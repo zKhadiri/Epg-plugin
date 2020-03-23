@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sources>
+<source type="gen_xmltv" channels="/etc/epgimport/custom.channels.xml">
+<description>bein</description>
+<url>/etc/epgimport/bein.xml</url>
+</source>
+<source type="gen_xmltv" channels="/etc/epgimport/custom.channels.xml">
+<description>entertainment</description>
+<url>/etc/epgimport/beinent.xml</url>
+</source>
+<source type="gen_xmltv" channels="/etc/epgimport/custom.channels.xml">
+<description>osn</description>
+<url>/etc/epgimport/osn.xml</url>
+</source>
+<source type="gen_xmltv" channels="/etc/epgimport/custom.channels.xml">
+<description>on demand</description>
+<url>/etc/epgimport/osnd.xml</url>
+</source>
+<source type="gen_xmltv" channels="/etc/epgimport/custom.channels.xml">
+<description>dubai</description>
+<url>/etc/epgimport/dubai.xml</url>
+</source>
+<source type="gen_xmltv" channels="/etc/epgimport/custom.channels.xml">
+<description>snrt</description>
+<url>/etc/epgimport/aloula.xml</url>
+</source>
+</sources>
