@@ -2,7 +2,7 @@
 ##setup command=wget https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=1.9
+version=1.7
 description=What is NEW:\n[Fix some bugs]
 ##############################################################
 
