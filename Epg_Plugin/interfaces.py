@@ -11,11 +11,95 @@ from Components.Input import Input
 from Screens.InputBox import InputBox
 from Screens.MessageBox import MessageBox
 from Tools.Directories import fileExists
+from urllib2 import Request
+from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigYesNo, configfile
 import io,os,re,sys
 reload(sys)
 sys.setdefaultencoding('utf8')
-##################################
+
+################################## Add By RAED
+
+config.plugins.EpgPlugin = ConfigSubsection()
+config.plugins.EpgPlugin.update = ConfigYesNo(default=True)
+
+def logdata(label_name = '', data = None):
+    try:
+        data=str(data)
+        fp = open('/tmp/addkey.log', 'a')
+        fp.write( str(label_name) + ': ' + data+"\n")
+        fp.close()
+    except:
+        trace_error()    
+        pass
+
+def getversioninfo():
+    currversion = '1.0'
+    version_file = '/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/version'
+    if os.path.exists(version_file):
+        try:
+            fp = open(version_file, 'r').readlines()
+            for line in fp:
+                if 'version' in line:
+                    currversion = line.split('=')[1].strip()
+        except:
+            pass
+    return (currversion)
+
+Ver = getversioninfo()
+
+HD = False
+try:
+    if enigma.getDesktop(0).size().width() >= 1280:
+		HD = True
+except:
+    pass
+
+def DreamOS():
+    if os.path.exists('/var/lib/dpkg/status'):
+        return DreamOS
+
 class EPGImportConfig(Screen):
+    if HD:
+		skin = """
+			<screen position="center,center" size="600,500" title="EPG Import Configuration" >
+				<ePixmap name="red" position="0,0" zPosition="2" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
+				<ePixmap name="green" position="140,0" zPosition="2" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
+				<ePixmap name="yellow" position="280,0" zPosition="2" size="140,40" pixmap="buttons/yellow.png" transparent="1" alphatest="on" />
+				<ePixmap name="blue" position="420,0" zPosition="2" size="140,40" pixmap="buttons/blue.png" transparent="1" alphatest="on" />
+				<ePixmap position="562,0" size="35,25" pixmap="buttons/key_menu.png" alphatest="on" />
+				<widget name="key_red" position="0,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="white" font="Regular;19" transparent="1" shadowColor="background" shadowOffset="-2,-2" />
+				<widget name="key_green" position="140,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="white" font="Regular;19" transparent="1" shadowColor="background" shadowOffset="-2,-2" />
+				<widget name="key_yellow" position="280,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="white" font="Regular;19" transparent="1" shadowColor="background" shadowOffset="-2,-2" />
+				<widget name="key_blue" position="420,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="white" font="Regular;19" transparent="1" shadowColor="background" shadowOffset="-2,-2" />
+				<widget name="config" position="10,70" size="590,320" scrollbarMode="showOnDemand" />
+				<ePixmap alphatest="on" pixmap="icons/clock.png" position="520,483" size="14,14" zPosition="3"/>
+				<widget font="Regular;18" halign="left" position="545,480" render="Label" size="55,20" source="global.CurrentTime" transparent="1" valign="center" zPosition="3">
+					<convert type="ClockToText">Default</convert>
+				</widget>
+				<widget name="statusbar" position="10,480" size="500,20" font="Regular;18" />
+				<widget name="status" position="10,400" size="580,60" font="Regular;20" />
+			</screen>"""
+    else:
+		skin = """
+			<screen position="center,center" size="600,430" title="EPG Import Configuration" >
+				<ePixmap name="red" position="0,0" zPosition="2" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
+				<ePixmap name="green" position="140,0" zPosition="2" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
+				<ePixmap name="yellow" position="280,0" zPosition="2" size="140,40" pixmap="buttons/yellow.png" transparent="1" alphatest="on" />
+				<ePixmap name="blue" position="420,0" zPosition="2" size="140,40" pixmap="buttons/blue.png" transparent="1" alphatest="on" />
+				<ePixmap position="562,0" size="35,25" pixmap="buttons/key_menu.png" alphatest="on" />
+				<widget name="key_red" position="0,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" />
+				<widget name="key_green" position="140,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" />
+				<widget name="key_yellow" position="280,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" />
+				<widget name="key_blue" position="420,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" />
+				<widget name="config" position="10,60" size="590,250" scrollbarMode="showOnDemand" />
+				<ePixmap alphatest="on" pixmap="icons/clock.png" position="520,403" size="14,14" zPosition="3"/>
+				<widget font="Regular;18" halign="left" position="545,400" render="Label" size="55,20" source="global.CurrentTime" transparent="1" valign="center" zPosition="3">
+					<convert type="ClockToText">Default</convert>
+				</widget>
+				<widget name="statusbar" position="10,410" size="500,20" font="Regular;18" />
+				<widget name="status" position="10,330" size="580,60" font="Regular;20" />
+			</screen>"""
+###### End 
     def __init__(self, session, args = 0):
         self.session = session
         list = []
@@ -29,22 +113,82 @@ class EPGImportConfig(Screen):
         self.skinName = ["E2m3u2bConfig", "EPGImportConfig", "EPGMainSetup"]
         self["status"] = Label()
         self["config"] = MenuList(list)
-        self.setup_title = _("EPG GRABBER BY ZIKO ")
+        #self.setup_title = _("EPG GRABBER BY ZIKO ")
         self.update()
         self["key_red"] = Button(_("Cancel"))
         self["key_green"] = Button(_("Timezone"))
         self["key_blue"] = Button(_("Channels"))
         self["key_yellow"] = Button(_("Change time"))
-        self["setupActions"] = ActionMap(["SetupActions","MovieSelectionActions","ColorActions"],
+        self["setupActions"] = ActionMap(["SetupActions","MovieSelectionActions","ColorActions",'MenuActions'],
         {
             "ok": self.go,
             "green": self.keyGreen,
             "blue": self.KeyBlue,
             "yellow": self.settime,
+            "menu":self.showsetup,
             "cancel": self.keyRed
         }, -1)
         self.onLayoutFinish.append(self.__layoutFinished)
 
+######### Add Update online by RAED (Fairbird) #####
+    def showsetup(self):
+        choices=[]
+	self.list = []
+	EnablecheckUpdate = config.plugins.EpgPlugin.update.value
+        #choices.append(("Install New version %s" %self.new_version, "Install"))
+        if EnablecheckUpdate == False:
+                choices.append(("Press Ok to [Enable checking for Online Update]","enablecheckUpdate"))
+        else:
+                choices.append(("Press Ok to [Disable checking for Online Update]","disablecheckUpdate")) 
+        from Screens.ChoiceBox import ChoiceBox
+        self.session.openWithCallback(self.choicesback, ChoiceBox, _('select task'),choices)
+
+    def choicesback(self, select):
+        if select:
+                #if select[1] == "Install":
+                #         self.install(True)
+                if select[1] == "enablecheckUpdate":
+                         config.plugins.EpgPlugin.update.value = True
+                         config.plugins.EpgPlugin.update.save()
+                         configfile.save()
+                elif select[1] == "disablecheckUpdate":
+                         config.plugins.EpgPlugin.update.value = False
+                         config.plugins.EpgPlugin.update.save()
+                         configfile.save()
+
+    def checkupdates(self):
+        from twisted.web.client import getPage, error
+        url = 'https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh'
+        getPage(url, headers={'Content-Type': 'application/x-www-form-urlencoded'}, timeout=10).addCallback(self.parseData).addErrback(self)
+
+    def addErrback(self, result):
+        logdata("data-failed",result) 
+        if result:
+            logdata("Error:",str(result))
+
+    def parseData(self, data):
+        if data:
+            lines=data.split("\n")
+            for line in lines:
+                if line.startswith("version"):
+                   self.new_version=str(line.split("=")[1])
+                if line.startswith("description"):
+                   self.new_description = str(line.split("=")[1])
+                   break
+        if float(Ver)==float(self.new_version) or float(Ver)>float(self.new_version):
+            logdata("Updates","No new version available")
+        else :
+            self.session.openWithCallback(self.install, MessageBox, _('New version %s is available.\n\n%s.\n\nDo want ot install now.' % (self.new_version, self.new_description)), MessageBox.TYPE_YESNO)
+
+    def install(self,answer=False):
+              if answer:
+                cmdlist = []
+                cmdlist.append("wget https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh")
+                self.session.open(Console, title='Installing last update, enigma will be started after install', cmdlist=cmdlist, finishedCallback=self.myCallback, closeOnSuccess=False)
+        
+    def myCallback(self,result):
+         return
+######### End #########
     def update(self):
         f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
         self["status"].setText("Current time zone : "+f.read())
@@ -168,7 +312,10 @@ class EPGImportConfig(Screen):
                     self.session.open(MessageBox,_("aloula.xml not found in path"), MessageBox.TYPE_INFO,timeout=10)
             
     def __layoutFinished(self):
-            self.setTitle(self.setup_title)
+            self.new_version = Ver ### Add By RAED
+            if config.plugins.EpgPlugin.update.value:
+            	self.checkupdates() ### Add By RAED
+            self.setTitle("EPG GRABBER BY ZIKO V %s" % Ver) ### Edit by RAED
 
     def  KeyBlue(self):
         self.session.open(Console,_("CHANNELS") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/show.py"])
@@ -202,16 +349,16 @@ class EPGImportConfig(Screen):
         returnValue = self["config"].l.getCurrentSelection()[1]
         if returnValue is not None:
             if returnValue == "1":
-                self.session.open(Console,_("EPG BEIN SPORTS") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/bein.py"])
+                self.session.open(Console,_("EPG BEIN SPORTS") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/bein.pyo"])
             elif returnValue == "2":
-                self.session.open(Console,_("EPG OSN ARABIC + ENGLISH TITLE") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/osn.py"])
+                self.session.open(Console,_("EPG OSN ARABIC + ENGLISH TITLE") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/osn.pyo"])
             elif returnValue == "3":
-                self.session.open(Console,_("EPG OSN ENGLISH TITLE ONLY") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/osnen.py"])
+                self.session.open(Console,_("EPG OSN ENGLISH TITLE ONLY") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/osnen.pyo"])
             elif returnValue == "4":
-                self.session.open(Console,_("EPG OSN ON DEMAND") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/ondemand.py"])
+                self.session.open(Console,_("EPG OSN ON DEMAND") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/ondemand.pyo"])
             elif returnValue == "5":
-                self.session.open(Console,_("EPG Bein entertainment") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/beinent.py"])
+                self.session.open(Console,_("EPG Bein entertainment") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/beinent.pyo"])
             elif returnValue == "6":
-                self.session.open(Console,_("EPG SNRT") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/aloula.py"])
+                self.session.open(Console,_("EPG SNRT") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/aloula.pyo"])
             else:
                 self.close(None)

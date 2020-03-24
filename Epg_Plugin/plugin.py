@@ -1,9 +1,28 @@
 from Plugins.Plugin import PluginDescriptor
 import interfaces
+from Screens.MessageBox import MessageBox
+import urllib2
+from urllib2 import urlopen, Request, URLError, HTTPError 
+
+def checkInternet():
+    try:
+        response = urllib2.urlopen("http://google.com", None, 5)
+        response.close()
+    except urllib2.HTTPError:
+        return False
+    except urllib2.URLError:
+        return False
+    except socket.timeout:
+        return False
+    else:
+        return True
 
 def main(session, **kwargs):
-	session.open(interfaces.EPGImportConfig)
-
+	if checkInternet:
+		session.open(interfaces.EPGImportConfig)
+	else:
+		session.open(MessageBox, "Check your internet", MessageBox.TYPE_INFO)
+  
 def Plugins(**kwargs):
 	return PluginDescriptor(
 			name="EPG BY ZIKO",
