@@ -3,7 +3,7 @@
 
 ######### Only These two lines to edit with new version ######
 version=1.8
-description=What is NEW:\n[OSN FIX & prevent crashes]
+description=What is NEW:\n[OSN FIX and prevent crashes]
 ##############################################################
 
 # remove old version
