@@ -2,8 +2,8 @@
 ##setup command=wget https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=1.7
-description=What is NEW:\n[Fix some bugs]
+version=1.8
+description=What is NEW:\n[OSN FIX & prevent crashes]
 ##############################################################
 
 # remove old version
