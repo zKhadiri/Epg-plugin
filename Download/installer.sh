@@ -11,6 +11,8 @@ rm -rf /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin
 
 # check depends packges
 
+chmod 755 /usr/bin/wget2
+
 opkg update
 
 if [ -f /var/lib/dpkg/status ]; then
