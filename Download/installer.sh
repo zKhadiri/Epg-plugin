@@ -5,7 +5,12 @@
 version=2.1
 description=What is NEW:\n[Online Update fix ]
 ##############################################################
-WGET='/usr/bin/wget2 --no-check-certificate'
+#### EDit By RAED To DreamOS OE2.5/2.6
+if [ -f /var/lib/dpkg/status ]; then
+      WGET='/usr/bin/wget2 --no-check-certificate'
+else
+      WGET='/usr/bin/wget'
+fi
 # remove old version
 rm -rf /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin
 
