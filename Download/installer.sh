@@ -2,7 +2,7 @@
 ##setup command=/usr/bin/wget2 --no-check-certificate https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=1.10
+version=2.0
 description=What is NEW:\n[Online Update fix ]
 ##############################################################
 WGET='/usr/bin/wget2 --no-check-certificate'
