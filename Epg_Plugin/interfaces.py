@@ -58,7 +58,7 @@ def DreamOS():
     if os.path.exists('/var/lib/dpkg/status'):
         return DreamOS
 
-class EPGImportConfig(Screen):
+class EPGIConfig(Screen):
     if HD:
 		skin = """
 			<screen position="center,center" size="600,500" title="EPG Import Configuration" >
@@ -110,7 +110,7 @@ class EPGImportConfig(Screen):
         list.append(("Bein entertainment EPG", "5"))
         list.append(("SNRT EPG", "6"))
         Screen.__init__(self, session)
-        self.skinName = ["E2m3u2bConfig", "EPGImportConfig", "EPGMainSetup"]
+        self.skinName = ["E2m3u2bConfig", "EPGIConfig", "EPGMainSetup"]
         self["status"] = Label()
         self["config"] = MenuList(list)
         #self.setup_title = _("EPG GRABBER BY ZIKO ")

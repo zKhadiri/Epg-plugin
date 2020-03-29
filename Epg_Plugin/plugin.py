@@ -19,7 +19,7 @@ def checkInternet():
 
 def main(session, **kwargs):
 	if checkInternet:
-		session.open(interfaces.EPGImportConfig)
+		session.open(interfaces.EPGIConfig)
 	else:
 		session.open(MessageBox, "Check your internet", MessageBox.TYPE_INFO)
   
