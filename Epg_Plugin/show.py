@@ -10,7 +10,7 @@ xm=['OSN_Movies','OSN_Cinema','OSN_Enigma','OSN_Movies_Disney','OSN_Movies_First
 ,'Baby_TV_Europe','Fashion_TV_HD','Disney_XD','MTV_Live_HD','Disney_HD','Disney_Junior','VH1','Music_Now','Bloomberg','NickToons_HD',
 'Nick_Jr','Fann','Viva_TV','Nickelodeon_HD']
 
-elc_channels=["Dubai_TV__Channel","Alhayat_TV_Channel","Al_Nahar_Drama_Channel","Cima_Channel","CBC_Drama_Channel","Nile_Drama_Channel"
+elc_channels=["Dubai_One_Channel","Dubai_TV__Channel","Alhayat_TV_Channel","Al_Nahar_Drama_Channel","Cima_Channel","CBC_Drama_Channel","Nile_Drama_Channel"
 ,"MBC_Egypt_Channel","Zee_aflam_Channel","Sada_El_Balad_Drama_Channel","MBC_MASR_2_Channel","CBC_Channel",
 "Abu_Dhabi_TV_Channel","_Sama_Dubai__Channel","Al_Nahar_TV_Channel","LDC__Channel","Al_Jadeed_TV_Channel",
 "Nile_Comedy _Channel","Emirates_Channel","Alrai_TV_Channel","Nile_Life__Channel","Sada_El_Balad_Channel",
