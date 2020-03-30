@@ -28,7 +28,7 @@
 <channel id="AljazeeraDocumentary">1:0:19:1F8:EAC4:77E:DCA0000:0:0:0:</channel> <!-- "AljazeeraDocumentary" -->
 <channel id="TRTWorld">1:0:1:31F:10:6E:DCA0000:0:0:0:</channel> <!-- "TRTWorld" -->
 <!-- DUBAI ONE -->
-<channel id="dubai_one">1:0:1:126F:2F:800:DCA0000:0:0:0:</channel> <!-- "dubai:one" -->
+<channel id="Dubai_One_Channel">1:0:1:126F:2F:800:DCA0000:0:0:0:</channel> <!-- "dubai:one" -->
 <!-- OSN -->
 <channel id="OSN_Movies">1:0:19:1197:2D:800:DCA0000:0:0:0:</channel> <!-- "OSN:Movies" -->
 <channel id="OSN_on_Demand">1:0:19:12F:3:800:DCA0000:0:0:0:</channel> <!-- "OSN:on:Demand" -->
