@@ -2,8 +2,8 @@
 ##setup command=/usr/bin/wget2 --no-check-certificate https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=2.3
-description=What is NEW:\n[Bein fix]
+version=2.4
+description=What is NEW:\n[new source elcinema]
 ##############################################################
 #### EDit By RAED To DreamOS OE2.5/2.6
 if [ -f /var/lib/dpkg/status ]; then
