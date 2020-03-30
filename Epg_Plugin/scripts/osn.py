@@ -53,7 +53,7 @@ def oss(url):
         data = json.loads(pg)
         for d in data:
             day=datetime.datetime.fromtimestamp(int(d['StartDateTime'].replace('/Date(','').replace(')/','')) // 1000).strftime('%Y-%m-%d')
-            if now == day or day > now:
+            if now == day or day > now and data[0]['EPGUNIQID'] not in d['EPGUNIQID']:
                 payload = {"prgmEPGUNIQID": d['EPGUNIQID'], "countryCode": "SA"}
                 pll.append(d['EPGUNIQID'])
                 ch=''
