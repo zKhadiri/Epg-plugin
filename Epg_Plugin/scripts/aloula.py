@@ -192,7 +192,7 @@ def snrt():
                 cat.append(4 * ' ' + '<category lang="ar">' + titl_ + '</category>' + '\n' + '  </programme>' + '\n')
             from datetime import datetime
             actuel = datetime.now().strftime("%H:%M")
-            times_at = [time_.replace(".", ":").replace("Actuellement", actuel).split() for time_ in time_at]
+            times_at = [time_.replace(".", ":").replace("Actuellement", actuel).replace('h',':').split() for time_ in time_at]
 
             for elem, next_elem in zip(times_at, times_at[1:] + [times_at[0]]):
                 date = re.search(r'\d{2}/\d{2}/\d{4}', url)

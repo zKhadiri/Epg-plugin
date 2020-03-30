@@ -1,11 +1,17 @@
-import requests,re,threading,io,os,ch
-from datetime import *
+import requests,re,io,os,ch
 from time import sleep
 from shutil import copyfile
-
+from requests.adapters import HTTPAdapter
 
 headers={
-    'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) snap Chromium/80.0.3987.100 Chrome/80.0.3987.100 Safari/537.36'
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+    'Accept-Encoding': 'gzip, deflate',
+    'Accept-Language': 'en-US,en;q=0.9',
+    'Cache-Control': 'max-age=0',
+    'Connection': 'keep-alive',
+    'Host': 'epg.beinsports.com',
+    'Upgrade-Insecure-Requests': '1',
+    'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) snap Chromium/80.0.3987.149 Chrome/80.0.3987.149 Safari/537.36'
 }
 print('**************STARTING******************')
 urls=[]
@@ -14,7 +20,7 @@ for i in range(0,3):
     from datetime import timedelta
     jour = datetime.date.today()
     week = jour + timedelta(days=i)
-    urls.append('http://epg.beinsports.com/utctime.php?cdate='+str(week)+'&serviceidentity=beinsports.com&category=entertainment')
+    urls.append('http://epg.beinsports.com/utctime.php?cdate='+str(week)+'&category=entertainment')
 
 desc=[]
 title_chan=[]
@@ -32,33 +38,37 @@ for nt in ch.net:
 
 def beinen():
     for url in urls:
-        import _strptime
+        from datetime import datetime
         desc[:]=[]
         title_chan[:]=[]
         titles[:]=[]
         prog[:]=[]
-        link = requests.get(url,headers=headers)
-        title = re.findall(r'<p\sclass=title>(.*?)<\/p>',link.text)
-        time = re.findall(r'<p\sclass=time>(.*?)<\/p>',link.text)
-        formt = re.findall(r'<p\sclass=format>(.*?)<\/p>',link.text)
-        times = [t.replace('&nbsp;-&nbsp;','-').split('-') for t in time ]
-        channels = re.findall(r"data-img='mena_entertaintment\/(.*?)\.",link.text)
-        for tt_ in title:
-            titles.append(4*' '+'<title lang="en">'+tt_.replace('&','and')+'</title>'+'\n')
-            desc.append(4*' '+'<category lang="en">'+tt_.replace('&','and')+'</category>'+'\n')
-        format_=[4*' '+'<desc lang="en">'+f+'</desc>'+"\n"+'  </programme>'+'\n' for f in formt]
-        for time_,chann_ in zip(times,channels):
-            date = re.search(r'\d{4}-\d{2}-\d{2}',url)
-            starttime = datetime.datetime.strptime(date.group()+' '+time_[0],'%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
-            endtime = datetime.datetime.strptime(date.group() + ' ' + time_[1], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
-            prog.append(2 * ' ' + '<programme start="' + starttime + ' '+time_offset+'" stop="' + endtime + ' '+time_offset+'" channel="'+chann_.replace('Star_World_HD','Star_World_B').replace('Star_Movies_HD','Star_Movies_B').replace('Bloomberg','Bloomberg_B')+'">'+'\n')
-        
-        for ttt,d,f,p in zip(titles,desc,format_,prog):
-            with io.open("/etc/epgimport/beinent.xml","a",encoding='UTF-8')as fil:
-                fil.write(p+ttt+d+f)
-        dat = re.search(r'\d{4}-\d{2}-\d{2}',url)
-        print('Date'+' : '+dat.group())
-    
+        with requests.Session() as s:
+            s.mount('http://', HTTPAdapter(max_retries=10))
+            link = s.get(url,headers=headers)
+            if link.text !='':
+                title = re.findall(r'<p\sclass=title>(.*?)<\/p>',link.text)
+                time = re.findall(r'<p\sclass=time>(.*?)<\/p>',link.text)
+                formt = re.findall(r'<p\sclass=format>(.*?)<\/p>',link.text)
+                times = [t.replace('&nbsp;-&nbsp;','-').split('-') for t in time ]
+                channels = re.findall(r"data-img='mena_entertaintment\/(.*?)\.",link.text)
+                for tt_ in title:
+                    titles.append(4*' '+'<title lang="en">'+tt_.replace('&','and')+'</title>'+'\n')
+                    desc.append(4*' '+'<category lang="en">'+tt_.replace('&','and')+'</category>'+'\n')
+                format_=[4*' '+'<desc lang="en">'+f+'</desc>'+"\n"+'  </programme>'+'\n' for f in formt]
+                for time_,chann_ in zip(times,channels):
+                    date = re.search(r'\d{4}-\d{2}-\d{2}',url)
+                    starttime = datetime.strptime(date.group()+' '+time_[0],'%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
+                    endtime = datetime.strptime(date.group() + ' ' + time_[1], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
+                    prog.append(2 * ' ' + '<programme start="' + starttime + ' '+time_offset+'" stop="' + endtime + ' '+time_offset+'" channel="'+chann_.replace('Star_World_HD','Star_World_B').replace('Star_Movies_HD','Star_Movies_B').replace('Bloomberg','Bloomberg_B')+'">'+'\n')
+                
+                for ttt,d,f,p in zip(titles,desc,format_,prog):
+                    with io.open("/etc/epgimport/beinent.xml","a",encoding='UTF-8')as fil:
+                        fil.write(p+ttt+d+f)
+                dat = re.search(r'\d{4}-\d{2}-\d{2}',url)
+                print('Date'+' : '+dat.group())
+            else:
+                print('No data found')
 if __name__=='__main__':
     beinen()
 

@@ -40,7 +40,7 @@
 <channel id="OSN_Action">1:0:19:12E:3:800:DCA0000:0:0:0:</channel> <!-- "OSN:Action" -->
 <channel id="Star_Movies_HD">1:0:19:3EF:A:800:DCA0000:0:0:0:</channel> <!-- "Star:Movies:HD" -->
 <channel id="Paramount">1:0:19:3F0:A:800:DCA0000:0:0:0:</channel> <!-- "Paramount" -->
-<channel id="OSN_Kids">1:0:19:119A:2D:800:DCA0000:0:0:0</channel> <!-- "OSN:Kids" -->
+<channel id="OSN_Kids">1:0:19:6A6:11:800:DCA0000:0:0:0:</channel> <!-- "OSN:Kids" -->
 <channel id="OSN_Ya_Hala_Al_Oula">1:0:19:119D:2D:800:DCA0000:0:0:0:</channel> <!-- "OSN:Ya:Hala:Al:Oula" -->
 <channel id="OSN_Ya_Hala">1:0:19:135:3:800:DCA0000:0:0:0:</channel> <!-- "OSN:Ya:Hala" -->
 <channel id="OSN_Yahala_Cinema">1:0:19:132:3:800:DCA0000:0:0:0:</channel> <!-- "OSN_Yahala:Cinema" -->
@@ -50,7 +50,7 @@
 <channel id="OSN_Kid_Zone_TV">1:0:19:6A6:11:800:DCA0000:0:0:0:</channel> <!-- "OSN:Kid:Zone:TV" -->
 <channel id="Comedy_Central">1:0:19:3F1:A:800:DCA0000:0:0:0:</channel> <!-- "Comedy:Central" -->
 <channel id="Syfy">1:0:19:161D:236:800:DCA0000:0:0:0:</channel> <!-- "Syfy" -->
-<channel id="Star_World_HD">1:0:19:6A9:11:800:DCA0000:0:0:0:</channel> <!-- "Star:World:HD" -->
+<channel id="Star_World_HD">1:0:19:119B:2D:800:DCA0000:0:0:0:</channel> <!-- "Star:World:HD" -->
 <channel id="Crime_And_Investigation_Network">1:0:1:D4:2:800:DCA0000:0:0:0:</channel> <!-- "Crime:And:Investigation:Network" -->
 <channel id="Nat_Geo_HD">1:0:19:3EE:A:800:DCA0000:0:0:0:</channel> <!-- "Nat:Geo:HD" -->
 <channel id="H2_HD">1:0:19:1623:236:800:DCA0000:0:0:0:</channel> <!-- "H2:HD" -->
@@ -58,13 +58,13 @@
 <channel id="Nat_Geo_People:HD">1:0:19:3ED:A:800:DCA0000:0:0:0:</channel> <!-- "Nat:Geo:People:HD" -->
 <channel id="Discovery_Science_HD">1:0:19:12C3:30:800:DCA0000:0:0:0:</channel> <!-- "Discovery:Science:HD" -->
 <channel id="Nat_Geo_Wild_HD">1:0:19:3EC:A:800:DCA0000:0:0:0:</channel> <!-- "Nat:Geo:Wild:HD" -->
-<channel id="Al_Safwa">1:0:1:A8E:1:2A:DCA0000:0:0:0:</channel> <!-- "Al:Safwa" -->
+<channel id="Al_Safwa">1:0:1:A8E:1:2A:FFBA0000:0:0:0:</channel> <!-- "Al:Safwa" -->
 <channel id="Discovery_ID">1:0:19:1624:236:800:DCA0000:0:0:0:</channel> <!-- "Discovery:ID" -->
-<channel id="Cinema_2">1:0:1:A90:1:2A:DCA0000:0:0:0:</channel> <!-- "Cinema:2" -->
-<channel id="Al_Yawm">1:0:1:A8D:1:2A:DCA0000:0:0:0:</channel> <!-- "Al:Yawm" -->
-<channel id="Series_+2">1:0:19:A91:1:2A:DCA0000:0:0:0:</channel> <!-- "Series:+2" -->
-<channel id="Cinema_1">1:0:1:A8F:1:2A:DCA0000:0:0:0:</channel> <!-- "Cinema:1" -->
-<channel id="Series_Channel">1:0:19:A92:1:2A:DCA0000:0:0:0:</channel> <!-- "Series:Channel" -->
+<channel id="Cinema_2">1:0:1:A90:1:2A:FFBA0000:0:0:0:</channel> <!-- "Cinema:2" -->
+<channel id="Al_Yawm">1:0:1:A8D:1:2A:FFBA0000:0:0:0:</channel> <!-- "Al:Yawm" -->
+<channel id="Series_+2">1:0:19:A91:1:2A:FFBA0000:0:0:0:</channel> <!-- "Series:+2" -->
+<channel id="Cinema_1">1:0:1:A8F:1:2A:FFBA0000:0:0:0:</channel> <!-- "Cinema:1" -->
+<channel id="Series_Channel">1:0:19:A92:1:2A:FFBA0000:0:0:0:</channel> <!-- "Series:Channel" -->
 <channel id="E!_Entertainment_HD">1:0:19:131:3:800:DCA0000:0:0:0:</channel> <!-- "E!:Entertainment:HD" -->
 <channel id="Discovery_HD">1:0:19:1621:236:800:DCA0000:0:0:0:</channel> <!-- "Discovery:HD" -->
 <channel id="Nat_Geo_People_HD">1:0:19:3ED:A:800:DCA0000:0:0:0:</channel> <!-- "Nat:Geo:People:HD" -->
@@ -80,9 +80,9 @@
 <channel id="Disney_Junior">1:0:19:12C7:30:800:DCA0000:0:0:0:</channel> <!-- "Disney:Junior" -->
 <channel id="NickToons_HD">1:0:19:12C1:30:800:DCA0000:0:0:0:</channel> <!-- "NickToons:HD" -->
 <channel id="Nick_Jr">1:0:19:3E9:A:800:DCA0000:0:0:0:</channel> <!-- "Nick:Jr" -->
-<channel id="Fann">1:0:1:A93:1:2A:DCA0000:0:0:0:</channel> <!-- "Fann" -->
-<channel id="Music_Now">1:0:1:A94:1:2A:DCA0000:0:0:0:</channel> <!-- "Music:Now" -->
-<channel id="VH1">1:0:1:DE:2:800:DCA0000:0:0:0:</channel> <!-- "VH1" -->
+<channel id="Fann">1:0:1:A93:1:2A:FFBA0000:0:0:0:</channel> <!-- "Fann" -->
+<channel id="Music_Now">1:0:1:A94:1:2A:FFBA0000:0:0:0:</channel> <!-- "Music:Now" -->
+<channel id="VH1">1:0:1:1B2:4:800:FFBAAB58:0:0:0:</channel> <!-- "VH1" -->
 <!-- SNRT -->
 <channel id="Aloula.ma">1:0:1:3:2E18:B0:820000:0:0:0:</channel> <!-- "aloula" -->
 <channel id="Arriadia.ma">1:0:1:A:2E18:B0:820000:0:0:0:</channel> <!-- "arriadia" -->

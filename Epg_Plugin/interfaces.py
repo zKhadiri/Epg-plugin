@@ -61,46 +61,43 @@ def DreamOS():
 class EPGIConfig(Screen):
     if HD:
 		skin = """
-			<screen position="center,center" size="600,500" title="EPG Import Configuration" >
-				<ePixmap name="red" position="0,0" zPosition="2" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
-				<ePixmap name="green" position="140,0" zPosition="2" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
-				<ePixmap name="yellow" position="280,0" zPosition="2" size="140,40" pixmap="buttons/yellow.png" transparent="1" alphatest="on" />
-				<ePixmap name="blue" position="420,0" zPosition="2" size="140,40" pixmap="buttons/blue.png" transparent="1" alphatest="on" />
-				<ePixmap position="562,0" size="35,25" pixmap="buttons/key_menu.png" alphatest="on" />
-				<widget name="key_red" position="0,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="white" font="Regular;19" transparent="1" shadowColor="background" shadowOffset="-2,-2" />
-				<widget name="key_green" position="140,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="white" font="Regular;19" transparent="1" shadowColor="background" shadowOffset="-2,-2" />
-				<widget name="key_yellow" position="280,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="white" font="Regular;19" transparent="1" shadowColor="background" shadowOffset="-2,-2" />
-				<widget name="key_blue" position="420,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="white" font="Regular;19" transparent="1" shadowColor="background" shadowOffset="-2,-2" />
+			<screen position="center,center" size="600,500" title="EPG Import Configuration">
+				<ePixmap name="red" position="0,0" zPosition="2" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/red.png" transparent="1" alphatest="on" />
+				<ePixmap name="green" position="140,0" zPosition="2" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/green.png" transparent="1" alphatest="on" />
+				<ePixmap name="yellow" position="280,0" zPosition="2" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/yellow.png" transparent="1" alphatest="on" />
+				<ePixmap name="blue" position="420,0" zPosition="2" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/blue.png" transparent="1" alphatest="on" />
+				<ePixmap position="562,0" size="35,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/key_menu.png" alphatest="on" />
+				<widget name="key_red" position="0,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;19" transparent="1" />
+				<widget name="key_green" position="140,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;19" transparent="1" shadowColor="background" />
+				<widget name="key_yellow" position="280,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;19" transparent="1" shadowColor="background" />
+				<widget name="key_blue" position="420,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;19" transparent="1" shadowColor="background" />
 				<widget name="config" position="10,70" size="590,320" scrollbarMode="showOnDemand" />
-				<ePixmap alphatest="on" pixmap="icons/clock.png" position="520,483" size="14,14" zPosition="3"/>
-				<widget font="Regular;18" halign="left" position="545,480" render="Label" size="55,20" source="global.CurrentTime" transparent="1" valign="center" zPosition="3">
+				<widget font="Regular;18" foregroundColor="#00ffffff" backgroundColor="#16000000" halign="left" position="545,480" render="Label" size="55,20" source="global.CurrentTime" transparent="1" valign="center" zPosition="3">
 					<convert type="ClockToText">Default</convert>
 				</widget>
-				<widget name="statusbar" position="10,480" size="500,20" font="Regular;18" />
-				<widget name="status" position="10,400" size="580,60" font="Regular;20" />
+				<widget name="status" foregroundColor="#00ffffff" backgroundColor="#16000000" position="10,400" size="580,60" font="Regular;20" />
 			</screen>"""
     else:
 		skin = """
-			<screen position="center,center" size="600,430" title="EPG Import Configuration" >
-				<ePixmap name="red" position="0,0" zPosition="2" size="140,40" pixmap="buttons/red.png" transparent="1" alphatest="on" />
-				<ePixmap name="green" position="140,0" zPosition="2" size="140,40" pixmap="buttons/green.png" transparent="1" alphatest="on" />
-				<ePixmap name="yellow" position="280,0" zPosition="2" size="140,40" pixmap="buttons/yellow.png" transparent="1" alphatest="on" />
-				<ePixmap name="blue" position="420,0" zPosition="2" size="140,40" pixmap="buttons/blue.png" transparent="1" alphatest="on" />
-				<ePixmap position="562,0" size="35,25" pixmap="buttons/key_menu.png" alphatest="on" />
-				<widget name="key_red" position="0,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" />
-				<widget name="key_green" position="140,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" />
-				<widget name="key_yellow" position="280,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" />
-				<widget name="key_blue" position="420,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="white" font="Regular;20" transparent="1" shadowColor="background" shadowOffset="-2,-2" />
-				<widget name="config" position="10,60" size="590,250" scrollbarMode="showOnDemand" />
-				<ePixmap alphatest="on" pixmap="icons/clock.png" position="520,403" size="14,14" zPosition="3"/>
-				<widget font="Regular;18" halign="left" position="545,400" render="Label" size="55,20" source="global.CurrentTime" transparent="1" valign="center" zPosition="3">
-					<convert type="ClockToText">Default</convert>
-				</widget>
-				<widget name="statusbar" position="10,410" size="500,20" font="Regular;18" />
-				<widget name="status" position="10,330" size="580,60" font="Regular;20" />
-			</screen>"""
+			<screen position="center,center" size="938,476" title="EPG Import Configuration">
+  <ePixmap name="red" position="0,0" zPosition="2" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/red.png" transparent="1" alphatest="on"/>
+  <ePixmap name="green" position="140,0" zPosition="2" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/green.png" transparent="1" alphatest="on"/>
+  <ePixmap name="yellow" position="280,0" zPosition="2" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/yellow.png" transparent="1" alphatest="on"/>
+  <ePixmap name="blue" position="420,0" zPosition="2" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/blue.png" transparent="1" alphatest="on"/>
+  <ePixmap position="562,0" size="35,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/key_menu.png" alphatest="on"/>
+  <widget name="key_red" position="0,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;20" transparent="1" shadowColor="background"/>
+  <widget name="key_green" position="140,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;20" transparent="1" shadowColor="background"/>
+  <widget name="key_yellow" position="280,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;20" transparent="1" shadowColor="background"/>
+  <widget name="key_blue" position="420,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;20" transparent="1" shadowColor="background"/>
+  <widget name="config" foregroundColor="#00ffffff" backgroundColor="#16000000" position="10,60" size="911,321" scrollbarMode="showOnDemand"/>
+  <widget name="status" foregroundColor="#00ffffff" backgroundColor="#16000000" position="10,396" size="911,71" font="Regular;20"/>
+</screen>"""
 ###### End 
     def __init__(self, session, args = 0):
+        if DreamOS():
+		self.wget = "/usr/bin/wget2 --no-check-certificate"
+        else:
+		self.wget = "/usr/bin/wget"
         self.session = session
         list = []
         list.append(("Bein Sports EPG", "1"))
@@ -109,6 +106,7 @@ class EPGIConfig(Screen):
         list.append(("Osn on demand EPG", "4"))
         list.append(("Bein entertainment EPG", "5"))
         list.append(("SNRT EPG", "6"))
+        list.append(("ELCINEMA WEBSITE EPG", "7"))
         Screen.__init__(self, session)
         self.skinName = ["E2m3u2bConfig", "EPGIConfig", "EPGMainSetup"]
         self["status"] = Label()
@@ -178,14 +176,14 @@ class EPGIConfig(Screen):
         if float(Ver)==float(self.new_version) or float(Ver)>float(self.new_version):
             logdata("Updates","No new version available")
         else :
-            self.session.openWithCallback(self.install, MessageBox, _('New version %s is available.\n\n%s.\n\nDo want ot install now.' % (self.new_version, self.new_description)), MessageBox.TYPE_YESNO)
+            self.session.openWithCallback(self.install, MessageBox, _('New version %s is available.\n\n%s.\n\nDo you want to install now.' % (self.new_version, self.new_description)), MessageBox.TYPE_YESNO)
 
     def install(self,answer=False):
               if answer:
                 cmdlist = []
-                cmdlist.append("wget https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh")
-                self.session.open(Console, title='Installing last update, enigma will be started after install', cmdlist=cmdlist, finishedCallback=self.myCallback, closeOnSuccess=False)
-        
+                cmdlist.append("%s https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh" % self.wget)
+                from Plugins.Extensions.Epg_Plugin.Console import Console
+                self.session.open(Console, title='Installing last update, enigma will be started after install', cmdlist=cmdlist, finishedCallback=self.myCallback, closeOnSuccess=False,endstr="")
     def myCallback(self,result):
          return
 ######### End #########
@@ -310,8 +308,28 @@ class EPGIConfig(Screen):
                         self.session.open(MessageBox,_("File is empty"), MessageBox.TYPE_INFO,timeout=10)
                 else:
                     self.session.open(MessageBox,_("aloula.xml not found in path"), MessageBox.TYPE_INFO,timeout=10)
+                    
+            if returnValue == "7":
+                if fileExists("/etc/epgimport/elcinema.xml"):
+                    f = open('/etc/epgimport/elcinema.xml','r')
+                    time_of = re.search(r'[+#-]+\d{4}',f.read())
+                    f.close()
+                    f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
+                    newtime=f1.read()
+                    f1.close()
+                    if time_of !=None:
+                        with io.open("/etc/epgimport/elcinema.xml",encoding="utf-8") as f:
+                            newText=f.read().decode('utf-8').replace(time_of.group(), newtime)
+                            with io.open("/etc/epgimport/elcinema.xml", "w",encoding="utf-8") as f:
+                                f.write((newText).decode('utf-8'))
+                                self.session.open(MessageBox,_("current snrt time "+time_of.group()+" replaced by "+newtime), MessageBox.TYPE_INFO,timeout=10)
+                    else:
+                        self.session.open(MessageBox,_("File is empty"), MessageBox.TYPE_INFO,timeout=10)
+                else:
+                    self.session.open(MessageBox,_("elcinema.xml not found in path"), MessageBox.TYPE_INFO,timeout=10)
             
     def __layoutFinished(self):
+            os.chmod("/usr/bin/wget2",0755)
             self.new_version = Ver ### Add By RAED
             if config.plugins.EpgPlugin.update.value:
             	self.checkupdates() ### Add By RAED
@@ -349,16 +367,18 @@ class EPGIConfig(Screen):
         returnValue = self["config"].l.getCurrentSelection()[1]
         if returnValue is not None:
             if returnValue == "1":
-                self.session.open(Console,_("EPG BEIN SPORTS") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/bein.pyo"])
+                self.session.open(Console,_("EPG BEIN SPORTS") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/bein.py"])
             elif returnValue == "2":
-                self.session.open(Console,_("EPG OSN ARABIC + ENGLISH TITLE") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/osn.pyo"])
+                self.session.open(Console,_("EPG OSN ARABIC + ENGLISH TITLE") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/osn.py"])
             elif returnValue == "3":
-                self.session.open(Console,_("EPG OSN ENGLISH TITLE ONLY") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/osnen.pyo"])
+                self.session.open(Console,_("EPG OSN ENGLISH TITLE ONLY") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/osnen.py"])
             elif returnValue == "4":
-                self.session.open(Console,_("EPG OSN ON DEMAND") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/ondemand.pyo"])
+                self.session.open(Console,_("EPG OSN ON DEMAND") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/ondemand.py"])
             elif returnValue == "5":
-                self.session.open(Console,_("EPG Bein entertainment") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/beinent.pyo"])
+                self.session.open(Console,_("EPG Bein entertainment") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/beinent.py"])
             elif returnValue == "6":
-                self.session.open(Console,_("EPG SNRT") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/aloula.pyo"])
+                self.session.open(Console,_("EPG SNRT") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/aloula.py"])
+            elif returnValue == "7":
+                self.session.open(Console,_("ELECINEMA SNRT") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/elcin.py"])
             else:
                 self.close(None)

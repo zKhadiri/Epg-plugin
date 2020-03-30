@@ -9,4 +9,13 @@ xm=['OSN_Movies','OSN_Cinema','OSN_Enigma','OSN_Movies_Disney','OSN_Movies_First
 'Discovery_ID','Cinema_2','Al_Yawm','Series_+2','Cinema_1','Series_Channel','E!_Entertainment_HD','B4U_Aflam','Discovery_HD','OSN_News','TLC_HD'
 ,'Baby_TV_Europe','Fashion_TV_HD','Disney_XD','MTV_Live_HD','Disney_HD','Disney_Junior','VH1','Music_Now','Bloomberg','NickToons_HD',
 'Nick_Jr','Fann','Viva_TV','Nickelodeon_HD']
+elc_channels=["Dubai_TV__Channel","Alhayat_TV_Channel","Al_Nahar_Drama_Channel","Cima_Channel","CBC_Drama_Channel","Nile_Drama_Channel"
+,"MBC_Egypt_Channel","Zee_aflam_Channel","Sada_El_Balad_Drama_Channel","MBC_MASR_2_Channel","CBC_Channel",
+"Abu_Dhabi_TV_Channel","_Sama_Dubai__Channel","Al_Nahar_TV_Channel","LDC__Channel","Al_Jadeed_TV_Channel",
+"Nile_Comedy _Channel","Emirates_Channel","Alrai_TV_Channel","Nile_Life__Channel","Sada_El_Balad_Channel",
+"LBCI_Channel","DMC_DRAMA_Channel","ON_E_Channel","Aloula_Channel","ON_Drama_Channel","Dubai_Zaman_Channel",
+"Sharjah_TV_Channel","CBC_sofra_Channel","DMC_Channel","iFILM_TV_Channel","Al_sharqya_Channel","National_Geographic_Abu_Dhabi_Channel",
+"TeN_TV_Channel","Syria_Drama_Channel","Amman_Channel","SBC_Channel","Alsumaria_Channel","Roya_Channel","MTV_Channel",
+"Nessma_Channel","Oman_Channel","Fujairah_Channel","Al_Aoula_Morocco_Channel","almanar_Channel","Syria_TV_Channel",
+"Al_Saeedah_Channel","2M_TV_Channel","Sama_TV_Channel","Mix_Channel"]
 
