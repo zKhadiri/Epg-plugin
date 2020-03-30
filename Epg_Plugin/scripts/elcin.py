@@ -84,7 +84,7 @@ def elci(nb):
         for p,tt,d,c in zip(prog,titles,des,cat):
             ch='' 
             ch+=p
-            ch+='     <title lang="ar">'+tt+'</title>\n'
+            ch+='     <title lang="ar">'+tt.replace('&#39;',"'")+'</title>\n'
             ch+='     <desc lang="ar">'+d.replace('\r','').replace('\n','')+'</desc>\n'
             ch+='     <category lang="ar">'+c+'</category>\n'+'  </programme>\n'
             with io.open("/etc/epgimport/elcinema.xml","a",encoding='UTF-8')as f:
