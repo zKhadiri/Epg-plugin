@@ -2,8 +2,8 @@
 ##setup command=/usr/bin/wget2 --no-check-certificate https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=2.5
-description=What is NEW:\n[osn fix timezone and duplicates programmes]
+version=2.6
+description=What is NEW:\n[osn fix]
 ##############################################################
 #### EDit By RAED To DreamOS OE2.5/2.6
 if [ -f /var/lib/dpkg/status ]; then
