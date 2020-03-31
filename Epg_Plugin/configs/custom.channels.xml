@@ -28,7 +28,7 @@
 <channel id="AljazeeraDocumentary">1:0:19:1F8:EAC4:77E:DCA0000:0:0:0:</channel> <!-- "AljazeeraDocumentary" -->
 <channel id="TRTWorld">1:0:1:31F:10:6E:DCA0000:0:0:0:</channel> <!-- "TRTWorld" -->
 <!-- ELCINEMA -->
-<channel id="Dubai_TV__Channel">1:0:1:126F:2F:800:DCA0000:0:0:0:</channel> <!-- "dubai:one" -->
+<channel id="Dubai_One_Channel">1:0:1:126F:2F:800:DCA0000:0:0:0:</channel> <!-- "dubai:one" -->
 <channel id="Dubai_TV__Channel">1:0:19:19CB:42:800:DCA0000:0:0:0</channel>
 <channel id="Alhayat_TV_Channel">1:0:19:C88:20:800:DCA0000:0:0:0</channel>
 <channel id="Al_Nahar_Drama_Channel">1:0:1:13F2:33:800:DCA0000:0:0:0</channel>
