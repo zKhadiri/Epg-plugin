@@ -4,7 +4,7 @@ from time import sleep,gmtime, strftime
 from requests.adapters import HTTPAdapter
 from shutil import copyfile
 
-delt=[]
+
 pyl=[]
 
 headers={
@@ -31,16 +31,10 @@ for i in range(0,3):
     from datetime import timedelta
     jour = datetime.date.today()
     week = jour+timedelta(days=i)
-    delt.append(week.strftime("%m/%d/%Y"))
     channels=['BO1','OCM','OFM','OMX','OM1','AHD','OPR','STM','PAR','OMK','OYH','OYA','OYC','OFH','OBG','OCO','OMZ','OLH','ONS','KDZ','CCE','SFY','STW','ETV','B4A','SER','SE4','YAW','SAF','CM1','CM2','DSC','SCI','DCX','CAI','HIS','HI2','NGO','NHD','NAH','TLC','VH1','DIS','DXD','MTL','DJR','NIC','NJR','NKT','BAB','BTV','VIV','FAN','NOW','FTH']
-    for d in delt:
-        for c in channels:
-            pyl.append({"newDate": d, "selectedCountry": "SA", "channelCode": c, "isMobile": "false", "hoursForMobile": "24"})
+    for c in channels:
+        pyl.append({"newDate": week.strftime("%m/%d/%Y"), "selectedCountry": "SA", "channelCode": c, "isMobile": "false", "hoursForMobile": "24"})
             
-urls = list()
-for sublist in pyl:
-    if sublist not in urls:
-        urls.append(sublist)
 
 pll=[]
 now = datetime.datetime.today().strftime('%Y-%m-%d')
@@ -63,15 +57,14 @@ def oss(url):
                         uri= session.post('http://www.osn.com/CMSPages/TVScheduleWebService.asmx/GetProgramDetails',data=payload,headers=headers)
                         pag = uri.text.replace('<?xml version="1.0" encoding="utf-8"?>','').replace('<string xmlns="http://tempuri.org/">','').replace('</string>','')
                         data= json.loads(pag)
-                        strtm=int(data[0][u'StartDateTime'].replace("/Date(",'').replace(")/",''))
-                        end=int(data[0][u'EndDateTime'].replace("/Date(",'').replace(")/",''))
                         nm=data[0][u'ChannelNameEnglish'].replace(' ','_').replace('Crime_&_Investigation_Network','Crime_And_Investigation_Network')
                         nam=data[0][u'ChannelNameEnglish']
-                        days=datetime.datetime.fromtimestamp(strtm // 1000).strftime("%Y %a %d %b")
-                        strt=datetime.datetime.fromtimestamp(strtm // 1000).strftime("%H:%M")
-                        endd = datetime.datetime.fromtimestamp(end // 1000).strftime("%H:%M")
-                        starttime = datetime.datetime.strptime(days+" "+strt, '%Y %a %d %b %H:%M').strftime('%Y%m%d%H%M%S')
-                        endtime = datetime.datetime.strptime(days+" "+endd, '%Y %a %d %b %H:%M').strftime('%Y%m%d%H%M%S')
+                        days=datetime.datetime.fromtimestamp(int(data[0][u'StartDateTime'].replace("/Date(",'').replace(")/",'')) // 1000).strftime("%Y-%d-%m")
+                        days_end=datetime.datetime.fromtimestamp(int(data[0][u'EndDateTime'].replace("/Date(",'').replace(")/",'')) // 1000).strftime("%Y-%d-%m")
+                        strt=datetime.datetime.fromtimestamp(int(data[0][u'StartDateTime'].replace("/Date(",'').replace(")/",'')) // 1000).strftime("%H:%M")
+                        endd = datetime.datetime.fromtimestamp(int(data[0][u'EndDateTime'].replace("/Date(",'').replace(")/",'')) // 1000).strftime("%H:%M")
+                        starttime = datetime.datetime.strptime(days+" "+strt, '%Y-%d-%m %H:%M').strftime('%Y%m%d%H%M%S')
+                        endtime = datetime.datetime.strptime(days_end+" "+endd, '%Y-%d-%m %H:%M').strftime('%Y%m%d%H%M%S')
                         ch+= 2 * ' ' + '<programme start="' + starttime + ' '+time_offset+'" stop="' + endtime + ' '+time_offset+'" channel="'+nm+'">'+'\n'
                         ch+='     <title lang="en">'+data[0][u'Title'].replace('&','and')+" - "+data[0][u'Arab_Title']+'</title>'+"\n"
                         ch+='     <desc lang="ar">'+data[0][u'Arab_Synopsis']+'</desc>'+"\n"
@@ -94,10 +87,10 @@ def progressbar(it, prefix="", size=20, file=sys.stdout):
     file.flush()
 
 def main():
-    threads = [threading.Thread(target=oss, args=(url,)) for url in urls]
+    threads = [threading.Thread(target=oss, args=(url,)) for url in pyl]
     for thread in threads:
         thread.start()
-        sleep(2)
+        sleep(1)
     for thread in threads:
         thread.join()
         
