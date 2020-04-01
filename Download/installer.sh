@@ -10,18 +10,12 @@ if [ -f /var/lib/dpkg/status ]; then
       if [ -f /usr/bin/wget2 ]; then
             chmod 755 /usr/bin/wget2
             WGET='/usr/bin/wget2 --no-check-certificate'
-      elif [ ! -f /usr/bin/wget2 ]; then
-            cd /tmp
-            wget https://github.com/ziko-ZR1/Epg-plugin/blob/master/Download/wget2
-            mv /tmp/wget2 /usr/bin
-            chmod 755 /usr/bin/wget2
-            WGET='/usr/bin/wget2 --no-check-certificate'
-            cd ..
       else
             echo "[Your image can not download wget2]"
             echo "[Please downoad it manually from (https://github.com/ziko-ZR1/Epg-plugin/blob/master/Download/wget2)]"
             echo "[Then send it to /usr/bin, And try again to dowload plugin]"
             exit 1
+       fi
 else
       WGET='/usr/bin/wget'
 fi
