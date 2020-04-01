@@ -1,5 +1,5 @@
 #!/bin/sh
-##setup command=/usr/bin/wget2 --no-check-certificate https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
+##setup command=wget https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
 version=2.7
@@ -7,7 +7,21 @@ description=What is NEW:\n[Bug fix]
 ##############################################################
 #### EDit By RAED To DreamOS OE2.5/2.6
 if [ -f /var/lib/dpkg/status ]; then
-      WGET='/usr/bin/wget2 --no-check-certificate'
+      if [ -f /usr/bin/wget2 ]; then
+            chmod 755 /usr/bin/wget2
+            WGET='/usr/bin/wget2 --no-check-certificate'
+      elif [ ! -f /usr/bin/wget2 ]; then
+            cd /tmp
+            wget https://github.com/ziko-ZR1/Epg-plugin/blob/master/Download/wget2
+            mv /tmp/wget2 /usr/bin
+            chmod 755 /usr/bin/wget2
+            WGET='/usr/bin/wget2 --no-check-certificate'
+            cd ..
+      else
+            echo "[Your image can not download wget2]"
+            echo "[Please downoad it manually from (https://github.com/ziko-ZR1/Epg-plugin/blob/master/Download/wget2)]"
+            echo "[Then send it to /usr/bin, And try again to dowload plugin]"
+            exit 1
 else
       WGET='/usr/bin/wget'
 fi
