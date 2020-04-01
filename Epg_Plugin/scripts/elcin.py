@@ -76,9 +76,9 @@ def elci():
                     des.insert(index,titles[index])
                     cat.insert(index,titles[index])
                     
-            for elem,next_elem,td in zip(times, times[1:]+[times[0]],time_d):
-                startime=datetime.strptime(str(now)+' '+str(td)+' '+elem,'%Y %A %d %B %H:%M').strftime('%Y%m%d%H%M%S')
-                endtime=datetime.strptime(str(now)+' '+str(td)+' '+next_elem,'%Y %A %d %B %H:%M').strftime('%Y%m%d%H%M%S')
+            for elem,next_elem,td1,td2 in zip(times, times[1:]+[times[0]],time_d,time_d[1:]+[time_d[0]]):
+                startime=datetime.strptime(str(now)+' '+str(td1)+' '+elem,'%Y %A %d %B %H:%M').strftime('%Y%m%d%H%M%S')
+                endtime=datetime.strptime(str(now)+' '+str(td2)+' '+next_elem,'%Y %A %d %B %H:%M').strftime('%Y%m%d%H%M%S')
                 prog.append(2 * ' ' +'<programme start="' + startime + ' '+time_offset+'" stop="' + endtime + ' '+time_offset+'" channel="'+''.join(channel_name).replace(' ','_')+'">\n')
                 
             
