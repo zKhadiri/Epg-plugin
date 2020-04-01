@@ -21,7 +21,7 @@ for i in range(0,3):
     from datetime import timedelta
     jour = datetime.date.today()
     week = jour + timedelta(days=i)
-    urls.append('http://epg.beinsports.com/utctime_ar.php?cdate='+str(week))
+    urls.append('http://epg.beinsports.com/utctime_ar.php?cdate='+str(week)+'&offset=+3&mins=00')
 
 
 f=open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt",'r')
@@ -66,7 +66,7 @@ def bein():
                     date = re.search(r'\d{4}-\d{2}-\d{2}',url)
                     starttime = datetime.strptime(date.group()+' '+time_[0],'%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
                     endtime = datetime.strptime(date.group() + ' ' + time_[1], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
-                    prog.append(2 * ' ' + '<programme start="' + starttime + ' +0000" stop="' + endtime + ' +0000" channel="'+chann_.replace('BS NBA','BS_NBA')+'">'+'\n')
+                    prog.append(2 * ' ' + '<programme start="' + starttime + ' '+time_offset+'" stop="' + endtime + ' '+time_offset+'" channel="'+chann_.replace('BS NBA','BS_NBA')+'">'+'\n')
 
                 for tt,d,f,p in zip(titles,desc,format_,prog):
                     with io.open("/etc/epgimport/bein.xml","a",encoding='UTF-8')as fil:
