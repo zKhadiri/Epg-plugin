@@ -2,7 +2,7 @@
 ##setup command=/usr/bin/wget2 --no-check-certificate https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=2.8
+version=2.7
 description=What is NEW:\n[Bug fix]
 ##############################################################
 #### EDit By RAED To DreamOS OE2.5/2.6
