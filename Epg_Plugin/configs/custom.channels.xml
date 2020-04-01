@@ -2,17 +2,17 @@
 <channels>
 <!-- BEIN SPORTS -->
 <channel id="SportsGlobalHD">1:0:19:83A:C8:77E:DCA0000:0:0:0:</channel> <!-- SportsGlobalHD -->
-<channel id="News_ar">1:0:1:89A:12C:77E:FFBA0000:0:0:0:</channel> <!-- news -->
-<channel id="HD1">1:0:19:28A1:410:E0:FF0000:0:0:0:</channel> <!-- "HD1" -->
-<channel id="HD2">1:0:19:28A2:410:E0:FF0000:0:0:0:</channel> <!-- "HD2" -->
-<channel id="HD3">1:0:19:28A3:410:E0:FF0000:0:0:0:</channel> <!-- "HD3" -->
-<channel id="HD4">1:0:19:28A4:410:E0:FF0000:0:0:0:</channel> <!-- "HD4" -->
-<channel id="HD5">1:0:19:2969:424:E0:FF0000:0:0:0:</channel> <!-- "HD5" -->
-<channel id="HD6">1:0:19:296A:424:E0:FF0000:0:0:0:</channel> <!-- "HD6" -->
-<channel id="HD7">1:0:19:296B:424:E0:FF0000:0:0:0:</channel> <!-- "HD7" -->
-<channel id="HD8">1:0:19:296C:424:E0:FF0000:0:0:0:</channel> <!-- "HD8" -->
-<channel id="HD9">1:0:19:2A31:438:E0:FF0000:0:0:0:</channel> <!-- "HD9" -->
-<channel id="HD10">1:0:19:2A32:438:E0:FF0000:0:0:0:</channel> <!-- "HD10" -->
+<channel id="News_ar">1:0:1:89A:12C:77E:DCA0000:0:0:0:</channel> <!-- news -->
+<channel id="HD1">1:0:19:7D1:64:77E:DCA0000:0:0:0</channel> <!-- "HD1" -->
+<channel id="HD2">1:0:19:7D2:64:77E:DCA0000:0:0:0</channel> <!-- "HD2" -->
+<channel id="HD3">1:0:19:7D3:64:77E:DCA0000:0:0:0</channel> <!-- "HD3" -->
+<channel id="HD4">1:0:19:7D4:64:77E:DCA0000:0:0:0</channel> <!-- "HD4" -->
+<channel id="HD5">1:0:19:835:C8:77E:DCA0000:0:0:0</channel> <!-- "HD5" -->
+<channel id="HD6">1:0:19:836:C8:77E:DCA0000:0:0:0</channel> <!-- "HD6" -->
+<channel id="HD7">1:0:19:837:C8:77E:DCA0000:0:0:0</channel> <!-- "HD7" -->
+<channel id="HD8">1:0:19:838:C8:77E:DCA0000:0:0:0</channel> <!-- "HD8" -->
+<channel id="HD9">1:0:19:839:C8:77E:DCA0000:0:0:0</channel> <!-- "HD9" -->
+<channel id="HD10">1:0:1:899:12C:77E:DCA0000:0:0:0</channel> <!-- "HD10" -->
 <channel id="SportsHD11">1:0:19:2A33:438:E0:104AD67:0:0:0:</channel> <!-- "SportsHD11" -->
 <channel id="SportsHD12">1:0:19:2A34:438:E0:104AD67:0:0:0:</channel> <!-- "SportsHD12" -->
 <channel id="SportsHD11">1:0:19:29CD:42E:E0:1040000:0:0:0:</channel> <!-- "SportsHD11" -->
