@@ -22,7 +22,7 @@ def snrt():
     channe.append('  <channel id="Arriadia.ma">'+"\n"+'    <display-name lang="en">Arriadia HD</display-name>'+"\n"+'  </channel>'+"\n")
     channe.append('  <channel id="2M.ma">' + "\n" + '    <display-name lang="en">2M</display-name>' + "\n" + '  </channel>' + "\n")
     channe.append('  <channel id="athaqafia.ma">' + "\n" + '    <display-name lang="en">Athaqafia HD</display-name>' + "\n" + '  </channel>' + "\n")
-    channe.append('  <channel id="Medi1tv.ma">' + "\n" + '    <display-name lang="en">Medi1tv</display-name>' + "\n" + '  </channel>' + "\n")
+    channe.append('  <channel id="Medi1tv.ma">' + "\n" + '    <display-name lang="en">Medi1tv</display-name>' + "\n" + '  </channel>' + "\r")
     with io.open("/etc/epgimport/aloula.xml","w",encoding='UTF-8')as f:
         f.write(''.join(channe).decode('utf-8'))
     prog = []

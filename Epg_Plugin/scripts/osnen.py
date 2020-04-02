@@ -30,7 +30,7 @@ for i in range(0,3):
     from datetime import timedelta
     jour = datetime.date.today()
     week = jour+timedelta(days=i)
-    channels=['BO1','OCM','OFM','OMX','OM1','AHD','OPR','STM','PAR','OMK','OYH','OYA','OYC','OFH','OBG','OCO','OMZ','OLH','ONS','KDZ','CCE','SFY','STW','ETV','B4A','SER','SE4','YAW','SAF','CM1','CM2','DSC','SCI','DCX','CAI','HIS','HI2','NGO','NHD','NAH','TLC','VH1','DIS','DXD','MTL','DJR','NIC','NJR','NKT','BAB','BTV','VIV','FAN','NOW','FTH']
+    channels=['BO1','OCM','OFM','OMX','OM1','AHD','OPR','STM','PAR','OMK','OYH','OYA','OYC','OFH','OBG','OCO','OMZ','OLH','ONS','KDZ','CCE','STW','ETV','B4A','SER','SE4','YAW','SAF','CM1','CM2','DSC','SCI','DCX','CAI','HIS','HI2','NGO','NHD','NAH','TLC','VH1','DIS','DXD','MTL','DJR','NIC','NJR','NKT','BAB','BTV','VIV','FAN','NOW']
     for c in channels:
         pyl.append({"newDate": week.strftime("%m/%d/%Y"), "selectedCountry": "SA", "channelCode": c, "isMobile": "false", "hoursForMobile": "24"})
             
@@ -45,31 +45,30 @@ def oss(url):
         pg = ur.text.replace('<?xml version="1.0" encoding="utf-8"?>','').replace('<string xmlns="http://tempuri.org/">','').replace('</string>','')
         data = json.loads(pg)
         for d in data:
-            if data[0]['EPGUNIQID'] not in d['EPGUNIQID']:
-                day=datetime.datetime.fromtimestamp(int(d['StartDateTime'].replace('/Date(','').replace(')/','')) // 1000).strftime('%Y-%m-%d')
-                if now == day or day > now:
-                    payload = {"prgmEPGUNIQID": d['EPGUNIQID'], "countryCode": "SA"}
-                    pll.append(d['EPGUNIQID'])
-                    ch=''
-                    with requests.Session() as session:
-                        session.mount('http://', HTTPAdapter(max_retries=10))
-                        uri= session.post('http://www.osn.com/CMSPages/TVScheduleWebService.asmx/GetProgramDetails',data=payload,headers=headers)
-                        pag = uri.text.replace('<?xml version="1.0" encoding="utf-8"?>','').replace('<string xmlns="http://tempuri.org/">','').replace('</string>','')
-                        data= json.loads(pag)
-                        nm=data[0][u'ChannelNameEnglish'].replace(' ','_').replace('Crime_&_Investigation_Network','Crime_And_Investigation_Network')
-                        nam=data[0][u'ChannelNameEnglish']
-                        days=datetime.datetime.fromtimestamp(int(data[0][u'StartDateTime'].replace("/Date(",'').replace(")/",'')) // 1000).strftime("%Y-%d-%m")
-                        days_end=datetime.datetime.fromtimestamp(int(data[0][u'EndDateTime'].replace("/Date(",'').replace(")/",'')) // 1000).strftime("%Y-%d-%m")
-                        strt=datetime.datetime.fromtimestamp(int(data[0][u'StartDateTime'].replace("/Date(",'').replace(")/",'')) // 1000).strftime("%H:%M")
-                        endd = datetime.datetime.fromtimestamp(int(data[0][u'EndDateTime'].replace("/Date(",'').replace(")/",'')) // 1000).strftime("%H:%M")
-                        starttime = datetime.datetime.strptime(days+" "+strt, '%Y-%d-%m %H:%M').strftime('%Y%m%d%H%M%S')
-                        endtime = datetime.datetime.strptime(days_end+" "+endd, '%Y-%d-%m %H:%M').strftime('%Y%m%d%H%M%S')
-                        ch+= 2 * ' ' + '<programme start="' + starttime + ' '+time_offset+'" stop="' + endtime + ' '+time_offset+'" channel="'+nm+'">'+'\n'
-                        ch+='     <title lang="en">'+data[0][u'Title'].replace('&','and')+'</title>'+"\n"
-                        ch+='     <desc lang="ar">'+data[0][u'Arab_Synopsis']+'</desc>'+"\n"
-                        ch+='     <category lang="ar">'+data[0][u'GenreArabicName']+'</category>'+"\n"+'  </programme>'+"\n"
-                        with io.open("/etc/epgimport/osn.xml","a",encoding='UTF-8')as f:
-                            f.write(ch)
+            day=datetime.datetime.fromtimestamp(int(d['StartDateTime'].replace('/Date(','').replace(')/','')) // 1000).strftime('%Y-%m-%d')
+            if now == day or day > now:
+                payload = {"prgmEPGUNIQID": d['EPGUNIQID'], "countryCode": "SA"}
+                pll.append(d['EPGUNIQID'])
+                ch=''
+                with requests.Session() as session:
+                    session.mount('http://', HTTPAdapter(max_retries=10))
+                    uri= session.post('http://www.osn.com/CMSPages/TVScheduleWebService.asmx/GetProgramDetails',data=payload,headers=headers)
+                    pag = uri.text.replace('<?xml version="1.0" encoding="utf-8"?>','').replace('<string xmlns="http://tempuri.org/">','').replace('</string>','')
+                    data= json.loads(pag)
+                    nm=data[0][u'ChannelNameEnglish'].replace(' ','_').replace('Crime_&_Investigation_Network','Crime_And_Investigation_Network')
+                    nam=data[0][u'ChannelNameEnglish']
+                    days=datetime.datetime.fromtimestamp(int(data[0][u'StartDateTime'].replace("/Date(",'').replace(")/",'')) // 1000).strftime("%Y-%d-%m")
+                    days_end=datetime.datetime.fromtimestamp(int(data[0][u'EndDateTime'].replace("/Date(",'').replace(")/",'')) // 1000).strftime("%Y-%d-%m")
+                    strt=datetime.datetime.fromtimestamp(int(data[0][u'StartDateTime'].replace("/Date(",'').replace(")/",'')) // 1000).strftime("%H:%M")
+                    endd = datetime.datetime.fromtimestamp(int(data[0][u'EndDateTime'].replace("/Date(",'').replace(")/",'')) // 1000).strftime("%H:%M")
+                    starttime = datetime.datetime.strptime(days+" "+strt, '%Y-%d-%m %H:%M').strftime('%Y%m%d%H%M%S')
+                    endtime = datetime.datetime.strptime(days_end+" "+endd, '%Y-%d-%m %H:%M').strftime('%Y%m%d%H%M%S')
+                    ch+= 2 * ' ' + '<programme start="' + starttime + ' '+time_offset+'" stop="' + endtime + ' '+time_offset+'" channel="'+nm+'">'+'\n'
+                    ch+='     <title lang="en">'+data[0][u'Title'].replace('&','and')+'</title>'+"\n"
+                    ch+='     <desc lang="ar">'+data[0][u'Arab_Synopsis']+'</desc>'+"\n"
+                    ch+='     <sub-title lang="ar">'+data[0][u'GenreArabicName']+'</sub-title>'+"\n"+'  </programme>'+"\n"
+                    with io.open("/etc/epgimport/osn.xml","a",encoding='UTF-8')as f:
+                        f.write(ch)
         for _ in progressbar((pll*120),nam+" "+days.replace("2020","")+" : ", 15):pass
 
 def progressbar(it, prefix="", size=20, file=sys.stdout):

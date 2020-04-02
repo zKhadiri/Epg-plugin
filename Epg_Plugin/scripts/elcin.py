@@ -23,11 +23,11 @@ with io.open("/etc/epgimport/elcinema.xml","w",encoding='UTF-8')as f:
 
 for x in ch.elc_channels:
     with io.open("/etc/epgimport/elcinema.xml","a",encoding='UTF-8')as f:
-        f.write(("\n"+'  <channel id="'+x+'">'+"\n"+'    <display-name lang="en">'+x.replace("_",' ')+'</display-name>'+"\n"+'  </channel>\n').decode('utf-8'))
+        f.write(("\n"+'  <channel id="'+x+'">'+"\n"+'    <display-name lang="en">'+x.replace("_",' ')+'</display-name>'+"\n"+'  </channel>\r').decode('utf-8'))
 
 now = datetime.today().year
-nb_channel=['1173','1169','1137','1223','1176','1199','1156','1239','1262','1227','1278','1198','1136','1177','1193','1246','1216','1158','1135',
-            '1170','1159','1226','1168','1292','1203','1101','1134','1283','1188','1260','1290','1204','1269','1266','1280',
+nb_channel=['1186','1261','1174','1173','1169','1137','1223','1176','1199','1156','1262','1227','1198','1177','1193','1158',
+            '1170','1159','1226','1292','1203','1101','1134','1283','1188','1260','1290','1204','1269','1280',
             '1300','1298','1297','1301','1299','1296','1304','1317','1302','1312','1321','1338','1339','1353','1350','1355']
 def elci():
     for nb in nb_channel:
@@ -77,16 +77,18 @@ def elci():
                     cat.insert(index,titles[index])
                     
             for elem,next_elem,td1,td2 in zip(times, times[1:]+[times[0]],time_d,time_d[1:]+[time_d[0]]):
+                chnm=re.sub(' +', '', ''.join(channel_name)).replace(u'\xa0 Channel','').replace('Channel','')
                 startime=datetime.strptime(str(now)+' '+str(td1)+' '+elem,'%Y %A %d %B %H:%M').strftime('%Y%m%d%H%M%S')
                 endtime=datetime.strptime(str(now)+' '+str(td2)+' '+next_elem,'%Y %A %d %B %H:%M').strftime('%Y%m%d%H%M%S')
-                prog.append(2 * ' ' +'<programme start="' + startime + ' '+time_offset+'" stop="' + endtime + ' '+time_offset+'" channel="'+''.join(channel_name).replace(' ','_')+'">\n')
+                prog.append(2 * ' ' +'<programme start="' + startime + ' +0100" stop="' + endtime + ' +0100" channel="'+chnm.strip()+'">\n')
                 
             
             for p,tt,d,c in zip(prog,titles,des,cat):
+                space=re.sub(' +', ' ', d).replace('\r','').replace('\n','').replace('&amp;','and').replace('(','').replace(')','')
                 ch='' 
                 ch+=p
-                ch+='     <title lang="ar">'+tt.replace('&#39;',"'").replace('&quot;',"'")+'</title>\n'
-                ch+='     <desc lang="ar">'+d.replace('\r','').replace('\n','')+'</desc>\n'
+                ch+='     <title lang="ar">'+tt.replace('&#39;',"'").replace('&quot;','"')+'</title>\n'
+                ch+='     <desc lang="ar">'+space+'</desc>\n'
                 ch+='     <category lang="ar">'+c+'</category>\n'+'  </programme>\n'
                 with io.open("/etc/epgimport/elcinema.xml","a",encoding='UTF-8')as f:
                     f.write(ch)

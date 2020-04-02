@@ -322,7 +322,7 @@ class EPGIConfig(Screen):
                             newText=f.read().decode('utf-8').replace(time_of.group(), newtime)
                             with io.open("/etc/epgimport/elcinema.xml", "w",encoding="utf-8") as f:
                                 f.write((newText).decode('utf-8'))
-                                self.session.open(MessageBox,_("current snrt time "+time_of.group()+" replaced by "+newtime), MessageBox.TYPE_INFO,timeout=10)
+                                self.session.open(MessageBox,_("current elcinema time "+time_of.group()+" replaced by "+newtime), MessageBox.TYPE_INFO,timeout=10)
                     else:
                         self.session.open(MessageBox,_("File is empty"), MessageBox.TYPE_INFO,timeout=10)
                 else:
@@ -379,6 +379,6 @@ class EPGIConfig(Screen):
             elif returnValue == "6":
                 self.session.open(Console,_("EPG SNRT") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/aloula.py"])
             elif returnValue == "7":
-                self.session.open(Console,_("ELECINEMA SNRT") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/elcin.py"])
+                self.session.open(Console,_("ELECINEMA EPG") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/elcin.py"])
             else:
                 self.close(None)

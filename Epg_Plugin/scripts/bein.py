@@ -32,7 +32,7 @@ with io.open("/etc/epgimport/bein.xml","w",encoding='UTF-8')as f:
     f.write(('<tv generator-info-name="By ZR1">').decode('utf-8'))
 for cc in ch.chann:
     with io.open("/etc/epgimport/bein.xml","a",encoding='UTF-8')as f:
-        f.write(("\n"+'  <channel id="'+cc.replace(" ","_")+'">'+"\n"+'    <display-name lang="en">'+cc.replace("_"," ")+'</display-name>'+"\n"+'    <icon src="http://epg.beinsports.com/mena_sports/'+cc.replace('BS_NBA','BS NBA')+'.svg"/>'+"\n"+'    <url>http://www.bein.net/ar</url>'+"\n"+'  </channel>').decode('utf-8'))
+        f.write(("\n"+'  <channel id="'+cc.replace(" ","_")+'">'+"\n"+'    <display-name lang="en">'+cc.replace("_"," ")+'</display-name>'+"\n"+'    <icon src="http://epg.beinsports.com/mena_sports/'+cc.replace('BS_NBA','BS NBA')+'.svg"/>'+"\n"+'    <url>http://www.bein.net/ar</url>'+"\n"+'  </channel>\r').decode('utf-8'))
 
 def bein():
     for url in urls:

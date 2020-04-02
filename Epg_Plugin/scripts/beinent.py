@@ -34,7 +34,7 @@ with io.open("/etc/epgimport/beinent.xml","w",encoding='UTF-8')as f:
     f.write(('<?xml version="1.0" encoding="UTF-8"?>'+"\n"+'<tv generator-info-name="By ZR1">').decode('utf-8'))
 for nt in ch.net:
     with io.open("/etc/epgimport/beinent.xml","a",encoding='UTF-8')as f:
-        f.write(("\n"+'  <channel id="'+nt+'">'+"\n"+'    <display-name lang="en">'+nt.replace("_"," ")+'</display-name>'+"\n"+'  </channel>'+"\n").decode('utf-8'))
+        f.write(("\n"+'  <channel id="'+nt+'">'+"\n"+'    <display-name lang="en">'+nt.replace("_"," ")+'</display-name>'+"\n"+'  </channel>'+"\r").decode('utf-8'))
 
 def beinen():
     for url in urls:
