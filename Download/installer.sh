@@ -3,7 +3,7 @@
 
 ######### Only These two lines to edit with new version ######
 version=2.7
-description=What is NEW:\n[Bug fix]
+description=What is NEW:\n[elcinema epg problems fix]
 ##############################################################
 #### EDit By RAED To DreamOS OE2.5/2.6
 if [ -f /var/lib/dpkg/status ]; then
