@@ -2,7 +2,7 @@
 ##setup command=wget https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=2.7
+version=2.8
 description=What is NEW:\n[elcinema epg problems fix]
 ##############################################################
 #### EDit By RAED To DreamOS OE2.5/2.6
