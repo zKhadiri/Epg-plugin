@@ -2,8 +2,8 @@
 ##setup command=wget https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=2.8
-description=What is NEW:\n[elcinema epg problems fix]
+version=2.9
+description=What is NEW:\n[Add option Yes/No Before downlod job]
 ##############################################################
 #### EDit By RAED To DreamOS OE2.5/2.6
 if [ -f /var/lib/dpkg/status ]; then
@@ -23,8 +23,6 @@ fi
 rm -rf /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin
 
 # check depends packges
-
-chmod 755 /usr/bin/wget2
 
 opkg update
 
