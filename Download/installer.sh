@@ -3,7 +3,7 @@
 
 ######### Only These two lines to edit with new version ######
 version=3.4
-description=What is NEW:\n[no more timezone fixing. enjoy]
+description=What is NEW:\n[new update]
 ##############################################################
 #### EDit By RAED To DreamOS OE2.5/2.6
 if [ -f /var/lib/dpkg/status ]; then
