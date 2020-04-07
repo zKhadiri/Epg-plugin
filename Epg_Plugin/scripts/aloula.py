@@ -4,11 +4,9 @@ import requests,re,os,io
 from time import strftime
 from requests.adapters import HTTPAdapter
 
-time_zone = strftime('%z')
-
-import time
-os.environ['TZ'] = 'UTC'
-
+fil = open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/aloula.txt','r')
+time_zone = fil.read().strip()
+fil.close()
 
 headers={
     'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) snap Chromium/80.0.3987.100 Chrome/80.0.3987.100 Safari/537.36'

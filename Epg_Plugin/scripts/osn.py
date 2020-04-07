@@ -5,10 +5,9 @@ from datetime import datetime
 from time import sleep,strftime
 from requests.adapters import HTTPAdapter
 
-time_zone = strftime('%z')
-
-import time
-os.environ['TZ'] = 'UTC'
+fil = open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/osn.txt','r')
+time_zone = fil.read().strip()
+fil.close()
 
 
 pyl=[]

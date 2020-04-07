@@ -4,10 +4,12 @@ import requests,re,io,ch,os,threading,sys
 from datetime import datetime
 from time import sleep,strftime
 
-time_zone = strftime('%z')
+fil = open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/elcinema.txt','r')
+time_zone = fil.read().strip()
+fil.close()
 
 import time
-os.environ['TZ'] = 'UTC'
+os.environ['TZ'] = 'CET-1CEST,M3.5.0,M10.5.0'
 
 
 headers={
