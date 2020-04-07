@@ -2,7 +2,7 @@
 ##setup command=wget https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=3.4
+version=3.5
 description=What is NEW:\n[new update]
 ##############################################################
 #### EDit By RAED To DreamOS OE2.5/2.6
