@@ -87,24 +87,25 @@ class EPGIConfig(Screen):
     else:
 		skin = """
 			<screen position="center,center" size="938,476" title="EPG Import Configuration">
-  <ePixmap name="red" position="0,0" zPosition="2" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/red.png" transparent="1" alphatest="on"/>
-  <ePixmap name="green" position="140,0" zPosition="2" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/green.png" transparent="1" alphatest="on"/>
-  <ePixmap name="yellow" position="280,0" zPosition="2" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/yellow.png" transparent="1" alphatest="on"/>
-  <ePixmap name="blue" position="420,0" zPosition="2" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/blue.png" transparent="1" alphatest="on"/>
-  <ePixmap position="562,0" size="35,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/key_menu.png" alphatest="on"/>
-  <widget name="key_red" position="0,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;20" transparent="1" shadowColor="background"/>
-  <widget name="key_green" position="140,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;20" transparent="1" shadowColor="background"/>
-  <widget name="key_yellow" position="280,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;20" transparent="1" shadowColor="background"/>
-  <widget name="key_blue" position="420,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;20" transparent="1" shadowColor="background"/>
-  <widget name="config" foregroundColor="#00ffffff" backgroundColor="#16000000" position="10,60" size="911,321" scrollbarMode="showOnDemand"/>
-  <widget name="status" foregroundColor="#00ffffff" backgroundColor="#16000000" position="10,396" size="911,71" font="Regular;20"/>
-</screen>"""
+            <ePixmap name="red" position="0,0" zPosition="2" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/red.png" transparent="1" alphatest="on"/>
+            <ePixmap name="green" position="140,0" zPosition="2" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/green.png" transparent="1" alphatest="on"/>
+            <ePixmap name="yellow" position="280,0" zPosition="2" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/yellow.png" transparent="1" alphatest="on"/>
+            <ePixmap name="blue" position="420,0" zPosition="2" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/blue.png" transparent="1" alphatest="on"/>
+            <ePixmap position="562,0" size="35,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/key_menu.png" alphatest="on"/>
+            <widget name="key_red" position="0,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;20" transparent="1" shadowColor="background"/>
+            <widget name="key_green" position="140,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;20" transparent="1" shadowColor="background"/>
+            <widget name="key_yellow" position="280,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;20" transparent="1" shadowColor="background"/>
+            <widget name="key_blue" position="420,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;20" transparent="1" shadowColor="background"/>
+            <widget name="config" foregroundColor="#00ffffff" backgroundColor="#16000000" position="10,60" size="911,321" scrollbarMode="showOnDemand"/>
+            <widget name="status" foregroundColor="#00ffffff" backgroundColor="#16000000" position="10,396" size="911,71" font="Regular;20"/>
+            </screen>"""
+            
 ###### End 
     def __init__(self, session, args = 0):
         if DreamOS():
-		self.wget = "/usr/bin/wget2 --no-check-certificate"
+		    self.wget = "/usr/bin/wget2 --no-check-certificate"
         else:
-		self.wget = "/usr/bin/wget"
+		    self.wget = "/usr/bin/wget"
         self.session = session
         list = []
         list.append(("Bein Sports EPG", "1"))
@@ -197,22 +198,9 @@ class EPGIConfig(Screen):
          return
 ######### End #########
     def update(self):
-        f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/bein.txt", "r")
-        bein = f.read()
-        f.close()
-        f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/osn.txt", "r")
-        osn = f.read()
+        f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
+        self["status"].setText("Current time zone  : "+f1.read())
         f1.close()
-        f2 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/elcinema.txt", "r")
-        elcin = f.read()
-        f2.close()
-        f3 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/snrt.txt", "r")
-        snrt = f.read()
-        f3.close()
-        f4 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/ondemand.txt", "r")
-        ond = f.read()
-        f4.close()
-        self["status"].setText("Current time zone for bein : "+bein+' osn : '+osn+' elcinema : '+elcin+' snrt : '+snrt+' ondemand : '+ond)
     
     def settime(self):
         returnValue = self["config"].l.getCurrentSelection()[1]
@@ -317,7 +305,7 @@ class EPGIConfig(Screen):
                     f = open('/etc/epgimport/aloula.xml','r')
                     time_of = re.search(r'[+#-]+\d{4}',f.read())
                     f.close()
-                    f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/snrt.txt", "r")
+                    f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/aloula.txt", "r")
                     newtime=f1.read()
                     f1.close()
                     if time_of !=None:
@@ -396,72 +384,72 @@ class EPGIConfig(Screen):
             	self.checkupdates() ### Add By RAED
             self.setTitle("EPG GRABBER BY ZIKO V %s" % Ver) ### Edit by RAED
 
-    def  KeyBlue(self):
+    def KeyBlue(self):
         returnValue = self["config"].l.getCurrentSelection()[1]
         if returnValue is not None:
-                if returnValue == "1":
-                    f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/offset.txt", "r")
-                    new_time = f.read().strip()
-                    f.close()
-                    with io.open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/bein.txt","w",encoding='UTF-8')as f1:
-                        f1.write(new_time.decode('utf-8'))
-                        self.session.open(MessageBox,_("time changed with succes "+new_time), MessageBox.TYPE_INFO,timeout=10)
-                elif returnValue == "2":
-                    f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
-                    new_time = f.read().strip()
-                    f.close()
-                    with io.open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/osn.txt","w",encoding='UTF-8')as f1:
-                        f1.write(new_time.decode('utf-8'))
-                        self.session.open(MessageBox,_("time changed with succes "+new_time), MessageBox.TYPE_INFO,timeout=10)
-                elif returnValue == "3":
-                    f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
-                    new_time = f.read().strip()
-                    f.close()
-                    with io.open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/osn.txt","w",encoding='UTF-8')as f1:
-                        f1.write(new_time.decode('utf-8'))
-                        self.session.open(MessageBox,_("time changed with succes "+new_time), MessageBox.TYPE_INFO,timeout=10)
-                elif returnValue == "4":
-                    f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
-                    new_time = f.read().strip()
-                    f.close()
-                    with io.open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/ondemand.txt","w",encoding='UTF-8')as f1:
-                        f1.write(new_time.decode('utf-8'))
-                        self.session.open(MessageBox,_("time changed with succes "+new_time), MessageBox.TYPE_INFO,timeout=10)
-                elif returnValue == "5":
-                    f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
-                    new_time = f.read().strip()
-                    f.close()
-                    with io.open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/bein.txt","w",encoding='UTF-8')as f1:
-                        f1.write(new_time.decode('utf-8'))
-                        self.session.open(MessageBox,_("time changed with succes "+new_time), MessageBox.TYPE_INFO,timeout=10)
-                elif returnValue == "6":
-                    f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
-                    new_time = f.read().strip()
-                    f.close()
-                    with io.open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/snrt.txt","w",encoding='UTF-8')as f1:
-                        f1.write(new_time.decode('utf-8'))
-                        self.session.open(MessageBox,_("time changed with succes "+new_time), MessageBox.TYPE_INFO,timeout=10)
-                elif returnValue == "7":
-                    f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
-                    new_time = f.read().strip()
-                    f.close()
-                    with io.open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/elcinema.txt","w",encoding='UTF-8')as f1:
-                        f1.write(new_time.decode('utf-8'))
-                        self.session.open(MessageBox,_("time changed with succes "+new_time), MessageBox.TYPE_INFO,timeout=10)
-                elif returnValue == "8":
-                    f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
-                    new_time = f.read().strip()
-                    f.close()
-                    with io.open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/osn.txt","w",encoding='UTF-8')as f1:
-                        f1.write(new_time.decode('utf-8'))
-                        self.session.open(MessageBox,_("time changed with succes "+new_time), MessageBox.TYPE_INFO,timeout=10)
-                elif returnValue == "9":
-                    f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
-                    new_time = f.read().strip()
-                    f.close()
-                    with io.open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/elcinema.txt","w",encoding='UTF-8')as f1:
-                        f1.write(new_time.decode('utf-8'))
-                        self.session.open(MessageBox,_("time changed with succes "+new_time), MessageBox.TYPE_INFO,timeout=10)
+            if returnValue == "1":
+                f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
+                new_time = f.read().strip()
+                f.close()
+                with io.open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/bein.txt","w",encoding='UTF-8')as f1:
+                    f1.write(new_time.decode('utf-8'))
+                    self.session.open(MessageBox,_("time changed with succes "+new_time), MessageBox.TYPE_INFO,timeout=10)
+            elif returnValue == "2":
+                f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
+                new_time = f.read().strip()
+                f.close()
+                with io.open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/osn.txt","w",encoding='UTF-8')as f1:
+                    f1.write(new_time.decode('utf-8'))
+                    self.session.open(MessageBox,_("time changed with succes "+new_time), MessageBox.TYPE_INFO,timeout=10)
+            elif returnValue == "3":
+                f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
+                new_time = f.read().strip()
+                f.close()
+                with io.open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/osn.txt","w",encoding='UTF-8')as f1:
+                    f1.write(new_time.decode('utf-8'))
+                    self.session.open(MessageBox,_("time changed with succes "+new_time), MessageBox.TYPE_INFO,timeout=10)
+            elif returnValue == "4":
+                f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
+                new_time = f.read().strip()
+                f.close()
+                with io.open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/ondemand.txt","w",encoding='UTF-8')as f1:
+                    f1.write(new_time.decode('utf-8'))
+                    self.session.open(MessageBox,_("time changed with succes "+new_time), MessageBox.TYPE_INFO,timeout=10)
+            elif returnValue == "5":
+                f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
+                new_time = f.read().strip()
+                f.close()
+                with io.open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/bein.txt","w",encoding='UTF-8')as f1:
+                    f1.write(new_time.decode('utf-8'))
+                    self.session.open(MessageBox,_("time changed with succes "+new_time), MessageBox.TYPE_INFO,timeout=10)
+            elif returnValue == "6":
+                f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
+                new_time = f.read().strip()
+                f.close()
+                with io.open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/aloula.txt","w",encoding='UTF-8')as f1:
+                    f1.write(new_time.decode('utf-8'))
+                    self.session.open(MessageBox,_("time changed with succes "+new_time), MessageBox.TYPE_INFO,timeout=10)
+            elif returnValue == "7":
+                f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
+                new_time = f.read().strip()
+                f.close()
+                with io.open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/elcinema.txt","w",encoding='UTF-8')as f1:
+                    f1.write(new_time.decode('utf-8'))
+                    self.session.open(MessageBox,_("time changed with succes "+new_time), MessageBox.TYPE_INFO,timeout=10)
+            elif returnValue == "8":
+                f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
+                new_time = f.read().strip()
+                f.close()
+                with io.open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/osn.txt","w",encoding='UTF-8')as f1:
+                    f1.write(new_time.decode('utf-8'))
+                    self.session.open(MessageBox,_("time changed with succes "+new_time), MessageBox.TYPE_INFO,timeout=10)
+            elif returnValue == "9":
+                f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
+                new_time = f.read().strip()
+                f.close()
+                with io.open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/elcinema.txt","w",encoding='UTF-8')as f1:
+                    f1.write(new_time.decode('utf-8'))
+                    self.session.open(MessageBox,_("time changed with succes "+new_time), MessageBox.TYPE_INFO,timeout=10)
 
     def keyRed(self):
         self.close(None)
@@ -495,30 +483,30 @@ class EPGIConfig(Screen):
         returnValue = self["config"].l.getCurrentSelection()[1]
         if answer:
             if returnValue is not None:
-                    if returnValue == "1":
-                        self.session.open(Console,_("EPG BEIN SPORTS") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/bein.py"], closeOnSuccess=False)
-                        cprint("Downloading EPG BEIN SPORTS")
-                    elif returnValue == "2":
-                        self.session.open(Console,_("EPG OSN ARABIC + ENGLISH TITLE") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/osn.py"], closeOnSuccess=False)
-                        cprint("Downloading EPG OSN ARABIC + ENGLISH TITLE")
-                    elif returnValue == "3":
-                        self.session.open(Console,_("EPG OSN ENGLISH TITLE ONLY") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/osnen.py"], closeOnSuccess=False)
-                        cprint("Downloading EPG OSN ENGLISH TITLE ONLY")
-                    elif returnValue == "4":
-                        self.session.open(Console,_("EPG OSN ON DEMAND") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/ondemand.py"], closeOnSuccess=False)
-                        cprint("Downloading EPG OSN ON DEMAND")
-                    elif returnValue == "5":
-                        self.session.open(Console,_("EPG Bein entertainment") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/beinent.py"], closeOnSuccess=False)
-                        cprint("Downloading EPG Bein entertainment")
-                    elif returnValue == "6":
-                        self.session.open(Console,_("EPG SNRT") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/aloula.py"], closeOnSuccess=False)
-                        cprint("Downloading EPG SNRT")
-                    elif returnValue == "7":
-                        self.session.open(Console,_("ELCINEMA EPG") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/elcin.py"], closeOnSuccess=False)
-                        cprint("Downloading ELECINEMA EPG")
-                    elif returnValue == "8":
-                            self.session.open(Console,_("OSN BACKUP EPG") , "%s https://github.com/ziko-ZR1/XML/raw/master/osn.xml -O /etc/epgimport/osn.xml" % self.wget)
-                            cprint("Downloading OSN BACKUP EPG")
-                    elif returnValue == "9":
-                            self.session.open(Console,_("elcinema BACKUP EPG") , "%s https://github.com/ziko-ZR1/XML/raw/master/elcinema.xml -O /etc/epgimport/elcinema.xml" % self.wget)
-                            cprint("Downloading elcinema BACKUP EPG")
+                if returnValue == "1":
+                    self.session.open(Console,_("EPG BEIN SPORTS") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/bein.py"], closeOnSuccess=False)
+                    cprint("Downloading EPG BEIN SPORTS")
+                elif returnValue == "2":
+                    self.session.open(Console,_("EPG OSN ARABIC + ENGLISH TITLE") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/osn.py"], closeOnSuccess=False)
+                    cprint("Downloading EPG OSN ARABIC + ENGLISH TITLE")
+                elif returnValue == "3":
+                    self.session.open(Console,_("EPG OSN ENGLISH TITLE ONLY") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/osnen.py"], closeOnSuccess=False)
+                    cprint("Downloading EPG OSN ENGLISH TITLE ONLY")
+                elif returnValue == "4":
+                    self.session.open(Console,_("EPG OSN ON DEMAND") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/ondemand.py"], closeOnSuccess=False)
+                    cprint("Downloading EPG OSN ON DEMAND")
+                elif returnValue == "5":
+                    self.session.open(Console,_("EPG Bein entertainment") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/beinent.py"], closeOnSuccess=False)
+                    cprint("Downloading EPG Bein entertainment")
+                elif returnValue == "6":
+                    self.session.open(Console,_("EPG SNRT") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/aloula.py"], closeOnSuccess=False)
+                    cprint("Downloading EPG SNRT")
+                elif returnValue == "7":
+                    self.session.open(Console,_("ELCINEMA EPG") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/elcin.py"], closeOnSuccess=False)
+                    cprint("Downloading ELECINEMA EPG")
+                elif returnValue == "8":
+                    self.session.open(Console,_("OSN BACKUP EPG") , "%s https://github.com/ziko-ZR1/XML/raw/master/osn.xml -O /etc/epgimport/osn.xml" % self.wget)
+                    cprint("Downloading OSN BACKUP EPG")
+                elif returnValue == "9":
+                    self.session.open(Console,_("elcinema BACKUP EPG") , "%s https://github.com/ziko-ZR1/XML/raw/master/elcinema.xml -O /etc/epgimport/elcinema.xml" % self.wget)
+                    cprint("Downloading elcinema BACKUP EPG")
