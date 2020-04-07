@@ -516,10 +516,9 @@ class EPGIConfig(Screen):
                     elif returnValue == "7":
                         self.session.open(Console,_("ELCINEMA EPG") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/elcin.py"], closeOnSuccess=False)
                         cprint("Downloading ELECINEMA EPG")
-                    
-                    elif returnValue == "8":
-                            self.session.open(Console,_("OSN BACKUP EPG") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/osnbackup.py"], closeOnSuccess=False)
+		    elif returnValue == "8":
+                            self.session.open(Console,_("OSN BACKUP EPG") , "%s https://github.com/ziko-ZR1/XML/raw/master/osn.xml -O /etc/epgimport/osn.xml" % self.wget)
                             cprint("Downloading OSN BACKUP EPG")
                     elif returnValue == "9":
-                            self.session.open(Console,_("elcinema BACKUP EPG") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/elcinemabackup.py"], closeOnSuccess=False)
+                            self.session.open(Console,_("elcinema BACKUP EPG") , "%s https://github.com/ziko-ZR1/XML/raw/master/elcinema.xml -O /etc/epgimport/elcinema.xml" % self.wget)
                             cprint("Downloading elcinema BACKUP EPG")
