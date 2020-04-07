@@ -516,7 +516,7 @@ class EPGIConfig(Screen):
                     elif returnValue == "7":
                         self.session.open(Console,_("ELCINEMA EPG") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/elcin.py"], closeOnSuccess=False)
                         cprint("Downloading ELECINEMA EPG")
-		    elif returnValue == "8":
+                    elif returnValue == "8":
                             self.session.open(Console,_("OSN BACKUP EPG") , "%s https://github.com/ziko-ZR1/XML/raw/master/osn.xml -O /etc/epgimport/osn.xml" % self.wget)
                             cprint("Downloading OSN BACKUP EPG")
                     elif returnValue == "9":
