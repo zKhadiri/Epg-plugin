@@ -67,7 +67,10 @@ def oss(url):
                     starttime = datetime.datetime.strptime(days+" "+strt, '%Y-%d-%m %H:%M').strftime('%Y%m%d%H%M%S')
                     endtime = datetime.datetime.strptime(days_end+" "+endd, '%Y-%d-%m %H:%M').strftime('%Y%m%d%H%M%S')
                     ch+= 2 * ' ' + '<programme start="' + starttime + ' '+time_zone+'" stop="' + endtime + ' '+time_zone+'" channel="'+nm+'">'+'\n'
-                    ch+='     <title lang="en">'+data[0][u'Title'].replace('&','and')+" - "+data[0][u'Arab_Title']+'</title>'+"\n"
+                    if url['channelCode'] =='SER' or url['channelCode'] =='YAW' or url['channelCode'] =='YAW' or url['channelCode'] =='SAF' or url['channelCode'] =='CM1' or url['channelCode'] =='CM2' or url['channelCode'] =='FAN' or url['channelCode'] =='OYH' or url['channelCode'] =='OYA' or url['channelCode'] =='OYC':
+                        ch+='     <title lang="en">'+data[0][u'Arab_Title']+'</title>'+"\n"
+                    else:
+                        ch+='     <title lang="en">'+data[0][u'Title'].replace('&','and')+'</title>'+"\n"
                     ch+='     <desc lang="ar">'+data[0][u'Arab_Synopsis']+'</desc>'+"\n"
                     ch+='     <sub-title lang="ar">'+data[0][u'GenreArabicName']+'</sub-title>'+"\n"+'  </programme>'+"\n"
                     with io.open("/etc/epgimport/osn.xml","a",encoding='UTF-8')as f:
