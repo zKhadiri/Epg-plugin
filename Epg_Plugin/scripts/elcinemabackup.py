@@ -1,14 +1,38 @@
-import requests,io,re
+import os,io,re,sys
+reload(sys)
+sys.setdefaultencoding('utf8')
 
-fil = open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/elcinema.txt','r')
-time_zone = fil.read().strip()
-fil.close()
+def DreamOS():
+    if os.path.exists('/var/lib/dpkg/status'):
+        return DreamOS
 
-url = requests.get('https://raw.githubusercontent.com/ziko-ZR1/XML/master/elcinema.xml')
-if url.status_code !=404:
-    old_time = re.search(r'[+#-]+\d{4}',url.text)
-    with io.open("/etc/epgimport/elcinema.xml","w",encoding='UTF-8')as f:
-        f.write(url.text.replace(old_time.group(),time_zone))
-        print('Finished')
+if DreamOS():
+	wget = "/usr/bin/wget2 --no-check-certificate"
 else:
-    print('Cannot establish connection to the server')
+	wget = "/usr/bin/wget"
+
+
+with io.open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/elcinema.txt','r') as f:
+    time_zone = f.read().strip()
+    
+path = '/etc/epgimport/elcinema.xml'   
+
+os.system(''+wget+' https://github.com/ziko-ZR1/XML/raw/master/osn.xml -O '+path+'')
+
+f = open(path,'r')
+time_of = re.search(r'[+#-]+\d{4}',f.read())
+f.close()
+
+print "changing to your timezone please wait...."
+
+if os.path.exists(path):
+    if time_of !=None:
+        with io.open(path,encoding="utf-8") as f:
+            newText=f.read().decode('utf-8').replace(time_of.group(), time_zone)
+            with io.open(path, "w",encoding="utf-8") as f:
+                f.write((newText).decode('utf-8'))
+    else:
+        print "file is empty"
+                
+                
+print "elcinema.xml donwloaded with succes"

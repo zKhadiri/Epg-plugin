@@ -85,8 +85,8 @@ class EPGIConfig(Screen):
 				<widget name="status" foregroundColor="#00ffffff" backgroundColor="#16000000" position="10,400" size="580,60" font="Regular;20" />
 			</screen>"""
     else:
-		skin = """
-			<screen position="center,center" size="938,476" title="EPG Import Configuration">
+        skin = """
+            <screen position="center,center" size="938,476" title="EPG Import Configuration">
             <ePixmap name="red" position="0,0" zPosition="2" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/red.png" transparent="1" alphatest="on"/>
             <ePixmap name="green" position="140,0" zPosition="2" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/green.png" transparent="1" alphatest="on"/>
             <ePixmap name="yellow" position="280,0" zPosition="2" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/yellow.png" transparent="1" alphatest="on"/>
@@ -98,14 +98,13 @@ class EPGIConfig(Screen):
             <widget name="key_blue" position="420,0" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;20" transparent="1" shadowColor="background"/>
             <widget name="config" foregroundColor="#00ffffff" backgroundColor="#16000000" position="10,60" size="911,321" scrollbarMode="showOnDemand"/>
             <widget name="status" foregroundColor="#00ffffff" backgroundColor="#16000000" position="10,396" size="911,71" font="Regular;20"/>
-            </screen>"""
-            
+        </screen>"""
 ###### End 
     def __init__(self, session, args = 0):
         if DreamOS():
-		    self.wget = "/usr/bin/wget2 --no-check-certificate"
+		self.wget = "/usr/bin/wget2 --no-check-certificate"
         else:
-		    self.wget = "/usr/bin/wget"
+		self.wget = "/usr/bin/wget"
         self.session = session
         list = []
         list.append(("Bein Sports EPG", "1"))
@@ -141,28 +140,28 @@ class EPGIConfig(Screen):
 ######### Add Update online by RAED (Fairbird) #####
     def showsetup(self):
         choices=[]
-	self.list = []
-	EnablecheckUpdate = config.plugins.EpgPlugin.update.value
+        self.list = []
+        EnablecheckUpdate = config.plugins.EpgPlugin.update.value
         #choices.append(("Install New version %s" %self.new_version, "Install"))
         if EnablecheckUpdate == False:
-                choices.append(("Press Ok to [Enable checking for Online Update]","enablecheckUpdate"))
+            choices.append(("Press Ok to [Enable checking for Online Update]","enablecheckUpdate"))
         else:
-                choices.append(("Press Ok to [Disable checking for Online Update]","disablecheckUpdate")) 
+            choices.append(("Press Ok to [Disable checking for Online Update]","disablecheckUpdate")) 
         from Screens.ChoiceBox import ChoiceBox
         self.session.openWithCallback(self.choicesback, ChoiceBox, _('select task'),choices)
 
     def choicesback(self, select):
         if select:
-                #if select[1] == "Install":
-                #         self.install(True)
-                if select[1] == "enablecheckUpdate":
-                         config.plugins.EpgPlugin.update.value = True
-                         config.plugins.EpgPlugin.update.save()
-                         configfile.save()
-                elif select[1] == "disablecheckUpdate":
-                         config.plugins.EpgPlugin.update.value = False
-                         config.plugins.EpgPlugin.update.save()
-                         configfile.save()
+            #if select[1] == "Install":
+            #         self.install(True)
+            if select[1] == "enablecheckUpdate":
+                config.plugins.EpgPlugin.update.value = True
+                config.plugins.EpgPlugin.update.save()
+                configfile.save()
+            elif select[1] == "disablecheckUpdate":
+                config.plugins.EpgPlugin.update.value = False
+                config.plugins.EpgPlugin.update.save()
+                configfile.save()
 
     def checkupdates(self):
         from twisted.web.client import getPage, error
@@ -189,11 +188,11 @@ class EPGIConfig(Screen):
             self.session.openWithCallback(self.installupdate, MessageBox, _('New version %s is available.\n\n%s.\n\nDo you want to install it now.' % (self.new_version, self.new_description)), MessageBox.TYPE_YESNO)
 
     def installupdate(self,answer=False):
-              if answer:
-                cmdlist = []
-                cmdlist.append("%s https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh" % self.wget)
-                from Plugins.Extensions.Epg_Plugin.Console import Console
-                self.session.open(Console, title='Installing last update, enigma will be started after install', cmdlist=cmdlist, finishedCallback=self.myCallback, closeOnSuccess=False,endstr="")
+        if answer:
+            cmdlist = []
+            cmdlist.append("%s https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh" % self.wget)
+            from Plugins.Extensions.Epg_Plugin.Console import Console
+            self.session.open(Console, title='Installing last update, enigma will be started after install', cmdlist=cmdlist, finishedCallback=self.myCallback, closeOnSuccess=False,endstr="")
     def myCallback(self,result):
          return
 ######### End #########
