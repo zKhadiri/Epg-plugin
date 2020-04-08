@@ -67,7 +67,7 @@ def oss(url):
                     starttime = datetime.datetime.strptime(days+" "+strt, '%Y-%d-%m %H:%M').strftime('%Y%m%d%H%M%S')
                     endtime = datetime.datetime.strptime(days_end+" "+endd, '%Y-%d-%m %H:%M').strftime('%Y%m%d%H%M%S')
                     ch+= 2 * ' ' + '<programme start="' + starttime + ' '+time_zone+'" stop="' + endtime + ' '+time_zone+'" channel="'+nm+'">'+'\n'
-                    if url['channelCode'] =='SER' or url['channelCode'] =='YAW' or url['channelCode'] =='YAW' or url['channelCode'] =='SAF' or url['channelCode'] =='CM1' or url['channelCode'] =='CM2' or url['channelCode'] =='FAN' or url['channelCode'] =='OYH' or url['channelCode'] =='OYA' or url['channelCode'] =='OYC':
+                    if url['channelCode'] =='SER' or url['channelCode'] =='YAW' or url['channelCode'] =='SAF' or url['channelCode'] =='CM1' or url['channelCode'] =='CM2' or url['channelCode'] =='FAN' or url['channelCode'] =='OYH' or url['channelCode'] =='OYA' or url['channelCode'] =='OYC':
                         ch+='     <title lang="en">'+data[0][u'Arab_Title']+'</title>'+"\n"
                     else:
                         ch+='     <title lang="en">'+data[0][u'Title'].replace('&','and')+'</title>'+"\n"
