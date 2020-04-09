@@ -9,27 +9,30 @@ description=What is NEW:\n[new update]
 rm -rf /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin
 
 # check depends packges
-opkg update
-
 if [ -f /var/lib/dpkg/status ]; then
    STATUS=/var/lib/dpkg/status
 else
    STATUS=/var/lib/opkg/status
 fi
-if grep -q python-requests $STATUS ; then
+if grep -q python-requests $STATUS; then
+    requests=Installed
+fi
+if grep -q enigma2-plugin-extensions-epgimport $STATUS; then
+    epgimport=Installed
+fi
+if [ $requests = "Installed" -a $epgimport = "Installed" ]; then 
      echo ""
 else
-     echo "Need to download python-requests"
-     opkg install python-requests
+     opkg update
+     echo "Need to download Depends packages"
+     if grep -q python-requests $STATUS; then
+          opkg install python-requests
+     fi
+     if grep -q python-requests $STATUS; then
+          opkg install enigma2-plugin-extensions-epgimport
+     fi
 fi
 echo ""
-if grep -q enigma2-plugin-extensions-epgimport $STATUS ; then
-     echo ""
-else
-     echo "Need to download epgimport plugin"
-     opkg install enigma2-plugin-extensions-epgimport
-fi
-
 # Download and install plugin
 cd /tmp
 set -e
