@@ -5,14 +5,11 @@
 version=3.5
 description=What is NEW:\n[new update]
 ##############################################################
-AGENT='--header="User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_0) AppleWebKit/600.1.17 (KHTML, like Gecko) Version/8.0 Safari/600.1.17"'
-CRT="--debug --no-check-certificate"
 # remove old version
-# rm -rf /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin
+rm -rf /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin
 
 # check depends packges
-
-# opkg update
+opkg update
 
 if [ -f /var/lib/dpkg/status ]; then
    STATUS=/var/lib/dpkg/status
@@ -34,10 +31,9 @@ else
 fi
 
 # Download and install plugin
-
 cd /tmp
 set -e
-wget -q $AGENT $CRT "https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/Epg_Plugin-"$version".tar.gz"
+wget "https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/Epg_Plugin-"$version".tar.gz"
 
 tar -xzf Epg_Plugin-"$version".tar.gz -C /
 set +e
