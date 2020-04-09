@@ -5,26 +5,14 @@
 version=3.5
 description=What is NEW:\n[new update]
 ##############################################################
-#### EDit By RAED To DreamOS OE2.5/2.6
-if [ -f /var/lib/dpkg/status ]; then
-      if [ -f /usr/bin/wget2 ]; then
-            chmod 755 /usr/bin/wget2
-            WGET='/usr/bin/wget2 --no-check-certificate'
-      else
-            echo "[Your image can not download wget2]"
-            echo "[Please downoad it manually from (https://github.com/ziko-ZR1/Epg-plugin/blob/master/Download/wget2)]"
-            echo "[Then send it to /usr/bin, And try again to dowload plugin]"
-            exit 1
-       fi
-else
-      WGET='/usr/bin/wget'
-fi
+AGENT='--header="User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_0) AppleWebKit/600.1.17 (KHTML, like Gecko) Version/8.0 Safari/600.1.17"'
+CRT="--debug --no-check-certificate"
 # remove old version
-rm -rf /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin
+# rm -rf /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin
 
 # check depends packges
 
-opkg update
+# opkg update
 
 if [ -f /var/lib/dpkg/status ]; then
    STATUS=/var/lib/dpkg/status
@@ -49,7 +37,7 @@ fi
 
 cd /tmp
 set -e
-$WGET "https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/Epg_Plugin-"$version".tar.gz"
+wget -q $AGENT $CRT "https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/Epg_Plugin-"$version".tar.gz"
 
 tar -xzf Epg_Plugin-"$version".tar.gz -C /
 set +e
