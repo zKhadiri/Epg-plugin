@@ -23,8 +23,8 @@ fi
 if [ $requests = "Installed" -a $epgimport = "Installed" ]; then 
      echo ""
 else
-     opkg update
      echo "Need to download Depends packages"
+     opkg update
      if grep -q python-requests $STATUS; then
           opkg install python-requests
      fi
