@@ -1,5 +1,5 @@
 #!/bin/sh
-##setup command=wget https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
+##setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
 version=3.5
@@ -33,8 +33,7 @@ fi
 # Download and install plugin
 cd /tmp
 set -e
-wget "https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/Epg_Plugin-"$version".tar.gz"
-
+wget -q "--no-check-certificate"  "https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/Epg_Plugin-"$version".tar.gz"
 tar -xzf Epg_Plugin-"$version".tar.gz -C /
 set +e
 rm -f Epg_Plugin-"$version".tar.gz
