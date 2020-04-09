@@ -29,7 +29,7 @@
 <channel id="TRTWorld">1:0:1:31F:10:6E:DCA0000:0:0:0:</channel> <!-- "TRTWorld" -->
 <!-- OSN -->
 <channel id="OSN_Movies">1:0:19:1197:2D:800:DCA0000:0:0:0:</channel> <!-- "OSN:Movies" -->
-<channel id="OSN_on_Demand">1:0:19:12F:3:800:DCA0000:0:0:0:</channel> <!-- "OSN:on:Demand" -->
+<channel id="OSN_On_Demand_HD">1:0:19:12F:3:800:DCA0000:0:0:0:</channel> <!-- "OSN:on:Demand" -->
 <channel id="OSN_Cinema">1:0:19:161E:236:800:DCA0000:0:0:0:</channel> <!-- "OSN:Cinema" -->
 <channel id="OSN_Enigma">1:0:19:1198:2D:800:DCA0000:0:0:0:</channel> <!-- "OSN:Enigma" -->
 <channel id="OSN_Movies_Disney">1:0:19:1622:236:800:DCA0000:0:0:0:</channel> <!-- "OSN:Movies:Disney" -->
