@@ -7,6 +7,8 @@ description=What is NEW:\n[new update]
 ##############################################################
 # remove old version
 rm -rf /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin
+rm -f /tmp/*epgimport*
+rm -f /tmp/*Epg_Plugin*
 
 # check depends packges
 if [ -f /etc/apt/apt.conf ] ; then
