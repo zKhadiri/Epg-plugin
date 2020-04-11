@@ -22,7 +22,7 @@ fi
 if grep -q 'enigma2-plugin-extensions-epgimport' $STATUS; then
     epgimport='Installed'
 fi
-if [ $requests = "Installed" -a $epgimport = "Installed" ]; then 
+if [ $requests = "Installed" -o $epgimport = "Installed" ]; then 
      echo ""
 else
      echo "Need to download Depends packages"
@@ -48,7 +48,7 @@ else
           if [ $OS = "DreamOS" ]; then
                    echo " Downloading epgimport ......"
                    cd /tmp
-                   wget https://github.com/ziko-ZR1/Epg-plugin/blob/master/Download/enigma2-plugin-extensions-epgimport_1.0-r200-all.deb
+                   wget -q "--no-check-certificate" https://github.com/ziko-ZR1/Epg-plugin/blob/master/Download/enigma2-plugin-extensions-epgimport_1.0-r200-all.deb
                    dpkg -i *.deb
                    apt-get install -f -y
                    cd ..
