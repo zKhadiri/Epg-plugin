@@ -22,7 +22,7 @@ fi
 if grep -q 'enigma2-plugin-extensions-epgimport' $STATUS; then
     epgimport='Installed'
 fi
-if [ $requests="Installed" -a $epgimport="Installed" ]; then
+if [ $requests="Installed" ] && [ $epgimport="Installed" ]; then
      echo ""
 else
      echo "Need to download Depends packages"
