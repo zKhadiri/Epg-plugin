@@ -22,6 +22,7 @@ fi
 if grep -q 'Package: enigma2-plugin-extensions-epgimport' $STATUS; then
     epgimport='Installed'
 fi
+sleep 2
 if [ $requests = "Installed" -a $epgimport = "Installed" ]; then
      echo ""
 else
@@ -47,26 +48,23 @@ else
      else
           if [ $OS = "DreamOS" ]; then
                    echo " Downloading/Insallling epgimport ......"
-                   wget -q "--no-check-certificate" https://github.com/ziko-ZR1/Epg-plugin/blob/master/Download/enigma2-plugin-extensions-epgimport_1.0-r200-all.deb?raw=true -O /tmp/enigma2-plugin-extensions-epgimport_1.0-r200-all.deb;
-                   dpkg -i /tmp/*.deb;
-                   apt-get install -f -y;
+                   wget -q "--no-check-certificate" "https://github.com/ziko-ZR1/Epg-plugin/blob/master/Download/enigma2-plugin-extensions-epgimport_1.0-r200-all.deb?raw=true" -O "/tmp/enigma2-plugin-extensions-epgimport_1.0-r200-all.deb"
+                   dpkg -i /tmp/*.deb
+                   apt-get install -f -y
           else
                    echo " Downloading/Insallling epgimport ......"
                    opkg install enigma2-plugin-extensions-epgimport
           fi
      fi
 fi
+sleep 2
 echo ""
 # Download and install plugin
 echo " Downloading/Insallling Epg_Plugin plugin ......"
-set -e
-wget -q "--no-check-certificate" "https://github.com/ziko-ZR1/Epg-plugin/blob/master/Download/Epg_Plugin-"$version".tar.gz?raw=true" -O /tmp/Epg_Plugin-"$version".tar.gz
+wget -q "--no-check-certificate" "https://github.com/ziko-ZR1/Epg-plugin/blob/master/Download/Epg_Plugin-"$version".tar.gz?raw=true" -O "/tmp/Epg_Plugin-"$version".tar.gz"
 tar -xzf /tmp/Epg_Plugin-"$version".tar.gz -C /
-set +e
 rm -f /tmp/Epg_Plugin-"$version".tar.gz
-cd ..
-
-sync
+echo ""
 echo "#########################################################"
 echo "#          Epg_Plugin INSTALLED SUCCESSFULLY            #"
 echo "#                BY ZIKO - support on                   #"
