@@ -3,7 +3,7 @@
 
 ######### Only These two lines to edit with new version ######
 version=3.6
-description=What is NEW:\n[new update]
+description=What_is_NEW:\n'[new update]'
 ##############################################################
 # remove old version
 rm -rf /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin
@@ -50,9 +50,10 @@ else
      else
           if [ $OS = "DreamOS" ]; then
                    echo " Downloading/Insallling epgimport ......"
-                   wget -q "--no-check-certificate" "https://github.com/ziko-ZR1/Epg-plugin/blob/master/Download/enigma2-plugin-extensions-epgimport_1.0-r200-all.deb?raw=true" -O "/tmp/enigma2-plugin-extensions-epgimport_1.0-r200-all.deb"
-                   dpkg -i /tmp/*.deb
-                   apt-get install -f -y
+                   sleep 3
+		   wget -q "--no-check-certificate" "https://github.com/ziko-ZR1/Epg-plugin/blob/master/Download/enigma2-plugin-extensions-epgimport_1.0-r200-all.deb?raw=true" -O "/tmp/enigma2-plugin-extensions-epgimport_1.0-r200-all.deb";
+                   dpkg -i /tmp/*.deb;
+                   apt-get install -f -y;
           else
                    echo " Downloading/Insallling epgimport ......"
                    opkg install enigma2-plugin-extensions-epgimport
