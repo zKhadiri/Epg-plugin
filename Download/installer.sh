@@ -35,10 +35,10 @@ else
           echo ""
      else
           if [ $OS = "DreamOS" ]; then 
-                  echo " Downloading python-requests ......"
+                  echo " Downloading/Insallling python-requests ......"
                   apt-get install python-requests -y
           else
-                  echo " Downloading python-requests ......"
+                  echo " Downloading/Insallling python-requests ......"
                   opkg install python-requests
           fi
      fi
@@ -46,24 +46,24 @@ else
           echo ""
      else
           if [ $OS = "DreamOS" ]; then
-                   echo " Downloading epgimport ......"
+                   echo " Downloading/Insallling epgimport ......"
                    wget -q "--no-check-certificate" https://github.com/ziko-ZR1/Epg-plugin/blob/master/Download/enigma2-plugin-extensions-epgimport_1.0-r200-all.deb?raw=true -O /tmp/enigma2-plugin-extensions-epgimport_1.0-r200-all.deb;
                    dpkg -i /tmp/*.deb;
                    apt-get install -f -y;
           else
-                   echo " Downloading epgimport ......"
+                   echo " Downloading/Insallling epgimport ......"
                    opkg install enigma2-plugin-extensions-epgimport
           fi
      fi
 fi
 echo ""
 # Download and install plugin
-cd /tmp
+echo " Downloading/Insallling Epg_Plugin plugin ......"
 set -e
-wget -q "--no-check-certificate"  "https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/Epg_Plugin-"$version".tar.gz"
-tar -xzf Epg_Plugin-"$version".tar.gz -C /
+wget -q "--no-check-certificate" "https://github.com/ziko-ZR1/Epg-plugin/blob/master/Download/Epg_Plugin-"$version".tar.gz?raw=true" -O /tmp/Epg_Plugin-"$version".tar.gz
+tar -xzf /tmp/Epg_Plugin-"$version".tar.gz -C /
 set +e
-rm -f Epg_Plugin-"$version".tar.gz
+rm -f /tmp/Epg_Plugin-"$version".tar.gz
 cd ..
 
 sync
