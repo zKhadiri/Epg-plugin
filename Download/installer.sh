@@ -60,7 +60,7 @@ echo ""
 # Download and install plugin
 cd /tmp
 set -e
-wget -q "--no-check-certificate"  'https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/Epg_Plugin-"$version".tar.gz?raw=true'
+wget -q "--no-check-certificate"  'https://github.com/ziko-ZR1/Epg-plugin/blob/master/Download/Epg_Plugin-"$version".tar.gz?raw=true'
 tar -xzf Epg_Plugin-"$version".tar.gz -C /
 set +e
 rm -f Epg_Plugin-"$version".tar.gz
