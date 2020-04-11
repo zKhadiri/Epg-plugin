@@ -16,10 +16,10 @@ elif [ -f /etc/opkg/opkg.conf ] ; then
    STATUS='/var/lib/opkg/status'
    OS='Opensource'
 fi
-if grep -q 'python-requests' $STATUS; then
+if grep -q 'Package: python-requests' $STATUS; then
     requests='Installed'
 fi
-if grep -q 'enigma2-plugin-extensions-epgimport' $STATUS; then
+if grep -q 'Package: enigma2-plugin-extensions-epgimport' $STATUS; then
     epgimport='Installed'
 fi
 if [ $requests = "Installed" -a $epgimport = "Installed" ]; then
@@ -31,7 +31,7 @@ else
      else
           opkg update
      fi
-     if grep -q 'python-requests' $STATUS; then
+     if grep -q 'Package: python-requests' $STATUS; then
           echo ""
      else
           if [ $OS = "DreamOS" ]; then 
@@ -42,14 +42,12 @@ else
                   opkg install python-requests
           fi
      fi
-     if grep -q 'enigma2-plugin-extensions-epgimport' $STATUS; then
+     if grep -q 'Package: enigma2-plugin-extensions-epgimport' $STATUS; then
           echo ""
      else
           if [ $OS = "DreamOS" ]; then
                    echo " Downloading epgimport ......"
-                   cd /tmp
-                   wget -q "--no-check-certificate" "https://github.com/ziko-ZR1/Epg-plugin/blob/master/Download/enigma2-plugin-extensions-epgimport_1.0-r200-all.deb";
-                   cd ..
+                   wget -q "--no-check-certificate" https://github.com/ziko-ZR1/Epg-plugin/blob/master/Download/enigma2-plugin-extensions-epgimport_1.0-r200-all.deb?raw=true -O /tmp/enigma2-plugin-extensions-epgimport_1.0-r200-all.deb;
                    dpkg -i /tmp/*.deb;
                    apt-get install -f -y;
           else
@@ -62,7 +60,7 @@ echo ""
 # Download and install plugin
 cd /tmp
 set -e
-wget -q "--no-check-certificate"  "https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/Epg_Plugin-"$version".tar.gz"
+wget -q "--no-check-certificate"  https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/Epg_Plugin-"$version".tar.gz?raw=true
 tar -xzf Epg_Plugin-"$version".tar.gz -C /
 set +e
 rm -f Epg_Plugin-"$version".tar.gz
