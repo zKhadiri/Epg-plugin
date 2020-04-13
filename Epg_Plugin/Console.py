@@ -14,16 +14,16 @@ class Console(Screen):
 
 	def __init__(self, session, title = "Console", cmdlist = None, finishedCallback = None, closeOnSuccess = False,endstr=''):
 		Screen.__init__(self, session)
-                self.color = '#800080'
+		self.color = '#800080'
 		self.finishedCallback = finishedCallback
 		self.closeOnSuccess = closeOnSuccess
-                self.endstr=endstr
+		self.endstr=endstr
 		self["text"] = ScrollLabel("")
 		self["actions"] = ActionMap(["WizardActions", "DirectionActions",'ColorActions'], 
 		{   
 			"ok": self.cancel,
 			"back": self.cancel,
-                        "blue": self.restartenigma,
+						"blue": self.restartenigma,
 			"up": self["text"].pageUp,
 			"down": self["text"].pageDown
 		}, -1)
@@ -33,11 +33,11 @@ class Console(Screen):
 		self.container = eConsoleAppContainer()
 		self.run = 0
 		try:
-                        self.container.appClosed.append(self.runFinished)
-                        self.container.dataAvail.append(self.dataAvail)
-                except:        
-                        self.appClosed_conn = self.container.appClosed.connect(self.runFinished)
-                        self.dataAvail_conn = self.container.dataAvail.connect(self.dataAvail)
+			self.container.appClosed.append(self.runFinished)
+			self.container.dataAvail.append(self.dataAvail)
+		except:        
+			self.appClosed_conn = self.container.appClosed.connect(self.runFinished)
+			self.dataAvail_conn = self.container.dataAvail.connect(self.dataAvail)
 		self.onLayoutFinish.append(self.startRun) # dont start before gui is finished
 
 	def updateTitle(self):
@@ -57,10 +57,9 @@ class Console(Screen):
 		else:
 			str = self["text"].getText()
 			if not retval and self.endstr.startswith("Swapping"):
-                           str += _("\n\n"+self.endstr)     
-                           
-                        else:
-                           str += _("Execution finished!!\n")         
+				str += _("\n\n"+self.endstr)     
+			else:
+				str += _("Execution finished!!\n")         
 			   
 			self["text"].setText(str)
 			self["text"].lastPage()
@@ -73,11 +72,11 @@ class Console(Screen):
 		if self.run == len(self.cmdlist):
 			self.close()
 			try:
-                                self.appClosed_conn = None
-                                self.dataAvail_conn = None
-                        except:
-                                    self.container.appClosed.remove(self.runFinished)
-                                    self.container.dataAvail.remove(self.dataAvail)
+				self.appClosed_conn = None
+				self.dataAvail_conn = None
+			except:
+				self.container.appClosed.remove(self.runFinished)
+				self.container.dataAvail.remove(self.dataAvail)
 
 	def dataAvail(self, str):
 		self["text"].setText(self["text"].getText() + str)
@@ -95,5 +94,5 @@ class Console(Screen):
 	def processInput(self, retval):
 		self.container.sendEOF()
         def restartenigma(self):
-                    from Screens.Standby import TryQuitMainloop
-                    self.session.open(TryQuitMainloop, 3)
+			from Screens.Standby import TryQuitMainloop
+			self.session.open(TryQuitMainloop, 3)

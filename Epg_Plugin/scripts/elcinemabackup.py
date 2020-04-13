@@ -1,23 +1,18 @@
-import os,io,re,sys
-reload(sys)
-sys.setdefaultencoding('utf8')
-
-def DreamOS():
-    if os.path.exists('/var/lib/dpkg/status'):
-        return DreamOS
-
-if DreamOS():
-	wget = "/usr/bin/wget2 --no-check-certificate"
-else:
-	wget = "/usr/bin/wget"
+#!/usr/bin/env python2.7
+# -*- coding: utf-8 -*-
+from datetime import datetime
+from time import sleep,strftime
+import os,io,re
 
 
-with io.open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/elcinema.txt','r') as f:
+with io.open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/elcinback.txt','r') as f:
     time_zone = f.read().strip()
     
 path = '/etc/epgimport/elcinema.xml'   
 
-os.system(''+wget+' https://github.com/ziko-ZR1/XML/raw/master/osn.xml -O '+path+'')
+print "Downloading elcinema epg guide\nPlease wait...."  
+
+os.system('wget -q "--no-check-certificate" https://github.com/ziko-ZR1/XML/blob/master/elcinema.xml?raw=true -O '+path+'')
 
 f = open(path,'r')
 time_of = re.search(r'[+#-]+\d{4}',f.read())
