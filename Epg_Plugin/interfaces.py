@@ -6,7 +6,7 @@ from Components.Button import Button
 from Components.Label import Label
 from Components.ScrollLabel import ScrollLabel
 from Components.MenuList import MenuList
-from Screens.Console import Console
+from Plugins.Extensions.Epg_Plugin.Console import Console
 from Components.Input import Input
 from Screens.InputBox import InputBox
 from Screens.MessageBox import MessageBox
@@ -191,7 +191,6 @@ class EPGIConfig(Screen):
         if answer:
             cmdlist = []
             cmdlist.append("%s https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh" % self.wget)
-            from Plugins.Extensions.Epg_Plugin.Console import Console
             self.session.open(Console, title='Installing last update, enigma will be started after install', cmdlist=cmdlist, finishedCallback=self.myCallback, closeOnSuccess=False,endstr="")
     def myCallback(self,result):
          return
@@ -241,8 +240,7 @@ class EPGIConfig(Screen):
                         self.session.open(MessageBox,_("File is empty"), MessageBox.TYPE_INFO,timeout=10)
                 else:
                     self.session.open(MessageBox,_("osn.xml not found in path"), MessageBox.TYPE_INFO,timeout=10)
-            
-                    
+             
             if returnValue == "3":
                 if fileExists("/etc/epgimport/beinent.xml"):
                     f = open('/etc/epgimport/beinent.xml','r')

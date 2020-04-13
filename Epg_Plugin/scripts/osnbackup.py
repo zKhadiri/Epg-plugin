@@ -30,3 +30,17 @@ if os.path.exists(path):
         print "file is empty"
         
 print "osn.xml donwloaded with succes"
+
+
+if not os.path.exists('/etc/epgimport/custom.channels.xml'):
+    print('Downloading custom.channels config')
+    os.system('wget -q "--no-check-certificate" https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/custom.channels.xml?raw=true -O /etc/epgimport/custom.channels.xml')
+        
+if not os.path.exists('/etc/epgimport/custom.sources.xml'):
+    print('Downloading custom sources config')
+    os.system('wget -q "--no-check-certificate" https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/custom.sources.xml?raw=true -O /etc/epgimport/custom.sources.xml')
+
+
+if not os.path.exists('/etc/epgimport/elcinema.channels.xml'):
+    print('Downloading elcinema channels config')
+    os.system('wget -q "--no-check-certificate" https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/elcinema.channels.xml?raw=true -O /etc/epgimport/elcinema.channels.xml')

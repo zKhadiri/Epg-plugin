@@ -89,33 +89,17 @@ with io.open("/etc/epgimport/bein.xml", "a",encoding="utf-8") as f:
 
 if not os.path.exists('/etc/epgimport/custom.channels.xml'):
     print('Downloading custom.channels config')
-    ur = requests.get('http://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Epg_Plugin/configs/custom.channels.xml',headers=headers)
-    if ur.status_code ==200:
-        with io.open('/etc/epgimport/custom.channels.xml','w') as f:
-            f.write(ur.text)
-        print('Done')
-    else:
-        print('Cannot establish connection to the server')
+    os.system('wget -q "--no-check-certificate" https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/custom.channels.xml?raw=true -O /etc/epgimport/custom.channels.xml')
         
 if not os.path.exists('/etc/epgimport/custom.sources.xml'):
     print('Downloading custom sources config')
-    uri = requests.get('http://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Epg_Plugin/configs/custom.sources.xml',headers=headers)
-    if uri.status_code==200:
-        with io.open('/etc/epgimport/custom.sources.xml','w') as f:
-            f.write(uri.text)
-        print('Done')
-    else:
-        print('Cannot establish connection to the server')
+    os.system('wget -q "--no-check-certificate" https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/custom.sources.xml?raw=true -O /etc/epgimport/custom.sources.xml')
+
 
 if not os.path.exists('/etc/epgimport/elcinema.channels.xml'):
     print('Downloading elcinema channels config')
-    uri = requests.get('https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Epg_Plugin/configs/elcinema.channels.xml',headers=headers)
-    if uri.status_code ==200:
-        with io.open('/etc/epgimport/elcinema.channels.xml','w') as f:
-            f.write(uri.text)
-        print('Done')
-    else:
-        print('Cannot establish connection to the server')
+    os.system('wget -q "--no-check-certificate" https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/elcinema.channels.xml?raw=true -O /etc/epgimport/elcinema.channels.xml')
+
 
 
 print("**************FINISHED******************")
