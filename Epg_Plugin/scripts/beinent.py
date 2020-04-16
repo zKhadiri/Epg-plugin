@@ -3,7 +3,7 @@ from time import sleep,strftime
 from requests.adapters import HTTPAdapter
 
 
-fil = open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/bein.txt','r')
+fil = open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/beinent.txt','r')
 time_zone = fil.read().strip()
 fil.close()
 

@@ -14,6 +14,8 @@ print "Downloading elcinema epg guide\nPlease wait...."
 
 os.system('wget -q "--no-check-certificate" https://github.com/ziko-ZR1/XML/blob/master/elcinema.xml?raw=true -O '+path+'')
 
+sleep(1)
+
 f = open(path,'r')
 time_of = re.search(r'[+#-]+\d{4}',f.read())
 f.close()
