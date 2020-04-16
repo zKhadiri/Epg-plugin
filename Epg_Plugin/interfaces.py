@@ -478,7 +478,7 @@ class EPGIConfig(Screen):
                     self.session.open(Console,_("EPG BEIN SPORTS") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/bein.py"], closeOnSuccess=False)
                     cprint("Downloading EPG BEIN SPORTS")
                 elif returnValue == "2":
-                    self.session.open(Console,_("EPG OSN") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/osnen.py"], closeOnSuccess=False)
+                    self.session.open(Console,_("EPG OSN") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/osn.py"], closeOnSuccess=False)
                     cprint("Downloading EPG OSN ENGLISH TITLE ONLY")
                 elif returnValue == "3":
                     self.session.open(Console,_("EPG Bein entertainment") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/beinent.py"], closeOnSuccess=False)
