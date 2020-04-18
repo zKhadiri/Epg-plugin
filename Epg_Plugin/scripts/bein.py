@@ -44,41 +44,41 @@ def bein():
         with requests.Session() as s:
             s.mount('http://', HTTPAdapter(max_retries=10))
             link = s.get(url,headers=headers)
-            if link.text !='':
-                time = re.findall(r'<p\sclass=time>(.*?)<\/p>',link.text)
-                times = [t.replace('&nbsp;-&nbsp;','-').split('-') for t in time ]
-                channels = re.findall(r"data-img='mena_sports\/(.*?)\.svg",link.text)
-                title = re.findall(r'<p\sclass=title>(.*?)<\/p>',link.text)
-                formt = re.findall(r'<p\sclass=format>(.*?)<\/p>',link.text)
-                format_=[4*' '+'<category lang="ar">'+f.replace('2014','2020')+'</category>'+'\n'+'  </programme>'+'\n' for f in formt]
-                desc=[]
-                title_chan=[]
-                titles=[]
-                prog=[]
-                for tit in title:
-                    title_chan.append(tit.replace('   ',' ').split('- ')[0])
-                    spl = re.search(r'-\s(.*)',tit)
-                    if spl !=None:
-                        desc.append(4*' '+'<desc lang="ar">'+spl.group().replace('- ','').replace('&','and')+'</desc>'+'\n')
-                    else:
-                        desc.append(4*' '+'<desc lang="ar">'+tit.replace('&','and')+'</desc>'+'\n')
+            time = re.findall(r'<p\sclass=time>(.*?)<\/p>',link.text)
+            times = [t.replace('&nbsp;-&nbsp;','-').split('-') for t in time ]
+            channels = re.findall(r"data-img='mena_sports\/(.*?)\.svg",link.text)
+            title = re.findall(r'<p\sclass=title>(.*?)<\/p>',link.text)
+            formt = re.findall(r'<p\sclass=format>(.*?)<\/p>',link.text)
+            format_=[4*' '+'<category lang="ar">'+f.replace('2014','2020')+'</category>'+'\n'+'  </programme>'+'\n' for f in formt]
+            desc=[]
+            title_chan=[]
+            titles=[]
+            prog=[]
+            for tit in title:
+                title_chan.append(tit.replace('   ',' ').split('- ')[0])
+                spl = re.search(r'-\s(.*)',tit)
+                if spl !=None:
+                    desc.append(4*' '+'<desc lang="ar">'+spl.group().replace('- ','').replace('&','and')+'</desc>'+'\n')
+                else:
+                    desc.append(4*' '+'<desc lang="ar">'+tit.replace('&','and')+'</desc>'+'\n')
 
-                for title_,form_ in zip(title_chan,formt):
-                    titles.append(4*' '+'<title lang="en">'+title_.replace('&','and')+' - '+form_.replace('2014','2020')+'</title>'+'\n')
+            for title_,form_ in zip(title_chan,formt):
+                titles.append(4*' '+'<title lang="en">'+title_.replace('&','and')+' - '+form_.replace('2014','2020')+'</title>'+'\n')
 
-                for time_,chann_ in zip(times,channels):
-                    date = re.search(r'\d{4}-\d{2}-\d{2}',url)
-                    starttime = datetime.strptime(date.group()+' '+time_[0],'%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
-                    endtime = datetime.strptime(date.group() + ' ' + time_[1], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
-                    prog.append(2 * ' ' + '<programme start="' + starttime + ' '+time_zone+'" stop="' + endtime + ' '+time_zone+'" channel="'+chann_.replace('BS NBA','BS_NBA')+'">'+'\n')
-
+            for time_,chann_ in zip(times,channels):
+                date = re.search(r'\d{4}-\d{2}-\d{2}',url)
+                starttime = datetime.strptime(date.group()+' '+time_[0],'%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
+                endtime = datetime.strptime(date.group() + ' ' + time_[1], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
+                prog.append(2 * ' ' + '<programme start="' + starttime + ' '+time_zone+'" stop="' + endtime + ' '+time_zone+'" channel="'+chann_.replace('BS NBA','BS_NBA')+'">'+'\n')
+            if len(title) !=0:
                 for tt,d,f,p in zip(titles,desc,format_,prog):
                     with io.open("/etc/epgimport/bein.xml","a",encoding='UTF-8')as fil:
                         fil.write(p+tt+d+f)
-                dat = re.search(r'\d{4}-\d{2}-\d{2}',url)
-                print('Date'+' : '+dat.group())
+                    dat = re.search(r'\d{4}-\d{2}-\d{2}',url)
+                    print('Date'+' : '+dat.group())
             else:
                 print('No data found')
+                break
 
 if __name__=='__main__':
     bein()

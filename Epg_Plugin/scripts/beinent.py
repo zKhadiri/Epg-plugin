@@ -18,6 +18,7 @@ headers={
     'Upgrade-Insecure-Requests': '1',
     'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) snap Chromium/80.0.3987.149 Chrome/80.0.3987.149 Safari/537.36'
 }
+
 print('**************STARTING******************')
 urls=[]
 for i in range(0,3):
@@ -48,22 +49,21 @@ def beinen():
         with requests.Session() as s:
             s.mount('http://', HTTPAdapter(max_retries=10))
             link = s.get(url,headers=headers)
-            if link.text !='':
-                title = re.findall(r'<p\sclass=title>(.*?)<\/p>',link.text)
-                time = re.findall(r'<p\sclass=time>(.*?)<\/p>',link.text)
-                formt = re.findall(r'<p\sclass=format>(.*?)<\/p>',link.text)
-                times = [t.replace('&nbsp;-&nbsp;','-').split('-') for t in time ]
-                channels = re.findall(r"data-img='mena_entertaintment\/(.*?)\.",link.text)
-                for tt_ in title:
-                    titles.append(4*' '+'<title lang="en">'+tt_.replace('&','and')+'</title>'+'\n')
-                    desc.append(4*' '+'<category lang="en">'+tt_.replace('&','and')+'</category>'+'\n')
-                format_=[4*' '+'<desc lang="en">'+f+'</desc>'+"\n"+'  </programme>'+'\n' for f in formt]
-                for time_,chann_ in zip(times,channels):
-                    date = re.search(r'\d{4}-\d{2}-\d{2}',url)
-                    starttime = datetime.strptime(date.group()+' '+time_[0],'%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
-                    endtime = datetime.strptime(date.group() + ' ' + time_[1], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
-                    prog.append(2 * ' ' + '<programme start="' + starttime + ' '+time_zone+'" stop="' + endtime + ' '+time_zone+'" channel="'+chann_.replace('Star_World_HD','Star_World_B').replace('Star_Movies_HD','Star_Movies_B').replace('Bloomberg','Bloomberg_B')+'">'+'\n')
-                
+            title = re.findall(r'<p\sclass=title>(.*?)<\/p>',link.text)
+            time = re.findall(r'<p\sclass=time>(.*?)<\/p>',link.text)
+            formt = re.findall(r'<p\sclass=format>(.*?)<\/p>',link.text)
+            times = [t.replace('&nbsp;-&nbsp;','-').split('-') for t in time ]
+            channels = re.findall(r"data-img='mena_entertaintment\/(.*?)\.",link.text)
+            for tt_ in title:
+                titles.append(4*' '+'<title lang="en">'+tt_.replace('&','and')+'</title>'+'\n')
+                desc.append(4*' '+'<category lang="en">'+tt_.replace('&','and')+'</category>'+'\n')
+            format_=[4*' '+'<desc lang="en">'+f+'</desc>'+"\n"+'  </programme>'+'\n' for f in formt]
+            for time_,chann_ in zip(times,channels):
+                date = re.search(r'\d{4}-\d{2}-\d{2}',url)
+                starttime = datetime.strptime(date.group()+' '+time_[0],'%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
+                endtime = datetime.strptime(date.group() + ' ' + time_[1], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
+                prog.append(2 * ' ' + '<programme start="' + starttime + ' '+time_zone+'" stop="' + endtime + ' '+time_zone+'" channel="'+chann_.replace('Star_World_HD','Star_World_B').replace('Star_Movies_HD','Star_Movies_B').replace('Bloomberg','Bloomberg_B')+'">'+'\n')
+            if len(title) !=0:
                 for ttt,d,f,p in zip(titles,desc,format_,prog):
                     with io.open("/etc/epgimport/beinent.xml","a",encoding='UTF-8')as fil:
                         fil.write(p+ttt+d+f)
@@ -71,6 +71,8 @@ def beinen():
                 print('Date'+' : '+dat.group())
             else:
                 print('No data found')
+                break
+            
 if __name__=='__main__':
     beinen()
 
