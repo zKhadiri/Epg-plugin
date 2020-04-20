@@ -14,7 +14,7 @@ from Tools.Directories import fileExists
 from urllib2 import Request
 from Plugins.Extensions.Epg_Plugin.Console import Console
 from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigYesNo, configfile
-import io,os,re,sys
+import io,os,re
 import gettext
 from enigma import getDesktop
 ################################## Add By RAED
