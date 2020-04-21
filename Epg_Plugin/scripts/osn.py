@@ -60,13 +60,9 @@ def oss(url):
                     data= json.loads(pag)
                     nm=data[0][u'ChannelNameEnglish'].replace(' ','_').replace('Crime_&_Investigation_Network','Crime_And_Investigation_Network')
                     nam=data[0][u'ChannelNameEnglish']
-                    days=datetime.datetime.fromtimestamp(int(data[0][u'StartDateTime'].replace("/Date(",'').replace(")/",'')) // 1000).strftime("%Y-%d-%m")
-                    days_end=datetime.datetime.fromtimestamp(int(data[0][u'EndDateTime'].replace("/Date(",'').replace(")/",'')) // 1000).strftime("%Y-%d-%m")
-                    strt=datetime.datetime.fromtimestamp(int(data[0][u'StartDateTime'].replace("/Date(",'').replace(")/",'')) // 1000).strftime("%H:%M")
-                    endd = datetime.datetime.fromtimestamp(int(data[0][u'EndDateTime'].replace("/Date(",'').replace(")/",'')) // 1000).strftime("%H:%M")
-                    starttime = datetime.datetime.strptime(days+" "+strt, '%Y-%d-%m %H:%M').strftime('%Y%m%d%H%M%S')
-                    endtime = datetime.datetime.strptime(days_end+" "+endd, '%Y-%d-%m %H:%M').strftime('%Y%m%d%H%M%S')
-                    ch+= 2 * ' ' + '<programme start="' + starttime + ' '+time_zone+'" stop="' + endtime + ' '+time_zone+'" channel="'+nm+'">'+'\n'
+                    days=datetime.datetime.fromtimestamp(int(data[0][u'StartDateTime'].replace("/Date(",'').replace(")/",'')) // 1000).strftime('%Y%m%d%H%M%S')
+                    days_end=datetime.datetime.fromtimestamp(int(data[0][u'EndDateTime'].replace("/Date(",'').replace(")/",'')) // 1000).strftime('%Y%m%d%H%M%S')
+                    ch+= 2 * ' ' + '<programme start="' + days + ' '+time_zone+'" stop="' + days_end + ' '+time_zone+'" channel="'+nm+'">'+'\n'
                     if url['channelCode'] =='SER' or url['channelCode'] =='YAW' or url['channelCode'] =='SAF' or url['channelCode'] =='CM1' or url['channelCode'] =='CM2' or url['channelCode'] =='FAN' or url['channelCode'] =='OYH' or url['channelCode'] =='OYA' or url['channelCode'] =='OYC':
                         ch+='     <title lang="en">'+data[0][u'Arab_Title']+'</title>'+"\n"
                     else:

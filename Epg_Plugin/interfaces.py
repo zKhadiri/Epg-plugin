@@ -132,7 +132,7 @@ class EPGIConfig(Screen):
         list.append(("SNRT EPG", "4"))
         list.append(("ELCINEMA WEBSITE EPG", "5"))
         list.append(("OSN BACKUP EPG", "6"))
-        #list.append(("ELCINEMA BACKUP EPG", "7"))
+        list.append(("MBC.NET", "7"))
         Screen.__init__(self, session)
         self.skinName = ["EPGIConfig"]
         self["status"] = Label()
@@ -252,7 +252,10 @@ class EPGIConfig(Screen):
             f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/osnback.txt", "r")
             self["status"].setText("Current osn backup time zone  : "+f1.read().strip())
             f1.close()
-
+        elif returnValue =="7":
+            f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/mbc.txt", "r")
+            self["status"].setText("Current mbc time zone  : "+f1.read().strip())
+            f1.close()
         else:
             self["status"].setText("")
             
@@ -375,6 +378,25 @@ class EPGIConfig(Screen):
                 else:
                     self.session.open(MessageBox,_("osn.xml not found in path"), MessageBox.TYPE_INFO,timeout=10)
                     
+            if returnValue == "7":
+                if fileExists("/etc/epgimport/mbc.xml"):
+                    f = open('/etc/epgimport/mbc.xml','r')
+                    time_of = re.search(r'[+#-]+\d{4}',f.read())
+                    f.close()
+                    f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/mbc.txt", "r")
+                    newtime=f1.read()
+                    f1.close()
+                    if time_of !=None:
+                        with io.open("/etc/epgimport/mbc.xml",encoding="utf-8") as f:
+                            newText=f.read().decode('utf-8').replace(time_of.group(), newtime)
+                            with io.open("/etc/epgimport/mbc.xml", "w",encoding="utf-8") as f:
+                                f.write((newText).decode('utf-8'))
+                                self.session.open(MessageBox,_("current mbc time "+time_of.group()+" replaced by "+newtime), MessageBox.TYPE_INFO,timeout=10)
+                    else:
+                        self.session.open(MessageBox,_("File is empty"), MessageBox.TYPE_INFO,timeout=10)
+                else:
+                    self.session.open(MessageBox,_("mbc.xml not found in path"), MessageBox.TYPE_INFO,timeout=10)
+                    
                     
            
             
@@ -437,7 +459,15 @@ class EPGIConfig(Screen):
                     f1.write(new_time.decode('utf-8'))
                     self.session.open(MessageBox,_("time changed with succes "+new_time), MessageBox.TYPE_INFO,timeout=10)
                     self["status"].setText("Current osn backup time zone  : "+new_time)
-            
+                    
+            elif returnValue == "7":
+                f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
+                new_time = f.read().strip()
+                f.close()
+                with io.open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/mbc.txt","w",encoding='UTF-8')as f1:
+                    f1.write(new_time.decode('utf-8'))
+                    self.session.open(MessageBox,_("time changed with succes "+new_time), MessageBox.TYPE_INFO,timeout=10)
+                    self["status"].setText("Current mbc time zone  : "+new_time)
 
     def keyRed(self):
         self.close(None)
@@ -481,6 +511,9 @@ class EPGIConfig(Screen):
                     self.session.open(Console,_("ELCINEMA EPG") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/elcin.py"], closeOnSuccess=False)
                     cprint("Downloading ELECINEMA EPG")
                 elif returnValue == "6":
-                        self.session.open(Console,_("OSN BACKUP EPG") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/osnbackup.py"], closeOnSuccess=False)
-                        cprint("Downloading OSN BACKUP EPG")
+                    self.session.open(Console,_("OSN BACKUP EPG") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/osnbackup.py"], closeOnSuccess=False)
+                    cprint("Downloading OSN BACKUP EPG")
+                elif returnValue == "7":
+                    self.session.open(Console,_("MBC EPG") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/mbc.py"], closeOnSuccess=False)
+                    cprint("Downloading MBC EPG")
                 

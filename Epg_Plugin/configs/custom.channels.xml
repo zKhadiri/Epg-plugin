@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <channels>
+<!-- MBC -->
+<channel id="MBC1">Your_ID:http%3a//example.com</channel> 
+<channel id="MBCDrama">1:0:1:A:3C:800:DCA0000:0:0:0:</channel> 
+<channel id="MBCEgypt2">1:0:1:452:B:800:DCA0000:0:0:0:</channel> 
+<channel id="MBC4">1:0:1:4:3C:800:DCA0000:0:0:0:</channel> 
+<channel id="MBC2">1:0:1:7:3C:800:DCA0000:0:0:0:</channel>
+<channel id="MBCAction">1:0:1:6:3C:800:DCA0000:0:0:0:</channel> 
+<channel id="MBCBollywood">1:0:1:9:3C:800:DCA0000:0:0:0:</channel> 
+<channel id="MBC+Drama">Your_ID:http%3a//example.com</channel> 
+<channel id="MBCMovieMax">1:0:1:8:3C:800:DCA0000:0:0:0:</channel> 
+<channel id="MBCIraq">1:0:1:85E:15:800:DCA0000:0:0:0:</channel>
+<channel id="MBCCinq">1:0:1:3:3C:800:DCA0000:0:0:0:</channel> 
+<channel id="Wanasah">1:0:1:C:3C:800:DCA0000:0:0:0:</channel> 
 <!-- BEIN SPORTS -->
 <channel id="SportsGlobalHD">1:0:19:83A:C8:77E:DCA0000:0:0:0:</channel> <!-- SportsGlobalHD -->
 <channel id="News_ar">1:0:1:89A:12C:77E:DCA0000:0:0:0:</channel> <!-- news -->
