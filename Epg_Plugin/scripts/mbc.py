@@ -1,6 +1,6 @@
 #!/usr/bin/env python2.7
 # -*- coding: utf-8 -*-
-import requests,json,io
+import requests,json,io,os
 from datetime import datetime
 
 urls=[]
@@ -34,20 +34,20 @@ def mbc():
         link = requests.get(url)
         data = json.loads(link.text)
         for d in data:
-            ch=''
+            cc=''
             prog_start=datetime.datetime.fromtimestamp(int(d['startTime'])// 1000).strftime('%Y%m%d%H%M%S')
             prog_end=datetime.datetime.fromtimestamp(int(d['endTime'])// 1000).strftime('%Y%m%d%H%M%S')
             nm=d['channelLabel']
-            ch+= 2 * ' ' + '<programme start="' + prog_start + ' '+time_zone+'" stop="' + prog_end + ' '+time_zone+'" channel="'+nm.replace(' ','').replace('-','')+'">'+'\n'
-            ch+='     <title lang="en">'+d['showPageTitle'].replace('&','-')+'</title>'+"\n"
+            cc+= 2 * ' ' + '<programme start="' + prog_start + ' '+time_zone+'" stop="' + prog_end + ' '+time_zone+'" channel="'+nm.replace(' ','').replace('-','')+'">'+'\n'
+            cc+='     <title lang="en">'+d['showPageTitle'].replace('&','-')+'</title>'+"\n"
             if d['showPageGenreInArabic']==None or d['showPageAboutInArabic']==None:
-                ch+='     <desc lang="ar">'+d['showPageTitle'].replace('&','-')+'</desc>'+"\n"
-                ch+='     <sub-title lang="ar">'+d['showPageTitle'].replace('&','-')+'</sub-title>'+"\n"+'  </programme>'+"\r"
+                cc+='     <desc lang="ar">'+d['showPageTitle'].replace('&','-')+'</desc>'+"\n"
+                cc+='     <sub-title lang="ar">'+d['showPageTitle'].replace('&','-')+'</sub-title>'+"\n"+'  </programme>'+"\r"
             else:
-                ch+='     <desc lang="ar">'+d['showPageAboutInArabic'].replace('\r\n','')+'</desc>'+"\n"
-                ch+='     <sub-title lang="ar">'+d['showPageGenreInArabic']+'</sub-title>'+"\n"+'  </programme>'+"\r"
+                cc+='     <desc lang="ar">'+d['showPageAboutInArabic'].replace('\r\n','')+'</desc>'+"\n"
+                cc+='     <sub-title lang="ar">'+d['showPageGenreInArabic']+'</sub-title>'+"\n"+'  </programme>'+"\r"
             with io.open("/etc/epgimport/mbc.xml","a",encoding='UTF-8')as f:
-                f.write(ch)
+                f.write(cc)
         print nm
     
 
@@ -56,3 +56,20 @@ if __name__ == "__main__":
     
 with io.open("/etc/epgimport/mbc.xml", "a",encoding="utf-8") as f:
     f.write(('</tv>').decode('utf-8'))
+    
+if not os.path.exists('/etc/epgimport/custom.channels.xml'):
+    print('Downloading custom.channels config')
+    os.system('wget -q "--no-check-certificate" https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/custom.channels.xml?raw=true -O /etc/epgimport/custom.channels.xml')
+        
+if not os.path.exists('/etc/epgimport/custom.sources.xml'):
+    print('Downloading custom sources config')
+    os.system('wget -q "--no-check-certificate" https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/custom.sources.xml?raw=true -O /etc/epgimport/custom.sources.xml')
+
+
+if not os.path.exists('/etc/epgimport/elcinema.channels.xml'):
+    print('Downloading elcinema channels config')
+    os.system('wget -q "--no-check-certificate" https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/elcinema.channels.xml?raw=true -O /etc/epgimport/elcinema.channels.xml')
+
+if not os.path.exists('/etc/epgimport/dstv.channels.xml'):
+    print('Downloading dstv channels config')
+    os.system('wget -q "--no-check-certificate" https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/elcinema.channels.xml?raw=true -O /etc/epgimport/elcinema.channels.xml')

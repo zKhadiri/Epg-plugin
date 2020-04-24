@@ -18,3 +18,22 @@ elc_channels=['Series+2','Zeealwan','AlKaheraWalNasTV','DubaiOne',"DubaiTV","Alh
 "Nessma","Oman","Fujairah","AlAoulaMorocco","almanar","SyriaTV",
 "AlSaeedah","2MTV","SamaTV","Mix"]
 
+ZA=['M-NetHD','1MagicHD','M-NetMoviesPremierHD','M-NetMoviesSmileHD','M-NetMoviesAction+HD','SundanceTVHD','TomCruise',
+    'M-NetMoviesAction','M-NetMoviesAllStarsHD','StudioUniversalHD','M-NETBinge','M-NetCityHD',
+    'VUZUHD','UniversalTVHD','TeleMundoEnglish','BBCFirstHD','BBCBritHD','DiscoveryChannelHD','ComedyCentral','ITVChoiceHD',
+    'E!EntertainmentHD','FOXHD','FOXLife','GinxeSportsHD','SuperSlamHD','BET','MTV','LifetimeEntertainment','CBSReality',
+    'DiscoveryTLCHD','DiscoveryFamilyHD','TNTAfricaHD','eMoviesHD','M-NetMoviesZoneHD','eMoviesExtraHD','EVA','KykNETHD',
+    'KykNETandKieHD','KyKNetNou','VIAHD','AfricaMagicEpic','AfricaMagicUrban','AfricaMagicFamily','RealTime','SABCEncore',
+    'MojaLove','MojaLoveHD','MzansiMagicHD','MzansiWethuHD','MzansiBioskop','ZeeWorldHD','StarLifeHD','ROK','CBSJusticeHD',
+    'DiscoveryIDHD','TVMall','BBCLifestyle','FoodNetworkHD','TheHomeChannel','HomeandGardenTVHD','FashionOne','TravelChannel',
+    'PeoplesWeather','NationalGeographicChannel','NatGeoWild','BBCEarthHD','CuriosityStream','TheHistoryChannelHD','IGNITION',
+    'SpiceTV','SABC1HD','SABC2HD','SABC3HD','e.TVHD','eTVExtraHD','NaijaStand-UpComedy','NigerianFestivals','BLITZHD','SuperSportHD1'
+    ,'SuperSportHD2','SuperSportHD3','SuperSportHD4','SuperSportHD5','SuperSportHD6','SuperSportHD7','SuperSportHD8','SuperSportHD9',
+    'SuperSportHD10','SuperSport11HD','SuperSportHD12','SuperSportMaximoHD','TellyTrack','SowetoTV','BayTV','1KZN','TshwaneTV',
+    'CapeTownTV','GauTV','LesothoTV','NTAI','ToonamiHD','CartoonNetworkHD','Boomerang','DisneyChannel','DisneyChannelXD','Nickelodeon',
+    'Cbeebies','NickJr','NickTOONS','DisneyJunior','JimJam','eToonz','PBSKids','MindsetPop','Mindset','ChannelOHD','MzansiMusic',
+    'MTVbase','TRACEURBANHD','TRACEAfrica','SoundCity','OneGospel','TraceGospel','Dumisa','FAITH','DayStar','TBN','AfricanEaster',
+    'EmmanuelTV','BBCWorldNews','CNNInternationalHD','SkyNews','eNewsChannelAfrica','SABCNews','NewzroomAfrika','AlJazeera',
+    'RussiaToday','ParliamentaryService','CGTNNews','CNBCAfrica','BloombergTelevision','BusinessDay','NDTV24x7','EuroNewsAfrica',
+    'KykNetLekker','RAIInternational','BesteVanNederlands','RTPI','TV5MondeAfrique','DeutscheWelle','CCTV4','SETAsia','B4UMovies',
+    'ZeeTV','StarPlus','SunTV','StarVijay','Colors','SETMax','Telemundo(P)','EVA(P)','SICInternacional(P)','M-NetPlus1HD']

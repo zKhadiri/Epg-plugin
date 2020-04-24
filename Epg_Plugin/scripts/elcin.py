@@ -46,7 +46,6 @@ def elci():
         time_d = re.findall(r'\d{2}:\d{2}\s+\w\w|<div\sclass=\" dates\">\s+(.*)',url.text)
         time = re.findall(r'\d{2}:\d{2}\s+\w\w',url.text)
         channel_name=re.findall(r'<li>(.*?)<\/li>\s+<li\sclass=\"localization\">',url.text)
-        print('\n'.join(channel_name))
         days[:]=[]
         times[:]=[]
         titles[:]=[]
@@ -140,6 +139,6 @@ if not os.path.exists('/etc/epgimport/elcinema.channels.xml'):
     print('Downloading elcinema channels config')
     os.system('wget -q "--no-check-certificate" https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/elcinema.channels.xml?raw=true -O /etc/epgimport/elcinema.channels.xml')
 
-
-
-
+if not os.path.exists('/etc/epgimport/dstv.channels.xml'):
+    print('Downloading dstv channels config')
+    os.system('wget -q "--no-check-certificate" https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/elcinema.channels.xml?raw=true -O /etc/epgimport/elcinema.channels.xml')
