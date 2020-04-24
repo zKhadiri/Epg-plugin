@@ -12,7 +12,7 @@ from Screens.InputBox import InputBox
 from Screens.MessageBox import MessageBox
 from Tools.Directories import fileExists
 from urllib2 import Request
-from Plugins.Extensions.Epg_Plugin.Console import Console
+from Plugins.Extensions.Epg_Plugin.Console2 import Console2
 from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigYesNo, configfile
 import io,os,re
 import gettext
@@ -214,7 +214,7 @@ class EPGIConfig(Screen):
         if answer:
             cmdlist = []
             cmdlist.append('wget -q "--no-check-certificate" https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh')
-            self.session.open(Console, title='Installing last update, enigma will be started after install', cmdlist=cmdlist, finishedCallback=self.myCallback, closeOnSuccess=False,endstr="")
+            self.session.open(Console2, title='Installing last update, enigma will be started after install', cmdlist=cmdlist, finishedCallback=self.myCallback, closeOnSuccess=False,endstr="")
     def myCallback(self,result):
         return
      
@@ -527,27 +527,27 @@ class EPGIConfig(Screen):
         if answer:
             if returnValue is not None:
                 if returnValue == "1":
-                    self.session.open(Console,_("EPG BEIN SPORTS") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/bein.py"], closeOnSuccess=False)
+                    self.session.open(Console2,_("EPG BEIN SPORTS") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/bein.py"], closeOnSuccess=False)
                     cprint("Downloading EPG BEIN SPORTS")
                 elif returnValue == "2":
-                    self.session.open(Console,_("EPG OSN") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/osn.py"], closeOnSuccess=False)
+                    self.session.open(Console2,_("EPG OSN") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/osn.py"], closeOnSuccess=False)
                     cprint("Downloading EPG OSN")
                 elif returnValue == "3":
-                    self.session.open(Console,_("EPG Bein entertainment") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/beinent.py"], closeOnSuccess=False)
+                    self.session.open(Console2,_("EPG Bein entertainment") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/beinent.py"], closeOnSuccess=False)
                     cprint("Downloading EPG Bein entertainment")
                 elif returnValue == "4":
-                    self.session.open(Console,_("EPG SNRT") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/aloula.py"], closeOnSuccess=False)
+                    self.session.open(Console2,_("EPG SNRT") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/aloula.py"], closeOnSuccess=False)
                     cprint("Downloading EPG SNRT")
                 elif returnValue == "5":
-                    self.session.open(Console,_("ELCINEMA EPG") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/elcin.py"], closeOnSuccess=False)
+                    self.session.open(Console2,_("ELCINEMA EPG") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/elcin.py"], closeOnSuccess=False)
                     cprint("Downloading ELECINEMA EPG")
                 elif returnValue == "6":
-                    self.session.open(Console,_("OSN BACKUP EPG") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/osnbackup.py"], closeOnSuccess=False)
+                    self.session.open(Console2,_("OSN BACKUP EPG") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/osnbackup.py"], closeOnSuccess=False)
                     cprint("Downloading OSN BACKUP EPG")
                 elif returnValue == "7":
-                    self.session.open(Console,_("MBC EPG") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/mbc.py"], closeOnSuccess=False)
+                    self.session.open(Console2,_("MBC EPG") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/mbc.py"], closeOnSuccess=False)
                     cprint("Downloading MBC EPG")
                 elif returnValue == "8":
-                    self.session.open(Console,_("DSTV EPG") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/dstv.py"], closeOnSuccess=False)
+                    self.session.open(Console2,_("DSTV EPG") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/dstv.py"], closeOnSuccess=False)
                     cprint("Downloading DSTV EPG")
                 
