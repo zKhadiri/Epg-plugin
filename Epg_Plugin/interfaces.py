@@ -259,7 +259,7 @@ class EPGIConfig(Screen):
             f1.close()
         elif returnValue =="8":
             f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/dstv.txt", "r")
-            self["status"].setText("Current mbc time zone  : "+f1.read().strip())
+            self["status"].setText("Current dstv time zone  : "+f1.read().strip())
             f1.close()
         else:
             self["status"].setText("")
