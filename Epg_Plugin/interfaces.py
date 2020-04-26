@@ -134,6 +134,7 @@ class EPGIConfig(Screen):
         list.append(("OSN BACKUP EPG", "6"))
         list.append(("MBC.NET", "7"))
         list.append(("DSTV.ZA", "8"))
+        list.append(("SuperSport.ZA BACKUP", "9"))
         Screen.__init__(self, session)
         self.skinName = ["EPGIConfig"]
         self["status"] = Label()
@@ -260,6 +261,11 @@ class EPGIConfig(Screen):
         elif returnValue =="8":
             f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/dstv.txt", "r")
             self["status"].setText("Current dstv time zone  : "+f1.read().strip())
+            f1.close()
+            
+        elif returnValue =="9":
+            f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/dstvback.txt", "r")
+            self["status"].setText("Current SuperSport time zone  : "+f1.read().strip())
             f1.close()
         else:
             self["status"].setText("")
@@ -420,7 +426,25 @@ class EPGIConfig(Screen):
                         self.session.open(MessageBox,_("File is empty"), MessageBox.TYPE_INFO,timeout=10)
                 else:
                     self.session.open(MessageBox,_("dstv.xml not found in path"), MessageBox.TYPE_INFO,timeout=10) 
-           
+                    
+            if returnValue == "9":
+                if fileExists("/etc/epgimport/dstv.xml"):
+                    f = open('/etc/epgimport/dstv.xml','r')
+                    time_of = re.search(r'[+#-]+\d{4}',f.read())
+                    f.close()
+                    f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/dstvback.txt", "r")
+                    newtime=f1.read()
+                    f1.close()
+                    if time_of !=None:
+                        with io.open("/etc/epgimport/dstv.xml",encoding="utf-8") as f:
+                            newText=f.read().decode('utf-8').replace(time_of.group(), newtime)
+                            with io.open("/etc/epgimport/dstv.xml", "w",encoding="utf-8") as f:
+                                f.write((newText).decode('utf-8'))
+                                self.session.open(MessageBox,_("current SuperSport time "+time_of.group()+" replaced by "+newtime), MessageBox.TYPE_INFO,timeout=10)
+                    else:
+                        self.session.open(MessageBox,_("File is empty"), MessageBox.TYPE_INFO,timeout=10)
+                else:
+                    self.session.open(MessageBox,_("dstv.xml not found in path"), MessageBox.TYPE_INFO,timeout=10)
             
     def __layoutFinished(self):
         self.new_version = Ver
@@ -500,6 +524,15 @@ class EPGIConfig(Screen):
                     self.session.open(MessageBox,_("time changed with succes "+new_time), MessageBox.TYPE_INFO,timeout=10)
                     self["status"].setText("Current dstv time zone  : "+new_time)
 
+            elif returnValue == "9":
+                f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
+                new_time = f.read().strip()
+                f.close()
+                with io.open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/dstvback.txt","w",encoding='UTF-8')as f1:
+                    f1.write(new_time.decode('utf-8'))
+                    self.session.open(MessageBox,_("time changed with succes "+new_time), MessageBox.TYPE_INFO,timeout=10)
+                    self["status"].setText("Current SuperSport time zone  : "+new_time)
+
     def keyRed(self):
         self.close(None)
 
@@ -550,4 +583,6 @@ class EPGIConfig(Screen):
                 elif returnValue == "8":
                     self.session.open(Console2,_("DSTV EPG") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/dstv.py"], closeOnSuccess=False)
                     cprint("Downloading DSTV EPG")
-                
+                elif returnValue == "9":
+                    self.session.open(Console2,_("SuperSport EPG") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/dstvback.py"], closeOnSuccess=False)
+                    cprint("Downloading SuperSport EPG")

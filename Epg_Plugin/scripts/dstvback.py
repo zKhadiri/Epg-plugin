@@ -4,14 +4,14 @@ from time import sleep
 import os,io,re
 
 
-with io.open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/osnback.txt','r') as f:
+with io.open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/dstvback.txt','r') as f:
     time_zone = f.read().strip()
     
-path = '/etc/epgimport/osn.xml'
+path = '/etc/epgimport/dstv.xml'
 
-print "Downloading osn epg guide\nPlease wait...."  
+print "Downloading SuperSport epg guide\nPlease wait...."  
 
-os.system('wget -q "--no-check-certificate" https://github.com/ziko-ZR1/XML/blob/master/osn.xml?raw=true -O '+path+'')
+os.system('wget -q "--no-check-certificate" http://github.com/ziko-ZR1/XML/blob/master/dstv.xml?raw=true -O '+path+'')
 
 sleep(1)
 
@@ -30,7 +30,7 @@ if os.path.exists(path):
     else:
         print "file is empty"
         
-print "osn.xml donwloaded with succes"
+print "dstv.xml donwloaded with succes"
 
 
 if not os.path.exists('/etc/epgimport/custom.channels.xml'):

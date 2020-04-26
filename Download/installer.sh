@@ -2,8 +2,8 @@
 ##setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=4.6
-description=What_is_NEW:\n'[Bein sport possible fix  after this update a timezone change may be required]'
+version=4.7
+description=What_is_NEW:\n'[New source : supersport backup]'
 ##############################################################
 # remove old version
 rm -rf /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin

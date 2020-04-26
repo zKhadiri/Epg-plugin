@@ -40,7 +40,7 @@ for i in range(0,3):
 pll=[]
 now = datetime.datetime.today().strftime('%Y-%m-%d')
 def oss(url):
-    global days,nam
+    global aff,days,nam
     with requests.Session() as s:
         s.mount('http://', HTTPAdapter(max_retries=10))
         ur= s.post('http://www.osn.com/CMSPages/TVScheduleWebService.asmx/GetTVChannelsProgramTimeTable',data=url,headers=headers)
@@ -62,6 +62,7 @@ def oss(url):
                     nam=data[0][u'ChannelNameEnglish']
                     days=datetime.datetime.fromtimestamp(int(data[0][u'StartDateTime'].replace("/Date(",'').replace(")/",'')) // 1000).strftime('%Y%m%d%H%M%S')
                     days_end=datetime.datetime.fromtimestamp(int(data[0][u'EndDateTime'].replace("/Date(",'').replace(")/",'')) // 1000).strftime('%Y%m%d%H%M%S')
+                    aff =datetime.datetime.fromtimestamp(int(data[0][u'EndDateTime'].replace("/Date(",'').replace(")/",'')) // 1000).strftime('%Y-%m-%d')
                     ch+= 2 * ' ' + '<programme start="' + days + ' '+time_zone+'" stop="' + days_end + ' '+time_zone+'" channel="'+nm+'">'+'\n'
                     if url['channelCode'] =='SER' or url['channelCode'] =='YAW' or url['channelCode'] =='SAF' or url['channelCode'] =='CM1' or url['channelCode'] =='CM2' or url['channelCode'] =='FAN' or url['channelCode'] =='OYH' or url['channelCode'] =='OYA' or url['channelCode'] =='OYC':
                         ch+='     <title lang="en">'+data[0][u'Arab_Title']+'</title>'+"\n"
@@ -71,7 +72,7 @@ def oss(url):
                     ch+='     <sub-title lang="ar">'+data[0][u'GenreArabicName']+'</sub-title>'+"\n"+'  </programme>'+"\n"
                     with io.open("/etc/epgimport/osn.xml","a",encoding='UTF-8')as f:
                         f.write(ch)
-        for _ in progressbar((pll*120),nam+" "+days+" : ", 15):pass
+        for _ in progressbar((pll*120),nam+" "+aff+" : ", 15):pass
         sleep(0.005)
 def progressbar(it, prefix="", size=20, file=sys.stdout):
     count = len(it)
