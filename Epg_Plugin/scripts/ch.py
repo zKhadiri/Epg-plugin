@@ -9,7 +9,7 @@ xm=['OSN_On_Demand_HD','OSN_Movies','OSN_Cinema','OSN_Enigma','OSN_Movies_Disney
 'Discovery_ID','Cinema_2','Al_Yawm','Series_+2','Cinema_1','Series_Channel','E!_Entertainment_HD','B4U_Aflam','Discovery_HD','OSN_News','TLC_HD'
 ,'Baby_TV_Europe','Disney_XD','MTV_Live_HD','Disney_HD','Disney_Junior','VH1','Music_Now','Bloomberg','NickToons_HD',
 'Nick_Jr','Fann','Viva_TV','Nickelodeon_HD']
-elc_channels=['Series+2','Zeealwan','AlKaheraWalNasTV','DubaiOne',"DubaiTV","AlhayatTV","AlNaharDrama","Cima","CBCDrama","NileDrama"
+elc_channels=['AlhayatDrama','Mehwar','Kuwait','JordanTV','Watania2','RotanaKids','LanaPlusTV','MBC3','Series+2','Zeealwan','AlKaheraWalNasTV','DubaiOne',"DubaiTV","AlhayatTV","AlNaharDrama","Cima","CBCDrama","NileDrama"
 ,"Zeeaflam","SadaElBaladDrama","CBC",
 "SamaDubai","AlNaharTV",
 "NileComedy","AlraiTV","NileLife","SadaElBalad","DMCDRAMA","ONE","Aloula","ONDrama","DubaiZaman",
