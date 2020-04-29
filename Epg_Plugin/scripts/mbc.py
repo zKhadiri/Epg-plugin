@@ -72,7 +72,7 @@ def mbc():
                     prog_end=datetime.datetime.fromtimestamp(int(next_elem)// 1000).strftime('%Y%m%d%H%M%S')
                 programme.append(2 * ' ' + '<programme start="' + prog_start + ' '+time_zone+'" stop="' + prog_end + ' '+time_zone+'" channel="'+nm.replace(' ','').replace('-','')+'">\n')
             for prog,title,descri,subt in zip(programme,titles,des,sub):
-                with io.open("mbc.xml","a",encoding='UTF-8')as f:
+                with io.open("/etc/epgimport/mbc.xml","a",encoding='UTF-8')as f:
                     f.write(prog+title+descri+subt)
         print nm
     
