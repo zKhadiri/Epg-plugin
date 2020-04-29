@@ -1,6 +1,6 @@
 #!/usr/bin/env python2.7
 # -*- coding: utf-8 -*-
-import requests,json,io,os
+import requests,json,io,os,re
 from datetime import datetime
 
 urls=[]
@@ -29,28 +29,53 @@ for x in ch:
     with io.open("/etc/epgimport/mbc.xml","a",encoding='UTF-8')as f:
         f.write(("\n"+'  <channel id="'+x+'">'+"\n"+'    <display-name lang="en">'+x+'</display-name>'+"\n"+'  </channel>\r').decode('utf-8'))  
 
+programme=[]
+times=[]
+end=[]
+titles=[]
+des=[]
+sub=[]
+channel=[]
+
 def mbc():
     for url in urls:
+        programme[:]=[]
+        times[:]=[]
+        end[:]=[]
+        titles[:]=[]
+        des[:]=[]
+        sub[:]=[]
+        channel[:]=[]
         link = requests.get(url)
         data = json.loads(link.text)
-        for d in data:
-            cc=''
-            prog_start=datetime.datetime.fromtimestamp(int(d['startTime'])// 1000).strftime('%Y%m%d%H%M%S')
-            prog_end=datetime.datetime.fromtimestamp(int(d['endTime'])// 1000).strftime('%Y%m%d%H%M%S')
-            nm=d['channelLabel']
-            cc+= 2 * ' ' + '<programme start="' + prog_start + ' '+time_zone+'" stop="' + prog_end + ' '+time_zone+'" channel="'+nm.replace(' ','').replace('-','')+'">'+'\n'
-            cc+='     <title lang="en">'+d['showPageTitle'].replace('&','-')+'</title>'+"\n"
-            if d['showPageGenreInArabic']==None or d['showPageAboutInArabic']==None:
-                cc+='     <desc lang="ar">'+d['showPageTitle'].replace('&','-')+'</desc>'+"\n"
-                cc+='     <sub-title lang="ar">'+d['showPageTitle'].replace('&','-')+'</sub-title>'+"\n"+'  </programme>'+"\r"
-            else:
-                cc+='     <desc lang="ar">'+d['showPageAboutInArabic'].replace('\r\n','')+'</desc>'+"\n"
-                cc+='     <sub-title lang="ar">'+d['showPageGenreInArabic']+'</sub-title>'+"\n"+'  </programme>'+"\r"
-            with io.open("/etc/epgimport/mbc.xml","a",encoding='UTF-8')as f:
-                f.write(cc)
+        if data ==[]:
+            nf = re.findall(r'channel=(.*?)&',str(url))
+            print 'No data found for : '+''.join(nf)
+        else:
+            for d in data:
+                times.append(d['startTime'])
+                end.append(d['endTime'])
+                channel.append(d['channelLabel'])
+                titles.append('     <title lang="ar">'+d['showPageTitle'].replace('&','-')+'</title>\n')
+                if d['showPageGenreInArabic']==None or d['showPageAboutInArabic']==None:
+                    des.append('     <desc lang="ar">No description for this programme</desc>\n')
+                    sub.append('     <sub-title lang="ar">No data</sub-title>\n  </programme>\r')
+                else:
+                    des.append('     <desc lang="ar">'+d['showPageAboutInArabic'].replace('&','-')+'</desc>\n')
+                    sub.append('     <sub-title lang="ar">'+d['showPageGenreInArabic'].replace('&','-')+'</sub-title>\n  </programme>\r')
+            for elem, next_elem,en,nm in zip(times, times[1:] + [times[0]],end,channel):
+                if times[-1]==elem and times[0]==next_elem:
+                    prog_start=datetime.datetime.fromtimestamp(int(elem)// 1000).strftime('%Y%m%d%H%M%S')
+                    prog_end=datetime.datetime.fromtimestamp(int(en)// 1000).strftime('%Y%m%d%H%M%S') 
+                else:
+                    prog_start=datetime.datetime.fromtimestamp(int(elem)// 1000).strftime('%Y%m%d%H%M%S')
+                    prog_end=datetime.datetime.fromtimestamp(int(next_elem)// 1000).strftime('%Y%m%d%H%M%S')
+                programme.append(2 * ' ' + '<programme start="' + prog_start + ' '+time_zone+'" stop="' + prog_end + ' '+time_zone+'" channel="'+nm.replace(' ','').replace('-','')+'">\n')
+            for prog,title,descri,subt in zip(programme,titles,des,sub):
+                with io.open("mbc.xml","a",encoding='UTF-8')as f:
+                    f.write(prog+title+descri+subt)
         print nm
     
-
 if __name__ == "__main__":
     mbc()
     
