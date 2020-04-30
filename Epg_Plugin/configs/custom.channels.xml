@@ -177,6 +177,7 @@
 <channel id="4K">Your_ID:http%3a//example.com</channel> <!-- "4K" -->
 <channel id="BS_NBA">Your_ID:http%3a//example.com</channel> <!-- "BS_NBA" -->
 <!-- bein entertainment -->
+<channel id="beincinema">Your_ID:http%3a//example.com</channel>
 <channel id="MoviesHD1">Your_ID:http%3a//example.com</channel> <!-- "MoviesHD1" -->
 <channel id="MoviesHD2">Your_ID:http%3a//example.com</channel> <!-- "MoviesHD2" -->
 <channel id="MoviesHD3">Your_ID:http%3a//example.com</channel> <!-- "MoviesHD3" -->

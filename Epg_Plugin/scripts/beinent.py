@@ -32,7 +32,7 @@ desc=[]
 title_chan=[]
 titles=[]
 prog=[]
-
+alls=[]
 with io.open("/etc/epgimport/beinent.xml","w",encoding='UTF-8')as f:
     f.write(('<?xml version="1.0" encoding="UTF-8"?>'+"\n"+'<tv generator-info-name="By ZR1">').decode('utf-8'))
 for nt in ch.net:
@@ -41,11 +41,12 @@ for nt in ch.net:
 
 def beinen():
     for url in urls:
-        from datetime import datetime
+        from datetime import datetime,timedelta
         desc[:]=[]
         title_chan[:]=[]
         titles[:]=[]
         prog[:]=[]
+        alls[:]=[]
         with requests.Session() as s:
             s.mount('http://', HTTPAdapter(max_retries=10))
             link = s.get(url,headers=headers)
@@ -56,19 +57,30 @@ def beinen():
             channels = re.findall(r"data-img='mena_entertaintment\/(.*?)\.",link.text)
             for tt_ in title:
                 titles.append(4*' '+'<title lang="en">'+tt_.replace('&','and')+'</title>'+'\n')
-                desc.append(4*' '+'<category lang="en">'+tt_.replace('&','and')+'</category>'+'\n')
+                desc.append(4*' '+'<category lang="en">No data found</category>'+'\n')
             format_=[4*' '+'<desc lang="en">'+f+'</desc>'+"\n"+'  </programme>'+'\n' for f in formt]
             for time_,chann_ in zip(times,channels):
+                end ='05:59'
+                start='18:00'
                 date = re.search(r'\d{4}-\d{2}-\d{2}',url)
-                starttime = datetime.strptime(date.group()+' '+time_[0],'%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
-                endtime = datetime.strptime(date.group() + ' ' + time_[1], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
-                prog.append(2 * ' ' + '<programme start="' + starttime + ' '+time_zone+'" stop="' + endtime + ' '+time_zone+'" channel="'+chann_.replace('Star_World_HD','Star_World_B').replace('Star_Movies_HD','Star_Movies_B').replace('Bloomberg','Bloomberg_B')+'">'+'\n')
+                if time_[0]>=start and time_[1]<=end:
+                    fix = (datetime.strptime(date.group(),'%Y-%m-%d')-timedelta(days=1)).strftime('%Y-%m-%d')
+                    starttime = datetime.strptime(fix+' '+time_[0],'%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
+                    endtime = datetime.strptime(date.group()+' ' + time_[1], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
+                    prog.append(2 * ' ' + '<programme start="' + starttime + ' '+time_zone+'" stop="' + endtime + ' '+time_zone+'" channel="'+chann_.replace('Star_World_HD','Star_World_B').replace('Star_Movies_HD','Star_Movies_B').replace('Bloomberg','Bloomberg_B')+'">'+'\n')
+                else:
+                    starttime = datetime.strptime(date.group()+' '+time_[0],'%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
+                    endtime = datetime.strptime(date.group() + ' ' + time_[1], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
+                    prog.append(2 * ' ' + '<programme start="' + starttime + ' '+time_zone+'" stop="' + endtime + ' '+time_zone+'" channel="'+chann_.replace('Star_World_HD','Star_World_B').replace('Star_Movies_HD','Star_Movies_B').replace('Bloomberg','Bloomberg_B')+'">'+'\n')
             if len(title) !=0:
                 for ttt,d,f,p in zip(titles,desc,format_,prog):
-                    with io.open("/etc/epgimport/beinent.xml","a",encoding='UTF-8')as fil:
-                        fil.write(p+ttt+d+f)
+                    alls.append(p+ttt+d+f)
                 dat = re.search(r'\d{4}-\d{2}-\d{2}',url)
                 print('Date'+' : '+dat.group())
+                for pr,chc,chch in zip(alls,channels,channels[1:]+[channels[0]]):
+                    if chc == chch:
+                        with io.open("/etc/epgimport/beinent.xml","a",encoding='UTF-8')as fil:
+                            fil.write(pr)
             else:
                 print('No data found')
                 break

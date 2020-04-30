@@ -1,4 +1,4 @@
-net=['MoviesHD1','MoviesHD2','MoviesHD3','MoviesHD4','BoxOffice_HD1','SeriesHD1','SeriesHD2','DramaHD1','gourmet','beJUNIOR','Jeem',
+net=['beincinema','MoviesHD1','MoviesHD2','MoviesHD3','MoviesHD4','BoxOffice_HD1','SeriesHD1','SeriesHD2','DramaHD1','gourmet','beJUNIOR','Jeem',
 'Baraem','CartoonNetworkHD','CartoonNetworkAR','CartoonNetworkHindi','Baby_TV','CBeebies','DreamWorks','JimJam','FOXFamilyMovies',
 'FOXActionMovies','Star_World_B','TCM','amc','Star_Movies_B','FOXHD','OutdoorChannel','V_HD','TravelChannel','Extreme','fatafeat'
 ,'FoodNetwork','HGTV','CBSreality','FXHD','DMAX','NatGeoWild_HD','NatGeoPeople_HD','NatGeo_HD','BBCEarth','AnimalPlanetHD'
