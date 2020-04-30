@@ -41,7 +41,7 @@ nb_channel=['1138','1145','1310','1314','1334','1356','1342','1241','1186','1261
             '1170','1159','1226','1292','1203','1101','1134','1283','1188','1260','1290','1204','1269','1280',
             '1300','1298','1297','1301','1299','1296','1304','1317','1302','1312','1321','1338','1339','1353','1350','1355']
 
-today = datetime.now().strftime('%Y/%m/%d')
+
 def elci():
     for nb in nb_channel:
         with requests.Session() as s:
@@ -103,19 +103,11 @@ def elci():
                             fixed = (datetime.strptime(str(td1),'%A %d %B')+timedelta(days=1)).strftime('%m %d')
                             startime = datetime.strptime(str(now) + ' ' + str(month)+' '+str(fx)+ ' ' + elem,'%Y %m %d %H:%M').strftime('%Y%m%d%H%M%S')
                             endtime = datetime.strptime(str(now) + ' ' +fixed+ ' ' + next_elem,'%Y %m %d %H:%M').strftime('%Y%m%d%H%M%S')
-                            prog.append(2 * ' ' +'<programme start="' + startime + ' '+time_zone+'" stop="' + endtime + ' '+time_zone+'" channel="'+chnm.strip()+'">\n')
-                            date_end = datetime.strptime(str(now)+' '+fixed,'%Y %m %d').strftime('%Y/%m/%d')
-                            day = datetime.strptime(date_end,'%Y/%m/%d')
-                            date_now = datetime.strptime(today,'%Y/%m/%d')
-                            nb_days = day - date_now
+                            prog.append(2 * ' ' +'<programme start="' + startime + ' '+time_zone+'" stop="' + endtime + ' '+time_zone+'" channel="'+chnm.strip()+'">\n') 
                         else:
                             startime=datetime.strptime(str(now)+' '+str(td1)+' '+elem,'%Y %A %d %B %H:%M').strftime('%Y%m%d%H%M%S')
                             endtime=datetime.strptime(str(now)+' '+str(td1)+' '+next_elem,'%Y %A %d %B %H:%M').strftime('%Y%m%d%H%M%S')
-                            prog.append(2 * ' ' +'<programme start="' + startime + ' '+time_zone+'" stop="' + endtime + ' '+time_zone+'" channel="'+chnm.strip()+'">\n')
-                            date_end = datetime.strptime(endtime,'%Y%m%d%H%M%S').strftime('%Y/%m/%d')
-                            day = datetime.strptime(date_end,'%Y/%m/%d')
-                            date_now = datetime.strptime(today,'%Y/%m/%d')
-                            nb_days = day - date_now
+                            prog.append(2 * ' ' +'<programme start="' + startime + ' '+time_zone+'" stop="' + endtime + ' '+time_zone+'" channel="'+chnm.strip()+'">\n')   
                     else:
                         startime=datetime.strptime(str(now)+' '+str(td1)+' '+elem,'%Y %A %d %B %H:%M').strftime('%Y%m%d%H%M%S')
                         endtime=datetime.strptime(str(now)+' '+str(td2)+' '+next_elem,'%Y %A %d %B %H:%M').strftime('%Y%m%d%H%M%S')
@@ -140,12 +132,7 @@ def elci():
             if error:
                 pass
             else:
-                if nb_days.days==0:
-                    print chan+' epg donwloaded For : 1 Day'
-                elif nb_days.days==1:
-                    chan+' epg donwloaded For : '+str(nb_days.days)+' Day'
-                else:
-                    print chan+' epg donwloaded For : '+str(nb_days.days)+' Days'
+                print chan
     
 
 if __name__=='__main__':
