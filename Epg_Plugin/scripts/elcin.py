@@ -3,7 +3,6 @@
 import requests,re,io,ch,os
 from datetime import datetime,timedelta
 from time import sleep,strftime
-from urllib3.util.retry import Retry
 from requests.adapters import HTTPAdapter
 
 
@@ -41,11 +40,12 @@ now = datetime.today().year
 nb_channel=['1138','1145','1310','1314','1334','1356','1342','1241','1186','1261','1174','1173','1169','1137','1223','1176','1199','1156','1262','1227','1198','1177','1193','1158',
             '1170','1159','1226','1292','1203','1101','1134','1283','1188','1260','1290','1204','1269','1280',
             '1300','1298','1297','1301','1299','1296','1304','1317','1302','1312','1321','1338','1339','1353','1350','1355']
+
+today = datetime.now().strftime('%Y/%m/%d')
 def elci():
     for nb in nb_channel:
         with requests.Session() as s:
-            retries = Retry(total=50,backoff_factor=0.1,status_forcelist=[500, 502, 503, 504])
-            s.mount('http://', HTTPAdapter(max_retries=retries))
+            s.mount('http://', HTTPAdapter(max_retries=10))
             url = s.get('http://elcinema.com/en/tvguide/'+nb+'/',headers=headers)
             time_d = re.findall(r'\d{2}:\d{2}\s+\w\w|<div\sclass=\" dates\">\s+(.*)',url.text)
             time = re.findall(r'\d{2}:\d{2}\s+\w\w',url.text)
@@ -63,7 +63,6 @@ def elci():
                 end = int(en.replace('[','').replace(' minutes]',''))
                 times.append(start.strftime('%H:%M'))
                 ends.append((start + timedelta(minutes=end)).strftime('%H:%M'))
-
             for i, val in enumerate(time_d):
                 if not val:
                     time_d[i] = time_d[i-1]
@@ -105,10 +104,18 @@ def elci():
                             startime = datetime.strptime(str(now) + ' ' + str(month)+' '+str(fx)+ ' ' + elem,'%Y %m %d %H:%M').strftime('%Y%m%d%H%M%S')
                             endtime = datetime.strptime(str(now) + ' ' +fixed+ ' ' + next_elem,'%Y %m %d %H:%M').strftime('%Y%m%d%H%M%S')
                             prog.append(2 * ' ' +'<programme start="' + startime + ' '+time_zone+'" stop="' + endtime + ' '+time_zone+'" channel="'+chnm.strip()+'">\n')
+                            date_end = datetime.strptime(str(now)+' '+fixed,'%Y %m %d').strftime('%Y/%m/%d')
+                            day = datetime.strptime(date_end,'%Y/%m/%d')
+                            date_now = datetime.strptime(today,'%Y/%m/%d')
+                            nb_days = day - date_now
                         else:
                             startime=datetime.strptime(str(now)+' '+str(td1)+' '+elem,'%Y %A %d %B %H:%M').strftime('%Y%m%d%H%M%S')
                             endtime=datetime.strptime(str(now)+' '+str(td1)+' '+next_elem,'%Y %A %d %B %H:%M').strftime('%Y%m%d%H%M%S')
                             prog.append(2 * ' ' +'<programme start="' + startime + ' '+time_zone+'" stop="' + endtime + ' '+time_zone+'" channel="'+chnm.strip()+'">\n')
+                            date_end = datetime.strptime(endtime,'%Y%m%d%H%M%S').strftime('%Y/%m/%d')
+                            day = datetime.strptime(date_end,'%Y/%m/%d')
+                            date_now = datetime.strptime(today,'%Y/%m/%d')
+                            nb_days = day - date_now
                     else:
                         startime=datetime.strptime(str(now)+' '+str(td1)+' '+elem,'%Y %A %d %B %H:%M').strftime('%Y%m%d%H%M%S')
                         endtime=datetime.strptime(str(now)+' '+str(td2)+' '+next_elem,'%Y %A %d %B %H:%M').strftime('%Y%m%d%H%M%S')
@@ -133,8 +140,12 @@ def elci():
             if error:
                 pass
             else:
-                print chan.strip()
-            sleep(1)
+                if nb_days.days==0:
+                    print chan+' epg donwloaded For : 1 Day'
+                elif nb_days.days==1:
+                    chan+' epg donwloaded For : '+str(nb_days.days)+' Day'
+                else:
+                    print chan+' epg donwloaded For : '+str(nb_days.days)+' Days'
     
 
 if __name__=='__main__':

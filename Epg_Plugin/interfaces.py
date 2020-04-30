@@ -64,63 +64,63 @@ class EPGIConfig(Screen):
     if reswidth == 1280:
         skin = """
             <screen position="center,center" size="762,528" title="ZIKO EPG GRABBER" backgroundColor="#16000000" flags="wfNoBorder">
-  		<widget source="Title" position="5,6" size="743,41" render="Label" font="Regular;26" foregroundColor="#00ffa500" backgroundColor="#16000000" transparent="1"/>
-  		<widget font="Regular;28" foregroundColor="#00ffffff" backgroundColor="#16000000" halign="center" position="322,47" render="Label" size="122,32" source="global.CurrentTime" transparent="1" valign="center" zPosition="3">
-    			<convert type="ClockToText">Default</convert>
-  		</widget>
-  		<ePixmap name="red" position="40,470" zPosition="2" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/red.png" transparent="1" alphatest="on"/>
-  		<ePixmap name="green" position="190,470" zPosition="2" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/green.png" transparent="1" alphatest="on"/>
-  		<ePixmap name="yellow" position="340,470" zPosition="2" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/yellow.png" transparent="1" alphatest="on"/>
-  		<ePixmap name="blue" position="490,470" zPosition="2" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/blue.png" transparent="1" alphatest="on"/>
-  		<ePixmap position="638,474" size="35,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/key_menu.png" alphatest="on"/>
-  		<widget name="key_red" position="40,470" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;19" transparent="1"/>
-  		<widget name="key_green" position="190,470" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;19" transparent="1"/>
-  		<widget name="key_yellow" position="340,470" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;19" transparent="1"/>
-  		<widget name="key_blue" position="490,470" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;19" transparent="1"/>
-  		<widget name="config" position="10,80" size="745,310" scrollbarMode="showOnDemand"/>
-  		<widget name="status" foregroundColor="#00ff2525" position="15,425" size="724,30" font="Regular;20"/>
-  		<widget name="glb" foregroundColor="#00ffffff" position="15,395" size="722,25" font="Regular;20"/>
+                <widget source="Title" position="5,6" size="743,41" render="Label" font="Regular;26" foregroundColor="#00ffa500" backgroundColor="#16000000" transparent="1"/>
+                <widget font="Regular;28" foregroundColor="#00ffffff" backgroundColor="#16000000" halign="center" position="322,47" render="Label" size="122,32" source="global.CurrentTime" transparent="1" valign="center" zPosition="3">
+                        <convert type="ClockToText">Default</convert>
+                </widget>
+                <ePixmap name="red" position="40,470" zPosition="2" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/red.png" transparent="1" alphatest="on"/>
+                <ePixmap name="green" position="190,470" zPosition="2" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/green.png" transparent="1" alphatest="on"/>
+                <ePixmap name="yellow" position="340,470" zPosition="2" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/yellow.png" transparent="1" alphatest="on"/>
+                <ePixmap name="blue" position="490,470" zPosition="2" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/blue.png" transparent="1" alphatest="on"/>
+                <ePixmap position="638,474" size="35,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/key_menu.png" alphatest="on"/>
+                <widget name="key_red" position="40,470" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;19" transparent="1"/>
+                <widget name="key_green" position="190,470" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;19" transparent="1"/>
+                <widget name="key_yellow" position="340,470" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;19" transparent="1"/>
+                <widget name="key_blue" position="490,470" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;19" transparent="1"/>
+                <widget name="config" position="10,80" size="745,310" scrollbarMode="showOnDemand"/>
+                <widget name="status" foregroundColor="#00ff2525" position="15,425" size="724,30" font="Regular;20"/>
+                <widget name="glb" foregroundColor="#00ffffff" position="15,395" size="722,25" font="Regular;20"/>
             </screen>"""
     else:
 	if os.path.exists('/var/lib/dpkg/status'):
         	skin = """
             		<screen position="center,185" size="1222,707" title="ZIKO EPG GRABBER" flags="wfNoBorder" backgroundColor="#16000000">
-  				<widget source="Title" position="5,6" size="1210,63" render="Label" font="Regular;45" foregroundColor="#00ffa500" backgroundColor="#16000000" transparent="1"/>
-  				<widget font="Regular;35" foregroundColor="#00ffffff" backgroundColor="#16000000" halign="center" position="514,73" render="Label" size="177,45" source="global.CurrentTime" transparent="1" valign="center" zPosition="3">
-    					<convert type="ClockToText">Default</convert>
-  				</widget>
-  				<ePixmap name="red" position="230,655" zPosition="2" size="195,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/red.png" transparent="1" alphatest="on"/>
-  				<ePixmap name="green" position="420,655" zPosition="2" size="195,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/green.png" transparent="1" alphatest="on"/>
-  		<ePixmap name="yellow" position="618,655" zPosition="2" size="195,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/yellow.png" transparent="1" alphatest="on"/>
-  				<ePixmap name="blue" position="810,655" zPosition="2" size="195,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/blue.png" transparent="1" alphatest="on"/>
-  				<ePixmap position="1010,658" size="35,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/key_menu.png" alphatest="on"/>
-  				<widget name="key_red" position="202,655" size="200,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
-  				<widget name="key_green" position="395,655" size="200,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
-  				<widget name="key_yellow" position="595,655" size="200,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
-  				<widget name="key_blue" position="784,655" size="200,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
-  				<widget name="config" foregroundColor="#00ffffff" backgroundColor="#16000000" position="10,125" size="1196,388" scrollbarMode="showOnDemand"/>
-  				<widget name="status" foregroundColor="#00ff2525" backgroundColor="#16000000" position="15,579" size="1174,54" font="Regular;35"/>
-  				<widget name="glb" foregroundColor="#00ffffff" backgroundColor="#16000000" position="15,519" size="1174,54" font="Regular;35"/>
+                        <widget source="Title" position="5,6" size="1210,63" render="Label" font="Regular;45" foregroundColor="#00ffa500" backgroundColor="#16000000" transparent="1"/>
+                        <widget font="Regular;35" foregroundColor="#00ffffff" backgroundColor="#16000000" halign="center" position="514,73" render="Label" size="177,45" source="global.CurrentTime" transparent="1" valign="center" zPosition="3">
+                                <convert type="ClockToText">Default</convert>
+                        </widget>
+                        <ePixmap name="red" position="230,655" zPosition="2" size="195,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/red.png" transparent="1" alphatest="on"/>
+                        <ePixmap name="green" position="420,655" zPosition="2" size="195,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/green.png" transparent="1" alphatest="on"/>
+                        <ePixmap name="yellow" position="618,655" zPosition="2" size="195,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/yellow.png" transparent="1" alphatest="on"/>
+                        <ePixmap name="blue" position="810,655" zPosition="2" size="195,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/blue.png" transparent="1" alphatest="on"/>
+                        <ePixmap position="1010,658" size="35,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/key_menu.png" alphatest="on"/>
+                        <widget name="key_red" position="202,655" size="200,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
+                        <widget name="key_green" position="395,655" size="200,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
+                        <widget name="key_yellow" position="595,655" size="200,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
+                        <widget name="key_blue" position="784,655" size="200,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
+                        <widget name="config" foregroundColor="#00ffffff" backgroundColor="#16000000" position="10,125" size="1196,388" scrollbarMode="showOnDemand"/>
+                        <widget name="status" foregroundColor="#00ff2525" backgroundColor="#16000000" position="15,579" size="1174,54" font="Regular;35"/>
+                        <widget name="glb" foregroundColor="#00ffffff" backgroundColor="#16000000" position="15,519" size="1174,54" font="Regular;35"/>
             		</screen>"""
 	else:
         	skin = """
             		<screen position="center,185" size="1222,707" title="ZIKO EPG GRABBER" flags="wfNoBorder" backgroundColor="#16000000">
-  				<widget source="Title" position="5,6" size="1210,63" render="Label" font="Regular;45" foregroundColor="#00ffa500" backgroundColor="#16000000" transparent="1"/>
-  				<widget font="Regular;40" foregroundColor="#00ffffff" backgroundColor="#16000000" halign="center" position="514,73" render="Label" size="177,45" source="global.CurrentTime" transparent="1" valign="center" zPosition="3">
-    					<convert type="ClockToText">Default</convert>
-  				</widget>
-  				<ePixmap name="red" position="230,655" zPosition="2" size="195,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/red.png" transparent="1" alphatest="on"/>
-  				<ePixmap name="green" position="420,655" zPosition="2" size="195,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/green.png" transparent="1" alphatest="on"/>
-  		<ePixmap name="yellow" position="618,655" zPosition="2" size="195,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/yellow.png" transparent="1" alphatest="on"/>
-  				<ePixmap name="blue" position="810,655" zPosition="2" size="195,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/blue.png" transparent="1" alphatest="on"/>
-  				<ePixmap position="1010,658" size="35,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/key_menu.png" alphatest="on"/>
-  				<widget name="key_red" position="202,655" size="200,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
-  				<widget name="key_green" position="395,655" size="200,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
-  				<widget name="key_yellow" position="595,655" size="200,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
-  				<widget name="key_blue" position="784,655" size="200,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
-  				<widget name="config" font="Regular;35" itemHeight="45" foregroundColor="#00ffffff" backgroundColor="#16000000" position="10,125" size="1196,388" scrollbarMode="showOnDemand"/>
-  				<widget name="status" foregroundColor="#00ff2525" backgroundColor="#16000000" position="15,579" size="1174,54" font="Regular;35"/>
-  				<widget name="glb" foregroundColor="#00ffffff" backgroundColor="#16000000" position="15,519" size="1174,54" font="Regular;35"/>
+                        <widget source="Title" position="5,6" size="1210,63" render="Label" font="Regular;45" foregroundColor="#00ffa500" backgroundColor="#16000000" transparent="1"/>
+                        <widget font="Regular;40" foregroundColor="#00ffffff" backgroundColor="#16000000" halign="center" position="514,73" render="Label" size="177,45" source="global.CurrentTime" transparent="1" valign="center" zPosition="3">
+                                <convert type="ClockToText">Default</convert>
+                        </widget>
+                        <ePixmap name="red" position="230,655" zPosition="2" size="195,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/red.png" transparent="1" alphatest="on"/>
+                        <ePixmap name="green" position="420,655" zPosition="2" size="195,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/green.png" transparent="1" alphatest="on"/>
+                        <ePixmap name="yellow" position="618,655" zPosition="2" size="195,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/yellow.png" transparent="1" alphatest="on"/>
+                        <ePixmap name="blue" position="810,655" zPosition="2" size="195,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/blue.png" transparent="1" alphatest="on"/>
+                        <ePixmap position="1010,658" size="35,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/key_menu.png" alphatest="on"/>
+                        <widget name="key_red" position="202,655" size="200,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
+                        <widget name="key_green" position="395,655" size="200,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
+                        <widget name="key_yellow" position="595,655" size="200,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
+                        <widget name="key_blue" position="784,655" size="200,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
+                        <widget name="config" font="Regular;35" itemHeight="45" foregroundColor="#00ffffff" backgroundColor="#16000000" position="10,125" size="1196,388" scrollbarMode="showOnDemand"/>
+                        <widget name="status" foregroundColor="#00ff2525" backgroundColor="#16000000" position="15,579" size="1174,54" font="Regular;35"/>
+                        <widget name="glb" foregroundColor="#00ffffff" backgroundColor="#16000000" position="15,519" size="1174,54" font="Regular;35"/>
             		</screen>"""
 ###### End 
     def __init__(self, session, args = 0):
@@ -239,7 +239,7 @@ class EPGIConfig(Screen):
             self["status"].setText("Current osn time zone  : "+f1.read().strip())
             f1.close()
         elif returnValue =="3":
-            f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/bein.txt", "r")
+            f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/beinent.txt", "r")
             self["status"].setText("Current Bein entertainment time zone  : "+f1.read().strip())
             f1.close()
         elif returnValue =="4":
@@ -318,7 +318,7 @@ class EPGIConfig(Screen):
                     f = open('/etc/epgimport/beinent.xml','r')
                     time_of = re.search(r'[+#-]+\d{4}',f.read())
                     f.close()
-                    f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/bein.txt", "r")
+                    f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/beinent.txt", "r")
                     newtime=f1.read()
                     f1.close()
                     if time_of !=None:

@@ -37,6 +37,7 @@ des=[]
 sub=[]
 channel=[]
 
+now = datetime.datetime.now().strftime('%Y/%m/%d')
 def mbc():
     for url in urls:
         programme[:]=[]
@@ -66,7 +67,11 @@ def mbc():
             for elem, next_elem,en,nm in zip(times, times[1:] + [times[0]],end,channel):
                 if times[-1]==elem and times[0]==next_elem:
                     prog_start=datetime.datetime.fromtimestamp(int(elem)// 1000).strftime('%Y%m%d%H%M%S')
-                    prog_end=datetime.datetime.fromtimestamp(int(en)// 1000).strftime('%Y%m%d%H%M%S') 
+                    prog_end=datetime.datetime.fromtimestamp(int(en)// 1000).strftime('%Y%m%d%H%M%S')
+                    date_end =datetime.datetime.fromtimestamp(int(en)// 1000).strftime('%Y/%m/%d')
+                    day = datetime.datetime.strptime(date_end,'%Y/%m/%d')
+                    date_now = datetime.datetime.strptime(now,'%Y/%m/%d')
+                    nb_days = day - date_now 
                 else:
                     prog_start=datetime.datetime.fromtimestamp(int(elem)// 1000).strftime('%Y%m%d%H%M%S')
                     prog_end=datetime.datetime.fromtimestamp(int(next_elem)// 1000).strftime('%Y%m%d%H%M%S')
@@ -74,7 +79,8 @@ def mbc():
             for prog,title,descri,subt in zip(programme,titles,des,sub):
                 with io.open("/etc/epgimport/mbc.xml","a",encoding='UTF-8')as f:
                     f.write(prog+title+descri+subt)
-        print nm
+                    
+        print nm+' epg donwloaded For : '+str(nb_days.days)+' Days'
     
 if __name__ == "__main__":
     mbc()
