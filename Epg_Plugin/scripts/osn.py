@@ -12,6 +12,8 @@ fil.close()
 
 pyl=[]
 
+
+
 headers={
     'Accept': 'application/json, text/javascript, */*; q=0.01',
     'Accept-Encoding': 'gzip,deflate',
@@ -27,7 +29,7 @@ for x in ch.xm:
     with io.open("/etc/epgimport/osn.xml","a",encoding='UTF-8')as f:
         f.write(("\n"+'  <channel id="'+x+'">'+"\n"+'    <display-name lang="en">'+x.replace("_",' ')+'</display-name>'+"\n"+'  </channel>\r').decode('utf-8'))  
 
-for i in range(0,3):
+for i in range(0,2):
     import datetime
     from datetime import timedelta
     jour = datetime.date.today()
@@ -39,6 +41,7 @@ for i in range(0,3):
 
 pll=[]
 now = datetime.datetime.today().strftime('%Y-%m-%d')
+lock = threading.Semaphore(3)
 def oss(url):
     global aff,days,nam
     with requests.Session() as s:
@@ -46,7 +49,7 @@ def oss(url):
         ur= s.post('http://www.osn.com/CMSPages/TVScheduleWebService.asmx/GetTVChannelsProgramTimeTable',data=url,headers=headers)
         pg = ur.text.replace('<?xml version="1.0" encoding="utf-8"?>','').replace('<string xmlns="http://tempuri.org/">','').replace('</string>','')
         data = json.loads(pg)
-        sleep(0.05)
+        #sleep(0.05)
         for d in data:
             day=datetime.datetime.fromtimestamp(int(d['StartDateTime'].replace('/Date(','').replace(')/','')) // 1000).strftime('%Y-%m-%d')
             if now == day or day > now:
@@ -74,6 +77,7 @@ def oss(url):
                         f.write(ch)
         for _ in progressbar((pll*120),nam+" "+aff+" : ", 15):pass
         sleep(0.005)
+        lock.release()
 def progressbar(it, prefix="", size=20, file=sys.stdout):
     count = len(it)
     def show(j):
@@ -88,12 +92,14 @@ def progressbar(it, prefix="", size=20, file=sys.stdout):
     file.flush()
 
 def main():
-    threads = [threading.Thread(target=oss, args=(url,)) for url in pyl]
-    for thread in threads:
+    thread_pool = []
+    for url in pyl:
+        thread = threading.Thread(target=oss, args=(url,))
+        thread_pool.append(thread)
         thread.start()
-        sleep(1)
-    for thread in threads:
-        thread.join()
+        lock.acquire()
+    for thread in thread_pool:
+        thread.join()  
         
 if __name__=='__main__':
     main()

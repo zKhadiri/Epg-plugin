@@ -1,6 +1,6 @@
 #!/usr/bin/env python2.7
 # -*- coding: utf-8 -*-
-import requests,re,os,io
+import requests,re,os,io,sys
 from time import strftime
 from requests.adapters import HTTPAdapter
 
@@ -60,6 +60,7 @@ def snrt():
 
             for tt,p,d,c in zip(time_chan,prog,desc,cat):
                 print(tt+p+d+c)
+                sys.stdout.flush()
                 with io.open("/etc/epgimport/aloula.xml","a",encoding='UTF-8')as f:
                     f.write(tt+p+d+c)
     except:pass
@@ -95,6 +96,7 @@ def snrt():
 
             for tt,p,d,c in zip(time_chan,prog,desc,cat):
                 print(tt+p+d+c)
+                sys.stdout.flush()
                 with io.open("/etc/epgimport/aloula.xml","a",encoding='UTF-8')as f:
                     f.write(tt+p+d+c)
     except:pass
@@ -137,6 +139,7 @@ def snrt():
                         prog.append(4 * ' ' + '<title lang="ar">' +tit.replace('&#39;', "'")+ '</title>' + "\n")
                 for tt, p, d, c in zip(time_chan, prog, desc, cat):
                     print(tt + p + d + c)
+                    sys.stdout.flush()
                     with io.open("/etc/epgimport/aloula.xml", "a", encoding='UTF-8')as f:
                         f.write(tt + p + d + c)
     except:pass
@@ -169,6 +172,7 @@ def snrt():
                 time_chan.append(2 * ' ' + '<programme start="' + starttime + ' '+time_zone+'" stop="' + endtime + ' '+time_zone+'" channel="Medi1tv.ma">' + '\n')
             for tt, p, d, c in zip(time_chan, prog, desc, cat):
                 print(tt + p + d + c)
+                sys.stdout.flush()
                 with io.open("/etc/epgimport/aloula.xml", "a", encoding='UTF-8')as f:
                     f.write(tt + p + d + c)
     except:pass
@@ -207,6 +211,7 @@ def snrt():
 
             for tt, p, d, c in zip(time_chan, prog, desc, cat):
                 print(tt + p + d + c)
+                sys.stdout.flush()
                 with io.open("/etc/epgimport/aloula.xml", "a", encoding='UTF-8')as f:
                     f.write(tt + p + d + c)
     except:pass

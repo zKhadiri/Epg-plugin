@@ -1,6 +1,6 @@
 #!/usr/bin/env python2.7
 # -*- coding: utf-8 -*-
-import requests,re,io,os,ch
+import requests,re,io,os,ch,sys
 from time import sleep,strftime
 from requests.adapters import HTTPAdapter
 
@@ -86,6 +86,7 @@ def bein():
                     alls.append(p+tt+d+f)
                 dat = re.search(r'\d{4}-\d{2}-\d{2}',url)
                 print('Date'+' : '+dat.group())
+                sys.stdout.flush()
                 for pr,chc,chch in zip(alls,channels,channels[1:]+[channels[0]]):
                     if chc == chch: 
                         with io.open("/etc/epgimport/bein.xml","a",encoding='UTF-8')as fil:

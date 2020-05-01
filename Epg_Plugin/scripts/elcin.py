@@ -1,6 +1,6 @@
 #!/usr/bin/env python2.7
 # -*- coding: utf-8 -*-
-import requests,re,io,ch,os
+import requests,re,io,ch,os,sys
 from datetime import datetime,timedelta
 from time import sleep,strftime
 from requests.adapters import HTTPAdapter
@@ -115,6 +115,7 @@ def elci():
                     
             except IndexError:
                 cprint('No epg found or missing data for : '+''.join(channel_name))
+                sys.stdout.flush()
                 error = True
                 pass
                 
@@ -133,6 +134,7 @@ def elci():
                 pass
             else:
                 print chan
+                sys.stdout.flush()
     
 
 if __name__=='__main__':

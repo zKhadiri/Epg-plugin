@@ -1,6 +1,6 @@
 #!/usr/bin/env python2.7
 # -*- coding: utf-8 -*-
-import requests,json,io,re,ch,os
+import requests,json,io,re,ch,os,sys
 from datetime import datetime
 
 urls=[]
@@ -42,7 +42,7 @@ def dstv():
                     f.write(ch)
         dat = re.search(r'\d{4}-\d{2}-\d{2}',url)
         print('Date'+' : '+dat.group())    
-
+        sys.stdout.flush()
 if __name__=='__main__':
     dstv()
 

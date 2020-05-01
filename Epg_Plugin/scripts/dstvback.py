@@ -1,7 +1,7 @@
 #!/usr/bin/env python2.7
 # -*- coding: utf-8 -*-
 from time import sleep
-import os,io,re
+import os,io,re,sys
 
 
 with io.open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/dstvback.txt','r') as f:
@@ -10,7 +10,7 @@ with io.open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/dstvba
 path = '/etc/epgimport/dstv.xml'
 
 print "Downloading SuperSport epg guide\nPlease wait...."  
-
+sys.stdout.flush()
 os.system('wget -q "--no-check-certificate" http://github.com/ziko-ZR1/XML/blob/master/dstv.xml?raw=true -O '+path+'')
 
 sleep(1)
@@ -20,7 +20,7 @@ time_of = re.search(r'[+#-]+\d{4}',f.read())
 f.close()
 
 print "changing to your timezone please wait...."
-
+sys.stdout.flush()
 if os.path.exists(path):
     if time_of !=None:
         with io.open(path,encoding="utf-8") as f:

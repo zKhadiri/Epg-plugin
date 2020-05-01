@@ -1,6 +1,6 @@
 #!/usr/bin/env python2.7
 # -*- coding: utf-8 -*-
-import requests,json,io,os,re
+import requests,json,io,os,re,sys
 from datetime import datetime
 
 urls=[]
@@ -52,6 +52,7 @@ def mbc():
         if data ==[]:
             nf = re.findall(r'channel=(.*?)&',str(url))
             print 'No data found for : '+''.join(nf)
+            sys.stdout.flush()
         else:
             for d in data:
                 times.append(d['startTime'])
@@ -81,6 +82,7 @@ def mbc():
                     f.write(prog+title+descri+subt)
                     
         print nm+' epg donwloaded For : '+str(nb_days.days)+' Days'
+        sys.stdout.flush()
     
 if __name__ == "__main__":
     mbc()
