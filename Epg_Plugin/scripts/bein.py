@@ -50,7 +50,7 @@ def bein():
             channels = re.findall(r"data-img='mena_sports\/(.*?)\.svg",link.text)
             title = re.findall(r'<p\sclass=title>(.*?)<\/p>',link.text)
             formt = re.findall(r'<p\sclass=format>(.*?)<\/p>',link.text)
-            format_=[4*' '+'<category lang="ar">'+f.replace('2014','2020')+'</category>'+'\n'+'  </programme>'+'\n' for f in formt]
+            #format_=[4*' '+'<category lang="ar">'+f.replace('2014','2020')+'</category>'+'\n'+'  </programme>'+'\n' for f in formt]
             desc=[]
             title_chan=[]
             titles=[]
@@ -59,9 +59,9 @@ def bein():
                 title_chan.append(tit.replace('   ',' ').split('- ')[0])
                 spl = re.search(r'-\s(.*)',tit)
                 if spl !=None:
-                    desc.append(4*' '+'<desc lang="ar">'+spl.group().replace('- ','').replace('&','and')+'</desc>'+'\n')
+                    desc.append(4*' '+'<desc lang="ar">'+spl.group().replace('- ','').replace('&','and')+'</desc>\n  </programme>\r')
                 else:
-                    desc.append(4*' '+'<desc lang="ar">'+tit.replace('&','and')+'</desc>'+'\n')
+                    desc.append(4*' '+'<desc lang="ar">'+tit.replace('&','and')+'</desc>\n  </programme>\r')
 
             for title_,form_ in zip(title_chan,formt):
                 titles.append(4*' '+'<title lang="en">'+title_.replace('&','and')+' - '+form_.replace('2014','2020')+'</title>'+'\n')
@@ -82,8 +82,8 @@ def bein():
                     prog.append(2 * ' ' + '<programme start="' + starttime + ' '+time_zone+'" stop="' + endtime + ' '+time_zone+'" channel="'+chann_.replace('BS NBA','BS_NBA')+'">'+'\n')
     
             if len(title) !=0:
-                for tt,d,f,p in zip(titles,desc,format_,prog):
-                    alls.append(p+tt+d+f)
+                for tt,d,p in zip(titles,desc,prog):
+                    alls.append(p+tt+d)
                 dat = re.search(r'\d{4}-\d{2}-\d{2}',url)
                 print('Date'+' : '+dat.group())
                 sys.stdout.flush()

@@ -60,11 +60,11 @@ def mbc():
                 channel.append(d['channelLabel'])
                 titles.append('     <title lang="ar">'+d['showPageTitle'].replace('&','-')+'</title>\n')
                 if d['showPageGenreInArabic']==None or d['showPageAboutInArabic']==None:
-                    des.append('     <desc lang="ar">No description for this programme</desc>\n')
-                    sub.append('     <sub-title lang="ar">No data</sub-title>\n  </programme>\r')
+                    des.append('     <desc lang="ar">No description for this programme</desc>\n  </programme>\r')
+                    #sub.append('     <sub-title lang="ar">No data</sub-title>\n  </programme>\r')
                 else:
-                    des.append('     <desc lang="ar">'+d['showPageAboutInArabic'].replace('&','-')+'</desc>\n')
-                    sub.append('     <sub-title lang="ar">'+d['showPageGenreInArabic'].replace('&','-')+'</sub-title>\n  </programme>\r')
+                    des.append('     <desc lang="ar">'+d['showPageAboutInArabic'].replace('&','-')+'</desc>\n  </programme>\r')
+                    #sub.append('     <sub-title lang="ar">'+d['showPageGenreInArabic'].replace('&','-')+'</sub-title>\n  </programme>\r')
             for elem, next_elem,en,nm in zip(times, times[1:] + [times[0]],end,channel):
                 if times[-1]==elem and times[0]==next_elem:
                     prog_start=datetime.datetime.fromtimestamp(int(elem)// 1000).strftime('%Y%m%d%H%M%S')
@@ -77,9 +77,9 @@ def mbc():
                     prog_start=datetime.datetime.fromtimestamp(int(elem)// 1000).strftime('%Y%m%d%H%M%S')
                     prog_end=datetime.datetime.fromtimestamp(int(next_elem)// 1000).strftime('%Y%m%d%H%M%S')
                 programme.append(2 * ' ' + '<programme start="' + prog_start + ' '+time_zone+'" stop="' + prog_end + ' '+time_zone+'" channel="'+nm.replace(' ','').replace('-','')+'">\n')
-            for prog,title,descri,subt in zip(programme,titles,des,sub):
+            for prog,title,descri in zip(programme,titles,des):
                 with io.open("/etc/epgimport/mbc.xml","a",encoding='UTF-8')as f:
-                    f.write(prog+title+descri+subt)
+                    f.write(prog+title+descri)
                     
         print nm+' epg donwloaded For : '+str(nb_days.days)+' Days'
         sys.stdout.flush()

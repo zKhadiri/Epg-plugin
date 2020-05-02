@@ -57,7 +57,7 @@ def beinen():
             channels = re.findall(r"data-img='mena_entertaintment\/(.*?)\.",link.text)
             for tt_ in title:
                 titles.append(4*' '+'<title lang="en">'+tt_.replace('&','and')+'</title>'+'\n')
-                desc.append(4*' '+'<category lang="en">No data found</category>'+'\n')
+                #desc.append(4*' '+'<category lang="en">No data found</category>'+'\n')
             format_=[4*' '+'<desc lang="en">'+f+'</desc>'+"\n"+'  </programme>'+'\n' for f in formt]
             for time_,chann_ in zip(times,channels):
                 end ='05:59'
@@ -73,8 +73,8 @@ def beinen():
                     endtime = datetime.strptime(date.group() + ' ' + time_[1], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
                     prog.append(2 * ' ' + '<programme start="' + starttime + ' '+time_zone+'" stop="' + endtime + ' '+time_zone+'" channel="'+chann_.replace('Star_World_HD','Star_World_B').replace('Star_Movies_HD','Star_Movies_B').replace('Bloomberg','Bloomberg_B')+'">'+'\n')
             if len(title) !=0:
-                for ttt,d,f,p in zip(titles,desc,format_,prog):
-                    alls.append(p+ttt+d+f)
+                for ttt,f,p in zip(titles,format_,prog):
+                    alls.append(p+ttt+f)
                 dat = re.search(r'\d{4}-\d{2}-\d{2}',url)
                 print('Date'+' : '+dat.group())
                 sys.stdout.flush()

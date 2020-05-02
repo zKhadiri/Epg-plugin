@@ -38,46 +38,50 @@ for i in range(0,4):
     for c in channels:
         pyl.append({"newDate": week.strftime("%m/%d/%Y"), "selectedCountry": "SA", "channelCode": c, "isMobile": "false", "hoursForMobile": "24"})
             
-
+pyl.sort()
 pll=[]
 now = datetime.datetime.today().strftime('%Y-%m-%d')
-lock = threading.Semaphore(4)
-def oss(url):
-    global aff,days,nam
-    with requests.Session() as s:
-        s.mount('http://', HTTPAdapter(max_retries=10))
-        ur= s.post('http://www.osn.com/CMSPages/TVScheduleWebService.asmx/GetTVChannelsProgramTimeTable',data=url,headers=headers)
-        pg = ur.text.replace('<?xml version="1.0" encoding="utf-8"?>','').replace('<string xmlns="http://tempuri.org/">','').replace('</string>','')
-        data = json.loads(pg)
-        #sleep(0.05)
-        for d in data:
-            day=datetime.datetime.fromtimestamp(int(d['StartDateTime'].replace('/Date(','').replace(')/','')) // 1000).strftime('%Y-%m-%d')
-            if now == day or day > now:
-                payload = {"prgmEPGUNIQID": d['EPGUNIQID'], "countryCode": "SA"}
-                pll.append(d['EPGUNIQID'])
-                ch=''
-                with requests.Session() as session:
-                    session.mount('http://', HTTPAdapter(max_retries=10))
-                    uri= session.post('http://www.osn.com/CMSPages/TVScheduleWebService.asmx/GetProgramDetails',data=payload,headers=headers)
-                    pag = uri.text.replace('<?xml version="1.0" encoding="utf-8"?>','').replace('<string xmlns="http://tempuri.org/">','').replace('</string>','')
-                    data= json.loads(pag)
-                    nm=data[0][u'ChannelNameEnglish'].replace(' ','_').replace('Crime_&_Investigation_Network','Crime_And_Investigation_Network')
-                    nam=data[0][u'ChannelNameEnglish']
-                    days=datetime.datetime.fromtimestamp(int(data[0][u'StartDateTime'].replace("/Date(",'').replace(")/",'')) // 1000).strftime('%Y%m%d%H%M%S')
-                    days_end=datetime.datetime.fromtimestamp(int(data[0][u'EndDateTime'].replace("/Date(",'').replace(")/",'')) // 1000).strftime('%Y%m%d%H%M%S')
-                    aff =datetime.datetime.fromtimestamp(int(data[0][u'EndDateTime'].replace("/Date(",'').replace(")/",'')) // 1000).strftime('%Y-%m-%d')
-                    ch+= 2 * ' ' + '<programme start="' + days + ' '+time_zone+'" stop="' + days_end + ' '+time_zone+'" channel="'+nm+'">'+'\n'
-                    if url['channelCode'] =='SER' or url['channelCode'] =='YAW' or url['channelCode'] =='SAF' or url['channelCode'] =='CM1' or url['channelCode'] =='CM2' or url['channelCode'] =='FAN' or url['channelCode'] =='OYH' or url['channelCode'] =='OYA' or url['channelCode'] =='OYC':
-                        ch+='     <title lang="en">'+data[0][u'Arab_Title']+'</title>'+"\n"
-                    else:
-                        ch+='     <title lang="en">'+data[0][u'Title'].replace('&','and')+'</title>'+"\n"
-                    ch+='     <desc lang="ar">'+data[0][u'Arab_Synopsis']+'</desc>'+"\n"
-                    ch+='     <sub-title lang="ar">'+data[0][u'GenreArabicName']+'</sub-title>'+"\n"+'  </programme>'+"\n"
-                    with io.open("/etc/epgimport/osn.xml","a",encoding='UTF-8')as f:
-                        f.write(ch)
-        for _ in progressbar((pll*120),nam+" "+aff+" : ", 15):pass
-        sleep(0.005)
-        lock.release()
+
+def oss():
+    for url in pyl:
+        global aff,days,nam
+        with requests.Session() as s:
+            s.mount('http://', HTTPAdapter(max_retries=10))
+            ur= s.post('http://www.osn.com/CMSPages/TVScheduleWebService.asmx/GetTVChannelsProgramTimeTable',data=url,headers=headers)
+            pg = ur.text.replace('<?xml version="1.0" encoding="utf-8"?>','').replace('<string xmlns="http://tempuri.org/">','').replace('</string>','')
+            data = json.loads(pg)
+            #sleep(0.05)
+            for d in data:
+                day=datetime.datetime.fromtimestamp(int(d['StartDateTime'].replace('/Date(','').replace(')/','')) // 1000).strftime('%Y-%m-%d')
+                if now == day or day > now:
+                    payload = {"prgmEPGUNIQID": d['EPGUNIQID'], "countryCode": "SA"}
+                    pll.append(d['EPGUNIQID'])
+                    ch=''
+                    with requests.Session() as session:
+                        session.mount('http://', HTTPAdapter(max_retries=10))
+                        uri= session.post('http://www.osn.com/CMSPages/TVScheduleWebService.asmx/GetProgramDetails',data=payload,headers=headers)
+                        pag = uri.text.replace('<?xml version="1.0" encoding="utf-8"?>','').replace('<string xmlns="http://tempuri.org/">','').replace('</string>','')
+                        data= json.loads(pag)
+                        nm=data[0][u'ChannelNameEnglish'].replace(' ','_')
+                        nam=data[0][u'ChannelNameEnglish']
+                        days=datetime.datetime.fromtimestamp(int(data[0][u'StartDateTime'].replace("/Date(",'').replace(")/",'')) // 1000).strftime('%Y%m%d%H%M%S')
+                        days_end=datetime.datetime.fromtimestamp(int(data[0][u'EndDateTime'].replace("/Date(",'').replace(")/",'')) // 1000).strftime('%Y%m%d%H%M%S')
+                        aff =datetime.datetime.fromtimestamp(int(data[0][u'EndDateTime'].replace("/Date(",'').replace(")/",'')) // 1000).strftime('%Y-%m-%d')
+                        ch+= 2 * ' ' + '<programme start="' + days + ' '+time_zone+'" stop="' + days_end + ' '+time_zone+'" channel="'+nm+'">'+'\n'
+                        if url['channelCode'] =='SER' or url['channelCode'] =='YAW' or url['channelCode'] =='SAF' or url['channelCode'] =='CM1' or url['channelCode'] =='CM2' or url['channelCode'] =='FAN' or url['channelCode'] =='OYH' or url['channelCode'] =='OYA' or url['channelCode'] =='OYC':
+                            ch+='     <title lang="en">'+data[0][u'Arab_Title']+'</title>'+"\n"
+                        else:
+                            ch+='     <title lang="en">'+data[0][u'Title'].replace('&','and')+'</title>'+"\n"
+                        if data[0][u'Arab_Synopsis']==u'\r\n':
+                            ch+='     <desc lang="ar">'+data[0][u'GenreArabicName']+'</desc>\n  </programme>\r'
+                        else:
+                            ch+='     <desc lang="ar">'+data[0][u'Arab_Synopsis']+'</desc>\n  </programme>\r' 
+                        #ch+='     <sub-title lang="ar">'+data[0][u'GenreArabicName']+'</sub-title>'+"\n"+'  </programme>'+"\n"
+                        with io.open("/etc/epgimport/osn.xml","a",encoding='UTF-8')as f:
+                            f.write(ch)
+            for _ in progressbar((pll*120),nam+" "+aff+" : ", 15):pass
+            #sleep(0.005)
+        
 def progressbar(it, prefix="", size=20, file=sys.stdout):
     count = len(it)
     def show(j):
@@ -92,14 +96,7 @@ def progressbar(it, prefix="", size=20, file=sys.stdout):
     file.flush()
 
 def main():
-    thread_pool = []
-    for url in pyl:
-        thread = threading.Thread(target=oss, args=(url,))
-        thread_pool.append(thread)
-        thread.start()
-        lock.acquire()
-    for thread in thread_pool:
-        thread.join()  
+    oss()
         
 if __name__=='__main__':
     main()
