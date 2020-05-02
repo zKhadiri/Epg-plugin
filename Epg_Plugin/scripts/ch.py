@@ -5,7 +5,7 @@ net=['beincinema','MoviesHD1','MoviesHD2','MoviesHD3','MoviesHD4','BoxOffice_HD1
 ,'AljazeeraDocumentary','TRTWorld','Euronews','CNNHD','Bloomberg_B','HLN','DTX','DLife','FineLiving']
 chann=['SportsGlobalHD','News_ar','HD1','HD2','HD3','HD4','HD5','HD6','HD7','HD8','HD9','HD10','SportsHD11','SportsHD12','SportsHD13','SportsHD14','SportsHD15','SportsHD16','SportsHD17','4K','BS_NBA']
 xm=['OSN_On_Demand_HD','OSN_Ya_Hala_Al_Oula','OSN_Ya_Hala']
-elc_channels=['AlhayatDrama','Mehwar','Kuwait','JordanTV','Watania2','RotanaKids','LanaPlusTV','MBC3','Series+2','Zeealwan','AlKaheraWalNasTV','DubaiOne',"DubaiTV","AlhayatTV","AlNaharDrama","Cima","CBCDrama","NileDrama"
+elc_channels=['AlhayatDrama','Mehwar','Kuwait','JordanTV','Watania2','RotanaKids','LanaPlusTV','MBC3','Zeealwan','AlKaheraWalNasTV','DubaiOne',"DubaiTV","AlhayatTV","AlNaharDrama","Cima","CBCDrama","NileDrama"
 ,"Zeeaflam","SadaElBaladDrama","CBC",
 "SamaDubai","AlNaharTV",
 "NileComedy","AlraiTV","NileLife","SadaElBalad","DMCDRAMA","ONE","Aloula","ONDrama","DubaiZaman",

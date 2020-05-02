@@ -131,11 +131,10 @@ class EPGIConfig(Screen):
         list.append(("Bein entertainment EPG", "3"))
         list.append(("SNRT EPG", "4"))
         list.append(("ELCINEMA WEBSITE EPG", "5"))
-        list.append(("OSN BACKUP EPG", "6"))
-        list.append(("MBC.NET", "7"))
-        list.append(("DSTV.ZA", "8"))
-        list.append(("SuperSport.ZA BACKUP", "9"))
-        list.append(("Osnplay BACKUP", "10"))
+        list.append(("MBC.NET", "6"))
+        list.append(("DSTV.ZA", "7"))
+        list.append(("SuperSport.ZA BACKUP", "8"))
+        list.append(("Osnplay BACKUP", "9"))
         Screen.__init__(self, session)
         self.skinName = ["EPGIConfig"]
         self["status"] = Label()
@@ -252,23 +251,19 @@ class EPGIConfig(Screen):
             self["status"].setText("Current elcinema time zone  : "+f1.read().strip())
             f1.close()
         elif returnValue =="6":
-            f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/osnback.txt", "r")
-            self["status"].setText("Current osn backup time zone  : "+f1.read().strip())
-            f1.close()
-        elif returnValue =="7":
             f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/mbc.txt", "r")
             self["status"].setText("Current mbc time zone  : "+f1.read().strip())
             f1.close()
-        elif returnValue =="8":
+        elif returnValue =="7":
             f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/dstv.txt", "r")
             self["status"].setText("Current dstv time zone  : "+f1.read().strip())
             f1.close()
-        elif returnValue =="9":
+        elif returnValue =="8":
             f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/dstvback.txt", "r")
             self["status"].setText("Current SuperSport time zone  : "+f1.read().strip())
             f1.close()
             
-        elif returnValue =="10":
+        elif returnValue =="9":
             f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/osnback.txt", "r")
             self["status"].setText("Current Osnplay time zone  : "+f1.read().strip())
             f1.close()
@@ -375,26 +370,9 @@ class EPGIConfig(Screen):
                 else:
                     self.session.open(MessageBox,_("elcinema.xml not found in path"), MessageBox.TYPE_INFO,timeout=10)
                     
-            if returnValue == "6":
-                if fileExists("/etc/epgimport/osn.xml"):
-                    f = open('/etc/epgimport/osn.xml','r')
-                    time_of = re.search(r'[+#-]+\d{4}',f.read())
-                    f.close()
-                    f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/osnback.txt", "r")
-                    newtime=f1.read()
-                    f1.close()
-                    if time_of !=None:
-                        with io.open("/etc/epgimport/osn.xml",encoding="utf-8") as f:
-                            newText=f.read().decode('utf-8').replace(time_of.group(), newtime)
-                            with io.open("/etc/epgimport/osn.xml", "w",encoding="utf-8") as f:
-                                f.write((newText).decode('utf-8'))
-                                self.session.open(MessageBox,_("current osn backup time "+time_of.group()+" replaced by "+newtime), MessageBox.TYPE_INFO,timeout=10)
-                    else:
-                        self.session.open(MessageBox,_("File is empty"), MessageBox.TYPE_INFO,timeout=10)
-                else:
-                    self.session.open(MessageBox,_("osn.xml not found in path"), MessageBox.TYPE_INFO,timeout=10)
+           
                     
-            if returnValue == "7":
+            if returnValue == "6":
                 if fileExists("/etc/epgimport/mbc.xml"):
                     f = open('/etc/epgimport/mbc.xml','r')
                     time_of = re.search(r'[+#-]+\d{4}',f.read())
@@ -413,7 +391,7 @@ class EPGIConfig(Screen):
                 else:
                     self.session.open(MessageBox,_("mbc.xml not found in path"), MessageBox.TYPE_INFO,timeout=10)
                     
-            if returnValue == "8":
+            if returnValue == "7":
                 if fileExists("/etc/epgimport/dstv.xml"):
                     f = open('/etc/epgimport/dstv.xml','r')
                     time_of = re.search(r'[+#-]+\d{4}',f.read())
@@ -432,7 +410,7 @@ class EPGIConfig(Screen):
                 else:
                     self.session.open(MessageBox,_("dstv.xml not found in path"), MessageBox.TYPE_INFO,timeout=10) 
                     
-            if returnValue == "9":
+            if returnValue == "8":
                 if fileExists("/etc/epgimport/dstv.xml"):
                     f = open('/etc/epgimport/dstv.xml','r')
                     time_of = re.search(r'[+#-]+\d{4}',f.read())
@@ -451,7 +429,7 @@ class EPGIConfig(Screen):
                 else:
                     self.session.open(MessageBox,_("dstv.xml not found in path"), MessageBox.TYPE_INFO,timeout=10)
                     
-            if returnValue == "10":
+            if returnValue == "9":
                 if fileExists("/etc/epgimport/osnplay.xml"):
                     f = open('/etc/epgimport/osnplay.xml','r')
                     time_of = re.search(r'[+#-]+\d{4}',f.read())
@@ -521,16 +499,8 @@ class EPGIConfig(Screen):
                     f1.write(new_time.decode('utf-8'))
                     self.session.open(MessageBox,_("time changed with succes "+new_time), MessageBox.TYPE_INFO,timeout=10)
                     self["status"].setText("Current elcinema time zone  : "+new_time)
+            
             elif returnValue == "6":
-                f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
-                new_time = f.read().strip()
-                f.close()
-                with io.open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/osnback.txt","w",encoding='UTF-8')as f1:
-                    f1.write(new_time.decode('utf-8'))
-                    self.session.open(MessageBox,_("time changed with succes "+new_time), MessageBox.TYPE_INFO,timeout=10)
-                    self["status"].setText("Current osn backup time zone  : "+new_time)
-                    
-            elif returnValue == "7":
                 f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
                 new_time = f.read().strip()
                 f.close()
@@ -539,7 +509,7 @@ class EPGIConfig(Screen):
                     self.session.open(MessageBox,_("time changed with succes "+new_time), MessageBox.TYPE_INFO,timeout=10)
                     self["status"].setText("Current mbc time zone  : "+new_time)
                     
-            elif returnValue == "8":
+            elif returnValue == "7":
                 f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
                 new_time = f.read().strip()
                 f.close()
@@ -548,7 +518,7 @@ class EPGIConfig(Screen):
                     self.session.open(MessageBox,_("time changed with succes "+new_time), MessageBox.TYPE_INFO,timeout=10)
                     self["status"].setText("Current dstv time zone  : "+new_time)
 
-            elif returnValue == "9":
+            elif returnValue == "8":
                 f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
                 new_time = f.read().strip()
                 f.close()
@@ -557,7 +527,7 @@ class EPGIConfig(Screen):
                     self.session.open(MessageBox,_("time changed with succes "+new_time), MessageBox.TYPE_INFO,timeout=10)
                     self["status"].setText("Current SuperSport time zone  : "+new_time)
                     
-            elif returnValue == "10":
+            elif returnValue == "9":
                 f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
                 new_time = f.read().strip()
                 f.close()
@@ -608,17 +578,14 @@ class EPGIConfig(Screen):
                     self.session.open(Console2,_("ELCINEMA EPG") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/elcin.py"], closeOnSuccess=False)
                     cprint("Downloading ELECINEMA EPG")
                 elif returnValue == "6":
-                    self.session.open(Console2,_("OSN BACKUP EPG") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/osnbackup.py"], closeOnSuccess=False)
-                    cprint("Downloading OSN BACKUP EPG")
-                elif returnValue == "7":
                     self.session.open(Console2,_("MBC EPG") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/mbc.py"], closeOnSuccess=False)
                     cprint("Downloading MBC EPG")
-                elif returnValue == "8":
+                elif returnValue == "7":
                     self.session.open(Console2,_("DSTV EPG") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/dstv.py"], closeOnSuccess=False)
                     cprint("Downloading DSTV EPG")
-                elif returnValue == "9":
+                elif returnValue == "8":
                     self.session.open(Console2,_("SuperSport EPG") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/dstvback.py"], closeOnSuccess=False)
                     cprint("Downloading SuperSport EPG")
-                elif returnValue == "10":
+                elif returnValue == "9":
                     self.session.open(Console2,_("Osnplay EPG") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/osnplay.py"], closeOnSuccess=False)
                     cprint("Downloading Osnplay EPG")
