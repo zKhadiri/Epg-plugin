@@ -25,8 +25,8 @@ def main(session, **kwargs):
   
 def Plugins(**kwargs):
 	return PluginDescriptor(
-			name="EPG BY ZIKO",
-			description="EPG GRABBER BY ZIKO",
+			name="EPG GRABBER",
+			description="EPG WEB GRABBER BY ZIKO",
 			where = PluginDescriptor.WHERE_PLUGINMENU,
 			icon="epg.png",
 			fnc=main)
