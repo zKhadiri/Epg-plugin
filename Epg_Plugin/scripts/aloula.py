@@ -220,19 +220,27 @@ def snrt():
         
     if not os.path.exists('/etc/epgimport/custom.channels.xml'):
         print('Downloading custom.channels config')
-        os.system('wget -q "--no-check-certificate" https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/custom.channels.xml?raw=true -O /etc/epgimport/custom.channels.xml')
+        custom_channels=requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/custom.channels.xml?raw=true')
+        with io.open('/etc/epgimport/custom.channels.xml','w',encoding="utf-8") as f:
+            f.write(custom_channels)
         
     if not os.path.exists('/etc/epgimport/custom.sources.xml'):
         print('Downloading custom sources config')
-        os.system('wget -q "--no-check-certificate" https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/custom.sources.xml?raw=true -O /etc/epgimport/custom.sources.xml')
+        custom_source=requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/custom.sources.xml?raw=true')
+        with io.open('/etc/epgimport/custom.sources.xml','w',encoding="utf-8") as f:
+            f.write(custom_source)
 
     if not os.path.exists('/etc/epgimport/elcinema.channels.xml'):
         print('Downloading elcinema channels config')
-        os.system('wget -q "--no-check-certificate" https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/elcinema.channels.xml?raw=true -O /etc/epgimport/elcinema.channels.xml')
+        elcinema_channels=requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/elcinema.channels.xml?raw=true')
+        with io.open('/etc/epgimport/elcinema.channels.xml','w',encoding="utf-8") as f:
+            f.write(elcinema_channels)
 
     if not os.path.exists('/etc/epgimport/dstv.channels.xml'):
         print('Downloading dstv channels config')
-        os.system('wget -q "--no-check-certificate" https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/dstv.channels.xml?raw=true -O /etc/epgimport/dstv.channels.xml')
+        dstv_channels=requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/dstv.channels.xml?raw=true')
+        with io.open('/etc/epgimport/dstv.channels.xml','w',encoding="utf-8") as f:
+            f.write(dstv_channels)
 
 if __name__ == '__main__':
     snrt()

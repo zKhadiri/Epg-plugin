@@ -26,7 +26,6 @@ days=[]
 times=[]
 titles=[]
 des=[]
-cat=[]
 prog=[]
 ends=[]
 with io.open("/etc/epgimport/elcinema.xml","w",encoding='UTF-8')as f:
@@ -55,7 +54,6 @@ def elci():
             times[:]=[]
             titles[:]=[]
             des[:]=[]
-            cat[:]=[]
             prog[:]=[]
             ends[:]=[]
             for ti,en in zip(time,end_time):
@@ -70,13 +68,8 @@ def elci():
             url_ar = s.get('http://elcinema.com/ar/tvguide/'+nb+'/',headers=headers)
             first=re.findall(r'<li>(.*?)<a\shref=\'#\'\sid=\'read-more\'>',url_ar.text)
             last=re.findall(r"<span class='hide'>[^\n]+",url_ar.text)
-            desc=re.findall(r'<\/a><\/li>\s+<li>\s+\s+(.*\s+.*?)\s+<\/li>\s+<li>',url_ar.text)
-            descc = [re.sub(' +',' ',d).replace('\n','') for d in desc]
             for f,l in zip(first,last):
                 des.append(f+l.replace("<span class='hide'>",'').replace('</span></li>',''))
-                
-            for dess in descc:
-                cat.append(dess)  
                 
             title_l = re.findall(r'<a\shref=\"\/work\/\d+\/\">(.*?)<\/a><\/li',url_ar.text)
 
@@ -91,9 +84,8 @@ def elci():
             try:
                 for index, element in enumerate(titles):
                     if element not in title_l:
-                        des.insert(index,titles[index])
-                        cat.insert(index,titles[index])
-                        
+                        des.insert(index,"No description Found for this programme")
+
                 for elem,next_elem,td1,td2 in zip(times,ends,days,days[1:]+[days[0]]):
                     chnm = re.sub(' +', '', ''.join(channel_name)).replace(u'\xa0 Channel', '').replace('Channel', '')
                     if days[-1]==td1 and days[1]==td2:
@@ -119,13 +111,13 @@ def elci():
                 error = True
                 pass
                 
-            for p,tt,d,c in zip(prog,titles,des,cat):
+            for p,tt,d in zip(prog,titles,des):
                 space=re.sub(' +', ' ', d).replace('\r','').replace('\n','').replace('&amp;','and').replace('(','').replace(')','').replace('&#39;',"'").replace('&quot;','"')
                 ch='' 
                 ch+=p
                 ch+='     <title lang="ar">'+tt.replace('&#39;',"'").replace('&quot;','"').replace('&amp;','and')+'</title>\n'
-                ch+='     <desc lang="ar">'+space+'</desc>\n'
-                ch+='     <category lang="ar">'+c+'</category>\n'+'  </programme>\n'
+                ch+='     <desc lang="ar">'+space+'</desc>\n  </programme>\r'
+                #ch+='     <category lang="ar">'+c+'</category>\n'+'  </programme>\n'
                 with io.open("/etc/epgimport/elcinema.xml","a",encoding='UTF-8')as f:
                     f.write(ch)
             
@@ -147,13 +139,24 @@ with io.open("/etc/epgimport/elcinema.xml", "a",encoding="utf-8") as f:
 
 if not os.path.exists('/etc/epgimport/custom.channels.xml'):
     print('Downloading custom.channels config')
-    os.system('wget -q "--no-check-certificate" https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/custom.channels.xml?raw=true -O /etc/epgimport/custom.channels.xml')
+    custom_channels=requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/custom.channels.xml?raw=true')
+    with io.open('/etc/epgimport/custom.channels.xml','w',encoding="utf-8") as f:
+        f.write(custom_channels)
+        
 if not os.path.exists('/etc/epgimport/custom.sources.xml'):
     print('Downloading custom sources config')
-    os.system('wget -q "--no-check-certificate" https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/custom.sources.xml?raw=true -O /etc/epgimport/custom.sources.xml')
+    custom_source=requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/custom.sources.xml?raw=true')
+    with io.open('/etc/epgimport/custom.sources.xml','w',encoding="utf-8") as f:
+        f.write(custom_source)
+
 if not os.path.exists('/etc/epgimport/elcinema.channels.xml'):
     print('Downloading elcinema channels config')
-    os.system('wget -q "--no-check-certificate" https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/elcinema.channels.xml?raw=true -O /etc/epgimport/elcinema.channels.xml')
+    elcinema_channels=requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/elcinema.channels.xml?raw=true')
+    with io.open('/etc/epgimport/elcinema.channels.xml','w',encoding="utf-8") as f:
+        f.write(elcinema_channels)
+
 if not os.path.exists('/etc/epgimport/dstv.channels.xml'):
     print('Downloading dstv channels config')
-    os.system('wget -q "--no-check-certificate" https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/dstv.channels.xml?raw=true -O /etc/epgimport/dstv.channels.xml')
+    dstv_channels=requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/dstv.channels.xml?raw=true')
+    with io.open('/etc/epgimport/dstv.channels.xml','w',encoding="utf-8") as f:
+        f.write(dstv_channels)
