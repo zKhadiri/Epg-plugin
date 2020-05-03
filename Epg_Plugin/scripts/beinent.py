@@ -110,24 +110,24 @@ if not os.path.exists('/etc/epgimport/custom.channels.xml'):
     print('Downloading custom.channels config')
     custom_channels=requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/custom.channels.xml?raw=true')
     with io.open('/etc/epgimport/custom.channels.xml','w',encoding="utf-8") as f:
-        f.write(custom_channels)
+        f.write(custom_channels.text)
         
 if not os.path.exists('/etc/epgimport/custom.sources.xml'):
     print('Downloading custom sources config')
     custom_source=requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/custom.sources.xml?raw=true')
     with io.open('/etc/epgimport/custom.sources.xml','w',encoding="utf-8") as f:
-        f.write(custom_source)
+        f.write(custom_source.text)
 
 if not os.path.exists('/etc/epgimport/elcinema.channels.xml'):
     print('Downloading elcinema channels config')
     elcinema_channels=requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/elcinema.channels.xml?raw=true')
     with io.open('/etc/epgimport/elcinema.channels.xml','w',encoding="utf-8") as f:
-        f.write(elcinema_channels)
+        f.write(elcinema_channels.text)
 
 if not os.path.exists('/etc/epgimport/dstv.channels.xml'):
     print('Downloading dstv channels config')
     dstv_channels=requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/dstv.channels.xml?raw=true')
     with io.open('/etc/epgimport/dstv.channels.xml','w',encoding="utf-8") as f:
-        f.write(dstv_channels)
+        f.write(dstv_channels.text)
         
 print("**************FINISHED******************")
