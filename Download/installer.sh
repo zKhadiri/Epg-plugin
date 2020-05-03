@@ -2,8 +2,8 @@
 ##setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=5.9
-description=What_is_NEW:\n'[Wget and dreamOS images problems fix]'
+version=6.0
+description=What_is_NEW:\n'[Times missing files fix]'
 ##############################################################
 # No need to remove old version
 #rm -rf /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin
