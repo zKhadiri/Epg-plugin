@@ -72,6 +72,7 @@ tar -xzf /tmp/Epg_Plugin-"$version".tar.gz -C /
 rm -f /tmp/Epg_Plugin-"$version".tar.gz
 if [ ! -r $TIMESFolder ]; then
 wget -q "--no-check-certificate" "https://github.com/ziko-ZR1/Epg-plugin/blob/master/Download/times.tar.gz?raw=true" -O "/tmp/times.tar.gz"
+echo " Downloading/Insallling timers files ......"
 tar -xzf /tmp/times.tar.gz -C /
 rm -f /tmp/times.tar.gz
 fi
