@@ -3,11 +3,13 @@
 from time import sleep
 import os,io,re,sys
 
-
-with io.open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/osnback.txt','r') as f:
-    time_zone = f.read().strip()
-    
 path = '/etc/epgimport/osnplay.xml'
+
+try:
+    with io.open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/osnback.txt','r') as f:
+        time_zone = f.read().strip()
+except:
+    print "osnplay.xml missing on %s" & path
 
 print "Downloading OsnPlay epg guide\nPlease wait...."  
 sys.stdout.flush()
