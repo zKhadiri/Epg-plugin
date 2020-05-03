@@ -2,13 +2,16 @@
 ##setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=5.7
-description=What_is_NEW:\n'[OSN DREAM OS FIX]'
+version=5.8
+description=What_is_NEW:\n'[Dont remove Timers files config]'
 ##############################################################
-# remove old version
-rm -rf /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin
+# No need to remove old version
+#rm -rf /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin
+
 rm -f /tmp/*epgimport*
 rm -f /tmp/*Epg_Plugin*
+
+TIMESFolder=/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times
 
 # check depends packges
 if [ -f /etc/apt/apt.conf ] ; then
@@ -67,6 +70,11 @@ echo " Downloading/Insallling Epg_Plugin plugin ......"
 wget -q "--no-check-certificate" "https://github.com/ziko-ZR1/Epg-plugin/blob/master/Download/Epg_Plugin-"$version".tar.gz?raw=true" -O "/tmp/Epg_Plugin-"$version".tar.gz"
 tar -xzf /tmp/Epg_Plugin-"$version".tar.gz -C /
 rm -f /tmp/Epg_Plugin-"$version".tar.gz
+if [ ! -r $TIMESFolder ]; then
+wget -q "--no-check-certificate" "https://github.com/ziko-ZR1/Epg-plugin/blob/master/Download/times.tar.gz?raw=true" -O "/tmp/times.tar.gz"
+tar -xzf /tmp/times.tar.gz -C /
+rm -f /tmp/times.tar.gz
+fi
 echo ""
 echo "#########################################################"
 echo "#          Epg_Plugin INSTALLED SUCCESSFULLY            #"
