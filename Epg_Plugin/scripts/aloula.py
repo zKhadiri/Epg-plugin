@@ -240,7 +240,7 @@ def snrt():
         print('Downloading dstv channels config')
         dstv_channels=requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/dstv.channels.xml?raw=true')
         with io.open('/etc/epgimport/dstv.channels.xml','w',encoding="utf-8") as f:
-        f.write(dstv_channels.text)
+            f.write(dstv_channels.text)
 
 if __name__ == '__main__':
     snrt()

@@ -44,12 +44,12 @@ if os.path.exists('/var/lib/dpkg/status'):
     print 'Dream os image found\nSorting data please wait.....'
     sys.stdout.flush()
     import xml.etree.ElementTree as ET
-    tree = ET.parse('/etc/epgimport/beinent.xml')
+    tree = ET.parse('/etc/epgimport/dstv.xml')
     data = tree.getroot()
     els = data.findall("*[@channel]")
     new_els = sorted(els, key=lambda el: (el.tag, el.attrib['channel']))
     data[:] = new_els
-    tree.write('/etc/epgimport/beinent.xml', xml_declaration=True, encoding='utf-8')
+    tree.write('/etc/epgimport/dstv.xml', xml_declaration=True, encoding='utf-8')
 
 if not os.path.exists('/etc/epgimport/custom.channels.xml'):
     print('Downloading custom.channels config')

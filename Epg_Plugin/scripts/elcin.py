@@ -5,9 +5,6 @@ from datetime import datetime,timedelta
 from time import sleep,strftime
 from requests.adapters import HTTPAdapter
 
-
-banned=['00:00','00:45','00:30','01:00','01:45','01:30','02:45','02:30','03:00','03:30','03:45','05:00']
-
 fil = open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/elcinema.txt','r')
 time_zone = fil.read().strip()
 fil.close()
@@ -22,12 +19,13 @@ ENDC = '\033[m'
 def cprint(text):                                                               
     print REDC+text+ENDC 
 
-days=[]
 times=[]
 titles=[]
 des=[]
 prog=[]
 ends=[]
+starts=[]
+prog_end=[]
 with io.open("/etc/epgimport/elcinema.xml","w",encoding='UTF-8')as f:
     f.write(('<?xml version="1.0" encoding="UTF-8"?>'+"\n"+'<tv generator-info-name="By ZR1">').decode('utf-8'))
 
@@ -35,36 +33,41 @@ for x in ch.elc_channels:
     with io.open("/etc/epgimport/elcinema.xml","a",encoding='UTF-8')as f:
         f.write(("\n"+'  <channel id="'+x+'">'+"\n"+'    <display-name lang="en">'+x.replace("_",' ')+'</display-name>'+"\n"+'  </channel>\r').decode('utf-8'))
 
-now = datetime.today().year
+today = datetime.now().strftime('%Y')
 nb_channel=['1138','1145','1310','1314','1334','1356','1342','1241','1261','1174','1173','1169','1137','1223','1176','1199','1156','1262','1227','1198','1177','1193','1158',
             '1170','1159','1226','1292','1203','1101','1134','1283','1188','1260','1290','1204','1269','1280',
             '1300','1298','1297','1301','1299','1296','1304','1317','1302','1312','1321','1338','1339','1353','1350','1355']
-
-
 def elci():
     for nb in nb_channel:
         with requests.Session() as s:
             s.mount('http://', HTTPAdapter(max_retries=10))
             url = s.get('http://elcinema.com/en/tvguide/'+nb+'/',headers=headers)
-            time_d = re.findall(r'\d{2}:\d{2}\s+\w\w|<div\sclass=\" dates\">\s+(.*)',url.text)
             time = re.findall(r'\d{2}:\d{2}\s+\w\w',url.text)
+            dates=re.findall(r'class=" dates">(\s+.*\s+)<\/div>',url.text)
             channel_name=re.findall(r'<li>(.*?)<\/li>\s+<li\sclass=\"localization\">',url.text)
             end_time=re.findall(r'\[\d+\sminutes]',url.text)
-            days[:]=[]
             times[:]=[]
             titles[:]=[]
             des[:]=[]
             prog[:]=[]
             ends[:]=[]
+            starts[:]=[]
+            prog_end[:]=[]
             for ti,en in zip(time,end_time):
                 start=datetime.strptime(ti,'%I:%M %p')
                 end = int(en.replace('[','').replace(' minutes]',''))
                 times.append(start.strftime('%H:%M'))
-                ends.append((start + timedelta(minutes=end)).strftime('%H:%M'))
-            for i, val in enumerate(time_d):
-                if not val:
-                    time_d[i] = time_d[i-1]
-                    days.append(time_d[i])
+                ends.append(end)
+            
+            toda = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0) 
+            last_hr = 0
+            for d in times:
+                h, m = map(int, d.split(":"))
+                if last_hr > h:
+                    toda = toda + timedelta(days=1)
+                last_hr = h
+                starts.append(toda + timedelta(hours=h, minutes=m))
+                
             url_ar = s.get('http://elcinema.com/ar/tvguide/'+nb+'/',headers=headers)
             first=re.findall(r'<li>(.*?)<a\shref=\'#\'\sid=\'read-more\'>',url_ar.text)
             last=re.findall(r"<span class='hide'>[^\n]+",url_ar.text)
@@ -75,35 +78,31 @@ def elci():
 
             mt2 = re.findall(r'<a\shref=\"\/work\/\d+\/\">(.*?)<\/a><\/li|columns small-7 large-11\">\s+<ul class=\"unstyled no-margin\">\s+<li>(.*?)<\/li>',url_ar.text)
             for m in mt2:
-                if m[0]=='':
+                if m[0]=='' and m[1]=='':
+                    titles.append('Unknown program')
+                elif m[0]=='':
                     titles.append(m[1])
                 else:
                     titles.append(m[0])
-
             error = False
             try:
                 for index, element in enumerate(titles):
                     if element not in title_l:
-                        des.insert(index,"No description Found for this programme")
+                        des.insert(index,"No description Found for this program")
 
-                for elem,next_elem,td1,td2 in zip(times,ends,days,days[1:]+[days[0]]):
+                b = datetime.strptime(str(today)+' '+dates[0].strip()+' '+times[0],'%Y %A %d %B %H:%M').strftime('%Y %A %d %B %H:%M')
+                a = datetime.strptime(b,'%Y %A %d %B %H:%M')
+
+                for r in ends:
+                    x=a+timedelta(minutes=r)
+                    a += timedelta(minutes=r)
+                    prog_end.append(x)
+                    
+                for elem,next_elem in zip(starts,prog_end):
                     chnm = re.sub(' +', '', ''.join(channel_name)).replace(u'\xa0 Channel', '').replace('Channel', '')
-                    if days[-1]==td1 and days[1]==td2:
-                        if next_elem in banned and elem =='23:00' or elem=='23:30':
-                            month = datetime.strptime(str(td1),'%A %d %B').strftime('%m')
-                            fx =datetime.strptime(str(td1),'%A %d %B').strftime('%d')
-                            fixed = (datetime.strptime(str(td1),'%A %d %B')+timedelta(days=1)).strftime('%m %d')
-                            startime = datetime.strptime(str(now) + ' ' + str(month)+' '+str(fx)+ ' ' + elem,'%Y %m %d %H:%M').strftime('%Y%m%d%H%M%S')
-                            endtime = datetime.strptime(str(now) + ' ' +fixed+ ' ' + next_elem,'%Y %m %d %H:%M').strftime('%Y%m%d%H%M%S')
-                            prog.append(2 * ' ' +'<programme start="' + startime + ' '+time_zone+'" stop="' + endtime + ' '+time_zone+'" channel="'+chnm.strip()+'">\n') 
-                        else:
-                            startime=datetime.strptime(str(now)+' '+str(td1)+' '+elem,'%Y %A %d %B %H:%M').strftime('%Y%m%d%H%M%S')
-                            endtime=datetime.strptime(str(now)+' '+str(td1)+' '+next_elem,'%Y %A %d %B %H:%M').strftime('%Y%m%d%H%M%S')
-                            prog.append(2 * ' ' +'<programme start="' + startime + ' '+time_zone+'" stop="' + endtime + ' '+time_zone+'" channel="'+chnm.strip()+'">\n')   
-                    else:
-                        startime=datetime.strptime(str(now)+' '+str(td1)+' '+elem,'%Y %A %d %B %H:%M').strftime('%Y%m%d%H%M%S')
-                        endtime=datetime.strptime(str(now)+' '+str(td2)+' '+next_elem,'%Y %A %d %B %H:%M').strftime('%Y%m%d%H%M%S')
-                        prog.append(2 * ' ' +'<programme start="' + startime + ' '+time_zone+'" stop="' + endtime + ' '+time_zone+'" channel="'+chnm.strip()+'">\n')
+                    startime=datetime.strptime(str(elem),'%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
+                    endtime=datetime.strptime(str(next_elem),'%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
+                    prog.append(2 * ' ' +'<programme start="' + startime + ' '+time_zone+'" stop="' + endtime + ' '+time_zone+'" channel="'+chnm.strip()+'">\n')
                     
             except IndexError:
                 cprint('No epg found or missing data for : '+''.join(channel_name))
@@ -117,7 +116,6 @@ def elci():
                 ch+=p
                 ch+='     <title lang="ar">'+tt.replace('&#39;',"'").replace('&quot;','"').replace('&amp;','and')+'</title>\n'
                 ch+='     <desc lang="ar">'+space+'</desc>\n  </programme>\r'
-                #ch+='     <category lang="ar">'+c+'</category>\n'+'  </programme>\n'
                 with io.open("/etc/epgimport/elcinema.xml","a",encoding='UTF-8')as f:
                     f.write(ch)
             
@@ -128,7 +126,6 @@ def elci():
                 print chan
                 sys.stdout.flush()
     
-
 if __name__=='__main__':
     elci()
 
