@@ -1,4 +1,4 @@
-import requests,re,os,io
+import requests,re,os,io,sys
 from shutil import copyfile
 from requests.adapters import HTTPAdapter
 
@@ -91,7 +91,8 @@ def snrt():
         for progr in alls:           
             with io.open("/etc/epgimport/aloula.xml","a",encoding='UTF-8')as f:
                 f.write(progr)
-        print 'Aloula epg downloaded for : '+str(end_date[-1])+' days'           
+        print 'Aloula epg downloaded for : '+str(end_date[-1])+' days'
+        sys.stdout.flush()         
     except:pass
     
 def arriadia():
@@ -150,6 +151,7 @@ def arriadia():
             with io.open("/etc/epgimport/aloula.xml","a",encoding='UTF-8')as f:
                 f.write(x)
         print 'arriada epg downloaded for : '+str(end_date[-2])+' days'
+        sys.stdout.flush()
     except:pass
   
 def mm():
@@ -219,6 +221,7 @@ def mm():
             with io.open("/etc/epgimport/aloula.xml", "a", encoding='UTF-8')as f:
                 f.write(x)
         print '2M epg downloaded for : '+str(end_date[-2])+' days'
+        sys.stdout.flush()
     except:pass
    
 if __name__ == '__main__': 
