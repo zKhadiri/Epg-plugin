@@ -11,8 +11,8 @@ elc_channels=['AlhayatDrama','Mehwar','Kuwait','JordanTV','Watania2','RotanaKids
 "NileComedy","AlraiTV","NileLife","SadaElBalad","DMCDRAMA","ONE","Aloula","ONDrama","DubaiZaman",
 "SharjahTV","CBCsofra","DMC","iFILMTV","Alsharqya",
 "TeNTV","SyriaDrama","Amman","SBC","Alsumaria","Roya","MTV",
-"Nessma","Oman","Fujairah","AlAoulaMorocco","almanar","SyriaTV",
-"AlSaeedah","2MTV","SamaTV","Mix"]
+"Nessma","Oman","Fujairah","almanar","SyriaTV",
+"AlSaeedah","SamaTV","Mix"]
 
 ZA=['M-NetHD','1MagicHD','M-NetMoviesPremierHD','M-NetMoviesSmileHD','M-NetMoviesAction+HD','SundanceTVHD','TomCruise',
     'M-NetMoviesAction','M-NetMoviesAllStarsHD','StudioUniversalHD','M-NETBinge','M-NetCityHD',

@@ -1,6 +1,6 @@
 #!/usr/bin/env python2.7
 # -*- coding: utf-8 -*-
-import requests,json,io,threading,os,sys,ch
+import requests,json,io,threading,os,sys,ch,osnos
 from datetime import datetime
 from time import sleep,strftime
 from requests.adapters import HTTPAdapter
@@ -106,23 +106,16 @@ def main():
         thread.join()  
         
 if __name__=='__main__':
-    main()
+    if os.path.exists('/var/lib/dpkg/status'):
+        print 'Dream os image found\nplease wait.....'
+        sys.stdout.flush()
+        osnos.oss()
+    else:
+        main()
+        with io.open("/etc/epgimport/osn.xml", "a",encoding="utf-8") as f:
+            f.write(('</tv>').decode('utf-8'))
     
-with io.open("/etc/epgimport/osn.xml", "a",encoding="utf-8") as f:
-    f.write(('</tv>').decode('utf-8'))
     
-    
-if os.path.exists('/var/lib/dpkg/status'):
-    print 'Dream os image found\nSorting data please wait.....'
-    sys.stdout.flush()
-    import xml.etree.ElementTree as ET
-    tree = ET.parse('/etc/epgimport/osn.xml')
-    data = tree.getroot()
-    els = data.findall("*[@channel]")
-    new_els = sorted(els, key=lambda el: (el.tag, el.attrib['channel']))
-    data[:] = new_els
-    tree.write('/etc/epgimport/osn.xml', xml_declaration=True, encoding='utf-8')
-
 if not os.path.exists('/etc/epgimport/custom.channels.xml'):
     print('Downloading custom.channels config')
     os.system('wget -q "--no-check-certificate" https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/custom.channels.xml?raw=true -O /etc/epgimport/custom.channels.xml')
