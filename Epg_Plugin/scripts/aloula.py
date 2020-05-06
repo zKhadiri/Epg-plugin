@@ -1,4 +1,4 @@
-import requests,re,os,io
+import requests,re,os,io,sys
 from shutil import copyfile
 from requests.adapters import HTTPAdapter
 headers={
@@ -86,9 +86,10 @@ def snrt():
             with io.open("/etc/epgimport/aloula.xml","a",encoding='UTF-8')as f:
                 f.write(progr)
         print 'Aloula epg downloaded for : '+str(end_date[-1])+' days'
+        sys.stdout.flush()
     except IndexError:
         print 'No data found for or missing data for aloulaTV'          
-     
+        sys.stdout.flush()
 def arriadia():
     prog = []
     urls=[]
@@ -150,8 +151,10 @@ def arriadia():
             with io.open("/etc/epgimport/aloula.xml","a",encoding='UTF-8')as f:
                 f.write(progr)
         print 'Arryadia epg downloaded for : '+str(end_date[-1])+' days'
+        sys.stdout.flush()
     except IndexError:
         print 'No data found for or missing data for Arryadia'
+        sys.stdout.flush()
    
 def mm():
     prog = []
@@ -221,10 +224,10 @@ def mm():
             with io.open("/etc/epgimport/aloula.xml", "a", encoding='UTF-8')as f:
                 f.write(x)
         print '2M epg downloaded for : '+str(end_date[-2])+' days'
-
+        sys.stdout.flush()
     except IndexError:
         print 'No data found for or missing data for 2M'
-        
+        sys.stdout.flush()
 if __name__ == '__main__': 
     snrt()
     arriadia()
