@@ -40,6 +40,7 @@ for i in range(0,7):
             
 
 pll=[]
+pyl.sort()
 now = datetime.datetime.today().strftime('%Y-%m-%d')
 lock = threading.Semaphore(4)
 def oss(url):
