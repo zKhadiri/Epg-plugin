@@ -26,6 +26,7 @@ prog=[]
 ends=[]
 starts=[]
 prog_end=[]
+end_date=[]
 with io.open("/etc/epgimport/elcinema.xml","w",encoding='UTF-8')as f:
     f.write(('<?xml version="1.0" encoding="UTF-8"?>'+"\n"+'<tv generator-info-name="By ZR1">').decode('utf-8'))
 
@@ -33,6 +34,7 @@ for x in ch.elc_channels:
     with io.open("/etc/epgimport/elcinema.xml","a",encoding='UTF-8')as f:
         f.write(("\n"+'  <channel id="'+x+'">'+"\n"+'    <display-name lang="en">'+x.replace("_",' ')+'</display-name>'+"\n"+'  </channel>\r').decode('utf-8'))
 
+now = datetime.today().strftime('%Y %m %d')
 today = datetime.now().strftime('%Y')
 nb_channel=['1138','1145','1310','1314','1334','1356','1342','1241','1261','1174','1173','1169','1137','1223','1176','1199','1156','1262','1227','1198','1177','1193','1158',
             '1170','1159','1226','1292','1203','1101','1134','1283','1188','1260','1290','1204','1269','1280',
@@ -53,6 +55,7 @@ def elci():
             ends[:]=[]
             starts[:]=[]
             prog_end[:]=[]
+            end_date[:]=[]
             for ti,en in zip(time,end_time):
                 start=datetime.strptime(ti,'%I:%M %p')
                 end = int(en.replace('[','').replace(' minutes]',''))
@@ -103,6 +106,11 @@ def elci():
                     startime=datetime.strptime(str(elem),'%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
                     endtime=datetime.strptime(str(next_elem),'%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
                     prog.append(2 * ' ' +'<programme start="' + startime + ' '+time_zone+'" stop="' + endtime + ' '+time_zone+'" channel="'+chnm.strip()+'">\n')
+                    date_end =datetime.strptime(str(prog_end[-1]),'%Y-%m-%d %H:%M:%S').strftime('%Y/%m/%d')
+                    day = datetime.strptime(date_end,'%Y/%m/%d')
+                    date_now = datetime.strptime(now,'%Y %m %d')
+                    nb_days = day - date_now
+                    end_date.append(nb_days.days) 
                     
             except IndexError:
                 cprint('No epg found or missing data for : '+''.join(channel_name))
@@ -119,21 +127,29 @@ def elci():
                 with io.open("/etc/epgimport/elcinema.xml","a",encoding='UTF-8')as f:
                     f.write(ch)
             
-            chan='\n'.join(channel_name)
+            chan='\n'.join(channel_name).strip()
             if error:
                 pass
             else:
-                print chan
+                print chan+' epg downloaded for : '+str(end_date[-1])+' Days'
                 sys.stdout.flush()
+                
+                
+    with io.open("/etc/epgimport/elcinema.xml", "a",encoding="utf-8") as f:
+        f.write(('</tv>').decode('utf-8'))          
     
 if __name__=='__main__':
-    elci()
+    import time
+    Hour = time.strftime("%H:%M")
+    start='00:00'
+    end='02:00'
+    if Hour>=start and Hour<end:
+        print 'Please come back at 2am to download the epg'
+    else:
+        elci()
 
         
-        
-with io.open("/etc/epgimport/elcinema.xml", "a",encoding="utf-8") as f:
-    f.write(('</tv>').decode('utf-8'))
-
+    
 if not os.path.exists('/etc/epgimport/custom.channels.xml'):
     print('Downloading custom.channels config')
     custom_channels=requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/custom.channels.xml?raw=true')

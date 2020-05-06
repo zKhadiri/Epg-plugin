@@ -52,7 +52,7 @@ def snrt():
             
             for titl_ in titles:
                 prog.append(4*' '+'<title lang="ar">' + titl_.replace('(',' ').replace(')',' ') + '</title>' + "\n")
-                desc.append(4 * ' ' + '<desc lang="ar">No descrption found for this program</desc>\n  </programme>\r')
+                desc.append(4 * ' ' + '<desc lang="ar">No description found for this program</desc>\n  </programme>\r')
                 
             from datetime import datetime,timedelta
             actuel = datetime.now().strftime("%H:%M")
