@@ -12,6 +12,7 @@ rm -f /tmp/*epgimport*
 rm -f /tmp/*Epg_Plugin*
 
 TIMESFolder=/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times
+TEMTIMESFolder=/tmp/times
 
 # check depends packges
 if [ -f /etc/apt/apt.conf ] ; then
@@ -66,16 +67,21 @@ fi
 sleep 2
 echo ""
 # Download and install plugin
+if [ -r $TIMESFolder ]; then
+mv $TIMESFolder /tmp/$TEMTIMESFolder
+fi
 echo " Downloading/Insallling Epg_Plugin plugin ......"
 wget -q "--no-check-certificate" "https://github.com/ziko-ZR1/Epg-plugin/blob/master/Download/Epg_Plugin-"$version".tar.gz?raw=true" -O "/tmp/Epg_Plugin-"$version".tar.gz"
 tar -xzf /tmp/Epg_Plugin-"$version".tar.gz -C /
-rm -f /tmp/Epg_Plugin-"$version".tar.gz
-if [ ! -r $TIMESFolder ]; then
-wget -q "--no-check-certificate" "https://github.com/ziko-ZR1/Epg-plugin/blob/master/Download/times.tar.gz?raw=true" -O "/tmp/times.tar.gz"
-echo " Downloading/Insallling timers files ......"
-tar -xzf /tmp/times.tar.gz -C /
-rm -f /tmp/times.tar.gz
+if [ -r $TEMTIMESFolder ]; then
+mv $TEMTIMESFolder $TIMESFolder
 fi
+rm -f /tmp/Epg_Plugin-"$version".tar.gz
+#wget -q "--no-check-certificate" "https://github.com/ziko-ZR1/Epg-plugin/blob/master/Download/times.tar.gz?raw=true" -O "/tmp/times.tar.gz"
+#echo " Downloading/Insallling timers files ......"
+#tar -xzf /tmp/times.tar.gz -C /
+#rm -f /tmp/times.tar.gz
+#fi
 echo ""
 echo "#########################################################"
 echo "#          Epg_Plugin INSTALLED SUCCESSFULLY            #"
