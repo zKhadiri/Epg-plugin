@@ -146,7 +146,7 @@ class EPGIConfig(Screen):
         list.append(("ondemand/yahala/yahala oula EPG", "2","osn"))
         list.append(("Bein entertainment EPG", "3","beinent"))
         list.append(("SNRT EPG", "4","aloula"))
-        list.append(("ELCINEMA WEBSITE EPG", "5","elcinema"))
+        list.append(("ELCINEMA WEBSITE EPG", "5","elcin"))
         list.append(("MBC.NET", "6","mbc"))
         list.append(("DSTV.ZA", "7","dstv"))
         list.append(("SuperSport.ZA BACKUP", "8","dstvback"))
