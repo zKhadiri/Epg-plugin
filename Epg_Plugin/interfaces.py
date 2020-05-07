@@ -151,7 +151,7 @@ class EPGIConfig(Screen):
         list.append(("DSTV.ZA", "7","dstv"))
         list.append(("SuperSport.ZA BACKUP", "8","dstvback"))
         list.append(("Osnplay BACKUP", "9","osnplay"))
-
+        list.append(("Spacetoon epg", "10","spacetoon"))
         self.provList=list ## New from mf to make choose list
         Screen.__init__(self, session)
         self.skinName = ["EPGIConfig"]
@@ -337,6 +337,11 @@ class EPGIConfig(Screen):
             f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/osnback.txt", "r")
             self["status"].setText("Current Osnplay time zone  : "+f1.read().strip())
             f1.close()
+        elif returnValue =="10":
+            f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/space.txt", "r")
+            self["status"].setText("Current Spacetoon time zone  : "+f1.read().strip())
+            f1.close()    
+        
         else:
             self["status"].setText("")
 
@@ -517,6 +522,25 @@ class EPGIConfig(Screen):
                         self.session.open(MessageBox,_("File is empty"), MessageBox.TYPE_INFO,timeout=10)
                 else:
                     self.session.open(MessageBox,_("osnplay.xml not found in path"), MessageBox.TYPE_INFO,timeout=10)
+            
+            if returnValue == "10":
+                if fileExists("/etc/epgimport/spacetoon.xml"):
+                    f = open('/etc/epgimport/spacetoon.xml','r')
+                    time_of = re.search(r'[+#-]+\d{4}',f.read())
+                    f.close()
+                    f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/space.txt", "r")
+                    newtime=f1.read()
+                    f1.close()
+                    if time_of !=None:
+                        with io.open("/etc/epgimport/spacetoon.xml",encoding="utf-8") as f:
+                            newText=f.read().decode('utf-8').replace(time_of.group(), newtime)
+                            with io.open("/etc/epgimport/spacetoon.xml", "w",encoding="utf-8") as f:
+                                f.write((newText).decode('utf-8'))
+                                self.session.open(MessageBox,_("current Spacetoon time "+time_of.group()+" replaced by "+newtime), MessageBox.TYPE_INFO,timeout=10)
+                    else:
+                        self.session.open(MessageBox,_("File is empty"), MessageBox.TYPE_INFO,timeout=10)
+                else:
+                    self.session.open(MessageBox,_("spacetoon.xml not found in path"), MessageBox.TYPE_INFO,timeout=10)
 
     def KeyBlue(self):
         index=self['config'].getSelectionIndex() ## New from mf to make choose list
@@ -600,6 +624,15 @@ class EPGIConfig(Screen):
                     f1.write(new_time.decode('utf-8'))
                     self.session.open(MessageBox,_("time changed with succes "+new_time), MessageBox.TYPE_INFO,timeout=10)
                     self["status"].setText("Current Osnplay time zone  : "+new_time)
+                    
+            elif returnValue == "10":
+                f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
+                new_time = f.read().strip()
+                f.close()
+                with io.open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/space.txt","w",encoding='UTF-8')as f1:
+                    f1.write(new_time.decode('utf-8'))
+                    self.session.open(MessageBox,_("time changed with succes "+new_time), MessageBox.TYPE_INFO,timeout=10)
+                    self["status"].setText("Current Spacetoon time zone  : "+new_time)
 
     def keyRed(self): ## New from mf to make choose list
         if len(self.installList)>0:
@@ -633,9 +666,9 @@ class EPGIConfig(Screen):
             self.installList.append(provider)
         self.iniMenu()
         if len(self.installList)>0:
-                self["key_red"].show()
+            self["key_red"].show()
         else:
-                self["key_red"].hide() 
+            self["key_red"].hide() 
         #self.session.openWithCallback(self.install, MessageBox, _('Do you want to Download now?!'), MessageBox.TYPE_YESNO)
 
     def install(self): ## New from mf to make choose list

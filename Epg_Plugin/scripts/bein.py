@@ -22,7 +22,7 @@ headers={
 }
 
 urls=[]
-print('**************STARTING******************')
+print('**************BEIN SPORTS EPG******************')
 for i in range(0,3):
     import datetime
     from datetime import timedelta

@@ -13,7 +13,7 @@ fil.close()
 
 today = int(datetime.strptime('' + str(datetime.now().strftime('%Y-%m-%d')) + ' 00:00:00', "%Y-%m-%d %H:%M:%S").strftime("%s")) * 1000
 
-channels=['mbc1','mbc-drama','mbc-maser2','mbc4','mbc2','mbc-action','mbc-bollywood','mbc-drama-plus','mbc-max','mbc-iraq','mbc5','Wanasa']
+channels=['mbc1','mbc-drama','mbc-maser','mbc-maser2','mbc4','mbc2','mbc-action','mbc-bollywood','mbc-drama-plus','mbc-max','mbc-iraq','mbc5','Wanasa']
 import datetime, time
 from datetime import timedelta
 week = datetime.date.today() + timedelta(days=7)
@@ -24,7 +24,7 @@ for c in channels:
 with io.open("/etc/epgimport/mbc.xml","w",encoding='UTF-8')as f:
     f.write(('<?xml version="1.0" encoding="UTF-8"?>'+"\n"+'<tv generator-info-name="By ZR1">').decode('utf-8'))
    
-ch=['MBC1','MBCDrama','MBCEgypt2','MBC4','MBC2','MBCAction','MBCBollywood','MBC+Drama','MBCMovieMax','MBCIraq','MBCCinq','Wanasah'] 
+ch=['MBC1','MBCDrama','MBCEgypt','MBCEgypt2','MBC4','MBC2','MBCAction','MBCBollywood','MBC+Drama','MBCMovieMax','MBCIraq','MBCCinq','Wanasah'] 
 for x in ch:
     with io.open("/etc/epgimport/mbc.xml","a",encoding='UTF-8')as f:
         f.write(("\n"+'  <channel id="'+x+'">'+"\n"+'    <display-name lang="en">'+x+'</display-name>'+"\n"+'  </channel>\r').decode('utf-8'))  
