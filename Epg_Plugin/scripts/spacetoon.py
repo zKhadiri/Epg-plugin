@@ -13,14 +13,13 @@ with io.open("/etc/epgimport/spacetoon.xml","w",encoding='UTF-8')as f:
 with io.open("/etc/epgimport/spacetoon.xml","a",encoding='UTF-8')as f:
     f.write(("\n"+'  <channel id="Spacetoon">\n    <display-name lang="en">Spacetoon</display-name>\n  </channel>\r').decode('utf-8'))
 
-tz= strftime('%z')
-zone = re.findall(r'\d(.*)\d{2}',tz)
+
 title=[]
 date=[]
 alls=[]
 
 for i in range(1,3):
-    url=requests.get('https://spacetoon.com/broadcast?&day='+str(i)+'&zone='+''.join(zone))
+    url=requests.get('https://spacetoon.com/broadcast?&day='+str(i)+'&zone=+3')
     dates=re.findall(r'\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}',url.text)
     titles=re.findall(r'png\" />\s+(.*?)<!--',url.text)
     for title_ in titles:
