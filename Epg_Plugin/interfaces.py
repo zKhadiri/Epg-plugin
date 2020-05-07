@@ -17,8 +17,8 @@ from Components.config import config, getConfigListEntry, ConfigSubsection, Conf
 import io,os,re
 import gettext
 from enigma import getDesktop
-################################## Add By RAED
-
+from enigma import loadPNG,gPixmapPtr, RT_WRAP, ePoint, RT_HALIGN_LEFT, RT_VALIGN_CENTER, eListboxPythonMultiContent, gFont
+from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmap, MultiContentEntryPixmapAlphaTest
 
 config.plugins.EpgPlugin = ConfigSubsection()
 config.plugins.EpgPlugin.update = ConfigYesNo(default=True)
@@ -60,86 +60,105 @@ reswidth = getDesktop(0).size().width()
 #    if os.path.exists('/var/lib/dpkg/status'):
 #        return DreamOS
 
+def connected_to_internet(): ## to test connection
+    import requests
+    try:
+        _ = requests.get('http://www.google.com', timeout=5)
+        print("internet connection available.")
+        return True
+    except requests.ConnectionError:
+        print("No internet connection available.")
+        return False
+    print connected_to_internet()
+
 class EPGIConfig(Screen):
     if reswidth == 1280:
         skin = """
-            <screen position="center,center" size="762,528" title="ZIKO EPG GRABBER" backgroundColor="#16000000" flags="wfNoBorder">
-                <widget source="Title" position="5,6" size="743,41" render="Label" font="Regular;26" foregroundColor="#00ffa500" backgroundColor="#16000000" transparent="1"/>
-                <widget font="Regular;28" foregroundColor="#00ffffff" backgroundColor="#16000000" halign="center" position="322,47" render="Label" size="122,32" source="global.CurrentTime" transparent="1" valign="center" zPosition="3">
-                        <convert type="ClockToText">Default</convert>
-                </widget>
-                <ePixmap name="red" position="40,470" zPosition="2" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/red.png" transparent="1" alphatest="on"/>
-                <ePixmap name="green" position="190,470" zPosition="2" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/green.png" transparent="1" alphatest="on"/>
-                <ePixmap name="yellow" position="340,470" zPosition="2" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/yellow.png" transparent="1" alphatest="on"/>
-                <ePixmap name="blue" position="490,470" zPosition="2" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/blue.png" transparent="1" alphatest="on"/>
-                <ePixmap position="638,474" size="35,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/key_menu.png" alphatest="on"/>
-                <widget name="key_red" position="40,470" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;19" transparent="1"/>
-                <widget name="key_green" position="190,470" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;19" transparent="1"/>
-                <widget name="key_yellow" position="340,470" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;19" transparent="1"/>
-                <widget name="key_blue" position="490,470" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;19" transparent="1"/>
-                <widget name="config" position="10,80" size="745,310" scrollbarMode="showOnDemand"/>
-                <widget name="status" foregroundColor="#00ff2525" position="15,425" size="724,30" font="Regular;20"/>
-                <widget name="glb" foregroundColor="#00ffffff" position="15,395" size="722,25" font="Regular;20"/>
-            </screen>"""
+		<screen position="center,center" size="762,562" title="ZIKO EPG GRABBER" backgroundColor="#16000000" flags="wfNoBorder">
+  			<widget source="Title" position="8,10" size="743,35" render="Label" font="Regular;26" foregroundColor="#00ffa500" backgroundColor="#16000000" transparent="1"/>
+  			<eLabel text="Select providers to install and press red button" position="10,42" size="663,43" font="Regular;24" foregroundColor="#00ff2525" zPosition="4" valign="center" backgroundColor="#16000000"/>
+  			<widget font="Regular;35" foregroundColor="#00ffffff" backgroundColor="#16000000" halign="center" position="615,5" render="Label" size="143,52" source="global.CurrentTime" transparent="1" valign="center" zPosition="5">
+    				<convert type="ClockToText">Default</convert>
+  			</widget>
+  			<ePixmap name="red" position="40,520" zPosition="2" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/red.png" transparent="1" alphatest="on"/>
+  			<ePixmap name="green" position="210,520" zPosition="2" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/green.png" transparent="1" alphatest="on"/>
+  			<ePixmap name="yellow" position="380,520" zPosition="2" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/yellow.png" transparent="1" alphatest="on"/>
+  			<ePixmap name="blue" position="557,520" zPosition="2" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/blue.png" transparent="1" alphatest="on"/>
+  			<ePixmap position="658,55" size="60,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/key_menu.png" alphatest="on" zPosition="5"/>
+  			<widget name="key_red" position="40,520" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;19" transparent="1"/>
+  			<widget name="key_green" position="210,520" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;19" transparent="1"/>
+  			<widget name="key_yellow" position="380,520" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;19" transparent="1"/>
+  			<widget name="key_blue" position="557,520" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;19" transparent="1"/>
+  			<widget name="config" foregroundColor="#00ffffff" backgroundColor="#16000000" position="10,90" size="745,360" scrollbarMode="showOnDemand"/>
+  			<widget name="glb" foregroundColor="#00ffffff" position="15,458" size="724,28" font="Regular;24"/>
+  			<widget name="status" foregroundColor="#000080ff" position="15,487" size="724,28" font="Regular;24"/>
+		</screen>"""
     else:
-	if os.path.exists('/var/lib/dpkg/status'):
-        	skin = """
-            		<screen position="center,185" size="1222,707" title="ZIKO EPG GRABBER" flags="wfNoBorder" backgroundColor="#16000000">
-                        <widget source="Title" position="5,6" size="1210,63" render="Label" font="Regular;45" foregroundColor="#00ffa500" backgroundColor="#16000000" transparent="1"/>
-                        <widget font="Regular;35" foregroundColor="#00ffffff" backgroundColor="#16000000" halign="center" position="514,73" render="Label" size="177,45" source="global.CurrentTime" transparent="1" valign="center" zPosition="3">
-                                <convert type="ClockToText">Default</convert>
-                        </widget>
-                        <ePixmap name="red" position="230,655" zPosition="2" size="195,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/red.png" transparent="1" alphatest="on"/>
-                        <ePixmap name="green" position="420,655" zPosition="2" size="195,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/green.png" transparent="1" alphatest="on"/>
-                        <ePixmap name="yellow" position="618,655" zPosition="2" size="195,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/yellow.png" transparent="1" alphatest="on"/>
-                        <ePixmap name="blue" position="810,655" zPosition="2" size="195,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/blue.png" transparent="1" alphatest="on"/>
-                        <ePixmap position="1010,658" size="35,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/key_menu.png" alphatest="on"/>
-                        <widget name="key_red" position="202,655" size="200,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
-                        <widget name="key_green" position="395,655" size="200,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
-                        <widget name="key_yellow" position="595,655" size="200,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
-                        <widget name="key_blue" position="784,655" size="200,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
-                        <widget name="config" foregroundColor="#00ffffff" backgroundColor="#16000000" position="10,125" size="1196,388" scrollbarMode="showOnDemand"/>
-                        <widget name="status" foregroundColor="#00ff2525" backgroundColor="#16000000" position="15,579" size="1174,54" font="Regular;35"/>
-                        <widget name="glb" foregroundColor="#00ffffff" backgroundColor="#16000000" position="15,519" size="1174,54" font="Regular;35"/>
-            		</screen>"""
-	else:
-        	skin = """
-            		<screen position="center,185" size="1222,707" title="ZIKO EPG GRABBER" flags="wfNoBorder" backgroundColor="#16000000">
-                        <widget source="Title" position="5,6" size="1210,63" render="Label" font="Regular;45" foregroundColor="#00ffa500" backgroundColor="#16000000" transparent="1"/>
-                        <widget font="Regular;40" foregroundColor="#00ffffff" backgroundColor="#16000000" halign="center" position="514,73" render="Label" size="177,45" source="global.CurrentTime" transparent="1" valign="center" zPosition="3">
-                                <convert type="ClockToText">Default</convert>
-                        </widget>
-                        <ePixmap name="red" position="230,655" zPosition="2" size="195,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/red.png" transparent="1" alphatest="on"/>
-                        <ePixmap name="green" position="420,655" zPosition="2" size="195,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/green.png" transparent="1" alphatest="on"/>
-                        <ePixmap name="yellow" position="618,655" zPosition="2" size="195,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/yellow.png" transparent="1" alphatest="on"/>
-                        <ePixmap name="blue" position="810,655" zPosition="2" size="195,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/blue.png" transparent="1" alphatest="on"/>
-                        <ePixmap position="1010,658" size="35,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/key_menu.png" alphatest="on"/>
-                        <widget name="key_red" position="202,655" size="200,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
-                        <widget name="key_green" position="395,655" size="200,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
-                        <widget name="key_yellow" position="595,655" size="200,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
-                        <widget name="key_blue" position="784,655" size="200,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
-                        <widget name="config" font="Regular;35" itemHeight="45" foregroundColor="#00ffffff" backgroundColor="#16000000" position="10,125" size="1196,388" scrollbarMode="showOnDemand"/>
-                        <widget name="status" foregroundColor="#00ff2525" backgroundColor="#16000000" position="15,579" size="1174,54" font="Regular;35"/>
-                        <widget name="glb" foregroundColor="#00ffffff" backgroundColor="#16000000" position="15,519" size="1174,54" font="Regular;35"/>
-            		</screen>"""
+# 	if os.path.exists('/var/lib/dpkg/status'):
+#         	skin = """
+#            		<screen position="center,185" size="1222,707" title="ZIKO EPG GRABBER" flags="wfNoBorder" backgroundColor="#16000000">
+#                        <widget source="Title" position="5,6" size="1210,63" render="Label" font="Regular;45" foregroundColor="#00ffa500" backgroundColor="#16000000" transparent="1"/>
+#                        <eLabel text = "Select providers to install" position = "0,73" size = "514,45" font = "Regular;36" foregroundColor = "#00ffffff" zPosition = "10"  valign = "center" halign = "left"  backgroundColor = "#16000000"/>
+#                        <widget font="Regular;35" foregroundColor="#00ffffff" backgroundColor="#16000000" halign="center" position="514,73" render="Label" size="177,45" source="global.CurrentTime" transparent="1" valign="center" zPosition="3">
+#                                <convert type="ClockToText">Default</convert>
+#                        </widget>
+#                        <ePixmap name="red" position="230,655" zPosition="2" size="195,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/red.png" transparent="1" alphatest="on"/>
+#                        <ePixmap name="green" position="420,655" zPosition="2" size="195,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/green.png" transparent="1" alphatest="on"/>
+#                        <ePixmap name="yellow" position="618,655" zPosition="2" size="195,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/yellow.png" transparent="1" alphatest="on"/>
+#                        <ePixmap name="blue" position="810,655" zPosition="2" size="195,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/blue.png" transparent="1" alphatest="on"/>
+#                        <ePixmap position="1010,658" size="35,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/key_menu.png" alphatest="on"/>
+#                        <widget name="key_red" position="202,655" size="200,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
+#                        <widget name="key_green" position="395,655" size="200,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
+#                        <widget name="key_yellow" position="595,655" size="200,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
+#                        <widget name="key_blue" position="784,655" size="200,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
+#                        <widget name="config" foregroundColor="#00ffffff" backgroundColor="#16000000" position="10,125" size="1196,388" scrollbarMode="showOnDemand"/>
+#                        <widget name="status" foregroundColor="#00ff2525" backgroundColor="#16000000" position="15,579" size="1174,54" font="Regular;35"/>
+#                        <widget name="glb" foregroundColor="#00ffffff" backgroundColor="#16000000" position="15,519" size="1174,54" font="Regular;35"/>
+#            		</screen>""" -->
+#	else:
+        skin = """
+		<screen position="center,center" size="1222,809" title="ZIKO EPG GRABBER" flags="wfNoBorder" backgroundColor="#16000000">
+  			<widget source="Title" position="5,10" size="1210,50" render="Label" font="Regular;40" foregroundColor="#00ffa500" backgroundColor="#16000000" transparent="1"/>
+  			<eLabel text="Select providers to install and press red button" position="20,67" size="951,60" font="Regular;35" foregroundColor="#00ff2525" zPosition="4" valign="center" backgroundColor="#16000000"/>
+  			<widget font="Regular;55" foregroundColor="#00ffffff" backgroundColor="#16000000" halign="center" position="962,8" render="Label" size="259,84" source="global.CurrentTime" transparent="1" valign="center" zPosition="5">
+    				<convert type="ClockToText">Default</convert>
+  			</widget>
+  			<ePixmap name="red" position="17,755" zPosition="2" size="260,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/redfhd.png" transparent="1" alphatest="on"/>
+ 			<ePixmap name="green" position="335,755" zPosition="2" size="260,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/greenfhd.png" transparent="1" alphatest="on"/>
+  			<ePixmap name="yellow" position="640,755" zPosition="2" size="260,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/yellowfhd.png" transparent="1" alphatest="on"/>
+  			<ePixmap name="blue" position="941,755" zPosition="2" size="260,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/bluefhd.png" transparent="1" alphatest="on"/>
+  			<ePixmap position="1042,87" size="103,35" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/key_menufhd.png" alphatest="on"/>
+  			<widget name="key_red" position="17,755" size="260,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
+  			<widget name="key_green" position="335,755" size="260,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
+  			<widget name="key_yellow" position="640,755" size="260,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
+  			<widget name="key_blue" position="941,755" size="260,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
+  			<widget name="config" foregroundColor="#00ffffff" backgroundColor="#16000000" position="10,140" size="1196,488" scrollbarMode="showOnDemand"/>
+  			<widget name="glb" foregroundColor="#00ffffff" backgroundColor="#16000000" position="15,653" size="1174,54" font="Regular;35"/>
+  			<widget name="status" foregroundColor="#000080ff" backgroundColor="#16000000" position="15,699" size="1174,54" font="Regular;35"/>
+		</screen>"""
 ###### End 
     def __init__(self, session, args = 0):
         self.session = session
         list = []
-        list.append(("Bein Sports EPG", "1"))
-        list.append(("ondemand/yahala/yahala oula EPG", "2"))
-        list.append(("Bein entertainment EPG", "3"))
-        list.append(("SNRT EPG", "4"))
-        list.append(("ELCINEMA WEBSITE EPG", "5"))
-        list.append(("MBC.NET", "6"))
-        list.append(("DSTV.ZA", "7"))
-        list.append(("SuperSport.ZA BACKUP", "8"))
-        list.append(("Osnplay BACKUP", "9"))
+        self.installList=[] ## New from mf to make choose list
+
+        list.append(("Bein Sports EPG", "1","bein"))
+        list.append(("ondemand/yahala/yahala oula EPG", "2","osn"))
+        list.append(("Bein entertainment EPG", "3","beinent"))
+        list.append(("SNRT EPG", "4","aloula"))
+        list.append(("ELCINEMA WEBSITE EPG", "5","elcin"))
+        list.append(("MBC.NET", "6","mbc"))
+        list.append(("DSTV.ZA", "7","dstv"))
+        list.append(("SuperSport.ZA BACKUP", "8","dstvback"))
+        list.append(("Osnplay BACKUP", "9","osnplay"))
+
+        self.provList=list ## New from mf to make choose list
         Screen.__init__(self, session)
         self.skinName = ["EPGIConfig"]
         self["status"] = Label()
         self["glb"] = Label()
-        self["config"] = MenuList(list)
+        #self["config"] = MenuList(list)
+        self["config"] = MenuList([], enableWrapAround=True, content=eListboxPythonMultiContent)
         f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/bein.txt", "r")
         self["status"].setText("Current bein sports time zone  : "+f1.read().strip())
         f1.close()
@@ -147,24 +166,75 @@ class EPGIConfig(Screen):
         self["glb"].setText("Global timezone : "+f2.read().strip())
         f2.close()
         self.update()
-        self["key_red"] = Button(_("Cancel"))
+        self["key_red"] = Button(_("Install"))
         self["key_green"] = Button(_("Timezone"))
         self["key_blue"] = Button(_("Set time"))
         self["key_yellow"] = Button(_("Change time"))
-        self["setupActions"] = ActionMap(["SetupActions","MovieSelectionActions","ColorActions",'MenuActions','WizardActions','ShortcutActions'],
+        self["setupActions"] = ActionMap(["EpgColorActions",'EpgMenuActions','EpgWizardActions','EpgShortcutActions'],
         {
             "down": self.down,
             "up": self.up,
             "ok": self.go,
+            "red": self.keyRed,
             "green": self.keyGreen,
             "blue": self.KeyBlue,
             "yellow": self.settime,
             "menu":self.showsetup,
-            "cancel": self.keyRed
+            "cancel": self.close
         }, -1)
-        self.onLayoutFinish.append(self.__layoutFinished)
+        self.onShown.append(self.onWindowShow)
+
+    def onWindowShow(self):
+        self.onShown.remove(self.onWindowShow)
+        self.new_version = Ver
+        if config.plugins.EpgPlugin.update.value:
+            self.checkupdates()
+        self.setTitle("EPG GRABBER BY ZIKO V %s" % Ver)
+        self["key_red"].hide() ## New from mf to make choose list
+        self.iniMenu() ## New from mf to make choose list
         
-######### Add Update online by RAED (Fairbird) #####
+    def iniMenu(self): ## New from mf to make choose list
+        cacolor = 16776960
+        cbcolor = 16753920
+        cccolor = 15657130
+        cdcolor = 16711680
+        cecolor = 16729344
+        cfcolor = 65407
+        cgcolor = 11403055
+        chcolor = 13047173
+        cicolor = 13789470
+        scolor = cbcolor
+        res = []        
+        gList=[]
+        if reswidth == 1280:
+            self["config"].l.setItemHeight(50)
+            self["config"].l.setFont(0, gFont('Regular', 24))
+        else:
+            self["config"].l.setItemHeight(80)
+            self["config"].l.setFont(0, gFont('Regular', 36))
+        for i in range(0, len(self.provList)):
+            provider = self.provList[i][0]
+            if reswidth == 1280:
+                png='/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/epg.png'
+            else:
+                png='/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/epgfhd.png'
+            if provider in self.installList:
+                if reswidth == 1280:
+                    png = '/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/ok.png'
+                else:
+                    png = '/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/okfhd.png'
+            res.append(MultiContentEntryText(pos=(0, 1), size=(0, 0), font=0, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='', color=scolor, color_sel=cccolor, border_width=3, border_color=806544))
+            if reswidth == 1280:
+                res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 10), size=(35, 35), png=loadPNG(png)))
+                res.append(MultiContentEntryText(pos=(60, 8), size=(723, 40), font=0, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text=str(provider), color=16777215, color_sel=16777215))
+            else:
+                res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 10), size=(50, 50), png=loadPNG(png)))
+                res.append(MultiContentEntryText(pos=(80, 8), size=(1080, 60), font=0, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text=str(provider), color=16777215, color_sel=16777215))
+            gList.append(res)
+            res = []
+        self["config"].l.setList(gList)
+        self["config"].show()
+
     def showsetup(self):
         choices=[]
         self.list = []
@@ -218,8 +288,7 @@ class EPGIConfig(Screen):
             self.session.open(Console2, title='Installing last update, enigma will be started after install', cmdlist=cmdlist, finishedCallback=self.myCallback, closeOnSuccess=False)
     def myCallback(self,result):
         return
-     
-######### End #########
+
     def up(self):
         self["config"].up()
         self.update()
@@ -229,7 +298,9 @@ class EPGIConfig(Screen):
         self.update()
 
     def update(self):
-        returnValue = self["config"].l.getCurrentSelection()[1]
+        index=self['config'].getSelectionIndex() ## New from mf to make choose list
+        returnValue=self.provList[index][1] ## New from mf to make choose list
+        #returnValue = self["config"].l.getCurrentSelection()[1]
         if returnValue == "1":
             f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/bein.txt", "r")
             self["status"].setText("Current bein sports time zone  : "+f1.read().strip())
@@ -262,18 +333,17 @@ class EPGIConfig(Screen):
             f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/dstvback.txt", "r")
             self["status"].setText("Current SuperSport time zone  : "+f1.read().strip())
             f1.close()
-            
         elif returnValue =="9":
             f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/osnback.txt", "r")
             self["status"].setText("Current Osnplay time zone  : "+f1.read().strip())
             f1.close()
         else:
             self["status"].setText("")
-            
-            
-    
+
     def settime(self):
-        returnValue = self["config"].l.getCurrentSelection()[1]
+        index=self['config'].getSelectionIndex() ## New from mf to make choose list
+        returnValue=self.provList[index][1] ## New from mf to make choose list
+        #returnValue = self["config"].l.getCurrentSelection()[1]
         if returnValue is not None:
             if returnValue == "1":
                 if fileExists("/etc/epgimport/bein.xml"):
@@ -447,15 +517,10 @@ class EPGIConfig(Screen):
                         self.session.open(MessageBox,_("File is empty"), MessageBox.TYPE_INFO,timeout=10)
                 else:
                     self.session.open(MessageBox,_("osnplay.xml not found in path"), MessageBox.TYPE_INFO,timeout=10)
-            
-    def __layoutFinished(self):
-        self.new_version = Ver
-        if config.plugins.EpgPlugin.update.value:
-            self.checkupdates()
-        self.setTitle("EPG GRABBER BY ZIKO V %s" % Ver)
 
     def KeyBlue(self):
-        returnValue = self["config"].l.getCurrentSelection()[1]
+        index=self['config'].getSelectionIndex() ## New from mf to make choose list
+        returnValue=self.provList[index][1] ## New from mf to make choose list
         if returnValue is not None:
             if returnValue == "1":
                 f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
@@ -536,8 +601,12 @@ class EPGIConfig(Screen):
                     self.session.open(MessageBox,_("time changed with succes "+new_time), MessageBox.TYPE_INFO,timeout=10)
                     self["status"].setText("Current Osnplay time zone  : "+new_time)
 
-    def keyRed(self):
-        self.close(None)
+    def keyRed(self): ## New from mf to make choose list
+        if len(self.installList)>0:
+		if connected_to_internet() == True:  ## Code to find connection internet or not
+			self.install()
+		else:
+			self.session.open(MessageBox,_("No internet connection available. Or github.com Down"), MessageBox.TYPE_INFO,timeout=10)
 
     def keyGreen(self):
         f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
@@ -555,37 +624,29 @@ class EPGIConfig(Screen):
         else:
             self.session.open(MessageBox,_("Not a valide format, exemple : +0000/+0100/-01000 "), MessageBox.TYPE_INFO,timeout=10)
             
-    def go(self):
-        self.session.openWithCallback(self.install, MessageBox, _('Do you want to Download now?!'), MessageBox.TYPE_YESNO)
+    def go(self): ## New from mf to make choose list
+        index=self['config'].getSelectionIndex()
+        provider=self.provList[index][0]
+        if provider in self.installList:
+            self.installList.remove(provider)
+        else:   
+            self.installList.append(provider)
+        self.iniMenu()
+        if len(self.installList)>0:
+                self["key_red"].show()
+        else:
+                self["key_red"].hide() 
+        #self.session.openWithCallback(self.install, MessageBox, _('Do you want to Download now?!'), MessageBox.TYPE_YESNO)
 
-    def install(self,answer=False):
-        returnValue = self["config"].l.getCurrentSelection()[1]
-        if answer:
-            if returnValue is not None:
-                if returnValue == "1":
-                    self.session.open(Console2,_("EPG BEIN SPORTS") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/bein.py"], closeOnSuccess=False)
-                    cprint("Downloading EPG BEIN SPORTS")
-                elif returnValue == "2":
-                    self.session.open(Console2,_("EPG OSN") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/osn.py"], closeOnSuccess=False)
-                    cprint("Downloading EPG OSN")
-                elif returnValue == "3":
-                    self.session.open(Console2,_("EPG Bein entertainment") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/beinent.py"], closeOnSuccess=False)
-                    cprint("Downloading EPG Bein entertainment")
-                elif returnValue == "4":
-                    self.session.open(Console2,_("EPG SNRT") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/aloula.py"], closeOnSuccess=False)
-                    cprint("Downloading EPG SNRT")
-                elif returnValue == "5":
-                    self.session.open(Console2,_("ELCINEMA EPG") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/elcin.py"], closeOnSuccess=False)
-                    cprint("Downloading ELECINEMA EPG")
-                elif returnValue == "6":
-                    self.session.open(Console2,_("MBC EPG") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/mbc.py"], closeOnSuccess=False)
-                    cprint("Downloading MBC EPG")
-                elif returnValue == "7":
-                    self.session.open(Console2,_("DSTV EPG") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/dstv.py"], closeOnSuccess=False)
-                    cprint("Downloading DSTV EPG")
-                elif returnValue == "8":
-                    self.session.open(Console2,_("SuperSport EPG") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/dstvback.py"], closeOnSuccess=False)
-                    cprint("Downloading SuperSport EPG")
-                elif returnValue == "9":
-                    self.session.open(Console2,_("Osnplay EPG") , ["%s" % "python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/osnplay.py"], closeOnSuccess=False)
-                    cprint("Downloading Osnplay EPG")
+    def install(self): ## New from mf to make choose list
+        index = self['config'].getSelectionIndex()
+        provider = self.provList[index][0]
+        cmdList=[]   
+        for i in range(len(self.provList)):
+            provider = self.provList[i][0]
+            if not provider in self.installList:
+                continue
+            provTag = self.provList[i][2]    
+            cmd="python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/%s.py" % provTag    
+            cmdList.append(cmd)    
+        self.session.open(Console2,_("EPG install started") , cmdList, closeOnSuccess=False)

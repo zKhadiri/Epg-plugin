@@ -34,7 +34,7 @@ if os.path.exists(path):
         else:
             print "file is empty"
             
-    print "dstv.xml donwloaded with succes"
+    print "dstv.xml donwloaded with success"
 else:
     print "dstv.xml not found"
     sys.stdout.flush()
