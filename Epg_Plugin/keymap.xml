@@ -1,0 +1,35 @@
+<keymap>
+	<map context="EpgMenuActions">
+		<key id="KEY_MENU" mapto="menu" flags="mr"/>
+	</map>
+
+	<map context="EpgColorActions">
+		<key id="KEY_RED" mapto="red" flags="m"/>
+		<key id="KEY_GREEN" mapto="green" flags="m"/>
+		<key id="KEY_YELLOW" mapto="yellow" flags="m"/>
+		<key id="KEY_BLUE" mapto="blue" flags="m"/>
+	</map>
+
+	<map context="EpgWizardActions">
+		<key id="KEY_LEFT" mapto="left" flags="mr"/>
+		<key id="KEY_RIGHT" mapto="right" flags="mr"/>
+		<key id="KEY_UP" mapto="up" flags="mr"/>
+		<key id="KEY_DOWN" mapto="down" flags="mr"/>
+		<key id="KEY_OK" mapto="ok" flags="m"/>
+		<key id="KEY_ENTER" mapto="ok" flags="m"/>
+		<key id="KEY_EXIT" mapto="back" flags="m"/>
+		<key id="KEY_ESC" mapto="back" flags="m"/>
+		<key id="KEY_EXIT" mapto="cancel" flags="m"/>
+	</map>
+
+	<map context="EpgShortcutActions">
+		<key id="KEY_F1" mapto="red" flags="mr"/>
+		<key id="KEY_F2" mapto="yellow" flags="mr"/>
+		<key id="KEY_F3" mapto="green" flags="mr"/>
+		<key id="KEY_F4" mapto="blue" flags="mr"/>
+		<key id="KEY_RED" mapto="red" flags="mr"/>
+		<key id="KEY_YELLOW" mapto="yellow" flags="mr"/>
+		<key id="KEY_GREEN" mapto="green" flags="mr"/>
+		<key id="KEY_BLUE" mapto="blue" flags="mr"/>
+	</map>
+</keymap>
