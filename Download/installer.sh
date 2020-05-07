@@ -8,11 +8,11 @@ description=What_is_NEW:\n'[Change download feature option]'
 # No need to remove old version
 #rm -rf /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin
 
-rm -f /tmp/*epgimport*
-rm -f /tmp/*Epg_Plugin*
-
+TEM=/tmp
 TIMESFolder=/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times
-TEMTIMESFolder=/tmp/times
+
+rm -f $TEM/*epgimport*
+rm -f $TEM/*Epg_Plugin*
 
 # check depends packges
 if [ -f /etc/apt/apt.conf ] ; then
@@ -67,20 +67,17 @@ fi
 sleep 2
 echo ""
 # Download and install plugin
-if [ -r $TIMESFolder ]; then
-mv $TIMESFolder /tmp/$TEMTIMESFolder
-fi
+mv $TIMESFolder $TEM
 echo " Downloading/Insallling Epg_Plugin plugin ......"
 wget -q "--no-check-certificate" "https://github.com/ziko-ZR1/Epg-plugin/blob/master/Download/Epg_Plugin-"$version".tar.gz?raw=true" -O "/tmp/Epg_Plugin-"$version".tar.gz"
 tar -xzf /tmp/Epg_Plugin-"$version".tar.gz -C /
-if [ -r $TEMTIMESFolder ]; then
-mv $TEMTIMESFolder $TIMESFolder
-fi
-rm -f /tmp/Epg_Plugin-"$version".tar.gz
+mv $TEM/times/* $TIMESFolder
+rm -f $TEM/Epg_Plugin-"$version".tar.gz
+rm -r $TEM/times
 #wget -q "--no-check-certificate" "https://github.com/ziko-ZR1/Epg-plugin/blob/master/Download/times.tar.gz?raw=true" -O "/tmp/times.tar.gz"
 #echo " Downloading/Insallling timers files ......"
-#tar -xzf /tmp/times.tar.gz -C /
-#rm -f /tmp/times.tar.gz
+#tar -xzf $TEM/times.tar.gz -C /
+#rm -f $TEM/times.tar.gz
 #fi
 echo ""
 echo "#########################################################"
@@ -91,5 +88,5 @@ echo "#########################################################"
 echo "#           your Device will RESTART Now                #"
 echo "#########################################################"
 sleep 3
-killall -9 enigma2
+#killall -9 enigma2
 exit 0
