@@ -67,13 +67,13 @@ fi
 sleep 2
 echo ""
 # Download and install plugin
-mv $TIMESFolder $TEM
+mv $TIMESFolder $TEM  > /dev/null 2>&1
 echo " Downloading/Insallling Epg_Plugin plugin ......"
 wget -q "--no-check-certificate" "https://github.com/ziko-ZR1/Epg-plugin/blob/master/Download/Epg_Plugin-"$version".tar.gz?raw=true" -O "/tmp/Epg_Plugin-"$version".tar.gz"
 tar -xzf /tmp/Epg_Plugin-"$version".tar.gz -C /
-mv $TEM/times/* $TIMESFolder
-rm -f $TEM/Epg_Plugin-"$version".tar.gz
-rm -r $TEM/times
+mv $TEM/times/* $TIMESFolder  > /dev/null 2>&1
+rm -f $TEM/Epg_Plugin-"$version".tar.gz  > /dev/null 2>&1
+rm -r $TEM/times  > /dev/null 2>&1
 #wget -q "--no-check-certificate" "https://github.com/ziko-ZR1/Epg-plugin/blob/master/Download/times.tar.gz?raw=true" -O "/tmp/times.tar.gz"
 #echo " Downloading/Insallling timers files ......"
 #tar -xzf $TEM/times.tar.gz -C /
