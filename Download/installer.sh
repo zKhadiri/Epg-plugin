@@ -2,8 +2,8 @@
 ##setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=6.7
-description=What_is_NEW:\n'[NEW CHANNELS]'
+version=6.8
+description=What_is_NEW:\n'[Fix crash after install new update]'
 ##############################################################
 # No need to remove old version
 #rm -rf /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin
