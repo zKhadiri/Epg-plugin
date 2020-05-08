@@ -88,5 +88,5 @@ echo "#########################################################"
 echo "#           your Device will RESTART Now                #"
 echo "#########################################################"
 sleep 3
-#killall -9 enigma2
+killall -9 enigma2
 exit 0
