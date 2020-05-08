@@ -4,19 +4,19 @@
 <!-- MBC -->
 <channel id="MBC1">1:0:1:4:3B:800:DC00000:0:0:0:</channel>
 <channel id="MBC1">1:0:1:1:1BC0:2BE:1040000:0:0:0:</channel>
-<channel id="MBC2">1:0:1:9:3B:800:DC00000:0:0:0:</channel>
+<channel id="MBC2">1:0:1:7:3C:800:DCA0000:0:0:0:</channel>
 <channel id="MBC2">1:0:1:6:1BC0:2BE:1040000:0:0:0:</channel>
-<channel id="MBC4">1:0:1:5:3B:800:DC00000:0:0:0:</channel>
+<channel id="MBC4">1:0:1:4:3C:800:DCA0000:0:0:0:</channel>
 <channel id="MBC4">1:0:1:2:1BC0:2BE:1040000:0:0:0:</channel> 
-<channel id="MBCDrama">1:0:1:6:3B:800:DC00000:0:0:0:</channel>
+<channel id="MBCDrama">1:0:1:A:3C:800:DCA0000:0:0:0:</channel>
 <channel id="MBCDrama">1:0:1:3:1BC0:2BE:1040000:0:0:0:</channel> 
-<channel id="MBCAction">1:0:1:A:3B:800:DC00000:0:0:0:</channel> 
+<channel id="MBCAction">1:0:1:6:3C:800:DCA0000:0:0:0:</channel>
 <channel id="MBCAction">1:0:1:7:1BC0:2BE:1040000:0:0:0:</channel> 
-<channel id="MBCBollywood">1:0:1:8:3B:800:DC00000:0:0:0:</channel>
+<channel id="MBCBollywood">1:0:1:9:3C:800:DCA0000:0:0:0:</channel> 
 <channel id="MBCBollywood">1:0:1:5:1BC0:2BE:1040000:0:0:0:</channel> 
 <channel id="MBC+Drama">1:0:1:A:3C3:800:DCA0000:0:0:0:</channel> 
-<channel id="MBCMovieMax">1:0:1:8:1BC0:2BE:1040000:0:0:0:</channel> 
-<channel id="MBCIraq">1:0:1:B05:1C:800:DCA0000:0:0:0:</channel>
+<channel id="MBCMovieMax">1:0:1:8:3C:800:DCA0000:0:0:0:</channel>  
+<channel id="MBCIraq">1:0:1:85E:15:800:DCA0000:0:0:0:</channel>
 <channel id="MBCIraq">1:0:1:3:1F7:2BE:1040000:0:0:0:</channel>
 <channel id="MBCCinq">1:0:1:3:3C:800:DCA0000:0:0:0:</channel>
 <channel id="MBCEgypt">1:0:1:51A:D:800:DCA0000:0:0:0:</channel>
