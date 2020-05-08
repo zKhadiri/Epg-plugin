@@ -121,12 +121,6 @@
 <channel id="Alfa_Music_Now">1:0:1:A94:1:2A:DCA0000:0:0:0:</channel> <!-- "Music:Now" -->
 <channel id="VH1">1:0:1:DE:2:800:DCA0000:0:0:0:</channel> <!-- "VH1" -->
 <channel id="Bloomberg">1:0:1:C9:2:800:DCA0000:0:0:0</channel> <!-- "Bloomberg" -->
-<channel id="ART_Aflam_1">1:0:1:2C2:7:800:DCA0000:0:0:0</channel>
-<channel id="ART_Aflam_2">1:0:1:2C4:7:800:DCA0000:0:0:0</channel>
-<channel id="ART_Cinema">1:0:1:2C5:7:800:DCA0000:0:0:0</channel>
-<channel id="Hekayat">1:0:1:2BF:7:800:DCA0000:0:0:0</channel>
-<channel id="Hekayat_2">1:0:1:2C1:7:800:DCA0000:0:0:0</channel>
-<channel id="Hekayat_HD">1:0:1:30C:7:800:DCA0000:0:0:0</channel>
 <channel id="Sky_News_HD">1:0:19:12C5:30:800:DCA0000:0:0:0:</channel>
 <channel id="ABS-CBN_Sports+Action">1:0:1:D6:2:800:DCA0000:0:0:0:</channel>
 <channel id="Aksyon_TV">1:0:1:DC:2:800:DCA0000:0:0:0</channel>

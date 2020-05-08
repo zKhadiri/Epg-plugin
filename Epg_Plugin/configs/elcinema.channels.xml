@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <channels>
+<channel id="LBC">1:0:1:5EA:38:800:DCA0000:0:0:0</channel>
+<channel id="AlDafrah">1:0:19:19D3:42:800:DCA0000:0:0:0</channel>
+<channel id="Lana">1:0:1:139:C9:6E:DCA0000:0:0:0</channel>
 <channel id="RotanaCinema">1:0:16:770:12C:13E:820000:0:0:0:</channel>
 <channel id="RotanaClassic">1:0:16:779:12C:13E:820000:0:0:0:</channel>
 <channel id="RotanaCinema">1:0:1:15E7:0:0:20D2F16:0:0:0:</channel>
@@ -65,4 +68,10 @@
 <channel id="Mix">1:0:1:13F7:33:800:DCA0000:0:0:0</channel>
 <channel id="Zeealwan">1:0:1:AFC:1C:800:DCA0000:0:0:0</channel>
 <channel id="AlKaheraWalNasTV">1:0:1:1EA:5:800:DCA0000:0:0:0</channel>
+<channel id="ARTAflam1">1:0:1:2C2:7:800:DCA0000:0:0:0</channel>
+<channel id="ARTAflam2">1:0:1:2C4:7:800:DCA0000:0:0:0</channel>
+<channel id="ARTCinema">1:0:1:2C5:7:800:DCA0000:0:0:0</channel>
+<channel id="ARTHekayat">1:0:1:2BF:7:800:DCA0000:0:0:0</channel>
+<channel id="ARTHekayat2">1:0:1:2C1:7:800:DCA0000:0:0:0</channel>
+<channel id="ARTHekayat">1:0:1:30C:7:800:DCA0000:0:0:0</channel>
 </channels>
