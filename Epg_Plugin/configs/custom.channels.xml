@@ -120,8 +120,29 @@
 <channel id="Alfa_Fann">1:0:1:A93:1:2A:DCA0000:0:0:0:</channel> <!-- "Fann" -->
 <channel id="Alfa_Music_Now">1:0:1:A94:1:2A:DCA0000:0:0:0:</channel> <!-- "Music:Now" -->
 <channel id="VH1">1:0:1:DE:2:800:DCA0000:0:0:0:</channel> <!-- "VH1" -->
-<channel id="Viva_TV">1:0:1:D9:2:800:DCA0000:0:0:0</channel> <!-- "Viva" -->
 <channel id="Bloomberg">1:0:1:C9:2:800:DCA0000:0:0:0</channel> <!-- "Bloomberg" -->
+<channel id="ART_Aflam_1">1:0:1:2C2:7:800:DCA0000:0:0:0</channel>
+<channel id="ART_Aflam_2">1:0:1:2C4:7:800:DCA0000:0:0:0</channel>
+<channel id="ART_Cinema">1:0:1:2C5:7:800:DCA0000:0:0:0</channel>
+<channel id="Hekayat">1:0:1:2BF:7:800:DCA0000:0:0:0</channel>
+<channel id="Hekayat_2">1:0:1:2C1:7:800:DCA0000:0:0:0</channel>
+<channel id="Hekayat_HD">1:0:1:30C:7:800:DCA0000:0:0:0</channel>
+<channel id="Sky_News_HD">1:0:19:12C5:30:800:DCA0000:0:0:0:</channel>
+<channel id="ABS-CBN_Sports+Action">1:0:1:D6:2:800:DCA0000:0:0:0:</channel>
+<channel id="Aksyon_TV">1:0:1:DC:2:800:DCA0000:0:0:0</channel>
+<channel id="ANC">1:0:1:E0:2:800:DCA0000:0:0:0:</channel>
+<channel id="ARC">1:0:1:DD:2:800:DCA0000:0:0:0:</channel>
+<channel id="CineMo">1:0:1:DF:2:800:DCA0000:0:0:0</channel>
+<channel id="Cinema_One_Global">1:0:1:D8:2:800:DCA0000:0:0:0:</channel>
+<channel id="CNBC_Europe">1:0:1:CF:2:800:DCA0000:0:0:0:</channel>
+<channel id="GMA_Life_TV">1:0:1:D3:2:800:DCA0000:0:0:0:</channel>
+<channel id="GMA_News_TV">1:0:1:CB:2:800:DCA0000:0:0:0:</channel>
+<channel id="GMA_Pinoy_TV">1:0:1:CA:2:800:DCA0000:0:0:0:</channel>
+<channel id="Lifestyle_Network">1:0:1:DA:2:800:DCA0000:0:0:0:</channel>
+<channel id="Net_25">1:0:1:CE:2:800:DCA0000:0:0:0</channel>
+<channel id="TeleRadyo">1:0:1:D7:2:800:DCA0000:0:0:0</channel>
+<channel id="TFC">1:0:1:CD:2:800:DCA0000:0:0:0:</channel>
+<channel id="VIVA_TV">1:0:1:D9:2:800:DCA0000:0:0:0</channel>
 <!-- SNRT -->
 <channel id="Aloula.ma">1:0:1:3:2E18:B0:820000:0:0:0:</channel> <!-- "aloula" -->
 <channel id="Arriadia.ma">1:0:1:A:2E18:B0:820000:0:0:0:</channel> <!-- "arriadia" -->
@@ -133,6 +154,8 @@
 <channel id="Aloula.ma">1:0:1:1:320:2BE:1040000:0:0:0:</channel> <!-- "aloula" -->
 <channel id="Arriadia.ma">1:0:1:1E:320:2BE:1040000:0:0:0:</channel> <!-- "arriadia" -->
 <channel id="Arriadia.ma">1:0:1:1F:320:2BE:1040000:0:0:0:</channel> <!-- "arriadia" -->
+<channel id="Aloula.ma">1:0:1:1:9D08:77E:DCA0000:0:0:0</channel>
+<channel id="2M.ma">1:0:1:2:9D08:77E:DCA0000:0:0:0</channel>
 <!-- bein entertainment -->
 <channel id="MoviesHD1">1:0:19:28A6:410:E0:1040000:0:0:0:</channel> <!-- "MoviesHD1" -->
 <channel id="MoviesHD2">1:0:19:29D2:42E:E0:1040000:0:0:0:</channel> <!-- "MoviesHD2" -->

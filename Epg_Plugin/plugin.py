@@ -18,10 +18,10 @@ def checkInternet():
         return True
 
 def main(session, **kwargs):
-	if checkInternet:
-		session.open(interfaces.EPGIConfig)
-	else:
-		session.open(MessageBox, "Check your internet", MessageBox.TYPE_INFO)
+    if checkInternet:
+        session.open(interfaces.EPGIConfig)
+    else:
+        session.open(MessageBox, "Check your internet", MessageBox.TYPE_INFO)
   
 def Plugins(**kwargs):
 	return PluginDescriptor(
