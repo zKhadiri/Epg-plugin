@@ -141,17 +141,17 @@ class EPGIConfig(Screen):
         self.session = session
         list = []
         self.installList=[] ## New from mf to make choose list
-
-        list.append(("Bein Sports EPG", "1","bein"))
-        list.append(("ondemand/yahala/yahala oula EPG", "2","osn"))
-        list.append(("Bein entertainment EPG", "3","beinent"))
-        list.append(("SNRT EPG", "4","aloula"))
-        list.append(("ELCINEMA WEBSITE EPG", "5","elcin"))
-        list.append(("MBC.NET", "6","mbc"))
-        list.append(("DSTV.ZA", "7","dstv"))
-        list.append(("SuperSport.ZA BACKUP", "8","dstvback"))
-        list.append(("Osnplay BACKUP", "9","osnplay"))
-        list.append(("Spacetoon epg", "10","spacetoon"))
+                                            #py    #times  #xml_file
+        list.append(("Bein Sports EPG", "0","bein","bein","bein"))
+        list.append(("ondemand/yahala/yahala oula EPG", "1","osn","osn","osn"))
+        list.append(("Bein entertainment EPG", "2","beinent","beinent","beinent"))
+        list.append(("SNRT EPG", "3","aloula","aloula","aloula"))
+        list.append(("ELCINEMA WEBSITE EPG", "4","elcin","elcinema","elcinema"))
+        list.append(("MBC.NET", "5","mbc","mbc","mbc"))
+        list.append(("DSTV.ZA", "6","dstv","dstv","dstv"))
+        list.append(("SuperSport.ZA BACKUP", "7","dstvback","dstvback","dstv"))
+        list.append(("Osnplay BACKUP", "8","osnplay","osnback","osnplay"))
+        list.append(("Spacetoon epg", "9","spacetoon","space","spacetoon"))
         self.provList=list ## New from mf to make choose list
         Screen.__init__(self, session)
         self.skinName = ["EPGIConfig"]
@@ -298,342 +298,58 @@ class EPGIConfig(Screen):
         self["config"].down()
         self.update()
 
+    
     def update(self):
-        index=self['config'].getSelectionIndex() ## New from mf to make choose list
-        returnValue=self.provList[index][1] ## New from mf to make choose list
-        #returnValue = self["config"].l.getCurrentSelection()[1]
-        if returnValue == "1":
-            f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/bein.txt", "r")
-            self["status"].setText("Current bein sports time zone  : "+f1.read().strip())
-            f1.close()
-        elif returnValue =="2":
-            f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/osn.txt", "r")
-            self["status"].setText("Current osn time zone  : "+f1.read().strip())
-            f1.close()
-        elif returnValue =="3":
-            f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/beinent.txt", "r")
-            self["status"].setText("Current Bein entertainment time zone  : "+f1.read().strip())
-            f1.close()
-        elif returnValue =="4":
-            f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/aloula.txt", "r")
-            self["status"].setText("Current snrt time zone  : "+f1.read().strip())
-            f1.close()
-        elif returnValue =="5":
-            f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/elcinema.txt", "r")
-            self["status"].setText("Current elcinema time zone  : "+f1.read().strip())
-            f1.close()
-        elif returnValue =="6":
-            f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/mbc.txt", "r")
-            self["status"].setText("Current mbc time zone  : "+f1.read().strip())
-            f1.close()
-        elif returnValue =="7":
-            f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/dstv.txt", "r")
-            self["status"].setText("Current dstv time zone  : "+f1.read().strip())
-            f1.close()
-        elif returnValue =="8":
-            f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/dstvback.txt", "r")
-            self["status"].setText("Current SuperSport time zone  : "+f1.read().strip())
-            f1.close()
-        elif returnValue =="9":
-            f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/osnback.txt", "r")
-            self["status"].setText("Current Osnplay time zone  : "+f1.read().strip())
-            f1.close()
-        elif returnValue =="10":
-            f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/space.txt", "r")
-            self["status"].setText("Current Spacetoon time zone  : "+f1.read().strip())
-            f1.close()    
-        
-        else:
-            self["status"].setText("")
-
-    def settime(self):
-        index=self['config'].getSelectionIndex() ## New from mf to make choose list
-        returnValue=self.provList[index][1] ## New from mf to make choose list
-        #returnValue = self["config"].l.getCurrentSelection()[1]
-        if returnValue is not None:
-            if returnValue == "1":
-                if fileExists("/etc/epgimport/bein.xml"):
-                    f = open('/etc/epgimport/bein.xml','r')
-                    time_of = re.search(r'[+#-]+\d{4}',f.read())
-                    f.close()
-                    f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/bein.txt", "r")
-                    newtime=f1.read()
-                    f1.close()
-                    if time_of !=None:
-                        with io.open("/etc/epgimport/bein.xml",encoding="utf-8") as f:
-                            newText=f.read().decode('utf-8').replace(time_of.group(), newtime)
-                            with io.open("/etc/epgimport/bein.xml", "w",encoding="utf-8") as f:
-                                f.write((newText).decode('utf-8'))
-                                self.session.open(MessageBox,_("current bein sports time "+time_of.group()+" replaced by "+newtime), MessageBox.TYPE_INFO,timeout=10)
-                    else:
-                        self.session.open(MessageBox,_("File is empty"), MessageBox.TYPE_INFO,timeout=10)
-                else:
-                    self.session.open(MessageBox,_("bein.xml not found in path"), MessageBox.TYPE_INFO,timeout=10)
-            
-            if returnValue == "2":
-                if fileExists("/etc/epgimport/osn.xml"):
-                    f = open('/etc/epgimport/osn.xml','r')
-                    time_of = re.search(r'[+#-]+\d{4}',f.read())
-                    f.close()
-                    f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/osn.txt", "r")
-                    newtime=f1.read()
-                    f1.close()
-                    if time_of !=None:
-                        with io.open("/etc/epgimport/osn.xml",encoding="utf-8") as f:
-                            newText=f.read().decode('utf-8').replace(time_of.group(), newtime)
-                            with io.open("/etc/epgimport/osn.xml", "w",encoding="utf-8") as f:
-                                f.write((newText).decode('utf-8'))
-                                self.session.open(MessageBox,_("current osn time "+time_of.group()+" replaced by "+newtime), MessageBox.TYPE_INFO,timeout=10)
-                    else:
-                        self.session.open(MessageBox,_("File is empty"), MessageBox.TYPE_INFO,timeout=10)
-                else:
-                    self.session.open(MessageBox,_("osn.xml not found in path"), MessageBox.TYPE_INFO,timeout=10)
-            
-            if returnValue == "3":
-                if fileExists("/etc/epgimport/beinent.xml"):
-                    f = open('/etc/epgimport/beinent.xml','r')
-                    time_of = re.search(r'[+#-]+\d{4}',f.read())
-                    f.close()
-                    f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/beinent.txt", "r")
-                    newtime=f1.read()
-                    f1.close()
-                    if time_of !=None:
-                        with io.open("/etc/epgimport/beinent.xml",encoding="utf-8") as f:
-                            newText=f.read().decode('utf-8').replace(time_of.group(), newtime)
-                            with io.open("/etc/epgimport/beinent.xml", "w",encoding="utf-8") as f:
-                                f.write((newText).decode('utf-8'))
-                                self.session.open(MessageBox,_("current Bein entertainment time "+time_of.group()+" replaced by "+newtime), MessageBox.TYPE_INFO,timeout=10)
-                    else:
-                        self.session.open(MessageBox,_("File is empty"), MessageBox.TYPE_INFO,timeout=10)
-                else:
-                    self.session.open(MessageBox,_("beinent.xml not found in path"), MessageBox.TYPE_INFO,timeout=10)
-                    
-            if returnValue == "4":
-                if fileExists("/etc/epgimport/aloula.xml"):
-                    f = open('/etc/epgimport/aloula.xml','r')
-                    time_of = re.search(r'[+#-]+\d{4}',f.read())
-                    f.close()
-                    f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/aloula.txt", "r")
-                    newtime=f1.read()
-                    f1.close()
-                    if time_of !=None:
-                        with io.open("/etc/epgimport/aloula.xml",encoding="utf-8") as f:
-                            newText=f.read().decode('utf-8').replace(time_of.group(), newtime)
-                            with io.open("/etc/epgimport/aloula.xml", "w",encoding="utf-8") as f:
-                                f.write((newText).decode('utf-8'))
-                                self.session.open(MessageBox,_("current snrt time "+time_of.group()+" replaced by "+newtime), MessageBox.TYPE_INFO,timeout=10)
-                    else:
-                        self.session.open(MessageBox,_("File is empty"), MessageBox.TYPE_INFO,timeout=10)
-                else:
-                    self.session.open(MessageBox,_("aloula.xml not found in path"), MessageBox.TYPE_INFO,timeout=10)
-                    
-            if returnValue == "5":
-                if fileExists("/etc/epgimport/elcinema.xml"):
-                    f = open('/etc/epgimport/elcinema.xml','r')
-                    time_of = re.search(r'[+#-]+\d{4}',f.read())
-                    f.close()
-                    f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/elcinema.txt", "r")
-                    newtime=f1.read()
-                    f1.close()
-                    if time_of !=None:
-                        with io.open("/etc/epgimport/elcinema.xml",encoding="utf-8") as f:
-                            newText=f.read().decode('utf-8').replace(time_of.group(), newtime)
-                            with io.open("/etc/epgimport/elcinema.xml", "w",encoding="utf-8") as f:
-                                f.write((newText).decode('utf-8'))
-                                self.session.open(MessageBox,_("current elcinema time "+time_of.group()+" replaced by "+newtime), MessageBox.TYPE_INFO,timeout=10)
-                    else:
-                        self.session.open(MessageBox,_("File is empty"), MessageBox.TYPE_INFO,timeout=10)
-                else:
-                    self.session.open(MessageBox,_("elcinema.xml not found in path"), MessageBox.TYPE_INFO,timeout=10)
-                    
-           
-                    
-            if returnValue == "6":
-                if fileExists("/etc/epgimport/mbc.xml"):
-                    f = open('/etc/epgimport/mbc.xml','r')
-                    time_of = re.search(r'[+#-]+\d{4}',f.read())
-                    f.close()
-                    f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/mbc.txt", "r")
-                    newtime=f1.read()
-                    f1.close()
-                    if time_of !=None:
-                        with io.open("/etc/epgimport/mbc.xml",encoding="utf-8") as f:
-                            newText=f.read().decode('utf-8').replace(time_of.group(), newtime)
-                            with io.open("/etc/epgimport/mbc.xml", "w",encoding="utf-8") as f:
-                                f.write((newText).decode('utf-8'))
-                                self.session.open(MessageBox,_("current mbc time "+time_of.group()+" replaced by "+newtime), MessageBox.TYPE_INFO,timeout=10)
-                    else:
-                        self.session.open(MessageBox,_("File is empty"), MessageBox.TYPE_INFO,timeout=10)
-                else:
-                    self.session.open(MessageBox,_("mbc.xml not found in path"), MessageBox.TYPE_INFO,timeout=10)
-                    
-            if returnValue == "7":
-                if fileExists("/etc/epgimport/dstv.xml"):
-                    f = open('/etc/epgimport/dstv.xml','r')
-                    time_of = re.search(r'[+#-]+\d{4}',f.read())
-                    f.close()
-                    f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/dstv.txt", "r")
-                    newtime=f1.read()
-                    f1.close()
-                    if time_of !=None:
-                        with io.open("/etc/epgimport/dstv.xml",encoding="utf-8") as f:
-                            newText=f.read().decode('utf-8').replace(time_of.group(), newtime)
-                            with io.open("/etc/epgimport/dstv.xml", "w",encoding="utf-8") as f:
-                                f.write((newText).decode('utf-8'))
-                                self.session.open(MessageBox,_("current dstv time "+time_of.group()+" replaced by "+newtime), MessageBox.TYPE_INFO,timeout=10)
-                    else:
-                        self.session.open(MessageBox,_("File is empty"), MessageBox.TYPE_INFO,timeout=10)
-                else:
-                    self.session.open(MessageBox,_("dstv.xml not found in path"), MessageBox.TYPE_INFO,timeout=10) 
-                    
-            if returnValue == "8":
-                if fileExists("/etc/epgimport/dstv.xml"):
-                    f = open('/etc/epgimport/dstv.xml','r')
-                    time_of = re.search(r'[+#-]+\d{4}',f.read())
-                    f.close()
-                    f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/dstvback.txt", "r")
-                    newtime=f1.read()
-                    f1.close()
-                    if time_of !=None:
-                        with io.open("/etc/epgimport/dstv.xml",encoding="utf-8") as f:
-                            newText=f.read().decode('utf-8').replace(time_of.group(), newtime)
-                            with io.open("/etc/epgimport/dstv.xml", "w",encoding="utf-8") as f:
-                                f.write((newText).decode('utf-8'))
-                                self.session.open(MessageBox,_("current SuperSport time "+time_of.group()+" replaced by "+newtime), MessageBox.TYPE_INFO,timeout=10)
-                    else:
-                        self.session.open(MessageBox,_("File is empty"), MessageBox.TYPE_INFO,timeout=10)
-                else:
-                    self.session.open(MessageBox,_("dstv.xml not found in path"), MessageBox.TYPE_INFO,timeout=10)
-                    
-            if returnValue == "9":
-                if fileExists("/etc/epgimport/osnplay.xml"):
-                    f = open('/etc/epgimport/osnplay.xml','r')
-                    time_of = re.search(r'[+#-]+\d{4}',f.read())
-                    f.close()
-                    f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/osnback.txt", "r")
-                    newtime=f1.read()
-                    f1.close()
-                    if time_of !=None:
-                        with io.open("/etc/epgimport/osnplay.xml",encoding="utf-8") as f:
-                            newText=f.read().decode('utf-8').replace(time_of.group(), newtime)
-                            with io.open("/etc/epgimport/osnplay.xml", "w",encoding="utf-8") as f:
-                                f.write((newText).decode('utf-8'))
-                                self.session.open(MessageBox,_("current Osnplay time "+time_of.group()+" replaced by "+newtime), MessageBox.TYPE_INFO,timeout=10)
-                    else:
-                        self.session.open(MessageBox,_("File is empty"), MessageBox.TYPE_INFO,timeout=10)
-                else:
-                    self.session.open(MessageBox,_("osnplay.xml not found in path"), MessageBox.TYPE_INFO,timeout=10)
-            
-            if returnValue == "10":
-                if fileExists("/etc/epgimport/spacetoon.xml"):
-                    f = open('/etc/epgimport/spacetoon.xml','r')
-                    time_of = re.search(r'[+#-]+\d{4}',f.read())
-                    f.close()
-                    f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/space.txt", "r")
-                    newtime=f1.read()
-                    f1.close()
-                    if time_of !=None:
-                        with io.open("/etc/epgimport/spacetoon.xml",encoding="utf-8") as f:
-                            newText=f.read().decode('utf-8').replace(time_of.group(), newtime)
-                            with io.open("/etc/epgimport/spacetoon.xml", "w",encoding="utf-8") as f:
-                                f.write((newText).decode('utf-8'))
-                                self.session.open(MessageBox,_("current Spacetoon time "+time_of.group()+" replaced by "+newtime), MessageBox.TYPE_INFO,timeout=10)
-                    else:
-                        self.session.open(MessageBox,_("File is empty"), MessageBox.TYPE_INFO,timeout=10)
-                else:
-                    self.session.open(MessageBox,_("spacetoon.xml not found in path"), MessageBox.TYPE_INFO,timeout=10)
-
+        index=self['config'].getSelectionIndex()
+        returnValue=self.provList[index][1]
+        for i in range(len(self.provList)):
+            if returnValue == str(i):
+                provTag = self.provList[i][3]
+                provName = self.provList[i][0]
+                f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/"+provTag+".txt", "r")
+                self["status"].setText("Current "+provName+" time zone  : "+f1.read().strip())
+                f1.close()
+                
     def KeyBlue(self):
-        index=self['config'].getSelectionIndex() ## New from mf to make choose list
-        returnValue=self.provList[index][1] ## New from mf to make choose list
-        if returnValue is not None:
-            if returnValue == "1":
+        index=self['config'].getSelectionIndex()
+        returnValue=self.provList[index][1]
+        for i in range(len(self.provList)):
+            if returnValue == str(i):
+                provTag = self.provList[i][3]
+                provName = self.provList[i][0]
                 f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
                 new_time = f.read().strip()
                 f.close()
-                with io.open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/bein.txt","w",encoding='UTF-8')as f1:
+                with io.open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/"+provTag+".txt","w",encoding='UTF-8')as f1:
                     f1.write(new_time.decode('utf-8'))
                     self.session.open(MessageBox,_("time changed with succes "+new_time), MessageBox.TYPE_INFO,timeout=10)
-                    self["status"].setText("Current bein sports time zone  : "+new_time)
-
-            elif returnValue == "2":
-                f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
-                new_time = f.read().strip()
-                f.close()
-                with io.open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/osn.txt","w",encoding='UTF-8')as f1:
-                    f1.write(new_time.decode('utf-8'))
-                    self.session.open(MessageBox,_("time changed with succes "+new_time), MessageBox.TYPE_INFO,timeout=10)
-                    self["status"].setText("Current osn time zone  : "+new_time)
-
-            elif returnValue == "3":
-                f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
-                new_time = f.read().strip()
-                f.close()
-                with io.open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/beinent.txt","w",encoding='UTF-8')as f1:
-                    f1.write(new_time.decode('utf-8'))
-                    self.session.open(MessageBox,_("time changed with succes "+new_time), MessageBox.TYPE_INFO,timeout=10)
-                    self["status"].setText("Current Bein entertainment time zone  : "+new_time)
-            elif returnValue == "4":
-                f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
-                new_time = f.read().strip()
-                f.close()
-                with io.open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/aloula.txt","w",encoding='UTF-8')as f1:
-                    f1.write(new_time.decode('utf-8'))
-                    self.session.open(MessageBox,_("time changed with succes "+new_time), MessageBox.TYPE_INFO,timeout=10)
-                    self["status"].setText("Current snrt time zone  : "+new_time)
-            elif returnValue == "5":
-                f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
-                new_time = f.read().strip()
-                f.close()
-                with io.open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/elcinema.txt","w",encoding='UTF-8')as f1:
-                    f1.write(new_time.decode('utf-8'))
-                    self.session.open(MessageBox,_("time changed with succes "+new_time), MessageBox.TYPE_INFO,timeout=10)
-                    self["status"].setText("Current elcinema time zone  : "+new_time)
-            
-            elif returnValue == "6":
-                f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
-                new_time = f.read().strip()
-                f.close()
-                with io.open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/mbc.txt","w",encoding='UTF-8')as f1:
-                    f1.write(new_time.decode('utf-8'))
-                    self.session.open(MessageBox,_("time changed with succes "+new_time), MessageBox.TYPE_INFO,timeout=10)
-                    self["status"].setText("Current mbc time zone  : "+new_time)
-                    
-            elif returnValue == "7":
-                f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
-                new_time = f.read().strip()
-                f.close()
-                with io.open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/dstv.txt","w",encoding='UTF-8')as f1:
-                    f1.write(new_time.decode('utf-8'))
-                    self.session.open(MessageBox,_("time changed with succes "+new_time), MessageBox.TYPE_INFO,timeout=10)
-                    self["status"].setText("Current dstv time zone  : "+new_time)
-
-            elif returnValue == "8":
-                f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
-                new_time = f.read().strip()
-                f.close()
-                with io.open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/dstvback.txt","w",encoding='UTF-8')as f1:
-                    f1.write(new_time.decode('utf-8'))
-                    self.session.open(MessageBox,_("time changed with succes "+new_time), MessageBox.TYPE_INFO,timeout=10)
-                    self["status"].setText("Current SuperSport time zone  : "+new_time)
-                    
-            elif returnValue == "9":
-                f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
-                new_time = f.read().strip()
-                f.close()
-                with io.open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/osnback.txt","w",encoding='UTF-8')as f1:
-                    f1.write(new_time.decode('utf-8'))
-                    self.session.open(MessageBox,_("time changed with succes "+new_time), MessageBox.TYPE_INFO,timeout=10)
-                    self["status"].setText("Current Osnplay time zone  : "+new_time)
-                    
-            elif returnValue == "10":
-                f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
-                new_time = f.read().strip()
-                f.close()
-                with io.open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/space.txt","w",encoding='UTF-8')as f1:
-                    f1.write(new_time.decode('utf-8'))
-                    self.session.open(MessageBox,_("time changed with succes "+new_time), MessageBox.TYPE_INFO,timeout=10)
-                    self["status"].setText("Current Spacetoon time zone  : "+new_time)
+                    self["status"].setText("Current "+provName+" time zone  : "+new_time)
+    
+    def settime(self):
+        index=self['config'].getSelectionIndex()
+        returnValue=self.provList[index][1]
+        for i in range(len(self.provList)):
+            if returnValue == str(i):
+                provTag = self.provList[i][3]
+                provName = self.provList[i][0]
+                provFile = self.provList[i][4]
+                if fileExists("/etc/epgimport/"+provFile+".xml"):
+                    f = open('/etc/epgimport/'+provFile+'.xml','r')
+                    time_of = re.search(r'[+#-]+\d{4}',f.read())
+                    f.close()
+                    f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/"+provTag+".txt", "r")
+                    newtime=f1.read()
+                    f1.close()
+                    if time_of !=None:
+                        with io.open("/etc/epgimport/"+provFile+".xml",encoding="utf-8") as f:
+                            newText=f.read().decode('utf-8').replace(time_of.group(), newtime)
+                            with io.open("/etc/epgimport/"+provFile+".xml", "w",encoding="utf-8") as f:
+                                f.write((newText).decode('utf-8'))
+                                self.session.open(MessageBox,_("current "+provName+" time "+time_of.group()+" replaced by "+newtime), MessageBox.TYPE_INFO,timeout=10)
+                    else:
+                        self.session.open(MessageBox,_("File is empty"), MessageBox.TYPE_INFO,timeout=10)
+                else:
+                    self.session.open(MessageBox,_(provFile+".xml not found in path"), MessageBox.TYPE_INFO,timeout=10)
 
     def keyRed(self): ## New from mf to make choose list
         if len(self.installList)>0:
