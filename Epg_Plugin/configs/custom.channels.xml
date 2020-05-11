@@ -38,8 +38,6 @@
 <channel id="HD9">1:0:19:839:C8:77E:DCA0000:0:0:0</channel> <!-- "HD9" -->
 <channel id="HD10">1:0:1:899:12C:77E:DCA0000:0:0:0</channel> <!-- "HD10" -->
 <!-- "BADER 26e" -->
-<channel id="SportsGlobalHD">1:0:19:83A:C8:77E:DCA0000:0:0:0:</channel> <!-- SportsGlobalHD -->
-<channel id="News_ar">1:0:1:89A:12C:77E:DCA0000:0:0:0:</channel> <!-- news -->
 <channel id="HD1">1:0:19:28A1:410:E0:1040000:0:0:0</channel> <!-- "HD1" -->
 <channel id="HD2">1:0:19:28A1:410:E0:1040000:0:0:0</channel> <!-- "HD2" -->
 <channel id="HD3">1:0:19:28A3:410:E0:1040000:0:0:0</channel> <!-- "HD3" -->
@@ -139,6 +137,15 @@
 <channel id="VIVA_TV">1:0:1:D9:2:800:DCA0000:0:0:0</channel>
 <channel id="OSN_Mix">1:0:19:1199:2D:800:DCA0000:0:0:0</channel>
 <channel id="Myx">1:0:1:D1:2:800:DCA0000:0:0:0</channel>
+<!-- ALFA 8W -->
+<channel id="Alfa_Al_Yawm_HD">1:0:1:A8D:1:2A:DC00000:0:0:0:</channel> <!-- "Al:Yawm" -->
+<channel id="Alfa_Cinema_1">1:0:1:A8F:1:2A:DC00000:0:0:0:</channel> <!-- "Cinema:1" -->
+<channel id="Alfa_Cinema_2">1:0:1:A90:1:2A:DC00000:0:0:0:</channel> <!-- "Cinema:2" -->
+<channel id="Alfa_Series_HD">1:0:19:A92:1:2A:DC00000:0:0:0:</channel> <!-- "Series:Channel" -->
+<channel id="Alfa_Series_+2_HD">1:0:19:A91:1:2A:DC00000:0:0:0:</channel> <!-- "Series:+2" -->
+<channel id="Alfa_Fann">1:0:1:A93:1:2A:DC00000:0:0:0:</channel> <!-- "Fann" -->
+<channel id="Alfa_Music_Now">1:0:1:A94:1:2A:DC00000:0:0:0:</channel> <!-- "Music:Now" -->
+<channel id="Alfa_Al_Safwa">1:0:1:A8E:1:2A:DC00000:0:0:0:</channel> <!-- "Al:Safwa" -->
 <!-- SNRT -->
 <channel id="Aloula.ma">1:0:1:3:2E18:B0:820000:0:0:0:</channel> <!-- "aloula" -->
 <channel id="Arriadia.ma">1:0:1:A:2E18:B0:820000:0:0:0:</channel> <!-- "arriadia" -->
