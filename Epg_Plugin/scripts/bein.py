@@ -37,10 +37,9 @@ with io.open("/etc/epgimport/bein.xml","w",encoding='UTF-8')as f:
 for cc in ch.chann:
     with io.open("/etc/epgimport/bein.xml","a",encoding='UTF-8')as f:
         f.write(("\n"+'  <channel id="'+cc.replace(" ","_")+'">'+"\n"+'    <display-name lang="en">'+cc.replace("_"," ")+'</display-name>'+"\n"+'    <icon src="http://epg.beinsports.com/mena_sports/'+cc.replace('BS_NBA','BS NBA')+'.svg"/>'+"\n"+'    <url>http://www.bein.net/ar</url>'+"\n"+'  </channel>\r').decode('utf-8'))
-alls=[]
+
 def bein():
     for url in urls:
-        alls[:]=[]
         from datetime import datetime
         with requests.Session() as s:
             s.mount('http://', HTTPAdapter(max_retries=10))
@@ -66,15 +65,20 @@ def bein():
             for title_,form_ in zip(title_chan,formt):
                 titles.append(4*' '+'<title lang="en">'+title_.replace('&','and')+' - '+form_.replace('2014','2020')+'</title>'+'\n')
 
-            for time_,chann_ in zip(times,channels):
+            for time_,chann_,chc,chch in zip(times,channels,channels,channels[1:]+[channels[0]]):
                 from datetime import timedelta
                 date = re.search(r'\d{4}-\d{2}-\d{2}',url)
                 end ='05:59'
                 start='18:00'
-                if time_[0]>=start and time_[1]<=end:
+                if time_[0]>=start and time_[1]<=end and chc==chch:
                     fix = (datetime.strptime(date.group(),'%Y-%m-%d')-timedelta(days=1)).strftime('%Y-%m-%d')
                     starttime = datetime.strptime(fix+' '+time_[0],'%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
                     endtime = datetime.strptime(date.group()+' ' + time_[1], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
+                    prog.append(2 * ' ' + '<programme start="' + starttime + ' '+time_zone+'" stop="' + endtime + ' '+time_zone+'" channel="'+chann_.replace('BS NBA','BS_NBA')+'">'+'\n')
+                elif chc!=chch and time_[1]>='00:00':
+                    fix = (datetime.strptime(date.group(),'%Y-%m-%d')+timedelta(days=1)).strftime('%Y-%m-%d')
+                    starttime = datetime.strptime(date.group()+' '+time_[0],'%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
+                    endtime = datetime.strptime(fix+' ' + time_[1], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
                     prog.append(2 * ' ' + '<programme start="' + starttime + ' '+time_zone+'" stop="' + endtime + ' '+time_zone+'" channel="'+chann_.replace('BS NBA','BS_NBA')+'">'+'\n')
                 else:
                     starttime = datetime.strptime(date.group()+' '+time_[0],'%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
@@ -83,14 +87,11 @@ def bein():
     
             if len(title) !=0:
                 for tt,d,p in zip(titles,desc,prog):
-                    alls.append(p+tt+d)
+                    with io.open("/etc/epgimport/bein.xml","a",encoding='UTF-8')as fil:
+                        fil.write(p+tt+d)
                 dat = re.search(r'\d{4}-\d{2}-\d{2}',url)
                 print('Date'+' : '+dat.group())
                 sys.stdout.flush()
-                for pr,chc,chch in zip(alls,channels,channels[1:]+[channels[0]]):
-                    if chc == chch: 
-                        with io.open("/etc/epgimport/bein.xml","a",encoding='UTF-8')as fil:
-                            fil.write(pr)
             else:
                 print('No data found')
                 break
