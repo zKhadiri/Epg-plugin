@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <channels>
+<channel id="NetworkArabic">1:0:1:85C:15:800:DCA0000:0:0:0:</channel>
+<channel id="Watania1">1:0:1:E11:24:800:DCA0000:0:0:0:</channel>
+<channel id="MasperoZaman">1:0:1:267:6:800:DCA0000:0:0:0:</channel>
 <channel id="LBC">1:0:1:15EA:38:800:DCA0000:0:0:0</channel>
 <channel id="LBC">1:0:19:133:51:2BE:1040000:0:0:0:</channel>
 <channel id="LBC">1:0:1:3:2648:2BE:1040000:0:0:0:</channel>

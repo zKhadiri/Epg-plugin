@@ -2,8 +2,8 @@
 ##setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=7.1
-description=What_is_NEW:\n'[BEIN UPDATE]'
+version=7.2
+description=What_is_NEW:\n'[ELCINEMA NEW CHANNELS]'
 ##############################################################
 # No need to remove old version
 #rm -rf /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin
