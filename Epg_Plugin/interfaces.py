@@ -143,15 +143,15 @@ class EPGIConfig(Screen):
         self.installList=[] ## New from mf to make choose list
                                             #py    #times  #xml_file
         list.append(("Bein Sports EPG", "0","bein","bein","bein"))
-        list.append(("ondemand/yahala/yahala oula EPG", "1","osn","osn","osn"))
-        list.append(("Bein entertainment EPG", "2","beinent","beinent","beinent"))
-        list.append(("SNRT EPG", "3","aloula","aloula","aloula"))
+        list.append(("Bein entertainment EPG", "1","beinent","beinent","beinent"))
+        list.append(("ondemand/yahala/yahala oula EPG", "2","osn","osn","osn"))
+        list.append(("Osnplay BACKUP", "3","osnplay","osnback","osnplay"))
         list.append(("ELCINEMA WEBSITE EPG", "4","elcin","elcinema","elcinema"))
         list.append(("MBC.NET", "5","mbc","mbc","mbc"))
-        list.append(("DSTV.ZA", "6","dstv","dstv","dstv"))
-        list.append(("SuperSport.ZA BACKUP", "7","dstvback","dstvback","dstv"))
-        list.append(("Osnplay BACKUP", "8","osnplay","osnback","osnplay"))
-        list.append(("Spacetoon epg", "9","spacetoon","space","spacetoon"))
+        list.append(("SNRT EPG", "6","aloula","aloula","aloula"))
+        list.append(("Spacetoon epg", "7","spacetoon","space","spacetoon"))
+        list.append(("DSTV.ZA", "8","dstv","dstv","dstv"))
+        list.append(("SuperSport.ZA BACKUP", "9","dstvback","dstvback","dstv"))
         self.provList=list ## New from mf to make choose list
         Screen.__init__(self, session)
         self.skinName = ["EPGIConfig"]

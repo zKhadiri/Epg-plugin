@@ -25,7 +25,7 @@ def snrt():
     channe.append('  <channel id="Arriadia.ma">'+"\n"+'    <display-name lang="en">Arriadia HD</display-name>'+"\n"+'  </channel>'+"\n")
     channe.append('  <channel id="2M.ma">' + "\n" + '    <display-name lang="en">2M</display-name>' + "\n" + '  </channel>' + "\n")
     #channe.append('  <channel id="athaqafia.ma">' + "\n" + '    <display-name lang="en">Athaqafia HD</display-name>' + "\n" + '  </channel>' + "\n")
-    #channe.append('  <channel id="Medi1tv.ma">' + "\n" + '    <display-name lang="en">Medi1tv</display-name>' + "\n" + '  </channel>' + "\n")
+    channe.append('  <channel id="Medi1tv.ma">' + "\n" + '    <display-name lang="en">Medi1tv</display-name>' + "\n" + '  </channel>' + "\n")
     with io.open("/etc/epgimport/aloula.xml","w",encoding='UTF-8')as f:
         f.write(''.join(channe).decode('utf-8'))
     prog = []
@@ -228,10 +228,86 @@ def mm():
     except IndexError:
         print 'No data found for or missing data for 2M'
         sys.stdout.flush()
+        
+def medi():
+    times=[]
+    descrip=[]
+    titles=[]
+    glb_time=[]
+    time_chan=[]
+    alls=[]
+    i= datetime.today().weekday()
+    for j in range(i,7):
+        url = requests.get('http://www.medi1tv.com/ar/inc/grille.aspx?d='+str(j))
+        for des in re.findall(r'id=\"resumegrille-\d+\"\s+>(.*)',url.text):
+            if des==u'\r':
+                descrip.append(4 * ' ' + '<desc lang="ar">No description found for this program</desc>\n  </programme>\r')
+            else:
+                descrip.append(4 * ' ' + '<desc lang="ar">'+des.strip()+'</desc>\n  </programme>\r')
+                
+        for time in re.findall(r'\d{2}:\d{2}',url.text):
+            times.append(time)
+        
+        for title in re.findall(r'id=\"titregrille-\d+\"\s+>(.*?)</div>',url.text):
+            titles.append(4*' '+'<title lang="ar">' + title + '</title>' + "\n")
+        
+    today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0) 
+    last_hr = 0
+    for d in times:
+        h, m = map(int, d.split(":"))
+        if last_hr > h:
+            today += + timedelta(days=1)
+        last_hr = h
+        glb_time.append(today + timedelta(hours=h, minutes=m))
+    
+    for elem, next_elem in zip(glb_time, glb_time[1:] + [glb_time[0]]):
+        startime=datetime.strptime(str(elem),'%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
+        endtime=datetime.strptime(str(next_elem),'%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
+        time_chan.append(2 * ' ' + '<programme start="' + startime + ' '+time_zone+'" stop="' + endtime + ' '+time_zone+'" channel="Medi1tv.ma">' + '\n')   
+
+    for tt,p,d in zip(time_chan,titles,descrip):
+        alls.append(tt+p+d)
+    try:   
+        alls.pop(-1)
+        print 'Mediatv epg ends at : '+str(glb_time[-1])
+        sys.stdout.flush()
+        for progr in alls:
+            with io.open("/etc/epgimport/aloula.xml", "a", encoding='UTF-8')as f:
+                f.write(progr)       
+    except IndexError:
+        print 'No data found for or missing data for Mediatv'
+        sys.stdout.flush()
+
 if __name__ == '__main__': 
     snrt()
     arriadia()
     mm()
+    medi()
 
 with io.open("/etc/epgimport/aloula.xml", "a", encoding='UTF-8')as f:
     f.write(('</tv>').decode('utf-8'))
+    
+    
+if not os.path.exists('/etc/epgimport/custom.channels.xml'):
+    print('Downloading custom.channels config')
+    custom_channels=requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/custom.channels.xml?raw=true')
+    with io.open('/etc/epgimport/custom.channels.xml','w',encoding="utf-8") as f:
+        f.write(custom_channels.text)
+        
+if not os.path.exists('/etc/epgimport/custom.sources.xml'):
+    print('Downloading custom sources config')
+    custom_source=requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/custom.sources.xml?raw=true')
+    with io.open('/etc/epgimport/custom.sources.xml','w',encoding="utf-8") as f:
+        f.write(custom_source.text)
+
+if not os.path.exists('/etc/epgimport/elcinema.channels.xml'):
+    print('Downloading elcinema channels config')
+    elcinema_channels=requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/elcinema.channels.xml?raw=true')
+    with io.open('/etc/epgimport/elcinema.channels.xml','w',encoding="utf-8") as f:
+        f.write(elcinema_channels.text)
+
+if not os.path.exists('/etc/epgimport/dstv.channels.xml'):
+    print('Downloading dstv channels config')
+    dstv_channels=requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/dstv.channels.xml?raw=true')
+    with io.open('/etc/epgimport/dstv.channels.xml','w',encoding="utf-8") as f:
+        f.write(dstv_channels.text)
