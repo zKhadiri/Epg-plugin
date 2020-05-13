@@ -236,6 +236,7 @@ def medi():
     glb_time=[]
     time_chan=[]
     alls=[]
+    from datetime import datetime,timedelta
     i= datetime.today().weekday()
     for j in range(i,7):
         url = requests.get('http://www.medi1tv.com/ar/inc/grille.aspx?d='+str(j))
