@@ -80,4 +80,14 @@
 <channel id="ARTHekayat">1:0:1:2BF:7:800:DCA0000:0:0:0</channel>
 <channel id="ARTHekayat2">1:0:1:2C1:7:800:DCA0000:0:0:0</channel>
 <channel id="ARTHekayat">1:0:1:30C:7:800:DCA0000:0:0:0</channel>
+<channel id="BEINMOVIESPREMIERE">1:0:19:28A6:410:E0:1040000:0:0:0:</channel><!-- "MoviesHD1" -->
+<channel id="BEINMOVIESACTION">1:0:19:29D2:42E:E0:1040000:0:0:0:</channel><!-- "MoviesHD2" -->
+<channel id="BEINMOVIESDRAMA">1:0:19:2843:406:E0:1040000:0:0:0:</channel><!-- "MoviesHD3" -->
+<channel id="BEINMOVIESFAMILY">1:0:19:2A35:438:E0:1040000:0:0:0</channel><!-- "MoviesHD4" -->
+<channel id="BeInBoxOffice">1:0:19:4E86:7DA:E0:1040000:0:0:0:</channel>
+<channel id="BeInSeriesHD1">1:0:19:296E:424:E0:1040000:0:0:0:</channel>
+<channel id="BeInSeriesHD2">1:0:19:28A7:410:E0:1040000:0:0:0:</channel>
+<channel id="beINDrama">1:0:1:4E8C:7DA:E0:1040000:0:0:0</channel>
+<channel id="FOXACTIONMOVIES">1:0:19:27DE:3FC:E0:1040000:0:0:0:</channel>
+<channel id="FOXFAMILYMOVIESHD">1:0:19:4FB2:7F8:E0:1040000:0:0:0</channel>
 </channels>

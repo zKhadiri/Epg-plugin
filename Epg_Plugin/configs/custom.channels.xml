@@ -161,14 +161,16 @@
 <channel id="2M.ma">1:0:1:2:9D08:77E:DCA0000:0:0:0</channel>
 <channel id="Medi1tv.ma">1:0:1:8:2E18:B0:820000:0:0:0:</channel>
 <!-- bein entertainment -->
-<channel id="MoviesHD1">1:0:19:28A6:410:E0:1040000:0:0:0:</channel> <!-- "MoviesHD1" -->
-<channel id="MoviesHD2">1:0:19:29D2:42E:E0:1040000:0:0:0:</channel> <!-- "MoviesHD2" -->
-<channel id="MoviesHD3">1:0:19:2843:406:E0:1040000:0:0:0:</channel> <!-- "MoviesHD3" -->
-<channel id="MoviesHD4">1:0:19:2A35:438:E0:1040000:0:0:0</channel> <!-- "MoviesHD4" -->
-<channel id="BoxOffice_HD1">1:0:19:4E86:7DA:E0:1040000:0:0:0:</channel> <!-- "BoxOffice_HD1" -->
-<channel id="SeriesHD1">1:0:19:296E:424:E0:1040000:0:0:0:</channel> <!-- "SeriesHD1" -->
-<channel id="SeriesHD2">1:0:19:28A7:410:E0:1040000:0:0:0:</channel> <!-- "SeriesHD2" -->
-<channel id="DramaHD1">1:0:1:4E8C:7DA:E0:1040000:0:0:0</channel> <!-- "DramaHD1" -->
+<!--
+<channel id="MoviesHD1">1:0:19:28A6:410:E0:1040000:0:0:0:</channel> 
+<channel id="MoviesHD2">1:0:19:29D2:42E:E0:1040000:0:0:0:</channel> 
+<channel id="MoviesHD3">1:0:19:2843:406:E0:1040000:0:0:0:</channel> 
+<channel id="MoviesHD4">1:0:19:2A35:438:E0:1040000:0:0:0</channel> 
+<channel id="BoxOffice_HD1">1:0:19:4E86:7DA:E0:1040000:0:0:0:</channel> 
+<channel id="SeriesHD1">1:0:19:296E:424:E0:1040000:0:0:0:</channel> 
+<channel id="SeriesHD2">1:0:19:28A7:410:E0:1040000:0:0:0:</channel> 
+<channel id="DramaHD1">1:0:1:4E8C:7DA:E0:1040000:0:0:0</channel>
+-->
 <channel id="gourmet">1:0:19:4E85:7DA:E0:1040000:0:0:0:</channel> <!-- "gourmet" -->
 <channel id="beJUNIOR">1:0:19:9D70:FBE:E0:1040000:0:0:0:</channel> <!-- "beJUNIOR" -->
 <channel id="Jeem">1:0:19:5141:820:E0:1040000:0:0:0:</channel> <!-- "Jeem" -->
@@ -179,8 +181,10 @@
 <channel id="CBeebies">1:0:19:9DD7:FC8:E0:1040000:0:0:0:</channel> <!-- "CBeebies" -->
 <channel id="DreamWorks">1:0:19:51AC:82A:E0:1040000:0:0:0:</channel> <!-- "DreamWorks" -->
 <channel id="JimJam">1:0:1:507B:80C:E0:1040000:0:0:0:</channel> <!-- "JimJam" -->
-<channel id="FOXFamilyMovies">1:0:19:4FB2:7F8:E0:1040000:0:0:0</channel> <!-- "FOXFamilyMovies" -->
-<channel id="FOXActionMovies">1:0:19:27DE:3FC:E0:1040000:0:0:0:</channel> <!-- "FOXActionMovies" -->
+<!--
+<channel id="FOXFamilyMovies">1:0:19:4FB2:7F8:E0:1040000:0:0:0</channel> 
+<channel id="FOXActionMovies">1:0:19:27DE:3FC:E0:1040000:0:0:0:</channel> 
+-->
 <channel id="Star_World_B">1:0:19:27DC:3FC:E0:1040000:0:0:0</channel> <!-- "Star_World_B" -->
 <channel id="TCM">1:0:19:51A9:82A:E0:1040000:0:0:0:</channel> <!-- "TCM" -->
 <channel id="amc">1:0:19:9CA8:FAA:E0:1040000:0:0:0:</channel> <!-- "amc" -->

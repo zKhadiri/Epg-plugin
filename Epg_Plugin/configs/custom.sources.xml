@@ -36,4 +36,8 @@
 <description>spacetoon</description>
 <url>/etc/epgimport/spacetoon.xml</url>
 </source>
+<source type="gen_xmltv" channels="/etc/epgimport/elcinema.channels.xml">
+<description>Bein entertainment cinema</description>
+<url>/etc/epgimport/beinentCin.xml</url>
+</source>
 </sourcecat>

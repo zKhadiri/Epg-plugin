@@ -147,11 +147,12 @@ class EPGIConfig(Screen):
         list.append(("ondemand/yahala/yahala oula EPG", "2","osn","osn","osn"))
         list.append(("Osnplay BACKUP", "3","osnplay","osnback","osnplay"))
         list.append(("ELCINEMA WEBSITE EPG", "4","elcin","elcinema","elcinema"))
-        list.append(("MBC.NET", "5","mbc","mbc","mbc"))
-        list.append(("SNRT EPG", "6","aloula","aloula","aloula"))
-        list.append(("Spacetoon epg", "7","spacetoon","space","spacetoon"))
-        list.append(("DSTV.ZA", "8","dstv","dstv","dstv"))
-        list.append(("SuperSport.ZA BACKUP", "9","dstvback","dstvback","dstv"))
+        list.append(("ELCINEMA Bein entertainment EPG", "5","beincin","elcinema","beinentCin"))
+        list.append(("MBC.NET", "6","mbc","mbc","mbc"))
+        list.append(("SNRT EPG", "7","aloula","aloula","aloula"))
+        list.append(("Spacetoon epg", "8","spacetoon","space","spacetoon"))
+        list.append(("DSTV.ZA", "9","dstv","dstv","dstv"))
+        list.append(("SuperSport.ZA BACKUP", "10","dstvback","dstvback","dstv"))
         self.provList=list ## New from mf to make choose list
         Screen.__init__(self, session)
         self.skinName = ["EPGIConfig"]

@@ -34,3 +34,5 @@ ZA=['M-NetHD','1MagicHD','M-NetMoviesPremierHD','M-NetMoviesSmileHD','M-NetMovie
     'RussiaToday','ParliamentaryService','CGTNNews','CNBCAfrica','BloombergTelevision','BusinessDay','NDTV24x7','EuroNewsAfrica',
     'KykNetLekker','RAIInternational','BesteVanNederlands','RTPI','TV5MondeAfrique','DeutscheWelle','CCTV4','SETAsia','B4UMovies',
     'ZeeTV','StarPlus','SunTV','StarVijay','Colors','SETMax','Telemundo(P)','EVA(P)','SICInternacional(P)','M-NetPlus1HD']
+ent=['BEINMOVIESPREMIERE','BEINMOVIESACTION','BEINMOVIESDRAMA','BEINMOVIESFAMILY','BeInBoxOffice','BeInSeriesHD1','BeInSeriesHD2'
+     ,'beINDrama','FOXACTIONMOVIES','FOXFAMILYMOVIESHD']
