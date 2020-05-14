@@ -7,7 +7,7 @@ path = '/etc/epgimport/osnplay.xml'
 
 
 with io.open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/osnback.txt','r') as f:
-    time_zone = f.read().strip()
+    time_zone = f.readlines()[0].strip()
 
 
 print "Downloading OsnPlay epg guide\nPlease wait...."  
@@ -39,6 +39,13 @@ if os.path.exists(path):
 else:
     print "osnplay.xml not found"
 
+
+from datetime import datetime
+with open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/osnback.txt") as f:
+    lines = f.readlines()
+lines[1] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
+with open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/osnback.txt", "w") as f:
+    f.writelines(lines)
 
 if not os.path.exists('/etc/epgimport/custom.channels.xml'):
     print('Downloading custom.channels config')

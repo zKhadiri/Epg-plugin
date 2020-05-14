@@ -4,7 +4,7 @@ from datetime import datetime
 
 
 fil = open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/space.txt','r')
-time_zone = fil.read().strip()
+time_zone = fil.readlines()[0].strip()
 fil.close()
 
 with io.open("/etc/epgimport/spacetoon.xml","w",encoding='UTF-8')as f:
@@ -46,3 +46,10 @@ for prog in alls:
         
 with io.open("/etc/epgimport/spacetoon.xml", "a",encoding="utf-8") as f:
     f.write(('\n'+'</tv>').decode('utf-8'))
+    
+from datetime import datetime
+with open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/space.txt") as f:
+    lines = f.readlines()
+lines[1] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
+with open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/space.txt", "w") as f:
+    f.writelines(lines)

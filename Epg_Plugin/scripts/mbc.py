@@ -7,7 +7,7 @@ urls=[]
 
 
 fil = open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/mbc.txt','r')
-time_zone = fil.read().strip()
+time_zone = fil.readlines()[0].strip()
 fil.close()
 
 
@@ -86,6 +86,12 @@ def mbc():
     
 if __name__ == "__main__":
     mbc()
+    from datetime import datetime
+    with open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/mbc.txt") as f:
+        lines = f.readlines()
+    lines[1] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
+    with open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/mbc.txt", "w") as f:
+        f.writelines(lines)
     
 with io.open("/etc/epgimport/mbc.xml", "a",encoding="utf-8") as f:
     f.write(('</tv>').decode('utf-8'))

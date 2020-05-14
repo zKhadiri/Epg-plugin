@@ -11,6 +11,7 @@
 	</map>
 
 	<map context="EpgWizardActions">
+		<key id="KEY_EPG" mapto="info" flags="m"/>
 		<key id="KEY_LEFT" mapto="left" flags="mr"/>
 		<key id="KEY_RIGHT" mapto="right" flags="mr"/>
 		<key id="KEY_UP" mapto="up" flags="mr"/>

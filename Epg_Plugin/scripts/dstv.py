@@ -10,7 +10,7 @@ headers={
 }
 
 fil = open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/dstv.txt','r')
-time_zone = fil.read().strip()
+time_zone = fil.readlines()[0].strip()
 fil.close()
 
 for i in range(0,5):
@@ -45,6 +45,12 @@ def dstv():
         sys.stdout.flush()
 if __name__=='__main__':
     dstv()
+    from datetime import datetime
+    with open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/dstv.txt") as f:
+        lines = f.readlines()
+    lines[1] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
+    with open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/dstv.txt", "w") as f:
+        f.writelines(lines)
 
 
 with io.open("/etc/epgimport/dstv.xml", "a",encoding="utf-8") as f:

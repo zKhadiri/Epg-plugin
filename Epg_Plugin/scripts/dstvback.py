@@ -5,7 +5,7 @@ import os,io,re,sys,requests
 
 
 with io.open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/dstvback.txt','r') as f:
-    time_zone = f.read().strip()
+    time_zone = f.readlines()[0].strip()
     
 path = '/etc/epgimport/dstv.xml'
 
@@ -39,6 +39,13 @@ else:
     print "dstv.xml not found"
     sys.stdout.flush()
 
+
+from datetime import datetime
+with open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/dstvback.txt") as f:
+    lines = f.readlines()
+lines[1] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
+with open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/dstvback.txt", "w") as f:
+    f.writelines(lines)
 
 if os.path.exists('/var/lib/dpkg/status'):
     print 'Dream os image found\nSorting data please wait.....'

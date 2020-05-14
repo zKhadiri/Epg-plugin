@@ -5,8 +5,8 @@ from datetime import datetime,timedelta
 from time import sleep,strftime
 from requests.adapters import HTTPAdapter
 
-fil = open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/elcinema.txt','r')
-time_zone = fil.read().strip()
+fil = open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/entc.txt','r')
+time_zone = fil.readlines()[0].strip()
 fil.close()
 
 headers={
@@ -123,6 +123,12 @@ if __name__=='__main__':
         print 'Please come back at 2am to download the epg'
     else:
         elcin().main()
+        from datetime import datetime
+        with open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/entc.txt") as f:
+            lines = f.readlines()
+        lines[1] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
+        with open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/entc.txt", "w") as f:
+            f.writelines(lines)
     
     
 with io.open("/etc/epgimport/beinentCin.xml", "a",encoding="utf-8") as f:

@@ -147,7 +147,7 @@ class EPGIConfig(Screen):
         list.append(("ondemand/yahala/yahala oula EPG", "2","osn","osn","osn"))
         list.append(("Osnplay BACKUP", "3","osnplay","osnback","osnplay"))
         list.append(("ELCINEMA WEBSITE EPG", "4","elcin","elcinema","elcinema"))
-        list.append(("ELCINEMA Bein entertainment EPG", "5","beincin","elcinema","beinentCin"))
+        list.append(("ELCINEMA Bein entertainment EPG", "5","beincin","entc","beinentCin"))
         list.append(("MBC.NET", "6","mbc","mbc","mbc"))
         list.append(("SNRT EPG", "7","aloula","aloula","aloula"))
         list.append(("Spacetoon epg", "8","spacetoon","space","spacetoon"))
@@ -161,7 +161,7 @@ class EPGIConfig(Screen):
         #self["config"] = MenuList(list)
         self["config"] = MenuList([], enableWrapAround=True, content=eListboxPythonMultiContent)
         f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/bein.txt", "r")
-        self["status"].setText("Current bein sports time zone  : "+f1.read().strip())
+        self["status"].setText("Current bein sports time zone  : "+f1.readlines()[0].strip())
         f1.close()
         f2 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
         self["glb"].setText("Global timezone : "+f2.read().strip())
@@ -181,7 +181,9 @@ class EPGIConfig(Screen):
             "blue": self.KeyBlue,
             "yellow": self.settime,
             "menu":self.showsetup,
-            "cancel": self.close
+            "cancel": self.close,
+            "info":self.info
+            
         }, -1)
         self.onShown.append(self.onWindowShow)
 
@@ -299,6 +301,18 @@ class EPGIConfig(Screen):
         self["config"].down()
         self.update()
 
+
+    def info(self):
+        index=self['config'].getSelectionIndex()
+        returnValue=self.provList[index][1]
+        for i in range(len(self.provList)):
+            if returnValue == str(i):
+                provTag = self.provList[i][3]
+                provName = self.provList[i][0]
+                f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/{}.txt".format(provTag), "r")
+                new_time = f.readlines()[1].strip()
+                f.close()
+                self.session.open(MessageBox,_('{} Last update : \n{} '.format(provName,new_time)),MessageBox.TYPE_INFO,timeout=15)
     
     def update(self):
         index=self['config'].getSelectionIndex()
@@ -308,7 +322,7 @@ class EPGIConfig(Screen):
                 provTag = self.provList[i][3]
                 provName = self.provList[i][0]
                 f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/"+provTag+".txt", "r")
-                self["status"].setText("Current "+provName+" time zone  : "+f1.read().strip())
+                self["status"].setText("Current {} time zone  : {}".format(provName,f1.readlines()[0].strip()))
                 f1.close()
                 
     def KeyBlue(self):
@@ -321,10 +335,13 @@ class EPGIConfig(Screen):
                 f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
                 new_time = f.read().strip()
                 f.close()
-                with io.open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/"+provTag+".txt","w",encoding='UTF-8')as f1:
-                    f1.write(new_time.decode('utf-8'))
-                    self.session.open(MessageBox,_("time changed with succes "+new_time), MessageBox.TYPE_INFO,timeout=10)
-                    self["status"].setText("Current "+provName+" time zone  : "+new_time)
+                with open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/{}.txt".format(provTag)) as f:
+                    lines1 = f.readlines()
+                lines1[0] = new_time+'\n'
+                with open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/{}.txt".format(provTag),"w")as f1:
+                    f1.writelines(lines1)
+                    self.session.open(MessageBox,_("time changed with succes {}".format(new_time)), MessageBox.TYPE_INFO,timeout=10)
+                    self["status"].setText("Current {} time zone  : {}".format(provName,new_time))
     
     def settime(self):
         index=self['config'].getSelectionIndex()
