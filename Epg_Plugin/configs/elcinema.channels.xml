@@ -94,4 +94,11 @@
 <channel id="beINDrama">1:0:1:4E8C:7DA:E0:1040000:0:0:0</channel>
 <channel id="FOXACTIONMOVIES">1:0:19:27DE:3FC:E0:1040000:0:0:0:</channel>
 <channel id="FOXFAMILYMOVIESHD">1:0:19:4FB2:7F8:E0:1040000:0:0:0</channel>
+<channel id="Oman">1:0:1:1389:32:800:DCA0000:0:0:0:</channel>
+<channel id="Oman">1:0:1:1E:22C:2BE:1040000:0:0:0:</channel>
+<channel id="Oman">1:0:1:A:22C:2BE:1040000:0:0:0:</channel>
+<channel id="Oman">1:0:1:398:2134:13E:820000:0:0:0:</channel>
+<channel id="JordanTV">1:0:1:2C9:7:800:DCA0000:0:0:0:</channel>
+<channel id="JordanTV">1:0:1:70A:1FA:2BE:1040000:0:0:0:</channel>
+<channel id="JordanTV">1:0:1:392:2134:13E:820000:0:0:0:</channel>
 </channels>
