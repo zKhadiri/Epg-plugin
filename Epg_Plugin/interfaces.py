@@ -356,7 +356,7 @@ class EPGIConfig(Screen):
                     time_of = re.search(r'[+#-]+\d{4}',f.read())
                     f.close()
                     f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/"+provTag+".txt", "r")
-                    newtime=f1.read()
+                    newtime=f1.readlines()[0].strip()
                     f1.close()
                     if time_of !=None:
                         with io.open("/etc/epgimport/"+provFile+".xml",encoding="utf-8") as f:
