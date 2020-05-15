@@ -2,8 +2,8 @@
 ##setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=7.5
-description=What_is_NEW:\n'[PRESS EPG KEY ON THE MAIN MENU TO SEE THE CHANGE]'
+version=7.6
+description=What_is_NEW:\n'[INFO KEY AND YELLOW KEY FIX]'
 ##############################################################
 # remove old version
 rm -rf /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin
