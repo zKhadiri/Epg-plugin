@@ -2,13 +2,17 @@
 ##setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=7.6
-description=What_is_NEW:\n'[INFO KEY AND YELLOW KEY FIX]'
+version=7.7
+description=What_is_NEW:\n'[NEW UPDATE]'
 ##############################################################
-# remove old version
-rm -rf /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin
-rm -f /tmp/*epgimport*
-rm -f /tmp/*Epg_Plugin*
+# No need to remove old version
+#rm -rf /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin
+
+TEM=/tmp
+TIMESFolder=/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times
+
+rm -f $TEM/*epgimport*
+rm -f $TEM/*Epg_Plugin*
 
 # check depends packges
 if [ -f /etc/apt/apt.conf ] ; then
@@ -37,7 +41,7 @@ else
      if grep -q 'Package: python-requests' $STATUS; then
           echo ""
      else
-          if [ $OS = "DreamOS" ]; then 
+          if [ $OS = "DreamOS" ]; then
                   echo " Downloading/Insallling python-requests ......"
                   apt-get install python-requests -y
           else
@@ -51,7 +55,7 @@ else
           if [ $OS = "DreamOS" ]; then
                    echo " Downloading/Insallling epgimport ......"
                    sleep 3
-		   wget -q "--no-check-certificate" "https://github.com/ziko-ZR1/Epg-plugin/blob/master/Download/enigma2-plugin-extensions-epgimport_1.0-r203-all.deb?raw=true" -O "/tmp/enigma2-plugin-extensions-epgimport_1.0-r203-all.deb";
+           wget -q "--no-check-certificate" "https://github.com/ziko-ZR1/Epg-plugin/blob/master/Download/enigma2-plugin-extensions-epgimport_1.0-r203-all.deb?raw=true" -O "/tmp/enigma2-plugin-extensions-epgimport_1.0-r203-all.deb";
                    dpkg -i /tmp/*.deb;
                    apt-get install -f -y;
           else
@@ -63,10 +67,18 @@ fi
 sleep 2
 echo ""
 # Download and install plugin
+mv $TIMESFolder $TEM  > /dev/null 2>&1
 echo " Downloading/Insallling Epg_Plugin plugin ......"
 wget -q "--no-check-certificate" "https://github.com/ziko-ZR1/Epg-plugin/blob/master/Download/Epg_Plugin-"$version".tar.gz?raw=true" -O "/tmp/Epg_Plugin-"$version".tar.gz"
 tar -xzf /tmp/Epg_Plugin-"$version".tar.gz -C /
-rm -f /tmp/Epg_Plugin-"$version".tar.gz
+mv $TEM/times/* $TIMESFolder  > /dev/null 2>&1
+rm -f $TEM/Epg_Plugin-"$version".tar.gz  > /dev/null 2>&1
+rm -r $TEM/times  > /dev/null 2>&1
+#wget -q "--no-check-certificate" "https://github.com/ziko-ZR1/Epg-plugin/blob/master/Download/times.tar.gz?raw=true" -O "/tmp/times.tar.gz"
+#echo " Downloading/Insallling timers files ......"
+#tar -xzf $TEM/times.tar.gz -C /
+#rm -f $TEM/times.tar.gz
+#fi
 echo ""
 echo "#########################################################"
 echo "#          Epg_Plugin INSTALLED SUCCESSFULLY            #"

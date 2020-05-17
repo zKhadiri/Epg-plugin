@@ -1,27 +1,22 @@
 from Plugins.Plugin import PluginDescriptor
 import interfaces
 from Screens.MessageBox import MessageBox
-import urllib2
-from urllib2 import urlopen, Request, URLError, HTTPError 
+import requests
 
-def checkInternet():
+
+def connected_to_internet(): ## to test connection	
     try:
-        response = urllib2.urlopen("http://google.com", None, 5)
-        response.close()
-    except urllib2.HTTPError:
-        return False
-    except urllib2.URLError:
-        return False
-    except socket.timeout:
-        return False
-    else:
+        _ = requests.get('http://www.google.com', timeout=5)
         return True
+    except requests.ConnectionError:
+        return False
+    print connected_to_internet()
 
 def main(session, **kwargs):
-    if checkInternet:
+    if connected_to_internet()==True:
         session.open(interfaces.EPGIConfig)
     else:
-        session.open(MessageBox, "Check your internet", MessageBox.TYPE_INFO)
+        session.open(MessageBox,_("No internet connection available. Or github.com Down"), MessageBox.TYPE_INFO,timeout=10)
   
 def Plugins(**kwargs):
 	return PluginDescriptor(

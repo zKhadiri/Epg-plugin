@@ -12,7 +12,7 @@ with io.open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/osnbac
 
 print "Downloading OsnPlay epg guide\nPlease wait...."  
 sys.stdout.flush()
-url=requests.get('http://github.com/ziko-ZR1/XML/blob/master/osn.xml?raw=true')
+url=requests.get('http://raw.githubusercontent.com/ziko-ZR1/XML/osn/osn.xml')
 with io.open(path,'w',encoding="utf-8") as f:
     f.write(url.text)
     

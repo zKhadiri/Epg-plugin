@@ -14,7 +14,7 @@ from Tools.Directories import fileExists
 from urllib2 import Request
 from Plugins.Extensions.Epg_Plugin.Console2 import Console2
 from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigYesNo, configfile
-import io,os,re
+import io,os,re,requests
 import gettext
 from enigma import getDesktop
 from enigma import loadPNG,gPixmapPtr, RT_WRAP, ePoint, RT_HALIGN_LEFT, RT_VALIGN_CENTER, eListboxPythonMultiContent, gFont
@@ -60,16 +60,17 @@ reswidth = getDesktop(0).size().width()
 #    if os.path.exists('/var/lib/dpkg/status'):
 #        return DreamOS
 
-def connected_to_internet(): ## to test connection
-    import requests
-    try:
-        _ = requests.get('http://www.google.com', timeout=5)
-        print("internet connection available.")
-        return True
-    except requests.ConnectionError:
-        print("No internet connection available.")
-        return False
-    print connected_to_internet()
+def Statusosn():
+    url = requests.get('https://api.github.com/repos/ziko-ZR1/xml/branches/osn')
+    date = re.search(r'date\":\"(.*?)\"',url.content)
+    message = re.search(r'message\":\"(.*?)\"',url.content)
+    return message.group()+' '+date.group().replace('T','  ').replace('Z','')
+
+def Statusdstv():
+    url = requests.get('https://api.github.com/repos/ziko-ZR1/xml/branches/master')
+    date = re.search(r'date\":\"(.*?)\"',url.content)
+    message = re.search(r'message\":\"(.*?)\"',url.content)
+    return message.group()+' '+date.group().replace('T','  ').replace('Z','')
 
 class EPGIConfig(Screen):
     if reswidth == 1280:
@@ -186,6 +187,11 @@ class EPGIConfig(Screen):
             
         }, -1)
         self.onShown.append(self.onWindowShow)
+        self.check_status()
+        
+    def check_status(self):
+        self.statusOS = Statusosn()
+        self.statusDS = Statusdstv()
 
     def onWindowShow(self):
         self.onShown.remove(self.onWindowShow)
@@ -324,6 +330,17 @@ class EPGIConfig(Screen):
                 f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/"+provTag+".txt", "r")
                 self["status"].setText("Current {} time zone  : {}".format(provName,f1.readlines()[0].strip()))
                 f1.close()
+            elif returnValue=='3':
+                self["glb"].setText('Last commit : '+self.statusOS)
+                 
+            elif returnValue=='10':
+                self["glb"].setText('Last commit : '+self.statusDS)
+            
+            else:
+                f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
+                self["glb"].setText('Global timezone : '+f.read())
+                f.close()
+                
                 
     def KeyBlue(self):
         index=self['config'].getSelectionIndex()
@@ -371,11 +388,9 @@ class EPGIConfig(Screen):
 
     def keyRed(self): ## New from mf to make choose list
         if len(self.installList)>0:
-		if connected_to_internet() == True:  ## Code to find connection internet or not
-			self.install()
-		else:
-			self.session.open(MessageBox,_("No internet connection available. Or github.com Down"), MessageBox.TYPE_INFO,timeout=10)
-
+		  ## Code to find connection internet or not
+		    self.install()
+		
     def keyGreen(self):
         f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
         self.session.openWithCallback(self.msg, InputBox,title=_("Please enter your time zone :"), text=f.read(), maxSize=5,type=Input.TEXT)
