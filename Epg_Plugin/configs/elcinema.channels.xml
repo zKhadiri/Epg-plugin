@@ -39,6 +39,7 @@
     <channel id="LanaPlusTV">1:0:1:83A:15:800:DCA0000:0:0:0:</channel>
     <channel id="Mehwar">1:0:1:457:B:800:DCA0000:0:0:0:</channel>
     <channel id="MBC3">1:0:1:B:3B:800:DCA0000:0:0:0:</channel>
+    <channel id="MBC3">1:0:1:5:3C:800:DCA0000:0:0:0:</channel>
     <channel id="Watania2">1:0:1:FAD:28:800:DCA0000:0:0:0:</channel>
     <channel id="DubaiOne">1:0:1:126F:2F:800:DCA0000:0:0:0:</channel> <!-- "dubai:one" -->
     <channel id="DubaiTV">1:0:19:19CB:42:800:DCA0000:0:0:0</channel>
@@ -117,4 +118,7 @@
     <channel id="Lana">1:0:1:139:C9:800:DCA0000:0:0:0</channel>
     <channel id="Lana">1:0:1:D0D:21:800:DCA0000:0:0:0:</channel>
     <channel id="Lana">1:0:1:14E6:E:20D:20D0000:0:0:0:</channel>
+    <channel id="AbuDhabiTV">1:0:1:1:32:64:DCA0000:0:0:0:</channel>
+    <channel id="Emirates">1:0:1:2:32:64:DCA0000:0:0:0:</channel>
+    <channel id="AbuDhabiDrama">1:0:1:4:32:64:DCA0000:0:0:0:</channel>
 </channels>
