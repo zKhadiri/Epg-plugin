@@ -151,9 +151,10 @@ class EPGIConfig(Screen):
         list.append(("ELCINEMA Bein entertainment EPG", "5","beincin","entc","beinentCin"))
         list.append(("MBC.NET", "6","mbc","mbc","mbc"))
         list.append(("SNRT EPG", "7","aloula","aloula","aloula"))
-        list.append(("Spacetoon epg", "8","spacetoon","space","spacetoon"))
-        list.append(("DSTV.ZA", "9","dstv","dstv","dstv"))
-        list.append(("SuperSport.ZA BACKUP", "10","dstvback","dstvback","dstv"))
+        list.append(("Noor Dubai EPG", "8","noor","noor","noor"))
+        list.append(("Spacetoon epg", "9","spacetoon","space","spacetoon"))
+        list.append(("DSTV.ZA", "10","dstv","dstv","dstv"))
+        list.append(("SuperSport.ZA BACKUP", "11","dstvback","dstvback","dstv"))
         self.provList=list ## New from mf to make choose list
         Screen.__init__(self, session)
         self.skinName = ["EPGIConfig"]
@@ -333,7 +334,7 @@ class EPGIConfig(Screen):
             elif returnValue=='3':
                 self["glb"].setText('Last commit : '+self.statusOS)
                  
-            elif returnValue=='10':
+            elif returnValue=='11':
                 self["glb"].setText('Last commit : '+self.statusDS)
             
             else:

@@ -44,7 +44,6 @@ pyl.sort()
 now = datetime.datetime.today().strftime('%Y-%m-%d')
 lock = threading.Semaphore(4)
 def oss(url):
-    global aff,days,nam
     with requests.Session() as s:
         s.mount('http://', HTTPAdapter(max_retries=10))
         ur= s.post('http://www.osn.com/CMSPages/TVScheduleWebService.asmx/GetTVChannelsProgramTimeTable',data=url,headers=headers)
@@ -63,7 +62,7 @@ def oss(url):
                     pag = uri.text.replace('<?xml version="1.0" encoding="utf-8"?>','').replace('<string xmlns="http://tempuri.org/">','').replace('</string>','')
                     data= json.loads(pag)
                     nm=data[0][u'ChannelNameEnglish'].replace(' ','_').replace('Crime_&_Investigation_Network','Crime_And_Investigation_Network')
-                    nam=data[0][u'ChannelNameEnglish']
+                    ch_name=data[0][u'ChannelNameEnglish']
                     days=datetime.datetime.fromtimestamp(int(data[0][u'StartDateTime'].replace("/Date(",'').replace(")/",'')) // 1000).strftime('%Y%m%d%H%M%S')
                     days_end=datetime.datetime.fromtimestamp(int(data[0][u'EndDateTime'].replace("/Date(",'').replace(")/",'')) // 1000).strftime('%Y%m%d%H%M%S')
                     aff =datetime.datetime.fromtimestamp(int(data[0][u'EndDateTime'].replace("/Date(",'').replace(")/",'')) // 1000).strftime('%Y-%m-%d')
@@ -79,7 +78,7 @@ def oss(url):
                     #ch+='     <sub-title lang="ar">'+data[0][u'GenreArabicName']+'</sub-title>'+"\n"+'  </programme>'+"\n"
                     with io.open("/etc/epgimport/osn.xml","a",encoding='UTF-8')as f:
                         f.write(ch)
-        for _ in progressbar((pll*120),nam+" "+aff+" : ", 15):pass
+        for _ in progressbar((pll*120),ch_name+" "+aff+" : ", 15):pass
         sleep(0.005)
         lock.release()
 def progressbar(it, prefix="", size=20, file=sys.stdout):
@@ -101,6 +100,7 @@ def main():
         thread = threading.Thread(target=oss, args=(url,))
         thread_pool.append(thread)
         thread.start()
+        sleep(1)
         lock.acquire()
     for thread in thread_pool:
         thread.join()  

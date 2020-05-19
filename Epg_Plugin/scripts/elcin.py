@@ -87,7 +87,7 @@ class elcin():
                 try:
                     for index, element in enumerate(self.titles):
                         if element not in self.title:
-                            self.des.insert(index,"No description Found for this program")
+                            self.des.insert(index,"يتعذر الحصول على معلومات هذا البرنامج")
                     b = datetime.strptime(self.now+' '+self.time[0],'%Y %m %d %H:%M').strftime('%Y %m %d %H:%M')
                     a = datetime.strptime(b,'%Y %m %d %H:%M')
                     for r in self.end:
