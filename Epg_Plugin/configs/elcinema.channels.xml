@@ -40,6 +40,7 @@
     <channel id="Mehwar">1:0:1:457:B:800:DCA0000:0:0:0:</channel>
     <channel id="MBC3">1:0:1:B:3B:800:DCA0000:0:0:0:</channel>
     <channel id="MBC3">1:0:1:5:3C:800:DCA0000:0:0:0:</channel>
+    <channel id="MBC3">1:0:1:9:1BC0:2BE:1040000:0:0:0:</channel>
     <channel id="Watania2">1:0:1:FAD:28:800:DCA0000:0:0:0:</channel>
     <channel id="DubaiOne">1:0:1:126F:2F:800:DCA0000:0:0:0:</channel> <!-- "dubai:one" -->
     <channel id="DubaiTV">1:0:19:19CB:42:800:DCA0000:0:0:0</channel>
