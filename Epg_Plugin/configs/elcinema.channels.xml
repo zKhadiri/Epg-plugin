@@ -123,4 +123,11 @@
     <channel id="AbuDhabiDrama">1:0:1:4:32:64:DCA0000:0:0:0:</channel>
     <channel id="SadaElBalad+2">1:0:1:17DB:3D:800:DCA0000:0:0:0:</channel>
     <channel id="AlKaheraWalNasTV2">1:0:1:1905:40:800:DCA0000:0:0:0:</channel>
+    <channel id="AbuDhabiDrama">1:0:1:4:32:64:DCA0000:0:0:0:</channel>
+    <channel id="AbuDhabiTV">1:0:1:AFA:1C:800:DCA0000:0:0:0:</channel>
+    <channel id="AbuDhabiDrama">1:0:1:855:15:800:DCA0000:0:0:0:</channel>
+    <channel id="AbuDhabiTV">1:0:1:2:1F8:2BE:1040000:0:0:0:</channel> 
+    <channel id="AbuDhabiDrama">1:0:1:B:1F8:2BE:1040000:0:0:0:</channel>
+    <channel id="Emirates">1:0:1:850:15:800:DCA0000:0:0:0:</channel>
+    <channel id="Emirates">1:0:1:1:1F8:2BE:1040000:0:0:0:</channel>
 </channels>

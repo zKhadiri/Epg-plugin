@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import requests,re,io,sys
 from datetime import datetime,timedelta
+from requests.adapters import HTTPAdapter
 
 fil = open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/noor.txt','r')
 time_zone = fil.readlines()[0].strip()
@@ -20,10 +21,12 @@ with io.open("/etc/epgimport/noor.xml","a",encoding='UTF-8')as f:
 
 times=[]
 data=[]
-url = requests.get('http://www.noordubai.com/content/noordubai/ar-ae/schedule/2.html',headers=headers)
-time= re.findall(r'GMT:\s+(\d{2}:\d{2})',url.content)
-des = re.findall(r"class=\"post-title mt-0 mb-5\"><a href='#'>(.*?)</a></h5>\s+<h6><i",url.content)
-title = re.findall(r"<h4 class=\"post-title mt-0 mb-5\"><a href='#'>(.*?)</a>",url.content)
+with requests.Session() as s:
+    s.mount('http://', HTTPAdapter(max_retries=50))
+    url = s.get('http://www.noordubai.com/content/noordubai/ar-ae/schedule/2.html',headers=headers)
+    time= re.findall(r'GMT:\s+(\d{2}:\d{2})',url.content)
+    des = re.findall(r"class=\"post-title mt-0 mb-5\"><a href='#'>(.*?)</a></h5>\s+<h6><i",url.content)
+    title = re.findall(r"<h4 class=\"post-title mt-0 mb-5\"><a href='#'>(.*?)</a>",url.content)
 
 today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0) 
 last_hr = 0
@@ -56,3 +59,9 @@ for epg in data:
     
 with io.open("/etc/epgimport/noor.xml", "a",encoding="utf-8") as f:
     f.write(('</tv>').decode('utf-8'))
+    
+with open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/noor.txt") as f:
+    lines = f.readlines()
+lines[1] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
+with open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/noor.txt", "w") as f:
+    f.writelines(lines)

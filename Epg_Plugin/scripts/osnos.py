@@ -43,8 +43,8 @@ pll=[]
 now = datetime.datetime.today().strftime('%Y-%m-%d')
 
 def oss():
+    from datetime import datetime
     for url in pyl:
-        global aff,days,nam
         with requests.Session() as s:
             s.mount('http://', HTTPAdapter(max_retries=10))
             ur= s.post('http://www.osn.com/CMSPages/TVScheduleWebService.asmx/GetTVChannelsProgramTimeTable',data=url,headers=headers)
@@ -52,7 +52,7 @@ def oss():
             data = json.loads(pg)
             #sleep(0.05)
             for d in data:
-                day=datetime.datetime.fromtimestamp(int(d['StartDateTime'].replace('/Date(','').replace(')/','')) // 1000).strftime('%Y-%m-%d')
+                day=datetime.fromtimestamp(int(d['StartDateTime'].replace('/Date(','').replace(')/','')) // 1000).strftime('%Y-%m-%d')
                 if now == day or day > now:
                     payload = {"prgmEPGUNIQID": d['EPGUNIQID'], "countryCode": "SA"}
                     pll.append(d['EPGUNIQID'])
@@ -64,9 +64,9 @@ def oss():
                         data= json.loads(pag)
                         nm=data[0][u'ChannelNameEnglish'].replace(' ','_')
                         nam=data[0][u'ChannelNameEnglish']
-                        days=datetime.datetime.fromtimestamp(int(data[0][u'StartDateTime'].replace("/Date(",'').replace(")/",'')) // 1000).strftime('%Y%m%d%H%M%S')
-                        days_end=datetime.datetime.fromtimestamp(int(data[0][u'EndDateTime'].replace("/Date(",'').replace(")/",'')) // 1000).strftime('%Y%m%d%H%M%S')
-                        aff =datetime.datetime.fromtimestamp(int(data[0][u'EndDateTime'].replace("/Date(",'').replace(")/",'')) // 1000).strftime('%Y-%m-%d')
+                        days=datetime.fromtimestamp(int(data[0][u'StartDateTime'].replace("/Date(",'').replace(")/",'')) // 1000).strftime('%Y%m%d%H%M%S')
+                        days_end=datetime.fromtimestamp(int(data[0][u'EndDateTime'].replace("/Date(",'').replace(")/",'')) // 1000).strftime('%Y%m%d%H%M%S')
+                        aff =datetime.fromtimestamp(int(data[0][u'EndDateTime'].replace("/Date(",'').replace(")/",'')) // 1000).strftime('%Y-%m-%d')
                         ch+= 2 * ' ' + '<programme start="' + days + ' '+time_zone+'" stop="' + days_end + ' '+time_zone+'" channel="'+nm+'">'+'\n'
                         if url['channelCode'] =='SER' or url['channelCode'] =='YAW' or url['channelCode'] =='SAF' or url['channelCode'] =='CM1' or url['channelCode'] =='CM2' or url['channelCode'] =='FAN' or url['channelCode'] =='OYH' or url['channelCode'] =='OYA' or url['channelCode'] =='OYC':
                             ch+='     <title lang="en">'+data[0][u'Arab_Title']+'</title>'+"\n"
@@ -83,8 +83,7 @@ def oss():
             #sleep(0.005)
     with io.open("/etc/epgimport/osn.xml", "a",encoding="utf-8") as f:
         f.write(('</tv>').decode('utf-8'))
-        
-    from datetime import datetime
+
     with open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/osn.txt") as f:
         lines = f.readlines()
     lines[1] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')

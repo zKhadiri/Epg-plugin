@@ -22,6 +22,7 @@ headers={
 }
 
 print('**************BEIN ENTERTAINMENT EPG******************')
+sys.stdout.flush()
 urls=[]
 for i in range(0,3):
     import datetime

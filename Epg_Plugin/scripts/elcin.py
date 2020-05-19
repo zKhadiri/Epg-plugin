@@ -12,7 +12,7 @@ fil.close()
 headers={
     'Host': 'elcinema.com',
     'Referer': 'https://elcinema.com/tvguide/',
-    'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) snap Chromium/80.0.3987.149 Chrome/80.0.3987.149 Safari/537.36'
+    'user-agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.30 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1'
 }
 nb_channel=['1138-AlhayatDrama','1145-Mehwar','1310-Kuwait','1314-JordanTV','1334-Watania2','1356-RotanaKids','1342-LanaPlusTV','1241-MBC3','1261-Zeealwan','1174-AlKaheraWalNasTV','1173-DubaiOne','1169-DubaiTV','1137-AlhayatTV','1223-AlNaharDrama','1176-Cima','1199-CBCDrama','1156-NileDrama','1262-Zeeaflam','1227-SadaElBaladDrama','1198-CBC','1177-SamaDubai','1193-AlNaharTV','1158-NileComedy',
             '1170-AlraiTV','1159-NileLife','1226-SadaElBalad','1292-DMCDRAMA','1203-ONE','1101-Aloula','1134-ONDrama','1283-DubaiZaman','1188-SharjahTV','1260-CBCsofra','1290-DMC','1204-iFILMTV','1269-Alsharqya','1280-TeNTV',
@@ -56,7 +56,7 @@ class elcin():
             self.prog_end[:]=[]
             self.title[:]=[]
             with requests.Session() as s:
-                s.mount('http://', HTTPAdapter(max_retries=10))
+                s.mount('http://', HTTPAdapter(max_retries=50))
                 self.url = s.get('http://elcinema.com/tvguide/'+self.nb.split('-')[0]+'/',headers=headers)
                 for time,end in zip (re.findall(r'(\d\d\:\d\d.*)',self.url.text),re.findall(r'\"subheader\">\[(\d+)',self.url.text)):
                     start=datetime.strptime(time.replace('</li>','').replace('مساءً'.decode('utf-8'),'PM').replace('صباحًا'.decode('utf-8'),'AM'),'%I:%M %p')

@@ -23,6 +23,7 @@ headers={
 
 urls=[]
 print('**************BEIN SPORTS EPG******************')
+sys.stdout.flush()
 for i in range(0,3):
     import datetime
     from datetime import timedelta
