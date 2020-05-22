@@ -131,4 +131,9 @@
     <channel id="AbuDhabiDrama">1:0:1:B:1F8:2BE:1040000:0:0:0:</channel>
     <channel id="Emirates">1:0:1:850:15:800:DCA0000:0:0:0:</channel>
     <channel id="Emirates">1:0:1:1:1F8:2BE:1040000:0:0:0:</channel>
+    <channel id="Aloula">1:0:1:1F5:5:800:DCA0000:0:0:0:</channel>
+    <channel id="Aloula">1:0:19:1F6:5:800:DCA0000:0:0:0:</channel>
+    <channel id="AlraiTV">1:0:19:1A0E:2BC:5000:DC00000:0:0:0:</channel>
+    <channel id="LBCI">1:0:19:17:1:2BE:1040000:0:0:0:</channel>
+    <channel id="Roya">1:0:19:33F:8:800:DCA0000:0:0:0:</channel>
 </channels>
