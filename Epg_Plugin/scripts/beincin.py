@@ -105,7 +105,7 @@ class elcin():
                     ch+=4*' '+'<title lang="ar">'+title.replace('&#39;',"'").replace('&quot;','"').replace('&amp;','and')+'</title>\n'
                     ch+=4*' '+'<desc lang="ar">'+des.replace('&#39;',"'").replace('&quot;','"').replace('&amp;','and').replace('(','').replace(')','').strip()+'</desc>\n  </programme>\r'
                     with io.open("/etc/epgimport/beinentCin.xml","a",encoding='UTF-8')as f:
-                        f.write(ch)
+                        f.write((ch).decode('utf-8'))
                         
             if self.error:
                 self.error = False
