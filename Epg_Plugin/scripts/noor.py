@@ -8,6 +8,8 @@ fil = open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/noor.txt
 time_zone = fil.readlines()[0].strip()
 fil.close()
 
+print('**************NOOR DUBAI EPG******************')
+
 headers={
     'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) snap Chromium/80.0.3987.149 Chrome/80.0.3987.149 Safari/537.36'
 }
@@ -65,3 +67,5 @@ with open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/noor.txt"
 lines[1] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
 with open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/noor.txt", "w") as f:
     f.writelines(lines)
+    
+print('**************FINISHED******************')

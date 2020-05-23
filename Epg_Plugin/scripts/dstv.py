@@ -13,6 +13,8 @@ fil = open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/dstv.txt
 time_zone = fil.readlines()[0].strip()
 fil.close()
 
+
+print('**************DSTV EPG******************')
 for i in range(0,5):
     import datetime
     from datetime import timedelta
@@ -91,3 +93,5 @@ if not os.path.exists('/etc/epgimport/dstv.channels.xml'):
     dstv_channels=requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/dstv.channels.xml?raw=true')
     with io.open('/etc/epgimport/dstv.channels.xml','w',encoding="utf-8") as f:
         f.write(dstv_channels.text)
+        
+print('**************FINISHED******************')

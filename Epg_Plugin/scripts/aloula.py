@@ -19,7 +19,7 @@ for i in range(0,7):
     jour = datetime.date.today()
     week = jour + timedelta(days=i)
     urls.append('http://www.alaoula.ma/programmes.php?jr='+week.strftime('%d/%m/%Y')+'&lang=ar')
-
+print('**************SNRT EPG******************')
 def snrt():
     channe.append('<?xml version="1.0" encoding="UTF-8"?>'+"\n"+'<tv generator-info-name="By ZR1">'+"\n"+'  <channel id="Aloula.ma">'+"\n"+'    <display-name lang="en">Aloula HD</display-name>'+"\n"+'  </channel>'+"\n")
     channe.append('  <channel id="Arriadia.ma">'+"\n"+'    <display-name lang="en">Arriadia HD</display-name>'+"\n"+'  </channel>'+"\n")
@@ -318,3 +318,5 @@ if not os.path.exists('/etc/epgimport/dstv.channels.xml'):
     dstv_channels=requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/dstv.channels.xml?raw=true')
     with io.open('/etc/epgimport/dstv.channels.xml','w',encoding="utf-8") as f:
         f.write(dstv_channels.text)
+        
+print('**************FINISHED******************')

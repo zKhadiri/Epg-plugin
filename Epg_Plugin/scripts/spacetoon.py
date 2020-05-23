@@ -7,6 +7,8 @@ fil = open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/space.tx
 time_zone = fil.readlines()[0].strip()
 fil.close()
 
+print('**************SPACETOON******************')
+
 with io.open("/etc/epgimport/spacetoon.xml","w",encoding='UTF-8')as f:
     f.write(('<?xml version="1.0" encoding="UTF-8"?>'+"\n"+'<tv generator-info-name="By ZR1">').decode('utf-8'))
     
@@ -53,3 +55,5 @@ with open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/space.txt
 lines[1] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
 with open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/space.txt", "w") as f:
     f.writelines(lines)
+    
+print('**************FINISHED******************')

@@ -64,13 +64,19 @@ def Statusosn():
     url = requests.get('https://api.github.com/repos/ziko-ZR1/xml/branches/osn')
     date = re.search(r'date\":\"(.*?)\"',url.content)
     message = re.search(r'message\":\"(.*?)\"',url.content)
-    return message.group()+' '+date.group().replace('T','  ').replace('Z','')
+    if date==None:
+        return "API rate limit exceeded"
+    else:
+        return message.group()+' '+date.group().replace('T','  ').replace('Z','')
 
 def Statusdstv():
     url = requests.get('https://api.github.com/repos/ziko-ZR1/xml/branches/master')
     date = re.search(r'date\":\"(.*?)\"',url.content)
     message = re.search(r'message\":\"(.*?)\"',url.content)
-    return message.group()+' '+date.group().replace('T','  ').replace('Z','')
+    if date==None:
+        return "API rate limit exceeded"
+    else:
+        return message.group()+' '+date.group().replace('T','  ').replace('Z','')
 
 class EPGIConfig(Screen):
     if reswidth == 1280:
@@ -252,7 +258,8 @@ class EPGIConfig(Screen):
         if EnablecheckUpdate == False:
             choices.append(("Press Ok to [Enable checking for Online Update]","enablecheckUpdate"))
         else:
-            choices.append(("Press Ok to [Disable checking for Online Update]","disablecheckUpdate")) 
+            choices.append(("Press Ok to [Disable checking for Online Update]","disablecheckUpdate"))
+        choices.append(("ASSIGN SERVICE TO CHANNELS","sref"))
         from Screens.ChoiceBox import ChoiceBox
         self.session.openWithCallback(self.choicesback, ChoiceBox, _('select task'),choices)
 
@@ -266,6 +273,19 @@ class EPGIConfig(Screen):
                 config.plugins.EpgPlugin.update.value = False
                 config.plugins.EpgPlugin.update.save()
                 configfile.save()
+            elif select[1]=='sref':
+                import ref
+                servicelist=None
+                global Servicelist
+                import Screens.InfoBar
+                Servicelist = servicelist or Screens.InfoBar.InfoBar.instance.servicelist
+                global epg_bouquet
+                epg_bouquet = Servicelist and Servicelist.getRoot()
+                if epg_bouquet is not None:
+                    from ServiceReference import ServiceReference
+                    services = ref.getBouquetServices(epg_bouquet)
+                    service = Servicelist.servicelist.getCurrent()
+                    self.session.openWithCallback(ref.closed,ref.set_ref, services, service, ServiceReference(epg_bouquet).getServiceName())
 
     def checkupdates(self):
         from twisted.web.client import getPage, error
