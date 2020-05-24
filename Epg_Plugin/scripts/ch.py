@@ -41,7 +41,7 @@ ZA=['M-NetHD','1MagicHD','M-NetMoviesPremierHD','M-NetMoviesSmileHD','M-NetMovie
 ent=['BEINMOVIESPREMIERE','BEINMOVIESACTION','BEINMOVIESDRAMA','BEINMOVIESFAMILY','BeInBoxOffice','BeInSeriesHD1','BeInSeriesHD2'
      ,'beINDrama','FOXACTIONMOVIES','FOXFAMILYMOVIESHD']
 
-osn=['OSN_On_Demand_HD','OSN_Ya_Hala_Al_Oula','OSN_Ya_Hala','OSN_Pop_Up_Family_Fun_HD','OSN_Action','OSN_Movies_First','OSN_Mov_First_+2h','OSN_Movies','OSN_Enigma',
+osn=['OSN_On_Demand_HD','OSN_Ya_Hala_Al_Oula','OSN_Ya_Hala','OSN_Pop_Up_Adel_Imam','OSN_Action','OSN_Movies_First','OSN_Mov_First_+2h','OSN_Movies','OSN_Enigma',
              'OSN_Kids','OSN_Movies_Disney','OSN_Cinema','Paramount_HD','Star_Movies_HD','OSN_YH_Cinema','Alfa_Series_HD',
              'Alfa_Series_+2_HD','Alfa_Al_Yawm_HD','Alfa_Al_Safwa','Alfa_Fann','Alfa_Cinema_1','Alfa_Cinema_2','Alfa_Music_Now',
              'OSN_Series_First','OSN_Binge','OSN_Comedy','Star_World_HD','TLC_HD','E!_HD','OSN_Mezze','OSN_Living','MTV_Live_HD',

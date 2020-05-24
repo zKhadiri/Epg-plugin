@@ -4,41 +4,55 @@ from Plugins.Plugin import PluginDescriptor
 from Components.Label import Label
 from Components.ActionMap import ActionMap
 from ServiceReference import ServiceReference
+from Components.Button import Button
 from enigma import eEnv
+from Tools.Directories import fileExists
 from Components.MenuList import MenuList
+from Screens.MessageBox import MessageBox
 import os
 from scripts import ch
 from xml.etree import ElementTree as ET
 from xml.dom import minidom
 
 LAMEDB = eEnv.resolve('${sysconfdir}/enigma2/lamedb')
-
+cos_path='/etc/epgimport/custom.channels.xml'
+elci_path='/etc/epgimport/elcinema.channels.xml'
+dstv_path='/etc/epgimport/dstv.channels.xml'
+bqList=['chann-bein sports-'+cos_path+'','osn-osn-'+cos_path+'','elc_channels-elcinema-'+elci_path+'','net-bein entertainment-'+cos_path+'','mbc-mbc-'+cos_path+'','ent-elcinema bein entertainment-'+elci_path+'','ZA-DSTV-'+dstv_path+'','others-others-'+cos_path+'']
 class set_ref(Screen):
     skin="""
-        <screen position="center,center" size="760,190" title="SET SERVICE" backgroundColor="#16000000" flags="wfNoBorder">
-            <widget name="status" backgroundColor="#16000000" position="300,60" size="911,90" font="Regular;30"/>
-            <widget name="srf" backgroundColor="#16000000" position="100,60" size="200,35" font="Regular;30" />
-            <widget name="id" backgroundColor="#16000000"  position="250,100" size="911,40" font="Regular;30" />
-            <widget name="label" backgroundColor="#16000000"  position="100,100" size="911,40" font="Regular;30" />
-            <widget name="bouq" foregroundColor="#00ffa500" backgroundColor="#16000000"  position="100,10" size="911,40" font="Regular;35" />
+        <screen position="center,center" size="1000,400" title="GET SERVICE" backgroundColor="#16000000" flags="wfNoBorder">
+            <widget source="bouq" position="200,10" size="990,50" render="Label" font="Regular;40" foregroundColor="#00ffa500" backgroundColor="#16000000" transparent="1"/>
+            <widget name="status" foregroundColor="#00ffffff" backgroundColor="#16000000"  position="10,130" size="700,25" font="Regular;23"/>             
+            <widget name="label" foregroundColor="#00ffffff" backgroundColor="#16000000"  position="10,100" size="700,25" font="Regular;23" />
+            <widget name="list" foregroundColor="#00ffffff" backgroundColor="#16000000" zPosition="2" position="650,80" size="320,300" scrollbarMode="showOnDemand" transparent="1" />
+            <widget name="id" foregroundColor="#008000" backgroundColor="#16000000"  position="30,200" size="700,25" font="Regular;22" />
+            <ePixmap name="red" position="17,300" zPosition="2" size="260,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/redfhd.png" transparent="1" alphatest="on"/>
+            <widget name="key_red" position="17,300" size="260,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
+            <ePixmap name="green" position="335,300" zPosition="2" size="260,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/greenfhd.png" transparent="1" alphatest="on"/>
+            <widget name="key_green" position="335,300" size="260,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
         </screen>"""
         
     def __init__(self, session, services, curservice=None, bouquetname=None):
         self.session = session
-        self["srf"] = Label()
         self["status"] = Label()
         self["id"] = Label()
         self["label"] = Label()
         self["bouq"] = Label()
+        self['list']=MenuList([])
+        self["key_red"] = Button(_("last provider"))
+        self["key_green"] = Button(_("next provider"))
         self.services = services
         self.curservice = curservice
         self.bouquetname = bouquetname
         Screen.__init__(self, session)
-        self["myActionMap"] = ActionMap(["EpgColorActions","EpgWizardActions"],
+        self["myActionMap"] = ActionMap(["EpgColorActions","EpgWizardActions",'PiPSetupActions','SrefColorActions'],
         {   
             "back": self.a,
-            "up":self.prevService,
-            "down":self.nextService,
+            "up":self.listUP,
+            "last": self.last,
+            "next": self.next,
+            "down":self.listDOWN,
             "ok":self.ok,
             "right":self.right,
             "left":self.left
@@ -52,85 +66,69 @@ class set_ref(Screen):
         self.id = None
         self.path=None
         self.idx = 0
-        self.init()
-        self.get_idx()
-        self.getCurrentid()
+        self.init() 
         self.getCurrentService()
-        self["label"].setText("Bein :")
-        self["srf"].setText("Channels :")
+        self.bqIndex=0        
+        self.changeBQ()
         self["bouq"].setText("Current bouquet  : {}".format(self.bouquetname))
-    
-    def get_idx(self):
-        for chan in ch.chann:
-            self.idxList.append(chan)
-        for c in ch.elc_channels:
-            self.idxList.append(c)
-        for m in ch.mbc:
-            self.idxList.append(m)
-        for o in ch.osn:
-            self.idxList.append(o)
-        for n in ch.net:
-            self.idxList.append(n)
-        for e in ch.ent:
-            self.idxList.append(e)
-        for other in ch.ent:
-            self.idxList.append(other)
-        for d in ch.ZA:
-            self.idxList.append(d)
-        self.lenidList = len(self.idxList)
-        
-        
-    def getCurrentid(self):
-        self.id = self.idxList[0]
-        self.setCurrentidIndex()
-        self.displayidParams()
         
     def setCurrentidIndex(self):
 		if self.idxList.count((self.id)):
 			self.idx = self.idxList.index((self.id))
    
-    def displayidParams(self):
-        self["id"].setText(self.id)
+#####################################################
 
-
-    def left(self):
-        self.changeid(-1)
+    def last(self):
+        self.bqIndex-=1
+        self.changeBQ()
         
-    def right(self):
-        self.changeid(1)
-    
-    def changeid(self, num):
-        if self.lenidList:
-            self.idx += num
-            self.idx %= self.lenidList
-            self.id = self.idxList[self.idx]
-            self.displayidParams()
-        if self.id in ch.chann:
-            self["label"].setText("Bein Sports :")
-            self.path="/etc/epgimport/custom.channels.xml"
-        elif self.id in ch.elc_channels:
-            self["label"].setText("elcinema :")
-            self.path="/etc/epgimport/elcinema.channels.xml"
-        elif self.id in ch.mbc:
-            self["label"].setText("MBC :")
-            self.path="/etc/epgimport/custom.channels.xml"
-        elif self.id in ch.osn:    
-            self["label"].setText("osn :")
-            self.path="/etc/epgimport/custom.channels.xml"
-        elif self.id in ch.net:
-            self["label"].setText("bein entertainment :")
-            self.path="/etc/epgimport/custom.channels.xml"
-        elif self.id in ch.ent:
-            self["label"].setText("elcinema bein entertainment :")
-            self.path="/etc/epgimport/elcinema.channels.xml"
-        elif self.id in ch.others:
-            self["label"].setText("Others :")
-            self.path="/etc/epgimport/custom.channels.xml"
-        elif self.id in ch.ZA:
-            self["label"].setText("DSTV :")
-            self.path="/etc/epgimport/dstv.channels.xml"
-        else:
-            self["label"].setText("")
+        
+    def next(self):
+        self.bqIndex+=1
+        self.changeBQ()
+        
+    def changeBQ(self):
+        if self.bqIndex>(len(bqList)-1):
+           self.bqIndex=0
+        if self.bqIndex<0:
+           self.bqIndex =len(bqList)-1
+           
+        bqTitle=bqList[self.bqIndex ].split('-')[1]
+        self["label"].setText('EPG PROVIDER : {}'.format(bqTitle))
+        self.listChannels()
+        
+    def listChannels(self):
+        self.path=bqList[self.bqIndex].split('-')[2]
+        bqTitle=bqList[self.bqIndex].split('-')[0]
+        exec "channels=ch."+bqTitle.split('-')[0]
+        self['list'].setList([])    
+        self['list'].setList(channels)
+        self['list'].show()
+        self.idxList=channels
+        self.lenidList=len(self.idxList)
+        self.updateServiceID()
+              
+    def listDOWN(self):
+        self['list'].down()
+        self.updateServiceID()
+        self['id'].setText("")
+        return
+
+
+    def listUP(self):
+        self['list'].up()
+        self.updateServiceID()
+        self['id'].setText("")
+        
+    def updateServiceID(self):
+        index=self['list'].getSelectionIndex()
+        service=self.idxList[index]
+        #self['id'].setText(service)
+        self.id = service
+        return
+#########################################        
+        
+ 
         
     def init(self):
         for service in self.services:
@@ -141,16 +139,20 @@ class set_ref(Screen):
       
 
     def ok(self):
-        doc = ET.parse(self.path)
-        root = doc.getroot()
-        root.append((ET.fromstring('<channel id="{}">{}</channel>'.format(self.id,self.refstr))))
-        out = ET.tostring(root)
-        dom = minidom.parseString(out)
-        f = open(self.path, 'w')
-        dom_string = dom.toprettyxml(encoding='UTF-8')
-        dom_string = os.linesep.join([s for s in dom_string.splitlines() if s.strip()])
-        f.write(dom_string)
-        f.close()
+        if fileExists(self.path):
+            doc = ET.parse(self.path)
+            root = doc.getroot()
+            root.append((ET.fromstring('<channel id="{}">{}</channel>'.format(self.id,self.refstr))))
+            out = ET.tostring(root)
+            dom = minidom.parseString(out)
+            f = open(self.path, 'w')
+            dom_string = dom.toprettyxml(encoding='UTF-8')
+            dom_string = os.linesep.join([s for s in dom_string.splitlines() if s.strip()])
+            f.write(dom_string)
+            f.close()
+            self['id'].setText("{} added successfully to config".format(self.name))
+        else:
+            self.session.open(MessageBox,_(self.path+" not found in path"), MessageBox.TYPE_INFO,timeout=10)
     
     def getCurrentService(self):
         from ServiceReference import ServiceReference
@@ -167,21 +169,22 @@ class set_ref(Screen):
             
     
     def displayServiceParams(self):
-        self["status"].setText(self.name)
+        self["status"].setText("Current channel : {}".format(self.name))
+        #self["srf"].setText(self.refstr)
 
     def setCurrentServiceIndex(self):
 		if self.ServicesList.count((self.name,self.refstr)):
 			self.sidx = self.ServicesList.index((self.name,self.refstr))
     
-       
-    def nextService(self):
+    def right(self):
         self.changeService(1)
 
-    def prevService(self):
+    def left(self):
         self.changeService(-1)
 
+        
     def changeService(self, num):
-        if self.lenServicesList:
+         if self.lenServicesList:
             self.sidx += num
             self.sidx %= self.lenServicesList
             self.name = self.ServicesList[self.sidx][0]
@@ -189,6 +192,7 @@ class set_ref(Screen):
             self.displayServiceParams()
             
 
+    
     def a(self):
         self.close(None)
 

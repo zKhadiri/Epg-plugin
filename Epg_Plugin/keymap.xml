@@ -34,4 +34,9 @@
 		<key id="KEY_GREEN" mapto="green" flags="mr"/>
 		<key id="KEY_BLUE" mapto="blue" flags="mr"/>
 	</map>
+
+	<map context="SrefColorActions">
+		<key id="KEY_GREEN" mapto="next" flags="m"/>
+		<key id="KEY_RED" mapto="last" flags="m"/>
+	</map>
 </keymap>
