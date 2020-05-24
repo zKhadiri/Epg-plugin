@@ -67,18 +67,20 @@ def snrt():
             toda = toda + timedelta(days=1)
         last_hr = h
         glb_time.append(toda + timedelta(hours=h, minutes=m))
-    
-    for elem, next_elem in zip(glb_time, glb_time[1:] + [glb_time[0]]):
-        startime=datetime.strptime(str(elem),'%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
-        endtime=datetime.strptime(str(next_elem),'%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
-        time_chan.append(2 * ' ' + '<programme start="' + startime + ' '+time_zone+'" stop="' + endtime + ' '+time_zone+'" channel="Aloula.ma">' + '\n')
-        date_end =datetime.strptime(startime,'%Y%m%d%H%M%S').strftime('%Y/%m/%d')
-        day = datetime.strptime(date_end,'%Y/%m/%d')
-        date_now = datetime.strptime(now,'%Y/%m/%d')
-        nb_days = day - date_now
-        end_date.append(nb_days.days) 
-    for tt,p,d in zip(time_chan,glb_title,glb_des):
-        alls.append(tt+p+d)
+    if len(glb_time)>0:
+        for elem, next_elem in zip(glb_time, glb_time[1:] + [glb_time[0]]):
+            startime=datetime.strptime(str(elem),'%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
+            endtime=datetime.strptime(str(next_elem),'%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
+            time_chan.append(2 * ' ' + '<programme start="' + startime + ' '+time_zone+'" stop="' + endtime + ' '+time_zone+'" channel="Aloula.ma">' + '\n')
+            date_end =datetime.strptime(startime,'%Y%m%d%H%M%S').strftime('%Y/%m/%d')
+            day = datetime.strptime(date_end,'%Y/%m/%d')
+            date_now = datetime.strptime(now,'%Y/%m/%d')
+            nb_days = day - date_now
+            end_date.append(nb_days.days) 
+        for tt,p,d in zip(time_chan,glb_title,glb_des):
+            alls.append(tt+p+d)
+    else:
+        pass
     
     try:
         alls.pop(-1)
@@ -132,15 +134,18 @@ def arriadia():
         last_hr = h
         grp_time.append(toda + timedelta(hours=h, minutes=m))
         from datetime import datetime
-    for elem, next_elem in zip(grp_time, grp_time[1:] + [grp_time[0]]):
-        startime=datetime.strptime(str(elem),'%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
-        endtime=datetime.strptime(str(next_elem),'%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
-        time_all.append(2 * ' ' + '<programme start="' + startime + ' '+time_zone+'" stop="' + endtime + ' '+time_zone+'" channel="Arriadia.ma">' + '\n')
-        date_end =datetime.strptime(startime,'%Y%m%d%H%M%S').strftime('%Y/%m/%d')
-        day = datetime.strptime(date_end,'%Y/%m/%d')
-        date_now = datetime.strptime(now,'%Y/%m/%d')
-        nb_days = day - date_now
-        end_date.append(nb_days.days)
+    if len(grp_time)>0:
+        for elem, next_elem in zip(grp_time, grp_time[1:] + [grp_time[0]]):
+            startime=datetime.strptime(str(elem),'%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
+            endtime=datetime.strptime(str(next_elem),'%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
+            time_all.append(2 * ' ' + '<programme start="' + startime + ' '+time_zone+'" stop="' + endtime + ' '+time_zone+'" channel="Arriadia.ma">' + '\n')
+            date_end =datetime.strptime(startime,'%Y%m%d%H%M%S').strftime('%Y/%m/%d')
+            day = datetime.strptime(date_end,'%Y/%m/%d')
+            date_now = datetime.strptime(now,'%Y/%m/%d')
+            nb_days = day - date_now
+            end_date.append(nb_days.days)
+    else:
+        pass
         
     for tt,p,d in zip(time_all,grp_title,grp_desc):
         alls.append(tt+p+d)
@@ -177,7 +182,7 @@ def mm():
 
     for url in urls:
         with requests.Session() as s:
-            s.mount('http://', HTTPAdapter(max_retries=10))
+            s.mount('http://', HTTPAdapter(max_retries=100))
             r = s.get(url, headers=headers)
             title_2m = re.findall(r'bold\">(.*?)<\/h4>\s+<p', r.text)
             des_2m = re.findall(r'<p class="text-size12">(.*?)<\/p>', r.text)
@@ -199,24 +204,27 @@ def mm():
             toda = toda + timedelta(days=1)
         last_hr = h
         starts.append(toda + timedelta(hours=h, minutes=m))
-    from datetime import datetime
-    for elem, next_elem in zip(starts, starts[1:] + [starts[0]]):
-        starttime = datetime.strptime(str(elem), '%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
-        endtime = datetime.strptime(str(next_elem), '%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
-        time_chan.append(2 * ' ' + '<programme start="' + starttime + ' '+time_zone+'" stop="' + endtime + ' '+time_zone+'" channel="2m.ma">' + '\n')
-        date_end =datetime.strptime(endtime,'%Y%m%d%H%M%S').strftime('%Y/%m/%d')
-        day = datetime.strptime(date_end,'%Y/%m/%d')
-        date_now = datetime.strptime(now,'%Y/%m/%d')
-        nb_days = day - date_now
-        end_date.append(nb_days.days)
-    for tit, de in zip(ti_, descrip):
-        desc.append(4 * ' ' + '<desc lang="ar">' + de + '</desc>\n  </programme>\r')
-        if tit == '':
-            prog.append(4 * ' ' + '<title lang="ar">' + de + '</title>' + "\n")
-        else:
-            prog.append(4 * ' ' + '<title lang="ar">' +tit.replace('&#39;', "'")+ '</title>' + "\n")
-    for tt, p, d in zip(time_chan, prog, desc):
-        alls.append(tt + p + d )
+    if len(starts)>0:
+        from datetime import datetime
+        for elem, next_elem in zip(starts, starts[1:] + [starts[0]]):
+            starttime = datetime.strptime(str(elem), '%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
+            endtime = datetime.strptime(str(next_elem), '%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
+            time_chan.append(2 * ' ' + '<programme start="' + starttime + ' '+time_zone+'" stop="' + endtime + ' '+time_zone+'" channel="2m.ma">' + '\n')
+            date_end =datetime.strptime(endtime,'%Y%m%d%H%M%S').strftime('%Y/%m/%d')
+            day = datetime.strptime(date_end,'%Y/%m/%d')
+            date_now = datetime.strptime(now,'%Y/%m/%d')
+            nb_days = day - date_now
+            end_date.append(nb_days.days)
+        for tit, de in zip(ti_, descrip):
+            desc.append(4 * ' ' + '<desc lang="ar">' + de + '</desc>\n  </programme>\r')
+            if tit == '':
+                prog.append(4 * ' ' + '<title lang="ar">' + de + '</title>' + "\n")
+            else:
+                prog.append(4 * ' ' + '<title lang="ar">' +tit.replace('&#39;', "'")+ '</title>' + "\n")
+        for tt, p, d in zip(time_chan, prog, desc):
+            alls.append(tt + p + d )
+    else:
+        pass
         
     try:       
         alls.pop(-1)
@@ -260,14 +268,16 @@ def medi():
             today += + timedelta(days=1)
         last_hr = h
         glb_time.append(today + timedelta(hours=h, minutes=m))
-    
-    for elem, next_elem in zip(glb_time, glb_time[1:] + [glb_time[0]]):
-        startime=datetime.strptime(str(elem),'%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
-        endtime=datetime.strptime(str(next_elem),'%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
-        time_chan.append(2 * ' ' + '<programme start="' + startime + ' '+time_zone+'" stop="' + endtime + ' '+time_zone+'" channel="Medi1tv.ma">' + '\n')   
+    if len(glb_time)>0:
+        for elem, next_elem in zip(glb_time, glb_time[1:] + [glb_time[0]]):
+            startime=datetime.strptime(str(elem),'%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
+            endtime=datetime.strptime(str(next_elem),'%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
+            time_chan.append(2 * ' ' + '<programme start="' + startime + ' '+time_zone+'" stop="' + endtime + ' '+time_zone+'" channel="Medi1tv.ma">' + '\n')   
 
-    for tt,p,d in zip(time_chan,titles,descrip):
-        alls.append(tt+p+d)
+        for tt,p,d in zip(time_chan,titles,descrip):
+            alls.append(tt+p+d)
+    else:
+        pass
     try:   
         alls.pop(-1)
         print 'Mediatv epg ends at : '+str(glb_time[-1])

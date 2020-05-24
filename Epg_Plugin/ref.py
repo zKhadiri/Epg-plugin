@@ -57,7 +57,6 @@ class set_ref(Screen):
             "right":self.right,
             "left":self.left
         }, -1)
-        
         self.ServicesList = []
         self.idxList=[]
         self.sidx = 0
@@ -73,8 +72,8 @@ class set_ref(Screen):
         self["bouq"].setText("Current bouquet  : {}".format(self.bouquetname))
         
     def setCurrentidIndex(self):
-		if self.idxList.count((self.id)):
-			self.idx = self.idxList.index((self.id))
+        if self.idxList.count((self.id)):
+            self.idx = self.idxList.index((self.id))
    
 #####################################################
 
@@ -100,6 +99,7 @@ class set_ref(Screen):
     def listChannels(self):
         self.path=bqList[self.bqIndex].split('-')[2]
         bqTitle=bqList[self.bqIndex].split('-')[0]
+        channels=ch.chann
         exec "channels=ch."+bqTitle.split('-')[0]
         self['list'].setList([])    
         self['list'].setList(channels)
@@ -127,9 +127,7 @@ class set_ref(Screen):
         self.id = service
         return
 #########################################        
-        
- 
-        
+  
     def init(self):
         for service in self.services:
             self.ServicesList.append((service.getServiceName(), str(service)))
@@ -191,8 +189,6 @@ class set_ref(Screen):
             self.refstr = self.ServicesList[self.sidx][1]
             self.displayServiceParams()
             
-
-    
     def a(self):
         self.close(None)
 

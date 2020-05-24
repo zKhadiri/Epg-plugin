@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import requests,json,io,re,ch,os,sys
 from datetime import datetime
+from requests.adapters import HTTPAdapter
 
 urls=[]
 
@@ -30,21 +31,23 @@ for cc in ch.ZA:
 
 def dstv():
     for url in urls:
-        link = requests.get(url,headers=headers)
-        data=json.loads(link.text)
-        for d in data['Channels']:
-            for prog in d['Programmes']:
-                ch=''
-                startime= datetime.datetime.strptime(prog['StartTime'].replace('T',' ').replace('Z',''),'%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
-                endtime= datetime.datetime.strptime(prog['EndTime'].replace('T',' ').replace('Z',''),'%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
-                ch+=2*' '+'<programme start="'+startime+' '+time_zone+'" stop="'+endtime+' '+time_zone+'" channel="'+d['Name'].replace(' ','').replace('&','and')+'">\n'
-                ch+=4*' '+'<title lang="en">'+prog['Title'].replace('&','and')+'</title>\n'
-                ch+=4*' '+'<desc lang="en">No description Found for this programme</desc>\n  </programme>\r'
-                with io.open("/etc/epgimport/dstv.xml","a",encoding='UTF-8')as f:
-                    f.write(ch)
-        dat = re.search(r'\d{4}-\d{2}-\d{2}',url)
-        print('Date'+' : '+dat.group())    
-        sys.stdout.flush()
+        with requests.Session() as s:
+            s.mount('https://', HTTPAdapter(max_retries=100))
+            link = s.get(url,headers=headers)
+            data=json.loads(link.text)
+            for d in data['Channels']:
+                for prog in d['Programmes']:
+                    ch=''
+                    startime= datetime.datetime.strptime(prog['StartTime'].replace('T',' ').replace('Z',''),'%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
+                    endtime= datetime.datetime.strptime(prog['EndTime'].replace('T',' ').replace('Z',''),'%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
+                    ch+=2*' '+'<programme start="'+startime+' '+time_zone+'" stop="'+endtime+' '+time_zone+'" channel="'+d['Name'].replace(' ','').replace('&','and')+'">\n'
+                    ch+=4*' '+'<title lang="en">'+prog['Title'].replace('&','and')+'</title>\n'
+                    ch+=4*' '+'<desc lang="en">No description Found for this programme</desc>\n  </programme>\r'
+                    with io.open("/etc/epgimport/dstv.xml","a",encoding='UTF-8')as f:
+                        f.write(ch)
+            dat = re.search(r'\d{4}-\d{2}-\d{2}',url)
+            print('Date'+' : '+dat.group())    
+            sys.stdout.flush()
 if __name__=='__main__':
     dstv()
     from datetime import datetime
