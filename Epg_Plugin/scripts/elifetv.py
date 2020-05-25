@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import requests,io,re,ch,os
+import requests,io,re,ch,os,sys
 from datetime import datetime,timedelta
 from requests.adapters import HTTPAdapter
 
@@ -43,6 +43,7 @@ for code_ch in channels_code:
     start= re.findall(r'<starttime>(\d+)<\/starttime>',url.text)
     end= re.findall(r'<endtime>(\d+)<\/endtime>',url.text)
     print code_ch.split('-')[1]+' ends at '+end[-1]
+    sys.stdout.flush()
     for start_prog ,end_prog,title_pro,des_prog in zip(start,end,title,des):
       ch=''
       ch+=2*' '+'<programme start="{} +0000" stop="{} +0000" channel="{}">\n'.format(start_prog,end_prog,code_ch.split('-')[1])
