@@ -1,4 +1,4 @@
-import requests,re,io
+import requests,re,io,os
 from time import strftime
 from datetime import datetime
 
@@ -55,5 +55,11 @@ with open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/space.txt
 lines[1] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
 with open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/space.txt", "w") as f:
     f.writelines(lines)
+    
+if not os.path.exists('/etc/epgimport/eliftv.channels.xml'):
+    print('Downloading eliftv channels config')
+    elif_channels=requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/eliftv.channels.xml?raw=true')
+    with io.open('/etc/epgimport/dstv.channels.xml','w',encoding="utf-8") as f:
+        f.write(elif_channels.text)
     
 print('**************FINISHED******************')

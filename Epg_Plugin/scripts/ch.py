@@ -53,3 +53,7 @@ osn=['OSN_On_Demand_HD','OSN_Ya_Hala_Al_Oula','OSN_Ya_Hala','OSN_Pop_Up_Adel_Ima
 mbc=['MBC1','MBCDrama','MBCEgypt','MBCEgypt2','MBC4','MBC2','MBCAction','MBCBollywood','MBC+Drama','MBCMovieMax','MBCIraq','MBCCinq','Wanasah']
 
 others=['Spacetoon','noordubai','Arriadia.ma','2M.ma','Medi1tv.ma','Aloula.ma']
+
+eli=['Dubai One HD','Abu Dhabi TV HD','Al Emarat TV HD','Abu Dhabi Drama HD','Baynounah TV HD','Dubai TV HD','Sama Dubai HD',
+     'Noor Dubai','Dubai Zaman TV','Sharjah TV HD','Sharqiya from kalba HD','Ajman TV HD','Al Dafrah HD','Saudi 1 HD','SBC HD','Zikrayat TV HD',
+     'MBC+ eLife HD','MBC+ Variety HD']
