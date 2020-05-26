@@ -24,7 +24,7 @@ bqList=['chann-bein sports-'+cos_path+'','osn-osn-'+cos_path+'','elc_channels-el
 class set_ref(Screen):
     skin="""
         <screen position="center,center" size="1000,400" title="GET SERVICE" backgroundColor="#16000000" flags="wfNoBorder">
-            <widget source="bouq" position="200,10" size="990,50" render="Label" font="Regular;40" foregroundColor="#00ffa500" backgroundColor="#16000000" transparent="1"/>
+            <widget name="bouq" position="200,10" size="990,50" font="Regular;40" foregroundColor="#00ffa500" backgroundColor="#16000000" transparent="1"/>
             <widget name="status" foregroundColor="#00ffffff" backgroundColor="#16000000"  position="10,130" size="700,25" font="Regular;23"/>             
             <widget name="label" foregroundColor="#00ffffff" backgroundColor="#16000000"  position="10,100" size="700,25" font="Regular;23" />
             <widget name="list" foregroundColor="#00ffffff" backgroundColor="#16000000" zPosition="2" position="650,80" size="320,300" scrollbarMode="showOnDemand" transparent="1" />
