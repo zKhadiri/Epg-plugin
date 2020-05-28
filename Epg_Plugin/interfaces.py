@@ -77,6 +77,15 @@ def Statusdstv():
         return "API rate limit exceeded"
     else:
         return message.group()+' '+date.group().replace('T','  ').replace('Z','')
+    
+def StatuseLife():
+    url = requests.get('https://api.github.com/repos/ziko-ZR1/xml/branches/eLife')
+    date = re.search(r'date\":\"(.*?)\"',url.content)
+    message = re.search(r'message\":\"(.*?)\"',url.content)
+    if date==None:
+        return "API rate limit exceeded"
+    else:
+        return message.group()+' '+date.group().replace('T','  ').replace('Z','')
 
 class EPGIConfig(Screen):
     if reswidth == 1280:
@@ -101,28 +110,6 @@ class EPGIConfig(Screen):
   			<widget name="status" foregroundColor="#000080ff" position="15,487" size="724,28" font="Regular;24"/>
 		</screen>"""
     else:
-# 	if os.path.exists('/var/lib/dpkg/status'):
-#         	skin = """
-#            		<screen position="center,185" size="1222,707" title="ZIKO EPG GRABBER" flags="wfNoBorder" backgroundColor="#16000000">
-#                        <widget source="Title" position="5,6" size="1210,63" render="Label" font="Regular;45" foregroundColor="#00ffa500" backgroundColor="#16000000" transparent="1"/>
-#                        <eLabel text = "Select providers to install" position = "0,73" size = "514,45" font = "Regular;36" foregroundColor = "#00ffffff" zPosition = "10"  valign = "center" halign = "left"  backgroundColor = "#16000000"/>
-#                        <widget font="Regular;35" foregroundColor="#00ffffff" backgroundColor="#16000000" halign="center" position="514,73" render="Label" size="177,45" source="global.CurrentTime" transparent="1" valign="center" zPosition="3">
-#                                <convert type="ClockToText">Default</convert>
-#                        </widget>
-#                        <ePixmap name="red" position="230,655" zPosition="2" size="195,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/red.png" transparent="1" alphatest="on"/>
-#                        <ePixmap name="green" position="420,655" zPosition="2" size="195,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/green.png" transparent="1" alphatest="on"/>
-#                        <ePixmap name="yellow" position="618,655" zPosition="2" size="195,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/yellow.png" transparent="1" alphatest="on"/>
-#                        <ePixmap name="blue" position="810,655" zPosition="2" size="195,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/blue.png" transparent="1" alphatest="on"/>
-#                        <ePixmap position="1010,658" size="35,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/key_menu.png" alphatest="on"/>
-#                        <widget name="key_red" position="202,655" size="200,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
-#                        <widget name="key_green" position="395,655" size="200,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
-#                        <widget name="key_yellow" position="595,655" size="200,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
-#                        <widget name="key_blue" position="784,655" size="200,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
-#                        <widget name="config" foregroundColor="#00ffffff" backgroundColor="#16000000" position="10,125" size="1196,388" scrollbarMode="showOnDemand"/>
-#                        <widget name="status" foregroundColor="#00ff2525" backgroundColor="#16000000" position="15,579" size="1174,54" font="Regular;35"/>
-#                        <widget name="glb" foregroundColor="#00ffffff" backgroundColor="#16000000" position="15,519" size="1174,54" font="Regular;35"/>
-#            		</screen>""" -->
-#	else:
         skin = """
 		<screen position="center,center" size="1222,809" title="ZIKO EPG GRABBER" flags="wfNoBorder" backgroundColor="#16000000">
   			<widget source="Title" position="5,10" size="1210,50" render="Label" font="Regular;40" foregroundColor="#00ffa500" backgroundColor="#16000000" transparent="1"/>
@@ -156,7 +143,7 @@ class EPGIConfig(Screen):
         list.append(("ELCINEMA WEBSITE EPG", "4","elcin","elcinema","elcinema"))
         list.append(("ELCINEMA Bein entertainment EPG", "5","beincin","entc","beinentCin"))
         list.append(("MBC.NET", "6","mbc","mbc","mbc"))
-        list.append(("eLife TV (under testing)", "7","elifetv","eliftv","eliftv"))
+        list.append(("eLife TV BACKUP", "7","elifetv","eliftv","eliftv"))
         list.append(("SNRT EPG", "8","aloula","aloula","aloula"))
         list.append(("Noor Dubai EPG", "9","noor","noor","noor"))
         list.append(("Spacetoon epg", "10","spacetoon","space","spacetoon"))
@@ -200,6 +187,7 @@ class EPGIConfig(Screen):
     def check_status(self):
         self.statusOS = Statusosn()
         self.statusDS = Statusdstv()
+        self.statusEL = StatuseLife()
 
     def onWindowShow(self):
         self.onShown.remove(self.onWindowShow)
@@ -354,7 +342,8 @@ class EPGIConfig(Screen):
                 f1.close()
             elif returnValue=='3':
                 self["glb"].setText('Last commit : '+self.statusOS)
-                 
+            elif returnValue=='7':
+                self["glb"].setText('Last commit : '+self.statusEL) 
             elif returnValue=='12':
                 self["glb"].setText('Last commit : '+self.statusDS)
             

@@ -41,19 +41,28 @@ ZA=['M-NetHD','1MagicHD','M-NetMoviesPremierHD','M-NetMoviesSmileHD','M-NetMovie
 ent=['BEINMOVIESPREMIERE','BEINMOVIESACTION','BEINMOVIESDRAMA','BEINMOVIESFAMILY','BeInBoxOffice','BeInSeriesHD1','BeInSeriesHD2'
      ,'beINDrama','FOXACTIONMOVIES','FOXFAMILYMOVIESHD']
 
-osn=['OSN_On_Demand_HD','OSN_Ya_Hala_Al_Oula','OSN_Ya_Hala','OSN_Pop_Up_Adel_Imam','OSN_Action','OSN_Movies_First','OSN_Mov_First_+2h','OSN_Movies','OSN_Enigma',
+osn=['Beity_TV','Majid_Kids_TV','YAS_Sports_HD','AD_Sports_1_HD','AD_Sports_2_HD','AD_Sports_3_HD','AD_Sports_4_HD','France_24_Arabic','Rusiya_Al_Yawm','Al_Hurra_HD','Al_Arabiya','CGTN','NHK_World-Japan','Yalla_OSN_Support','Sky_News_Arabia'
+             ,'SpongeBob_with_OSN','OSN_Pop_Up_Adel_Imam','OSN_Action','OSN_On_Demand_HD','OSN_Ya_Hala_Al_Oula','OSN_Ya_Hala','OSN_Movies_First','OSN_Mov_First_+2h','OSN_Movies','OSN_Enigma',
              'OSN_Kids','OSN_Movies_Disney','OSN_Cinema','Paramount_HD','Star_Movies_HD','OSN_YH_Cinema','Alfa_Series_HD',
              'Alfa_Series_+2_HD','Alfa_Al_Yawm_HD','Alfa_Al_Safwa','Alfa_Fann','Alfa_Cinema_1','Alfa_Cinema_2','Alfa_Music_Now',
              'OSN_Series_First','OSN_Binge','OSN_Comedy','Star_World_HD','TLC_HD','E!_HD','OSN_Mezze','OSN_Living','MTV_Live_HD',
-             'VH1','Disney_Channel_HD','Disney_XD_HD','Nickelodeon_HD','Nick_Jr_HD','OSN_Kidzone','Baby_TV','OSN_News','Bloomberg'
+             'VH1','Disney_Channel_HD','Disney_XD_HD','Nickelodeon_HD','Nick_Jr_HD','OSN_Kidzone','Baby_TV','OSN_News'
              ,'Discovery_Channel_HD','Discovery_Science_HD','CI','History_HD','H2_HD','Nat_Geo_HD','Nat_Geo_Wild_HD','Nat_Geo_People_HD',
              'Comedy_Central_HD','Discovery_IDX_HD','Disney_Junior_HD','NickToons_HD','Sky_News_HD','ABS-CBN_Sports+Action','Aksyon_TV','ANC','ARC','CineMo','Cinema_One_Global',
-             'CNBC_Europe','GMA_Life_TV','GMA_News_TV','GMA_Pinoy_TV','Lifestyle_Network','Net_25','TeleRadyo','TFC','VIVA_TV','Myx','OSN_Mix']
+             'CNBC_Europe','GMA_Life_TV','GMA_News_TV','GMA_Pinoy_TV','Lifestyle_Network','Net_25','TeleRadyo','TFC','VIVA_TV','Bloomberg','Myx','OSN_Mix']
 
 mbc=['MBC1','MBCDrama','MBCEgypt','MBCEgypt2','MBC4','MBC2','MBCAction','MBCBollywood','MBC+Drama','MBCMovieMax','MBCIraq','MBCCinq','Wanasah']
 
 others=['Spacetoon','noordubai','Arriadia.ma','2M.ma','Medi1tv.ma','Aloula.ma']
 
-eli=['Dubai One HD','Abu Dhabi TV HD','Al Emarat TV HD','Abu Dhabi Drama HD','Baynounah TV HD','Dubai TV HD','Sama Dubai HD',
-     'Noor Dubai','Dubai Zaman TV','Sharjah TV HD','Sharqiya from kalba HD','Ajman TV HD','Al Dafrah HD','Saudi 1 HD','SBC HD','Zikrayat TV HD',
-     'MBC+ eLife HD','MBC+ Variety HD']
+eli=['Dubai One HD', 'Abu Dhabi TV HD','Al Emarat TV HD',
+     'Abu Dhabi Drama HD', 'Baynounah TV HD', 'Dubai TV HD', 'Sama Dubai HD', 'Noor Dubai', 'Dubai Zaman TV', 'Sharjah TV HD',
+     'Sharqiya from kalba HD', 'Ajman TV HD', 'Al Dafrah HD', 'Saudi 1 HD', 'SBC HD', 'Zikrayat TV HD', 'MBC+ eLife HD', 'MBC+ Variety HD', 
+     'KSA Sports 1 HD', 'Oman TV HD', 'Al Rai TV', 'Funoon HD', 'Al Soumariya', 'Al Sharqiya HD', 'LBC Sat HD', 'OTV HD', 'Future TV', 
+     'Tele Liban', 'MTV Lebanon HD', 'Al Jadeed HD', 'Al Masriya', 'Al Kahera Wal Nass', 'ON Drama', 'ON E HD', 'CBC', 'CBC Extra News', 
+     'CBC Drama', 'Al Hayat', 'Al Nahar TV', 'Al Nahar Drama', 'Sada Al Balad', 'DMC HD', 'DMC Drama', 'Dream', 'Ten', 'Cairo Drama', 
+     'Nile Drama', 'Nile Family and Children', 'Nile Life', 'Nessma TV', 'Zee Alwan', 'Fox Rewayat HD', 'Rotana Khaleejiah HD', 
+     'Rotana Classic HD', 'Al Aan TV HD', 'Roya TV HD', 'DW Arabia', 'Kuwait TV 2 HD', 'MBC 3 HD', 'Spacetoon', 'Cartoon Network Arabic', 
+     'Rotana Kids', 'Nat Geo Abu Dhabi HD', 'CBC Sofra', 'Rotana Clip', 'Rotana Mousica HD', 'Saudi Quran HD', 'Saudi Sunna HD', 'Cairo Cinema', 
+     'Rotana Cinema HD', 'Rotana Comedy HD', 'Zee Aflam', 'B4U Aflam', 'Dubai Sports HD', 'Dubai Sports 2', 'Dubai Sports 3', 'Dubai Racing HD', 
+     'Sharjah Sports HD', 'ON Sport HD', 'ON Sports 2 HD', 'Manorama News', 'Surya TV HD', 'Surya Movies']

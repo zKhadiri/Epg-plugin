@@ -139,6 +139,14 @@
 <channel id="VIVA_TV">1:0:1:D9:2:800:DCA0000:0:0:0</channel>
 <channel id="OSN_Mix">1:0:19:1199:2D:800:DCA0000:0:0:0</channel>
 <channel id="Myx">1:0:1:D1:2:800:DCA0000:0:0:0</channel>
+<channel id="Yalla_OSN_Support">1:0:19:6AA:11:800:DCA0000:0:0:0:</channel>
+<channel id="Beity_TV">1:0:1:106C:2A:800:DCA0000:0:0:0:</channel>
+<channel id="Sky_News_Arabia">1:0:19:7DF:14:800:DCA0000:0:0:0:</channel>
+<channel id="Al_Hurra_HD">1:0:1:1BA:10:6E:DCA0000:0:0:0:</channel>
+<channel id="NHK_World-Japan">1:0:1:517:D:800:DCA0000:0:0:0:</channel>
+<channel id="Al_Arabiya">1:0:1:17DE:3D:800:DCA0000:0:0:0:</channel>
+<channel id="CGTN">1:0:1:516:D:800:DCA0000:0:0:0:</channel>
+<channel id="SpongeBob_with_OSN">1:0:19:6AD:11:800:DCA0000:0:0:0:</channel>
 <!-- ALFA 8W -->
 <channel id="Alfa_Al_Yawm_HD">1:0:1:A8D:1:2A:DC00000:0:0:0:</channel> <!-- "Al:Yawm" -->
 <channel id="Alfa_Cinema_1">1:0:1:A8F:1:2A:DC00000:0:0:0:</channel> <!-- "Cinema:1" -->

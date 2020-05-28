@@ -2,8 +2,8 @@
 ##setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=8.5
-description=What_is_NEW:\n'[NEW SOURCE : Fix plugin for DreamOS]'
+version=8.6
+description=What_is_NEW:\n'[NEW CHANNELS]'
 ##############################################################
 # No need to remove old version
 #rm -rf /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin
