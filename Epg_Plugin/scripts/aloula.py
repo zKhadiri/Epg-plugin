@@ -297,7 +297,7 @@ if __name__ == '__main__':
     from datetime import datetime
     with open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/aloula.txt") as f:
         lines = f.readlines()
-    lines[1] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
+    lines[0] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
     with open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/aloula.txt", "w") as f:
         f.writelines(lines)
 

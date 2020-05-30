@@ -52,7 +52,7 @@ with io.open("/etc/epgimport/spacetoon.xml", "a",encoding="utf-8") as f:
 from datetime import datetime
 with open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/space.txt") as f:
     lines = f.readlines()
-lines[1] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
+lines[0] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
 with open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/space.txt", "w") as f:
     f.writelines(lines)
     
