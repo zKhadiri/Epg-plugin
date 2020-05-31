@@ -55,7 +55,7 @@ osn=['Beity_TV','Majid_Kids_TV','YAS_Sports_HD','AD_Sports_1_HD','AD_Sports_2_HD
 
 mbc=['MBC1','MBCDrama','MBCEgypt','MBCEgypt2','MBC4','MBC2','MBCAction','MBCBollywood','MBC+Drama','MBCMovieMax','MBCIraq','MBCCinq','Wanasah']
 
-others=['Spacetoon','noordubai','Arriadia.ma','2M.ma','Medi1tv.ma','Aloula.ma']
+others=['Spacetoon','noordubai','Arriadia.ma','2M.ma','Medi1tv.ma','Aloula.ma','QATAR.TV']
 
 eli=['Dubai One HD', 'Abu Dhabi TV HD','Al Emarat TV HD',
      'Abu Dhabi Drama HD', 'Baynounah TV HD', 'Dubai TV HD', 'Sama Dubai HD', 'Noor Dubai', 'Dubai Zaman TV', 'Sharjah TV HD',
