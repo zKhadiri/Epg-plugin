@@ -19,7 +19,8 @@ headers={
 nb_channel=['1138-AlhayatDrama','1145-Mehwar','1310-Kuwait','1314-JordanTV','1334-Watania2','1356-RotanaKids','1342-LanaPlusTV','1241-MBC3','1261-Zeealwan','1174-AlKaheraWalNasTV','1173-DubaiOne','1169-DubaiTV','1137-AlhayatTV','1223-AlNaharDrama','1176-Cima','1199-CBCDrama','1156-NileDrama','1262-Zeeaflam','1227-SadaElBaladDrama','1198-CBC','1177-SamaDubai','1193-AlNaharTV','1158-NileComedy',
             '1170-AlraiTV','1159-NileLife','1226-SadaElBalad','1292-DMCDRAMA','1203-ONE','1101-Aloula','1134-ONDrama','1283-DubaiZaman','1188-SharjahTV','1260-CBCsofra','1290-DMC','1204-iFILMTV','1269-Alsharqya','1280-TeNTV',
             '1300-SyriaDrama','1298-Amman','1297-SBC','1301-Alsumaria','1299-Roya','1296-MTVLebnon','1304-Nessma','1317-Oman','1302-Fujairah','1321-almanar','1338-SyriaTV','1339-AlSaeedah','1350-SamaTV','1355-Mix','1148-RotanaCinema','1217-RotanaClassic',
-            '1147-RotanaDrama','1149-RotanaKhalijiah','1358-RotanaComedy','1313-Lana','1168-LBCI','1216-AlJadeedTV','1264-AlDafrah','1341-LBC','1120-ARTAflam1','1121-ARTAflam2','1122-ARTHekayat','1182-ARTHekayat2','1195-ARTCinema','1336-MasperoZaman','1242-NetworkArabic','1308-Watania1','1136-AbuDhabiTV','1135-Emirates','1178-AbuDhabiDrama','1279-SadaElBalad+2','1252-AlKaheraWalNasTV2']
+            '1147-RotanaDrama','1149-RotanaKhalijiah','1358-RotanaComedy','1313-Lana','1168-LBCI','1216-AlJadeedTV','1264-AlDafrah','1341-LBC','1120-ARTAflam1','1121-ARTAflam2','1122-ARTHekayat','1182-ARTHekayat2','1195-ARTCinema','1336-MasperoZaman','1242-NetworkArabic','1308-Watania1','1136-AbuDhabiTV','1135-Emirates','1178-AbuDhabiDrama','1279-SadaElBalad+2','1252-AlKaheraWalNasTV2',
+            '1266-National_Geographic_Abu_Dhabi']
 
 REDC =  '\033[31m'                                                              
 ENDC = '\033[m'                                                                 

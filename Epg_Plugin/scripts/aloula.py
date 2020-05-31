@@ -1,6 +1,10 @@
-import requests,re,os,io,sys
+import requests,re,os,io,sys,ssl
 from shutil import copyfile
 from requests.adapters import HTTPAdapter
+import warnings
+warnings.filterwarnings('ignore', message='Unverified HTTPS request')
+
+
 headers={
     'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) snap Chromium/80.0.3987.100 Chrome/80.0.3987.100 Safari/537.36'
 }
@@ -42,7 +46,8 @@ def snrt():
         prog[:] = []
         desc[:] = []
         cat[:] = []
-        link = requests.get(url,headers=headers)
+        ssl._create_default_https_context = ssl._create_unverified_context
+        link = requests.get(url,headers=headers,verify=False)
         time = re.findall(r'<div class="\w+_\w+_\w+" style=";">(.*?)<\/div>',link.text)
         title= re.findall(r'<a\s+class="grille_item_title_12 grille_item_title_12_ar" style="">(.*?)<\/a>',link.text)
         titles =[re.sub(' +',' ',t).replace('-','') for t in title]
@@ -114,7 +119,8 @@ def arriadia():
         prog[:] = []
         desc[:] = []
         cat[:] = []
-        ur = requests.get(url,headers=headers)
+        ssl._create_default_https_context = ssl._create_unverified_context
+        ur = requests.get(url,headers=headers,verify=False)
         title_ar = re.findall(r'<span class="emissiontitle">(.*?)<\/span>',ur.text)
         time_ar=re.findall(r'<div class="eventlineitem-time">(.*?)<\/div>',ur.text)
         des=re.findall(r'<\/span><br \/>(\s.*)</div>',ur.text)
@@ -183,7 +189,8 @@ def mm():
     for url in urls:
         with requests.Session() as s:
             s.mount('http://', HTTPAdapter(max_retries=100))
-            r = s.get(url, headers=headers)
+            ssl._create_default_https_context = ssl._create_unverified_context
+            r = s.get(url, headers=headers,verify=False)
             title_2m = re.findall(r'bold\">(.*?)<\/h4>\s+<p', r.text)
             des_2m = re.findall(r'<p class="text-size12">(.*?)<\/p>', r.text)
             time_2m = re.findall(r'<span class=\"p-right-15 text-size22 roboto lighter\">(.*?)<\/span>', r.text)
@@ -247,7 +254,8 @@ def medi():
     from datetime import datetime,timedelta
     i= datetime.today().weekday()
     for j in range(i,7):
-        url = requests.get('http://www.medi1tv.com/ar/inc/grille.aspx?d='+str(j))
+        ssl._create_default_https_context = ssl._create_unverified_context
+        url = requests.get('http://www.medi1tv.com/ar/inc/grille.aspx?d='+str(j),verify=False,headers=headers)
         for des in re.findall(r'id=\"resumegrille-\d+\"\s+>(.*)',url.text):
             if des==u'\r':
                 descrip.append(4 * ' ' + '<desc lang="ar">No description found for this program</desc>\n  </programme>\r')
