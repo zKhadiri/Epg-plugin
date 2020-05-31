@@ -69,4 +69,3 @@ eli=['Dubai One HD', 'Abu Dhabi TV HD','Al Emarat TV HD',
      'Rotana Cinema HD', 'Rotana Comedy HD', 'Zee Aflam', 'B4U Aflam', 'Dubai Sports HD', 'Dubai Sports 2', 'Dubai Sports 3', 'Dubai Racing HD', 
      'Sharjah Sports HD', 'ON Sport HD', 'ON Sports 2 HD', 'Manorama News', 'Surya TV HD', 'Surya Movies']
 
-print len(net)+len(mbc)+len(others)+len(ZA)+len(eli)+len(osn)+len(chann)+len(elc_channels)+len(ent)
