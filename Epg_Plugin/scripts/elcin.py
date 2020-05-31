@@ -1,9 +1,11 @@
 #!/usr/bin/env python2.7
 # -*- coding: utf-8 -*-
-import requests,re,io,sys,ch,os
+import requests,re,io,sys,ch,os,ssl
 from datetime import datetime,timedelta
 from time import sleep,strftime
 from requests.adapters import HTTPAdapter
+import warnings
+warnings.filterwarnings('ignore', message='Unverified HTTPS request')
 
 fil = open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/elcinema.txt','r')
 time_zone = fil.readlines()[0].strip()
@@ -11,7 +13,7 @@ fil.close()
 
 headers={
     'Host': 'elcinema.com',
-    'Referer': 'https://elcinema.com/tvguide/',
+    "Connection": "keep-alive",
     'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.75 Safari/537.36'
 }
 nb_channel=['1138-AlhayatDrama','1145-Mehwar','1310-Kuwait','1314-JordanTV','1334-Watania2','1356-RotanaKids','1342-LanaPlusTV','1241-MBC3','1261-Zeealwan','1174-AlKaheraWalNasTV','1173-DubaiOne','1169-DubaiTV','1137-AlhayatTV','1223-AlNaharDrama','1176-Cima','1199-CBCDrama','1156-NileDrama','1262-Zeeaflam','1227-SadaElBaladDrama','1198-CBC','1177-SamaDubai','1193-AlNaharTV','1158-NileComedy',
@@ -58,11 +60,14 @@ class elcin():
             self.prog_end[:]=[]
             self.title[:]=[]
             with requests.Session() as s:
+                ssl._create_default_https_context = ssl._create_unverified_context
                 s.mount('https://', HTTPAdapter(max_retries=100))
-                self.url = s.get('https://elcinema.com/tvguide/'+self.nb.split('-')[0]+'/',headers=headers)
-                for time,end in zip (re.findall(r'(\d\d\:\d\d.*)',self.url.text),re.findall(r'\"subheader\">\[(\d+)',self.url.text)):
-                    start=datetime.strptime(time.replace('</li>','').replace('مساءً'.decode('utf-8'),'PM').replace('صباحًا'.decode('utf-8'),'AM'),'%I:%M %p')
-                    self.time.append(start.strftime('%H:%M'))
+                self.url = s.get('https://elcinema.com/tvguide/'+self.nb.split('-')[0]+'/',headers=headers,verify=False)
+                for time in re.findall(r'(\d\d\:\d\d.*)',self.url.text):
+                    if 'مساءً'.decode('utf-8') in time or 'صباحًا'.decode('utf-8') in time:
+                        start=datetime.strptime(time.replace('</li>','').replace('مساءً'.decode('utf-8'),'PM').replace('صباحًا'.decode('utf-8'),'AM'),'%I:%M %p')
+                        self.time.append(start.strftime('%H:%M'))
+                for end in re.findall(r'\"subheader\">\[(\d+)',self.url.text):     
                     self.end.append(int(end))
                     
                 today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0) 

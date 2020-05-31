@@ -84,7 +84,6 @@ class set_ref(Screen):
         self.bqIndex-=1
         self.changeBQ()
         
-        
     def next(self):
         self.bqIndex+=1
         self.changeBQ()
@@ -117,7 +116,6 @@ class set_ref(Screen):
         self['id'].setText("")
         return
 
-
     def listUP(self):
         self['list'].up()
         self.updateServiceID()
@@ -130,17 +128,14 @@ class set_ref(Screen):
         self.id = service
         return
 #########################################        
-        
- 
-        
+    
     def init(self):
         for service in self.services:
             self.ServicesList.append((service.getServiceName(), str(service)))
         self.lenServicesList = len(self.ServicesList)
         if not self.bouquetname:
             self.ServicesList.sort()
-      
-
+    
     def ok(self):
         if fileExists(self.path):
             doc = ET.parse(self.path)
@@ -153,9 +148,22 @@ class set_ref(Screen):
             dom_string = os.linesep.join([s for s in dom_string.splitlines() if s.strip()])
             f.write(dom_string)
             f.close()
+            self.remove_duplicates()
             self['id'].setText("{} added successfully to config".format(self.name))
         else:
             self.session.open(MessageBox,_(self.path+" not found in path"), MessageBox.TYPE_INFO,timeout=10)
+    
+    def remove_duplicates(self):
+        with open(self.path, "rb") as fp:
+            lines = fp.readlines()
+            new_lines = []
+            for line in lines:
+                line = line.strip()
+                if line not in new_lines:
+                    new_lines.append(line)
+                f = open(self.path, 'w')
+                f.write('\n'.join(new_lines))
+                f.close()
     
     def getCurrentService(self):
         from ServiceReference import ServiceReference

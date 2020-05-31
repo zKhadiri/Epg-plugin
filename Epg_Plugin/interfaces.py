@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Screens.ChoiceBox import ChoiceBox
 from Components.ActionMap import ActionMap
@@ -14,8 +13,7 @@ from Tools.Directories import fileExists
 from urllib2 import Request
 from Plugins.Extensions.Epg_Plugin.Console2 import Console2
 from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigYesNo, configfile
-import io,os,re,requests
-import gettext
+import io,os,re,requests,gettext
 from enigma import getDesktop
 from enigma import loadPNG,gPixmapPtr, RT_WRAP, ePoint, RT_HALIGN_LEFT, RT_VALIGN_CENTER, eListboxPythonMultiContent, gFont
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmap, MultiContentEntryPixmapAlphaTest
@@ -249,6 +247,7 @@ class EPGIConfig(Screen):
         else:
             choices.append(("Press Ok to [Disable checking for Online Update]","disablecheckUpdate"))
         choices.append(("ASSIGN SERVICE TO CHANNELS","sref"))
+        choices.append(("DOWNLOAD THE LATEST CONFIGS [NOT THAT OLD CONFIGS WILL BE DISCARDED]","config"))
         from Screens.ChoiceBox import ChoiceBox
         self.session.openWithCallback(self.choicesback, ChoiceBox, _('select task'),choices)
 
@@ -275,6 +274,8 @@ class EPGIConfig(Screen):
                     services = ref.getBouquetServices(epg_bouquet)
                     service = Servicelist.servicelist.getCurrent()
                     self.session.openWithCallback(ref.closed,ref.set_ref, services, service, ServiceReference(epg_bouquet).getServiceName())
+            elif select[1]=="config":
+                self.session.open(Console2,_("EPG CONFIGS") , ["python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/configs.py"], closeOnSuccess=False)
 
     def checkupdates(self):
         from twisted.web.client import getPage, error

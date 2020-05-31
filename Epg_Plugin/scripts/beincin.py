@@ -1,9 +1,11 @@
 #!/usr/bin/env python2.7
 # -*- coding: utf-8 -*-
-import requests,re,io,sys,ch,os
+import requests,re,io,sys,ch,os,ssl
 from datetime import datetime,timedelta
 from time import sleep,strftime
 from requests.adapters import HTTPAdapter
+import warnings
+warnings.filterwarnings('ignore', message='Unverified HTTPS request')
 
 fil = open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/entc.txt','r')
 time_zone = fil.readlines()[0].strip()
@@ -11,7 +13,7 @@ fil.close()
 
 headers={
     'Host': 'elcinema.com',
-    'Referer': 'https://elcinema.com/tvguide/',
+    'Connection': 'keep-alive',
     'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) snap Chromium/80.0.3987.149 Chrome/80.0.3987.149 Safari/537.36'
 }
 nb_channel=['1322-BEINMOVIESPREMIERE','1323-BEINMOVIESACTION','1324-BEINMOVIESDRAMA','1325-BEINMOVIESFAMILY','1326-BeInBoxOffice','1327-BeInSeriesHD1'
@@ -55,11 +57,14 @@ class elcin():
             self.prog_end[:]=[]
             self.title[:]=[]
             with requests.Session() as s:
+                ssl._create_default_https_context = ssl._create_unverified_context
                 s.mount('http://', HTTPAdapter(max_retries=10))
-                self.url = s.get('http://elcinema.com/tvguide/'+self.nb.split('-')[0]+'/',headers=headers)
-                for time,end in zip (re.findall(r'(\d\d\:\d\d.*)',self.url.text),re.findall(r'\"subheader\">\[(\d+)',self.url.text)):
-                    start=datetime.strptime(time.replace('</li>','').replace('مساءً'.decode('utf-8'),'PM').replace('صباحًا'.decode('utf-8'),'AM'),'%I:%M %p')
-                    self.time.append(start.strftime('%H:%M'))
+                self.url = s.get('http://elcinema.com/tvguide/'+self.nb.split('-')[0]+'/',headers=headers,verify=False)
+                for time in re.findall(r'(\d\d\:\d\d.*)',self.url.text):
+                    if 'مساءً'.decode('utf-8') in time or 'صباحًا'.decode('utf-8') in time:
+                        start=datetime.strptime(time.replace('</li>','').replace('مساءً'.decode('utf-8'),'PM').replace('صباحًا'.decode('utf-8'),'AM'),'%I:%M %p')
+                        self.time.append(start.strftime('%H:%M'))
+                for end in re.findall(r'\"subheader\">\[(\d+)',self.url.text):     
                     self.end.append(int(end))
                     
                 today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0) 
@@ -106,8 +111,7 @@ class elcin():
                     ch+=4*' '+'<title lang="ar">'+title.replace('&#39;',"'").replace('&quot;','"').replace('&amp;','and')+'</title>\n'
                     ch+=4*' '+'<desc lang="ar">'+des.replace('&#39;',"'").replace('&quot;','"').replace('&amp;','and').replace('(','').replace(')','').strip()+'</desc>\n  </programme>\r'
                     with io.open("/etc/epgimport/beinentCin.xml","a",encoding='UTF-8')as f:
-                        f.write((ch).decode('utf-8'))
-                        
+                        f.write((ch).decode('utf-8'))    
             if self.error:
                 self.error = False
                 pass

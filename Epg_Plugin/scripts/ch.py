@@ -4,6 +4,8 @@ net=['beincinema','MoviesHD1','MoviesHD2','MoviesHD3','MoviesHD4','BoxOffice_HD1
 ,'FoodNetwork','HGTV','CBSreality','FXHD','DMAX','NatGeoWild_HD','NatGeoPeople_HD','NatGeo_HD','BBCEarth','AnimalPlanetHD'
 ,'AljazeeraDocumentary','TRTWorld','Euronews','CNNHD','Bloomberg_B','HLN','DTX','DLife','FineLiving']
 
+
+
 chann=['SportsGlobalHD','News_ar','HD1','HD2','HD3','HD4','HD5','HD6','HD7','HD8','HD9','HD10','SportsHD11','SportsHD12','SportsHD13','SportsHD14','SportsHD15','SportsHD16','SportsHD17','4K','BS_NBA']
 
 xm=['OSN_On_Demand_HD','OSN_Ya_Hala_Al_Oula','OSN_Ya_Hala']
@@ -66,3 +68,5 @@ eli=['Dubai One HD', 'Abu Dhabi TV HD','Al Emarat TV HD',
      'Rotana Kids', 'Nat Geo Abu Dhabi HD', 'CBC Sofra', 'Rotana Clip', 'Rotana Mousica HD', 'Saudi Quran HD', 'Saudi Sunna HD', 'Cairo Cinema', 
      'Rotana Cinema HD', 'Rotana Comedy HD', 'Zee Aflam', 'B4U Aflam', 'Dubai Sports HD', 'Dubai Sports 2', 'Dubai Sports 3', 'Dubai Racing HD', 
      'Sharjah Sports HD', 'ON Sport HD', 'ON Sports 2 HD', 'Manorama News', 'Surya TV HD', 'Surya Movies']
+
+print len(net)+len(mbc)+len(others)+len(ZA)+len(eli)+len(osn)+len(chann)+len(elc_channels)+len(ent)
