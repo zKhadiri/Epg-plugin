@@ -3,7 +3,7 @@
 from time import sleep
 import os,io,re,sys,requests
 
-path = '/etc/epgimport/osn.xml'
+path = '/etc/epgimport/osnplay.xml'
 
 
 with io.open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/osnar.txt','r') as f:
@@ -35,9 +35,9 @@ if os.path.exists(path):
         else:
             print "file is empty"
             
-    print "osn.xml donwloaded with succes"
+    print "osnplay.xml donwloaded with succes"
 else:
-    print "osn.xml not found"
+    print "osnplay.xml not found"
 
 
 from datetime import datetime
