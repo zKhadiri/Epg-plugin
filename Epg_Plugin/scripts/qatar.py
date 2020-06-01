@@ -27,12 +27,14 @@ epg=[]
 with requests.Session() as s:
     s.mount('http://', HTTPAdapter(max_retries=50))
     url = s.get('http://www.qmcdemo.site/TransmissionScheduled',headers=headers)
+    for day in re.findall(r"nav-(\d)' aria-selected='true'>",url.text):
+        pass
 for time in re.findall(r"<span>(.*?)</span>\s+<\/div>\s+<div class='col-md",url.text):
     times.append(datetime.strptime(time,'%I:%M %p').strftime('%H:%M'))
 
 titles=re.findall(r'<h3>(.*?)</h3>',url.text)
 des= re.findall(r'h3>\s+<p>(.*?)</p>',url.text)
-today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0) - timedelta(days=2)
+today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0) - timedelta(days=int(day))
 last_hr = 0
 for d in times:
     h, m = map(int, d.split(":"))

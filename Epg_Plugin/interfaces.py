@@ -84,6 +84,24 @@ def StatuseLife():
         return "API rate limit exceeded"
     else:
         return message.group()+' '+date.group().replace('T','  ').replace('Z','')
+    
+def StatuseosnAR():
+    url = requests.get('https://api.github.com/repos/Haxer/EPG-XMLFiles/branches/FullArabicXML')
+    date = re.search(r'date\":\"(.*?)\"',url.content)
+    message = re.search(r'message\":\"(.*?)\"',url.content)
+    if date==None:
+        return "API rate limit exceeded"
+    else:
+        return message.group()+' '+date.group().replace('T','  ').replace('Z','')
+    
+def StatuseosnEN():
+    url = requests.get('https://api.github.com/repos/Haxer/EPG-XMLFiles/branches/FullEnglishXML')
+    date = re.search(r'date\":\"(.*?)\"',url.content)
+    message = re.search(r'message\":\"(.*?)\"',url.content)
+    if date==None:
+        return "API rate limit exceeded"
+    else:
+        return message.group()+' '+date.group().replace('T','  ').replace('Z','')
 
 class EPGIConfig(Screen):
     if reswidth == 1280:
@@ -137,17 +155,19 @@ class EPGIConfig(Screen):
         list.append(("Bein Sports EPG", "0","bein","bein","bein"))
         list.append(("Bein entertainment EPG", "1","beinent","beinent","beinent"))
         list.append(("ondemand/yahala/yahala oula EPG", "2","osn","osn","osn"))
-        list.append(("Osnplay BACKUP", "3","osnplay","osnback","osnplay"))
-        list.append(("ELCINEMA WEBSITE EPG", "4","elcin","elcinema","elcinema"))
-        list.append(("ELCINEMA Bein entertainment EPG", "5","beincin","entc","beinentCin"))
-        list.append(("MBC.NET", "6","mbc","mbc","mbc"))
-        list.append(("eLife TV BACKUP", "7","elifetv","eliftv","eliftv"))
-        list.append(("SNRT EPG", "8","aloula","aloula","aloula"))
-        list.append(("QATAR TV EPG", "9","qatar","qatar","qatar"))
-        list.append(("Noor Dubai EPG", "10","noor","noor","noor"))
-        list.append(("Spacetoon epg", "11","spacetoon","space","spacetoon"))
-        list.append(("DSTV.ZA", "12","dstv","dstv","dstv"))
-        list.append(("SuperSport.ZA BACKUP", "13","dstvback","dstvback","dstv"))
+        list.append(("Osnplay english title arabic description BACKUP (ziko source)", "3","osnplay","osnback","osnplay"))
+        list.append(("OSN arabic only epg BACKUP (haxer source)", "4","osnar","osnar","osn"))
+        list.append(("OSN english only epg BACKUP (haxer source)", "5","osnen","osnen","osn"))
+        list.append(("ELCINEMA WEBSITE EPG", "6","elcin","elcinema","elcinema"))
+        list.append(("ELCINEMA Bein entertainment EPG", "7","beincin","entc","beinentCin"))
+        list.append(("MBC.NET", "8","mbc","mbc","mbc"))
+        list.append(("eLife TV BACKUP", "9","elifetv","eliftv","eliftv"))
+        list.append(("SNRT EPG", "10","aloula","aloula","aloula"))
+        list.append(("QATAR TV EPG", "11","qatar","qatar","qatar"))
+        list.append(("Noor Dubai EPG", "12","noor","noor","noor"))
+        list.append(("Spacetoon epg", "13","spacetoon","space","spacetoon"))
+        list.append(("DSTV.ZA", "14","dstv","dstv","dstv"))
+        list.append(("SuperSport.ZA BACKUP", "15","dstvback","dstvback","dstv"))
         self.provList=list ## New from mf to make choose list
         Screen.__init__(self, session)
         self.skinName = ["EPGIConfig"]
@@ -187,6 +207,8 @@ class EPGIConfig(Screen):
         self.statusOS = Statusosn()
         self.statusDS = Statusdstv()
         self.statusEL = StatuseLife()
+        self.StatuseosnAR = StatuseosnAR()
+        self.StatuseosnEN = StatuseosnEN()
 
     def onWindowShow(self):
         self.onShown.remove(self.onWindowShow)
@@ -344,9 +366,13 @@ class EPGIConfig(Screen):
                 f1.close()
             elif returnValue=='3':
                 self["glb"].setText('Last commit : '+self.statusOS)
-            elif returnValue=='7':
+            elif returnValue=='4':
+                self["glb"].setText('Last commit : '+self.StatuseosnAR)
+            elif returnValue=='5':
+                self["glb"].setText('Last commit : '+self.StatuseosnEN)
+            elif returnValue=='9':
                 self["glb"].setText('Last commit : '+self.statusEL) 
-            elif returnValue=='13':
+            elif returnValue=='15':
                 self["glb"].setText('Last commit : '+self.statusDS)
             
             else:

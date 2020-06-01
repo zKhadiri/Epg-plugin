@@ -4,7 +4,7 @@ net=['beincinema','MoviesHD1','MoviesHD2','MoviesHD3','MoviesHD4','BoxOffice_HD1
 ,'FoodNetwork','HGTV','CBSreality','FXHD','DMAX','NatGeoWild_HD','NatGeoPeople_HD','NatGeo_HD','BBCEarth','AnimalPlanetHD'
 ,'AljazeeraDocumentary','TRTWorld','Euronews','CNNHD','Bloomberg_B','HLN','DTX','DLife','FineLiving']
 
-
+net.sort()
 
 chann=['SportsGlobalHD','News_ar','HD1','HD2','HD3','HD4','HD5','HD6','HD7','HD8','HD9','HD10','SportsHD11','SportsHD12','SportsHD13','SportsHD14','SportsHD15','SportsHD16','SportsHD17','4K','BS_NBA']
 
@@ -20,7 +20,7 @@ elc_channels=['AlhayatDrama','Mehwar','Kuwait','JordanTV','Watania2','RotanaKids
 "AlSaeedah","SamaTV","Mix",'RotanaCinema','RotanaClassic','RotanaDrama','RotanaKhalijiah','RotanaComedy','LBC','AlDafrah','Lana',
 'ARTAflam1','ARTAflam2','ARTCinema','ARTHekayat','ARTHekayat2','AlJadeedTV','LBCI','MasperoZaman','NetworkArabic','Watania1',
 'AbuDhabiTV','Emirates','AbuDhabiDrama','SadaElBalad+2','AlKaheraWalNasTV2','National_Geographic_Abu_Dhabi']
-
+elc_channels.sort()
 ZA=['M-NetHD','1MagicHD','M-NetMoviesPremierHD','M-NetMoviesSmileHD','M-NetMoviesAction+HD','SundanceTVHD','TomCruise',
     'M-NetMoviesAction','M-NetMoviesAllStarsHD','StudioUniversalHD','M-NETBinge','M-NetCityHD',
     'VUZUHD','UniversalTVHD','TeleMundoEnglish','BBCFirstHD','BBCBritHD','DiscoveryChannelHD','ComedyCentral','ITVChoiceHD',
@@ -40,6 +40,7 @@ ZA=['M-NetHD','1MagicHD','M-NetMoviesPremierHD','M-NetMoviesSmileHD','M-NetMovie
     'RussiaToday','ParliamentaryService','CGTNNews','CNBCAfrica','BloombergTelevision','BusinessDay','NDTV24x7','EuroNewsAfrica',
     'KykNetLekker','RAIInternational','BesteVanNederlands','RTPI','TV5MondeAfrique','DeutscheWelle','CCTV4','SETAsia','B4UMovies',
     'ZeeTV','StarPlus','SunTV','StarVijay','Colors','SETMax','Telemundo(P)','EVA(P)','SICInternacional(P)','M-NetPlus1HD']
+ZA.sort()
 ent=['BEINMOVIESPREMIERE','BEINMOVIESACTION','BEINMOVIESDRAMA','BEINMOVIESFAMILY','BeInBoxOffice','BeInSeriesHD1','BeInSeriesHD2'
      ,'beINDrama','FOXACTIONMOVIES','FOXFAMILYMOVIESHD']
 
@@ -52,6 +53,7 @@ osn=['Beity_TV','Majid_Kids_TV','YAS_Sports_HD','AD_Sports_1_HD','AD_Sports_2_HD
              ,'Discovery_Channel_HD','Discovery_Science_HD','CI','History_HD','H2_HD','Nat_Geo_HD','Nat_Geo_Wild_HD','Nat_Geo_People_HD',
              'Comedy_Central_HD','Discovery_IDX_HD','Disney_Junior_HD','NickToons_HD','Sky_News_HD','ABS-CBN_Sports+Action','Aksyon_TV','ANC','ARC','CineMo','Cinema_One_Global',
              'CNBC_Europe','GMA_Life_TV','GMA_News_TV','GMA_Pinoy_TV','Lifestyle_Network','Net_25','TeleRadyo','TFC','VIVA_TV','Bloomberg','Myx','OSN_Mix']
+osn.sort()
 
 mbc=['MBC1','MBCDrama','MBCEgypt','MBCEgypt2','MBC4','MBC2','MBCAction','MBCBollywood','MBC+Drama','MBCMovieMax','MBCIraq','MBCCinq','Wanasah']
 
@@ -68,4 +70,4 @@ eli=['Dubai One HD', 'Abu Dhabi TV HD','Al Emarat TV HD',
      'Rotana Kids', 'Nat Geo Abu Dhabi HD', 'CBC Sofra', 'Rotana Clip', 'Rotana Mousica HD', 'Saudi Quran HD', 'Saudi Sunna HD', 'Cairo Cinema', 
      'Rotana Cinema HD', 'Rotana Comedy HD', 'Zee Aflam', 'B4U Aflam', 'Dubai Sports HD', 'Dubai Sports 2', 'Dubai Sports 3', 'Dubai Racing HD', 
      'Sharjah Sports HD', 'ON Sport HD', 'ON Sports 2 HD', 'Manorama News', 'Surya TV HD', 'Surya Movies']
-
+eli.sort()
