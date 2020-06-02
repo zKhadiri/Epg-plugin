@@ -28,10 +28,14 @@ if os.path.exists(path):
     sys.stdout.flush()
     if os.path.exists(path):
         if time_of !=None:
-            with io.open(path,encoding="utf-8") as f:
-                newText=f.read().decode('utf-8').replace(time_of.group(), time_zone)
-                with io.open(path, "w",encoding="utf-8") as f:
-                    f.write((newText).decode('utf-8'))
+            if time_of.group()==time_zone:
+                print 'No need to change the timezone : '+time_zone
+                sys.stdout.flush()
+            else:
+                with io.open(path,encoding="utf-8") as f:
+                    newText=f.read().decode('utf-8').replace(time_of.group(), time_zone)
+                    with io.open(path, "w",encoding="utf-8") as f:
+                        f.write((newText).decode('utf-8'))
         else:
             print "file is empty"
             
@@ -76,3 +80,10 @@ if not os.path.exists('/etc/epgimport/eliftv.channels.xml'):
     elif_channels=requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/eliftv.channels.xml?raw=true')
     with io.open('/etc/epgimport/eliftv.channels.xml','w',encoding="utf-8") as f:
         f.write(elif_channels.text)
+
+
+if not os.path.exists('/etc/epgimport/jawwy.channels.xml'):
+    print('Downloading jawwy channels config')
+    jaw_channels=requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/jawwy.channels.xml?raw=true')
+    with io.open('/etc/epgimport/jawwy.channels.xml','w',encoding="utf-8") as f:
+        f.write(jaw_channels.text)

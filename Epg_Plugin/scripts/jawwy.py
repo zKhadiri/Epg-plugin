@@ -3,16 +3,16 @@
 from time import sleep
 import os,io,re,sys,requests
 
-path = '/etc/epgimport/eliftv.xml'
+path = '/etc/epgimport/jawwytv.xml'
 
 
-with io.open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/eliftv.txt','r') as f:
+with io.open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/jawwy.txt','r') as f:
     time_zone = f.readlines()[0].strip()
 
 
-print "Downloading eLife TV epg guide\nPlease wait...."  
+print "Downloading Jawwy TV epg guide\nPlease wait...."  
 sys.stdout.flush()
-url=requests.get('https://raw.githubusercontent.com/ziko-ZR1/XML/eLife/eliftv.xml')
+url=requests.get('https://raw.githubusercontent.com/ziko-ZR1/XML/jawwy/jawwytv.xml')
 with io.open(path,'w',encoding="utf-8") as f:
     f.write(url.text)
     
@@ -39,16 +39,16 @@ if os.path.exists(path):
         else:
             print "file is empty"
             
-    print "eliftv.xml donwloaded with succes"
+    print "jawwytv.xml donwloaded with succes"
 else:
-    print "eliftv.xml not found"
+    print "jawwytv.xml not found"
 
 
 from datetime import datetime
-with open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/eliftv.txt") as f:
+with open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/jawwy.txt") as f:
     lines = f.readlines()
 lines[1] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
-with open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/eliftv.txt", "w") as f:
+with open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/jawwy.txt", "w") as f:
     f.writelines(lines)
 
 if not os.path.exists('/etc/epgimport/custom.channels.xml'):

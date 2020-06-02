@@ -19,8 +19,9 @@ cos_path='/etc/epgimport/custom.channels.xml'
 elci_path='/etc/epgimport/elcinema.channels.xml'
 dstv_path='/etc/epgimport/dstv.channels.xml'
 elif_path='/etc/epgimport/eliftv.channels.xml'
+jaw_path='/etc/epgimport/jawwy.channels.xml'
 bqList=['chann-bein sports-'+cos_path+'','osn-osn-'+cos_path+'','elc_channels-elcinema-'+elci_path+'','net-bein entertainment-'+cos_path+'','mbc-mbc-'+cos_path+'','ent-elcinema bein entertainment-'+elci_path+'','ZA-DSTV-'+dstv_path+'','others-others-'+cos_path+'',
-        'eli-eLife TV-'+elif_path+'']
+        'eli-eLife TV-'+elif_path+'','Jaw-Jawwy TV-'+jaw_path+'']
 class set_ref(Screen):
     skin="""
         <screen position="center,center" size="1000,400" title="GET SERVICE" backgroundColor="#16000000" flags="wfNoBorder">
@@ -202,8 +203,6 @@ class set_ref(Screen):
             self.refstr = self.ServicesList[self.sidx][1]
             self.displayServiceParams()
             
-
-    
     def a(self):
         self.close(None)
 

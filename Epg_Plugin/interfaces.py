@@ -85,6 +85,15 @@ def StatuseLife():
     else:
         return message.group()+' '+date.group().replace('T','  ').replace('Z','')
     
+def StatuseJaw():
+    url = requests.get('https://api.github.com/repos/ziko-ZR1/xml/branches/jawwy')
+    date = re.search(r'date\":\"(.*?)\"',url.content)
+    message = re.search(r'message\":\"(.*?)\"',url.content)
+    if date==None:
+        return "API rate limit exceeded"
+    else:
+        return message.group()+' '+date.group().replace('T','  ').replace('Z','')
+    
 def StatuseosnAR():
     url = requests.get('https://api.github.com/repos/Haxer/EPG-XMLFiles/branches/FullArabicXML')
     date = re.search(r'date\":\"(.*?)\"',url.content)
@@ -162,10 +171,10 @@ class EPGIConfig(Screen):
         list.append(("ELCINEMA Bein entertainment EPG", "7","beincin","entc","beinentCin"))
         list.append(("MBC.NET", "8","mbc","mbc","mbc"))
         list.append(("eLife TV BACKUP", "9","elifetv","eliftv","eliftv"))
-        list.append(("SNRT EPG", "10","aloula","aloula","aloula"))
-        list.append(("QATAR TV EPG", "11","qatar","qatar","qatar"))
-        list.append(("Noor Dubai EPG", "12","noor","noor","noor"))
-        list.append(("Spacetoon epg", "13","spacetoon","space","spacetoon"))
+        list.append(("Jawwy TV BACKUP", "10","jawwy","jawwy","jawwytv"))
+        list.append(("SNRT EPG", "11","aloula","aloula","aloula"))
+        list.append(("QATAR TV EPG", "12","qatar","qatar","qatar"))
+        list.append(("Noor Dubai EPG", "13","noor","noor","noor"))
         list.append(("DSTV.ZA", "14","dstv","dstv","dstv"))
         list.append(("SuperSport.ZA BACKUP", "15","dstvback","dstvback","dstv"))
         self.provList=list ## New from mf to make choose list
@@ -209,6 +218,7 @@ class EPGIConfig(Screen):
         self.statusEL = StatuseLife()
         self.StatuseosnAR = StatuseosnAR()
         self.StatuseosnEN = StatuseosnEN()
+        self.StatuseJaw = StatuseJaw()
 
     def onWindowShow(self):
         self.onShown.remove(self.onWindowShow)
@@ -371,7 +381,9 @@ class EPGIConfig(Screen):
             elif returnValue=='5':
                 self["glb"].setText('Last commit : '+self.StatuseosnEN)
             elif returnValue=='9':
-                self["glb"].setText('Last commit : '+self.statusEL) 
+                self["glb"].setText('Last commit : '+self.statusEL)
+            elif returnValue=='10':
+                self["glb"].setText('Last commit : '+self.StatuseJaw)
             elif returnValue=='15':
                 self["glb"].setText('Last commit : '+self.statusDS)
             
