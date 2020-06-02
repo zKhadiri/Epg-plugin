@@ -5,18 +5,13 @@ import os,io,re,sys,requests
 
 path = '/etc/epgimport/osnplay.xml'
 
-
-with io.open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/osnback.txt','r') as f:
-    time_zone = f.readlines()[0].strip()
-
-
 print "Downloading OsnPlay epg guide\nPlease wait...."  
 sys.stdout.flush()
 url=requests.get('http://raw.githubusercontent.com/ziko-ZR1/XML/osn/osn.xml')
 with io.open(path,'w',encoding="utf-8") as f:
     f.write(url.text)
     
-    
+"""  
 sleep(1)
 
 f = open(path,'r')
@@ -41,7 +36,8 @@ if os.path.exists(path):
     print "osnplay.xml donwloaded with succes"
 else:
     print "osnplay.xml not found"
-
+"""
+print "osnplay.xml donwloaded with succes"
 
 from datetime import datetime
 with open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/osnback.txt") as f:

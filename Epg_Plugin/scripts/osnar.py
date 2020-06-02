@@ -16,7 +16,7 @@ url=requests.get('http://raw.githubusercontent.com/Haxer/EPG-XMLFiles/FullArabic
 with io.open(path,'w',encoding="utf-8") as f:
     f.write(url.text)
     
-    
+""" 
 sleep(1)
 
 f = open(path,'r')
@@ -42,7 +42,8 @@ if os.path.exists(path):
     print "osnplay.xml donwloaded with succes"
 else:
     print "osnplay.xml not found"
-
+"""
+print "osnplay.xml donwloaded with succes"
 
 from datetime import datetime
 with open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/osnar.txt") as f:

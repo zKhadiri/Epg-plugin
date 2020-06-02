@@ -10,10 +10,6 @@ headers={
     'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) snap Chromium/80.0.3987.100 Chrome/80.0.3987.100 Safari/537.36'
 }
 
-fil = open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/dstv.txt','r')
-time_zone = fil.readlines()[0].strip()
-fil.close()
-
 
 print('**************DSTV EPG******************')
 for i in range(0,5):
@@ -40,7 +36,7 @@ def dstv():
                     ch=''
                     startime= datetime.datetime.strptime(prog['StartTime'].replace('T',' ').replace('Z',''),'%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
                     endtime= datetime.datetime.strptime(prog['EndTime'].replace('T',' ').replace('Z',''),'%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
-                    ch+=2*' '+'<programme start="'+startime+' '+time_zone+'" stop="'+endtime+' '+time_zone+'" channel="'+d['Name'].replace(' ','').replace('&','and')+'">\n'
+                    ch+=2*' '+'<programme start="'+startime+' +0200" stop="'+endtime+' +0200" channel="'+d['Name'].replace(' ','').replace('&','and')+'">\n'
                     ch+=4*' '+'<title lang="en">'+prog['Title'].replace('&','and')+'</title>\n'
                     ch+=4*' '+'<desc lang="en">No description Found for this programme</desc>\n  </programme>\r'
                     with io.open("/etc/epgimport/dstv.xml","a",encoding='UTF-8')as f:

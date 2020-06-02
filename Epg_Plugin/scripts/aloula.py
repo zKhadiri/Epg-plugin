@@ -9,9 +9,17 @@ headers={
     'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) snap Chromium/80.0.3987.100 Chrome/80.0.3987.100 Safari/537.36'
 }
 
-fil = open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/aloula.txt','r')
-time_zone = fil.readlines()[0].strip()
-fil.close()
+def get_tz():
+    url_timezone = 'http://worldtimeapi.org/api/ip'
+    requests_url = requests.get(url_timezone)
+    ip_data = requests_url.json()
+
+    try:
+        return ip_data['utc_offset'].replace(':', '')
+    except:
+        return ('+0000')
+    
+time_zone = get_tz()
 
 channe=[]
 urls=[]
@@ -23,6 +31,7 @@ for i in range(0,7):
     jour = datetime.date.today()
     week = jour + timedelta(days=i)
     urls.append('http://www.alaoula.ma/programmes.php?jr='+week.strftime('%d/%m/%Y')+'&lang=ar')
+    
 print('**************SNRT EPG******************')
 def snrt():
     channe.append('<?xml version="1.0" encoding="UTF-8"?>'+"\n"+'<tv generator-info-name="By ZR1">'+"\n"+'  <channel id="Aloula.ma">'+"\n"+'    <display-name lang="en">Aloula HD</display-name>'+"\n"+'  </channel>'+"\n")
