@@ -5,9 +5,17 @@ from datetime import datetime
 from time import sleep,strftime
 from requests.adapters import HTTPAdapter
 
-fil = open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/osn.txt','r')
-time_zone = fil.readlines()[0].strip()
-fil.close()
+def get_tz():
+     url_timezone = 'http://worldtimeapi.org/api/ip'
+     requests_url = requests.get(url_timezone)
+     ip_data = requests_url.json()
+     if ip_data['utc_offset'].replace(':', '') !='+0000':
+          tz = (int(ip_data['utc_offset'].replace('+', '').split(':')[0])-1)
+          return ('+0{}00'.format(tz))
+     elif ip_data['utc_offset'].replace(':', '') =='+0000':
+          return '-0100'
+      
+time_zone=get_tz()
 
 
 pyl=[]
@@ -69,7 +77,7 @@ def oss():
                         aff =datetime.fromtimestamp(int(data[0][u'EndDateTime'].replace("/Date(",'').replace(")/",'')) // 1000).strftime('%Y-%m-%d')
                         ch+= 2 * ' ' + '<programme start="' + days + ' '+time_zone+'" stop="' + days_end + ' '+time_zone+'" channel="'+nm+'">'+'\n'
                         if url['channelCode'] =='SER' or url['channelCode'] =='YAW' or url['channelCode'] =='SAF' or url['channelCode'] =='CM1' or url['channelCode'] =='CM2' or url['channelCode'] =='FAN' or url['channelCode'] =='OYH' or url['channelCode'] =='OYA' or url['channelCode'] =='OYC':
-                            ch+='     <title lang="en">'+data[0][u'Arab_Title']+'</title>'+"\n"
+                            ch+='     <title lang="ar">'+data[0][u'Arab_Title']+'</title>'+"\n"
                         else:
                             ch+='     <title lang="en">'+data[0][u'Title'].replace('&','and')+'</title>'+"\n"
                         if data[0][u'Arab_Synopsis']==u'\r\n':
@@ -133,13 +141,7 @@ if not os.path.exists('/etc/epgimport/dstv.channels.xml'):
     dstv_channels=requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/dstv.channels.xml?raw=true')
     with io.open('/etc/epgimport/dstv.channels.xml','w',encoding="utf-8") as f:
         f.write(dstv_channels.text)
-        
-if not os.path.exists('/etc/epgimport/eliftv.channels.xml'):
-    print('Downloading eliftv channels config')
-    elif_channels=requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/eliftv.channels.xml?raw=true')
-    with io.open('/etc/epgimport/eliftv.channels.xml','w',encoding="utf-8") as f:
-        f.write(elif_channels.text)
-        
+          
 if not os.path.exists('/etc/epgimport/jawwy.channels.xml'):
     print('Downloading jawwy channels config')
     jaw_channels=requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/jawwy.channels.xml?raw=true')

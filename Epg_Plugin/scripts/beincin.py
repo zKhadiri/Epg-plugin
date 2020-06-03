@@ -7,9 +7,17 @@ from requests.adapters import HTTPAdapter
 import warnings
 warnings.filterwarnings('ignore', message='Unverified HTTPS request')
 
-fil = open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/entc.txt','r')
-time_zone = fil.readlines()[0].strip()
-fil.close()
+def get_tz():
+    url_timezone = 'http://worldtimeapi.org/api/ip'
+    requests_url = requests.get(url_timezone)
+    ip_data = requests_url.json()
+
+    try:
+        return ip_data['utc_offset'].replace(':', '')
+    except:
+        return ('+0000')
+    
+time_zone=get_tz()
 
 headers={
     'Host': 'elcinema.com',
@@ -164,11 +172,7 @@ if not os.path.exists('/etc/epgimport/dstv.channels.xml'):
     with io.open('/etc/epgimport/dstv.channels.xml','w',encoding="utf-8") as f:
         f.write(dstv_channels.text)
         
-if not os.path.exists('/etc/epgimport/eliftv.channels.xml'):
-    print('Downloading eliftv channels config')
-    elif_channels=requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/eliftv.channels.xml?raw=true')
-    with io.open('/etc/epgimport/eliftv.channels.xml','w',encoding="utf-8") as f:
-        f.write(elif_channels.text)
+
         
 if not os.path.exists('/etc/epgimport/jawwy.channels.xml'):
     print('Downloading jawwy channels config')

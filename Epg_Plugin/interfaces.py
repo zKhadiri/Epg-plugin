@@ -75,16 +75,7 @@ def Statusdstv():
         return "API rate limit exceeded"
     else:
         return message.group()+' '+date.group().replace('T','  ').replace('Z','')
-    
-def StatuseLife():
-    url = requests.get('https://api.github.com/repos/ziko-ZR1/xml/branches/eLife')
-    date = re.search(r'date\":\"(.*?)\"',url.content)
-    message = re.search(r'message\":\"(.*?)\"',url.content)
-    if date==None:
-        return "API rate limit exceeded"
-    else:
-        return message.group()+' '+date.group().replace('T','  ').replace('Z','')
-    
+
 def StatuseJaw():
     url = requests.get('https://api.github.com/repos/ziko-ZR1/xml/branches/jawwy')
     date = re.search(r'date\":\"(.*?)\"',url.content)
@@ -170,13 +161,13 @@ class EPGIConfig(Screen):
         list.append(("ELCINEMA WEBSITE EPG", "6","elcin","elcinema","elcinema"))
         list.append(("ELCINEMA Bein entertainment EPG", "7","beincin","entc","beinentCin"))
         list.append(("MBC.NET", "8","mbc","mbc","mbc"))
-        list.append(("eLife TV BACKUP", "9","elifetv","eliftv","eliftv"))
-        list.append(("Jawwy TV BACKUP", "10","jawwy","jawwy","jawwytv"))
-        list.append(("SNRT EPG", "11","aloula","aloula","aloula"))
-        list.append(("QATAR TV EPG", "12","qatar","qatar","qatar"))
-        list.append(("Noor Dubai EPG", "13","noor","noor","noor"))
-        list.append(("DSTV.ZA", "14","dstv","dstv","dstv"))
-        list.append(("SuperSport.ZA BACKUP", "15","dstvback","dstvback","dstv"))
+        #list.append(("eLife TV BACKUP", "9","elifetv","eliftv","eliftv"))
+        list.append(("Jawwy TV BACKUP", "9","jawwy","jawwy","jawwytv"))
+        list.append(("SNRT EPG", "10","aloula","aloula","aloula"))
+        list.append(("QATAR TV EPG", "11","qatar","qatar","qatar"))
+        list.append(("Noor Dubai EPG", "12","noor","noor","noor"))
+        list.append(("DSTV.ZA", "13","dstv","dstv","dstv"))
+        list.append(("SuperSport.ZA BACKUP", "14","dstvback","dstvback","dstv"))
         self.provList=list ## New from mf to make choose list
         Screen.__init__(self, session)
         self.skinName = ["EPGIConfig"]
@@ -215,7 +206,6 @@ class EPGIConfig(Screen):
     def check_status(self):
         self.statusOS = Statusosn()
         self.statusDS = Statusdstv()
-        self.statusEL = StatuseLife()
         self.StatuseosnAR = StatuseosnAR()
         self.StatuseosnEN = StatuseosnEN()
         self.StatuseJaw = StatuseJaw()
@@ -381,10 +371,8 @@ class EPGIConfig(Screen):
             elif returnValue=='5':
                 self["glb"].setText('Last commit : '+self.StatuseosnEN)
             elif returnValue=='9':
-                self["glb"].setText('Last commit : '+self.statusEL)
-            elif returnValue=='10':
                 self["glb"].setText('Last commit : '+self.StatuseJaw)
-            elif returnValue=='15':
+            elif returnValue=='14':
                 self["glb"].setText('Last commit : '+self.statusDS)
             
             else:

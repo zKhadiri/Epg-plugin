@@ -10,16 +10,13 @@ chann=['SportsGlobalHD','News_ar','HD1','HD2','HD3','HD4','HD5','HD6','HD7','HD8
 
 xm=['OSN_On_Demand_HD','OSN_Ya_Hala_Al_Oula','OSN_Ya_Hala']
 
-elc_channels=['AlhayatDrama','Mehwar','Kuwait','JordanTV','Watania2','RotanaKids','LanaPlusTV','MBC3','Zeealwan','AlKaheraWalNasTV','DubaiOne',"DubaiTV","AlhayatTV","AlNaharDrama","Cima","CBCDrama","NileDrama"
-,"Zeeaflam","SadaElBaladDrama","CBC",
-"SamaDubai","AlNaharTV",
-"NileComedy","AlraiTV","NileLife","SadaElBalad","DMCDRAMA","ONE","Aloula","ONDrama","DubaiZaman",
-"SharjahTV","CBCsofra","DMC","iFILMTV","Alsharqya",
-"TeNTV","SyriaDrama","Amman","SBC","Alsumaria","Roya","MTVLebnon",
-"Nessma","Oman","Fujairah","almanar","SyriaTV",
-"AlSaeedah","SamaTV","Mix",'RotanaCinema','RotanaClassic','RotanaDrama','RotanaKhalijiah','RotanaComedy','LBC','AlDafrah','Lana',
-'ARTAflam1','ARTAflam2','ARTCinema','ARTHekayat','ARTHekayat2','AlJadeedTV','LBCI','MasperoZaman','NetworkArabic','Watania1',
-'AbuDhabiTV','Emirates','AbuDhabiDrama','SadaElBalad+2','AlKaheraWalNasTV2','National_Geographic_Abu_Dhabi']
+elc_channels=['AlhayatDrama', 'Mehwar', 'Kuwait', 'JordanTV', 'Watania2', 'LanaPlusTV', 'AlKaheraWalNasTV',
+               'Cima', 'NileDrama', 'SadaElBaladDrama', 'CBC', 'SamaDubai', 'NileComedy', 'AlraiTV', 
+               'NileLife', 'SadaElBalad', 'ONE', 'Aloula', 'ONDrama', 'SharjahTV', 'iFILMTV', 'Alsharqya', 
+               'TeNTV', 'SyriaDrama', 'Amman', 'SBC', 'Alsumaria', 'Roya', 'MTVLebnon', 'Nessma', 'Oman', 
+               'Fujairah', 'almanar', 'SyriaTV', 'AlSaeedah', 'SamaTV', 'Mix', 'RotanaCinema', 'Lana', 'LBCI', 
+               'AlJadeedTV', 'AlDafrah', 'LBC', 'MasperoZaman', 'Watania1', 'SadaElBalad+2', 'AlKaheraWalNasTV2', 
+               'National_Geographic_Abu_Dhabi']
 elc_channels.sort()
 ZA=['M-NetHD','1MagicHD','M-NetMoviesPremierHD','M-NetMoviesSmileHD','M-NetMoviesAction+HD','SundanceTVHD','TomCruise',
     'M-NetMoviesAction','M-NetMoviesAllStarsHD','StudioUniversalHD','M-NETBinge','M-NetCityHD',
@@ -59,32 +56,19 @@ mbc=['MBC1','MBCDrama','MBCEgypt','MBCEgypt2','MBC4','MBC2','MBCAction','MBCBoll
 
 others=['noordubai','Arriadia.ma','2M.ma','Medi1tv.ma','Aloula.ma','QATAR.TV']
 
-eli=['Dubai One HD', 'Abu Dhabi TV HD','Al Emarat TV HD',
-     'Abu Dhabi Drama HD', 'Baynounah TV HD', 'Dubai TV HD', 'Sama Dubai HD', 'Noor Dubai', 'Dubai Zaman TV', 'Sharjah TV HD',
-     'Sharqiya from kalba HD', 'Ajman TV HD', 'Al Dafrah HD', 'Saudi 1 HD', 'SBC HD', 'Zikrayat TV HD', 'MBC+ eLife HD', 'MBC+ Variety HD', 
-     'KSA Sports 1 HD', 'Oman TV HD', 'Al Rai TV', 'Funoon HD', 'Al Soumariya', 'Al Sharqiya HD', 'LBC Sat HD', 'OTV HD', 'Future TV', 
-     'Tele Liban', 'MTV Lebanon HD', 'Al Jadeed HD', 'Al Masriya', 'Al Kahera Wal Nass', 'ON Drama', 'ON E HD', 'CBC', 'CBC Extra News', 
-     'CBC Drama', 'Al Hayat', 'Al Nahar TV', 'Al Nahar Drama', 'Sada Al Balad', 'DMC HD', 'DMC Drama', 'Dream', 'Ten', 'Cairo Drama', 
-     'Nile Drama', 'Nile Family and Children', 'Nile Life', 'Nessma TV', 'Zee Alwan', 'Fox Rewayat HD', 'Rotana Khaleejiah HD', 
-     'Rotana Classic HD', 'Al Aan TV HD', 'Roya TV HD', 'DW Arabia', 'Kuwait TV 2 HD', 'MBC 3 HD', 'Spacetoon', 'Cartoon Network Arabic', 
-     'Rotana Kids', 'Nat Geo Abu Dhabi HD', 'CBC Sofra', 'Rotana Clip', 'Rotana Mousica HD', 'Saudi Quran HD', 'Saudi Sunna HD', 'Cairo Cinema', 
-     'Rotana Cinema HD', 'Rotana Comedy HD', 'Zee Aflam', 'B4U Aflam', 'Dubai Sports HD', 'Dubai Sports 2', 'Dubai Sports 3', 'Dubai Racing HD', 
-     'Sharjah Sports HD', 'ON Sport HD', 'ON Sports 2 HD', 'Manorama News', 'Surya TV HD', 'Surya Movies']
-eli.sort()
-
-Jaw=['Abu_Dhabi','AD_Drama','Al_Emarat','AD_Sports_1','AD_Sports_2','Aghani_Aghani','Al_Aan','Al_Arabiya_HD','Al_Ekhbariya','Al_Hadath',
+Jaw=['Abu_Dhabi','AD_Drama','Al_Emarat','Aghani_Aghani','Al_Aan','Al_Arabiya_HD','Al_Ekhbariya','Al_Hadath',
      'Al_Hayat','Al_Nahar','Al_Nahar_Drama','Al_Rai','Al_Resalah','ART_Aflam_1','ART_Aflam_2','ART_Cinema','ART_Hekayat','ART_Hekayat_2',
-     'B4U_Aflam','Baby_TV','Bahrain_Sports_TV','Bahrain_TV','BBC_Arabic','BBC_World_News','Bloomberg','CBC','CBC_Drama','CBC_Sofra',
+     'B4U_Aflam','Baby_TV','Bahrain_Sports_TV','Bahrain_TV','BBC_Arabic','BBC_World_News','CBC','CBC_Drama','CBC_Sofra',
      'Channel_News_Asia','CN_Arabic','CN_English','CNBC','CNBC_Arabia','CNN','Discovery_HD','Discovery_IDX','Discovery_Science_HD',
      'Disney_Junior','Disney_XD','DMC_Drama','DMC_HD','DocuBox_HD','Documentary_Bil_Arabie','Dubai','Dubai_One','Dubai_Zaman',
      'Duck_TV','English_Club_TV','Fast_Fun_Box_HD','Fight_Box_HD','Fight_Sports','FilmBox','FilmBox_Arthouse','Fix_and_Foxi',
      'Fox_Action_Movies_HD','Fox_Family_Movies_HD','Fox_Life','FOX_Rewayat','France_24','Funoon_TV','Future_TV','FX_HD','Gulli_Bil_Arabie',
      'Horse_TV','Insight','Iqraa','Jawwy_TV_Live','KSA_Sports_+1','KSA_Sports_+2','Kuwait_1','Kuwait_TV_Sports_1','La3ab_Wa_Jad',
-     'Lana_TV','LBC_Sat','Luxe','Majid','MBC_1_HD','MBC_2_HD','MBC_3','MBC_4_HD','MBC_Action_HD','MBC_Bollywood','MBC_Drama_HD',
-     'MBC_MASR','MBC_MASR_2','MBC_Max_HD','MBC_VARIETY','MBC+_Drama_HD','Motorvision','My_Cinema_HD','MyZEN_TV','Nat._Geo._AD','Nat._Geo._People_HD',
+     'Lana_TV','LBC_Sat','Luxe','Majid','MBC_3','MBC_VARIETY','Motorvision','My_Cinema_HD','MyZEN_TV','Nat._Geo._AD'
+     ,'Nat._Geo._People_HD',
      'Nat._Geo._Wild_HD','Nat._Geographic','Nautical_TV','Nick_Jr.','Nicktoons','Oman_Al_Thakafeyah','Oman_Mubasher','Oman_Sport',
-     'Oman_TV','OSN_Kid_Zone_TV','OSN_Kids','OSN_Mix','OSN_Ya_Hala','OSN_Ya_Hala_Al_Oula','OSN_YH_Cinema','Outdoor_Sports_Channel',
+     'Oman_TV','Outdoor_Sports_Channel',
      'People_TV','Planet_Earth','Rotana_Aflam_+','Rotana_Cinema_HD','Rotana_Classic_HD','Rotana_Clip','Rotana_Comedy','Rotana_Drama_HD',
      'Rotana_Khalijia_HD','Rotana_Kids','Rotana_Music_HD','Roya','Saudi_1','Saudi_Quran','Saudi_Sports_1','Saudi_Sports_2',
-     'Saudi_Sunnah','SBC','Sky_News_Arabia_HD','Space_Toon','Star_Movies_HD','Star_World_HD','TCM','Tiji','Trace_Sports_Stars','Travel_XP',
-     'Wanasah','Zee_Aflam','Zee_Alwan','Zekrayat']
+     'Saudi_Sunnah','SBC','Sky_News_Arabia_HD','Space_Toon','Star_Movies_HD','Star_World_HD','TCM','Tiji','Trace_Sports_Stars','Travel_XP'
+     ,'Zee_Aflam','Zee_Alwan','Zekrayat']
