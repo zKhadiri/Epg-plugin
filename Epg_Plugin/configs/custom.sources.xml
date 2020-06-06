@@ -48,4 +48,8 @@
 <description>QATAR TV</description>
 <url>/etc/epgimport/qatar.xml</url>
 </source>
+<source type="gen_xmltv" channels="/etc/epgimport/freesat.channels.xml">
+<description>FREESAT TV</description>
+<url>/etc/epgimport/freesat.xml</url>
+</source>
 </sourcecat>

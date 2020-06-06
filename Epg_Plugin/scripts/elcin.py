@@ -182,5 +182,10 @@ if not os.path.exists('/etc/epgimport/jawwy.channels.xml'):
     with io.open('/etc/epgimport/jawwy.channels.xml','w',encoding="utf-8") as f:
         f.write(jaw_channels.text)
 
+if not os.path.exists('/etc/epgimport/freesat.channels.xml'):
+    print('Downloading freesat channels config')
+    free_channels=requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/freesat.channels.xml?raw=true')
+    with io.open('/etc/epgimport/freesat.channels.xml','w',encoding="utf-8") as f:
+        f.write(free_channels.text)
         
 print('**************FINISHED******************')

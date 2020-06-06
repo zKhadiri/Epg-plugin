@@ -72,3 +72,26 @@ Jaw=['Abu_Dhabi','AD_Drama','Al_Emarat','Aghani_Aghani','Al_Aan','Al_Arabiya_HD'
      'Rotana_Khalijia_HD','Rotana_Kids','Rotana_Music_HD','Roya','Saudi_1','Saudi_Quran','Saudi_Sports_1','Saudi_Sports_2',
      'Saudi_Sunnah','SBC','Sky_News_Arabia_HD','Space_Toon','Star_Movies_HD','Star_World_HD','TCM','Tiji','Trace_Sports_Stars','Travel_XP'
      ,'Zee_Aflam','Zee_Alwan','Zekrayat']
+
+channels_code=['505-BBC ONE SD','555-BBC ONE HD','700-BBC TWO HD','1011-ITV','1500-Channel 4 HD','1547-Channel 5 HD',
+               '819-BBC FOUR HD','710-BBC Scotland HD','707-BBC ALBA','600-BBC TWO','10005-ITV HD','1100-itv 2',
+               '1101-itv2 +2','1102-ITV 3','1103-ITV 3 +1','1104-ITV 4','1107-ITV 4 +1','1109-ITV BE','1113-ITV BE +1','20002-S4C HD',
+               '1525-Channel 4 +1','1515-Channel 4 more','1520-4 FILM','1521-4 FILM +1','1541-5 +1','28008-5 USA +1','28007-5 USA','17013-paramount','27000-5 SELECT','28005-5 STAR',
+               '27000-CBS DRAMA','27003-CBS REALITY','4010-CBS REALITY +1','27001-CBS JUSTICE','27004-HORROR CHANNELS','21010-SONY CHANNEL',
+               '21007-SONY CHANNEL +7','4015-TOGHETER TV','7013-FORCES TV',
+               '17009-PICK','4020-PICK +1','7009-FOOD','7010-FOOD +1','5007-DMAX','17011-PBS AMERICA','5005-DAVE','5003-D DRAMA','26000-YESTERDAY',
+               '19012-REALLY','4027-BLAZE','9008-HGTV','18008-QUEST','18006-RED QUEST','702-BBC FOUR SD','820-BBC NEWS HD',
+               '704-BBC PALIAMENT','20014-SKY NEWS','2000-ALJAZEERA EN','7017-FREESPORT HD','20023-SONY MOVIES','21000-SONY MOVIES CLASSIC','14000-SONY MOVIES ACTION',
+               '822-CBBC HD','821-CBEEBIES','806-BBC 5 RADIO']
+
+freesat=['BBC ONE SD', 'BBC ONE HD', 'BBC TWO HD', 'ITV', 'Channel 4 HD', 'Channel 5 HD', 'BBC FOUR HD', 
+         'BBC Scotland HD', 'BBC ALBA', 'BBC TWO', 'ITV HD', 'itv 2', 'itv2 +2', 
+         'ITV 3', 'ITV 3 +1', 'ITV 4', 'ITV 4 +1', 'ITV BE', 'ITV BE +1', 'S4C HD', 
+         'Channel 4 +1', 'Channel 4 more', '4 FILM', '4 FILM +1', '5 +1', '5 USA +1', '5 USA', 
+         'paramount', '5 SELECT', '5 STAR', 'CBS DRAMA', 'CBS REALITY', 'CBS REALITY +1', 'CBS JUSTICE', 
+         'HORROR CHANNELS', 'SONY CHANNEL', 'SONY CHANNEL +7', 'TOGHETER TV', 'FORCES TV', 'PICK', 'PICK +1', 
+         'FOOD', 'FOOD +1', 'DMAX', 'PBS AMERICA', 'DAVE', 'D DRAMA', 'YESTERDAY', 'REALLY', 'BLAZE', 'HGTV', 'QUEST', 
+         'RED QUEST', 'BBC FOUR SD', 'BBC NEWS HD', 'BBC PALIAMENT', 'SKY NEWS', 'ALJAZEERA EN', 'FREESPORT HD', 
+         'SONY MOVIES', 'SONY MOVIES CLASSIC', 'SONY MOVIES ACTION', 'CBBC HD', 'CBEEBIES', 'BBC 5 RADIO']
+
+freesat.sort()

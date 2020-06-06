@@ -154,18 +154,18 @@ class EPGIConfig(Screen):
                                             #py    #times  #xml_file
         list.append(("Bein Sports EPG", "0","bein","bein","bein"))
         list.append(("Bein entertainment EPG", "1","beinent","beinent","beinent"))
-        list.append(("ondemand/yahala/yahala oula EPG", "2","osn","osn","osn"))
-        list.append(("Osnplay english title arabic description BACKUP(ziko source)", "3","osnplay","osnback","osnplay"))
-        list.append(("OSN arabic only epg BACKUP (haxer source)", "4","osnar","osnar","osnplay"))
-        list.append(("OSN english only epg BACKUP (haxer source)", "5","osnen","osnen","osnplay"))
-        list.append(("ELCINEMA WEBSITE EPG", "6","elcin","elcinema","elcinema"))
-        list.append(("ELCINEMA Bein entertainment EPG", "7","beincin","entc","beinentCin"))
-        list.append(("MBC.NET", "8","mbc","mbc","mbc"))
+        list.append(("Osnplay english title arabic description BACKUP", "2","osnplay","osnback","osnplay"))
+        list.append(("OSN دليل عربي بالكامل (haxer source)", "3","osnar","osnar","osnplay"))
+        list.append(("OSN english only epg BACKUP (haxer source)", "4","osnen","osnen","osnplay"))
+        list.append(("ELCINEMA WEBSITE EPG", "5","elcin","elcinema","elcinema"))
+        list.append(("ELCINEMA Bein entertainment EPG", "6","beincin","entc","beinentCin"))
+        list.append(("MBC.NET", "7","mbc","mbc","mbc"))
         #list.append(("eLife TV BACKUP", "9","elifetv","eliftv","eliftv"))
-        list.append(("Jawwy TV BACKUP", "9","jawwy","jawwy","jawwytv"))
-        list.append(("SNRT EPG", "10","aloula","aloula","aloula"))
-        list.append(("QATAR TV EPG", "11","qatar","qatar","qatar"))
-        list.append(("Noor Dubai EPG", "12","noor","noor","noor"))
+        list.append(("Jawwy TV BACKUP", "8","jawwy","jawwy","jawwytv"))
+        list.append(("SNRT EPG", "9","aloula","aloula","aloula"))
+        list.append(("QATAR TV EPG", "10","qatar","qatar","qatar"))
+        list.append(("Noor Dubai EPG", "11","noor","noor","noor"))
+        list.append(("FREESAT UK", "12","freesat","freesat","freesat"))
         list.append(("DSTV.ZA", "13","dstv","dstv","dstv"))
         list.append(("SuperSport.ZA BACKUP", "14","dstvback","dstvback","dstv"))
         self.provList=list ## New from mf to make choose list
@@ -364,13 +364,13 @@ class EPGIConfig(Screen):
                 f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/"+provTag+".txt", "r")
                 self["status"].setText("Current {} time zone  : {}".format(provName,f1.readlines()[0].strip()))
                 f1.close()
-            elif returnValue=='3':
+            elif returnValue=='2':
                 self["glb"].setText('Last commit : '+self.statusOS)
-            elif returnValue=='4':
+            elif returnValue=='3':
                 self["glb"].setText('Last commit : '+self.StatuseosnAR)
-            elif returnValue=='5':
+            elif returnValue=='4':
                 self["glb"].setText('Last commit : '+self.StatuseosnEN)
-            elif returnValue=='9':
+            elif returnValue=='8':
                 self["glb"].setText('Last commit : '+self.StatuseJaw)
             elif returnValue=='14':
                 self["glb"].setText('Last commit : '+self.statusDS)
