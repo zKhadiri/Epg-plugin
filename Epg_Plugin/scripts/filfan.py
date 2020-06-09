@@ -28,7 +28,7 @@ channels_code=['74-CBC DRAMA','88-CBC','103-NILE DRAMA','90-AL MIHWAR','255-ON E
                ,'76-SADA ALBALAD','129-SADA ALBALAD DRAMA','81-AL HAYAT','233-al kahira wa nass','234-al kahira wa nass +2',
                '257-DMC','258-DMC DRAMA']
 
-with io.open("/etc/epgimport/filfan","w",encoding='UTF-8')as f:
+with io.open("/etc/epgimport/filfan.xml","w",encoding='UTF-8')as f:
     f.write(('<?xml version="1.0" encoding="UTF-8"?>'+"\n"+'<tv generator-info-name="By ZR1">').decode('utf-8'))
 
 for x in channels_code:
