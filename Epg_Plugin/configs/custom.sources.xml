@@ -13,8 +13,8 @@
 <url>/etc/epgimport/beinent.xml</url>
 </source>
 <source type="gen_xmltv" channels="/etc/epgimport/custom.channels.xml">
-<description>osn</description>
-<url>/etc/epgimport/osn.xml</url>
+<description>FILFAN</description>
+<url>/etc/epgimport/filfan.xml</url>
 </source>
 <source type="gen_xmltv" channels="/etc/epgimport/custom.channels.xml">
 <description>Osnplay</description>

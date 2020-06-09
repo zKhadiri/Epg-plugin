@@ -6,7 +6,8 @@ net=['beincinema','MoviesHD1','MoviesHD2','MoviesHD3','MoviesHD4','BoxOffice_HD1
 
 net.sort()
 
-chann=['SportsGlobalHD','News_ar','HD1','HD2','HD3','HD4','HD5','HD6','HD7','HD8','HD9','HD10','SportsHD11','SportsHD12','SportsHD13','SportsHD14','SportsHD15','SportsHD16','SportsHD17','4K','BS_NBA']
+chann=['SportsGlobalHD','News_ar','HD1','HD2','HD3','HD4','HD5','HD6','HD7','HD8','HD9','HD10','SportsHD11',
+       'SportsHD12','SportsHD13','SportsHD14','SportsHD15','SportsHD16','SportsHD17','4K','BS_NBA']
 
 xm=['OSN_On_Demand_HD','OSN_Ya_Hala_Al_Oula','OSN_Ya_Hala']
 
@@ -16,7 +17,7 @@ elc_channels=['AlhayatDrama', 'Mehwar', 'Kuwait', 'JordanTV', 'Watania2', 'LanaP
                'TeNTV', 'SyriaDrama', 'Amman', 'SBC', 'Alsumaria', 'Roya', 'MTVLebnon', 'Nessma', 'Oman', 
                'Fujairah', 'almanar', 'SyriaTV', 'AlSaeedah', 'SamaTV', 'Mix', 'RotanaCinema', 'Lana', 'LBCI', 
                'AlJadeedTV', 'AlDafrah', 'LBC', 'MasperoZaman', 'Watania1', 'SadaElBalad+2', 'AlKaheraWalNasTV2', 
-               'National_Geographic_Abu_Dhabi']
+               'Nile_Cinema']
 elc_channels.sort()
 ZA=['M-NetHD','1MagicHD','M-NetMoviesPremierHD','M-NetMoviesSmileHD','M-NetMoviesAction+HD','SundanceTVHD','TomCruise',
     'M-NetMoviesAction','M-NetMoviesAllStarsHD','StudioUniversalHD','M-NETBinge','M-NetCityHD',
@@ -56,33 +57,17 @@ mbc=['MBC1','MBCDrama','MBCEgypt','MBCEgypt2','MBC4','MBC2','MBCAction','MBCBoll
 
 others=['noordubai','Arriadia.ma','2M.ma','Medi1tv.ma','Aloula.ma','QATAR.TV']
 
-Jaw=['Abu_Dhabi','AD_Drama','Al_Emarat','Aghani_Aghani','Al_Aan','Al_Arabiya_HD','Al_Ekhbariya','Al_Hadath',
-     'Al_Hayat','Al_Nahar','Al_Nahar_Drama','Al_Rai','Al_Resalah','ART_Aflam_1','ART_Aflam_2','ART_Cinema','ART_Hekayat','ART_Hekayat_2',
-     'B4U_Aflam','Baby_TV','Bahrain_Sports_TV','Bahrain_TV','BBC_Arabic','BBC_World_News','CBC','CBC_Drama','CBC_Sofra',
-     'Channel_News_Asia','CN_Arabic','CN_English','CNBC','CNBC_Arabia','CNN','Discovery_HD','Discovery_IDX','Discovery_Science_HD',
-     'Disney_Junior','Disney_XD','DMC_Drama','DMC_HD','DocuBox_HD','Documentary_Bil_Arabie','Dubai','Dubai_One','Dubai_Zaman',
-     'Duck_TV','English_Club_TV','Fast_Fun_Box_HD','Fight_Box_HD','Fight_Sports','FilmBox','FilmBox_Arthouse','Fix_and_Foxi',
-     'Fox_Action_Movies_HD','Fox_Family_Movies_HD','Fox_Life','FOX_Rewayat','France_24','Funoon_TV','Future_TV','FX_HD','Gulli_Bil_Arabie',
-     'Horse_TV','Insight','Iqraa','Jawwy_TV_Live','KSA_Sports_+1','KSA_Sports_+2','Kuwait_1','Kuwait_TV_Sports_1','La3ab_Wa_Jad',
-     'Lana_TV','LBC_Sat','Luxe','Majid','MBC_3','MBC_VARIETY','Motorvision','My_Cinema_HD','MyZEN_TV','Nat._Geo._AD'
-     ,'Nat._Geo._People_HD',
-     'Nat._Geo._Wild_HD','Nat._Geographic','Nautical_TV','Nick_Jr.','Nicktoons','Oman_Al_Thakafeyah','Oman_Mubasher','Oman_Sport',
-     'Oman_TV','Outdoor_Sports_Channel',
-     'People_TV','Planet_Earth','Rotana_Aflam_+','Rotana_Cinema_HD','Rotana_Classic_HD','Rotana_Clip','Rotana_Comedy','Rotana_Drama_HD',
-     'Rotana_Khalijia_HD','Rotana_Kids','Rotana_Music_HD','Roya','Saudi_1','Saudi_Quran','Saudi_Sports_1','Saudi_Sports_2',
-     'Saudi_Sunnah','SBC','Sky_News_Arabia_HD','Space_Toon','Star_Movies_HD','Star_World_HD','TCM','Tiji','Trace_Sports_Stars','Travel_XP'
-     ,'Zee_Aflam','Zee_Alwan','Zekrayat']
-
-channels_code=['505-BBC ONE SD','555-BBC ONE HD','700-BBC TWO HD','1011-ITV','1500-Channel 4 HD','1547-Channel 5 HD',
-               '819-BBC FOUR HD','710-BBC Scotland HD','707-BBC ALBA','600-BBC TWO','10005-ITV HD','1100-itv 2',
-               '1101-itv2 +2','1102-ITV 3','1103-ITV 3 +1','1104-ITV 4','1107-ITV 4 +1','1109-ITV BE','1113-ITV BE +1','20002-S4C HD',
-               '1525-Channel 4 +1','1515-Channel 4 more','1520-4 FILM','1521-4 FILM +1','1541-5 +1','28008-5 USA +1','28007-5 USA','17013-paramount','27000-5 SELECT','28005-5 STAR',
-               '27000-CBS DRAMA','27003-CBS REALITY','4010-CBS REALITY +1','27001-CBS JUSTICE','27004-HORROR CHANNELS','21010-SONY CHANNEL',
-               '21007-SONY CHANNEL +7','4015-TOGHETER TV','7013-FORCES TV',
-               '17009-PICK','4020-PICK +1','7009-FOOD','7010-FOOD +1','5007-DMAX','17011-PBS AMERICA','5005-DAVE','5003-D DRAMA','26000-YESTERDAY',
-               '19012-REALLY','4027-BLAZE','9008-HGTV','18008-QUEST','18006-RED QUEST','702-BBC FOUR SD','820-BBC NEWS HD',
-               '704-BBC PALIAMENT','20014-SKY NEWS','2000-ALJAZEERA EN','7017-FREESPORT HD','20023-SONY MOVIES','21000-SONY MOVIES CLASSIC','14000-SONY MOVIES ACTION',
-               '822-CBBC HD','821-CBEEBIES','806-BBC 5 RADIO']
+Jaw=['AD_Sports_1', 'AD_Sports_2', 'Abu_Dhabi', 'AD_Drama', 'Aghani_Aghani', 'Al_Aan', 'Al_Arabiya_HD', 'Al_Ekhbariya', 
+     'Al_Emarat', 'Al_Hadath', 'Al_Hayat', 'Al_Nahar_Drama', 'Al_Rai', 'Al_Resalah', 'ART_Aflam_1', 'ART_Aflam_2', 'ART_Cinema', 
+     'ART_Hekayat', 'ART_Hekayat_2', 'B4U_Aflam', 'BBC_Arabic', 'BBC_World_News', 'Bloomberg', 'Boomerang', 'CBC_Drama', 'Channel_News_Asia',
+      'CN_Arabic', 'CN_English', 'CNBC', 'CNBC_Arabia', 'CNN', 'Discovery_HD', 'Discovery_IDX', 'Discovery_Science_HD', 'DMC_Drama', 'DMC_HD',
+       'Documentary_Bil_Arabie', 'Dubai', 'Dubai_One', 'Dubai_Zaman', 'Duck_TV', 'English_Club_TV', 'Fast_Fun_Box_HD', 'Fight_Box_HD', 
+       'Fight_Sports', 'FilmBox', 'FilmBox_Arthouse', 'Fix_and_Foxi', 'Fox_Action_Movies_HD', 'Fox_Family_Movies_HD', 'Fox_Life', 'FOX_Rewayat',
+        'France_24', 'FX_HD', 'Gulli_Bil_Arabie', 'Horse_TV', 'Insight', 'La3ab_Wa_Jad', 'LBC_Sat', 'Luxe', 'Majid', 'MBC_3', 'MBC_VARIETY', 
+        'Motorvision', 'My_Cinema_HD', 'MyZEN_TV', 'Nat._Geo._AD', 'Nat._Geo._People_HD', 'Nat._Geo._Wild_HD', 'Nat._Geographic', 'Nautical_TV', 
+        'Outdoor_Sports_Channel', 'People_TV', 'Planet_Earth', 'Rotana_Aflam_+', 'Rotana_Cinema_HD', 'Rotana_Classic_HD', 'Rotana_Clip', 
+        'Rotana_Comedy', 'Rotana_Drama_HD', 'Rotana_Khalijia_HD', 'Rotana_Kids', 'Rotana_Music_HD', 'Roya', 'Saudi_Quran', 'Saudi_Sunnah', 
+        'SBC', 'Sky_News_Arabia_HD', 'Space_Toon', 'TCM', 'Tiji', 'Trace_Sports_Stars', 'Travel_XP', 'Zee_Aflam', 'Zee_Alwan']
 
 freesat=['BBC ONE SD', 'BBC ONE HD', 'BBC TWO HD', 'ITV', 'Channel 4 HD', 'Channel 5 HD', 'BBC FOUR HD', 
          'BBC Scotland HD', 'BBC ALBA', 'BBC TWO', 'ITV HD', 'itv 2', 'itv2 +2', 
@@ -95,3 +80,5 @@ freesat=['BBC ONE SD', 'BBC ONE HD', 'BBC TWO HD', 'ITV', 'Channel 4 HD', 'Chann
          'SONY MOVIES', 'SONY MOVIES CLASSIC', 'SONY MOVIES ACTION', 'CBBC HD', 'CBEEBIES', 'BBC 5 RADIO']
 
 freesat.sort()
+
+filfan=['CBC DRAMA','CBC','NILE DRAMA','AL MIHWAR','ON E','ON DRAMA','AL NAHAR','AL NAHAR DRAMA','SADA ALBALAD','SADA ALBALAD DRAMA']

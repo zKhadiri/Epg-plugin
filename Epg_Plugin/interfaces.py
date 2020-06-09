@@ -159,15 +159,15 @@ class EPGIConfig(Screen):
         list.append(("OSN english only epg BACKUP (haxer source)", "4","osnen","osnen","osnplay"))
         list.append(("ELCINEMA WEBSITE EPG", "5","elcin","elcinema","elcinema"))
         list.append(("ELCINEMA Bein entertainment EPG", "6","beincin","entc","beinentCin"))
-        list.append(("MBC.NET", "7","mbc","mbc","mbc"))
-        #list.append(("eLife TV BACKUP", "9","elifetv","eliftv","eliftv"))
-        list.append(("Jawwy TV BACKUP", "8","jawwy","jawwy","jawwytv"))
-        list.append(("SNRT EPG", "9","aloula","aloula","aloula"))
-        list.append(("QATAR TV EPG", "10","qatar","qatar","qatar"))
-        list.append(("Noor Dubai EPG", "11","noor","noor","noor"))
-        list.append(("FREESAT UK", "12","freesat","freesat","freesat"))
-        list.append(("DSTV.ZA", "13","dstv","dstv","dstv"))
-        list.append(("SuperSport.ZA BACKUP", "14","dstvback","dstvback","dstv"))
+        list.append(("FILFAN WEBSITE", "7","filfan","filfan","filfan"))
+        list.append(("MBC.NET", "8","mbc","mbc","mbc"))
+        list.append(("Jawwy TV BACKUP", "9","jawwy","jawwy","jawwytv"))
+        list.append(("SNRT EPG", "10","aloula","aloula","aloula"))
+        list.append(("QATAR TV EPG", "11","qatar","qatar","qatar"))
+        list.append(("Noor Dubai EPG", "12","noor","noor","noor"))
+        list.append(("FREESAT UK", "13","freesat","freesat","freesat"))
+        list.append(("DSTV.ZA", "14","dstv","dstv","dstv"))
+        list.append(("SuperSport.ZA BACKUP", "15","dstvback","dstvback","dstv"))
         self.provList=list ## New from mf to make choose list
         Screen.__init__(self, session)
         self.skinName = ["EPGIConfig"]
@@ -370,9 +370,9 @@ class EPGIConfig(Screen):
                 self["glb"].setText('Last commit : '+self.StatuseosnAR)
             elif returnValue=='4':
                 self["glb"].setText('Last commit : '+self.StatuseosnEN)
-            elif returnValue=='8':
+            elif returnValue=='9':
                 self["glb"].setText('Last commit : '+self.StatuseJaw)
-            elif returnValue=='14':
+            elif returnValue=='15':
                 self["glb"].setText('Last commit : '+self.statusDS)
             
             else:
