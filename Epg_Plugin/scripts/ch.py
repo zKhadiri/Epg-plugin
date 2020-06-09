@@ -81,4 +81,5 @@ freesat=['BBC ONE SD', 'BBC ONE HD', 'BBC TWO HD', 'ITV', 'Channel 4 HD', 'Chann
 
 freesat.sort()
 
-filfan=['CBC DRAMA','CBC','NILE DRAMA','AL MIHWAR','ON E','ON DRAMA','AL NAHAR','AL NAHAR DRAMA','SADA ALBALAD','SADA ALBALAD DRAMA']
+filfan=['CBC DRAMA','CBC','NILE DRAMA','AL MIHWAR','ON E','ON DRAMA','AL NAHAR','AL NAHAR DRAMA','SADA ALBALAD','SADA ALBALAD DRAMA',
+        'AL HAYAT','al kahira wa nass','al kahira wa nass +2','DMC','DMC DRAMA']

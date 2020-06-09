@@ -25,13 +25,14 @@ time_zone=get_tz()
 time=[]
 epg=[]
 channels_code=['74-CBC DRAMA','88-CBC','103-NILE DRAMA','90-AL MIHWAR','255-ON E','259-ON DRAMA','131-AL NAHAR','86-AL NAHAR DRAMA'
-               ,'76-SADA ALBALAD','129-SADA ALBALAD DRAMA']
+               ,'76-SADA ALBALAD','129-SADA ALBALAD DRAMA','81-AL HAYAT','233-al kahira wa nass','234-al kahira wa nass +2',
+               '257-DMC','258-DMC DRAMA']
 
 with io.open("/etc/epgimport/filfan","w",encoding='UTF-8')as f:
     f.write(('<?xml version="1.0" encoding="UTF-8"?>'+"\n"+'<tv generator-info-name="By ZR1">').decode('utf-8'))
 
 for x in channels_code:
-    with io.open("/etc/epgimport/filfan","a",encoding='UTF-8')as f:
+    with io.open("/etc/epgimport/filfan.xml","a",encoding='UTF-8')as f:
         f.write(("\n"+'  <channel id="'+x.split('-')[1]+'">'+"\n"+'    <display-name lang="en">'+x.split('-')[1]+'</display-name>'+"\n"+'  </channel>\r').decode('utf-8')) 
 
 for channel in channels_code:
@@ -68,14 +69,14 @@ for channel in channels_code:
         sys.stdout.flush()
         epg.pop(-1)
         for ep in epg:
-            with io.open("/etc/epgimport/filfan","a",encoding='UTF-8')as f:
+            with io.open("/etc/epgimport/filfan.xml","a",encoding='UTF-8')as f:
                 f.write((ep))
     
     else:
         print 'no data found for '+channel.split('-')[1]
         sys.stdout.flush()
         
-with io.open("/etc/epgimport/filfan", "a",encoding="utf-8") as f:
+with io.open("/etc/epgimport/filfan.xml", "a",encoding="utf-8") as f:
     f.write(('</tv>').decode('utf-8'))
     
     

@@ -3,10 +3,6 @@
 from time import sleep
 import os,io,re,sys,requests
 
-
-with io.open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/dstvback.txt','r') as f:
-    time_zone = f.readlines()[0].strip()
-    
 path = '/etc/epgimport/dstv.xml'
 
 print "Downloading SuperSport epg guide\nPlease wait...."  
@@ -16,28 +12,9 @@ url = requests.get('http://github.com/ziko-ZR1/XML/blob/master/dstv.xml?raw=true
 with io.open(path,'w',encoding="utf-8") as f:
     f.write(url.text)
 
-sleep(1)
+         
+print "dstv.xml donwloaded with success"
 
-f = open(path,'r')
-time_of = re.search(r'[+#-]+\d{4}',f.read())
-f.close()
-
-if os.path.exists(path):
-    print "changing to your timezone please wait...."
-    sys.stdout.flush()
-    if os.path.exists(path):
-        if time_of !=None:
-            with io.open(path,encoding="utf-8") as f:
-                newText=f.read().decode('utf-8').replace(time_of.group(), time_zone)
-                with io.open(path, "w",encoding="utf-8") as f:
-                    f.write((newText).decode('utf-8'))
-        else:
-            print "file is empty"
-            
-    print "dstv.xml donwloaded with success"
-else:
-    print "dstv.xml not found"
-    sys.stdout.flush()
 
 
 from datetime import datetime
