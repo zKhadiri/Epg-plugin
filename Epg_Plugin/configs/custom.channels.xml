@@ -103,7 +103,7 @@
 <channel id="Discovery_Channel_HD">1:0:19:1621:236:800:DCA0000:0:0:0:</channel> <!-- "Discovery:HD" -->
 <channel id="Nat_Geo_People_HD">1:0:19:3ED:A:800:DCA0000:0:0:0:</channel> <!-- "Nat:Geo:People:HD" -->
 <channel id="OSN_News">1:0:19:6A5:11:800:DCA0000:0:0:0:</channel> <!-- "OSN:News" -->
-<channel id="OSN_Pop_Up_Adel_Imam">1:0:19:6A8:11:800:DCA0000:0:0:0:</channel> <!-- "OSN Pop Up Adel Imam" -->
+<channel id="OSN_POP_UP_Cruise_Control">1:0:19:6AC:11:800:DCA0000:0:0:0:</channel> <!-- "OSN POP UP Cruise Control" -->
 <!--channel id="OSN_Pop_Up_Super_Collection">1:0:19:6AC:11:800:DCA0000:0:0:0:</channel>-->
 <channel id="OSN_Mezze">1:0:19:1195:2D:800:DCA0000:0:0:0:</channel> <!-- "OSN_Mezze" -->
 <channel id="Baby_TV">1:0:19:6A7:11:800:DCA0000:0:0:0:</channel> <!-- "Baby:TV:Europe" -->
@@ -145,7 +145,6 @@
 <channel id="NHK_World-Japan">1:0:1:517:D:800:DCA0000:0:0:0:</channel>
 <channel id="Al_Arabiya">1:0:1:17DE:3D:800:DCA0000:0:0:0:</channel>
 <channel id="CGTN">1:0:1:516:D:800:DCA0000:0:0:0:</channel>
-<channel id="SpongeBob_with_OSN">1:0:19:6AD:11:800:DCA0000:0:0:0:</channel>
 <!-- ALFA 8W -->
 <channel id="Alfa_Al_Yawm_HD">1:0:1:A8D:1:2A:DC00000:0:0:0:</channel> <!-- "Al:Yawm" -->
 <channel id="Alfa_Cinema_1">1:0:1:A8F:1:2A:DC00000:0:0:0:</channel> <!-- "Cinema:1" -->
