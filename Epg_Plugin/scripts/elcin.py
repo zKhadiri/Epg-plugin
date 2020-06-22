@@ -25,7 +25,7 @@ headers={
 }
 nb_channel=['1138-AlhayatDrama','1145-Mehwar','1310-Kuwait','1314-JordanTV','1334-Watania2','1342-LanaPlusTV','1174-AlKaheraWalNasTV','1176-Cima','1156-NileDrama','1227-SadaElBaladDrama','1198-CBC','1177-SamaDubai','1158-NileComedy',
             '1170-AlraiTV','1159-NileLife','1226-SadaElBalad','1203-ONE','1101-Aloula','1134-ONDrama','1188-SharjahTV','1204-iFILMTV','1269-Alsharqya','1280-TeNTV',
-            '1300-SyriaDrama','1298-Amman','1297-SBC','1301-Alsumaria','1299-Roya','1296-MTVLebnon','1304-Nessma','1317-Oman','1302-Fujairah','1321-almanar','1338-SyriaTV','1339-AlSaeedah','1350-SamaTV','1355-Mix','1148-RotanaCinema',
+            '1300-SyriaDrama','1298-Amman','1297-SBC','1301-Alsumaria','1299-Roya','1296-MTVLebnon','1304-Nessma','1317-Oman','1302-Fujairah','1321-almanar','1338-SyriaTV','1339-AlSaeedah','1350-SamaTV','1355-Mix','1148-RotanaCinema EGY',
             '1313-Lana','1168-LBCI','1216-AlJadeedTV','1264-AlDafrah','1341-LBC','1336-MasperoZaman','1308-Watania1','1279-SadaElBalad+2','1252-AlKaheraWalNasTV2',
             '1157-Nile_Cinema']
 

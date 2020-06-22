@@ -15,7 +15,7 @@ elc_channels=['AlhayatDrama', 'Mehwar', 'Kuwait', 'JordanTV', 'Watania2', 'LanaP
                'Cima', 'NileDrama', 'SadaElBaladDrama', 'CBC', 'SamaDubai', 'NileComedy', 'AlraiTV', 
                'NileLife', 'SadaElBalad', 'ONE', 'Aloula', 'ONDrama', 'SharjahTV', 'iFILMTV', 'Alsharqya', 
                'TeNTV', 'SyriaDrama', 'Amman', 'SBC', 'Alsumaria', 'Roya', 'MTVLebnon', 'Nessma', 'Oman', 
-               'Fujairah', 'almanar', 'SyriaTV', 'AlSaeedah', 'SamaTV', 'Mix', 'RotanaCinema', 'Lana', 'LBCI', 
+               'Fujairah', 'almanar', 'SyriaTV', 'AlSaeedah', 'SamaTV', 'Mix', 'RotanaCinema EGY', 'Lana', 'LBCI', 
                'AlJadeedTV', 'AlDafrah', 'LBC', 'MasperoZaman', 'Watania1', 'SadaElBalad+2', 'AlKaheraWalNasTV2', 
                'Nile_Cinema']
 elc_channels.sort()
@@ -43,7 +43,7 @@ ent=['BEINMOVIESPREMIERE','BEINMOVIESACTION','BEINMOVIESDRAMA','BEINMOVIESFAMILY
      ,'beINDrama','FOXACTIONMOVIES','FOXFAMILYMOVIESHD']
 
 osn=['Beity_TV','Majid_Kids_TV','YAS_Sports_HD','AD_Sports_1_HD','AD_Sports_2_HD','AD_Sports_3_HD','AD_Sports_4_HD','France_24_Arabic','Rusiya_Al_Yawm','Al_Hurra_HD','Al_Arabiya','CGTN','NHK_World-Japan','Yalla_OSN_Support','Sky_News_Arabia'
-             ,'SpongeBob_with_OSN','OSN_Pop_Up_Adel_Imam','OSN_Action','OSN_On_Demand_HD','OSN_Ya_Hala_Al_Oula','OSN_Ya_Hala','OSN_Movies_First','OSN_Mov_First_+2h','OSN_Movies','OSN_Enigma',
+             ,'OSN_POP_UP_Cruise_Control','OSN_Action','OSN_On_Demand_HD','OSN_Ya_Hala_Al_Oula','OSN_Ya_Hala','OSN_Movies_First','OSN_Mov_First_+2h','OSN_Movies','OSN_Enigma',
              'OSN_Kids','OSN_Movies_Disney','OSN_Cinema','Paramount_HD','Star_Movies_HD','OSN_YH_Cinema','Alfa_Series_HD',
              'Alfa_Series_+2_HD','Alfa_Al_Yawm_HD','Alfa_Al_Safwa','Alfa_Fann','Alfa_Cinema_1','Alfa_Cinema_2','Alfa_Music_Now',
              'OSN_Series_First','OSN_Binge','OSN_Comedy','Star_World_HD','TLC_HD','E!_HD','OSN_Mezze','OSN_Living','MTV_Live_HD',
@@ -65,7 +65,7 @@ Jaw=['AD_Sports_1', 'AD_Sports_2', 'Abu_Dhabi', 'AD_Drama', 'Aghani_Aghani', 'Al
        'Fight_Sports', 'FilmBox', 'FilmBox_Arthouse', 'Fix_and_Foxi', 'Fox_Action_Movies_HD', 'Fox_Family_Movies_HD', 'Fox_Life', 'FOX_Rewayat',
         'France_24', 'FX_HD', 'Gulli_Bil_Arabie', 'Horse_TV', 'Insight', 'La3ab_Wa_Jad', 'LBC_Sat', 'Luxe', 'Majid', 'MBC_3', 'MBC_VARIETY', 
         'Motorvision', 'My_Cinema_HD', 'MyZEN_TV', 'Nat._Geo._AD', 'Nat._Geo._People_HD', 'Nat._Geo._Wild_HD', 'Nat._Geographic', 'Nautical_TV', 
-        'Outdoor_Sports_Channel', 'People_TV', 'Planet_Earth', 'Rotana_Aflam_+', 'Rotana_Cinema_HD', 'Rotana_Classic_HD', 'Rotana_Clip', 
+        'Outdoor_Sports_Channel', 'People_TV', 'Planet_Earth', 'Rotana_Aflam_+', 'Rotana_Cinema_HD_KSA', 'Rotana_Classic_HD', 'Rotana_Clip', 
         'Rotana_Comedy', 'Rotana_Drama_HD', 'Rotana_Khalijia_HD', 'Rotana_Kids', 'Rotana_Music_HD', 'Roya', 'Saudi_Quran', 'Saudi_Sunnah', 
         'SBC', 'Sky_News_Arabia_HD', 'Space_Toon', 'TCM', 'Tiji', 'Trace_Sports_Stars', 'Travel_XP', 'Zee_Aflam', 'Zee_Alwan']
 
