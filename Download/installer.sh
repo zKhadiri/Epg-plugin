@@ -3,7 +3,7 @@
 
 ######### Only These two lines to edit with new version ######
 version=10.3
-description=What_is_NEW:\n'[BEIN SPORTS FIX]'
+description=What_is_NEW:\n'[BEIN SPORTS missing file fix]'
 ##############################################################
 
 TEMPATH=/tmp
