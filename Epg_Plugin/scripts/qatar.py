@@ -5,9 +5,6 @@ from datetime import datetime,timedelta
 from requests.adapters import HTTPAdapter
 
 
-fil = open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/qatar.txt','r')
-time_zone = fil.readlines()[0].strip()
-fil.close()
 
 print('**************QATAR******************')
 
@@ -47,7 +44,7 @@ for elem,next_elem,title,descr in zip(prog_start,prog_start[1:] + [prog_start[0]
     ch=''
     startime=datetime.strptime(str(elem),'%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
     endtime=datetime.strptime(str(next_elem),'%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
-    ch+= 2 * ' ' +'<programme start="' + startime + ' '+time_zone+'" stop="' + endtime + ' '+time_zone+'" channel="QATAR.TV">\n'
+    ch+= 2 * ' ' +'<programme start="' + startime + ' +0300" stop="' + endtime + ' +0300" channel="QATAR.TV">\n'
     ch+=4*' '+'<title lang="ar">'+title.replace('&#39;',"'").replace('&quot;','"')+'</title>\n'
     if title==descr:
         ch+=4*' '+'<desc lang="ar">يتعذر الحصول على معلومات هذا البرنامج</desc>\n  </programme>\r'.decode('utf-8')

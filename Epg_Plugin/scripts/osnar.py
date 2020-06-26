@@ -6,10 +6,6 @@ import os,io,re,sys,requests,json
 path = '/etc/epgimport/osnplay.xml'
 
 
-with io.open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/osnar.txt','r') as f:
-    time_zone = f.readlines()[0].strip()
-
-
 print "Downloading OSN arabic epg guide\nPlease wait...."  
 sys.stdout.flush()
 url=requests.get('http://raw.githubusercontent.com/Haxer/EPG-XMLFiles/FullArabicXML/osn.xml')

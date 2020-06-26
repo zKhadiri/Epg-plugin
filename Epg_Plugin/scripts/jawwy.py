@@ -5,43 +5,15 @@ import os,io,re,sys,requests
 
 path = '/etc/epgimport/jawwytv.xml'
 
-
-with io.open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/jawwy.txt','r') as f:
-    time_zone = f.readlines()[0].strip()
-
-
 print "Downloading Jawwy TV epg guide\nPlease wait...."  
 sys.stdout.flush()
 url=requests.get('https://raw.githubusercontent.com/ziko-ZR1/XML/jawwy/jawwytv.xml')
 with io.open(path,'w',encoding="utf-8") as f:
     f.write(url.text)
-    
-    
-sleep(1)
 
-f = open(path,'r')
-time_of = re.search(r'[+#-]+\d{4}',f.read())
-f.close()
-
-if os.path.exists(path):
-    print "changing to your timezone please wait...."
-    sys.stdout.flush()
-    if os.path.exists(path):
-        if time_of !=None:
-            if time_of.group()==time_zone:
-                print 'No need to change the timezone : '+time_zone
-                sys.stdout.flush()
-            else:
-                with io.open(path,encoding="utf-8") as f:
-                    newText=f.read().decode('utf-8').replace(time_of.group(), time_zone)
-                    with io.open(path, "w",encoding="utf-8") as f:
-                        f.write((newText).decode('utf-8'))
-        else:
-            print "file is empty"
             
-    print "jawwytv.xml donwloaded with succes"
-else:
-    print "jawwytv.xml not found"
+print "jawwytv.xml donwloaded with succes"
+
 
 
 from datetime import datetime
