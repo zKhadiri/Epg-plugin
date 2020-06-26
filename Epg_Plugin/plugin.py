@@ -6,7 +6,7 @@ import requests
 
 def connected_to_internet(): ## to test connection	
     try:
-        _ = requests.get('http://www.google.com', timeout=5)
+        _ = requests.get('https://github.com', timeout=5)
         return True
     except requests.ConnectionError:
         return False
