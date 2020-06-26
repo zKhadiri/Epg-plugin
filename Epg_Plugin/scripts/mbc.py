@@ -97,11 +97,13 @@ def mbc():
 if __name__ == "__main__":
     mbc()
     from datetime import datetime
-    with open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/mbc.txt") as f:
-        lines = f.readlines()
-    lines[1] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
-    with open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/mbc.txt", "w") as f:
-        f.writelines(lines)
+    with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'r') as f:
+        data = json.load(f)
+    for channel in data['bouquets']:
+        if channel["bouquet"]=="mbc":
+            channel['date']=datetime.today().strftime('%A %d %B %Y at %I:%M %p')
+    with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'w') as f:
+        json.dump(data, f)
     
 with io.open("/etc/epgimport/mbc.xml", "a",encoding="utf-8") as f:
     f.write(('</tv>').decode('utf-8'))

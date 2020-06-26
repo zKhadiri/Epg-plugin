@@ -14,6 +14,14 @@ def get_tz():
     
 time_zone = get_tz()
 
+import json
+with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'r') as f:
+    data = json.load(f)
+for channel in data['bouquets']:
+    if channel["bouquet"]=="freesat":
+        channel['date']=datetime.today().strftime('%A %d %B %Y at %I:%M %p')
+with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'w') as f:
+    json.dump(data, f)
 
 head={
     "Content-Type": "application/json; charset=utf-8",

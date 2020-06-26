@@ -1,6 +1,6 @@
 #!/usr/bin/env python2.7
 # -*- coding: utf-8 -*-
-import requests,re,io,os
+import requests,re,io,os,json
 from datetime import datetime,timedelta
 from requests.adapters import HTTPAdapter
 
@@ -65,11 +65,14 @@ for prog in epg:
 with io.open("/etc/epgimport/qatar.xml", "a",encoding="utf-8") as f:
     f.write(('\n'+'</tv>').decode('utf-8'))
     
-with open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/qatar.txt") as f:
-    lines = f.readlines()
-lines[1] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
-with open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/qatar.txt", "w") as f:
-    f.writelines(lines)
+from datetime import datetime
+with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'r') as f:
+    data = json.load(f)
+for channel in data['bouquets']:
+    if channel["bouquet"]=="qatar":
+        channel['date']=datetime.today().strftime('%A %d %B %Y at %I:%M %p')
+with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'w') as f:
+    json.dump(data, f)
     
     
 if not os.path.exists('/etc/epgimport/custom.channels.xml'):

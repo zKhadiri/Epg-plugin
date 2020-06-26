@@ -13,10 +13,11 @@ from Tools.Directories import fileExists
 from urllib2 import Request
 from Plugins.Extensions.Epg_Plugin.Console2 import Console2
 from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigYesNo, configfile
-import io,os,re,requests,gettext
+import io,os,re,requests,gettext,json
 from enigma import getDesktop
 from enigma import loadPNG,gPixmapPtr, RT_WRAP, ePoint, RT_HALIGN_LEFT, RT_VALIGN_CENTER, eListboxPythonMultiContent, gFont
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmap, MultiContentEntryPixmapAlphaTest
+from scripts import status
 
 config.plugins.EpgPlugin = ConfigSubsection()
 config.plugins.EpgPlugin.update = ConfigYesNo(default=True)
@@ -58,51 +59,6 @@ reswidth = getDesktop(0).size().width()
 #    if os.path.exists('/var/lib/dpkg/status'):
 #        return DreamOS
 
-def Statusosn():
-    url = requests.get('https://api.github.com/repos/ziko-ZR1/xml/branches/osn')
-    date = re.search(r'date\":\"(.*?)\"',url.content)
-    message = re.search(r'message\":\"(.*?)\"',url.content)
-    if date==None:
-        return "API rate limit exceeded"
-    else:
-        return message.group()+' '+date.group().replace('T','  ').replace('Z','')
-
-def Statusdstv():
-    url = requests.get('https://api.github.com/repos/ziko-ZR1/xml/branches/master')
-    date = re.search(r'date\":\"(.*?)\"',url.content)
-    message = re.search(r'message\":\"(.*?)\"',url.content)
-    if date==None:
-        return "API rate limit exceeded"
-    else:
-        return message.group()+' '+date.group().replace('T','  ').replace('Z','')
-
-def StatuseJaw():
-    url = requests.get('https://api.github.com/repos/ziko-ZR1/xml/branches/jawwy')
-    date = re.search(r'date\":\"(.*?)\"',url.content)
-    message = re.search(r'message\":\"(.*?)\"',url.content)
-    if date==None:
-        return "API rate limit exceeded"
-    else:
-        return message.group()+' '+date.group().replace('T','  ').replace('Z','')
-    
-def StatuseosnAR():
-    url = requests.get('https://api.github.com/repos/Haxer/EPG-XMLFiles/branches/FullArabicXML')
-    date = re.search(r'date\":\"(.*?)\"',url.content)
-    message = re.search(r'message\":\"(.*?)\"',url.content)
-    if date==None:
-        return "API rate limit exceeded"
-    else:
-        return message.group()+' '+date.group().replace('T','  ').replace('Z','')
-    
-def StatuseosnEN():
-    url = requests.get('https://api.github.com/repos/Haxer/EPG-XMLFiles/branches/FullEnglishXML')
-    date = re.search(r'date\":\"(.*?)\"',url.content)
-    message = re.search(r'message\":\"(.*?)\"',url.content)
-    if date==None:
-        return "API rate limit exceeded"
-    else:
-        return message.group()+' '+date.group().replace('T','  ').replace('Z','')
-
 class EPGIConfig(Screen):
     if reswidth == 1280:
         skin = """
@@ -113,14 +69,8 @@ class EPGIConfig(Screen):
     				<convert type="ClockToText">Default</convert>
   			</widget>
   			<ePixmap name="red" position="40,520" zPosition="2" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/red.png" transparent="1" alphatest="on"/>
-  			<ePixmap name="green" position="210,520" zPosition="2" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/green.png" transparent="1" alphatest="on"/>
-  			<ePixmap name="yellow" position="380,520" zPosition="2" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/yellow.png" transparent="1" alphatest="on"/>
-  			<ePixmap name="blue" position="557,520" zPosition="2" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/blue.png" transparent="1" alphatest="on"/>
   			<ePixmap position="658,55" size="60,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/key_menu.png" alphatest="on" zPosition="5"/>
   			<widget name="key_red" position="40,520" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;19" transparent="1"/>
-  			<widget name="key_green" position="210,520" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;19" transparent="1"/>
-  			<widget name="key_yellow" position="380,520" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;19" transparent="1"/>
-  			<widget name="key_blue" position="557,520" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;19" transparent="1"/>
   			<widget name="config" foregroundColor="#00ffffff" backgroundColor="#16000000" position="10,90" size="745,360" scrollbarMode="showOnDemand"/>
   			<widget name="glb" foregroundColor="#00ffffff" position="15,458" size="724,28" font="Regular;24"/>
   			<widget name="status" foregroundColor="#000080ff" position="15,487" size="724,28" font="Regular;24"/>
@@ -134,14 +84,8 @@ class EPGIConfig(Screen):
     				<convert type="ClockToText">Default</convert>
   			</widget>
   			<ePixmap name="red" position="17,755" zPosition="2" size="260,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/redfhd.png" transparent="1" alphatest="on"/>
- 			<ePixmap name="green" position="335,755" zPosition="2" size="260,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/greenfhd.png" transparent="1" alphatest="on"/>
-  			<ePixmap name="yellow" position="640,755" zPosition="2" size="260,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/yellowfhd.png" transparent="1" alphatest="on"/>
-  			<ePixmap name="blue" position="941,755" zPosition="2" size="260,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/bluefhd.png" transparent="1" alphatest="on"/>
   			<ePixmap position="1042,87" size="103,35" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/key_menufhd.png" alphatest="on"/>
   			<widget name="key_red" position="17,755" size="260,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
-  			<widget name="key_green" position="335,755" size="260,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
-  			<widget name="key_yellow" position="640,755" size="260,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
-  			<widget name="key_blue" position="941,755" size="260,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
   			<widget name="config" foregroundColor="#00ffffff" backgroundColor="#16000000" position="10,140" size="1196,488" scrollbarMode="showOnDemand"/>
   			<widget name="glb" foregroundColor="#00ffffff" backgroundColor="#16000000" position="15,653" size="1174,54" font="Regular;35"/>
   			<widget name="status" foregroundColor="#000080ff" backgroundColor="#16000000" position="15,699" size="1174,54" font="Regular;35"/>
@@ -151,23 +95,23 @@ class EPGIConfig(Screen):
         self.session = session
         list = []
         self.installList=[] ## New from mf to make choose list
-                                            #py    #times  #xml_file
-        list.append(("Bein Sports EPG", "0","bein","bein","bein"))
-        list.append(("Bein entertainment EPG", "1","beinent","beinent","beinent"))
-        list.append(("Osnplay english title arabic description BACKUP", "2","osnplay","osnback","osnplay"))
-        list.append(("OSN دليل عربي بالكامل (haxer source)", "3","osnar","osnar","osnplay"))
-        list.append(("OSN english only epg BACKUP (haxer source)", "4","osnen","osnen","osnplay"))
-        list.append(("ELCINEMA WEBSITE EPG", "5","elcin","elcinema","elcinema"))
-        list.append(("ELCINEMA Bein entertainment EPG", "6","beincin","entc","beinentCin"))
-        list.append(("FILFAN WEBSITE", "7","filfan","filfan","filfan"))
-        list.append(("MBC.NET", "8","mbc","mbc","mbc"))
-        list.append(("Jawwy TV BACKUP", "9","jawwy","jawwy","jawwytv"))
-        list.append(("SNRT EPG", "10","aloula","aloula","aloula"))
-        list.append(("QATAR TV EPG", "11","qatar","qatar","qatar"))
-        list.append(("Noor Dubai EPG", "12","noor","noor","noor"))
-        list.append(("FREESAT UK", "13","freesat","freesat","freesat"))
-        list.append(("DSTV.ZA", "14","dstv","dstv","dstv"))
-        list.append(("SuperSport.ZA BACKUP", "15","dstvback","dstvback","dstv"))
+                                            #py    
+        list.append(("Bein Sports EPG", "0","bein"))
+        list.append(("Bein entertainment EPG", "1","beinent"))
+        list.append(("Osnplay english title arabic description BACKUP", "2","osnplay"))
+        list.append(("OSN دليل عربي بالكامل (haxer source)", "3","osnar"))
+        list.append(("OSN english only epg BACKUP (haxer source)", "4","osnen"))
+        list.append(("ELCINEMA WEBSITE EPG", "5","elcin"))
+        list.append(("ELCINEMA Bein entertainment EPG", "6","beincin"))
+        list.append(("FILFAN WEBSITE", "7","filfan"))
+        list.append(("MBC.NET", "8","mbc"))
+        list.append(("Jawwy TV BACKUP", "9","jawwy"))
+        list.append(("SNRT EPG", "10","aloula"))
+        list.append(("QATAR TV EPG", "11","qatar"))
+        list.append(("Noor Dubai EPG", "12","noor"))
+        list.append(("FREESAT UK", "13","freesat"))
+        list.append(("DSTV.ZA", "14","dstv"))
+        list.append(("SuperSport.ZA BACKUP", "15","dstvback"))
         self.provList=list ## New from mf to make choose list
         Screen.__init__(self, session)
         self.skinName = ["EPGIConfig"]
@@ -175,40 +119,26 @@ class EPGIConfig(Screen):
         self["glb"] = Label()
         #self["config"] = MenuList(list)
         self["config"] = MenuList([], enableWrapAround=True, content=eListboxPythonMultiContent)
-        f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/bein.txt", "r")
-        self["status"].setText("Current bein sports time zone  : "+f1.readlines()[0].strip())
-        f1.close()
-        f2 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
-        self["glb"].setText("Global timezone : "+f2.read().strip())
-        f2.close()
         self.update()
         self["key_red"] = Button(_("Install"))
-        self["key_green"] = Button(_("Timezone"))
-        self["key_blue"] = Button(_("Set time"))
-        self["key_yellow"] = Button(_("Change time"))
         self["setupActions"] = ActionMap(["EpgColorActions",'EpgMenuActions','EpgWizardActions','EpgShortcutActions'],
         {
             "down": self.down,
             "up": self.up,
             "ok": self.go,
             "red": self.keyRed,
-            "green": self.keyGreen,
-            "blue": self.KeyBlue,
-            "yellow": self.settime,
             "menu":self.showsetup,
             "cancel": self.close,
-            "info":self.info
-            
         }, -1)
         self.onShown.append(self.onWindowShow)
         self.check_status()
         
     def check_status(self):
-        self.statusOS = Statusosn()
-        self.statusDS = Statusdstv()
-        self.StatuseosnAR = StatuseosnAR()
-        self.StatuseosnEN = StatuseosnEN()
-        self.StatuseJaw = StatuseJaw()
+        self.statusOS = status.Statusosn()
+        self.statusDS = status.Statusdstv()
+        self.StatuseosnAR = status.StatuseosnAR()
+        self.StatuseosnEN = status.StatuseosnEN()
+        self.StatuseJaw = status.StatuseJaw()
 
     def onWindowShow(self):
         self.onShown.remove(self.onWindowShow)
@@ -341,111 +271,35 @@ class EPGIConfig(Screen):
         self["config"].down()
         self.update()
 
-
-    def info(self):
-        index=self['config'].getSelectionIndex()
-        returnValue=self.provList[index][1]
-        for i in range(len(self.provList)):
-            if returnValue == str(i):
-                provTag = self.provList[i][3]
-                provName = self.provList[i][0]
-                f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/{}.txt".format(provTag), "r")
-                new_time = f.readlines()[1].strip()
-                f.close()
-                self.session.open(MessageBox,_('{} Last update : \n{} '.format(provName,new_time)),MessageBox.TYPE_INFO,timeout=15)
-    
     def update(self):
         index=self['config'].getSelectionIndex()
         returnValue=self.provList[index][1]
         for i in range(len(self.provList)):
             if returnValue == str(i):
-                provTag = self.provList[i][3]
-                provName = self.provList[i][0]
-                f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/"+provTag+".txt", "r")
-                self["status"].setText("Current {} time zone  : {}".format(provName,f1.readlines()[0].strip()))
-                f1.close()
-            elif returnValue=='2':
-                self["glb"].setText('Last commit : '+self.statusOS)
-            elif returnValue=='3':
-                self["glb"].setText('Last commit : '+self.StatuseosnAR)
-            elif returnValue=='4':
-                self["glb"].setText('Last commit : '+self.StatuseosnEN)
-            elif returnValue=='9':
-                self["glb"].setText('Last commit : '+self.StatuseJaw)
-            elif returnValue=='15':
-                self["glb"].setText('Last commit : '+self.statusDS)
-            
-            else:
-                f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
-                self["glb"].setText('Global timezone : '+f.read())
-                f.close()
-                
-                
-    def KeyBlue(self):
-        index=self['config'].getSelectionIndex()
-        returnValue=self.provList[index][1]
-        for i in range(len(self.provList)):
-            if returnValue == str(i):
-                provTag = self.provList[i][3]
-                provName = self.provList[i][0]
-                f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
-                new_time = f.read().strip()
-                f.close()
-                with open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/{}.txt".format(provTag)) as f:
-                    lines1 = f.readlines()
-                lines1[0] = new_time+'\n'
-                with open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/{}.txt".format(provTag),"w")as f1:
-                    f1.writelines(lines1)
-                    self.session.open(MessageBox,_("time changed with succes {}".format(new_time)), MessageBox.TYPE_INFO,timeout=10)
-                    self["status"].setText("Current {} time zone  : {}".format(provName,new_time))
-    
-    def settime(self):
-        index=self['config'].getSelectionIndex()
-        returnValue=self.provList[index][1]
-        for i in range(len(self.provList)):
-            if returnValue == str(i):
-                provTag = self.provList[i][3]
-                provName = self.provList[i][0]
-                provFile = self.provList[i][4]
-                if fileExists("/etc/epgimport/"+provFile+".xml"):
-                    f = open('/etc/epgimport/'+provFile+'.xml','r')
-                    time_of = re.search(r'[+#-]+\d{4}',f.read())
-                    f.close()
-                    f1 = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/"+provTag+".txt", "r")
-                    newtime=f1.readlines()[0].strip()
-                    f1.close()
-                    if time_of !=None:
-                        with io.open("/etc/epgimport/"+provFile+".xml",encoding="utf-8") as f:
-                            newText=f.read().decode('utf-8').replace(time_of.group(), newtime)
-                            with io.open("/etc/epgimport/"+provFile+".xml", "w",encoding="utf-8") as f:
-                                f.write((newText).decode('utf-8'))
-                                self.session.open(MessageBox,_("current "+provName+" time "+time_of.group()+" replaced by "+newtime), MessageBox.TYPE_INFO,timeout=10)
-                    else:
-                        self.session.open(MessageBox,_("File is empty"), MessageBox.TYPE_INFO,timeout=10)
+                with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'r') as json_file:
+                    data = json.load(json_file)
+                provName = self.provList[i][2]
+                for channel in data['bouquets']:
+                    if channel["bouquet"]==provName:
+                        self["glb"].setText("last update : {}".format(channel["date"]))
+                if provName=="osnplay":
+                    self["status"].setText('Last commit : '+self.statusOS)
+                elif provName=='osnar':
+                    self["status"].setText('Last commit : '+self.StatuseosnAR)
+                elif provName=='osnen':
+                    self["status"].setText('Last commit : '+self.StatuseosnEN)
+                elif provName=='jawwy':
+                    self["status"].setText('Last commit : '+self.StatuseJaw)
+                elif provName=='dstvback':
+                    self["status"].setText('Last commit : '+self.statusDS)
                 else:
-                    self.session.open(MessageBox,_(provFile+".xml not found in path"), MessageBox.TYPE_INFO,timeout=10)
-
+                    self["status"].setText("")
+          
     def keyRed(self): ## New from mf to make choose list
         if len(self.installList)>0:
 		  ## Code to find connection internet or not
 		    self.install()
-		
-    def keyGreen(self):
-        f = open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt", "r")
-        self.session.openWithCallback(self.msg, InputBox,title=_("Please enter your time zone :"), text=f.read(), maxSize=5,type=Input.TEXT)
-        f.close()
-    
-    def msg(self,time):
-        if time is None:
-            pass
-        elif re.match(r'^[\-+\d{4}]+$',time) and time.startswith('+') or time.startswith('-'):
-            with io.open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/offset.txt','w',encoding='UTF-8') as f:
-                f.write((time).decode('utf-8'))
-                self.session.open(MessageBox,_("Your time offset changed with success : %s ")% (time), MessageBox.TYPE_INFO,timeout=10)
-                self["glb"].setText("Global timezone : "+time)
-        else:
-            self.session.open(MessageBox,_("Not a valide format, exemple : +0000/+0100/-01000 "), MessageBox.TYPE_INFO,timeout=10)
-            
+      
     def go(self): ## New from mf to make choose list
         index=self['config'].getSelectionIndex()
         provider=self.provList[index][0]

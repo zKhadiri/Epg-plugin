@@ -2,17 +2,11 @@
 ##setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=10.1
+version=10.2
 description=What_is_NEW:\n'[NEW UPDATE]'
 ##############################################################
-# No need to remove old version
-#rm -rf /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin
-
-TEM=/tmp
-TIMESFolder=/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times
-
-rm -f $TEM/*epgimport*
-rm -f $TEM/*Epg_Plugin*
+# remove old version
+rm -rf /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin
 
 # check depends packges
 if [ -f /etc/apt/apt.conf ] ; then
@@ -22,14 +16,13 @@ elif [ -f /etc/opkg/opkg.conf ] ; then
    STATUS='/var/lib/opkg/status'
    OS='Opensource'
 fi
-if grep -q 'Package: python-requests' $STATUS; then
+if grep -q 'python-requests' $STATUS; then
     requests='Installed'
 fi
-if grep -q 'Package: enigma2-plugin-extensions-epgimport' $STATUS; then
+if grep -q 'enigma2-plugin-extensions-epgimport' $STATUS; then
     epgimport='Installed'
 fi
-sleep 2
-if [ $requests = "Installed" -a $epgimport = "Installed" ]; then
+if [ $requests = "Installed" -a $epgimport = "Installed" ]; then 
      echo ""
 else
      echo "Need to download Depends packages"
@@ -38,18 +31,18 @@ else
      else
           opkg update
      fi
-     if grep -q 'Package: python-requests' $STATUS; then
+     if grep -q 'python-requests' $STATUS; then
           echo ""
      else
-          if [ $OS = "DreamOS" ]; then
-                  echo " Downloading/Insallling python-requests ......"
+          if [ $OS = "DreamOS" ]; then 
+                  echo " Downloading python-requests ......"
                   apt-get install python-requests -y
           else
-                  echo " Downloading/Insallling python-requests ......"
+                  echo " Downloading python-requests ......"
                   opkg install python-requests
           fi
      fi
-     if grep -q 'Package: enigma2-plugin-extensions-epgimport' $STATUS; then
+     if grep -q 'enigma2-plugin-extensions-epgimport' $STATUS; then
           echo ""
      else
           if [ $OS = "DreamOS" ]; then
@@ -64,22 +57,17 @@ else
           fi
      fi
 fi
-sleep 2
 echo ""
 # Download and install plugin
-mv $TIMESFolder $TEM  > /dev/null 2>&1
-echo " Downloading/Insallling Epg_Plugin plugin ......"
-wget -q "--no-check-certificate" "https://github.com/ziko-ZR1/Epg-plugin/blob/master/Download/Epg_Plugin-"$version".tar.gz?raw=true" -O "/tmp/Epg_Plugin-"$version".tar.gz"
-tar -xzf /tmp/Epg_Plugin-"$version".tar.gz -C /
-mv $TEM/times/* $TIMESFolder  > /dev/null 2>&1
-rm -f $TEM/Epg_Plugin-"$version".tar.gz  > /dev/null 2>&1
-rm -r $TEM/times  > /dev/null 2>&1
-#wget -q "--no-check-certificate" "https://github.com/ziko-ZR1/Epg-plugin/blob/master/Download/times.tar.gz?raw=true" -O "/tmp/times.tar.gz"
-#echo " Downloading/Insallling timers files ......"
-#tar -xzf $TEM/times.tar.gz -C /
-#rm -f $TEM/times.tar.gz
-#fi
-echo ""
+cd /tmp
+set -e
+wget -q "--no-check-certificate"  "https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/Epg_Plugin-"$version".tar.gz"
+tar -xzf Epg_Plugin-"$version".tar.gz -C /
+set +e
+rm -f Epg_Plugin-"$version".tar.gz
+cd ..
+
+sync
 echo "#########################################################"
 echo "#          Epg_Plugin INSTALLED SUCCESSFULLY            #"
 echo "#                BY ZIKO - support on                   #"

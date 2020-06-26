@@ -1,7 +1,7 @@
 #!/usr/bin/env python2.7
 # -*- coding: utf-8 -*-
 from time import sleep
-import os,io,re,sys,requests
+import os,io,re,sys,requests,json
 
 path = '/etc/epgimport/osnplay.xml'
 
@@ -12,41 +12,14 @@ url=requests.get('http://raw.githubusercontent.com/Haxer/EPG-XMLFiles/FullEnglis
 with io.open(path,'w',encoding="utf-8") as f:
     f.write(url.text)
     
-"""  
-sleep(1)
-
-f = open(path,'r')
-time_of = re.search(r'[+#-]+\d{4}',f.read())
-f.close()
-
-if os.path.exists(path):
-    print "changing to your timezone please wait...."
-    sys.stdout.flush()
-    if os.path.exists(path):
-        if time_of !=None:
-            if time_of.group()==time_zone:
-                print 'No need to change the timezone : '+time_zone
-                sys.stdout.flush()
-            else:
-                with io.open(path,encoding="utf-8") as f:
-                    newText=f.read().decode('utf-8').replace(time_of.group(), time_zone)
-                    with io.open(path, "w",encoding="utf-8") as f:
-                        f.write((newText).decode('utf-8'))
-        else:
-            print "file is empty"
-            
-    print "osnplay.xml donwloaded with succes"
-else:
-    print "osnplay.xml not found"
-"""
-print "osnplay.xml donwloaded with succes"
-
 from datetime import datetime
-with open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/osnen.txt") as f:
-    lines = f.readlines()
-lines[1] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
-with open("/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times/osnen.txt", "w") as f:
-    f.writelines(lines)
+with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'r') as f:
+    data = json.load(f)
+for channel in data['bouquets']:
+    if channel["bouquet"]=="osnen":
+        channel['date']=datetime.today().strftime('%A %d %B %Y at %I:%M %p')
+with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'w') as f:
+    json.dump(data, f)
 
 if not os.path.exists('/etc/epgimport/custom.channels.xml'):
     print('Downloading custom.channels config')
