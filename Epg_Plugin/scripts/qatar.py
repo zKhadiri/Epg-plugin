@@ -4,7 +4,17 @@ import requests,re,io,os,json
 from datetime import datetime,timedelta
 from requests.adapters import HTTPAdapter
 
+def get_tz():
+    url_timezone = 'http://worldtimeapi.org/api/ip'
+    requests_url = requests.get(url_timezone)
+    ip_data = requests_url.json()
 
+    try:
+        return ip_data['utc_offset'].replace(':', '')
+    except:
+        return ('+0000')
+    
+time_zone = get_tz()
 
 print('**************QATAR******************')
 
@@ -44,7 +54,7 @@ for elem,next_elem,title,descr in zip(prog_start,prog_start[1:] + [prog_start[0]
     ch=''
     startime=datetime.strptime(str(elem),'%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
     endtime=datetime.strptime(str(next_elem),'%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
-    ch+= 2 * ' ' +'<programme start="' + startime + ' +0300" stop="' + endtime + ' +0300" channel="QATAR.TV">\n'
+    ch+= 2 * ' ' +'<programme start="' + startime + ' '+time_zone+'" stop="' + endtime + ' '+time_zone+'" channel="QATAR.TV">\n'
     ch+=4*' '+'<title lang="ar">'+title.replace('&#39;',"'").replace('&quot;','"')+'</title>\n'
     if title==descr:
         ch+=4*' '+'<desc lang="ar">يتعذر الحصول على معلومات هذا البرنامج</desc>\n  </programme>\r'.decode('utf-8')
