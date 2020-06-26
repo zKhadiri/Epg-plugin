@@ -131,4 +131,9 @@
 <channel id="Zee_Aflam">1:0:1:AFB:1C:800:DCA0000:0:0:0:</channel>
 <channel id="Zee_Alwan">1:0:1:AFC:1C:800:DCA0000:0:0:0:</channel>
 <channel id="Rotana_Cinema_HD_KSA">1:0:19:12D:51:2BE:1040000:0:0:0:</channel>
+<channel id="Al_Hadath">1:0:1:17E0:3D:800:DCA0000:0:0:0:</channel>
+<channel id="BBC_World_News">1:0:1:20A:5:800:DCA0000:0:0:0:</channel>
+<channel id="Saudi_Sunnah">1:0:1:15E2:1A:2BE:DCA0000:0:0:0:</channel>
+<channel id="Saudi_Quran">1:0:1:15E1:1A:2BE:DCA0000:0:0:0:</channel>
+<channel id="Al_Arabiya_HD">1:0:1:17DE:3D:800:DCA0000:0:0:0:</channel>
 </channels>
