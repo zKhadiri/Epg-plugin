@@ -5,7 +5,12 @@
 version=10.2
 description=What_is_NEW:\n'[NEW UPDATE]'
 ##############################################################
+
+TEMPATH=/tmp
+PLUGINPATH=/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin
+
 # remove old version
+mv $PLUGINPATH/times.json $TEMPATH  > /dev/null 2>&1
 rm -rf /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin
 
 # check depends packges
@@ -61,12 +66,14 @@ echo ""
 # Download and install plugin
 cd /tmp
 set -e
+echo " Downloading And Insallling Epg_Plugin plugin ......"
+echo 
 wget -q "--no-check-certificate"  "https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/Epg_Plugin-"$version".tar.gz"
 tar -xzf Epg_Plugin-"$version".tar.gz -C /
 set +e
 rm -f Epg_Plugin-"$version".tar.gz
+mv $TEMPATH/times.json $PLUGINPATH  > /dev/null 2>&1
 cd ..
-
 sync
 echo "#########################################################"
 echo "#          Epg_Plugin INSTALLED SUCCESSFULLY            #"
