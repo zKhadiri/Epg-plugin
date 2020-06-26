@@ -36,16 +36,12 @@
 <channel id="BBC_Arabic">1:0:1:C83:20:800:DCA0000:0:0:0:</channel>
 <channel id="BBC_Arabic">1:0:19:1E:1FD:2BE:1040000:0:0:0:</channel>
 <channel id="BBC_World_News">1:0:1:133:1FE:2BE:1040000:0:0:0:</channel>
-<channel id="Bloomberg">1:0:1:C9:2:800:DCA0000:0:0:0:</channel>
 <channel id="CBC_Drama">1:0:1:13F3:33:800:DCA0000:0:0:0:</channel>
 <channel id="CN_Arabic">1:0:1:1D0:12D:2BE:1040000:0:0:0:</channel>
 <channel id="CN_Arabic">1:0:1:85C:15:800:DCA0000:0:0:0:</channel>
 <channel id="CNBC_Arabia">1:0:1:18:1FD:2BE:1040000:0:0:0:</channel>
 <channel id="CNBC_Arabia">1:0:1:712:12:800:DCA0000:0:0:0:</channel>
 <channel id="CNN">1:0:1:85A:15:800:DCA0000:0:0:0:</channel>
-<channel id="Discovery_HD">1:0:19:1621:236:800:DCA0000:0:0:0:</channel>
-<channel id="Discovery_IDX">1:0:19:1624:236:800:DCA0000:0:0:0:</channel>
-<channel id="Discovery_Science_HD">1:0:19:12C3:30:800:DCA0000:0:0:0:</channel>
 <channel id="DMC_Drama">1:0:1:1AF9:45:800:DCA0000:0:0:0:</channel>
 <channel id="DMC_HD">1:0:19:1AF5:45:800:DCA0000:0:0:0:</channel>
 <channel id="Documentary_Bil_Arabie">1:0:19:D0:15EC:2BE:1040000:0:0:0:</channel>
@@ -90,11 +86,6 @@
 <channel id="Nat._Geo._AD">1:0:1:8:1F8:2BE:1040000:0:0:0:</channel>
 <channel id="Nat._Geo._AD">1:0:1:8:32:64:DCA0000:0:0:0:</channel>
 <channel id="Nat._Geo._AD">1:0:1:853:15:800:DCA0000:0:0:0:</channel>
-<channel id="Nat._Geo._People_HD">1:0:19:3ED:A:800:DCA0000:0:0:0:</channel>
-<channel id="Nat._Geo._People_HD">1:0:19:4EEA:7E4:E0:1040000:0:0:0:</channel>
-<channel id="Nat._Geo._Wild_HD">1:0:19:3EC:A:800:DCA0000:0:0:0:</channel>
-<channel id="Nat._Geo._Wild_HD">1:0:19:4EEB:7E4:E0:1040000:0:0:0:</channel>
-<channel id="Nat._Geo._Wild_HD">1:0:19:9E37:FD2:E0:1040000:0:0:0:</channel>
 <channel id="Nat._Geographic">1:0:1:172:1C84:13E:820000:0:0:0:</channel>
 <channel id="Nat._Geographic">1:0:1:3C8F:1BBC:13E:820000:0:0:0:</channel>
 <channel id="People_TV">1:0:1:530:3D54:13E:820000:0:0:0:</channel>
@@ -123,7 +114,6 @@
 <channel id="SBC">1:0:1:15E3:1A:2BE:1040000:0:0:0:</channel>
 <channel id="SBC">1:0:19:A94:1B:800:DCA0000:0:0:0:</channel>
 <channel id="Sky_News_Arabia_HD">1:0:1:19:1FD:2BE:1040000:0:0:0:</channel>
-<channel id="Sky_News_Arabia_HD">1:0:19:7DF:14:800:DCA0000:0:0:0:</channel>
 <channel id="Space_Toon">1:0:1:710:12:800:DCA0000:0:0:0:</channel>
 <channel id="TCM">1:0:19:9DD5:FC8:E0:1040000:0:0:0:</channel>
 <channel id="Tiji">1:0:19:193:15E9:2BE:1040000:0:0:0:</channel>
