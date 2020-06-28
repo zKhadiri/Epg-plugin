@@ -42,7 +42,7 @@ ZA.sort()
 ent=['BEINMOVIESPREMIERE','BEINMOVIESACTION','BEINMOVIESDRAMA','BEINMOVIESFAMILY','BeInBoxOffice','BeInSeriesHD1','BeInSeriesHD2'
      ,'beINDrama','FOXACTIONMOVIES','FOXFAMILYMOVIESHD']
 
-osn=['Beity_TV','Majid_Kids_TV','YAS_Sports_HD','AD_Sports_1_HD','AD_Sports_2_HD','AD_Sports_3_HD','AD_Sports_4_HD','France_24_Arabic','Rusiya_Al_Yawm','Al_Hurra_HD','Al_Arabiya','CGTN','NHK_World-Japan','Yalla_OSN_Support','Sky_News_Arabia'
+osn=['Beity_TV','Majid_Kids_TV','YAS_Sports_HD','AD_Sports_3_HD','AD_Sports_4_HD','France_24_Arabic','Rusiya_Al_Yawm','Al_Hurra_HD','CGTN','NHK_World-Japan','Yalla_OSN_Support','Sky_News_Arabia'
              ,'OSN_POP_UP_Cruise_Control','OSN_Action','OSN_On_Demand_HD','OSN_Ya_Hala_Al_Oula','OSN_Ya_Hala','OSN_Movies_First','OSN_Mov_First_+2h','OSN_Movies','OSN_Enigma',
              'OSN_Kids','OSN_Movies_Disney','OSN_Cinema','Paramount_HD','Star_Movies_HD','OSN_YH_Cinema','Alfa_Series_HD',
              'Alfa_Series_+2_HD','Alfa_Al_Yawm_HD','Alfa_Al_Safwa','Alfa_Fann','Alfa_Cinema_1','Alfa_Cinema_2','Alfa_Music_Now',
@@ -60,11 +60,11 @@ others=['noordubai','Arriadia.ma','2M.ma','Medi1tv.ma','Aloula.ma','QATAR.TV']
 Jaw=['AD_Sports_1', 'AD_Sports_2', 'Abu_Dhabi', 'AD_Drama', 'Aghani_Aghani', 'Al_Aan', 'Al_Arabiya_HD', 'Al_Ekhbariya', 
      'Al_Emarat', 'Al_Hadath', 'Al_Hayat', 'Al_Nahar_Drama', 'Al_Rai', 'Al_Resalah', 'ART_Aflam_1', 'ART_Aflam_2', 'ART_Cinema', 
      'ART_Hekayat', 'ART_Hekayat_2', 'B4U_Aflam', 'BBC_Arabic', 'BBC_World_News', 'Bloomberg', 'Boomerang', 'CBC_Drama', 'Channel_News_Asia',
-      'CN_Arabic', 'CN_English', 'CNBC', 'CNBC_Arabia', 'CNN', 'Discovery_HD', 'Discovery_IDX', 'Discovery_Science_HD', 'DMC_Drama', 'DMC_HD',
+      'CN_Arabic', 'CN_English', 'CNBC', 'CNBC_Arabia', 'CNN', 'DMC_Drama', 'DMC_HD',
        'Documentary_Bil_Arabie', 'Dubai', 'Dubai_One', 'Dubai_Zaman', 'Duck_TV', 'English_Club_TV', 'Fast_Fun_Box_HD', 'Fight_Box_HD', 
        'Fight_Sports', 'FilmBox', 'FilmBox_Arthouse', 'Fix_and_Foxi', 'Fox_Action_Movies_HD', 'Fox_Family_Movies_HD', 'Fox_Life', 'FOX_Rewayat',
         'France_24', 'FX_HD', 'Gulli_Bil_Arabie', 'Horse_TV', 'Insight', 'La3ab_Wa_Jad', 'LBC_Sat', 'Luxe', 'Majid', 'MBC_3', 'MBC_VARIETY', 
-        'Motorvision', 'My_Cinema_HD', 'MyZEN_TV', 'Nat._Geo._AD', 'Nat._Geo._People_HD', 'Nat._Geo._Wild_HD', 'Nat._Geographic', 'Nautical_TV', 
+        'Motorvision', 'My_Cinema_HD', 'MyZEN_TV', 'Nat._Geo._AD', 'Nat._Geographic', 'Nautical_TV', 
         'Outdoor_Sports_Channel', 'People_TV', 'Planet_Earth', 'Rotana_Aflam_+', 'Rotana_Cinema_HD_KSA', 'Rotana_Classic_HD', 'Rotana_Clip', 
         'Rotana_Comedy', 'Rotana_Drama_HD', 'Rotana_Khalijia_HD', 'Rotana_Kids', 'Rotana_Music_HD', 'Roya', 'Saudi_Quran', 'Saudi_Sunnah', 
         'SBC', 'Sky_News_Arabia_HD', 'Space_Toon', 'TCM', 'Tiji', 'Trace_Sports_Stars', 'Travel_XP', 'Zee_Aflam', 'Zee_Alwan']

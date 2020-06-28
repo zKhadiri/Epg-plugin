@@ -104,14 +104,12 @@ class EPGIConfig(Screen):
         list.append(("ELCINEMA WEBSITE EPG", "5","elcin"))
         list.append(("ELCINEMA Bein entertainment EPG", "6","beincin"))
         list.append(("FILFAN WEBSITE", "7","filfan"))
-        list.append(("MBC.NET", "8","mbc"))
+        list.append(("MBC.NET/QATAR TV/NOOR DUBAI", "8","mbc"))
         list.append(("Jawwy TV BACKUP", "9","jawwy"))
         list.append(("SNRT EPG", "10","aloula"))
-        list.append(("QATAR TV EPG", "11","qatar"))
-        list.append(("Noor Dubai EPG", "12","noor"))
-        list.append(("FREESAT UK", "13","freesat"))
-        list.append(("DSTV.ZA", "14","dstv"))
-        list.append(("SuperSport.ZA BACKUP", "15","dstvback"))
+        list.append(("FREESAT UK", "11","freesat"))
+        list.append(("DSTV.ZA", "12","dstv"))
+        list.append(("SuperSport.ZA BACKUP", "13","dstvback"))
         self.provList=list ## New from mf to make choose list
         Screen.__init__(self, session)
         self.skinName = ["EPGIConfig"]
@@ -324,5 +322,7 @@ class EPGIConfig(Screen):
                 continue
             provTag = self.provList[i][2]    
             cmd="python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/%s.py" % provTag    
-            cmdList.append(cmd)    
+            cmd1="python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/check.py" 
+            cmdList.append(cmd)
+            cmdList.append(cmd1)
         self.session.open(Console2,_("EPG install started") , cmdList, closeOnSuccess=False)

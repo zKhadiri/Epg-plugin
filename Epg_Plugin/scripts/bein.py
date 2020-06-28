@@ -4,10 +4,6 @@ import requests,re,io,os,ch,sys
 from time import sleep,strftime
 from requests.adapters import HTTPAdapter
 
-
-
-
-
 headers={
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
     'Accept-Encoding': 'gzip, deflate',
@@ -29,7 +25,6 @@ for i in range(0,3):
     week = jour + timedelta(days=i)
     urls.append('http://epg.beinsports.com/utctime_ar.php?cdate='+str(week))
 
-now = str(datetime.datetime.now().year)+' '+str(datetime.datetime.now().month)
 
 with io.open("/etc/epgimport/bein.xml","w",encoding='UTF-8')as f:
     f.write(('<tv generator-info-name="By ZR1">').decode('utf-8'))
@@ -121,41 +116,4 @@ if os.path.exists('/var/lib/dpkg/status'):
     data[:] = new_els
     tree.write('/etc/epgimport/bein.xml', xml_declaration=True, encoding='utf-8')
     
-
-if not os.path.exists('/etc/epgimport/custom.channels.xml'):
-    print('Downloading custom.channels config')
-    custom_channels=requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/custom.channels.xml?raw=true')
-    with io.open('/etc/epgimport/custom.channels.xml','w',encoding="utf-8") as f:
-        f.write(custom_channels.text)
-        
-if not os.path.exists('/etc/epgimport/custom.sources.xml'):
-    print('Downloading custom sources config')
-    custom_source=requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/custom.sources.xml?raw=true')
-    with io.open('/etc/epgimport/custom.sources.xml','w',encoding="utf-8") as f:
-        f.write(custom_source.text)
-
-if not os.path.exists('/etc/epgimport/elcinema.channels.xml'):
-    print('Downloading elcinema channels config')
-    elcinema_channels=requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/elcinema.channels.xml?raw=true')
-    with io.open('/etc/epgimport/elcinema.channels.xml','w',encoding="utf-8") as f:
-        f.write(elcinema_channels.text)
-
-if not os.path.exists('/etc/epgimport/dstv.channels.xml'):
-    print('Downloading dstv channels config')
-    dstv_channels=requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/dstv.channels.xml?raw=true')
-    with io.open('/etc/epgimport/dstv.channels.xml','w',encoding="utf-8") as f:
-        f.write(dstv_channels.text)
-
-if not os.path.exists('/etc/epgimport/jawwy.channels.xml'):
-    print('Downloading jawwy channels config')
-    jaw_channels=requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/jawwy.channels.xml?raw=true')
-    with io.open('/etc/epgimport/jawwy.channels.xml','w',encoding="utf-8") as f:
-        f.write(jaw_channels.text)
-
-if not os.path.exists('/etc/epgimport/freesat.channels.xml'):
-    print('Downloading freesat channels config')
-    free_channels=requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/configs/freesat.channels.xml?raw=true')
-    with io.open('/etc/epgimport/freesat.channels.xml','w',encoding="utf-8") as f:
-        f.write(free_channels.text)
-
 print("**************FINISHED******************")
