@@ -2,8 +2,8 @@
 ##setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=10.6
-description=What_is_NEW:\n'[NEW UPDATE]'
+version=10.7
+description=What_is_NEW:\n'[NEW SOURCE : UK SPORTS CHANNELS]'
 ##############################################################
 
 TEMPATH=/tmp

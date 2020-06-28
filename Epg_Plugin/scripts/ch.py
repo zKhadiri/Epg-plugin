@@ -83,3 +83,10 @@ freesat.sort()
 
 filfan=['CBC DRAMA','CBC','NILE DRAMA','AL MIHWAR','ON E','ON DRAMA','AL NAHAR','AL NAHAR DRAMA','SADA ALBALAD','SADA ALBALAD DRAMA',
         'AL HAYAT','al kahira wa nass','al kahira wa nass +2','DMC','DMC DRAMA']
+
+uk_sports=['SkySp PL HD',"SkySp F'ball HD","SkySp News HD",'SkySpMainEvHD',
+'BT Sport 1 HD','BT Sport 2 HD','BT Sport 3 HD','BTSpt//ESPNHD','BTSBoxOffWWE',
+'SkySpCricketHD','SkySp F1 HD','SkySp ActionHD','SkySp ArenaHD',
+'SkySp Golf HD','SkySp Racing HD','SkySp Mix HD','SkySpBoxOffHD','LaLigaTV HD','Premier 1 HD',
+'Premier 2 HD','FreeSports HD','MUTV HD']
+uk_sports.sort()
