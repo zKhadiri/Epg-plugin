@@ -111,6 +111,7 @@ class EPGIConfig(Screen):
         list.append(("UK SPORTS CHANNELS", "12","skyuk"))
         list.append(("DSTV.ZA", "13","dstv"))
         list.append(("SuperSport.ZA BACKUP", "14","dstvback"))
+        list.append(("SETANTA eurasia", "15","setanta"))
         self.provList=list ## New from mf to make choose list
         Screen.__init__(self, session)
         self.skinName = ["EPGIConfig"]

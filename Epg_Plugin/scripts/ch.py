@@ -55,7 +55,7 @@ osn.sort()
 
 mbc=['MBC1','MBCDrama','MBCEgypt','MBCEgypt2','MBC4','MBC2','MBCAction','MBCBollywood','MBC+Drama','MBCMovieMax','MBCIraq','MBCCinq','Wanasah']
 
-others=['noordubai','Arriadia.ma','2M.ma','Medi1tv.ma','Aloula.ma','QATAR.TV']
+others=['noordubai','Arriadia.ma','2M.ma','Medi1tv.ma','Aloula.ma','QATAR.TV','SETANTA1','SETANTA2']
 
 Jaw=['AD_Sports_1', 'AD_Sports_2', 'Abu_Dhabi', 'AD_Drama', 'Aghani_Aghani', 'Al_Aan', 'Al_Arabiya_HD', 'Al_Ekhbariya', 
      'Al_Emarat', 'Al_Hadath', 'Al_Hayat', 'Al_Nahar_Drama', 'Al_Rai', 'Al_Resalah', 'ART_Aflam_1', 'ART_Aflam_2', 'ART_Cinema', 

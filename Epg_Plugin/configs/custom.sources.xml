@@ -48,4 +48,8 @@
 <description>UK SPORTS CHANNELS</description>
 <url>/etc/epgimport/skyuk.xml</url>
 </source>
+<source type="gen_xmltv" channels="/etc/epgimport/custom.channels.xml">
+<description>SETANTA eurasia</description>
+<url>/etc/epgimport/setanta.xml</url>
+</source>
 </sourcecat>

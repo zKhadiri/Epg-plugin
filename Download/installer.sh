@@ -3,7 +3,7 @@
 
 ######### Only These two lines to edit with new version ######
 version=10.7
-description=What_is_NEW:\n'[NEW SOURCE : UK SPORTS CHANNELS]'
+description=What_is_NEW:\n'[NEW SOURCE : SETANTA]'
 ##############################################################
 
 TEMPATH=/tmp
