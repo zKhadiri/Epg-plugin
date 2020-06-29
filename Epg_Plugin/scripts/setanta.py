@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import requests,re,io,json
+import requests,re,io,json,sys
 from datetime import datetime,timedelta
 
 
@@ -22,16 +22,18 @@ for link in urls:
 
     times[:]=[]
     epg[:]=[]
-    today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0) 
-    last_hr = 0
-    for d in time:
-        h, m = map(int, d.split(":"))
-        if last_hr > h:
-            today += + timedelta(days=1)
-        last_hr = h
-        times.append(today + timedelta(hours=h, minutes=m))
     
-    if len(time)>0:    
+    
+    if len(time)>0:
+        today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0) 
+        last_hr = 0
+        for d in time:
+            h, m = map(int, d.split(":"))
+            if last_hr > h:
+                today += + timedelta(days=1)
+            last_hr = h
+            times.append(today + timedelta(hours=h, minutes=m))
+               
         for elem,next_elem,title,des in zip(times,times[1:] + [times[0]],titles,des):
             ch=''
             startime=datetime.strptime(str(elem),'%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
@@ -42,7 +44,7 @@ for link in urls:
             epg.append(ch)
         
         print link.split('|')[1].lower()+' epg ends at '+str(times[-1])
-        
+        sys.stdout.flush()
         epg.pop(-1)
         for prog in epg:
             with io.open("/etc/epgimport/setanta.xml","a",encoding='UTF-8')as f:

@@ -55,6 +55,9 @@ for link in urls:
 with io.open("/etc/epgimport/skyuk.xml", "a",encoding="utf-8") as f:
     f.write(('</tv>').decode('utf-8'))
     
+
+with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'r') as f:
+    data = json.load(f)
     
 for channel in data['bouquets']:
     if channel["bouquet"]=="skyuk":
