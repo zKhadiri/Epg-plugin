@@ -105,7 +105,7 @@ class EPGIConfig(Screen):
         list.append(("ELCINEMA Bein entertainment EPG", "6","beincin"))
         list.append(("FILFAN WEBSITE", "7","filfan"))
         list.append(("MBC.NET/QATAR TV/NOOR DUBAI", "8","mbc"))
-        list.append(("Jawwy TV BACKUP", "9","jawwy"))
+        list.append(("Jawwy TV", "9","jawwy"))
         list.append(("SNRT EPG", "10","aloula"))
         list.append(("FREESAT UK", "11","freesat"))
         list.append(("UK SPORTS CHANNELS", "12","skyuk"))
@@ -138,7 +138,6 @@ class EPGIConfig(Screen):
         self.statusDS = status.Statusdstv()
         self.StatuseosnAR = status.StatuseosnAR()
         self.StatuseosnEN = status.StatuseosnEN()
-        self.StatuseJaw = status.StatuseJaw()
 
     def onWindowShow(self):
         self.onShown.remove(self.onWindowShow)
@@ -288,8 +287,6 @@ class EPGIConfig(Screen):
                     self["status"].setText('Last commit : '+self.StatuseosnAR)
                 elif provName=='osnen':
                     self["status"].setText('Last commit : '+self.StatuseosnEN)
-                elif provName=='jawwy':
-                    self["status"].setText('Last commit : '+self.StatuseJaw)
                 elif provName=='dstvback':
                     self["status"].setText('Last commit : '+self.statusDS)
                 else:
@@ -322,9 +319,11 @@ class EPGIConfig(Screen):
             provider = self.provList[i][0]
             if not provider in self.installList:
                 continue
-            provTag = self.provList[i][2]    
-            cmd="python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/%s.py" % provTag    
-            cmd1="python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/check.py" 
+            provTag = self.provList[i][2]
+            if provTag == "jawwy":
+                cmd="python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/jawwy.pyc"
+            else:
+                cmd="python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/%s.py" % provTag
             cmdList.append(cmd)
-            cmdList.append(cmd1)
+            cmdList.append("python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/check.py")
         self.session.open(Console2,_("EPG install started") , cmdList, closeOnSuccess=False)
