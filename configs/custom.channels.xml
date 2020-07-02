@@ -80,7 +80,7 @@
 <channel id="OSN_Ya_Hala">1:0:19:135:3:800:DCA0000:0:0:0:</channel> <!-- "OSN:Ya:Hala" -->
 <channel id="OSN_YH_Cinema">1:0:19:132:3:800:DCA0000:0:0:0:</channel> <!-- "OSN_Yahala:Cinema" -->
 <channel id="OSN_Series_First">1:0:19:130:3:800:DCA0000:0:0:0:</channel> <!-- "OSN:Series:First" -->
-<channel id="OSN_Binge">1:0:19:3EB:A:800:DCA0000:0:0:0:</channel> <!-- "OSN:Binge" -->
+<channel id="OSN_Series">1:0:19:3EB:A:800:DCA0000:0:0:0:</channel> <!-- "OSN_Series" -->
 <channel id="OSN_Comedy">1:0:19:119C:2D:800:DCA0000:0:0:0:</channel> <!-- "OSN:Comedy" -->
 <channel id="OSN_Kidzone">1:0:19:6A6:11:800:DCA0000:0:0:0:</channel> <!-- "OSN:Kid:Zone:TV" -->
 <channel id="Comedy_Central_HD">1:0:19:3F1:A:800:DCA0000:0:0:0:</channel> <!-- "Comedy:Central" -->
