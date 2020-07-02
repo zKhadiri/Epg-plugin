@@ -1,6 +1,6 @@
 #!/usr/bin/env python2.7
 # -*- coding: utf-8 -*-
-import requests,re,io,os,ch,sys
+import requests,re,io,os,sys,json
 from time import sleep,strftime
 from requests.adapters import HTTPAdapter
 
@@ -28,9 +28,14 @@ for i in range(0,3):
 
 with io.open("/etc/epgimport/bein.xml","w",encoding='UTF-8')as f:
     f.write(('<tv generator-info-name="By ZR1">').decode('utf-8'))
-for cc in ch.chann:
-    with io.open("/etc/epgimport/bein.xml","a",encoding='UTF-8')as f:
-        f.write(("\n"+'  <channel id="'+cc.replace(" ","_")+'">'+"\n"+'    <display-name lang="en">'+cc.replace("_"," ")+'</display-name>'+"\n"+'    <icon src="http://epg.beinsports.com/mena_sports/'+cc.replace('BS_NBA','BS NBA')+'.svg"/>'+"\n"+'    <url>http://www.bein.net/ar</url>'+"\n"+'  </channel>\r').decode('utf-8'))
+
+with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/bouquets.json', 'r') as f:
+    jsData = json.load(f)
+for channel in jsData['bouquets']:
+    if channel["name"]=="Bein sports":    
+        for cc in channel['channels']:
+            with io.open("/etc/epgimport/bein.xml","a",encoding='UTF-8')as f:
+                f.write(("\n"+'  <channel id="'+cc.replace(" ","_")+'">'+"\n"+'    <display-name lang="en">'+cc.replace("_"," ")+'</display-name>'+"\n"+'    <icon src="http://epg.beinsports.com/mena_sports/'+cc.replace('BS_NBA','BS NBA')+'.svg"/>'+"\n"+'    <url>http://www.bein.net/ar</url>'+"\n"+'  </channel>\r').decode('utf-8'))
 
 def bein():
     for url in urls:
@@ -93,12 +98,11 @@ def bein():
 if __name__=='__main__':
     bein()
     from datetime import datetime
-    import json
     with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'r') as f:
         data = json.load(f)
-    for channel in data['bouquets']:
-        if channel["bouquet"]=="bein":
-            channel['date']=datetime.today().strftime('%A %d %B %Y at %I:%M %p')
+    for bouquet in data['bouquets']:
+        if bouquet["bouquet"]=="bein":
+            bouquet['date']=datetime.today().strftime('%A %d %B %Y at %I:%M %p')
     with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'w') as f:
         json.dump(data, f)
 

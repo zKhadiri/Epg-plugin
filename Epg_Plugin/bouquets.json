@@ -1,0 +1,138 @@
+{
+    "bouquets": [{
+            "name": "Bein sports",
+            "path": "/etc/epgimport/custom.channels.xml",
+            "channels": ["SportsGlobalHD", "News_ar", "HD1", "HD2", "HD3", "HD4", "HD5", "HD6", "HD7", "HD8", "HD9", "HD10", "SportsHD11",
+                "SportsHD12", "SportsHD13", "SportsHD14", "SportsHD15", "SportsHD16", "SportsHD17", "4K", "BS_NBA"
+            ]
+        },
+        {
+            "name": "OSN",
+            "path": "/etc/epgimport/custom.channels.xml",
+            "channels": ["ABS-CBN_Sports+Action", "AD_Sports_3_HD", "AD_Sports_4_HD", "ANC", "ARC", "Aksyon_TV",
+                "Al_Hurra_HD", "Alfa_Al_Safwa", "Alfa_Al_Yawm_HD", "Alfa_Cinema_1", "Alfa_Cinema_2", "Alfa_Fann",
+                "Alfa_Music_Now", "Alfa_Series_+2_HD", "Alfa_Series_HD", "Baby_TV", "Beity_TV", "Bloomberg", "CGTN", "CI",
+                "CNBC_Europe", "CineMo", "Cinema_One_Global", "Comedy_Central_HD", "Discovery_Channel_HD", "Discovery_IDX_HD",
+                "Discovery_Science_HD", "Disney_Channel_HD", "Disney_Junior_HD", "Disney_XD_HD", "E!_HD", "France_24_Arabic",
+                "GMA_Life_TV", "GMA_News_TV", "GMA_Pinoy_TV", "H2_HD", "History_HD", "Lifestyle_Network", "MTV_Live_HD", "Majid_Kids_TV",
+                "Myx", "NHK_World-Japan", "Nat_Geo_HD", "Nat_Geo_People_HD", "Nat_Geo_Wild_HD", "Net_25", "NickToons_HD", "Nick_Jr_HD",
+                "Nickelodeon_HD", "OSN_Action", "OSN_Binge", "OSN_Cinema", "OSN_Comedy", "OSN_Enigma", "OSN_Kids", "OSN_Kidzone", "OSN_Living",
+                "OSN_Mezze", "OSN_Mix", "OSN_Mov_First_+2h", "OSN_Movies", "OSN_Movies_Disney", "OSN_Movies_First", "OSN_News",
+                "OSN_On_Demand_HD", "OSN_POP_UP_Cruise_Control", "OSN_Series_First", "OSN_YH_Cinema", "OSN_Ya_Hala", "OSN_Ya_Hala_Al_Oula",
+                "Paramount_HD", "Rusiya_Al_Yawm", "Sky_News_Arabia", "Sky_News_HD", "Star_Movies_HD", "Star_World_HD", "TFC", "TLC_HD",
+                "TeleRadyo", "VH1", "VIVA_TV", "YAS_Sports_HD", "Yalla_OSN_Support"
+            ]
+        },
+        {
+            "name": "bein entertainment",
+            "path": "/etc/epgimport/custom.channels.xml",
+            "channels": ["beincinema", "MoviesHD1", "MoviesHD2", "MoviesHD3", "MoviesHD4", "BoxOffice_HD1", "SeriesHD1", "SeriesHD2", "DramaHD1", "gourmet", "beJUNIOR", "Jeem",
+                "Baraem", "CartoonNetworkHD", "CartoonNetworkAR", "CartoonNetworkHindi", "Baby_TV_B", "CBeebies", "DreamWorks", "JimJam", "FOXFamilyMovies",
+                "FOXActionMovies_b", "Star_World_B", "TCM", "amc", "Star_Movies_B", "FOXHD", "OutdoorChannel", "V_HD", "TravelChannel", "Extreme", "fatafeat", "FoodNetwork", "HGTV", "CBSreality", "FXHD", "DMAX", "NatGeoWild_HD", "NatGeoPeople_HD", "NatGeo_HD", "BBCEarth", "AnimalPlanetHD", "AljazeeraDocumentary", "TRTWorld", "Euronews", "CNNHD", "Bloomberg_B", "HLN", "DTX", "DLife", "FineLiving"
+            ]
+        },
+        {
+            "name": "ELCINEMA",
+            "path": "/etc/epgimport/elcinema.channels.xml",
+            "channels": ["AlDafrah", "AlJadeedTV", "AlKaheraWalNasTV", "AlKaheraWalNasTV2", "AlSaeedah", "AlhayatDrama",
+                "Aloula", "AlraiTV", "Alsharqya", "Alsumaria", "Amman", "CBC", "Cima", "Fujairah", "JordanTV", "Kuwait",
+                "LBC", "LBCI", "Lana", "LanaPlusTV", "MTVLebnon", "MasperoZaman", "Mehwar", "Mix", "Nessma", "NileComedy",
+                "NileDrama", "NileLife", "Nile_Cinema", "ONDrama", "ONE", "Oman", "RotanaCinema EGY", "Roya", "SBC", "SadaElBalad",
+                "SadaElBalad+2", "SadaElBaladDrama", "SamaDubai", "SamaTV", "SharjahTV", "SyriaDrama", "SyriaTV", "TeNTV", "Watania1",
+                "Watania2", "almanar", "iFILMTV"
+            ]
+        },
+        {
+            "name": "bein entertainment ELCINEMA",
+            "path": "/etc/epgimport/elcinema.channels.xml",
+            "channels": ["BEINMOVIESPREMIERE", "BEINMOVIESACTION", "BEINMOVIESDRAMA", "BEINMOVIESFAMILY", "BeInBoxOffice", "BeInSeriesHD1", "BeInSeriesHD2", "beINDrama", "FOXACTIONMOVIES", "FOXFAMILYMOVIESHD"]
+        },
+        {
+            "name": "MBC",
+            "path": "/etc/epgimport/custom.channels.xml",
+            "channels": ["MBC1", "MBCDrama", "MBCEgypt", "MBCEgypt2", "MBC4", "MBC2", "MBCAction",
+                "MBCBollywood", "MBC+Drama", "MBCMovieMax", "MBCIraq", "MBCCinq", "Wanasah", "noordubai", "QATAR.TV"
+            ]
+        },
+        {
+            "name": "JAWWY",
+            "path": "/etc/epgimport/jawwy.channels.xml",
+            "channels": ["AD_Sports_1", "AD_Sports_2", "Abu_Dhabi", "AD_Drama", "Aghani_Aghani", "Al_Aan", "Al_Arabiya_HD", "Al_Ekhbariya",
+                "Al_Emarat", "Al_Hadath", "Al_Hayat", "Al_Nahar_Drama", "Al_Rai", "Al_Resalah", "ART_Aflam_1", "ART_Aflam_2", "ART_Cinema",
+                "ART_Hekayat", "ART_Hekayat_2", "B4U_Aflam", "BBC_Arabic", "BBC_World_News", "Bloomberg", "Boomerang", "CBC_Drama", "Channel_News_Asia",
+                "CN_Arabic", "CN_English", "CNBC", "CNBC_Arabia", "CNN", "DMC_Drama", "DMC_HD",
+                "Documentary_Bil_Arabie", "Dubai", "Dubai_One", "Dubai_Zaman", "Duck_TV", "English_Club_TV", "Fast_Fun_Box_HD", "Fight_Box_HD",
+                "Fight_Sports", "FilmBox", "FilmBox_Arthouse", "Fix_and_Foxi", "Fox_Action_Movies_HD", "Fox_Family_Movies_HD", "Fox_Life", "FOX_Rewayat",
+                "France_24", "FX_HD", "Gulli_Bil_Arabie", "Horse_TV", "Insight", "La3ab_Wa_Jad", "LBC_Sat", "Luxe", "Majid", "MBC_3", "MBC_VARIETY",
+                "Motorvision", "My_Cinema_HD", "MyZEN_TV", "Nat._Geo._AD", "Nat._Geographic", "Nautical_TV",
+                "Outdoor_Sports_Channel", "People_TV", "Planet_Earth", "Rotana_Aflam_+", "Rotana_Cinema_HD_KSA", "Rotana_Classic_HD", "Rotana_Clip",
+                "Rotana_Comedy", "Rotana_Drama_HD", "Rotana_Khalijia_HD", "Rotana_Kids", "Rotana_Music_HD", "Roya", "Saudi_Quran", "Saudi_Sunnah",
+                "SBC", "Sky_News_Arabia_HD", "Space_Toon", "TCM", "Tiji", "Trace_Sports_Stars", "Travel_XP", "Zee_Aflam", "Zee_Alwan"
+            ]
+        },
+        {
+            "name": "FILFAN",
+            "path": "/etc/epgimport/custom.channels.xml",
+            "channels": ["CBC DRAMA", "CBC", "NILE DRAMA", "AL MIHWAR", "ON E", "ON DRAMA", "AL NAHAR", "AL NAHAR DRAMA", "SADA ALBALAD", "SADA ALBALAD DRAMA",
+                "AL HAYAT", "al kahira wa nass", "al kahira wa nass +2", "DMC", "DMC DRAMA"
+            ]
+        },
+        {
+            "name": "UK SPORTS CHANNELS",
+            "path": "/etc/epgimport/custom.channels.xml",
+            "channels": ["BT Sport 1 HD", "BT Sport 2 HD", "BT Sport 3 HD", "BTSBoxOffWWE",
+                "BTSpt//ESPNHD", "FreeSports HD", "LaLigaTV HD", "MUTV HD", "Premier 1 HD",
+                "Premier 2 HD", "SkySp ActionHD", "SkySp ArenaHD", "SkySp F'ball HD", "SkySp F1 HD",
+                "SkySp Golf HD", "SkySp Mix HD", "SkySp News HD", "SkySp PL HD", "SkySp Racing HD",
+                "SkySpBoxOffHD", "SkySpCricketHD", "SkySpMainEvHD"
+            ]
+        },
+        {
+            "name": "FREESAT",
+            "path": "/etc/epgimport/freesat.channels.xml",
+            "channels": ["4 FILM", "4 FILM +1", "5 +1", "5 SELECT", "5 STAR", "5 USA", "5 USA +1",
+                "ALJAZEERA EN", "BBC 5 RADIO", "BBC ALBA", "BBC FOUR HD", "BBC FOUR SD", "BBC NEWS HD",
+                "BBC ONE HD", "BBC ONE SD", "BBC PALIAMENT", "BBC Scotland HD", "BBC TWO", "BBC TWO HD",
+                "BLAZE", "CBBC HD", "CBEEBIES", "CBS DRAMA", "CBS JUSTICE", "CBS REALITY", "CBS REALITY +1",
+                "Channel 4 +1", "Channel 4 HD", "Channel 4 more", "Channel 5 HD", "D DRAMA", "DAVE", "DMAX", "FOOD",
+                "FOOD +1", "FORCES TV", "FREESPORT HD", "HGTV", "HORROR CHANNELS", "ITV", "ITV 3", "ITV 3 +1", "ITV 4",
+                "ITV 4 +1", "ITV BE", "ITV BE +1", "ITV HD", "PBS AMERICA", "PICK", "PICK +1", "QUEST", "REALLY", "RED QUEST",
+                "S4C HD", "SKY NEWS", "SONY CHANNEL", "SONY CHANNEL +7", "SONY MOVIES", "SONY MOVIES ACTION", "SONY MOVIES CLASSIC",
+                "TOGHETER TV", "YESTERDAY", "itv 2", "itv2 +2", "paramount"
+            ]
+        },
+        {
+            "name": "DSTV",
+            "path": "/etc/epgimport/dstv.channels.xml",
+            "channels": ["1KZN", "1MagicHD", "AfricaMagicEpic", "AfricaMagicFamily", "AfricaMagicUrban", "AfricanEaster",
+                "AlJazeera", "B4UMovies", "BBCBritHD", "BBCEarthHD", "BBCFirstHD", "BBCLifestyle", "BBCWorldNews", "BET",
+                "BLITZHD", "BayTV", "BesteVanNederlands", "BloombergTelevision", "Boomerang", "BusinessDay", "CBSJusticeHD",
+                "CBSReality", "CCTV4", "CGTNNews", "CNBCAfrica", "CNNInternationalHD", "CapeTownTV", "CartoonNetworkHD", "Cbeebies",
+                "ChannelOHD", "Colors", "ComedyCentral", "CuriosityStream", "DayStar", "DeutscheWelle", "DiscoveryChannelHD",
+                "DiscoveryFamilyHD", "DiscoveryIDHD", "DiscoveryTLCHD", "DisneyChannel", "DisneyChannelXD", "DisneyJunior", "Dumisa",
+                "E!EntertainmentHD", "EVA", "EVA(P)", "EmmanuelTV", "EuroNewsAfrica", "FAITH", "FOXHD", "FOXLife", "FashionOne",
+                "FoodNetworkHD", "GauTV", "GinxeSportsHD", "HomeandGardenTVHD", "IGNITION", "ITVChoiceHD", "JimJam", "KyKNetNou",
+                "KykNETHD", "KykNETandKieHD", "KykNetLekker", "LesothoTV", "LifetimeEntertainment", "M-NETBinge", "M-NetCityHD",
+                "M-NetHD", "M-NetMoviesAction", "M-NetMoviesAction+HD", "M-NetMoviesAllStarsHD", "M-NetMoviesPremierHD",
+                "M-NetMoviesSmileHD", "M-NetMoviesZoneHD", "M-NetPlus1HD", "MTV", "MTVbase", "Mindset", "MindsetPop", "MojaLove",
+                "MojaLoveHD", "MzansiBioskop", "MzansiMagicHD", "MzansiMusic", "MzansiWethuHD", "NDTV24x7", "NTAI", "NaijaStand-UpComedy",
+                "NatGeoWild", "NationalGeographicChannel", "NewzroomAfrika", "NickJr", "NickTOONS", "Nickelodeon", "NigerianFestivals",
+                "OneGospel", "PBSKids", "ParliamentaryService", "PeoplesWeather", "RAIInternational", "ROK", "RTPI", "RealTime", "RussiaToday",
+                "SABC1HD", "SABC2HD", "SABC3HD", "SABCEncore", "SABCNews", "SETAsia", "SETMax", "SICInternacional(P)", "SkyNews", "SoundCity",
+                "SowetoTV", "SpiceTV", "StarLifeHD", "StarPlus", "StarVijay", "StudioUniversalHD", "SunTV", "SundanceTVHD",
+                "SuperSlamHD", "SuperSportHD1", "SuperSportHD2", "SuperSportHD3",
+                "SuperSportHD4", "SuperSportHD5", "SuperSportHD6", "SuperSportHD7", "SuperSportHD8", "SuperSportHD9", "SuperSportHD10",
+                "SuperSport11HD", "SuperSportHD12", "SuperSportMaximoHD",
+                "TBN", "TNTAfricaHD", "TRACEAfrica", "TRACEURBANHD", "TV5MondeAfrique", "TVMall", "TeleMundoEnglish", "Telemundo(P)",
+                "TellyTrack", "TheHistoryChannelHD", "TheHomeChannel", "TomCruise", "ToonamiHD", "TraceGospel", "TravelChannel",
+                "TshwaneTV", "UniversalTVHD", "VIAHD", "VUZUHD", "ZeeTV", "ZeeWorldHD", "e.TVHD", "eMoviesExtraHD", "eMoviesHD",
+                "eNewsChannelAfrica", "eTVExtraHD", "eToonz"
+            ]
+        },
+        {
+            "name": "OTHERS",
+            "path": "/etc/epgimport/custom.channels.xml",
+            "channels": ["Arriadia.ma", "2M.ma", "Medi1tv.ma", "Aloula.ma", "SETANTA1", "SETANTA2"]
+        }
+    ]
+}

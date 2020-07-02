@@ -1,6 +1,6 @@
 #!/usr/bin/env python2.7
 # -*- coding: utf-8 -*-
-import requests,re,io,sys,ch,os,ssl
+import requests,re,io,sys,os,ssl
 from datetime import datetime,timedelta
 from time import sleep,strftime
 from requests.adapters import HTTPAdapter
@@ -40,9 +40,9 @@ print('**************ELCINEMA EPG******************')
 with io.open("/etc/epgimport/elcinema.xml","w",encoding='UTF-8')as f:
     f.write(('<?xml version="1.0" encoding="UTF-8"?>'+"\n"+'<tv generator-info-name="By ZR1">').decode('utf-8'))
 
-for x in ch.elc_channels:
+for x in nb_channel:
     with io.open("/etc/epgimport/elcinema.xml","a",encoding='UTF-8')as f:
-        f.write(("\n"+'  <channel id="'+x+'">'+"\n"+'    <display-name lang="en">'+x.replace("_",' ')+'</display-name>'+"\n"+'  </channel>\r').decode('utf-8'))
+        f.write(("\n"+'  <channel id="'+x.split('-')[1]+'">'+"\n"+'    <display-name lang="en">'+x.split('-')[1]+'</display-name>'+"\n"+'  </channel>\r').decode('utf-8'))
 
 class elcin():
     def __init__(self):

@@ -9,20 +9,13 @@ from enigma import eEnv
 from Tools.Directories import fileExists
 from Components.MenuList import MenuList
 from Screens.MessageBox import MessageBox
-import os
+import os,json
 from scripts import ch
 from xml.etree import ElementTree as ET
 from xml.dom import minidom
 
 LAMEDB = eEnv.resolve('${sysconfdir}/enigma2/lamedb')
-cos_path='/etc/epgimport/custom.channels.xml'
-elci_path='/etc/epgimport/elcinema.channels.xml'
-dstv_path='/etc/epgimport/dstv.channels.xml'
-#elif_path='/etc/epgimport/eliftv.channels.xml'
-jaw_path='/etc/epgimport/jawwy.channels.xml'
-free_path='/etc/epgimport/freesat.channels.xml'
-bqList=['chann-bein sports-'+cos_path+'','osn-osn-'+cos_path+'','elc_channels-elcinema-'+elci_path+'','net-bein entertainment-'+cos_path+'','mbc-mbc-'+cos_path+'','ent-elcinema bein entertainment-'+elci_path+'','ZA-DSTV-'+dstv_path+'','others-others-'+cos_path+''
-        ,'Jaw-Jawwy TV-'+jaw_path+'','uk_sports-UK SPORTS CHANNELS-'+cos_path+'','freesat-FREESAT TV-'+free_path+'','filfan-FILFAN TV-'+cos_path+'']
+
 class set_ref(Screen):
     skin="""
         <screen position="center,center" size="1000,400" title="GET SERVICE" backgroundColor="#16000000" flags="wfNoBorder">
@@ -64,6 +57,7 @@ class set_ref(Screen):
         
         self.ServicesList = []
         self.idxList=[]
+        self.bqList=[]
         self.sidx = 0
         self.name = None
         self.refstr = None
@@ -72,8 +66,9 @@ class set_ref(Screen):
         self.idx = 0
         self.init() 
         self.getCurrentService()
-        self.bqIndex=0        
-        self.changeBQ()
+        self.bqIndex=0
+        self.getJson()       
+        
         self["bouq"].setText("Current bouquet  : {}".format(self.bouquetname))
         
     def setCurrentidIndex(self):
@@ -82,6 +77,13 @@ class set_ref(Screen):
    
 #####################################################
 
+    def getJson(self):
+        with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/bouquets.json','r')as f:
+            self.data=json.load(f)
+            for bouquet in self.data['bouquets']:
+                self.bqList.append(bouquet['name'])
+        self.changeBQ()
+    
     def last(self):
         self.bqIndex-=1
         self.changeBQ()
@@ -91,27 +93,28 @@ class set_ref(Screen):
         self.changeBQ()
         
     def changeBQ(self):
-        if self.bqIndex>(len(bqList)-1):
+        if self.bqIndex>(len(self.bqList)-1):
            self.bqIndex=0
         if self.bqIndex<0:
-           self.bqIndex =len(bqList)-1
+           self.bqIndex =len(self.bqList)-1
            
-        bqTitle=bqList[self.bqIndex ].split('-')[1]
+        bqTitle=self.bqList[self.bqIndex]
         self["label"].setText('EPG PROVIDER : {}'.format(bqTitle))
         self.listChannels()
-        
+     
+      
     def listChannels(self):
-        self.path=bqList[self.bqIndex].split('-')[2]
-        bqTitle=bqList[self.bqIndex].split('-')[0]
-        channels=ch.chann
-        exec "channels=ch."+bqTitle.split('-')[0]
-        self['list'].setList([])    
-        self['list'].setList(channels)
-        self['list'].show()
-        self.idxList=channels
-        self.lenidList=len(self.idxList)
-        self.updateServiceID()
-              
+        for data in self.data['bouquets']:
+            if data['name']==self.bqList[self.bqIndex]:
+                channels = [s.encode('ascii', 'ignore') for s in data['channels']]
+                self.path = data['path']
+                self['list'].setList([])    
+                self['list'].setList(channels)
+                self['list'].show()
+                self.idxList=channels
+                self.lenidList=len(self.idxList)
+                self.updateServiceID()
+                        
     def listDOWN(self):
         self['list'].down()
         self.updateServiceID()
@@ -153,7 +156,7 @@ class set_ref(Screen):
             self.remove_duplicates()
             self['id'].setText("{} added successfully to config".format(self.name))
         else:
-            self.session.open(MessageBox,_(self.path+" not found in path"), MessageBox.TYPE_INFO,timeout=10)
+            self.session.open(MessageBox,_(str(self.path)+" not found in path"), MessageBox.TYPE_INFO,timeout=10)
     
     def remove_duplicates(self):
         with open(self.path, "rb") as fp:
@@ -203,10 +206,10 @@ class set_ref(Screen):
             self.name = self.ServicesList[self.sidx][0]
             self.refstr = self.ServicesList[self.sidx][1]
             self.displayServiceParams()
-            
+           
     def a(self):
         self.close(None)
-
+    
 
 def freeMemory():
 	os.system("sync")

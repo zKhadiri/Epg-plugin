@@ -1,6 +1,6 @@
 #!/usr/bin/env python2.7
 # -*- coding: utf-8 -*-
-import requests,json,io,re,ch,os,sys
+import requests,json,io,re,os,sys
 from datetime import datetime
 from requests.adapters import HTTPAdapter
 
@@ -21,9 +21,13 @@ for i in range(0,5):
 
 with io.open("/etc/epgimport/dstv.xml","w",encoding='UTF-8')as f:
     f.write(('<tv generator-info-name="By ZR1">').decode('utf-8'))
-for cc in ch.ZA:
-    with io.open("/etc/epgimport/dstv.xml","a",encoding='UTF-8')as f:
-        f.write(("\n"+'  <channel id="'+cc+'">'+"\n"+'    <display-name lang="en">'+cc+'</display-name>'+"\n"+'  </channel>'+"\r").decode('utf-8'))
+with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/bouquets.json', 'r') as f:
+    jsData = json.load(f)
+for channel in jsData['bouquets']:
+    if channel["name"]=="DSTV":  
+        for nt in channel['channels']:
+            with io.open("/etc/epgimport/dstv.xml","a",encoding='UTF-8')as f:
+                f.write(("\n"+'  <channel id="'+nt+'">'+"\n"+'    <display-name lang="en">'+nt.replace("_"," ")+'</display-name>'+"\n"+'  </channel>'+"\r").decode('utf-8'))
 
 def dstv():
     for url in urls:
@@ -50,9 +54,9 @@ if __name__=='__main__':
     import json
     with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'r') as f:
         data = json.load(f)
-    for channel in data['bouquets']:
-        if channel["bouquet"]=="dstv":
-            channel['date']=datetime.today().strftime('%A %d %B %Y at %I:%M %p')
+    for bouquet in data['bouquets']:
+        if bouquet["bouquet"]=="dstv":
+            bouquet['date']=datetime.today().strftime('%A %d %B %Y at %I:%M %p')
     with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'w') as f:
         json.dump(data, f)
 

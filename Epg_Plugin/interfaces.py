@@ -199,7 +199,7 @@ class EPGIConfig(Screen):
         else:
             choices.append(("Press Ok to [Disable checking for Online Update]","disablecheckUpdate"))
         choices.append(("ASSIGN SERVICE TO CHANNELS","sref"))
-        choices.append(("DOWNLOAD THE LATEST CONFIGS [NOT THAT OLD CONFIGS WILL BE DISCARDED]","config"))
+        choices.append(("DOWNLOAD THE LATEST CHANNELS LIST","config"))
         from Screens.ChoiceBox import ChoiceBox
         self.session.openWithCallback(self.choicesback, ChoiceBox, _('select task'),choices)
 

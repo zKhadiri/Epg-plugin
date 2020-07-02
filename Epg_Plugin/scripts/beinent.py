@@ -1,6 +1,6 @@
 #!/usr/bin/env python2.7
 # -*- coding: utf-8 -*-
-import requests,re,io,os,ch,sys
+import requests,re,io,os,sys,json
 from time import sleep,strftime
 from requests.adapters import HTTPAdapter
 
@@ -33,9 +33,14 @@ prog=[]
 
 with io.open("/etc/epgimport/beinent.xml","w",encoding='UTF-8')as f:
     f.write(('<?xml version="1.0" encoding="UTF-8"?>'+"\n"+'<tv generator-info-name="By ZR1">').decode('utf-8'))
-for nt in ch.net:
-    with io.open("/etc/epgimport/beinent.xml","a",encoding='UTF-8')as f:
-        f.write(("\n"+'  <channel id="'+nt+'">'+"\n"+'    <display-name lang="en">'+nt.replace("_"," ")+'</display-name>'+"\n"+'  </channel>'+"\r").decode('utf-8'))
+
+with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/bouquets.json', 'r') as f:
+    jsData = json.load(f)
+for channel in jsData['bouquets']:
+    if channel["name"]=="bein entertainment":  
+        for nt in channel['channels']:
+            with io.open("/etc/epgimport/beinent.xml","a",encoding='UTF-8')as f:
+                f.write(("\n"+'  <channel id="'+nt+'">'+"\n"+'    <display-name lang="en">'+nt.replace("_"," ")+'</display-name>'+"\n"+'  </channel>'+"\r").decode('utf-8'))
 
 def beinen():
     for url in urls:
@@ -92,9 +97,9 @@ if __name__=='__main__':
     import json
     with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'r') as f:
         data = json.load(f)
-    for channel in data['bouquets']:
-        if channel["bouquet"]=="beinent":
-            channel['date']=datetime.today().strftime('%A %d %B %Y at %I:%M %p')
+    for bouquet in data['bouquets']:
+        if bouquet["bouquet"]=="beinent":
+            bouquet['date']=datetime.today().strftime('%A %d %B %Y at %I:%M %p')
     with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'w') as f:
         json.dump(data, f)
 
