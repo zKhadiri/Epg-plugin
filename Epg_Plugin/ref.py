@@ -10,7 +10,6 @@ from Tools.Directories import fileExists
 from Components.MenuList import MenuList
 from Screens.MessageBox import MessageBox
 import os,json
-from scripts import ch
 from xml.etree import ElementTree as ET
 from xml.dom import minidom
 
