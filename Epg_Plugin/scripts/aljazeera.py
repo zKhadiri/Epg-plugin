@@ -1,11 +1,11 @@
 #!/usr/bin/env python2.7
 # -*- coding: utf-8 -*-
 import requests,re,io,warnings,ssl
-from datetime import datetime
+from datetime import datetime,timedelta
 from requests.adapters import HTTPAdapter
 warnings.filterwarnings('ignore', message='Unverified HTTPS request')
 
-now = datetime.today().strftime('%Y-%m-%d')
+now = (datetime.today()+timedelta(hours=3)).strftime('%Y-%m-%d')
 
 with io.open("/etc/epgimport/aljazeera.xml","w",encoding='UTF-8')as f:
     f.write(('<?xml version="1.0" encoding="UTF-8"?>'+"\n"+'<tv generator-info-name="By ZR1">').decode('utf-8'))
@@ -19,21 +19,24 @@ with requests.Session() as s:
 times = re.findall(r'<div class="schedule__row__timeslot">(.*?)</div>',url.text)
 title = re.findall(r'<div class="schedule__row__showname">(.*?)</div>',url.text)
 des = re.findall(r'<div class="schedule__row__description">(.*?)</div>',url.text)
-epg=[]
+
 if len(times)>0:
     for elem, next_elem,tit,de in zip(times, times[1:] + [times[0]],title,des):
         ch=''
-        start = datetime.strptime(now+' '+elem,'%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
-        end = datetime.strptime(now+' '+next_elem,'%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
+        if times[-1]==elem and times[0]==next_elem:
+            start = datetime.strptime(now+' '+elem,'%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
+            extend_prog = (datetime.strptime(start,'%Y%m%d%H%M%S')+timedelta(hours=1)).strftime('%Y%m%d%H%M%S')
+            end = extend_prog
+        else:
+            start = datetime.strptime(now+' '+elem,'%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
+            end = datetime.strptime(now+' '+next_elem,'%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
         ch+= 2 * ' ' +'<programme start="' + start + ' +0300" stop="' + end+ ' +0300" channel="aljazeera">\n'
         ch+=4*' '+'<title lang="ar">'+tit.replace('&#39;',"'").replace('&quot;','"').replace('&amp;','و'.decode('utf-8')).replace('<div class="schedule__row__nowshowing">','')+'</title>\n'
         ch+=4*' '+'<desc lang="ar">'+de.replace('&#39;',"'").replace('&quot;','"').replace('&amp;','و'.decode('utf-8')).strip()+'</desc>\n  </programme>\r'
-        epg.append(ch)
-    print 'aljazeera epg download finished'
-    epg.pop(-1)
-    for prog in epg:
         with io.open("/etc/epgimport/aljazeera.xml", "a",encoding="utf-8") as f:
-            f.write((prog))
+            f.write(ch)
+    print 'aljazeera epg download finished'
+        
 else:
     'No data found for aljazeera'
     

@@ -8,6 +8,6 @@ with io.open('/etc/epgimport/custom.sources.xml','w',encoding="utf-8") as f:
         
 print('Downloading latest channels list')
 sys.stdout.flush()
-custom_channels=requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/bouquets.json?raw=true')
+chnnales_lists=requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/Epg_Plugin/bouquets.json?raw=true')
 with io.open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/bouquets.json','w',encoding="utf-8") as f:
-    f.write(custom_channels.text)
+    f.write(chnnales_lists.text)
