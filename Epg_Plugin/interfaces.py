@@ -284,15 +284,15 @@ class EPGIConfig(Screen):
                     if channel["bouquet"]==provName:
                         self["glb"].setText("last update : {}".format(channel["date"]))
                 if provName=="osnplay":
-                    self["status"].setText('Last commit : '+self.statusOS)
+                    self["status"].setText('Last commit : {}'.format(self.statusOS))
                 elif provName=='osnar':
-                    self["status"].setText('Last commit : '+self.StatuseosnAR)
+                    self["status"].setText('Last commit : {}'.format(self.StatuseosnAR))
                 elif provName=='osnen':
-                    self["status"].setText('Last commit : '+self.StatuseosnEN)
+                    self["status"].setText('Last commit : {}'.format(self.StatuseosnEN))
                 elif provName=='jawwy':
-                    self["status"].setText('Last commit : '+self.StatusJawwy)
+                    self["status"].setText('Last commit : {}'.format(self.StatusJawwy))
                 elif provName=='dstvback':
-                    self["status"].setText('Last commit : '+self.statusDS)
+                    self["status"].setText('Last commit : {}'.format(self.statusDS))
                 else:
                     self["status"].setText("")
           
