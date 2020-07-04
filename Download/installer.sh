@@ -2,8 +2,8 @@
 ##setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=11.4
-description=What_is_NEW:\n'[Jawwy tv backup]'
+version=11.5
+description=What_is_NEW:\n'[new source : aljazeera]'
 ##############################################################
 
 TEMPATH=/tmp
