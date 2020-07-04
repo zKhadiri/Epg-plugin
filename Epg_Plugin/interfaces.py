@@ -138,6 +138,7 @@ class EPGIConfig(Screen):
         self.statusDS = status.Statusdstv()
         self.StatuseosnAR = status.StatuseosnAR()
         self.StatuseosnEN = status.StatuseosnEN()
+        self.StatusJawwy = status.StatusJawwy()
 
     def onWindowShow(self):
         self.onShown.remove(self.onWindowShow)
@@ -287,6 +288,8 @@ class EPGIConfig(Screen):
                     self["status"].setText('Last commit : '+self.StatuseosnAR)
                 elif provName=='osnen':
                     self["status"].setText('Last commit : '+self.StatuseosnEN)
+                elif provName=='jawwy':
+                    self["status"].setText('Last commit : '+self.StatusJawwy)
                 elif provName=='dstvback':
                     self["status"].setText('Last commit : '+self.statusDS)
                 else:
@@ -320,10 +323,7 @@ class EPGIConfig(Screen):
             if not provider in self.installList:
                 continue
             provTag = self.provList[i][2]
-            if provTag == "jawwy":
-                cmd="python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/jawwy.pyc"
-            else:
-                cmd="python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/%s.py" % provTag
+            cmd="python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/%s.py" % provTag
             cmdList.append(cmd)
             cmdList.append("python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/check.py")
         self.session.open(Console2,_("EPG install started") , cmdList, closeOnSuccess=False)
