@@ -1,9 +1,8 @@
 #!/usr/bin/env python2.7
 # -*- coding: utf-8 -*-
-import requests,re,io,warnings,ssl
+import requests,re,io
 from datetime import datetime,timedelta
 from requests.adapters import HTTPAdapter
-warnings.filterwarnings('ignore', message='Unverified HTTPS request')
 
 now = (datetime.today()+timedelta(hours=3)).strftime('%Y-%m-%d')
 
@@ -12,9 +11,8 @@ with io.open("/etc/epgimport/aljazeera.xml","w",encoding='UTF-8')as f:
     f.write(("\n"+'  <channel id="aljazeera">'+"\n"+'    <display-name lang="en">aljazeera</display-name>'+"\n"+'  </channel>\r').decode('utf-8'))
     
 with requests.Session() as s:
-    s.mount('http://', HTTPAdapter(max_retries=50))
-    ssl._create_default_https_context = ssl._create_unverified_context
-    url = s.get('https://www.aljazeera.net/schedule',verify=False)
+    s.mount('https://', HTTPAdapter(max_retries=50))
+    url = s.get('https://www.aljazeera.net/schedule')
 
 times = re.findall(r'<div class="schedule__row__timeslot">(.*?)</div>',url.text)
 title = re.findall(r'<div class="schedule__row__showname">(.*?)</div>',url.text)

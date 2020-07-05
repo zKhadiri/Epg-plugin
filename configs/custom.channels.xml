@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <channels>
+<channel id="aljazeera">1:0:19:1F5:EAC4:77E:DCA0000:0:0:0:</channel>
+<channel id="aljazeera">1:0:1:2C4:1B58:13E:820000:0:0:0:</channel>
+<channel id="aljazeera">1:0:19:2775:3F2:E0:1040000:0:0:0:</channel>
 <channel id="noordubai">1:0:1:126D:2F:800:DCA0000:0:0:0</channel>
 <channel id="noordubai">1:0:1:8A0:1FC:2BE:1040000:0:0:0</channel>
 <!-- MBC -->
