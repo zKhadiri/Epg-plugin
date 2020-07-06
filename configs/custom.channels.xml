@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <channels>
+<channel id="SETANTA1">1:0:19:1D56:2A:55:13B0000:0:0:0</channel>
+<channel id="SETANTA2">1:0:19:1D60:2A:55:13B0000:0:0:0</channel>
 <channel id="aljazeera">1:0:19:1F5:EAC4:77E:DCA0000:0:0:0:</channel>
 <channel id="aljazeera">1:0:1:2C4:1B58:13E:820000:0:0:0:</channel>
 <channel id="aljazeera">1:0:19:2775:3F2:E0:1040000:0:0:0:</channel>
