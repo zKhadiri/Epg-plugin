@@ -132,7 +132,12 @@
         {
             "name": "OTHERS",
             "path": "/etc/epgimport/custom.channels.xml",
-            "channels": ["Arriadia.ma", "2M.ma", "Medi1tv.ma", "Aloula.ma","aljazeera", "SETANTA1", "SETANTA2"]
+            "channels": ["Arriadia.ma", "2M.ma", "Medi1tv.ma", "Aloula.ma", "aljazeera", "SETANTA1", "SETANTA2"]
+        },
+        {
+            "name": "INDIAN SPORTS CHANNELS",
+            "path": "/etc/epgimport/custom.channels.xml",
+            "channels": ["sony-six", "sony-ten-1", "sony-ten-2", "star-sports-select-1", "star-sports-select-hd-2", "star-sports1", "star-sports2", "wow-hd"]
         }
     ]
 }
