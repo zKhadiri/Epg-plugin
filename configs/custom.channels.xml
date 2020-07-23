@@ -88,6 +88,7 @@
 <channel id="OSN_Series">1:0:19:3EB:A:800:DCA0000:0:0:0:</channel> <!-- "OSN_Series" -->
 <channel id="OSN_Comedy">1:0:19:119C:2D:800:DCA0000:0:0:0:</channel> <!-- "OSN:Comedy" -->
 <channel id="OSN_Kidzone">1:0:19:6A6:11:800:DCA0000:0:0:0:</channel> <!-- "OSN:Kid:Zone:TV" -->
+<channel id="OSN_Pop_Up_Marvel_Studios">1:0:19:6A8:11:800:DCA0000:0:0:0:</channel>
 <channel id="Comedy_Central_HD">1:0:19:3F1:A:800:DCA0000:0:0:0:</channel> <!-- "Comedy:Central" -->
 <channel id="Star_World_HD">1:0:19:6A9:11:800:DCA0000:0:0:0:</channel> <!-- "Star:World:HD" -->
 <channel id="CI">1:0:1:D4:2:800:DCA0000:0:0:0:</channel> <!-- "Crime:And:Investigation:Network" -->
