@@ -78,6 +78,21 @@
             ]
         },
         {
+            "name": "SKY IT",
+            "path": "/etc/epgimport/skyit.channels.xml",
+            "channels": ["Boomerang", "Canale 20 HD", "Cartoon Network", "GIALLO HD", "Comedy Central", "Crime + Inv. HD", "DAZN1", "DeAJunior", "DeAKids",
+                "DeAKids +1", "Discovery", "Discovery Sci", "Eurosport 2 HD", "Eurosport HD", "Fox Crime HD", "Fox HD", "Fox News",
+                "FoxCrime Castle", "Gambero Rosso HD", "History HD", "Italia 1 HD", "La7D", "LaF", "Milan TV", "Inter TV", "Iris", "Mediaset Italia Due", "NatGeo Wild HD",
+                "NationalGeo", "Nick Jr", "Nickelodeon", "Premium Crime HD", "PremiumCinema1 HD", "PremiumCinema2 HD", "PremiumCinema3 HD", "RAI News", "Rai 1 (DTT)",
+                "Rai 2 (DTT)", "Rai 3 (DTT)", "Rai 4", "Rai Movie", "Rai Premium", "Rete 4 HD", "Sky Arte HD", "Sky Atlantic +1",
+                "Sky Atlantic HD", "Sky Cinema Action HD", "Sky Cinema Comedy HD", "Sky Cinema Drama HD", "Sky Cinema Due +24 HD",
+                "Sky Cinema Due HD", "Sky Cinema Family HD", "Sky Cinema Romance HD", "Sky Cinema Suspense HD", "Sky Cinema Uno +24 HD",
+                "Sky Cinema Uno HD", "Sky News", "Sky Sport Arena", "Sky Sport Collection HD", "Sky Sport F1 HD", "Sky Sport Football HD",
+                "Sky Sport MotoGP", "Sky Sport NBA", "Sky Sport Serie A HD", "Sky Sport Uno", "Sky Sport24", "Sky TG24", "Sky Uno +1",
+                "Sky Uno HD", "VH1", "Western Collection HD"
+            ]
+        },
+        {
             "name": "UK SPORTS CHANNELS",
             "path": "/etc/epgimport/custom.channels.xml",
             "channels": ["BT Sport 1 HD", "BT Sport 2 HD", "BT Sport 3 HD", "BTSBoxOffWWE",
@@ -130,14 +145,14 @@
             ]
         },
         {
-            "name": "OTHERS",
-            "path": "/etc/epgimport/custom.channels.xml",
-            "channels": ["Arriadia.ma", "2M.ma", "Medi1tv.ma", "Aloula.ma", "aljazeera", "SETANTA1", "SETANTA2"]
-        },
-        {
             "name": "INDIAN SPORTS CHANNELS",
             "path": "/etc/epgimport/custom.channels.xml",
             "channels": ["sony-six", "sony-ten-1", "sony-ten-2", "star-sports-select-1", "star-sports-select-hd-2", "star-sports1", "star-sports2", "wow-hd"]
+        },
+        {
+            "name": "OTHERS",
+            "path": "/etc/epgimport/custom.channels.xml",
+            "channels": ["Arriadia.ma", "2M.ma", "Medi1tv.ma", "Aloula.ma", "aljazeera", "SETANTA1", "SETANTA2"]
         }
     ]
 }

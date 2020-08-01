@@ -40,3 +40,10 @@ if not os.path.exists('/etc/epgimport/freesat.channels.xml'):
     free_channels=requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/configs/freesat.channels.xml?raw=true')
     with io.open('/etc/epgimport/freesat.channels.xml','w',encoding="utf-8") as f:
         f.write(free_channels.text)
+        
+if not os.path.exists('/etc/epgimport/skyit.channels.xml'):
+    print('Downloading skyit channels config')
+    sys.stdout.flush()
+    sky_it=requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/configs/skyit.channels.xml?raw=true')
+    with io.open('/etc/epgimport/skyit.channels.xml','w',encoding="utf-8") as f:
+        f.write(sky_it.text)
