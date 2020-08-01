@@ -10,7 +10,6 @@ TEMPATH=/tmp
 PLUGINPATH=/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin
 
 # remove old version
-mv $PLUGINPATH/times.json $TEMPATH  > /dev/null 2>&1
 rm -rf /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin
 
 # check depends packges
@@ -72,7 +71,6 @@ wget -q "--no-check-certificate"  "https://raw.githubusercontent.com/ziko-ZR1/Ep
 tar -xzf Epg_Plugin-"$version".tar.gz -C /
 set +e
 rm -f Epg_Plugin-"$version".tar.gz
-mv $TEMPATH/times.json $PLUGINPATH  > /dev/null 2>&1
 cd ..
 sync
 echo "#########################################################"

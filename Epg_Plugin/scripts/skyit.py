@@ -1,7 +1,9 @@
-import requests,re,io,sys,json
+import requests,re,io,sys,json,ssl
 from datetime import datetime,timedelta
 from requests.adapters import HTTPAdapter
 from time import sleep
+import warnings
+warnings.filterwarnings('ignore', message='Unverified HTTPS request')
 
 def get_tz():
     url_timezone = 'http://worldtimeapi.org/api/ip'
@@ -39,7 +41,8 @@ def skyit():
     for code in channels_code:
         with requests.Session() as s:
             s.mount('https://', HTTPAdapter(max_retries=10))
-            url = s.get('https://apid.sky.it/gtv/v1/events?pageSize=380&pageNum=0&from='+today+'&env=DTH&channels='+code,timeout=5).json()
+            ssl._create_default_https_context = ssl._create_unverified_context
+            url = s.get('https://apid.sky.it/gtv/v1/events?pageSize=380&pageNum=0&from='+today+'&env=DTH&channels='+code,timeout=5,verify=False).json()
             for data in url['events']:
                 channel_name =  data["channel"]['name']
                 title = re.sub(r"\s+", " ", data['eventTitle'].strip())
@@ -59,6 +62,14 @@ if __name__ == '__main__':
 
 with io.open("/etc/epgimport/skyit.xml", "a",encoding="utf-8") as f:
     f.write(('</tv>').decode('utf-8'))
+    
+with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'r') as f:
+    data = json.load(f)
+for channel in data['bouquets']:
+    if channel["bouquet"]=="skyit":
+        channel['date']=datetime.today().strftime('%A %d %B %Y at %I:%M %p')
+with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'w') as f:
+    json.dump(data, f)
     
 
 

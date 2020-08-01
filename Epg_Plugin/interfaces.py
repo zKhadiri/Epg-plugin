@@ -72,8 +72,8 @@ class EPGIConfig(Screen):
   			<ePixmap position="658,55" size="60,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/key_menu.png" alphatest="on" zPosition="5"/>
   			<widget name="key_red" position="40,520" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;19" transparent="1"/>
   			<widget name="config" foregroundColor="#00ffffff" backgroundColor="#16000000" position="10,90" size="745,360" scrollbarMode="showOnDemand"/>
-  			<widget name="glb" foregroundColor="#00ffffff" position="15,458" size="724,28" font="Regular;24"/>
-  			<widget name="status" foregroundColor="#000080ff" position="15,487" size="724,28" font="Regular;24"/>
+  			<widget name="glb" foregroundColor="#00ffffff" backgroundColor="#16000000" position="15,458" size="724,28" font="Regular;24"/>
+  			<widget name="status" foregroundColor="#000080ff" backgroundColor="#16000000" position="15,487" size="724,28" font="Regular;24"/>
 		</screen>"""
     else:
         skin = """

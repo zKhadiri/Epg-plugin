@@ -34,12 +34,15 @@
         {
             "name": "ELCINEMA",
             "path": "/etc/epgimport/elcinema.channels.xml",
-            "channels": ["AlDafrah", "AlJadeedTV", "AlKaheraWalNasTV", "AlKaheraWalNasTV2", "AlSaeedah", "AlhayatDrama",
-                "Aloula", "AlraiTV", "Alsharqya", "Alsumaria", "Amman", "CBC", "Cima", "Fujairah", "JordanTV", "Kuwait",
-                "LBC", "LBCI", "Lana", "LanaPlusTV", "MTVLebnon", "MasperoZaman", "Mehwar", "Mix", "Nessma", "NileComedy",
-                "NileDrama", "NileLife", "Nile_Cinema", "ONDrama", "ONE", "Oman", "RotanaCinema EGY", "Roya", "SBC", "SadaElBalad",
-                "SadaElBalad+2", "SadaElBaladDrama", "SamaDubai", "SamaTV", "SharjahTV", "SyriaDrama", "SyriaTV", "TeNTV", "Watania1",
-                "Watania2", "almanar", "iFILMTV"
+            "channels": ["ART_Aflam_1", "ART_Aflam_2", "ART_Cinema", "ART_Hekayat", "ART_Hekayat_2", "Abu_Dhabi_TV",
+                "AlDafrah", "AlJadeedTV", "AlKaheraWalNasTV", "AlKaheraWalNasTV2", "AlSaeedah", "Al_Nahar_Drama",
+                "Al_Nahar_TV", "Al_Saeedah", "AlhayatDrama", "Alhayat_TV", "Aloula", "AlraiTV", "Alsharqya", "Alsumaria",
+                "Amman", "CBC", "CBC_Drama", "Cima", "DMC_DRAMA", "Dream", "Dubai_One", "Dubai_Zaman", "Emirates",
+                "Fujairah", "JordanTV", "Kuwait", "LBC", "LBCI", "Lana", "LanaPlusTV", "MTVLebnon", "MasperoZaman",
+                "Mehwar", "Mix", "Nessma", "NileComedy", "NileDrama", "NileLife", "Nile_Cinema", "ONDrama", "ONE",
+                "Oman", "RotanaCinema EGY", "Roya", "SBC", "SadaElBalad", "SadaElBalad+2", "SadaElBaladDrama",
+                "SamaDubai", "SamaTV", "Sama_Dubai", "Saudiya_TV", "SharjahTV", "SyriaDrama",
+                "SyriaTV", "TeNTV", "Watania1", "Watania2", "Zee_aflam", "Zee_alwan", "almanar", "iFILMTV"
             ]
         },
         {
