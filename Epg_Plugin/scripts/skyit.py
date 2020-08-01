@@ -5,16 +5,6 @@ from time import sleep
 import warnings
 warnings.filterwarnings('ignore', message='Unverified HTTPS request')
 
-def get_tz():
-    url_timezone = 'http://worldtimeapi.org/api/ip'
-    requests_url = requests.get(url_timezone)
-    ip_data = requests_url.json()
-    try:
-        return ip_data['utc_offset'].replace(':', '')
-    except:
-        return ('+0000')
-    
-time_zone = get_tz()
 
 channels_code=['9077', '9074', '318', '9073', '9095', '9103', '9100', '9101', '9034', 
                '129', '9050', '9039', '10254', '10515', '472', '320', '7767', '8714', '931',
@@ -49,7 +39,7 @@ def skyit():
                 epg =''
                 start = datetime.strptime(data['starttime'],'%Y-%m-%dT%H:%M:%SZ').strftime('%Y%m%d%H%M%S')
                 end = datetime.strptime(data['endtime'],'%Y-%m-%dT%H:%M:%SZ').strftime('%Y%m%d%H%M%S')
-                epg+=2 * ' ' + '<programme start="' + start + ' '+time_zone+'" stop="' + end + ' '+time_zone+'" channel="'+channel_name+'">\n'
+                epg+=2 * ' ' + '<programme start="' + start + ' +0000" stop="' + end + ' +0000" channel="'+channel_name+'">\n'
                 epg+=4*' '+'<title lang="it">'+title.replace('&','and')+'</title>\n'
                 epg+=4*' '+'<desc lang="it">'+data['eventSynopsis'].replace('&','and')+'</desc>\n  </programme>\r'
                 with io.open("/etc/epgimport/skyit.xml","a",encoding='UTF-8')as f:
