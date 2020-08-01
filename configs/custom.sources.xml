@@ -60,4 +60,8 @@
 <description>INDIAN SPORTS CHANNELS</description>
 <url>/etc/epgimport/sony.xml</url>
 </source>
+<source type="gen_xmltv" channels="/etc/epgimport/skyit.channels.xml">
+<description>SKY IT</description>
+<url>/etc/epgimport/skyit.xml</url>
+</source>
 </sourcecat>
