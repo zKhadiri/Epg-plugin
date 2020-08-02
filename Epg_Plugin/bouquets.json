@@ -34,15 +34,18 @@
         {
             "name": "ELCINEMA",
             "path": "/etc/epgimport/elcinema.channels.xml",
-            "channels": ["ART_Aflam_1", "ART_Aflam_2", "ART_Cinema", "ART_Hekayat", "ART_Hekayat_2", "Abu_Dhabi_TV",
-                "AlDafrah", "AlJadeedTV", "AlKaheraWalNasTV", "AlKaheraWalNasTV2", "AlSaeedah", "Al_Nahar_Drama",
-                "Al_Nahar_TV", "Al_Saeedah", "AlhayatDrama", "Alhayat_TV", "Aloula", "AlraiTV", "Alsharqya", "Alsumaria",
-                "Amman", "CBC", "CBC_Drama", "Cima", "DMC_DRAMA", "Dream", "Dubai_One", "Dubai_Zaman", "Emirates",
-                "Fujairah", "JordanTV", "Kuwait", "LBC", "LBCI", "Lana", "LanaPlusTV", "MTVLebnon", "MasperoZaman",
-                "Mehwar", "Mix", "Nessma", "NileComedy", "NileDrama", "NileLife", "Nile_Cinema", "ONDrama", "ONE",
-                "Oman", "RotanaCinema EGY", "Roya", "SBC", "SadaElBalad", "SadaElBalad+2", "SadaElBaladDrama",
-                "SamaDubai", "SamaTV", "Sama_Dubai", "Saudiya_TV", "SharjahTV", "SyriaDrama",
-                "SyriaTV", "TeNTV", "Watania1", "Watania2", "Zee_aflam", "Zee_alwan", "almanar", "iFILMTV"
+            "channels": ["Aloula", "ART_Aflam_1", "ART_Aflam_2", "ART_Hekayat", "ART_Cinema", "ONDrama", "Emirates",
+                "Abu_Dhabi_TV", "Alhayat_TV", "AlhayatDrama", "Mehwar", "RotanaCinema EGY",
+                "NileDrama", "Nile_Cinema", "NileComedy", "NileLife", "LBCI", "Dubai_TV",
+                "AlraiTV", "Dubai_One", "AlKaheraWalNasTV", "Cima", "SamaDubai", "Sama_Dubai",
+                "Abu_Dhabi_Drama", "Dream", "ART_Hekayat_2", "SharjahTV", "Al_Nahar_TV",
+                "CBC", "CBC_Drama", "ONE", "iFILMTV", "AlJadeedTV", "Rotana_Classic",
+                "Al_Nahar_Drama", "SadaElBalad", "SadaElBaladDrama", "AlKaheraWalNasTV2",
+                "CBC_sofra", "Zee_alwan", "Zee_aflam", "AlDafrah", "Alsharqya", "SadaElBalad+2",
+                "TeNTV", "Dubai_Zaman", "DMC", "DMC_DRAMA", "MTVLebnon", "SBC", "Amman", "Roya",
+                "SyriaDrama", "Alsumaria", "Fujairah", "Nessma", "Watania1", "Kuwait", "Lana",
+                "JordanTV", "Oman", "almanar", "Watania2", "MasperoZaman", "SyriaTV", "AlSaeedah",
+                "Al_Saeedah", "LBC", "LanaPlusTV", "SamaTV", "Saudiya_TV", "Mix"
             ]
         },
         {
