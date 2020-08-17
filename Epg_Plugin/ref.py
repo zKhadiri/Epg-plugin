@@ -144,7 +144,10 @@ class set_ref(Screen):
         if fileExists(self.path):
             doc = ET.parse(self.path)
             root = doc.getroot()
-            root.append((ET.fromstring('<channel id="{}">{}</channel>'.format(self.id,self.refstr))))
+            if len(self.refstr)>60:
+                root.append((ET.fromstring('<channel id="{}">{}</channel>'.format(self.id,self.refstr.split('/')[0]+'//example.m3u8'))))
+            else:
+                root.append((ET.fromstring('<channel id="{}">{}</channel>'.format(self.id,self.refstr))))
             out = ET.tostring(root)
             dom = minidom.parseString(out)
             f = open(self.path, 'w')
