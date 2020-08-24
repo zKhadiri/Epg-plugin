@@ -1,123 +1,114 @@
 #!/usr/bin/env python2.7
 # -*- coding: utf-8 -*-
-import requests,re,io,os,sys,json
-from time import sleep,strftime
-from requests.adapters import HTTPAdapter
+import requests,re,sys,io,json
+from datetime import timedelta
 
-headers={
-    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-    'Accept-Encoding': 'gzip, deflate',
-    'Accept-Language': 'en-US,en;q=0.9',
-    'Cache-Control': 'max-age=0',
-    'Connection': 'keep-alive',
-    'Host': 'epg.beinsports.com',
-    'Upgrade-Insecure-Requests': '1',
-    'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) snap Chromium/80.0.3987.149 Chrome/80.0.3987.149 Safari/537.36'
-}
 
-urls=[]
-print('**************BEIN SPORTS EPG******************')
-sys.stdout.flush()
-for i in range(0,3):
-    import datetime
-    from datetime import timedelta
-    jour = datetime.date.today()
-    week = jour + timedelta(days=i)
-    urls.append('http://epg.beinsports.com/utctime_ar.php?cdate='+str(week))
+import datetime
+week = datetime.date.today() + timedelta(days=7)
+from datetime import datetime
+milli = (datetime.strptime('' + str(week) + ' 23:59:59', "%Y-%m-%d %H:%M:%S").strftime("%s"))+'.999'
+today = datetime.strptime(str(datetime.now().strftime('%Y-%m-%d'))+' 00:00:00',"%Y-%m-%d %H:%M:%S").strftime('%s')
 
+ch_code =['74-SportsGlobalHD','75-News_ar','65-HD1','66-HD2','67-HD3','68-HD4',
+          '69-HD5','70-HD6','71-HD7','72-HD8','73-HD9','58-HD10','59-SportsHD11'
+          ,'60-SportsHD12','61-SportsHD13','62-SportsHD14','63-SportsHD15','64-SportsHD16','80-SportsHD17']
 
 with io.open("/etc/epgimport/bein.xml","w",encoding='UTF-8')as f:
-    f.write(('<tv generator-info-name="By ZR1">').decode('utf-8'))
+    f.write(('<?xml version="1.0" encoding="UTF-8"?>'+"\n"+'<tv generator-info-name="By ZR1">').decode('utf-8'))
 
-with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/bouquets.json', 'r') as f:
-    jsData = json.load(f)
-for channel in jsData['bouquets']:
-    if channel["name"]=="Bein sports":    
-        for cc in channel['channels']:
-            with io.open("/etc/epgimport/bein.xml","a",encoding='UTF-8')as f:
-                f.write(("\n"+'  <channel id="'+cc.replace(" ","_")+'">'+"\n"+'    <display-name lang="en">'+cc.replace("_"," ")+'</display-name>'+"\n"+'    <icon src="http://epg.beinsports.com/mena_sports/'+cc.replace('BS_NBA','BS NBA')+'.svg"/>'+"\n"+'    <url>http://www.bein.net/ar</url>'+"\n"+'  </channel>\r').decode('utf-8'))
-
-def bein():
-    for url in urls:
-        from datetime import datetime
-        with requests.Session() as s:
-            s.mount('http://', HTTPAdapter(max_retries=10))
-            link = s.get(url,headers=headers)
-            time = re.findall(r'<p\sclass=time>(.*?)<\/p>',link.text)
-            times = [t.replace('&nbsp;-&nbsp;','-').split('-') for t in time ]
-            channels = re.findall(r"data-img='mena_sports\/(.*?)\.svg",link.text)
-            title = re.findall(r'<p\sclass=title>(.*?)<\/p>',link.text)
-            formt = re.findall(r'<p\sclass=format>(.*?)<\/p>',link.text)
-            #format_=[4*' '+'<category lang="ar">'+f.replace('2014','2020')+'</category>'+'\n'+'  </programme>'+'\n' for f in formt]
-            desc=[]
-            title_chan=[]
-            titles=[]
-            prog=[]
-            for tit in title:
-                title_chan.append(tit.replace('   ',' ').split('- ')[0])
-                spl = re.search(r'-\s(.*)',tit)
-                if spl !=None:
-                    desc.append(4*' '+'<desc lang="ar">'+spl.group().replace('- ','').replace('&','and')+'</desc>\n  </programme>\r')
-                else:
-                    desc.append(4*' '+'<desc lang="ar">'+tit.replace('&','and')+'</desc>\n  </programme>\r')
-
-            for title_,form_ in zip(title_chan,formt):
-                titles.append(4*' '+'<title lang="en">'+title_.replace('&','and')+' - '+form_.replace('2014','2020')+'</title>'+'\n')
-
-            for time_,chann_,chc,chch in zip(times,channels,channels,channels[1:]+[channels[0]]):
-                from datetime import timedelta
-                date = re.search(r'\d{4}-\d{2}-\d{2}',url)
-                end ='05:59'
-                start='18:00'
-                if time_[0]>=start and time_[1]<=end and chc==chch:
-                    fix = (datetime.strptime(date.group(),'%Y-%m-%d')-timedelta(days=1)).strftime('%Y-%m-%d')
-                    starttime = datetime.strptime(fix+' '+time_[0],'%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
-                    endtime = datetime.strptime(date.group()+' ' + time_[1], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
-                    prog.append(2 * ' ' + '<programme start="' + starttime + ' +0000" stop="' + endtime + ' +0000" channel="'+chann_.replace('BS NBA','BS_NBA')+'">'+'\n')
-                elif chc!=chch and time_[1]>='00:00':
-                    fix = (datetime.strptime(date.group(),'%Y-%m-%d')+timedelta(days=1)).strftime('%Y-%m-%d')
-                    starttime = datetime.strptime(date.group()+' '+time_[0],'%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
-                    endtime = datetime.strptime(fix+' ' + time_[1], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
-                    prog.append(2 * ' ' + '<programme start="' + starttime + ' +0000" stop="' + endtime + ' +0000" channel="'+chann_.replace('BS NBA','BS_NBA')+'">'+'\n')
-                else:
-                    starttime = datetime.strptime(date.group()+' '+time_[0],'%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
-                    endtime = datetime.strptime(date.group() + ' ' + time_[1], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
-                    prog.append(2 * ' ' + '<programme start="' + starttime + ' +0000" stop="' + endtime + ' +0000" channel="'+chann_.replace('BS NBA','BS_NBA')+'">'+'\n')
-    
-            if len(title) !=0:
-                for tt,d,p in zip(titles,desc,prog):
-                    with io.open("/etc/epgimport/bein.xml","a",encoding='UTF-8')as fil:
-                        fil.write(p+tt+d)
-                dat = re.search(r'\d{4}-\d{2}-\d{2}',url)
-                print('Date'+' : '+dat.group())
-                sys.stdout.flush()
-            else:
-                print('No data found')
-                break
-
-if __name__=='__main__':
-    bein()
-    from datetime import datetime
-    with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'r') as f:
-        data = json.load(f)
-    for bouquet in data['bouquets']:
-        if bouquet["bouquet"]=="bein":
-            bouquet['date']=datetime.today().strftime('%A %d %B %Y at %I:%M %p')
-    with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'w') as f:
-        json.dump(data, f)
+for code in ch_code:
+    with io.open("/etc/epgimport/bein.xml","a",encoding='UTF-8')as f:
+        f.write(("\n"+'  <channel id="'+code.split('-')[1]+'">'+"\n"+'    <display-name lang="en">'+code.split('-')[1]+'</display-name>'+"\n"+'  </channel>\r').decode('utf-8')) 
+print('**************BEIN SPORTS EPG******************')
+sys.stdout.flush()
+for code in ch_code: 
+    query ={
+        "languageId": "ara",
+        "filter": '{"$and":[{"id_channel":{"$in":['+code.split('-')[0]+']}},{"endutc":{"$ge":'+today+'}},{"startutc":{"$le":'+milli+'}}]}'
+    }
+    url = requests.get('https://proxies-beinmena.portail.alphanetworks.be/cms/epg/filtered',params=query).json()
+    for data in url['result']['epg']['chan_'+code.split('-')[0]]:
+        start= datetime.fromtimestamp(int(data['startutc'])).strftime('%Y%m%d%H%M%S') 
+        end = datetime.fromtimestamp(int(data['endutc'])).strftime('%Y%m%d%H%M%S')
+        title = data['title'].replace('   ',' ').split('- ')[0]
+        if 'Qatar Stars League' in data['title']:
+            extra = 'دوري نجوم قطر'.decode('utf-8')
+        elif 'Moroccan League' in data['title']:
+            extra = 'الدوري المغربي الممتاز'.decode('utf-8')
+        elif 'Review' in data['title']:
+            extra = 'حصيلة الدوريات'.decode('utf-8')
+        elif 'English Premier League' in data['title']:
+            extra = 'الدوري الإنجليزي الممتاز'.decode('utf-8')
+        elif 'Spanish La Liga' in data['title']:
+            extra = 'الدوري الإسباني لكرة القدم'.decode('utf-8')
+        elif 'Italian Serie A' in data['title']:
+            extra = 'الدوري الإيطالي لكرة القدم'.decode('utf-8')
+        elif 'French Ligue 1' in data['title']:
+            extra = 'الدوري الفرنسي'.decode('utf-8')
+        elif 'Copa Libertadores' in data['title']:
+            extra = 'كأس ليبرتادوريس'.decode('utf-8')
+        elif 'Indy' in data['title']:
+            extra = 'رياضة السيارات'.decode('utf-8')
+        elif 'MotoGP' in data['title']:
+            extra = 'بطولة العالم للدراجات النارية'.decode('utf-8')
+        elif 'Pre Season Friendly' in data['title']:
+            extra = 'كرة قدم'.decode('utf-8')
+        elif 'NBA' in data['title']:
+            extra = 'الدوري الأميركي لكرة السلة'.decode('utf-8')
+        elif 'WTA' in data['title']:
+            extra = 'تنس'.decode('utf-8')
+        elif 'Mini Match' in data['title']:
+            extra = 'مباريات قصيرة'.decode('utf-8')
+        elif 'Major League Baseball' in data['title']:
+            extra = 'كرة القاعدة'.decode('utf-8')
+        elif 'UEFA Champions League' in data['title']:
+            extra = 'دوري أبطال أوروبا لكرة القدم'.decode('utf-8')
+        elif 'UEFA Europa League' in data['title']:
+            extra = 'الدوري الأوروبي'.decode('utf-8')
+        elif 'Cricket' in data['title']:
+            extra = 'كريكيت'.decode('utf-8')
+        elif 'Sports News' in data['title']:
+            extra = 'الأخبار الرياضية'.decode('utf-8')
+        elif 'Handball' in data['title']:
+            extra = 'كرة اليد'.decode('utf-8')
+        elif 'EPL World' in data['title']:
+            extra = 'عالم الدوري الانجليزي الممتاز'.decode('utf-8')
+        elif 'CAF Champions League' in data['title']:
+            extra = 'دوري أبطال أفريقيا'.decode('utf-8')
+        else:
+            extra = 'الرياضة العام'.decode('utf-8')
+        spl = re.search(r'-\s(.*)',title)
+        ch = ''
+        ch+=2*' '+'<programme start="'+start+' +0000" stop="'+end+' +0000" channel="'+code.split('-')[1]+'">\n'
+        if spl != None:
+            ch+=4*' '+'<title lang="en">'+spl.group().replace('&','and')+' - '+extra+'</title>\n'
+        else:
+            ch+=4*' '+'<title lang="en">'+title.replace('&','and').strip()+' - '+extra+'</title>\n'
+        if data['synopsis'].strip()==u'' and ' -' in data['title']:
+            ch+=4*' '+'<desc lang="en">'+data['title'].split(' -')[1].strip().replace('&','and')+'</desc>\n  </programme>\r'
+        elif data['synopsis'].strip() == u'':
+            ch+=4*' '+'<desc lang="en">'+title.replace('&','and')+'</desc>\n  </programme>\r'
+        else:
+            ch+=4*' '+'<desc lang="en">'+data['synopsis'].strip().replace('&','and')+'</desc>\n  </programme>\r'
+        endtime = datetime.strptime(start,'%Y%m%d%H%M%S').strftime('%Y-%m-%d %H:%M')
+        
+        with io.open('/etc/epgimport/bein.xml','a',encoding="utf-8") as f:
+            f.write(ch)
+    print code.split('-')[1]+' epg ends at '+endtime
+    sys.stdout.flush()
 
 with io.open("/etc/epgimport/bein.xml", "a",encoding="utf-8") as f:
-    f.write(('\n'+'</tv>').decode('utf-8'))
+    f.write(('</tv>').decode('utf-8'))
     
-if os.path.exists('/var/lib/dpkg/status'):
-    print 'Dream os image found\nSorting data please wait.....'
-    sys.stdout.flush()
-    import xml.etree.ElementTree as ET
-    tree = ET.parse('/etc/epgimport/bein.xml')
-    data = tree.getroot()
-    els = data.findall("*[@channel]")
-    new_els = sorted(els, key=lambda el: (el.tag, el.attrib['channel']))
-    data[:] = new_els
-    tree.write('/etc/epgimport/bein.xml', xml_declaration=True, encoding='utf-8')
-    
+
+with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'r') as f:
+    data = json.load(f)
+for bouquet in data['bouquets']:
+    if bouquet["bouquet"]=="bein":
+        bouquet['date']=datetime.today().strftime('%A %d %B %Y at %I:%M %p')
+with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'w') as f:
+    json.dump(data, f)    
+
 print("**************FINISHED******************")
+sys.stdout.flush()

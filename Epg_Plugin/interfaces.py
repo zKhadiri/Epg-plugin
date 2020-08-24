@@ -96,8 +96,8 @@ class EPGIConfig(Screen):
         list = []
         self.installList=[] ## New from mf to make choose list
                                             #py    
-        list.append(("Bein Sports EPG", "0","bein"))
-        list.append(("Bein entertainment EPG", "1","beinent"))
+        list.append(("Bein Sports connect EPG", "0","bein"))
+        list.append(("Bein entertainment connect EPG", "1","beinent"))
         list.append(("Osnplay english title arabic description BACKUP", "2","osnplay"))
         list.append(("OSN دليل عربي بالكامل (haxer source)", "3","osnar"))
         list.append(("OSN english only epg BACKUP (haxer source)", "4","osnen"))
