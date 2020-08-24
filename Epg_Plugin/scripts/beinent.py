@@ -12,6 +12,18 @@ today = datetime.strptime(str(datetime.now().strftime('%Y-%m-%d'))+' 00:00:00',"
 ch_code =['81-MoviesHD1','82-MoviesHD2','83-MoviesHD3','90-MoviesHD4','112-SeriesHD1','175-SeriesHD2'
           ,'174-DramaHD1','170-gourmet','91-beJUNIOR','100-Jeem','99-Baraem']
 
+
+def get_tz():
+    url_timezone = 'http://worldtimeapi.org/api/ip'
+    requests_url = requests.get(url_timezone)
+    ip_data = requests_url.json()
+    try:
+        return ip_data['utc_offset'].replace(':', '')
+    except:
+        return ('+0000')
+    
+time_zone = get_tz()
+
 with io.open("/etc/epgimport/beinent.xml","w",encoding='UTF-8')as f:
     f.write(('<?xml version="1.0" encoding="UTF-8"?>'+"\n"+'<tv generator-info-name="By ZR1">').decode('utf-8'))
 
@@ -30,7 +42,7 @@ for code in ch_code:
         start= datetime.fromtimestamp(int(data['startutc'])).strftime('%Y%m%d%H%M%S') 
         end = datetime.fromtimestamp(int(data['endutc'])).strftime('%Y%m%d%H%M%S')
         ch = ''
-        ch+=2*' '+'<programme start="'+start+' +0000" stop="'+end+' +0000" channel="'+code.split('-')[1]+'">\n'
+        ch+=2*' '+'<programme start="'+start+' '+time_zone+'" stop="'+end+' '+time_zone+'" channel="'+code.split('-')[1]+'">\n'
         ch+=4*' '+'<title lang="en">'+data['title'].replace('&','and').strip()+'</title>\n'
         ch+=4*' '+'<desc lang="en">'+data['synopsis'].strip().replace('&','and')+'</desc>\n  </programme>\r'
         with io.open('/etc/epgimport/beinent.xml','a',encoding="utf-8") as f:

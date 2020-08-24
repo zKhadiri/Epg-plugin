@@ -14,6 +14,18 @@ ch_code =['74-SportsGlobalHD','75-News_ar','65-HD1','66-HD2','67-HD3','68-HD4',
           '69-HD5','70-HD6','71-HD7','72-HD8','73-HD9','58-HD10','59-SportsHD11'
           ,'60-SportsHD12','61-SportsHD13','62-SportsHD14','63-SportsHD15','64-SportsHD16','80-SportsHD17']
 
+
+def get_tz():
+    url_timezone = 'http://worldtimeapi.org/api/ip'
+    requests_url = requests.get(url_timezone)
+    ip_data = requests_url.json()
+    try:
+        return ip_data['utc_offset'].replace(':', '')
+    except:
+        return ('+0000')
+    
+time_zone = get_tz()
+
 with io.open("/etc/epgimport/bein.xml","w",encoding='UTF-8')as f:
     f.write(('<?xml version="1.0" encoding="UTF-8"?>'+"\n"+'<tv generator-info-name="By ZR1">').decode('utf-8'))
 
@@ -80,7 +92,7 @@ for code in ch_code:
             extra = 'الرياضة العام'.decode('utf-8')
         spl = re.search(r'-\s(.*)',title)
         ch = ''
-        ch+=2*' '+'<programme start="'+start+' +0000" stop="'+end+' +0000" channel="'+code.split('-')[1]+'">\n'
+        ch+=2*' '+'<programme start="'+start+' '+time_zone+'" stop="'+end+' '+time_zone+'" channel="'+code.split('-')[1]+'">\n'
         if spl != None:
             ch+=4*' '+'<title lang="en">'+spl.group().replace('&','and')+' - '+extra+'</title>\n'
         else:
