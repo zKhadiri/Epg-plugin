@@ -42,7 +42,7 @@ def beinen():
         prog[:]=[]
         with requests.Session() as s:
             s.mount('http://', HTTPAdapter(max_retries=10))
-            link = s.get(url,headers=headers)
+            link = s.get(url)
             title = re.findall(r'<p\sclass=title>(.*?)<\/p>',link.text)
             time = re.findall(r'<p\sclass=time>(.*?)<\/p>',link.text)
             formt = re.findall(r'<p\sclass=format>(.*?)<\/p>',link.text)
