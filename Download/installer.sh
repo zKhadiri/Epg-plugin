@@ -2,8 +2,8 @@
 ##setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=12.6
-description=What_is_NEW:\n'[bein media groupe timezone fix]'
+version=12.7
+description=What_is_NEW:\n'[new sources : bein-media.net]'
 ##############################################################
 
 TEMPATH=/tmp

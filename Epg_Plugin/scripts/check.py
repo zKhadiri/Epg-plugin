@@ -47,3 +47,10 @@ if not os.path.exists('/etc/epgimport/skyit.channels.xml'):
     sky_it=requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/configs/skyit.channels.xml?raw=true')
     with io.open('/etc/epgimport/skyit.channels.xml','w',encoding="utf-8") as f:
         f.write(sky_it.text)
+        
+if not os.path.exists('/etc/epgimport/bein.channels.xml'):
+    print('Downloading bein.channels config')
+    sys.stdout.flush()
+    bein_channels=requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/configs/bein.channels.xml?raw=true')
+    with io.open('/etc/epgimport/bein.channels.xml','w',encoding="utf-8") as f:
+        f.write(bein_channels.text)
