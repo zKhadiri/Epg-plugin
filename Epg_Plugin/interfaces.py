@@ -99,7 +99,7 @@ class EPGIConfig(Screen):
         list.append(("Bein Sports connect EPG", "0","beinConnect"))
         list.append(("Bein entertainment connect EPG", "1","beinentC"))
         list.append(("Bein Sports.net", "2","bein"))
-        list.append(("Bein Sports.net", "3","beinent"))
+        list.append(("Bein entertainment.net", "3","beinent"))
         list.append(("Osnplay english title arabic description BACKUP", "4","osnplay"))
         list.append(("OSN دليل عربي بالكامل (haxer source)", "5","osnar"))
         list.append(("OSN english only epg BACKUP (haxer source)", "6","osnen"))
