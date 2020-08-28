@@ -4,9 +4,6 @@ import requests,re,io,os,sys,json
 from time import sleep,strftime
 from requests.adapters import HTTPAdapter
 
-
-
-
 print('**************BEIN ENTERTAINMENT EPG******************')
 sys.stdout.flush()
 urls=[]
@@ -56,7 +53,7 @@ def beinen():
                 end ='05:59'
                 start='18:00'
                 date = re.search(r'\d{4}-\d{2}-\d{2}',url)
-                channel_b = chann_.replace('Baby-TV','Baby-TV_b').replace('-on-White','').replace('-1-150x150','').replace('-2-150x150','').replace('-150x150','').replace('-logo-2018','').replace('Star-Movies-HD','Star_Movies_B').replace('Bloomberg','Bloomberg_B').replace('-Yellow','').replace('_onWhite','').replace('-Black','').replace('_blk','')
+                channel_b = chann_.replace('Nat_geo_people','Nat_geo_people_b').replace('Nat_geo_hd','Nat_geo_hd_b').replace('Nat_Geo_wild_b','Nat_Geo_wild').replace('Baby-TV','Baby-TV_b').replace('-on-White','').replace('-1-150x150','').replace('-2-150x150','').replace('-150x150','').replace('-logo-2018','').replace('Star-Movies-HD','Star_Movies_B').replace('Bloomberg','Bloomberg_B').replace('-Yellow','').replace('_onWhite','').replace('-Black','').replace('_blk','')
                 if time_[0]>=start and time_[1]<=end and chc==chch:
                     fix = (datetime.strptime(date.group(),'%Y-%m-%d')-timedelta(days=1)).strftime('%Y-%m-%d')
                     starttime = datetime.strptime(fix+' '+time_[0],'%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
