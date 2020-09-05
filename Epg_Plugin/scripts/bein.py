@@ -63,27 +63,28 @@ def bein():
 
             for title_,form_ in zip(title_chan,formt):
                 titles.append(4*' '+'<title lang="en">'+title_.replace('&','and')+' - '+form_.replace('2014','2020')+'</title>'+'\n')
-
-            for time_,chann_,chc,chch in zip(times,channels,channels,channels[1:]+[channels[0]]):
-                from datetime import timedelta
-                date = re.search(r'\d{4}-\d{2}-\d{2}',url)
-                end ='05:59'
-                start='18:00'
-                if time_[0]>=start and time_[1]<=end and chc==chch:
-                    fix = (datetime.strptime(date.group(),'%Y-%m-%d')-timedelta(days=1)).strftime('%Y-%m-%d')
-                    starttime = datetime.strptime(fix+' '+time_[0],'%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
-                    endtime = datetime.strptime(date.group()+' ' + time_[1], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
-                    prog.append(2 * ' ' + '<programme start="' + starttime + ' +0000" stop="' + endtime + ' +0000" channel="'+chann_.replace('BS NBA','BS_NBA')+'">'+'\n')
-                elif chc!=chch and time_[1]>='00:00':
-                    fix = (datetime.strptime(date.group(),'%Y-%m-%d')+timedelta(days=1)).strftime('%Y-%m-%d')
-                    starttime = datetime.strptime(date.group()+' '+time_[0],'%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
-                    endtime = datetime.strptime(fix+' ' + time_[1], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
-                    prog.append(2 * ' ' + '<programme start="' + starttime + ' +0000" stop="' + endtime + ' +0000" channel="'+chann_.replace('BS NBA','BS_NBA')+'">'+'\n')
-                else:
-                    starttime = datetime.strptime(date.group()+' '+time_[0],'%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
-                    endtime = datetime.strptime(date.group() + ' ' + time_[1], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
-                    prog.append(2 * ' ' + '<programme start="' + starttime + ' +0000" stop="' + endtime + ' +0000" channel="'+chann_.replace('BS NBA','BS_NBA')+'">'+'\n')
-    
+            try:
+                for time_,chann_,chc,chch in zip(times,channels,channels,channels[1:]+[channels[0]]):
+                    from datetime import timedelta
+                    date = re.search(r'\d{4}-\d{2}-\d{2}',url)
+                    end ='05:59'
+                    start='18:00'
+                    if time_[0]>=start and time_[1]<=end and chc==chch:
+                        fix = (datetime.strptime(date.group(),'%Y-%m-%d')-timedelta(days=1)).strftime('%Y-%m-%d')
+                        starttime = datetime.strptime(fix+' '+time_[0],'%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
+                        endtime = datetime.strptime(date.group()+' ' + time_[1], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
+                        prog.append(2 * ' ' + '<programme start="' + starttime + ' +0000" stop="' + endtime + ' +0000" channel="'+chann_.replace('BS NBA','BS_NBA')+'">'+'\n')
+                    elif chc!=chch and time_[1]>='00:00':
+                        fix = (datetime.strptime(date.group(),'%Y-%m-%d')+timedelta(days=1)).strftime('%Y-%m-%d')
+                        starttime = datetime.strptime(date.group()+' '+time_[0],'%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
+                        endtime = datetime.strptime(fix+' ' + time_[1], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
+                        prog.append(2 * ' ' + '<programme start="' + starttime + ' +0000" stop="' + endtime + ' +0000" channel="'+chann_.replace('BS NBA','BS_NBA')+'">'+'\n')
+                    else:
+                        starttime = datetime.strptime(date.group()+' '+time_[0],'%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
+                        endtime = datetime.strptime(date.group() + ' ' + time_[1], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
+                        prog.append(2 * ' ' + '<programme start="' + starttime + ' +0000" stop="' + endtime + ' +0000" channel="'+chann_.replace('BS NBA','BS_NBA')+'">'+'\n')
+            except:
+                break
             if len(title) !=0:
                 for tt,d,p in zip(titles,desc,prog):
                     with io.open("/etc/epgimport/bein.xml","a",encoding='UTF-8')as fil:

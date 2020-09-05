@@ -49,26 +49,28 @@ def beinen():
                 titles.append(4*' '+'<title lang="en">'+tt_.replace('&','and')+'</title>'+'\n')
                 #desc.append(4*' '+'<category lang="en">No data found</category>'+'\n')
             format_=[4*' '+'<desc lang="en">'+f+'</desc>'+"\n"+'  </programme>'+'\n' for f in formt]
-            for time_,chann_,chc,chch in zip(times,channels,channels,channels[1:]+[channels[0]]):
-                end ='05:59'
-                start='18:00'
-                date = re.search(r'\d{4}-\d{2}-\d{2}',url)
-                channel_b = chann_.replace('Nat_geo_people','Nat_geo_people_b').replace('Nat_geo_hd','Nat_geo_hd_b').replace('Nat_Geo_wild','Nat_Geo_wild_b').replace('Baby-TV','Baby-TV_b').replace('-on-White','').replace('-1-150x150','').replace('-2-150x150','').replace('-150x150','').replace('-logo-2018','').replace('Star-Movies-HD','Star_Movies_B').replace('Bloomberg','Bloomberg_B').replace('-Yellow','').replace('_onWhite','').replace('-Black','').replace('_blk','')
-                if time_[0]>=start and time_[1]<=end and chc==chch:
-                    fix = (datetime.strptime(date.group(),'%Y-%m-%d')-timedelta(days=1)).strftime('%Y-%m-%d')
-                    starttime = datetime.strptime(fix+' '+time_[0],'%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
-                    endtime = datetime.strptime(date.group()+' ' + time_[1], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
-                    prog.append(2 * ' ' + '<programme start="' + starttime + ' +0000" stop="' + endtime + ' +0000" channel="'+channel_b+'">'+'\n')
-                elif chc!=chch and time_[1]>='00:00':
-                    fix = (datetime.strptime(date.group(),'%Y-%m-%d')+timedelta(days=1)).strftime('%Y-%m-%d')
-                    starttime = datetime.strptime(date.group()+' '+time_[0],'%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
-                    endtime = datetime.strptime(fix+' ' + time_[1], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
-                    prog.append(2 * ' ' + '<programme start="' + starttime + ' +0000" stop="' + endtime + ' +0000" channel="'+channel_b+'">'+'\n')
-                else:
-                    starttime = datetime.strptime(date.group()+' '+time_[0],'%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
-                    endtime = datetime.strptime(date.group() + ' ' + time_[1], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
-                    prog.append(2 * ' ' + '<programme start="' + starttime + ' +0000" stop="' + endtime + ' +0000" channel="'+channel_b+'">'+'\n')
-                    
+            try:
+                for time_,chann_,chc,chch in zip(times,channels,channels,channels[1:]+[channels[0]]):
+                    end ='05:59'
+                    start='18:00'
+                    date = re.search(r'\d{4}-\d{2}-\d{2}',url)
+                    channel_b = chann_.replace('Nat_geo_people','Nat_geo_people_b').replace('Nat_geo_hd','Nat_geo_hd_b').replace('Nat_Geo_wild','Nat_Geo_wild_b').replace('Baby-TV','Baby-TV_b').replace('-on-White','').replace('-1-150x150','').replace('-2-150x150','').replace('-150x150','').replace('-logo-2018','').replace('Star-Movies-HD','Star_Movies_B').replace('Bloomberg','Bloomberg_B').replace('-Yellow','').replace('_onWhite','').replace('-Black','').replace('_blk','')
+                    if time_[0]>=start and time_[1]<=end and chc==chch:
+                        fix = (datetime.strptime(date.group(),'%Y-%m-%d')-timedelta(days=1)).strftime('%Y-%m-%d')
+                        starttime = datetime.strptime(fix+' '+time_[0],'%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
+                        endtime = datetime.strptime(date.group()+' ' + time_[1], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
+                        prog.append(2 * ' ' + '<programme start="' + starttime + ' +0000" stop="' + endtime + ' +0000" channel="'+channel_b+'">'+'\n')
+                    elif chc!=chch and time_[1]>='00:00':
+                        fix = (datetime.strptime(date.group(),'%Y-%m-%d')+timedelta(days=1)).strftime('%Y-%m-%d')
+                        starttime = datetime.strptime(date.group()+' '+time_[0],'%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
+                        endtime = datetime.strptime(fix+' ' + time_[1], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
+                        prog.append(2 * ' ' + '<programme start="' + starttime + ' +0000" stop="' + endtime + ' +0000" channel="'+channel_b+'">'+'\n')
+                    else:
+                        starttime = datetime.strptime(date.group()+' '+time_[0],'%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
+                        endtime = datetime.strptime(date.group() + ' ' + time_[1], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
+                        prog.append(2 * ' ' + '<programme start="' + starttime + ' +0000" stop="' + endtime + ' +0000" channel="'+channel_b+'">'+'\n')
+            except:
+                break     
             if len(title) !=0:
                 for ttt,f,p in zip(titles,format_,prog):
                     with io.open("/etc/epgimport/beinent.xml","a",encoding='UTF-8')as fil:

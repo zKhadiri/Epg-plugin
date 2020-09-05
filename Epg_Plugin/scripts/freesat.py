@@ -53,16 +53,19 @@ def freesat(code):
         with requests.Session() as s:
             s.mount('http://', HTTPAdapter(max_retries=10))
             url = s.get('https://www.freesat.co.uk/tv-guide/api/'+str(i)+'/?channel='+code.split('-')[0],headers=head)
-            data = url.json()
-            for d in data[0]['event']:
-                ch=''
-                start = datetime.fromtimestamp(d['startTime']).strftime('%Y%m%d%H%M%S')
-                end = (datetime.strptime(start,'%Y%m%d%H%M%S') + timedelta(seconds=d['duration'])).strftime('%Y%m%d%H%M%S')
-                ch+=2 * ' ' + '<programme start="' + str(start) + ' '+time_zone+'" stop="' + str(end) + ' '+time_zone+'" channel="'+code.split('-')[1]+'">\n'
-                ch+=4*' '+'<title lang="en">'+d['name'].replace('&','and')+'</title>\n'
-                ch+=4*' '+'<desc lang="en">'+d['description'].replace('&','and')+'</desc>\n  </programme>\r'
-                with io.open("/etc/epgimport/freesat.xml","a",encoding='UTF-8')as f:
-                    f.write(ch)
+            try:
+                data = url.json()
+                for d in data[0]['event']:
+                    ch=''
+                    start = datetime.fromtimestamp(d['startTime']).strftime('%Y%m%d%H%M%S')
+                    end = (datetime.strptime(start,'%Y%m%d%H%M%S') + timedelta(seconds=d['duration'])).strftime('%Y%m%d%H%M%S')
+                    ch+=2 * ' ' + '<programme start="' + str(start) + ' '+time_zone+'" stop="' + str(end) + ' '+time_zone+'" channel="'+code.split('-')[1]+'">\n'
+                    ch+=4*' '+'<title lang="en">'+d['name'].replace('&','and')+'</title>\n'
+                    ch+=4*' '+'<desc lang="en">'+d['description'].replace('&','and')+'</desc>\n  </programme>\r'
+                    with io.open("/etc/epgimport/freesat.xml","a",encoding='UTF-8')as f:
+                        f.write(ch)
+            except:
+                continue
     print code.split('-')[1]+' epg ends at : '+(datetime.strptime(end,'%Y%m%d%H%M%S').strftime('%Y-%m-%d %H:%M'))
     sys.stdout.flush()
     lock.release()
