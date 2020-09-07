@@ -54,3 +54,10 @@ if not os.path.exists('/etc/epgimport/bein.channels.xml'):
     bein_channels=requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/configs/bein.channels.xml?raw=true')
     with io.open('/etc/epgimport/bein.channels.xml','w',encoding="utf-8") as f:
         f.write(bein_channels.text)
+        
+if not os.path.exists('/etc/epgimport/discovery.channels.xml'):
+    print('Downloading discovery.channels config')
+    sys.stdout.flush()
+    discovery_channels=requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/configs/discovery.channels.xml?raw=true')
+    with io.open('/etc/epgimport/discovery.channels.xml','w',encoding="utf-8") as f:
+        f.write(discovery_channels.text)

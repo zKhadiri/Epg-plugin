@@ -68,4 +68,8 @@
 <description>SKY IT</description>
 <url>/etc/epgimport/skyit.xml</url>
 </source>
+<source type="gen_xmltv" channels="/etc/epgimport/discovery.channels.xml">
+<description>discovery 0.8w</description>
+<url>/etc/epgimport/discovery.xml</url>
+</source>
 </sourcecat>

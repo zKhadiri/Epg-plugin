@@ -158,6 +158,11 @@
             ]
         },
         {
+            "name": "Discovery at 0.8w",
+            "path": "/etc/epgimport/discovery.channels.xml",
+            "channels": ["Animal Planet Europe", "Discovery Central Europe", "Discovery Showcase HD", "Discovery Science Europe"]
+        },
+        {
             "name": "INDIAN SPORTS CHANNELS",
             "path": "/etc/epgimport/custom.channels.xml",
             "channels": ["sony-six", "sony-ten-1", "sony-ten-2", "star-sports-select-1", "star-sports-select-hd-2", "star-sports1", "star-sports2", "wow-hd"]
