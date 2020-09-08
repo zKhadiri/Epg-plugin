@@ -25,4 +25,11 @@
 <channel id="Discovery Science Europe">1:0:1:C83:2:5E:E08B00F:0:0:0:</channel>
 <channel id="Discovery Science Europe">1:0:1:C82:2:5E:E08B00F:0:0:0</channel>
 <channel id="Discovery Science Europe">1:0:1:C81:2:5E:E08B00F:0:0:0</channel>
+<channel id="ID">1:0:1:A8D:2:5E:E08B00F:0:0:0:</channel>
+<channel id="ID">1:0:1:A8E:2:5E:E08B00F:0:0:0:</channel>
+<channel id="ID">1:0:1:A8C:2:5E:E08B00F:0:0:0:</channel>
+<channel id="DTX">1:0:1:BB8:2:5E:E08B00F:0:0:0:</channel>
+<channel id="DTX">1:0:1:BB9:2:5E:E08B00F:0:0:0:</channel>
+<channel id="DTX">1:0:1:BBA:2:5E:E08B00F:0:0:0:</channel>
+<channel id="DTX">1:0:1:8FC:2:5E:E08B00F:0:0:0:</channel>
 </channels>

@@ -160,7 +160,7 @@
         {
             "name": "Discovery at 0.8w",
             "path": "/etc/epgimport/discovery.channels.xml",
-            "channels": ["Animal Planet Europe", "Discovery Central Europe", "Discovery Showcase HD", "Discovery Science Europe"]
+            "channels": ["Animal Planet Europe", "Discovery Central Europe", "Discovery Showcase HD", "Discovery Science Europe","ID","DTX"]
         },
         {
             "name": "INDIAN SPORTS CHANNELS",
