@@ -18,6 +18,12 @@ from enigma import getDesktop
 from enigma import loadPNG,gPixmapPtr, RT_WRAP, ePoint, RT_HALIGN_LEFT, RT_VALIGN_CENTER, eListboxPythonMultiContent, gFont
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmap, MultiContentEntryPixmapAlphaTest
 from scripts import status
+try:
+    from Plugins.Extensions.EPGImport.plugin import EPGImportConfig
+    epgimport = True
+except:
+    epgimport =False
+    pass
 
 config.plugins.EpgPlugin = ConfigSubsection()
 config.plugins.EpgPlugin.update = ConfigYesNo(default=True)
@@ -69,8 +75,10 @@ class EPGIConfig(Screen):
     				<convert type="ClockToText">Default</convert>
   			</widget>
   			<ePixmap name="red" position="40,520" zPosition="2" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/red.png" transparent="1" alphatest="on"/>
+            <ePixmap name="green" position="210,520" zPosition="2" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/green.png" transparent="1" alphatest="on"/>
   			<ePixmap position="658,55" size="60,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/key_menu.png" alphatest="on" zPosition="5"/>
   			<widget name="key_red" position="40,520" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;19" transparent="1"/>
+            <widget name="key_green" position="210,520" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;19" transparent="1"/>
   			<widget name="config" foregroundColor="#00ffffff" backgroundColor="#16000000" position="10,90" size="745,360" scrollbarMode="showOnDemand"/>
   			<widget name="glb" foregroundColor="#00ffffff" backgroundColor="#16000000" position="15,458" size="724,28" font="Regular;24"/>
   			<widget name="status" foregroundColor="#000080ff" backgroundColor="#16000000" position="15,487" size="724,28" font="Regular;24"/>
@@ -84,8 +92,10 @@ class EPGIConfig(Screen):
     				<convert type="ClockToText">Default</convert>
   			</widget>
   			<ePixmap name="red" position="17,755" zPosition="2" size="260,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/redfhd.png" transparent="1" alphatest="on"/>
+            <ePixmap name="green" position="335,755" zPosition="2" size="260,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/greenfhd.png" transparent="1" alphatest="on"/>
   			<ePixmap position="1042,87" size="103,35" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/key_menufhd.png" alphatest="on"/>
   			<widget name="key_red" position="17,755" size="260,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
+             <widget name="key_green" position="335,755" size="260,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
   			<widget name="config" foregroundColor="#00ffffff" backgroundColor="#16000000" position="10,140" size="1196,488" scrollbarMode="showOnDemand"/>
   			<widget name="glb" foregroundColor="#00ffffff" backgroundColor="#16000000" position="15,653" size="1174,54" font="Regular;35"/>
   			<widget name="status" foregroundColor="#000080ff" backgroundColor="#16000000" position="15,699" size="1174,54" font="Regular;35"/>
@@ -133,6 +143,7 @@ class EPGIConfig(Screen):
             "ok": self.go,
             "red": self.keyRed,
             "menu":self.showsetup,
+            "green": self.keyGreen,
             "cancel": self.close,
         }, -1)
         self.onShown.append(self.onWindowShow)
@@ -275,6 +286,14 @@ class EPGIConfig(Screen):
     def down(self):
         self["config"].down()
         self.update()
+    
+    def keyGreen(self):
+        if epgimport:
+            self["key_green"].show()
+            self.session.open(EPGImportConfig)
+        else:
+            self["key_green"].hide()
+            self.session.open(MessageBox,_("Epgimport is not installed"), MessageBox.TYPE_INFO,timeout=10)
 
     def update(self):
         index=self['config'].getSelectionIndex()
