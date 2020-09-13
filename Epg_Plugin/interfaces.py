@@ -136,6 +136,7 @@ class EPGIConfig(Screen):
         self["config"] = MenuList([], enableWrapAround=True, content=eListboxPythonMultiContent)
         self.update()
         self["key_red"] = Button(_("Install"))
+        self["key_green"] = Button(_("Epgimport"))
         self["setupActions"] = ActionMap(["EpgColorActions",'EpgMenuActions','EpgWizardActions','EpgShortcutActions'],
         {
             "down": self.down,
