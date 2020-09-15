@@ -2,8 +2,8 @@
 ##setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=13.3
-description=What_is_NEW:\n'[accessing epgimport directly from the plugin]'
+version=13.4
+description=What_is_NEW:\n'[discovery french channels]'
 ##############################################################
 
 TEMPATH=/tmp

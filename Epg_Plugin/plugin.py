@@ -1,5 +1,5 @@
 from Plugins.Plugin import PluginDescriptor
-from interfaces import EPGIConfig
+from interfaces import EPGGrabber
 from Screens.MessageBox import MessageBox
 import requests
 
@@ -13,7 +13,7 @@ def connected_to_internet():
 
 def main(session, **kwargs):
     if connected_to_internet():
-        session.open(EPGIConfig)
+        session.open(EPGGrabber)
     else:
         session.open(MessageBox,_("No internet connection available. Or github.com Down"), MessageBox.TYPE_INFO,timeout=10)
   

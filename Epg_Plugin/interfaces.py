@@ -65,7 +65,7 @@ reswidth = getDesktop(0).size().width()
 #    if os.path.exists('/var/lib/dpkg/status'):
 #        return DreamOS
 
-class EPGIConfig(Screen):
+class EPGGrabber(Screen):
     if reswidth == 1280:
         skin = """
 		<screen position="center,center" size="762,562" title="ZIKO EPG GRABBER" backgroundColor="#16000000" flags="wfNoBorder">
@@ -129,7 +129,7 @@ class EPGIConfig(Screen):
         list.append(("INDIAN SPORTS CHANNELS EPG", "20","sony"))
         self.provList=list ## New from mf to make choose list
         Screen.__init__(self, session)
-        self.skinName = ["EPGIConfig"]
+        self.skinName = ["EPGGrabber"]
         self["status"] = Label()
         self["glb"] = Label()
         #self["config"] = MenuList(list)
