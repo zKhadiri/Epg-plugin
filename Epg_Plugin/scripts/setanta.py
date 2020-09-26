@@ -25,7 +25,10 @@ for link in urls:
     
     
     if len(time)>0:
-        today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0) 
+        if time[0]<='23:59':
+            today = (datetime.now()-timedelta(days=1)).replace(hour=0, minute=0, second=0, microsecond=0)
+        if time[0]=='00:00':
+            today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0) 
         last_hr = 0
         for d in time:
             h, m = map(int, d.split(":"))

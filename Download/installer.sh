@@ -3,7 +3,7 @@
 
 ######### Only These two lines to edit with new version ######
 version=13.5
-description=What_is_NEW:\n'[setanta description fix]'
+description=What_is_NEW:\n'[setanta datetime fix]'
 ##############################################################
 
 TEMPATH=/tmp
