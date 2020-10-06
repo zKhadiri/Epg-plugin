@@ -37,7 +37,7 @@ channels_code=['505-BBC ONE SD','555-BBC ONE HD','700-BBC TWO HD','1011-ITV','15
                '17009-PICK','4020-PICK +1','7009-FOOD','7010-FOOD +1','5007-DMAX','17011-PBS AMERICA','5005-DAVE','5003-D DRAMA','26000-YESTERDAY',
                '19012-REALLY','4027-BLAZE','9008-HGTV','18008-QUEST','18006-RED QUEST','702-BBC FOUR SD','820-BBC NEWS HD',
                '704-BBC PALIAMENT','20014-SKY NEWS','2000-ALJAZEERA EN','7017-FREESPORT HD','20023-SONY MOVIES','21000-SONY MOVIES CLASSIC','14000-SONY MOVIES ACTION',
-               '822-CBBC HD','821-CBEEBIES','806-BBC 5 RADIO']
+               '822-CBBC HD','821-CBEEBIES','806-BBC 5 RADIO','21008-talkSPORT']
 
 channels_code.sort()
 with io.open("/etc/epgimport/freesat.xml","w",encoding='UTF-8')as f:
@@ -49,26 +49,28 @@ for x in channels_code:
 lock = threading.Semaphore(4)
 
 def freesat(code):
-    for i in range(0,8):
-        with requests.Session() as s:
-            s.mount('http://', HTTPAdapter(max_retries=10))
-            url = s.get('https://www.freesat.co.uk/tv-guide/api/'+str(i)+'/?channel='+code.split('-')[0],headers=head)
-            try:
-                data = url.json()
-                for d in data[0]['event']:
-                    ch=''
-                    start = datetime.fromtimestamp(d['startTime']).strftime('%Y%m%d%H%M%S')
-                    end = (datetime.strptime(start,'%Y%m%d%H%M%S') + timedelta(seconds=d['duration'])).strftime('%Y%m%d%H%M%S')
-                    ch+=2 * ' ' + '<programme start="' + str(start) + ' '+time_zone+'" stop="' + str(end) + ' '+time_zone+'" channel="'+code.split('-')[1]+'">\n'
-                    ch+=4*' '+'<title lang="en">'+d['name'].replace('&','and')+'</title>\n'
-                    ch+=4*' '+'<desc lang="en">'+d['description'].replace('&','and')+'</desc>\n  </programme>\r'
-                    with io.open("/etc/epgimport/freesat.xml","a",encoding='UTF-8')as f:
-                        f.write(ch)
-            except:
-                continue
-    print code.split('-')[1]+' epg ends at : '+(datetime.strptime(end,'%Y%m%d%H%M%S').strftime('%Y-%m-%d %H:%M'))
-    sys.stdout.flush()
-    lock.release()
+    try:
+        for i in range(0,8):
+            with requests.Session() as s:
+                s.mount('http://', HTTPAdapter(max_retries=10))
+                url = s.get('https://www.freesat.co.uk/tv-guide/api/'+str(i)+'/?channel='+code.split('-')[0],headers=head)
+                try:
+                    data = url.json()
+                    for d in data[0]['event']:
+                        ch=''
+                        start = datetime.fromtimestamp(d['startTime']).strftime('%Y%m%d%H%M%S')
+                        end = (datetime.strptime(start,'%Y%m%d%H%M%S') + timedelta(seconds=d['duration'])).strftime('%Y%m%d%H%M%S')
+                        ch+=2 * ' ' + '<programme start="' + str(start) + ' '+time_zone+'" stop="' + str(end) + ' '+time_zone+'" channel="'+code.split('-')[1]+'">\n'
+                        ch+=4*' '+'<title lang="en">'+d['name'].replace('&','and')+'</title>\n'
+                        ch+=4*' '+'<desc lang="en">'+d['description'].replace('&','and')+'</desc>\n  </programme>\r'
+                        with io.open("/etc/epgimport/freesat.xml","a",encoding='UTF-8')as f:
+                            f.write(ch)
+                except:
+                    continue
+        print code.split('-')[1]+' epg ends at : '+(datetime.strptime(end,'%Y%m%d%H%M%S').strftime('%Y-%m-%d %H:%M'))
+        sys.stdout.flush()
+        lock.release()
+    except:pass
 
 if __name__=='__main__':
     thread_pool = []

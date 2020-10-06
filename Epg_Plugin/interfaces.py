@@ -10,14 +10,13 @@ from Components.Input import Input
 from Screens.InputBox import InputBox
 from Screens.MessageBox import MessageBox
 from Tools.Directories import fileExists
-from urllib2 import Request
 from Plugins.Extensions.Epg_Plugin.Console2 import Console2
 from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigYesNo, configfile
 import io,os,re,requests,gettext,json
 from enigma import getDesktop
 from enigma import loadPNG,gPixmapPtr, RT_WRAP, ePoint, RT_HALIGN_LEFT, RT_VALIGN_CENTER, eListboxPythonMultiContent, gFont
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmap, MultiContentEntryPixmapAlphaTest
-from scripts import status
+
 try:
     from Plugins.Extensions.EPGImport.plugin import EPGImportConfig
     epgimport = True
@@ -148,15 +147,9 @@ class EPGGrabber(Screen):
             "cancel": self.close,
         }, -1)
         self.onShown.append(self.onWindowShow)
-        self.check_status()
+      
         
-    def check_status(self):
-        self.statusOS = status.Statusosn()
-        self.statusDS = status.Statusdstv()
-        self.StatuseosnAR = status.StatuseosnAR()
-        self.StatuseosnEN = status.StatuseosnEN()
-        self.StatusJawwy = status.StatusJawwy()
-
+        
     def onWindowShow(self):
         self.onShown.remove(self.onWindowShow)
         self.new_version = Ver
@@ -295,10 +288,19 @@ class EPGGrabber(Screen):
         else:
             self["key_green"].hide()
             self.session.open(MessageBox,_("Epgimport is not installed"), MessageBox.TYPE_INFO,timeout=10)
-
+    
+    def readJs(self):
+        import json
+        if fileExists('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/epg_status.json'):
+            with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/epg_status.json','r')as f:
+                return json.loads(f.read())
+        else:
+            return None
+        
     def update(self):
         index=self['config'].getSelectionIndex()
         returnValue=self.provList[index][1]
+        js = self.readJs()
         for i in range(len(self.provList)):
             if returnValue == str(i):
                 with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'r') as json_file:
@@ -307,18 +309,19 @@ class EPGGrabber(Screen):
                 for channel in data['bouquets']:
                     if channel["bouquet"]==provName:
                         self["glb"].setText("last update : {}".format(channel["date"]))
-                if provName=="osnplay":
-                    self["status"].setText('Last commit : {}'.format(self.statusOS))
-                elif provName=='osnar':
-                    self["status"].setText('Last commit : {}'.format(self.StatuseosnAR))
-                elif provName=='osnen':
-                    self["status"].setText('Last commit : {}'.format(self.StatuseosnEN))
-                elif provName=='jawwy':
-                    self["status"].setText('Last commit : {}'.format(self.StatusJawwy))
-                elif provName=='dstvback':
-                    self["status"].setText('Last commit : {}'.format(self.statusDS))
-                else:
-                    self["status"].setText("")
+                if js != None:
+                    if provName=="osnplay":
+                        self["status"].setText('Last commit : {}'.format(js['osn']))
+                    elif provName=='osnar':
+                        self["status"].setText('Last commit : {}'.format(js['FullArabicXML']))
+                    elif provName=='osnen':
+                        self["status"].setText('Last commit : {}'.format(js['FullEnglishXML']))
+                    elif provName=='jawwy':
+                        self["status"].setText('Last commit : {}'.format(js['jawwy']))
+                    elif provName=='dstvback':
+                        self["status"].setText('Last commit : {}'.format(js['master']))
+                    else:
+                        self["status"].setText("")
           
     def keyRed(self): ## New from mf to make choose list
         if len(self.installList)>0:

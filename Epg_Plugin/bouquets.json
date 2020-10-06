@@ -130,7 +130,7 @@
                 "FOOD +1", "FORCES TV", "FREESPORT HD", "HGTV", "HORROR CHANNELS", "ITV", "ITV 3", "ITV 3 +1", "ITV 4",
                 "ITV 4 +1", "ITV BE", "ITV BE +1", "ITV HD", "PBS AMERICA", "PICK", "PICK +1", "QUEST", "REALLY", "RED QUEST",
                 "S4C HD", "SKY NEWS", "SONY CHANNEL", "SONY CHANNEL +7", "SONY MOVIES", "SONY MOVIES ACTION", "SONY MOVIES CLASSIC",
-                "TOGHETER TV", "YESTERDAY", "itv 2", "itv2 +2", "paramount"
+                "TOGHETER TV", "talkSPORT", "YESTERDAY", "itv 2", "itv2 +2", "paramount"
             ]
         },
         {
@@ -160,8 +160,7 @@
         {
             "name": "Discovery at 0.8w",
             "path": "/etc/epgimport/discovery.channels.xml",
-            "channels": ["Animal Planet Europe", "Discovery Central Europe", "Discovery Showcase HD", "Discovery Science Europe","ID","DTX"
-                ,"Discovery Channel France","Discovery Science France","Discovery Family France","Investigation Discovery France"]
+            "channels": ["Animal Planet Europe", "Discovery Central Europe", "Discovery Showcase HD", "Discovery Science Europe", "ID", "DTX", "Discovery Channel France", "Discovery Science France", "Discovery Family France", "Investigation Discovery France"]
         },
         {
             "name": "INDIAN SPORTS CHANNELS",

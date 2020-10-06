@@ -2,8 +2,8 @@
 ##setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=13.6
-description=What_is_NEW:\n'[setanta datetime fix]'
+version=13.7
+description=What_is_NEW:\n'[improvement]'
 ##############################################################
 
 TEMPATH=/tmp
