@@ -293,7 +293,10 @@ class EPGGrabber(Screen):
         import json
         if fileExists('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/epg_status.json'):
             with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/epg_status.json','r')as f:
-                return json.loads(f.read())
+                try:
+                    return json.loads(f.read())
+                except ValueError:
+                    os.remove('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/epg_status.json')
         else:
             return None
         
