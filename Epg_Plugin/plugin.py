@@ -39,14 +39,19 @@ class StartTimer:
 
     def start(self):
         delay = 5
-
-        if self.query not in self.timer.callback:
-            self.timer.callback.append(self.query)
-            self.timer.startLongTimer(delay) 
-		
+        if self.query: #not in self.timer.callback: no need 
+            try:
+                self.timer.callback.append(self.query)
+            except:
+                self.timer_conn = self.timer.timeout.connect(self.query)
+            self.timer.startLongTimer(delay)
+        
     def stop(self):
-        if self.query in self.timer.callback:
-            self.timer.callback.remove(self.query)			
+        if self.query: #in self.timer.callback: no need 
+            try:
+                self.timer.callback.remove(self.query)
+            except:
+                self.timer_conn = None		
 			
     def query(self):
         if fileExists('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/epg_status.json'):
@@ -66,9 +71,9 @@ class StartTimer:
                     url = requests.get('https://api.github.com/repos/Haxer/EPG-XMLFiles/branches/'+branch.split('-')[0],timeout=5).json()
                 else:
                     url = requests.get('https://api.github.com/repos/ziko-ZR1/xml/branches/'+branch.split('-')[0],timeout=5).json()
-                
             except:
                 result = "Unable to Fetch Data Error 404"
+                return ## code should return because url is not downloaded
             try:
                 result = url['commit']['commit']['message']+' '+url['commit']['commit']['committer']['date'].replace('T',' ').replace('Z','')
             except KeyError:
@@ -99,4 +104,3 @@ def Plugins(**kwargs):
     Descriptors.append(PluginDescriptor(name="EPG GRABBER",where = PluginDescriptor.WHERE_EXTENSIONSMENU,fnc=main))
     Descriptors.append(PluginDescriptor(where = [PluginDescriptor.WHERE_AUTOSTART,PluginDescriptor.WHERE_SESSIONSTART], fnc=autostart))
     return Descriptors
-
