@@ -2,8 +2,8 @@
 ##setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=13.9
-description=What_is_NEW:\n'[uk sports epg fix]'
+version=14.0
+description=What_is_NEW:\n'[Fix crashe on DreamOS image]'
 ##############################################################
 
 TEMPATH=/tmp
