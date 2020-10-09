@@ -5,7 +5,7 @@ from Components.Label import Label
 from Components.ActionMap import ActionMap
 from ServiceReference import ServiceReference
 from Components.Button import Button
-from enigma import eEnv
+from enigma import eEnv,getDesktop
 from Tools.Directories import fileExists
 from Components.MenuList import MenuList
 from Screens.MessageBox import MessageBox
@@ -15,19 +15,36 @@ from xml.dom import minidom
 
 LAMEDB = eEnv.resolve('${sysconfdir}/enigma2/lamedb')
 
+reswidth = getDesktop(0).size().width()
+
+
 class set_ref(Screen):
-    skin="""
-        <screen position="center,center" size="1000,400" title="GET SERVICE" backgroundColor="#16000000" flags="wfNoBorder">
-            <widget name="bouq" position="200,10" size="990,50" font="Regular;40" foregroundColor="#00ffa500" backgroundColor="#16000000" transparent="1"/>
-            <widget name="status" foregroundColor="#00ffffff" backgroundColor="#16000000"  position="10,130" size="700,25" font="Regular;23"/>             
-            <widget name="label" foregroundColor="#00ffffff" backgroundColor="#16000000"  position="10,100" size="700,25" font="Regular;23" />
-            <widget name="list" foregroundColor="#00ffffff" backgroundColor="#16000000" zPosition="2" position="650,80" size="320,300" scrollbarMode="showOnDemand" transparent="1" />
-            <widget name="id" foregroundColor="#008000" backgroundColor="#16000000"  position="30,200" size="700,25" font="Regular;22" />
-            <ePixmap name="red" position="17,300" zPosition="2" size="260,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/redfhd.png" transparent="1" alphatest="on"/>
-            <widget name="key_red" position="17,300" size="260,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
-            <ePixmap name="green" position="335,300" zPosition="2" size="260,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/greenfhd.png" transparent="1" alphatest="on"/>
-            <widget name="key_green" position="335,300" size="260,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
-        </screen>"""
+    if reswidth == 1280:
+        skin="""
+            <screen position="center,center" size="1000,400" title="GET SERVICE" backgroundColor="#16000000" flags="wfNoBorder">
+                <widget name="bouq" position="200,10" size="990,50" font="Regular;40" foregroundColor="#00ffa500" backgroundColor="#16000000" transparent="1"/>
+                <widget name="status" foregroundColor="#00ffffff" backgroundColor="#16000000"  position="10,130" size="700,25" font="Regular;23"/>             
+                <widget name="label" foregroundColor="#00ffffff" backgroundColor="#16000000"  position="10,100" size="700,25" font="Regular;23" />
+                <widget name="list" foregroundColor="#00ffffff" backgroundColor="#16000000" zPosition="2" position="650,80" size="320,300" scrollbarMode="showOnDemand" transparent="1" />
+                <widget name="id" foregroundColor="#008000" backgroundColor="#16000000"  position="30,200" size="700,25" font="Regular;22" />
+                <ePixmap name="red" position="17,300" zPosition="2" size="260,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/redfhd.png" transparent="1" alphatest="on"/>
+                <widget name="key_red" position="17,300" size="260,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
+                <ePixmap name="green" position="335,300" zPosition="2" size="260,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/greenfhd.png" transparent="1" alphatest="on"/>
+                <widget name="key_green" position="335,300" size="260,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
+            </screen>"""
+    else:
+        skin="""
+            <screen position="center,center" size="1200,500" title="GET SERVICE" backgroundColor="#16000000" flags="wfNoBorder">
+                <widget name="bouq" position="200,10" size="990,50" font="Regular;40" foregroundColor="#00ffa500" backgroundColor="#16000000" transparent="1"/>
+                <widget name="status" foregroundColor="#00ffffff" backgroundColor="#16000000"  position="10,145" size="700,30" font="Regular;30"/>             
+                <widget name="label" foregroundColor="#00ffffff" backgroundColor="#16000000"  position="10,100" size="700,30" font="Regular;30" />
+                <widget name="list" foregroundColor="#00ffffff" backgroundColor="#16000000" zPosition="2" position="750,80" size="450,400" transparent="1" />
+                <widget name="id" foregroundColor="#008000" backgroundColor="#16000000"  position="35,250" size="700,35" font="Regular;30" />
+                <ePixmap name="red" position="17,400" zPosition="2" size="260,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/redfhd.png" transparent="1" alphatest="on"/>
+                <widget name="key_red" position="17,400" size="260,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
+                <ePixmap name="green" position="335,400" zPosition="2" size="260,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/greenfhd.png" transparent="1" alphatest="on"/>
+                <widget name="key_green" position="335,400" size="260,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
+            </screen>"""
         
     def __init__(self, session, services, curservice=None, bouquetname=None):
         self.session = session
@@ -44,7 +61,7 @@ class set_ref(Screen):
         Screen.__init__(self, session)
         self["myActionMap"] = ActionMap(["EpgColorActions","EpgWizardActions",'PiPSetupActions','SrefColorActions'],
         {   
-            "back": self.a,
+            "back": self.exit,
             "up":self.listUP,
             "last": self.last,
             "next": self.next,
@@ -67,12 +84,9 @@ class set_ref(Screen):
         self.getCurrentService()
         self.bqIndex=0
         self.getJson()       
-        
         self["bouq"].setText("Current bouquet  : {}".format(self.bouquetname))
-        
-    def setCurrentidIndex(self):
-        if self.idxList.count((self.id)):
-            self.idx = self.idxList.index((self.id))
+     
+    
    
 #####################################################
 
@@ -209,7 +223,7 @@ class set_ref(Screen):
             self.refstr = self.ServicesList[self.sidx][1]
             self.displayServiceParams()
            
-    def a(self):
+    def exit(self):
         self.close(None)
     
 

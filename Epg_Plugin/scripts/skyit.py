@@ -26,7 +26,7 @@ for channel in jsData['bouquets']:
         for x in channel['channels']:
             with io.open("/etc/epgimport/skyit.xml","a",encoding='UTF-8')as f:
                 f.write(("\n"+'  <channel id="'+x+'">'+"\n"+'    <display-name lang="en">'+x+'</display-name>'+"\n"+'  </channel>\r').decode('utf-8')) 
-
+channels=[]
 def skyit():
     for code in channels_code:
         with requests.Session() as s:
@@ -45,7 +45,19 @@ def skyit():
                 with io.open("/etc/epgimport/skyit.xml","a",encoding='UTF-8')as f:
                     f.write(epg)
             print channel_name+' ends at '+data['endtime'].replace('T',' ').replace('Z','')
+            channels.append(channel_name)
             sys.stdout.flush()
+    channels.sort()
+    update(channels)
+
+def update(chan):
+    with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/bouquets.json', 'r') as f:
+        data = json.load(f)
+    for channel in data['bouquets']:
+        if channel["name"]=="SKY IT":
+            channel['channels']=[ch for ch in list(dict.fromkeys(chan))]
+    with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/bouquets.json', 'w') as f:
+        json.dump(data, f)
 
 if __name__ == '__main__': 
     skyit()
@@ -60,7 +72,3 @@ for channel in data['bouquets']:
         channel['date']=datetime.today().strftime('%A %d %B %Y at %I:%M %p')
 with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'w') as f:
     json.dump(data, f)
-    
-
-
-
