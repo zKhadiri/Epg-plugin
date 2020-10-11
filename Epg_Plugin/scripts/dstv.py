@@ -12,6 +12,8 @@ headers={
 
 
 print('**************DSTV EPG******************')
+sys.stdout.flush()
+
 for i in range(0,5):
     import datetime
     from datetime import timedelta
@@ -28,7 +30,7 @@ for channel in jsData['bouquets']:
         for nt in channel['channels']:
             with io.open("/etc/epgimport/dstv.xml","a",encoding='UTF-8')as f:
                 f.write(("\n"+'  <channel id="'+nt+'">'+"\n"+'    <display-name lang="en">'+nt.replace("_"," ")+'</display-name>'+"\n"+'  </channel>'+"\r").decode('utf-8'))
-
+channels=[]
 def dstv():
     for url in urls:
         with requests.Session() as s:
@@ -45,9 +47,21 @@ def dstv():
                     ch+=4*' '+'<desc lang="en">No description Found for this programme</desc>\n  </programme>\r'
                     with io.open("/etc/epgimport/dstv.xml","a",encoding='UTF-8')as f:
                         f.write(ch)
+                channels.append(d['Name'].replace(' ','').replace('&','and'))
             dat = re.search(r'\d{4}-\d{2}-\d{2}',url)
             print('Date'+' : '+dat.group())    
             sys.stdout.flush()
+    update(channels)
+    
+def update(chan):
+    with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/bouquets.json', 'r') as f:
+        data = json.load(f)
+    for channel in data['bouquets']:
+        if channel["name"]=="DSTV":
+            channel['channels']=sorted([ch for ch in list(dict.fromkeys(chan))])
+    with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/bouquets.json', 'w') as f:
+        json.dump(data, f)    
+    
 if __name__=='__main__':
     dstv()
     from datetime import datetime

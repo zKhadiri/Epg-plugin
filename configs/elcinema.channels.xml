@@ -69,6 +69,8 @@
 <channel id="Watania2">1:0:1:64D:10:800:DCA0000:0:0:0:</channel>
 <channel id="Watania2">1:0:1:C:1137:2BE:1040000:0:0:0:</channel>
 <channel id="Watania2">1:0:1:FAD:28:800:DCA0000:0:0:0:</channel>
+<channel id="Thikrayat">1:0:1:A2A:1A:2BE:1040000:0:0:0:</channel>
+<channel id="Thikrayat">1:0:1:A2D:1A:800:DCA0000:0:0:0:</channel>
 <channel id="BEINMOVIESPREMIERE">1:0:19:28A6:410:E0:1040000:0:0:0:</channel><!-- "MoviesHD1" -->
 <channel id="BEINMOVIESACTION">1:0:19:29D2:42E:E0:1040000:0:0:0:</channel><!-- "MoviesHD2" -->
 <channel id="BEINMOVIESDRAMA">1:0:19:2843:406:E0:1040000:0:0:0:</channel><!-- "MoviesHD3" -->

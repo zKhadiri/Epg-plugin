@@ -55,7 +55,7 @@ def update(chan):
         data = json.load(f)
     for channel in data['bouquets']:
         if channel["name"]=="SKY IT":
-            channel['channels']=[ch for ch in list(dict.fromkeys(chan))]
+            channel['channels']=sorted([ch for ch in list(dict.fromkeys(chan))])
     with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/bouquets.json', 'w') as f:
         json.dump(data, f)
 
