@@ -75,18 +75,19 @@ def isHD():
 #        return DreamOS
 
 class EPGGrabber(Screen):
+
     def __init__(self, session, args = 0):
         self.session = session
         if config.plugins.EpgPlugin.skin.value == 'smallscreen':
         	if isHD():
-        		self.skin = SKIN_Small_HD
+        		self.skin = SKIN_EPGGrabber_Small_HD
         	else:
-        		self.skin = SKIN_Small_FHD
+        		self.skin = SKIN_EPGGrabber_Small_FHD
         else:
         	if isHD():
-        		self.skin = SKIN_Full_HD
+        		self.skin = SKIN_EPGGrabber_Full_HD
         	else:
-        		self.skin = SKIN_Full_FHD
+        		self.skin = SKIN_EPGGrabber_Full_FHD
         list = []
         self.installList=[] ## New from mf to make choose list
         list.append(("Bein Sports connect EPG", "0","beinConnect"))

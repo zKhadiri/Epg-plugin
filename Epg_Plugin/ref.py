@@ -12,42 +12,35 @@ from Screens.MessageBox import MessageBox
 import os,json
 from xml.etree import ElementTree as ET
 from xml.dom import minidom
+from Components.config import config
 
 LAMEDB = eEnv.resolve('${sysconfdir}/enigma2/lamedb')
 
-reswidth = getDesktop(0).size().width()
+### import class + screens from files inside plugin
+from .skin import *
 
+def getDesktopSize():
+    s = getDesktop(0).size()
+    return (s.width(), s.height())
+
+def isHD():
+    desktopSize = getDesktopSize()
+    return desktopSize[0] == 1280
 
 class set_ref(Screen):
-    if reswidth == 1280:
-        skin="""
-            <screen position="center,center" size="1000,400" title="GET SERVICE" backgroundColor="#16000000" flags="wfNoBorder">
-                <widget name="bouq" position="200,10" size="990,50" font="Regular;40" foregroundColor="#00ffa500" backgroundColor="#16000000" transparent="1"/>
-                <widget name="status" foregroundColor="#00ffffff" backgroundColor="#16000000"  position="10,130" size="700,25" font="Regular;23"/>             
-                <widget name="label" foregroundColor="#00ffffff" backgroundColor="#16000000"  position="10,100" size="700,25" font="Regular;23" />
-                <widget name="list" foregroundColor="#00ffffff" backgroundColor="#16000000" zPosition="2" position="650,80" size="320,300" scrollbarMode="showOnDemand" transparent="1" />
-                <widget name="id" foregroundColor="#008000" backgroundColor="#16000000"  position="30,200" size="700,25" font="Regular;22" />
-                <ePixmap name="red" position="17,300" zPosition="2" size="260,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/redfhd.png" transparent="1" alphatest="on"/>
-                <widget name="key_red" position="17,300" size="260,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
-                <ePixmap name="green" position="335,300" zPosition="2" size="260,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/greenfhd.png" transparent="1" alphatest="on"/>
-                <widget name="key_green" position="335,300" size="260,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
-            </screen>"""
-    else:
-        skin="""
-            <screen position="center,center" size="1200,500" title="GET SERVICE" backgroundColor="#16000000" flags="wfNoBorder">
-                <widget name="bouq" position="200,10" size="990,50" font="Regular;40" foregroundColor="#00ffa500" backgroundColor="#16000000" transparent="1"/>
-                <widget name="status" foregroundColor="#00ffffff" backgroundColor="#16000000"  position="10,145" size="700,30" font="Regular;30"/>             
-                <widget name="label" foregroundColor="#00ffffff" backgroundColor="#16000000"  position="10,100" size="700,30" font="Regular;30" />
-                <widget name="list" foregroundColor="#00ffffff" backgroundColor="#16000000" zPosition="2" position="750,80" size="450,400" transparent="1" />
-                <widget name="id" foregroundColor="#008000" backgroundColor="#16000000"  position="35,250" size="700,35" font="Regular;30" />
-                <ePixmap name="red" position="17,400" zPosition="2" size="260,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/redfhd.png" transparent="1" alphatest="on"/>
-                <widget name="key_red" position="17,400" size="260,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
-                <ePixmap name="green" position="335,400" zPosition="2" size="260,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/greenfhd.png" transparent="1" alphatest="on"/>
-                <widget name="key_green" position="335,400" size="260,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
-            </screen>"""
-        
+
     def __init__(self, session, services, curservice=None, bouquetname=None):
         self.session = session
+        if config.plugins.EpgPlugin.skin.value == 'smallscreen':
+        	if isHD():
+        		self.skin = SKIN_set_ref_Small_HD
+        	else:
+        		self.skin = SKIN_set_ref_Small_FHD
+        else:
+        	if isHD():
+        		self.skin = SKIN_set_ref_Full_HD
+        	else:
+        		self.skin = SKIN_set_ref_Full_FHD
         self["status"] = Label()
         self["id"] = Label()
         self["label"] = Label()
