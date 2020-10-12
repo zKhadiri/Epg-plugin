@@ -290,7 +290,7 @@ class EPGGrabber(Screen):
         index=self['config'].getSelectionIndex()
         returnValue=self.provList[index][1]
         js = self.readJs()
-        for i in range(len(self.provList)-1):
+        for i in range(len(self.provList)):
             if returnValue == i:
                 with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'r') as json_file:
                     data = json.load(json_file)
