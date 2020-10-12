@@ -2,8 +2,8 @@
 ##setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=14.2
-description=What_is_NEW:\n'[new channel (zikrayat tv elcinema)]'
+version=14.3
+description=What_is_NEW:\n'[Update Skins]'
 ##############################################################
 
 TEMPATH=/tmp
