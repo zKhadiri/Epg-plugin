@@ -1,88 +1,87 @@
 {
     "bouquets": [{
-            "date": "You didn't download from this source yet",
-            "bouquet": "bein"
-        },
-        {
-            "bouquet": "beinent",
-            "date": "You didn't download from this source yet"
-        },
-        {
-            "bouquet": "beinConnect",
-            "date": "You didn't download from this source yet"
-        },
-        {
-            "bouquet": "beinentC",
-            "date": "You didn't download from this source yet"
-        },
-        {
-            "bouquet": "osnplay",
-            "date": "You didn't download from this source yet"
-        },
-        {
-            "bouquet": "osnar",
-            "date": "You didn't download from this source yet"
-        },
-        {
-            "bouquet":"osnen",
-            "date":"You didn't download from this source yet"
-        },
-        {
-            "bouquet":"elcin",
-            "date":"You didn't download from this source yet"
-        },
-        {
-            "bouquet":"beincin",
-            "date":"You didn't download from this source yet"
-        },
-        {
-            "bouquet":"mbc",
-            "date":"You didn't download from this source yet"
-        },
-        {
-            "bouquet":"jawwy",
-            "date":"You didn't download from this source yet"
-        },
-        {
-            "bouquet":"aloula",
-            "date":"You didn't download from this source yet"
-        },
-        {
-            "bouquet":"freesat",
-            "date":"You didn't download from this source yet"
-        },
-        {
-            "bouquet":"skyuk",
-            "date":"You didn't download from this source yet"
-        },
-        {
-            "bouquet":"dstv",
-            "date":"You didn't download from this source yet"
-        },
-        {
-            "bouquet":"dstvback",
-            "date":"You didn't download from this source yet"
-        },
-        {
-            "bouquet":"setanta",
-            "date":"You didn't download from this source yet"
-        },
-        {
-            "bouquet":"aljazeera",
-            "date":"You didn't download from this source yet"
-        },
-        {
-            "bouquet":"sony",
-            "date":"You didn't download from this source yet"
-        },
-        {
-            "bouquet":"skyit",
-            "date":"You didn't download from this source yet"
-        },
-        {
-            "bouquet":"discovery",
-            "date":"You didn't download from this source yet"
-        }
-
-    ]
+        "date": "You didn't download from this source yet",
+        "bouquet": "bein",
+        "title": "Bein Sports.net"
+    }, {
+        "bouquet": "beinent",
+        "date": "You didn't download from this source yet",
+        "title": "Bein entertainment.net"
+    }, {
+        "bouquet": "beinConnect",
+        "date": "You didn't download from this source yet",
+        "title": "Bein Sports connect"
+    }, {
+        "bouquet": "beinentC",
+        "date": "You didn't download from this source yet",
+        "title": "Bein entertainment connect"
+    }, {
+        "bouquet": "osnplay",
+        "date": "You didn't download from this source yet",
+        "title": "OSN english title arabic description Backup"
+    }, {
+        "bouquet": "osnar",
+        "date": "You didn't download from this source yet",
+        "title": "OSN \u062f\u0644\u064a\u0644 \u0639\u0631\u0628\u064a \u0628\u0627\u0644\u0643\u0627\u0645\u0644 (haxer source) Backup"
+    }, {
+        "bouquet": "osnen",
+        "date": "You didn't download from this source yet",
+        "title": "OSN english only epg BACKUP (haxer source)"
+    }, {
+        "bouquet": "elcin",
+        "date": "You didn't download from this source yet",
+        "title": "ELCINEMA Website"
+    }, {
+        "bouquet": "beincin",
+        "date": "You didn't download from this source yet",
+        "title": "ELCINEMA Bein entertainment"
+    }, {
+        "bouquet": "mbc",
+        "date": "You didn't download from this source yet",
+        "title": "MBC.NET/QATAR TV/NOOR DUBAI"
+    }, {
+        "bouquet": "jawwy",
+        "date": "You didn't download from this source yet",
+        "title": "Jawwy TV"
+    }, {
+        "bouquet": "aloula",
+        "date": "You didn't download from this source yet",
+        "title": "SNRT"
+    }, {
+        "bouquet": "freesat",
+        "date": "You didn't download from this source yet",
+        "title": "FREESAT UK"
+    }, {
+        "bouquet": "skyuk",
+        "date": "You didn't download from this source yet",
+        "title": "UK SPORTS channels"
+    }, {
+        "bouquet": "dstv",
+        "date": "You didn't download from this source yet",
+        "title": "DSTV.ZA"
+    }, {
+        "bouquet": "dstvback",
+        "date": "You didn't download from this source yet",
+        "title": "SuperSport.ZA Backup"
+    }, {
+        "bouquet": "setanta",
+        "date": "You didn't download from this source yet",
+        "title": "SETANTA Eurasia"
+    }, {
+        "bouquet": "aljazeera",
+        "date": "You didn't download from this source yet",
+        "title": "Aljazeera.net Arabic"
+    }, {
+        "bouquet": "sony",
+        "date": "You didn't download from this source yet",
+        "title": "INDIAN SPORTS CHANNELS"
+    }, {
+        "bouquet": "skyit",
+        "date": "You didn't download from this source yet",
+        "title": "SKY IT"
+    }, {
+        "bouquet": "discovery",
+        "date": "You didn't download from this source yet",
+        "title": "Discovery 0.8w"
+    }]
 }

@@ -100,7 +100,7 @@ def main(session, **kwargs):
   
 def Plugins(**kwargs):
     Descriptors=[]
-    Descriptors.append(PluginDescriptor(name="EPG GRABBER",description="EPG WEB GRABBER BY ZIKO",where = PluginDescriptor.WHERE_PLUGINMENU,icon="epg.png",fnc=main))
-    Descriptors.append(PluginDescriptor(name="EPG GRABBER",where = PluginDescriptor.WHERE_EXTENSIONSMENU,fnc=main))
+    Descriptors.append(PluginDescriptor(name="EPG Grabber",description="EPG WEB Grabber",where = PluginDescriptor.WHERE_PLUGINMENU,icon="epg.png",fnc=main))
+    Descriptors.append(PluginDescriptor(name="EPG Grabber",where = PluginDescriptor.WHERE_EXTENSIONSMENU,fnc=main))
     Descriptors.append(PluginDescriptor(where = [PluginDescriptor.WHERE_AUTOSTART,PluginDescriptor.WHERE_SESSIONSTART], fnc=autostart))
     return Descriptors

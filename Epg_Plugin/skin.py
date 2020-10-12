@@ -129,7 +129,7 @@ if DreamOS():
                 <screen name="set_ref" position="0,0" size="1280,720" title="ZIKO EPG GRABBER" backgroundColor="#16000000" flags="wfNoBorder">
 			<eLabel text="Background of VideoPicture" foregroundColor="#00ffffff" backgroundColor="#00ffffff" size="543,272" position="688,100" zPosition="-10"/>
 			<widget source="session.VideoPicture" render="Pig" position="693,105" size="532,263" backgroundColor="#ff000000" zPosition="1"/>
-			<eLabel text="Select providers to install and press red button" position="25,49" size="591,43" font="Regular;24" foregroundColor="#00ff2525" zPosition="4" valign="center" backgroundColor="#16000000" halign="center"/>
+			<eLabel text="Match the channel with the correct id and press OK" position="25,49" size="591,43" font="Regular;24" foregroundColor="#00ff2525" zPosition="4" valign="center" backgroundColor="#16000000" halign="center"/>
 			<widget font="Regular;35" foregroundColor="#00ffffff" backgroundColor="#16000000" halign="center" position="1072,0" render="Label" size="206,44" source="global.CurrentTime" transparent="1" valign="center" zPosition="5">
 			<convert type="ClockToText">Default</convert>
 			</widget>
@@ -159,7 +159,7 @@ if DreamOS():
 			<widget name="bouq" position="319,20" size="1210,65" render="Label" font="Regular;50" foregroundColor="#00ffa500" backgroundColor="#16000000" transparent="1" halign="center"/>
 			<widget source="session.VideoPicture" render="Pig" position="1017,168" size="827,437" backgroundColor="#ff000000" zPosition="1"/>
 			<eLabel text="Background of VideoPicture" foregroundColor="#00ffffff" backgroundColor="#00ffffff" size="842,452" position="1010,160" zPosition="-10"/>
-			<eLabel text="Select providers to install and press red button" position="22,86" size="933,72" font="Regular;38" foregroundColor="#00ff2525" zPosition="4" valign="center" backgroundColor="#16000000" halign="center"/>
+			<eLabel text="Match the channel with the correct id and press OK" position="22,86" size="933,72" font="Regular;38" foregroundColor="#00ff2525" zPosition="4" valign="center" backgroundColor="#16000000" halign="center"/>
 			<widget font="Regular;55" foregroundColor="#00ffffff" backgroundColor="#16000000" halign="center" position="1565,3" render="Label" size="353,84" source="global.CurrentTime" transparent="1" valign="center" zPosition="5">
 			<convert type="ClockToText">Default</convert>
 			</widget>
@@ -187,7 +187,7 @@ else:
             <screen name="set_ref" position="0,0" size="1280,720" title="ZIKO EPG GRABBER" backgroundColor="#16000000" flags="wfNoBorder">
 			<eLabel text="Background of VideoPicture" foregroundColor="#00ffffff" backgroundColor="#00ffffff" size="543,272" position="688,100" zPosition="-10"/>
 			<widget source="session.VideoPicture" render="Pig" position="693,105" size="532,263" backgroundColor="#ff000000" zPosition="1"/>
-			<eLabel text="Select providers to install and press red button" position="25,49" size="591,43" font="Regular;24" foregroundColor="#00ff2525" zPosition="4" valign="center" backgroundColor="#16000000" halign="center"/>
+			<eLabel text="Match the channel with the correct id and press OK" position="25,49" size="591,43" font="Regular;24" foregroundColor="#00ff2525" zPosition="4" valign="center" backgroundColor="#16000000" halign="center"/>
 			<widget font="Regular;35" foregroundColor="#00ffffff" backgroundColor="#16000000" halign="center" position="1072,0" render="Label" size="206,44" source="global.CurrentTime" transparent="1" valign="center" zPosition="5">
 			<convert type="ClockToText">Default</convert>
 			</widget>
@@ -217,7 +217,7 @@ else:
 			<widget name="bouq" position="319,20" size="1210,65" render="Label" font="Regular;50" foregroundColor="#00ffa500" backgroundColor="#16000000" transparent="1" halign="center"/>
 			<widget source="session.VideoPicture" render="Pig" position="1017,168" size="827,437" backgroundColor="#ff000000" zPosition="1"/>
 			<eLabel text="Background of VideoPicture" foregroundColor="#00ffffff" backgroundColor="#00ffffff" size="842,452" position="1010,160" zPosition="-10"/>
-			<eLabel text="Select providers to install and press red button" position="22,86" size="933,72" font="Regular;38" foregroundColor="#00ff2525" zPosition="4" valign="center" backgroundColor="#16000000" halign="center"/>
+			<eLabel text="Match the channel with the correct id and press OK" position="22,86" size="933,72" font="Regular;38" foregroundColor="#00ff2525" zPosition="4" valign="center" backgroundColor="#16000000" halign="center"/>
 			<widget font="Regular;55" foregroundColor="#00ffffff" backgroundColor="#16000000" halign="center" position="1565,3" render="Label" size="353,84" source="global.CurrentTime" transparent="1" valign="center" zPosition="5">
 			<convert type="ClockToText">Default</convert>
 			</widget>

@@ -70,6 +70,12 @@ def isHD():
     desktopSize = getDesktopSize()
     return desktopSize[0] == 1280
 
+def DataJs():
+    file = open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json','r')
+    data = json.loads(file.read())
+    file.close()
+    return data
+    
 #def DreamOS():
 #    if os.path.exists('/var/lib/dpkg/status'):
 #        return DreamOS
@@ -90,27 +96,10 @@ class EPGGrabber(Screen):
         		self.skin = SKIN_EPGGrabber_Full_FHD
         list = []
         self.installList=[] ## New from mf to make choose list
-        list.append(("Bein Sports connect EPG", "0","beinConnect"))
-        list.append(("Bein entertainment connect EPG", "1","beinentC"))
-        list.append(("Bein Sports.net", "2","bein"))
-        list.append(("Bein entertainment.net", "3","beinent"))
-        list.append(("Osnplay english title arabic description BACKUP", "4","osnplay"))
-        list.append(("OSN دليل عربي بالكامل (haxer source)", "5","osnar"))
-        list.append(("OSN english only epg BACKUP (haxer source)", "6","osnen"))
-        list.append(("ELCINEMA WEBSITE EPG", "7","elcin"))
-        list.append(("ELCINEMA Bein entertainment EPG", "8","beincin"))
-        list.append(("MBC.NET/QATAR TV/NOOR DUBAI", "9","mbc"))
-        list.append(("Jawwy TV", "10","jawwy"))
-        list.append(("SNRT EPG", "11","aloula"))
-        list.append(("Aljazeera.net ar EPG", "12","aljazeera"))
-        list.append(("SKY IT EPG", "13","skyit"))
-        list.append(("FREESAT UK", "14","freesat"))
-        list.append(("UK SPORTS CHANNELS", "15","skyuk"))
-        list.append(("DSTV.ZA", "16","dstv"))
-        list.append(("SuperSport.ZA BACKUP", "17","dstvback"))
-        list.append(("SETANTA eurasia", "18","setanta"))
-        list.append(("Discovery 0.8w EPG", "19","discovery"))
-        list.append(("INDIAN SPORTS CHANNELS EPG", "20","sony"))
+        
+        for i in range(len(DataJs()['bouquets'])):
+            list.append((DataJs()["bouquets"][i]["title"],i,DataJs()['bouquets'][i]["bouquet"]))
+            
         self.provList=list ## New from mf to make choose list
         Screen.__init__(self, session)
         self.skinName = ["EPGGrabber"]
@@ -133,8 +122,6 @@ class EPGGrabber(Screen):
         }, -1)
         self.onShown.append(self.onWindowShow)
       
-        
-        
     def onWindowShow(self):
         self.onShown.remove(self.onWindowShow)
         self.new_version = Ver
@@ -199,9 +186,9 @@ class EPGGrabber(Screen):
             choices.append(("Press Ok to [Enable checking for Online Update]","enablecheckUpdate"))
         else:
             choices.append(("Press Ok to [Disable checking for Online Update]","disablecheckUpdate"))
-        choices.append(("ASSIGN SERVICE TO CHANNELS","sref"))
-        choices.append(("DOWNLOAD THE LATEST CHANNELS LIST","config"))
-        self.session.openWithCallback(self.choicesback, ChoiceBox, _('select task'),choices)
+        choices.append(("Assign Service to channel","sref"))
+        choices.append(("Download The Latest Channels List","config"))
+        self.session.openWithCallback(self.choicesback, ChoiceBox, _('Select Task'),choices)
 
     def choicesback(self, select):
         if select:
@@ -237,7 +224,7 @@ class EPGGrabber(Screen):
                     service = Servicelist.servicelist.getCurrent()
                     self.session.openWithCallback(ref.closed,ref.set_ref, services, service, ServiceReference(epg_bouquet).getServiceName())
             elif select[1]=="config":
-                self.session.open(Console2,_("EPG CONFIGS") , ["python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/configs.py"], closeOnSuccess=False)
+                self.session.open(Console2,_("EPG Configs") , ["python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/configs.py"], closeOnSuccess=False)
 
     def checkupdates(self):
         from twisted.web.client import getPage, error
@@ -303,8 +290,8 @@ class EPGGrabber(Screen):
         index=self['config'].getSelectionIndex()
         returnValue=self.provList[index][1]
         js = self.readJs()
-        for i in range(len(self.provList)):
-            if returnValue == str(i):
+        for i in range(len(self.provList)-1):
+            if returnValue == i:
                 with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'r') as json_file:
                     data = json.load(json_file)
                 provName = self.provList[i][2]

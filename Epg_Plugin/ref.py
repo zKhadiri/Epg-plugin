@@ -105,7 +105,7 @@ class set_ref(Screen):
            self.bqIndex =len(self.bqList)-1
            
         bqTitle=self.bqList[self.bqIndex]
-        self["label"].setText('EPG PROVIDER : {}'.format(bqTitle))
+        self["label"].setText('EPG Provider : {}'.format(bqTitle))
         self.listChannels()
      
       
