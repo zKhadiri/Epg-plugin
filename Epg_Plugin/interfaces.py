@@ -341,6 +341,6 @@ class EPGGrabber(Screen):
                 continue
             provTag = self.provList[i][2]
             cmd="python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/%s.py" % provTag
-            cmdList.append(cmd)
+            cmdList.append(str(cmd))
             cmdList.append("python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/check.py")
         self.session.open(Console2,_("EPG install started") , cmdList, closeOnSuccess=False)
