@@ -3,6 +3,8 @@
 import requests,json,io,os,re,sys
 from datetime import datetime
 from requests.adapters import HTTPAdapter
+from time import strftime
+
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
@@ -13,14 +15,13 @@ headers={
 }
 
 def get_tz():
-    url_timezone = 'http://worldtimeapi.org/api/ip'
-    requests_url = requests.get(url_timezone)
-    ip_data = requests_url.json()
-
     try:
+        url_timezone = 'http://worldtimeapi.org/api/ip'
+        requests_url = requests.get(url_timezone)
+        ip_data = requests_url.json()
         return ip_data['utc_offset'].replace(':', '')
     except:
-        return ('+0000')
+        return strftime("%z")
     
 time_zone = get_tz()
 
@@ -202,8 +203,8 @@ if __name__ == "__main__":
     with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'w') as f:
         json.dump(data, f)
     
-with io.open("/etc/epgimport/mbc.xml", "a",encoding="utf-8") as f:
-    f.write(('</tv>').decode('utf-8'))    
+    with io.open("/etc/epgimport/mbc.xml", "a",encoding="utf-8") as f:
+        f.write(('</tv>').decode('utf-8'))    
 
 
 print('**************FINISHED******************')

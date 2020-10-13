@@ -1,18 +1,21 @@
 import requests,io,threading,sys,os
 from datetime import datetime,timedelta
 from requests.adapters import HTTPAdapter
-from time import sleep
+from time import sleep,strftime
 
 def get_tz():
-    url_timezone = 'http://worldtimeapi.org/api/ip'
-    requests_url = requests.get(url_timezone)
-    ip_data = requests_url.json()
     try:
+        url_timezone = 'http://worldtimeapi.org/api/ip'
+        requests_url = requests.get(url_timezone)
+        ip_data = requests_url.json()
         return ip_data['utc_offset'].replace(':', '')
     except:
-        return ('+0000')
+        return strftime("%z")
     
 time_zone = get_tz()
+
+print('**************FREESAT EPG******************')
+sys.stdout.flush()
 
 import json
 with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'r') as f:
@@ -52,7 +55,7 @@ def freesat(code):
     try:
         for i in range(0,8):
             with requests.Session() as s:
-                s.mount('http://', HTTPAdapter(max_retries=10))
+                s.mount('https://', HTTPAdapter(max_retries=10))
                 url = s.get('https://www.freesat.co.uk/tv-guide/api/'+str(i)+'/?channel='+code.split('-')[0],headers=head)
                 try:
                     data = url.json()
@@ -96,3 +99,6 @@ if os.path.exists('/var/lib/dpkg/status'):
     new_els = sorted(els, key=lambda el: (el.tag, el.attrib['channel']))
     data[:] = new_els
     tree.write('/etc/epgimport/freesat.xml', xml_declaration=True, encoding='utf-8')
+
+print('**************FINISHED******************')
+sys.stdout.flush()

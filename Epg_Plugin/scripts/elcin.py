@@ -36,7 +36,7 @@ def get_tz():
         ip_data = requests_url.json()
         return ip_data['utc_offset'].replace(':', '')
     except:
-        return strftime("z")
+        return strftime("%z")
     
 time_zone = get_tz()
 

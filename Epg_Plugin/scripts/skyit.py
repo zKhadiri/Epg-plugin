@@ -1,7 +1,7 @@
 import requests,re,io,sys,json,ssl
 from datetime import datetime,timedelta
 from requests.adapters import HTTPAdapter
-from time import sleep
+from time import strftime
 import warnings
 warnings.filterwarnings('ignore', message='Unverified HTTPS request')
 
@@ -12,9 +12,17 @@ channels_code=['9077', '9074', '318', '9073', '9095', '9103', '9100', '9101', '9
                 '9044', '641', '929', '7507','8453','588','364','6624','10458','10469','10464',
                 '10454','6601','6621','6602','5007','6622','5023','6608','6623','362','895','445',
                 '446','10918','9099','8753','9096','8434','10774','9057','9060','9055','10518',
-                '9037','10517','10096','120','8336','8131','9513','9893','10095','10097','10467']
+                '9037','10517','10096','120','8336','8131','9513','9893','10095','10097','10467','9098','9114','635',
+                '8473','10133','9774','10136','8353','11055','8007','974','7588','10914','10466'
+                ,'8173','10465','8933','10469','6000','807','10093','10654','9059','331'
+                ,'125','9054','123','321','10354','8329','6630','6628','10653','10893','944','9553','7527'
+                ,'7587','9194','10916','10468']
+
 channels_code.sort()
 today = (datetime.today() - timedelta(hours=3)).strftime('%Y-%m-%dT%H:00:00Z')
+
+print('**************SKY IT EPG******************')
+sys.stdout.flush()
 
 with io.open("/etc/epgimport/skyit.xml","w",encoding='UTF-8')as f:
     f.write(('<?xml version="1.0" encoding="UTF-8"?>'+"\n"+'<tv generator-info-name="By ZR1">').decode('utf-8'))
@@ -62,13 +70,16 @@ def update(chan):
 if __name__ == '__main__': 
     skyit()
 
-with io.open("/etc/epgimport/skyit.xml", "a",encoding="utf-8") as f:
-    f.write(('</tv>').decode('utf-8'))
-    
-with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'r') as f:
-    data = json.load(f)
-for channel in data['bouquets']:
-    if channel["bouquet"]=="skyit":
-        channel['date']=datetime.today().strftime('%A %d %B %Y at %I:%M %p')
-with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'w') as f:
-    json.dump(data, f)
+    with io.open("/etc/epgimport/skyit.xml", "a",encoding="utf-8") as f:
+        f.write(('</tv>').decode('utf-8'))
+        
+    with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'r') as f:
+        data = json.load(f)
+    for channel in data['bouquets']:
+        if channel["bouquet"]=="skyit":
+            channel['date']=datetime.today().strftime('%A %d %B %Y at %I:%M %p')
+    with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'w') as f:
+        json.dump(data, f)
+        
+    print('**************FINISHED******************')
+    sys.stdout.flush()

@@ -1,18 +1,21 @@
 import requests,io,re,sys,json
 from datetime import datetime,timedelta
 from requests.adapters import HTTPAdapter
+from time import strftime
 
 def get_tz():
-    url_timezone = 'http://worldtimeapi.org/api/ip'
-    requests_url = requests.get(url_timezone)
-    ip_data = requests_url.json()
     try:
+        url_timezone = 'http://worldtimeapi.org/api/ip'
+        requests_url = requests.get(url_timezone)
+        ip_data = requests_url.json()
         return ip_data['utc_offset'].replace(':', '')
     except:
-        return ('+0000')
+        return strftime("%z")
     
 time_zone=get_tz()
 
+print('**************UK SPORTS CHANNELS EPG******************')
+sys.stdout.flush()
 
 uk_sports=['4010-SkySp PL HD',"3939-SkySp F'ball HD","4049-SkySp News HD",'4002-SkySpMainEvHD',
 '3625-BT Sport 1 HD','3627-BT Sport 2 HD','3629-BT Sport 3 HD','4040-BTSpt//ESPNHD','1218-BTSBoxOffWWE',
@@ -62,11 +65,14 @@ if __name__ == "__main__":
         f.write(('</tv>').decode('utf-8'))
     
 
-with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'r') as f:
-    data = json.load(f)
-    
-for channel in data['bouquets']:
-    if channel["bouquet"]=="skyuk":
-        channel['date']=datetime.today().strftime('%A %d %B %Y at %I:%M %p')
-with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'w') as f:
-    json.dump(data, f)
+    with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'r') as f:
+        data = json.load(f)
+        
+    for channel in data['bouquets']:
+        if channel["bouquet"]=="skyuk":
+            channel['date']=datetime.today().strftime('%A %d %B %Y at %I:%M %p')
+    with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'w') as f:
+        json.dump(data, f)
+        
+    print('**************FINISHED******************')
+    sys.stdout.flush()

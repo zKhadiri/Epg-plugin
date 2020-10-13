@@ -12,6 +12,9 @@ channels = ['Discovery Central Europe|DCENENG-UTC','Animal Planet Europe|APEUENG
             'Discovery Channel France|DFRAFRE-UTC','Discovery Science France|SCFRFRE-UTC',
             'Discovery Family France|DFFRFRE-UTC','Investigation Discovery France|IDFRFRE-UTC']
 
+print('**************Discovery EPG******************')
+sys.stdout.flush()
+
 with io.open("/etc/epgimport/discovery.xml","w",encoding='UTF-8')as f:
     f.write(('<?xml version="1.0" encoding="UTF-8"?>'+"\n"+'<tv generator-info-name="By ZR1">').decode('utf-8'))
 
@@ -70,3 +73,6 @@ if __name__ =='__main__':
             bouquet['date']=datetime.today().strftime('%A %d %B %Y at %I:%M %p')
     with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'w') as f:
         json.dump(data, f)
+        
+    print('**************FINISHED******************')
+    sys.stdout.flush()

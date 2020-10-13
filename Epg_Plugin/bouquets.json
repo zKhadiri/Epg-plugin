@@ -97,17 +97,20 @@
         {
             "name": "SKY IT",
             "path": "/etc/epgimport/skyit.channels.xml",
-            "channels": ["Boomerang", "Canale 20 HD", "Cartoon Network", "GIALLO HD", "Comedy Central", "Crime + Inv. HD", "DAZN1", "DeAJunior", "DeAKids",
-                "DeAKids +1", "Discovery", "Discovery Sci", "Eurosport 2 HD", "Eurosport HD", "Fox Crime HD", "Fox HD", "Fox News",
-                "FoxCrime Castle", "Gambero Rosso HD", "History HD", "Italia 1 HD", "La7D", "LaF", "Milan TV", "Inter TV", "Iris", "Mediaset Italia Due", "NatGeo Wild HD",
-                "NationalGeo", "Nick Jr", "Nickelodeon", "Premium Crime HD", "PremiumCinema1 HD", "PremiumCinema2 HD", "PremiumCinema3 HD", "RAI News", "Rai 1 (DTT)",
-                "Rai 2 (DTT)", "Rai 3 (DTT)", "Rai 4", "Rai Movie", "Rai Premium", "Rete 4 HD", "Sky Arte HD", "Sky Atlantic +1",
-                "Sky Atlantic HD", "Sky Cinema Action HD", "Sky Cinema Comedy HD", "Sky Cinema Drama HD", "Sky Cinema Due +24 HD",
-                "Sky Cinema Due HD", "Sky Cinema Family HD", "Sky Cinema Romance HD", "Sky Cinema Suspense HD", "Sky Cinema Uno +24 HD",
-                "Sky Cinema Uno HD", "Sky News", "Sky Sport Arena", "Sky Sport Collection HD", "Sky Sport F1 HD", "Sky Sport Football HD",
-                "Sky Sport MotoGP", "Sky Sport NBA", "Sky Sport Serie A HD", "Sky Sport Uno", "Sky Sport24", "Sky TG24", "Sky Uno +1",
-                "Sky Uno HD", "VH1", "Western Collection HD"
-            ]
+            "channels": ["Agatha Christie Collection HD", "Blaze HD", "Boing", "Boomerang", "Canale 20 HD", "Canale 5 HD", "Cine34", 
+                "Classica HD", "Comedy +1", "Comedy Central", "Crime + Inv. HD", "DAZN1", "DMAX HD", "DeAJunior", "DeAKids", "DeAKids +1", 
+                "Discovery +1", "Discovery HD", "Discovery Sci HD", "Eurosport 2 HD", "Eurosport HD", "Fox BigBangTheory", "Fox Crime HD",
+                 "Fox HD", "Fox News", "FoxCrime +1", "GIALLO HD", "Gambero Rosso HD", "History +1", "History HD", "Inter TV", "Iris", 
+                 "Italia 1 HD", "La 5", "La7", "La7D", "LaF", "Lazio Style Ch", "MS MOTORTV", "Mediaset Extra", "Mediaset Italia Due", 
+                 "Milan TV", "NOVE", "NatGeo Wild HD", "NationalGeo +1", "NationalGeo HD", "Nick Jr", "Nickelodeon", "Paramount Network", 
+                 "Premium Action HD", "Premium Crime HD", "Premium Stories HD", "PremiumCin.1 +24 HD", "PremiumCinema1 HD", "PremiumCinema2 HD",
+                  "PremiumCinema3 HD", "Primafila 1 HD", "Primafila 2 HD", "Primafila 3", "RAI News", "RAI Sport", "Rai 1 (DTT)", "Rai 2 (DTT)", 
+                  "Rai 3 (DTT)", "Rai 4", "Rai Movie", "Rai Premium", "Rai Storia", "Real Time HD", "Rete 4 HD", "Roma TV", "Sky Arte HD", 
+                  "Sky Atlantic +1 HD", "Sky Atlantic HD", "Sky Cinema Action HD", "Sky Cinema Comedy HD", "Sky Cinema Drama HD", 
+                  "Sky Cinema Due +24 HD", "Sky Cinema Due HD", "Sky Cinema Family HD", "Sky Cinema Romance HD", "Sky Cinema Suspense HD", 
+                  "Sky Cinema Uno +24 HD", "Sky Cinema Uno HD", "Sky Meteo24", "Sky News", "Sky Sport Arena", "Sky Sport Collection HD",
+                  "Sky Sport F1 HD", "Sky Sport Football HD", "Sky Sport MotoGP", "Sky Sport NBA", "Sky Sport Serie A HD", "Sky Sport Uno", 
+                  "Sky Sport24", "Sky TG24", "Sky Uno +1 HD", "Sky Uno HD", "Spike", "SuperTennis HD", "TOPcrime", "TV2000", "Torino Channel", "VH1"]
         },
         {
             "name": "UK SPORTS CHANNELS",
