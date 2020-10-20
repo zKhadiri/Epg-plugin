@@ -162,9 +162,12 @@
             ]
         },
         {
-            "name": "Discovery at 0.8w",
+            "name": "Discovery at 0.8w & 4.8E",
             "path": "/etc/epgimport/discovery.channels.xml",
-            "channels": ["Animal Planet Europe", "Discovery Central Europe", "Discovery Showcase HD", "Discovery Science Europe", "ID", "DTX", "Discovery Channel France", "Discovery Science France", "Discovery Family France", "Investigation Discovery France"]
+            "channels": ["Animal Planet Europe", "Discovery Central Europe", "Discovery Showcase HD", "Discovery Science Europe",
+                "Discovery World", "ID", "DTX", "Discovery Channel France", "Discovery Science France", "Discovery Family France",
+                "Investigation Discovery France"
+            ]
         },
         {
             "name": "INDIAN SPORTS CHANNELS",

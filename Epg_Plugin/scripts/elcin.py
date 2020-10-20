@@ -87,11 +87,10 @@ class Elcinema:
         minutes =[]
         for end in re.findall(r'\"subheader\">\[(\d+)',self.data):     
             minutes.append(int(end))
-        b = datetime.strptime(str(self.Starttime()[0]),'%Y-%m-%d %H:%M:%S').strftime('%Y %m %d %H:%M')
-        a = datetime.strptime(b,'%Y %m %d %H:%M') 
-        for r in minutes:
-            x=a+timedelta(minutes=r)
-            a += timedelta(minutes=r)
+        start = datetime.strptime(datetime.strptime(str(self.Starttime()[0]),'%Y-%m-%d %H:%M:%S').strftime('%Y %m %d %H:%M'),'%Y %m %d %H:%M') 
+        for m in minutes:
+            x=start+timedelta(minutes=m)
+            start += timedelta(minutes=m)
             self.prog_end.append(x)
             
         return self.prog_end
@@ -107,7 +106,7 @@ class Elcinema:
         mt = re.findall(r'<a\shref=\"\/work\/\d+\/\">(.*?)<\/a><\/li|columns small-7 large-11\">\s+<ul class=\"unstyled no-margin\">\s+<li>(.*?)<\/li>',self.data)
         for m in mt:
             if m[0]=='' and m[1]=='':
-                self.titles.append('Unknown program')
+                self.titles.append("يتعذر الحصول على معلومات هذا البرنامج".decode('utf-8'))
             elif m[0]=='':
                 self.titles.append(m[1])
             else:

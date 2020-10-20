@@ -71,13 +71,16 @@ class StartTimer:
                     url = requests.get('https://api.github.com/repos/Haxer/EPG-XMLFiles/branches/'+branch.split('-')[0],timeout=5).json()
                 else:
                     url = requests.get('https://api.github.com/repos/ziko-ZR1/xml/branches/'+branch.split('-')[0],timeout=5).json()
+                
+                try:
+                    result = url['commit']['commit']['message']+' '+url['commit']['commit']['committer']['date'].replace('T',' ').replace('Z','')
+                except KeyError:
+                    result = url['message'].split('. (')[0]
+                     
             except:
                 result = "Unable to Fetch Data Error 404"
-                return ## code should return because url is not downloaded
-            try:
-                result = url['commit']['commit']['message']+' '+url['commit']['commit']['committer']['date'].replace('T',' ').replace('Z','')
-            except KeyError:
-                result = url['message'].split('. (')[0]
+                continue
+            
               
             allData.append(str(branch.split('-')[0]+' '+result))
         self.toJson(allData)

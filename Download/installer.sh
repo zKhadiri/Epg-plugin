@@ -2,8 +2,8 @@
 ##setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=14.6
-description=What_is_NEW:\n'[Fix crash on DreamOS]'
+version=14.7
+description=What_is_NEW:\n'[discovery channels at 4.8E]'
 ##############################################################
 
 TEMPATH=/tmp

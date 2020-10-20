@@ -5,7 +5,7 @@ from Components.Label import Label
 from Components.ActionMap import ActionMap
 from ServiceReference import ServiceReference
 from Components.Button import Button
-from enigma import eEnv,getDesktop
+from enigma import eEnv,getDesktop,gRGB
 from Tools.Directories import fileExists
 from Components.MenuList import MenuList
 from Screens.MessageBox import MessageBox
@@ -18,6 +18,9 @@ LAMEDB = eEnv.resolve('${sysconfdir}/enigma2/lamedb')
 
 ### import class + screens from files inside plugin
 from .skin import *
+
+def parseColor(s):
+	return gRGB(int(s[1:], 0x10))
 
 def getDesktopSize():
     s = getDesktop(0).size()
@@ -63,7 +66,7 @@ class set_ref(Screen):
             "right":self.right,
             "left":self.left
         }, -1)
-        
+        self.exist= False
         self.ServicesList = []
         self.idxList=[]
         self.bqList=[]
@@ -79,8 +82,6 @@ class set_ref(Screen):
         self.getJson()       
         self["bouq"].setText("Current bouquet  : {}".format(self.bouquetname))
      
-    
-   
 #####################################################
 
     def getJson(self):
@@ -93,10 +94,12 @@ class set_ref(Screen):
     def last(self):
         self.bqIndex-=1
         self.changeBQ()
+        self['id'].setText("")
         
     def next(self):
         self.bqIndex+=1
         self.changeBQ()
+        self['id'].setText("")
         
     def changeBQ(self):
         if self.bqIndex>(len(self.bqList)-1):
@@ -149,36 +152,40 @@ class set_ref(Screen):
     
     def ok(self):
         if fileExists(self.path):
-            doc = ET.parse(self.path)
-            root = doc.getroot()
+	    self.exist = False
+            
             if len(self.refstr)>60:
-                root.append((ET.fromstring('<channel id="{}">{}</channel>'.format(self.id,self.refstr.split('/')[0]+'//example.m3u8'))))
+                new_id = '<channel id="{}">{}</channel>'.format(self.id,self.refstr.split('/')[0]+'//example.m3u8')
             else:
-                root.append((ET.fromstring('<channel id="{}">{}</channel>'.format(self.id,self.refstr))))
-            out = ET.tostring(root)
-            dom = minidom.parseString(out)
-            f = open(self.path, 'w')
-            dom_string = dom.toprettyxml(encoding='UTF-8')
-            dom_string = os.linesep.join([s for s in dom_string.splitlines() if s.strip()])
-            f.write(dom_string)
+                new_id = '<channel id="{}">{}</channel>'.format(self.id,self.refstr)
+            
+            f = open(self.path, 'r')
+            data = f.read()
             f.close()
-            self.remove_duplicates()
-            self['id'].setText("{} added successfully to config".format(self.name))
+            
+            for line in data.split('\n'):
+                if new_id == line.strip():
+                    self['id'].setText("{} already exist in config".format(self.name))
+                    self['id'].instance.setForegroundColor(parseColor("#00ff2525"))
+                    self.exist = True
+                  
+            if not self.exist:
+                doc = ET.parse(self.path)
+                root = doc.getroot()
+                root.append((ET.fromstring(new_id)))
+                out = ET.tostring(root)
+                dom = minidom.parseString(out)
+                f = open(self.path, 'w')
+                dom_string = dom.toprettyxml(encoding='UTF-8')
+                dom_string = os.linesep.join([s for s in dom_string.splitlines() if s.strip()])
+                f.write(dom_string)
+                f.close()
+                self['id'].setText("{} added successfully to config".format(self.name))
+                self['id'].instance.setForegroundColor(parseColor("#008000"))
         else:
             self.session.open(MessageBox,_(str(self.path)+" not found in path"), MessageBox.TYPE_INFO,timeout=10)
-    
-    def remove_duplicates(self):
-        with open(self.path, "rb") as fp:
-            lines = fp.readlines()
-            new_lines = []
-            for line in lines:
-                line = line.strip()
-                if line not in new_lines:
-                    new_lines.append(line)
-                f = open(self.path, 'w')
-                f.write('\n'.join(new_lines))
-                f.close()
-    
+
+
     def getCurrentService(self):
         from ServiceReference import ServiceReference
         if self.curservice is not None:
@@ -203,9 +210,11 @@ class set_ref(Screen):
     
     def right(self):
         self.changeService(1)
+        self['id'].setText("")
 
     def left(self):
         self.changeService(-1)
+        self['id'].setText("")
 
         
     def changeService(self, num):
