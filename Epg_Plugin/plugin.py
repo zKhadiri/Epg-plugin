@@ -12,7 +12,7 @@ def connected_to_internet():
     try:
         _ = requests.get('https://github.com', timeout=5)
         return True
-    except requests.ConnectionError:
+    except :
         return False
     
 glb_session = None
@@ -79,9 +79,7 @@ class StartTimer:
                      
             except:
                 result = "Unable to Fetch Data Error 404"
-                continue
-            
-              
+                
             allData.append(str(branch.split('-')[0]+' '+result))
         self.toJson(allData)
         

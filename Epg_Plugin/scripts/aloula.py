@@ -75,12 +75,14 @@ def snrt():
     nn=datetime.strptime(date.group(),'%d/%m/%Y')
     toda = nn.replace(hour=0, minute=0, second=0, microsecond=0)
     last_hr = 0
-    for d in times_all:
-        h, m = map(int, d.split(":"))
-        if last_hr > h:
-            toda = toda + timedelta(days=1)
-        last_hr = h
-        glb_time.append(toda + timedelta(hours=h, minutes=m))
+    try:
+        for d in times_all:
+            h, m = map(int, d.split(":"))
+            if last_hr > h:
+                toda = toda + timedelta(days=1)
+            last_hr = h
+            glb_time.append(toda + timedelta(hours=h, minutes=m))
+    except:pass
     if len(glb_time)>0:
         for elem, next_elem in zip(glb_time, glb_time[1:] + [glb_time[0]]):
             startime=datetime.strptime(str(elem),'%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
@@ -306,7 +308,7 @@ def medi():
         print 'No data found for or missing data for Mediatv'
         sys.stdout.flush()
 
-if __name__ == '__main__': 
+if __name__ == '__main__':
     snrt()
     arriadia()
     mm()
