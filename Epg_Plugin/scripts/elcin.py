@@ -1,5 +1,10 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
+
+# python3
+from __future__ import print_function
+from compat import PY3
+
 import requests,re,io,sys,os,ssl
 from datetime import datetime,timedelta
 from time import sleep,strftime
@@ -44,7 +49,7 @@ REDC =  '\033[31m'
 ENDC = '\033[m'                                                                 
                                                                                 
 def cprint(text):                                                               
-    print REDC+text+ENDC
+    print(REDC+text+ENDC)
 
 
 class Elcinema:
@@ -68,10 +73,14 @@ class Elcinema:
     def Starttime(self):
         hours = []
         for time in re.findall(r'(\d\d\:\d\d.*)',self.data):
-            if 'مساءً'.decode('utf-8') in time or 'صباحًا'.decode('utf-8') in time:
-                start=datetime.strptime(time.replace('</li>','').replace('مساءً'.decode('utf-8'),'PM').replace('صباحًا'.decode('utf-8'),'AM'),'%I:%M %p')
-                hours.append(start.strftime('%H:%M'))
-        
+            if PY3:
+            	if 'مساءً' in time or 'صباحًا' in time:
+                	start=datetime.strptime(time.replace('</li>','').replace('مساءً','PM').replace('صباحًا','AM'),'%I:%M %p')
+                	hours.append(start.strftime('%H:%M'))
+            else:
+            	if 'مساءً'.decode('utf-8') in time or 'صباحًا'.decode('utf-8') in time:
+                	start=datetime.strptime(time.replace('</li>','').replace('مساءً'.decode('utf-8'),'PM').replace('صباحًا'.decode('utf-8'),'AM'),'%I:%M %p')
+                	hours.append(start.strftime('%H:%M'))
         today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0) 
         last_hr = 0
         for d in hours:
@@ -106,14 +115,20 @@ class Elcinema:
         mt = re.findall(r'<a\shref=\"\/work\/\d+\/\">(.*?)<\/a><\/li|columns small-7 large-11\">\s+<ul class=\"unstyled no-margin\">\s+<li>(.*?)<\/li>',self.data)
         for m in mt:
             if m[0]=='' and m[1]=='':
-                self.titles.append("يتعذر الحصول على معلومات هذا البرنامج".decode('utf-8'))
+                if PY3:
+                	self.titles.append("يتعذر الحصول على معلومات هذا البرنامج")
+                else:
+                	self.titles.append("يتعذر الحصول على معلومات هذا البرنامج".decode('utf-8'))
             elif m[0]=='':
                 self.titles.append(m[1])
             else:
                 self.titles.append(m[0])
         for index, element in enumerate(self.titles):
             if element not in self.title:
-                self.GetDes().insert(index,"يتعذر الحصول على معلومات هذا البرنامج".decode('utf-8'))
+                if PY3:
+                	self.GetDes().insert(index,"يتعذر الحصول على معلومات هذا البرنامج")
+                else:
+                	self.GetDes().insert(index,"يتعذر الحصول على معلومات هذا البرنامج".decode('utf-8'))
                 
         return self.titles
     
@@ -127,26 +142,32 @@ class Elcinema:
             ch+=4*' '+'<desc lang="ar">'+des.replace('&#39;',"'").replace('&quot;','"').replace('&amp;','and').replace('(','').replace(')','').strip()+'</desc>\n  </programme>\r'
             with io.open("/etc/epgimport/elcinema.xml","a",encoding='UTF-8')as f:
                 f.write(ch)
-        print channel.split('-')[1]+' epg ends at : '+str(self.Endtime()[-1])
+        cprint(channel.split('-')[1]+' epg ends at : '+str(self.Endtime()[-1]))
         sys.stdout.flush()          
             
 def main():
-    print('**************ELCINEMA EPG******************')
+    cprint('**************ELCINEMA EPG******************')
     sys.stdout.flush()
     
     with io.open("/etc/epgimport/elcinema.xml","w",encoding='UTF-8')as f:
-        f.write(('<?xml version="1.0" encoding="UTF-8"?>'+"\n"+'<tv generator-info-name="By ZR1">').decode('utf-8'))
+        if PY3:
+        	f.write('<?xml version="1.0" encoding="UTF-8"?>'+"\n"+'<tv generator-info-name="By ZR1">')
+        else:
+        	f.write(('<?xml version="1.0" encoding="UTF-8"?>'+"\n"+'<tv generator-info-name="By ZR1">').decode('utf-8'))
 
     for x in nb_channel:
         with io.open("/etc/epgimport/elcinema.xml","a",encoding='UTF-8')as f:
-            f.write(("\n"+'  <channel id="'+x.split('-')[1]+'">'+"\n"+'    <display-name lang="en">'+x.split('-')[1]+'</display-name>'+"\n"+'  </channel>\r').decode('utf-8'))
+            if PY3:
+            	f.write("\n"+'  <channel id="'+x.split('-')[1]+'">'+"\n"+'    <display-name lang="en">'+x.split('-')[1]+'</display-name>'+"\n"+'  </channel>\r')
+            else:
+            	f.write(("\n"+'  <channel id="'+x.split('-')[1]+'">'+"\n"+'    <display-name lang="en">'+x.split('-')[1]+'</display-name>'+"\n"+'  </channel>\r').decode('utf-8'))
     
     import time
     Hour = time.strftime("%H:%M")
     start='00:00'
     end='02:00'
     if Hour>=start and Hour<end:
-        print 'Please come back at 2am to download the epg'
+        cprint('Please come back at 2am to download the epg')
         sys.stdout.flush()
     else:
         for nb in nb_channel:
@@ -171,7 +192,10 @@ def main():
 if __name__=='__main__':
     main()
     with io.open("/etc/epgimport/elcinema.xml", "a",encoding="utf-8") as f:
-        f.write(('</tv>').decode('utf-8'))
+        if PY3:
+            f.write('</tv>')
+        else:
+            f.write(('</tv>').decode('utf-8'))
 
-    print('**************FINISHED******************')
+    cprint('**************FINISHED******************')
     sys.stdout.flush()

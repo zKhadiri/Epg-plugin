@@ -1,5 +1,10 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
+
+# python3
+from __future__ import print_function
+from compat import PY3
+
 from elcin import Elcinema,get_tz
 import io,requests,sys
 from datetime import datetime,timedelta
@@ -24,16 +29,22 @@ class ElcinB(Elcinema,object):
             ch+=4*' '+'<desc lang="ar">'+des.replace('&#39;',"'").replace('&quot;','"').replace('&amp;','and').replace('(','').replace(')','').strip()+'</desc>\n  </programme>\r'
             with io.open("/etc/epgimport/beinentCin.xml","a",encoding='UTF-8')as f:
                 f.write(ch)
-        print channel.split('-')[1]+' epg ends at : '+str(self.Endtime()[-1])
+        print(channel.split('-')[1]+' epg ends at : '+str(self.Endtime()[-1]))
         sys.stdout.flush()
         
 def main():
     with io.open("/etc/epgimport/beinentCin.xml","w",encoding='UTF-8')as f:
-        f.write(('<?xml version="1.0" encoding="UTF-8"?>'+"\n"+'<tv generator-info-name="By ZR1">').decode('utf-8'))
+        if PY3:
+        	f.write('<?xml version="1.0" encoding="UTF-8"?>'+"\n"+'<tv generator-info-name="By ZR1">')
+        else:
+        	f.write(('<?xml version="1.0" encoding="UTF-8"?>'+"\n"+'<tv generator-info-name="By ZR1">').decode('utf-8'))
 
     for x in nb_channel:
         with io.open("/etc/epgimport/beinentCin.xml","a",encoding='UTF-8')as f:
-            f.write(("\n"+'  <channel id="'+x.split('-')[1]+'">'+"\n"+'    <display-name lang="en">'+x.split('-')[1]+'</display-name>'+"\n"+'  </channel>\r').decode('utf-8'))
+            if PY3:
+            	f.write("\n"+'  <channel id="'+x.split('-')[1]+'">'+"\n"+'    <display-name lang="en">'+x.split('-')[1]+'</display-name>'+"\n"+'  </channel>\r')
+            else:
+            	f.write(("\n"+'  <channel id="'+x.split('-')[1]+'">'+"\n"+'    <display-name lang="en">'+x.split('-')[1]+'</display-name>'+"\n"+'  </channel>\r').decode('utf-8'))
         
     print('**************ELCINEMA BEIN ENTERTAINMENT EPG******************')
     sys.stdout.flush()         
@@ -42,7 +53,7 @@ def main():
     start='00:00'
     end='02:00'
     if Hour>=start and Hour<end:
-        print 'Please come back at 2am to download the epg'
+        print('Please come back at 2am to download the epg')
         sys.stdout.flush()
     else:
         for nb in nb_channel:
@@ -60,7 +71,10 @@ def main():
 if __name__=='__main__':
     main()
     with io.open("/etc/epgimport/beinentCin.xml", "a",encoding="utf-8") as f:
-        f.write(('</tv>').decode('utf-8'))
+        if PY3:
+            f.write('</tv>')
+        else:
+            f.write(('</tv>').decode('utf-8'))
 
     print('**************FINISHED******************')
     sys.stdout.flush()

@@ -1,21 +1,23 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
+
+# python3
+from __future__ import print_function
+from compat import PY3
+
 from time import sleep
 import os,io,re,sys,requests
 
 path = '/etc/epgimport/dstv.xml'
 
-print "Downloading SuperSport epg guide\nPlease wait...."  
+print("Downloading SuperSport epg guide\nPlease wait....")
 sys.stdout.flush()
 
 url = requests.get('http://github.com/ziko-ZR1/XML/blob/master/dstv.xml?raw=true')
 with io.open(path,'w',encoding="utf-8") as f:
     f.write(url.text)
-
-         
-print "dstv.xml donwloaded with success"
-
-
+ 
+print("dstv.xml donwloaded with success")
 
 from datetime import datetime
 import json
@@ -28,7 +30,7 @@ with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'w
     json.dump(data, f)
 
 if os.path.exists('/var/lib/dpkg/status'):
-    print 'Dream os image found\nSorting data please wait.....'
+    print('Dream os image found\nSorting data please wait.....')
     sys.stdout.flush()
     import xml.etree.ElementTree as ET
     tree = ET.parse('/etc/epgimport/dstv.xml')

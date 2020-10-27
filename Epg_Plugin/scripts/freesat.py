@@ -1,3 +1,10 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+# python3
+from __future__ import print_function
+from compat import PY3
+
 import requests,io,threading,sys,os
 from datetime import datetime,timedelta
 from requests.adapters import HTTPAdapter
@@ -44,11 +51,17 @@ channels_code=['505-BBC ONE SD','555-BBC ONE HD','700-BBC TWO HD','1011-ITV','15
 
 channels_code.sort()
 with io.open("/etc/epgimport/freesat.xml","w",encoding='UTF-8')as f:
-    f.write(('<?xml version="1.0" encoding="UTF-8"?>'+"\n"+'<tv generator-info-name="By ZR1">').decode('utf-8'))
+    if PY3:
+    	f.write('<?xml version="1.0" encoding="UTF-8"?>'+"\n"+'<tv generator-info-name="By ZR1">')
+    else:
+    	f.write(('<?xml version="1.0" encoding="UTF-8"?>'+"\n"+'<tv generator-info-name="By ZR1">').decode('utf-8'))
 
 for x in channels_code:
     with io.open("/etc/epgimport/freesat.xml","a",encoding='UTF-8')as f:
-        f.write(("\n"+'  <channel id="'+x.split('-')[1]+'">'+"\n"+'    <display-name lang="en">'+x.split('-')[1]+'</display-name>'+"\n"+'  </channel>\r').decode('utf-8')) 
+        if PY3:
+        	f.write("\n"+'  <channel id="'+x.split('-')[1]+'">'+"\n"+'    <display-name lang="en">'+x.split('-')[1]+'</display-name>'+"\n"+'  </channel>\r')
+        else:
+        	f.write(("\n"+'  <channel id="'+x.split('-')[1]+'">'+"\n"+'    <display-name lang="en">'+x.split('-')[1]+'</display-name>'+"\n"+'  </channel>\r').decode('utf-8'))
 lock = threading.Semaphore(4)
 
 def freesat(code):
@@ -70,7 +83,7 @@ def freesat(code):
                             f.write(ch)
                 except:
                     continue
-        print code.split('-')[1]+' epg ends at : '+(datetime.strptime(end,'%Y%m%d%H%M%S').strftime('%Y-%m-%d %H:%M'))
+        print(code.split('-')[1]+' epg ends at : '+(datetime.strptime(end,'%Y%m%d%H%M%S').strftime('%Y-%m-%d %H:%M')))
         sys.stdout.flush()
         lock.release()
     except:pass
@@ -87,10 +100,13 @@ if __name__=='__main__':
         thread.join()  
 
 with io.open("/etc/epgimport/freesat.xml", "a",encoding="utf-8") as f:
-    f.write(('</tv>').decode('utf-8'))
+    if PY3:
+        f.write('</tv>')
+    else:
+        f.write(('</tv>').decode('utf-8'))
 
 if os.path.exists('/var/lib/dpkg/status'):
-    print 'Dream os image found\nSorting data please wait.....'
+    print('Dream os image found\nSorting data please wait.....')
     sys.stdout.flush()
     import xml.etree.ElementTree as ET
     tree = ET.parse('/etc/epgimport/freesat.xml')

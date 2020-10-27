@@ -1,5 +1,10 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
+
+# python3
+from __future__ import print_function
+from compat import PY3
+
 import requests,json,io,re,os,sys
 from datetime import datetime
 from requests.adapters import HTTPAdapter
@@ -22,14 +27,20 @@ for i in range(0,5):
     urls.append('https://www.dstv.co.za/webmethods/no-cache/GetChannelAllDate.ashx?d='+str(week)+'')
 
 with io.open("/etc/epgimport/dstv.xml","w",encoding='UTF-8')as f:
-    f.write(('<tv generator-info-name="By ZR1">').decode('utf-8'))
+    if PY3:
+    	f.write('<tv generator-info-name="By ZR1">')
+    else:
+    	f.write(('<tv generator-info-name="By ZR1">').decode('utf-8'))
 with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/bouquets.json', 'r') as f:
     jsData = json.load(f)
 for channel in jsData['bouquets']:
     if channel["name"]=="DSTV":  
         for nt in channel['channels']:
             with io.open("/etc/epgimport/dstv.xml","a",encoding='UTF-8')as f:
-                f.write(("\n"+'  <channel id="'+nt+'">'+"\n"+'    <display-name lang="en">'+nt.replace("_"," ")+'</display-name>'+"\n"+'  </channel>'+"\r").decode('utf-8'))
+                if PY3:
+                	f.write("\n"+'  <channel id="'+nt+'">'+"\n"+'    <display-name lang="en">'+nt.replace("_"," ")+'</display-name>'+"\n"+'  </channel>'+"\r")
+                else:
+                	f.write(("\n"+'  <channel id="'+nt+'">'+"\n"+'    <display-name lang="en">'+nt.replace("_"," ")+'</display-name>'+"\n"+'  </channel>'+"\r").decode('utf-8'))
 channels=[]
 def dstv():
     for url in urls:
@@ -76,10 +87,13 @@ if __name__=='__main__':
 
 
 with io.open("/etc/epgimport/dstv.xml", "a",encoding="utf-8") as f:
-    f.write(('</tv>').decode('utf-8'))
+    if PY3:
+        f.write('</tv>')
+    else:
+        f.write(('</tv>').decode('utf-8'))
     
 if os.path.exists('/var/lib/dpkg/status'):
-    print 'Dream os image found\nSorting data please wait.....'
+    print('Dream os image found\nSorting data please wait.....')
     sys.stdout.flush()
     import xml.etree.ElementTree as ET
     tree = ET.parse('/etc/epgimport/dstv.xml')
