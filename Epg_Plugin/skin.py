@@ -144,7 +144,7 @@ if DreamOS():
 			</widget>
 			<ePixmap name="red" position="775,664" zPosition="2" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/red.png" transparent="1" alphatest="on"/>
 			<ePixmap name="green" position="966,663" zPosition="2" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/green.png" transparent="1" alphatest="on"/>
-			<ePixmap position="1144,671" size="60,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/key_menu.png" alphatest="on" zPosition="5"/>
+			<!--ePixmap position="1144,671" size="60,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/key_menu.png" alphatest="on" zPosition="5"/-->
 			<widget name="key_red" position="775,663" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;19" transparent="1"/>
 			<widget name="key_green" position="966,663" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;19" transparent="1"/>
 			<widget name="list" foregroundColor="#00ffffff" backgroundColor="#16000000" zPosition="2" position="17,100" size="625,595" scrollbarMode="showOnDemand" transparent="1"/>
@@ -174,7 +174,7 @@ if DreamOS():
 			</widget>
 			<ePixmap name="red" position="1092,999" zPosition="2" size="260,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/redfhd.png" transparent="1" alphatest="on"/>
 			<ePixmap name="green" position="1417,999" zPosition="2" size="260,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/greenfhd.png" transparent="1" alphatest="on"/>
-			<ePixmap position="1716,1006" size="103,35" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/key_menufhd.png" alphatest="on"/>
+			<!--ePixmap position="1716,1006" size="103,35" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/key_menufhd.png" alphatest="on"/-->
 			<widget name="key_red" position="1092,1005" size="260,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
 			<widget name="key_green" position="1418,1005" size="260,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
 			<widget name="list" foregroundColor="#00ffffff" backgroundColor="#16000000" zPosition="2" position="30,160" size="932,895" scrollbarMode="showOnDemand" transparent="1"/>
@@ -202,7 +202,7 @@ else:
 			</widget>
 			<ePixmap name="red" position="775,664" zPosition="2" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/red.png" transparent="1" alphatest="on"/>
 			<ePixmap name="green" position="966,663" zPosition="2" size="140,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/green.png" transparent="1" alphatest="on"/>
-			<ePixmap position="1144,671" size="60,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/key_menu.png" alphatest="on" zPosition="5"/>
+			<!--ePixmap position="1144,671" size="60,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/key_menu.png" alphatest="on" zPosition="5"/-->
 			<widget name="key_red" position="775,663" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;19" transparent="1"/>
 			<widget name="key_green" position="966,663" size="140,40" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;19" transparent="1"/>
 			<widget name="list" font="Regular; 25" itemHeight="35" foregroundColor="#00ffffff" backgroundColor="#16000000" zPosition="2" position="17,100" size="625,595" scrollbarMode="showOnDemand" transparent="1"/>
@@ -232,7 +232,7 @@ else:
 			</widget>
 			<ePixmap name="red" position="1092,999" zPosition="2" size="260,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/redfhd.png" transparent="1" alphatest="on"/>
 			<ePixmap name="green" position="1417,999" zPosition="2" size="260,49" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/greenfhd.png" transparent="1" alphatest="on"/>
-			<ePixmap position="1716,1006" size="103,35" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/key_menufhd.png" alphatest="on"/>
+			<!--ePixmap position="1716,1006" size="103,35" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/icons/key_menufhd.png" alphatest="on"/-->
 			<widget name="key_red" position="1092,1005" size="260,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
 			<widget name="key_green" position="1418,1005" size="260,49" valign="center" halign="center" zPosition="4" foregroundColor="#00ffffff" backgroundColor="#16000000" font="Regular;32" transparent="1"/>
 			<widget name="list" font="Regular;35" itemHeight="42" foregroundColor="#00ffffff" backgroundColor="#16000000" zPosition="2" position="30,160" size="932,895" scrollbarMode="showOnDemand" transparent="1"/>

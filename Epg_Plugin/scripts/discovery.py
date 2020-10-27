@@ -3,14 +3,14 @@
 
 # python3
 from __future__ import print_function
-
+from compat import PY3
 
 import requests,re,sys,io
 from datetime import datetime,timedelta
 from requests.adapters import HTTPAdapter
-
-reload(sys)
-sys.setdefaultencoding("utf-8")
+if not PY3:
+	reload(sys)
+	sys.setdefaultencoding("utf-8")
 
 next_update = (datetime.today()+timedelta(days=20)).strftime('%Y-%m-%d 02:00:00')
 
@@ -23,14 +23,19 @@ print('**************Discovery EPG******************')
 sys.stdout.flush()
 
 with io.open("/etc/epgimport/discovery.xml","w",encoding='UTF-8')as f:
-    f.write(('<?xml version="1.0" encoding="UTF-8"?>'+"\n"+'<tv generator-info-name="By ZR1">').decode('utf-8'))
+    if PY3:
+    	f.write('<?xml version="1.0" encoding="UTF-8"?>'+"\n"+'<tv generator-info-name="By ZR1">')
+    else:
+    	f.write(('<?xml version="1.0" encoding="UTF-8"?>'+"\n"+'<tv generator-info-name="By ZR1">').decode('utf-8'))
 
 for x in channels:
     with io.open("/etc/epgimport/discovery.xml","a",encoding='UTF-8')as f:
-        f.write(("\n"+'  <channel id="'+x.split('|')[0]+'">'+"\n"+'    <display-name lang="en">'+x.split('|')[0]+'</display-name>'+"\n"+'  </channel>\r').decode('utf-8'))
+        if PY3:
+        	f.write("\n"+'  <channel id="'+x.split('|')[0]+'">'+"\n"+'    <display-name lang="en">'+x.split('|')[0]+'</display-name>'+"\n"+'  </channel>\r')
+        else:
+        	f.write(("\n"+'  <channel id="'+x.split('|')[0]+'">'+"\n"+'    <display-name lang="en">'+x.split('|')[0]+'</display-name>'+"\n"+'  </channel>\r').decode('utf-8'))
         
 french=['DFRAFRE-UTC','SCFRFRE-UTC','DFFRFRE-UTC','IDFRFRE-UTC']
-
 def discovery():
     with requests.Session() as s:
         s.mount('http://', HTTPAdapter(max_retries=10))
@@ -58,8 +63,12 @@ def discovery():
                         epg+=4*' '+'<desc lang="en">'+py+' (S'+se+' Ep '+ep+') : '+dxt_d.replace('&amp;','and').strip()+'</desc>\n  </programme>\r'
                     elif ch.split('|')[1] in french:
                         epg+=2 * ' ' + '<programme start="' + prog_start + ' +0000" stop="' + prog_end + ' +0000" channel="'+ch.split('|')[0]+'">\n'
-                        epg+=4*' '+'<title lang="en">'+title.encode('latin-1').replace('&amp;','and')+'</title>\n'
-                        epg+=4*' '+'<desc lang="en">'+py+' (S'+se+' Ep '+ep+') : '+des.encode('latin-1').replace('&amp;','and').strip()+'</desc>\n  </programme>\r'
+                        if PY3:
+                        	epg+=4*' '+'<title lang="en">'+title.replace('&amp;','and')+'</title>\n'
+                        	epg+=4*' '+'<desc lang="en">'+py+' (S'+se+' Ep '+ep+') : '+des.replace('&amp;','and').strip()+'</desc>\n  </programme>\r'
+                        else:
+                        	epg+=4*' '+'<title lang="en">'+title.encode('latin-1').replace('&amp;','and')+'</title>\n'
+                        	epg+=4*' '+'<desc lang="en">'+py+' (S'+se+' Ep '+ep+') : '+des.encode('latin-1').replace('&amp;','and').strip()+'</desc>\n  </programme>\r'
                     else:
                         epg+=2 * ' ' + '<programme start="' + prog_start + ' +0000" stop="' + prog_end + ' +0000" channel="'+ch.split('|')[0]+'">\n'
                         epg+=4*' '+'<title lang="en">'+title.replace('&amp;','and')+'</title>\n'
@@ -73,7 +82,10 @@ def discovery():
 if __name__ =='__main__':
     discovery()
     with io.open("/etc/epgimport/discovery.xml", "a",encoding="utf-8") as f:
-        f.write(('</tv>').decode('utf-8'))
+        if PY3:
+            f.write('</tv>')
+        else:
+            f.write(('</tv>').decode('utf-8'))
     import json
     with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'r') as f:
         data = json.load(f)

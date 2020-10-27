@@ -1,10 +1,16 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+# python3
+from __future__ import print_function
+
 from Plugins.Plugin import PluginDescriptor
-from interfaces import EPGGrabber
+from .interfaces import EPGGrabber
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from enigma import eTimer
 from Tools.Directories import fileExists
-import requests,os,json
+import requests, os, json
 from datetime import datetime
 
 
@@ -21,8 +27,8 @@ glb_startDelay = None
 def autostart(reason, **kwargs): 
     global glb_session
     global glb_startDelay
-   
-    if reason == 0 and kwargs.has_key("session"):   
+
+    if reason == 0 and "session" in kwargs:   
         glb_session = kwargs["session"]         
         glb_startDelay = StartTimer()
         glb_startDelay.start()

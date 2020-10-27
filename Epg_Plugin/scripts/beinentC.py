@@ -1,5 +1,10 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
+
+# python3
+from __future__ import print_function
+from compat import PY3
+
 import requests,re,sys,io,json
 from datetime import timedelta
 
@@ -25,11 +30,18 @@ def get_tz():
 time_zone = get_tz()
 
 with io.open("/etc/epgimport/beinentC.xml","w",encoding='UTF-8')as f:
-    f.write(('<?xml version="1.0" encoding="UTF-8"?>'+"\n"+'<tv generator-info-name="By ZR1">').decode('utf-8'))
-
+    if PY3:
+    	f.write('<?xml version="1.0" encoding="UTF-8"?>'+"\n"+'<tv generator-info-name="By ZR1">')
+    else:
+    	f.write(('<?xml version="1.0" encoding="UTF-8"?>'+"\n"+'<tv generator-info-name="By ZR1">').decode('utf-8'))
+    	
 for code in ch_code:
     with io.open("/etc/epgimport/beinentC.xml","a",encoding='UTF-8')as f:
-        f.write(("\n"+'  <channel id="'+code.split('-')[1]+'">'+"\n"+'    <display-name lang="en">'+code.split('-')[1]+'</display-name>'+"\n"+'  </channel>\r').decode('utf-8')) 
+        if PY3:
+        	f.write("\n"+'  <channel id="'+code.split('-')[1]+'">'+"\n"+'    <display-name lang="en">'+code.split('-')[1]+'</display-name>'+"\n"+'  </channel>\r')
+        else:
+        	f.write(("\n"+'  <channel id="'+code.split('-')[1]+'">'+"\n"+'    <display-name lang="en">'+code.split('-')[1]+'</display-name>'+"\n"+'  </channel>\r').decode('utf-8'))
+        
 print('**************BEIN ENTERTAINMENT EPG******************')
 sys.stdout.flush()
 for code in ch_code: 
@@ -49,12 +61,14 @@ for code in ch_code:
             f.write(ch)
             
     endtime = datetime.strptime(start,'%Y%m%d%H%M%S').strftime('%Y-%m-%d %H:%M')
-    print code.split('-')[1]+' epg ends at '+endtime
+    print(code.split('-')[1]+' epg ends at '+endtime)
     sys.stdout.flush()
 
 with io.open("/etc/epgimport/beinentC.xml", "a",encoding="utf-8") as f:
-    f.write(('</tv>').decode('utf-8'))
-   
+    if PY3:
+        f.write('</tv>')
+    else:
+        f.write(('</tv>').decode('utf-8'))
 
 with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'r') as f:
     data = json.load(f)

@@ -1,5 +1,10 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
+
+# python3
+from __future__ import print_function
+from compat import PY3
+
 import requests,re,io
 from datetime import datetime,timedelta
 from requests.adapters import HTTPAdapter
@@ -7,8 +12,12 @@ from requests.adapters import HTTPAdapter
 now = (datetime.today()+timedelta(hours=3)).strftime('%Y-%m-%d')
 
 with io.open("/etc/epgimport/aljazeera.xml","w",encoding='UTF-8')as f:
-    f.write(('<?xml version="1.0" encoding="UTF-8"?>'+"\n"+'<tv generator-info-name="By ZR1">').decode('utf-8'))
-    f.write(("\n"+'  <channel id="aljazeera">'+"\n"+'    <display-name lang="en">aljazeera</display-name>'+"\n"+'  </channel>\r').decode('utf-8'))
+    if PY3:
+    	f.write('<?xml version="1.0" encoding="UTF-8"?>'+"\n"+'<tv generator-info-name="By ZR1">')
+    	f.write("\n"+'  <channel id="aljazeera">'+"\n"+'    <display-name lang="en">aljazeera</display-name>'+"\n"+'  </channel>\r')
+    else:
+    	f.write(('<?xml version="1.0" encoding="UTF-8"?>'+"\n"+'<tv generator-info-name="By ZR1">').decode('utf-8'))
+    	f.write(("\n"+'  <channel id="aljazeera">'+"\n"+'    <display-name lang="en">aljazeera</display-name>'+"\n"+'  </channel>\r').decode('utf-8'))
     
 with requests.Session() as s:
     s.mount('https://', HTTPAdapter(max_retries=50))
@@ -29,17 +38,25 @@ if len(times)>0:
             start = datetime.strptime(now+' '+elem,'%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
             end = datetime.strptime(now+' '+next_elem,'%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
         ch+= 2 * ' ' +'<programme start="' + start + ' +0300" stop="' + end+ ' +0300" channel="aljazeera">\n'
-        ch+=4*' '+'<title lang="ar">'+tit.replace('&#39;',"'").replace('&quot;','"').replace('&amp;','و'.decode('utf-8')).replace('<div class="schedule__row__nowshowing">','')+'</title>\n'
-        ch+=4*' '+'<desc lang="ar">'+de.replace('&#39;',"'").replace('&quot;','"').replace('&amp;','و'.decode('utf-8')).strip()+'</desc>\n  </programme>\r'
+        if PY3:
+        	ch+=4*' '+'<title lang="ar">'+tit.replace('&#39;',"'").replace('&quot;','"').replace('&amp;','و').replace('<div class="schedule__row__nowshowing">','')+'</title>\n'
+        	ch+=4*' '+'<desc lang="ar">'+de.replace('&#39;',"'").replace('&quot;','"').replace('&amp;','و').strip()+'</desc>\n  </programme>\r'
+        else:
+        	ch+=4*' '+'<title lang="ar">'+tit.replace('&#39;',"'").replace('&quot;','"').replace('&amp;','و'.decode('utf-8')).replace('<div class="schedule__row__nowshowing">','')+'</title>\n'
+        	ch+=4*' '+'<desc lang="ar">'+de.replace('&#39;',"'").replace('&quot;','"').replace('&amp;','و'.decode('utf-8')).strip()+'</desc>\n  </programme>\r'
+        
         with io.open("/etc/epgimport/aljazeera.xml", "a",encoding="utf-8") as f:
             f.write(ch)
-    print 'aljazeera epg download finished'
+    print('aljazeera epg download finished')
         
 else:
-    'No data found for aljazeera'
+    print('No data found for aljazeera')
     
 with io.open("/etc/epgimport/aljazeera.xml", "a",encoding="utf-8") as f:
-    f.write(('</tv>').decode('utf-8'))
+    if PY3:
+        f.write('</tv>')
+    else:
+        f.write(('</tv>').decode('utf-8'))
     
 import json
 with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'r') as f:

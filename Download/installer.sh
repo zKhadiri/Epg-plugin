@@ -2,8 +2,8 @@
 ##setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=14.9
-description=What_is_NEW:\n'[fix discovery french channels]'
+version=15.0
+description=What_is_NEW:\n'[Add support Python3]'
 ##############################################################
 
 TEMPATH=/tmp
@@ -20,30 +20,41 @@ elif [ -f /etc/opkg/opkg.conf ] ; then
    STATUS='/var/lib/opkg/status'
    OS='Opensource'
 fi
-if grep -q 'python-requests' $STATUS; then
+###############
+if [ -d /usr/lib/python3.8 ] ; then
+   echo "Python3"
+   PYTHON='PY3'
+   PYTHONPACK='python3-requests'
+else
+   echo "Python2"
+   PYTHON='PY2'
+   PYTHONPACK='python-requests'
+fi
+################
+if grep -q $PYTHONPACK $STATUS; then
     requests='Installed'
 fi
+################
 if grep -q 'enigma2-plugin-extensions-epgimport' $STATUS; then
     epgimport='Installed'
 fi
-if [ $requests = "Installed" -a $epgimport = "Installed" ]; then 
+################
+if [ $requests = "Installed" -a $epgimport = "Installed" ]; then
      echo ""
 else
-     echo "Need to download Depends packages"
-     if [ $OS = "DreamOS" ]; then
-          apt-get update
-     else
-          opkg update
-     fi
-     if grep -q 'python-requests' $STATUS; then
+
+     if grep -q $PYTHONPACK $STATUS; then
           echo ""
      else
           if [ $OS = "DreamOS" ]; then 
-                  echo " Downloading python-requests ......"
+                  echo " Downloading $PYTHONPACK ......"
                   apt-get install python-requests -y
-          else
-                  echo " Downloading python-requests ......"
+          elif [ $PYTHON = "PY2" ]; then 
+                  echo " Downloading $PYTHONPACK ......"
                   opkg install python-requests
+          elif [ $PYTHON = "PY3" ]; then 
+                  echo " Downloading $PYTHONPACK ......"
+                  opkg install python3-requests
           fi
      fi
      if grep -q 'enigma2-plugin-extensions-epgimport' $STATUS; then
@@ -61,6 +72,17 @@ else
           fi
      fi
 fi
+############################
+if grep -q $PYTHONPACK $STATUS; then
+	echo ""
+else
+	echo "#########################################################"
+	echo "#         Feed cannot download ($PYTHONPACK)            #"
+	echo "#         Epg_Plugin has not been not install           #"
+	echo "#########################################################"
+	exit 1
+fi
+############################
 echo ""
 # Download and install plugin
 cd /tmp
@@ -73,6 +95,7 @@ set +e
 rm -f Epg_Plugin-"$version".tar.gz
 cd ..
 sync
+############################
 echo "#########################################################"
 echo "#          Epg_Plugin INSTALLED SUCCESSFULLY            #"
 echo "#                BY ZIKO - support on                   #"

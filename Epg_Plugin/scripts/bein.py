@@ -1,5 +1,10 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
+
+# python3
+from __future__ import print_function
+from compat import PY3
+
 import requests,re,io,os,sys,json
 from time import sleep,strftime
 from requests.adapters import HTTPAdapter
@@ -27,7 +32,10 @@ for i in range(0,3):
 
 
 with io.open("/etc/epgimport/bein.xml","w",encoding='UTF-8')as f:
-    f.write(('<tv generator-info-name="By ZR1">').decode('utf-8'))
+	if PY3:
+		f.write('<tv generator-info-name="By ZR1">')
+	else:
+		f.write(('<tv generator-info-name="By ZR1">').decode('utf-8'))
 
 with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/bouquets.json', 'r') as f:
     jsData = json.load(f)
@@ -35,7 +43,10 @@ for channel in jsData['bouquets']:
     if channel["name"]=="Bein sports":    
         for cc in channel['channels']:
             with io.open("/etc/epgimport/bein.xml","a",encoding='UTF-8')as f:
-                f.write(("\n"+'  <channel id="'+cc.replace(" ","_")+'">'+"\n"+'    <display-name lang="en">'+cc.replace("_"," ")+'</display-name>'+"\n"+'    <icon src="http://epg.beinsports.com/mena_sports/'+cc.replace('BS_NBA','BS NBA')+'.svg"/>'+"\n"+'    <url>http://www.bein.net/ar</url>'+"\n"+'  </channel>\r').decode('utf-8'))
+            	if PY3:
+            		f.write("\n"+'  <channel id="'+cc.replace(" ","_")+'">'+"\n"+'    <display-name lang="en">'+cc.replace("_"," ")+'</display-name>'+"\n"+'    <icon src="http://epg.beinsports.com/mena_sports/'+cc.replace('BS_NBA','BS NBA')+'.svg"/>'+"\n"+'    <url>http://www.bein.net/ar</url>'+"\n"+'  </channel>\r')
+            	else:
+            		f.write(("\n"+'  <channel id="'+cc.replace(" ","_")+'">'+"\n"+'    <display-name lang="en">'+cc.replace("_"," ")+'</display-name>'+"\n"+'    <icon src="http://epg.beinsports.com/mena_sports/'+cc.replace('BS_NBA','BS NBA')+'.svg"/>'+"\n"+'    <url>http://www.bein.net/ar</url>'+"\n"+'  </channel>\r').decode('utf-8'))
 
 def bein():
     for url in urls:
@@ -108,10 +119,13 @@ if __name__=='__main__':
         json.dump(data, f)
 
 with io.open("/etc/epgimport/bein.xml", "a",encoding="utf-8") as f:
-    f.write(('\n'+'</tv>').decode('utf-8'))
-    
+    if PY3:
+    	f.write('\n'+'</tv>')
+    else:
+    	f.write(('\n'+'</tv>').decode('utf-8'))
+
 if os.path.exists('/var/lib/dpkg/status'):
-    print 'Dream os image found\nSorting data please wait.....'
+    print('Dream os image found\nSorting data please wait.....')
     sys.stdout.flush()
     import xml.etree.ElementTree as ET
     tree = ET.parse('/etc/epgimport/bein.xml')
