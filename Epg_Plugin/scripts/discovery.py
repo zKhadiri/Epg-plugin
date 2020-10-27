@@ -10,7 +10,7 @@ from datetime import datetime,timedelta
 from requests.adapters import HTTPAdapter
 
 reload(sys)
-sys.setdefaultencoding('UTF8')
+sys.setdefaultencoding("utf-8")
 
 next_update = (datetime.today()+timedelta(days=20)).strftime('%Y-%m-%d 02:00:00')
 
@@ -30,6 +30,7 @@ for x in channels:
         f.write(("\n"+'  <channel id="'+x.split('|')[0]+'">'+"\n"+'    <display-name lang="en">'+x.split('|')[0]+'</display-name>'+"\n"+'  </channel>\r').decode('utf-8'))
         
 french=['DFRAFRE-UTC','SCFRFRE-UTC','DFFRFRE-UTC','IDFRFRE-UTC']
+
 def discovery():
     with requests.Session() as s:
         s.mount('http://', HTTPAdapter(max_retries=10))
@@ -57,8 +58,8 @@ def discovery():
                         epg+=4*' '+'<desc lang="en">'+py+' (S'+se+' Ep '+ep+') : '+dxt_d.replace('&amp;','and').strip()+'</desc>\n  </programme>\r'
                     elif ch.split('|')[1] in french:
                         epg+=2 * ' ' + '<programme start="' + prog_start + ' +0000" stop="' + prog_end + ' +0000" channel="'+ch.split('|')[0]+'">\n'
-                        epg+=4*' '+'<title lang="en">'+title.replace('&amp;','and')+'</title>\n'
-                        epg+=4*' '+'<desc lang="en">'+py+' (S'+se+' Ep '+ep+') : '+des.replace('&amp;','and').strip()+'</desc>\n  </programme>\r'
+                        epg+=4*' '+'<title lang="en">'+title.encode('latin-1').replace('&amp;','and')+'</title>\n'
+                        epg+=4*' '+'<desc lang="en">'+py+' (S'+se+' Ep '+ep+') : '+des.encode('latin-1').replace('&amp;','and').strip()+'</desc>\n  </programme>\r'
                     else:
                         epg+=2 * ' ' + '<programme start="' + prog_start + ' +0000" stop="' + prog_end + ' +0000" channel="'+ch.split('|')[0]+'">\n'
                         epg+=4*' '+'<title lang="en">'+title.replace('&amp;','and')+'</title>\n'
