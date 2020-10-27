@@ -1,4 +1,9 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+# python3
 from __future__ import print_function
+
 from enigma import eConsoleAppContainer
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
@@ -6,6 +11,8 @@ from Components.ScrollLabel import ScrollLabel
 from Components.Sources.StaticText import StaticText
 from Screens.MessageBox import MessageBox
 from enigma import getDesktop
+
+from .scripts.compat import PY3
 
 def getDesktopSize():
     s = getDesktop(0).size()
@@ -50,15 +57,15 @@ class Console2(Screen):
         self['text'] = ScrollLabel('')
         self['key_red'] = StaticText(_('Cancel'))
         self['key_green'] = StaticText(_('Hide'))
-	self["actions"] = ActionMap(["WizardActions", "DirectionActions",'ColorActions'], 
-	{
+        self["actions"] = ActionMap(["WizardActions", "DirectionActions",'ColorActions'],
+            {
 		"ok": self.cancel,
 		"up": self["text"].pageUp,
 		"down": self["text"].pageDown,
 		"red": self.cancel,
 		"green": self.toggleHideShow,
 		"blue": self.restartenigma,
-	}, -1)
+            }, -1)
         self.cmdlist = isinstance(cmdlist, list) and cmdlist or [cmdlist]
         self.newtitle = title == 'Console' and _('Console') or title
         self.cancel_msg = None
@@ -66,10 +73,10 @@ class Console2(Screen):
         self.container = eConsoleAppContainer()
         self.run = 0
         self.finished = False
-	try: ## DreamOS By RAED
+        try: ## DreamOS By RAED
         	self.container.appClosed.append(self.runFinished)
         	self.container.dataAvail.append(self.dataAvail)
-	except:
+        except:
             	self.container.appClosed_conn = self.container.appClosed.connect(self.runFinished)
             	self.container.dataAvail_conn = self.container.dataAvail.connect(self.dataAvail)
         self.onLayoutFinish.append(self.startRun)
@@ -130,8 +137,8 @@ class Console2(Screen):
         self.cancel_msg = None
         if ret:
             try: ## DreamOS By RAED
-		self.container.appClosed.remove(self.runFinished)
-        	self.container.dataAvail.remove(self.dataAvail)
+                self.container.appClosed.remove(self.runFinished)
+                self.container.dataAvail.remove(self.dataAvail)
             except:
                 self.container.appClosed_conn = None
                 self.container.dataAvail_conn = None
@@ -140,7 +147,7 @@ class Console2(Screen):
 
     def closeConsole(self):
         if self.finished:
-	    try: ## DreamOS By RAED
+            try: ## DreamOS By RAED
                 self.container.appClosed.remove(self.runFinished)
                 self.container.dataAvail.remove(self.dataAvail)
             except:
@@ -151,7 +158,10 @@ class Console2(Screen):
             self.show()
 
     def dataAvail(self, str):
-        self['text'].appendText(str)
+        if PY3:
+        	self['text'].appendText(str.decode())
+        else:
+        	self['text'].appendText(str)
 
     def restartenigma(self):
         from Screens.Standby import TryQuitMainloop

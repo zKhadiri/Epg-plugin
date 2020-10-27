@@ -1,4 +1,10 @@
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
+
+# python3
+from __future__ import print_function
+from .scripts.compat import PY3
+
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
 from Components.Button import Button
@@ -12,12 +18,12 @@ from Tools.Directories import fileExists
 from Plugins.Extensions.Epg_Plugin.Console2 import Console2
 from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigYesNo, configfile, ConfigSelection
 import io,os,re,requests,gettext,json
-from enigma import getDesktop
+from ServiceReference import ServiceReference
 from Screens.ChoiceBox import ChoiceBox
-from enigma import loadPNG,gPixmapPtr, RT_WRAP, ePoint, RT_HALIGN_LEFT, RT_VALIGN_CENTER, eListboxPythonMultiContent, gFont
+from enigma import loadPNG,gPixmapPtr, RT_WRAP, ePoint, RT_HALIGN_LEFT, RT_VALIGN_CENTER, eListboxPythonMultiContent, gFont, getDesktop
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmap, MultiContentEntryPixmapAlphaTest
 
-### import class + screens from files inside plugin
+### import class + screens from files inside plugin (Python3)
 from .skin import *
 
 try:
@@ -35,7 +41,7 @@ REDC =  '\033[31m'
 ENDC = '\033[m'                                                                 
                                                                                 
 def cprint(text):                                                               
-        print REDC+text+ENDC 
+        print(REDC+text+ENDC)
 
 def logdata(label_name = '', data = None):
     try:
@@ -45,6 +51,15 @@ def logdata(label_name = '', data = None):
         fp.close()
     except:
         trace_error()    
+        pass
+
+def trace_error():
+    import sys
+    import traceback
+    try:
+        traceback.print_exc(file=sys.stdout)
+        traceback.print_exc(file=open('/tmp/EPG_PluginrError.log', 'a'))
+    except:
         pass
 
 def getversioninfo():
@@ -85,15 +100,15 @@ class EPGGrabber(Screen):
     def __init__(self, session, args = 0):
         self.session = session
         if config.plugins.EpgPlugin.skin.value == 'smallscreen':
-        	if isHD():
-        		self.skin = SKIN_EPGGrabber_Small_HD
-        	else:
-        		self.skin = SKIN_EPGGrabber_Small_FHD
+                if isHD():
+                        self.skin = SKIN_EPGGrabber_Small_HD
+                else:
+                        self.skin = SKIN_EPGGrabber_Small_FHD
         else:
-        	if isHD():
-        		self.skin = SKIN_EPGGrabber_Full_HD
-        	else:
-        		self.skin = SKIN_EPGGrabber_Full_FHD
+                if isHD():
+                        self.skin = SKIN_EPGGrabber_Full_HD
+                else:
+                        self.skin = SKIN_EPGGrabber_Full_FHD
         list = []
         self.installList=[] ## New from mf to make choose list
         
@@ -179,9 +194,9 @@ class EPGGrabber(Screen):
         SkinStyle = config.plugins.EpgPlugin.skin.value
         EnablecheckUpdate = config.plugins.EpgPlugin.update.value
         if SkinStyle == "smallscreen":
-        	choices.append(("Press Ok to [change skin to FullScreen]:","fullscreen"))
+                choices.append(("Press Ok to [change skin to FullScreen]:","fullscreen"))
         else:
-        	choices.append(("Press Ok to [change skin to smallscreen]:","smallscreen"))
+                choices.append(("Press Ok to [change skin to smallscreen]:","smallscreen"))
         if EnablecheckUpdate == False:
             choices.append(("Press Ok to [Enable checking for Online Update]","enablecheckUpdate"))
         else:
@@ -211,7 +226,7 @@ class EPGGrabber(Screen):
                 config.plugins.EpgPlugin.update.save()
                 configfile.save()
             elif select[1]=='sref':
-                import ref
+                from Plugins.Extensions.Epg_Plugin import ref
                 servicelist=None
                 global Servicelist
                 import Screens.InfoBar
@@ -219,7 +234,6 @@ class EPGGrabber(Screen):
                 global epg_bouquet
                 epg_bouquet = Servicelist and Servicelist.getRoot()
                 if epg_bouquet is not None:
-                    from ServiceReference import ServiceReference
                     services = ref.getBouquetServices(epg_bouquet)
                     service = Servicelist.servicelist.getCurrent()
                     self.session.openWithCallback(ref.closed,ref.set_ref, services, service, ServiceReference(epg_bouquet).getServiceName())
@@ -227,27 +241,34 @@ class EPGGrabber(Screen):
                 self.session.open(Console2,_("EPG Configs") , ["python /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/scripts/configs.py"], closeOnSuccess=False)
 
     def checkupdates(self):
-        from twisted.web.client import getPage, error
-        url = 'https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh'
-        getPage(url, headers={'Content-Type': 'application/x-www-form-urlencoded'}, timeout=10).addCallback(self.parseData).addErrback(self)
+        try:
+                from twisted.web.client import getPage, error
+                url = 'http://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh'
+                getPage(str.encode(url), headers={b'Content-Type': b'application/x-www-form-urlencoded'}).addCallback(self.parseData).addErrback(self.addErrback)
+        except Exception as error:
+                trace_error()
 
-    def addErrback(self, result):
-        logdata("data-failed",result) 
-        if result:
-            logdata("Error:",str(result))
+    def addErrback(self,error=None):
+        logdata("addErrback",error)
 
     def parseData(self, data):
+        if PY3:
+                data = data.decode("utf-8")
+        else:
+                data = data.encode("utf-8")
         if data:
             lines=data.split("\n")
             for line in lines:
                 if line.startswith("version"):
-                   self.new_version=str(line.split("=")[1])
+                   self.new_version = line.split("=")[1]
                 if line.startswith("description"):
-                   self.new_description = str(line.split("=")[1])
+                   self.new_description = line.split("=")[1]
                    break
-        if float(Ver)==float(self.new_version) or float(Ver)>float(self.new_version):
+        if float(Ver) == float(self.new_version) or float(Ver)>float(self.new_version):
             logdata("Updates","No new version available")
         else :
+            new_version = self.new_version
+            new_description = self.new_description
             self.session.openWithCallback(self.installupdate, MessageBox, _('New version %s is available.\n\n%s.\n\nDo you want to install it now.' % (self.new_version, self.new_description)), MessageBox.TYPE_YESNO)
 
     def installupdate(self,answer=False):
@@ -314,8 +335,8 @@ class EPGGrabber(Screen):
           
     def keyRed(self): ## New from mf to make choose list
         if len(self.installList)>0:
-		  ## Code to find connection internet or not
-		    self.install()
+            ## Code to find connection internet or not
+            self.install()
       
     def go(self): ## New from mf to make choose list
         index=self['config'].getSelectionIndex()

@@ -1,11 +1,17 @@
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
+
+# python3
+from __future__ import print_function
+from .scripts.compat import PY3
+
 from Screens.Screen import Screen
 from Plugins.Plugin import PluginDescriptor
 from Components.Label import Label
 from Components.ActionMap import ActionMap
 from ServiceReference import ServiceReference
 from Components.Button import Button
-from enigma import eEnv,getDesktop,gRGB
+from enigma import eEnv, getDesktop, gRGB, eServiceCenter, eServiceReference
 from Tools.Directories import fileExists
 from Components.MenuList import MenuList
 from Screens.MessageBox import MessageBox
@@ -115,7 +121,10 @@ class set_ref(Screen):
     def listChannels(self):
         for data in self.data['bouquets']:
             if data['name']==self.bqList[self.bqIndex]:
-                channels = [s.encode('ascii', 'ignore') for s in data['channels']]
+                if PY3:
+                	channels = [s for s in data['channels']]
+                else:
+                	channels = [s.encode('ascii', 'ignore') for s in data['channels']]
                 self.path = data['path']
                 self['list'].setList([])    
                 self['list'].setList(channels)
@@ -152,7 +161,7 @@ class set_ref(Screen):
     
     def ok(self):
         if fileExists(self.path):
-	    self.exist = False
+            self.exist = False
             
             if len(self.refstr)>60:
                 new_id = '<channel id="{}">{}</channel>'.format(self.id,self.refstr.split('/')[0]+'//example.m3u8')
@@ -176,7 +185,10 @@ class set_ref(Screen):
                 out = ET.tostring(root)
                 dom = minidom.parseString(out)
                 f = open(self.path, 'w')
-                dom_string = dom.toprettyxml(encoding='UTF-8')
+                if PY3:
+                	dom_string = dom.toprettyxml()
+                else:
+                	dom_string = dom.toprettyxml(encoding='UTF-8')
                 dom_string = os.linesep.join([s for s in dom_string.splitlines() if s.strip()])
                 f.write(dom_string)
                 f.close()
@@ -187,7 +199,6 @@ class set_ref(Screen):
 
 
     def getCurrentService(self):
-        from ServiceReference import ServiceReference
         if self.curservice is not None:
             service = self.curservice
         else:
@@ -205,8 +216,8 @@ class set_ref(Screen):
         #self["srf"].setText(self.refstr)
 
     def setCurrentServiceIndex(self):
-		if self.ServicesList.count((self.name,self.refstr)):
-			self.sidx = self.ServicesList.index((self.name,self.refstr))
+        if self.ServicesList.count((self.name,self.refstr)):
+                self.sidx = self.ServicesList.index((self.name,self.refstr))
     
     def right(self):
         self.changeService(1)
@@ -244,11 +255,6 @@ def cleanup():
 
 def closed(ret=False):
 	cleanup()
-
-
-
-from enigma import eServiceCenter, eServiceReference
-from ServiceReference import ServiceReference
 
 def getBouquetServices(bouquet):
 	services = []
