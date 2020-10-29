@@ -100,15 +100,15 @@ class EPGGrabber(Screen):
     def __init__(self, session, args = 0):
         self.session = session
         if config.plugins.EpgPlugin.skin.value == 'smallscreen':
-                if isHD():
-                        self.skin = SKIN_EPGGrabber_Small_HD
-                else:
-                        self.skin = SKIN_EPGGrabber_Small_FHD
+            if isHD():
+                self.skin = SKIN_EPGGrabber_Small_HD
+            else:
+                self.skin = SKIN_EPGGrabber_Small_FHD
         else:
-                if isHD():
-                        self.skin = SKIN_EPGGrabber_Full_HD
-                else:
-                        self.skin = SKIN_EPGGrabber_Full_FHD
+            if isHD():
+                self.skin = SKIN_EPGGrabber_Full_HD
+            else:
+                self.skin = SKIN_EPGGrabber_Full_FHD
         list = []
         self.installList=[] ## New from mf to make choose list
         
@@ -242,20 +242,20 @@ class EPGGrabber(Screen):
 
     def checkupdates(self):
         try:
-                from twisted.web.client import getPage, error
-                url = 'http://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh'
-                getPage(str.encode(url), headers={b'Content-Type': b'application/x-www-form-urlencoded'}).addCallback(self.parseData).addErrback(self.addErrback)
+            from twisted.web.client import getPage, error
+            url = 'http://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh'
+            getPage(str.encode(url), headers={b'Content-Type': b'application/x-www-form-urlencoded'}).addCallback(self.parseData).addErrback(self.addErrback)
         except Exception as error:
-                trace_error()
+            trace_error()
 
     def addErrback(self,error=None):
         logdata("addErrback",error)
 
     def parseData(self, data):
         if PY3:
-                data = data.decode("utf-8")
+            data = data.decode("utf-8")
         else:
-                data = data.encode("utf-8")
+            data = data.encode("utf-8")
         if data:
             lines=data.split("\n")
             for line in lines:
