@@ -78,9 +78,9 @@ if grep -q $PYTHONPACK $STATUS; then
 else
 	echo "#########################################################"
 	echo "#         Feed cannot download ($PYTHONPACK)            #"
-	echo "#         Epg_Plugin has not been not install           #"
+	echo "#         Epg_Plugin has not been works well            #"
 	echo "#########################################################"
-	exit 1
+#	exit 1
 fi
 ############################
 echo ""
