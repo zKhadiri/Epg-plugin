@@ -326,6 +326,8 @@ class EPGGrabber(Screen):
                         self["status"].setText('Last commit : {}'.format(js['FullArabicXML']))
                     elif provName=='osnen':
                         self["status"].setText('Last commit : {}'.format(js['FullEnglishXML']))
+                    elif provName=='snrt':
+                        self["status"].setText('Last commit : {}'.format(js['snrt']))
                     elif provName=='jawwy':
                         self["status"].setText('Last commit : {}'.format(js['jawwy']))
                     elif provName=='dstvback':

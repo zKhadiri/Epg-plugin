@@ -70,7 +70,7 @@ class StartTimer:
                 
     def getStatus(self):
         allData=[]
-        branches = ['osn-ziko-ZR1','master-ziko-ZR1','jawwy-ziko-ZR1','FullArabicXML-Haxer','FullEnglishXML-Haxer']
+        branches = ['osn-ziko-ZR1','master-ziko-ZR1','snrt-ziko-ZR1','jawwy-ziko-ZR1','FullArabicXML-Haxer','FullEnglishXML-Haxer']
         for branch in branches:
             try:
                 if branch.split('-')[1]=="Haxer":
