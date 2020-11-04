@@ -6,16 +6,15 @@
         "path": "/etc/epgimport/custom.channels.xml",
         "name": "Bein sports"
     }, {
-        "channels": ["AMC", "Aljazeera-Documentary", "AnimPlanet", "BBC_earth", "Baby-TV_b",
-            "Bara3em", "Bloomberg_B", "BoxOffice_HD1", "BoxOffice_HD2", "beIN_SERIES_HD1", "beincinema",
-            "beJUNIOR", "CBS-Reality", "CBeebies", "CNN-HD", "Cartoon-Network-Arabic", "Cartoon-Network-HD",
-            "Cartoon-Network-Hindi", "D-Life", "DMAX", "DTX", "DW_B", "DramaHD1", "Euro-News", "FATAFEAT", "FOX-HD",
-            "FX-HD", "Fine-Living", "Fox-Action-Movies", "Fox-Family-Movies", "Gourmet", "HGTV", "HLN", "Jeem-HD", "JimJam",
-            "MoviesHD1Premier", "MoviesHD2Action", "MoviesHD3Drama", "MoviesHD4Family", "Nat_Geo_wild_b", "Nat_geo_hd_b",
-            "Nat_geo_people_b", "Outdoor-Channel", "SUNDANCE-TV", "SeriesHD2", "StarWorldHD", "Star_Movies_B", "TCM",
-            "Travel-Channel-HD", "Trt_worls", "VHD", "extreme-sports-channel", "food-network"
+        "channels": ["AMC", "Aljazeera-Documentary", "AnimPlanet_onWhite", "BBC_earth", "Baby-TV", "Bara3em",
+            "Bloomberg", "BoxOffice_HD1", "BoxOffice_HD2", "CBS-Reality", "CBeebies", "CNN-HD", "Cartoon-Network-Arabic",
+            "Cartoon-Network-HD", "Cartoon-Network-Hindi", "D-Life", "DMAX", "DTX", "DW_B", "DramaHD1", "Euro-News", "FATAFEAT",
+            "FOX-HD", "FX-HD-Black", "Fine-Living", "Fox-Action-Movies", "Fox-Family-Movies", "Gourmet", "HGTV", "HLN", "Jeem-HD",
+            "JimJam", "MoviesHD1Premier", "MoviesHD2Action", "MoviesHD3Drama", "MoviesHD4Family", "Nat_Geo_wild", "Nat_geo_hd",
+            "Nat_geo_people", "Outdoor-Channel", "SUNDANCE-TV", "SeriesHD2", "Star-Movies-HD", "StarWorldHD", "TCM-on-White",
+            "Travel-Channel-HD", "Trt_worls_blk", "VHD", "beIN_SERIES_HD1", "beJUNIOR", "extreme-sports-channel", "food-network"
         ],
-        "path": "/etc/epgimport/custom.channels.xml",
+        "path": "/etc/epgimport/bein.channels.xml",
         "name": "bein entertainment.net"
     }, {
         "channels": ["beIN Sports", "beIN Sports News", "beIN 1HD", "beIN 2HD", "beIN 3HD", "beIN 4HD",

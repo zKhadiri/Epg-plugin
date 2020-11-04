@@ -49,7 +49,7 @@ def beinen():
         titles[:]=[]
         prog[:]=[]
         with requests.Session() as s:
-            s.mount('http://', HTTPAdapter(max_retries=10))
+            s.mount('https://', HTTPAdapter(max_retries=10))
             link = s.get(url)
             title = re.findall(r'<p\sclass=title>(.*?)<\/p>',link.text)
             time = re.findall(r'<p\sclass=time>(.*?)<\/p>',link.text)
@@ -65,7 +65,7 @@ def beinen():
                     end ='05:59'
                     start='18:00'
                     date = re.search(r'\d{4}-\d{2}-\d{2}',url)
-                    channel_b = chann_.replace('Nat_geo_people','Nat_geo_people_b').replace('Nat_geo_hd','Nat_geo_hd_b').replace('Nat_Geo_wild','Nat_Geo_wild_b').replace('Baby-TV','Baby-TV_b').replace('-on-White','').replace('-1-150x150','').replace('-2-150x150','').replace('-150x150','').replace('-logo-2018','').replace('Star-Movies-HD','Star_Movies_B').replace('Bloomberg','Bloomberg_B').replace('-Yellow','').replace('_onWhite','').replace('-Black','').replace('_blk','')
+                    channel_b = chann_.replace('-logo-2018-1','').replace('-Yellow-1','').replace('-1','').replace('-2','')
                     if time_[0]>=start and time_[1]<=end and chc==chch:
                         fix = (datetime.strptime(date.group(),'%Y-%m-%d')-timedelta(days=1)).strftime('%Y-%m-%d')
                         starttime = datetime.strptime(fix+' '+time_[0],'%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
@@ -89,14 +89,26 @@ def beinen():
                 dat = re.search(r'\d{4}-\d{2}-\d{2}',url)
                 print('Date'+' : '+dat.group())
                 sys.stdout.flush()
+                update([channel.replace('-logo-2018-1','').replace('-Yellow-1','').replace('-1','').replace('-2','') for channel in channels])
             else:
                 print('No data found')
                 break
-            
+
+def update(chan):
+    with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/bouquets.json', 'r') as f:
+        data = json.load(f)
+    for channel in data['bouquets']:
+        if channel["name"]=="bein entertainment.net":
+            channel['channels']=sorted([ch for ch in list(dict.fromkeys(chan))])
+    with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/bouquets.json', 'w') as f:
+        json.dump(data, f)
+           
 if __name__=='__main__':
     beinen()
+    
     from datetime import datetime
     import json
+    
     with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'r') as f:
         data = json.load(f)
     for bouquet in data['bouquets']:
@@ -105,22 +117,22 @@ if __name__=='__main__':
     with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'w') as f:
         json.dump(data, f)
 
-with io.open("/etc/epgimport/beinent.xml", "a",encoding="utf-8") as f:
-    if PY3:
-        f.write('</tv>')
-    else:
-        f.write(('</tv>').decode('utf-8'))
+    with io.open("/etc/epgimport/beinent.xml", "a",encoding="utf-8") as f:
+        if PY3:
+            f.write('</tv>')
+        else:
+            f.write(('</tv>').decode('utf-8'))
 
-if os.path.exists('/var/lib/dpkg/status'):
-    print('Dream os image found\nSorting data please wait.....')
-    sys.stdout.flush()
-    import xml.etree.ElementTree as ET
-    tree = ET.parse('/etc/epgimport/beinent.xml')
-    data = tree.getroot()
-    els = data.findall("*[@channel]")
-    new_els = sorted(els, key=lambda el: (el.tag, el.attrib['channel']))
-    data[:] = new_els
-    tree.write('/etc/epgimport/beinent.xml', xml_declaration=True, encoding='utf-8')
+    if os.path.exists('/var/lib/dpkg/status'):
+        print('Dream os image found\nSorting data please wait.....')
+        sys.stdout.flush()
+        import xml.etree.ElementTree as ET
+        tree = ET.parse('/etc/epgimport/beinent.xml')
+        data = tree.getroot()
+        els = data.findall("*[@channel]")
+        new_els = sorted(els, key=lambda el: (el.tag, el.attrib['channel']))
+        data[:] = new_els
+        tree.write('/etc/epgimport/beinent.xml', xml_declaration=True, encoding='utf-8')
 
 
-print("**************FINISHED******************")
+    print("**************FINISHED******************")
