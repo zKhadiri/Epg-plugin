@@ -47,7 +47,7 @@
         "path": "/etc/epgimport/custom.channels.xml",
         "name": "OSN"
     }, {
-        "channels": ["Aloula", "ART_Aflam_1", "ART_Aflam_2", "ART_Hekayat", "ART_Cinema", "ONDrama", "Emirates", "Abu_Dhabi_TV",
+        "channels": ["2M Monde", "Al Aoula International","Aloula", "ART_Aflam_1", "ART_Aflam_2", "ART_Hekayat", "ART_Cinema", "ONDrama", "Emirates", "Abu_Dhabi_TV",
             "Alhayat_TV", "AlhayatDrama", "Mehwar", "RotanaCinema EGY", "NileDrama", "Nile_Cinema", "NileComedy", "NileLife",
             "LBCI", "Dubai_TV", "AlraiTV", "Dubai_One", "AlKaheraWalNasTV", "Cima", "SamaDubai", "Sama_Dubai", "Abu_Dhabi_Drama",
             "Dream", "ART_Hekayat_2", "SharjahTV", "Al_Nahar_TV", "CBC", "CBC_Drama", "ONE", "iFILMTV", "AlJadeedTV",
@@ -165,7 +165,7 @@
         "path": "/etc/epgimport/custom.channels.xml",
         "name": "INDIAN SPORTS CHANNELS"
     }, {
-        "channels": ["2M Monde", "Al Aoula International", "Al Maghribia", "aljazeera", "SETANTA1", "SETANTA2"],
+        "channels": ["aljazeera", "SETANTA1", "SETANTA2","Espn 901","Espn 902"],
         "path": "/etc/epgimport/custom.channels.xml",
         "name": "Others"
     }]

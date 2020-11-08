@@ -2,8 +2,8 @@
 ##setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=15.2
-description=What_is_NEW:\n'[Aljazeera ar, beIN entertainment update]'
+version=15.3
+description=What_is_NEW:\n'[New Source: ESPN Caribbean]'
 ##############################################################
 
 TEMPATH=/tmp

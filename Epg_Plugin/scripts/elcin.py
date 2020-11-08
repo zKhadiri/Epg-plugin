@@ -18,7 +18,7 @@ headers={
     'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.75 Safari/537.36'
 }
 
-nb_channel=['1101-Aloula', '1120-ART_Aflam_1', '1121-ART_Aflam_2', '1122-ART_Hekayat', 
+nb_channel=["1353-2M Monde","1312-Al Aoula International",'1101-Aloula', '1120-ART_Aflam_1', '1121-ART_Aflam_2', '1122-ART_Hekayat', 
             '1134-ONDrama', '1135-Emirates', '1136-Abu_Dhabi_TV', '1137-Alhayat_TV', 
             '1138-AlhayatDrama', '1145-Mehwar', '1148-RotanaCinema EGY', '1156-NileDrama', 
             '1157-Nile_Cinema', '1158-NileComedy', '1159-NileLife', '1168-LBCI', '1169-Dubai_TV', 
@@ -142,11 +142,20 @@ class Elcinema:
             ch+=4*' '+'<desc lang="ar">'+des.replace('&#39;',"'").replace('&quot;','"').replace('&amp;','and').replace('(','').replace(')','').strip()+'</desc>\n  </programme>\r'
             with io.open("/etc/epgimport/elcinema.xml","a",encoding='UTF-8')as f:
                 f.write(ch)
-        cprint(channel.split('-')[1]+' epg ends at : '+str(self.Endtime()[-1]))
+        print(channel.split('-')[1]+' epg ends at : '+str(self.Endtime()[-1]))
         sys.stdout.flush()          
             
 def main():
-    cprint('**************ELCINEMA EPG******************')
+    from datetime import datetime
+    import json
+    with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'r') as f:
+        data = json.load(f)
+    for channel in data['bouquets']:
+        if channel["bouquet"]=="elcin":
+            channel['date']=datetime.today().strftime('%A %d %B %Y at %I:%M %p')
+    with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'w') as f:
+        json.dump(data, f)
+    print('**************ELCINEMA EPG******************')
     sys.stdout.flush()
     
     with io.open("/etc/epgimport/elcinema.xml","w",encoding='UTF-8')as f:
@@ -167,7 +176,7 @@ def main():
     start='00:00'
     end='02:00'
     if Hour>=start and Hour<end:
-        cprint('Please come back at 2am to download the epg')
+        print('Please come back at 2am to download the epg')
         sys.stdout.flush()
     else:
         for nb in nb_channel:
@@ -177,18 +186,8 @@ def main():
                 cprint('No epg found or missing data for : '+nb.split('-')[1])
                 sys.stdout.flush()
                 continue
-        from datetime import datetime
-        import json
-        with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'r') as f:
-            data = json.load(f)
-        for channel in data['bouquets']:
-            if channel["bouquet"]=="elcin":
-                channel['date']=datetime.today().strftime('%A %d %B %Y at %I:%M %p')
-        with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'w') as f:
-            json.dump(data, f)
-    
         
-     
+             
 if __name__=='__main__':
     main()
     with io.open("/etc/epgimport/elcinema.xml", "a",encoding="utf-8") as f:
@@ -197,5 +196,5 @@ if __name__=='__main__':
         else:
             f.write(('</tv>').decode('utf-8'))
 
-    cprint('**************FINISHED******************')
+    print('**************FINISHED******************')
     sys.stdout.flush()
