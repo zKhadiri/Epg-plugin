@@ -5,7 +5,7 @@
 from __future__ import print_function
 from compat import PY3
 
-import requests,re,io,sys
+import requests,re,io,sys,random
 from datetime import datetime,timedelta
 from requests.adapters import HTTPAdapter
 from requests.exceptions import ConnectionError
@@ -14,24 +14,18 @@ from proxies import proxy
 print('************Al jazeera arabic EPG **************')
 sys.stdout.flush() 
 
-def jscNews():
-    now = (datetime.today()+timedelta(hours=3)).strftime('%Y-%m-%d')
-        
-    with requests.Session() as s:
-        s.mount('https://', HTTPAdapter(max_retries=10))
-        try:
-            url = s.get('https://www.aljazeera.net/schedule',timeout=5)
-        except ConnectionError:
-            print("Ip blocked , using proxy....\nPlease wait this might take a while.")
-            sys.stdout.flush()
-            proxies = {'http':'http://'+proxy(),'https':'https://'+proxy()}
-            url = s.get('https://www.aljazeera.net/schedule',proxies = proxies)
-            
-    times = re.findall(r'<div class="schedule__row__timeslot">(.*?)</div>',url.text)
-    title = re.findall(r'<div class="schedule__row__showname">(.*?)</div>',url.text)
-    des = re.findall(r'<div class="schedule__row__description">(.*?)</div>',url.text)
+def random_prox():
+    p = random.choice(list(proxy()))
+    return {'http':'http://'+p,'https':'https://'+p}
+
+
+def to_xml(data):             
+    times = re.findall(r'<div class="schedule__row__timeslot">(.*?)</div>',data)
+    title = re.findall(r'<div class="schedule__row__showname">(.*?)</div>',data)
+    des = re.findall(r'<div class="schedule__row__description">(.*?)</div>',data)
 
     if len(times)>0:
+        now = (datetime.today()+timedelta(hours=3)).strftime('%Y-%m-%d')
         for elem, next_elem,tit,de in zip(times, times[1:] + [times[0]],title,des):
             ch=''
             if times[-1]==elem and times[0]==next_elem:
@@ -57,6 +51,35 @@ def jscNews():
     else:
         print('No data found for aljazeera')
         sys.stdout.flush()
+
+def jscNews():
+    
+        
+    with requests.Session() as s:
+        s.mount('https://', HTTPAdapter(max_retries=3))
+        try:
+            url = s.get('https://www.aljazeera.net/schedule',timeout=5)
+        except ConnectionError:
+        
+            print("Ip blocked , using proxy....\nPlease wait this might take a while.")
+            sys.stdout.flush()
+            
+            tries = 10
+            while tries >0:
+                
+                try:
+                    url = s.get('https://www.aljazeera.net/schedule',proxies = random_prox(),timeout=3)
+                    if '<!doctype html>' in url.text:
+                        to_xml(url.text)
+                        break
+                except Exception as e:
+                    print(e)
+                    tries -=1
+                    print('Error occured Retry!!',tries)
+                    if tries==0:
+                        break
+                
+
 
 def main():
     with io.open("/etc/epgimport/aljazeera.xml","w",encoding='UTF-8')as f:
