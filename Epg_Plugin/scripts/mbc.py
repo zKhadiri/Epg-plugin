@@ -191,7 +191,7 @@ def noor():
     
 if __name__ == "__main__":
     mbc()
-    qatar()
+    #qatar()
     noor()
     
     from datetime import datetime
