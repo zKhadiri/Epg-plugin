@@ -53,8 +53,6 @@ def to_xml(data):
         sys.stdout.flush()
 
 def jscNews():
-    
-        
     with requests.Session() as s:
         s.mount('https://', HTTPAdapter(max_retries=3))
         try:
@@ -72,15 +70,10 @@ def jscNews():
                     if '<!doctype html>' in url.text:
                         to_xml(url.text)
                         break
-                except Exception as e:
-                    print(e)
+                except Exception:
                     tries -=1
                     print('Error occured Retry!!',tries)
-                    if tries==0:
-                        break
-                
-
-
+                    
 def main():
     with io.open("/etc/epgimport/aljazeera.xml","w",encoding='UTF-8')as f:
         if PY3:

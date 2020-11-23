@@ -11,4 +11,4 @@ def proxy():
     ur = requests.get('http://free-proxy.cz/fr/proxylist/country/DE/https/ping/level3',headers=headers)
     
     for ip,port in zip(re.findall(r'decode\(\"(.*?)\"',ur.text),re.findall(r'<span class=\"fport\" style=\'\'>(\d+)<\/span>',ur.text)):
-        return base64.b64decode(ip)+":"+port
+        yield base64.b64decode(ip)+":"+port
