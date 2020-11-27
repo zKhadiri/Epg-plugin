@@ -67,7 +67,7 @@
         "name": "bein entertainment ELCINEMA"
     }, {
         "channels": ["MBC1", "MBCDrama", "MBCEgypt", "MBCEgypt2", "MBC4", "MBC2", "MBCAction", "MBCBollywood", "MBC+Drama",
-            "MBCMovieMax", "MBCIraq", "MBCCinq", "Wanasah", "noordubai", "QATAR.TV"
+            "MBCMovieMax", "MBCIraq", "MBCCinq", "Wanasah", "noordubai"
         ],
         "path": "/etc/epgimport/custom.channels.xml",
         "name": "MBC"

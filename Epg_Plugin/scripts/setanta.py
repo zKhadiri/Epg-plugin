@@ -44,7 +44,7 @@ def setanta():
                 ch=''
                 startime=datetime.strptime(str(elem),'%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
                 endtime=datetime.strptime(str(next_elem),'%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
-                ch+= 2 * ' ' +'<programme start="' + startime + ' +0200" stop="' + endtime + ' +0200" channel="'+link.split('|')[1]+'">\n'
+                ch+= 2 * ' ' +'<programme start="' + startime + ' +0100" stop="' + endtime + ' +0100" channel="'+link.split('|')[1]+'">\n'
                 ch+=4*' '+'<title lang="en">'+title.replace('არ გადაიცემა საქართველოში'.decode('utf-8'),"").replace('&','and').strip()+'</title>\n'
                 if des.strip()=="": 
                     ch+=4*' '+'<desc lang="en">Setanta Sports Eurasia</desc>\n  </programme>\r'
