@@ -7,7 +7,7 @@ from compat import PY3
 
 import requests,re,sys,io,json
 from datetime import timedelta
-
+from time import strftime
 
 import datetime
 week = datetime.date.today() + timedelta(days=7)
@@ -21,13 +21,11 @@ ch_code =['74-beIN Sports','75-beIN Sports News','65-beIN 1HD','66-beIN 2HD','67
 
 
 def get_tz():
-    url_timezone = 'http://worldtimeapi.org/api/ip'
-    requests_url = requests.get(url_timezone)
-    ip_data = requests_url.json()
     try:
-        return ip_data['utc_offset'].replace(':', '')
+        json = requests.get('http://worldtimeapi.org/api/ip').json()
+        return json['utc_offset'].replace(':', '')
     except:
-        return ('+0000')
+        return (strftime('%z'))
     
 time_zone = get_tz()
 

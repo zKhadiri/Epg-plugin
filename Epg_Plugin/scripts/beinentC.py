@@ -11,6 +11,8 @@ from datetime import timedelta
 import datetime
 week = datetime.date.today() + timedelta(days=7)
 from datetime import datetime
+from time import strftime
+
 milli = (datetime.strptime('' + str(week) + ' 23:59:59', "%Y-%m-%d %H:%M:%S").strftime("%s"))+'.999'
 today = datetime.strptime(str(datetime.now().strftime('%Y-%m-%d'))+' 00:00:00',"%Y-%m-%d %H:%M:%S").strftime('%s')
 
@@ -19,13 +21,11 @@ ch_code =['81-beIN Movie 1','82-beIN Movie 2','83-beIN Movie 3','90-beIN Movie 4
 
 
 def get_tz():
-    url_timezone = 'http://worldtimeapi.org/api/ip'
-    requests_url = requests.get(url_timezone)
-    ip_data = requests_url.json()
     try:
-        return ip_data['utc_offset'].replace(':', '')
+        json = requests.get('http://worldtimeapi.org/api/ip').json()
+        return json['utc_offset'].replace(':', '')
     except:
-        return ('+0000')
+        return (strftime('%z'))
     
 time_zone = get_tz()
 
