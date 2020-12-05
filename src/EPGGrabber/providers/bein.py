@@ -94,7 +94,8 @@ def bein():
 
 def main():
     with open(API_PATH+'/bouquets.json', 'r') as f:
-        jsData = json.load(f)
+        import simplejson
+        jsData = simplejson.load(f)
         for channel in jsData['bouquets']:
             if channel["name"]=="Bein sports":
                 xml_header(EPG_ROOT+'/bein.xml',channel['channels'])

@@ -5,16 +5,17 @@
 from __future__ import print_function
 from Plugins.Extensions.EPGGrabber.core.compat import PY3
 from Plugins.Extensions.EPGGrabber.core.header import xml_header,close_xml
+from Plugins.Extensions.EPGGrabber.core.timezone import tz
 from Plugins.Extensions.EPGGrabber.core.paths import *
 
-from elcin import Elcinema,get_tz
+from elcin import Elcinema
 import io,requests,sys
 from datetime import datetime,timedelta
 
 nb_channel=['1322-BEINMOVIESPREMIERE','1323-BEINMOVIESACTION','1324-BEINMOVIESDRAMA','1325-BEINMOVIESFAMILY','1326-BeInBoxOffice','1327-BeInSeriesHD1'
             ,'1328-BeInSeriesHD2','1309-beINDrama','1330-FOXACTIONMOVIES','1331-FOXFAMILYMOVIESHD']
 
-time_zone=get_tz()
+time_zone=tz()
 
 class ElcinB(Elcinema,object):
     
