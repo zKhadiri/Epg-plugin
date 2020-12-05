@@ -92,7 +92,7 @@ def update(chan):
 
 def main():
     with open(BOUQUETS_ROOT, 'r') as f:
-        jsData = json.loads(f)
+        jsData = json.load(f)
     for channel in jsData['bouquets']:
         if channel["name"]=="bein entertainment.net":
             xml_header(EPG_ROOT+'/beinent.xml',channel['channels'])
