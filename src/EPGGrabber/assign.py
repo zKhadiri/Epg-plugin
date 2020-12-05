@@ -4,6 +4,7 @@
 # python3
 from __future__ import print_function
 from .core.compat import PY3
+from .core.paths import BOUQUETS_ROOT
 
 from Screens.Screen import Screen
 from Plugins.Plugin import PluginDescriptor
@@ -91,7 +92,7 @@ class AssignRef(Screen):
 #####################################################
 
     def getJson(self):
-        with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/data/bouquets.json','r')as f:
+        with open(BOUQUETS_ROOT,'r')as f:
             self.data=json.load(f)
             for bouquet in self.data['bouquets']:
                 self.bqList.append(bouquet['name'])
