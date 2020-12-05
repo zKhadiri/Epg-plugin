@@ -2,15 +2,15 @@
 ##setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=15.9
-description=What_is_NEW:\n'[New update.]'
+version=16.0
+description=What_is_NEW:\n'[Crash fix]'
 ##############################################################
 
 TEMPATH=/tmp
 PLUGINPATH=/usr/lib/enigma2/python/Plugins/Extensions/EPGGrabber
 
 # remove old version
-rm -rf /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin
+rm -rf /usr/lib/enigma2/python/Plugins/Extensions/EPGGrabber
 
 # check depends packges
 if [ -f /etc/apt/apt.conf ] ; then
