@@ -2,12 +2,12 @@
 ##setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=15.8
-description=What_is_NEW:\n'[New source : Le Matin.ma , Bein connect fix]'
+version=15.9
+description=What_is_NEW:\n'[New update.]'
 ##############################################################
 
 TEMPATH=/tmp
-PLUGINPATH=/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin
+PLUGINPATH=/usr/lib/enigma2/python/Plugins/Extensions/EPGGrabber
 
 # remove old version
 rm -rf /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin
