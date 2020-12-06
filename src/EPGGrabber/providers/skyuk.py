@@ -2,9 +2,7 @@ import requests,io,re,sys,json
 from datetime import datetime,timedelta
 from requests.adapters import HTTPAdapter
 from time import strftime
-from Plugins.Extensions.EPGGrabber.core.header import xml_header,close_xml
-from Plugins.Extensions.EPGGrabber.core.timezone import tz
-from Plugins.Extensions.EPGGrabber.core.paths import *
+from __init__ import *
 
 
 time_zone=tz()

@@ -1,10 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 from __future__ import print_function
+from __init__ import *
+
 import requests,re,sys,io,json
-from Plugins.Extensions.EPGGrabber.core.compat import PY3
-from Plugins.Extensions.EPGGrabber.core.header import xml_header,close_xml
-from Plugins.Extensions.EPGGrabber.core.paths import *
 from datetime import datetime,timedelta
 
 

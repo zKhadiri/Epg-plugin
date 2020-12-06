@@ -1,8 +1,5 @@
 from __future__ import print_function
-from Plugins.Extensions.EPGGrabber.core.compat import PY3
-from Plugins.Extensions.EPGGrabber.core.header import xml_header,close_xml
-from Plugins.Extensions.EPGGrabber.core.timezone import tz
-from Plugins.Extensions.EPGGrabber.core.paths import *
+from __init__ import *
 
 import requests,re,io,os,sys,json
 from datetime import datetime,timedelta

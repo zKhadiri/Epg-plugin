@@ -2,8 +2,8 @@
 ##setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=16.1
-description=What_is_NEW:\n'[No JSON object could be decoded fix]'
+version=16.2
+description=What_is_NEW:\n'[Relative import fix.]'
 ##############################################################
 
 TEMPATH=/tmp

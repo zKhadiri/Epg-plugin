@@ -2,8 +2,7 @@ import requests,re,io,sys
 from datetime import datetime,timedelta
 from requests.adapters import HTTPAdapter
 
-from Plugins.Extensions.EPGGrabber.core.header import xml_header,close_xml
-from Plugins.Extensions.EPGGrabber.core.paths import *
+from __init__ import *
 
 channels=['sony-six/84','sony-ten-1/85','sony-ten-2/92','star-sports1/88','star-sports-select-1/86','star-sports-select-hd-2/214'
 ,'star-sports2/87','wow-hd/207']

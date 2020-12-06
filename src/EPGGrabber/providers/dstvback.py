@@ -3,6 +3,7 @@
 
 # python3
 from __future__ import print_function
+from __init__ import *
 
 from time import sleep
 import os,io,re,sys,requests
@@ -20,12 +21,12 @@ print("dstv.xml donwloaded with success")
 
 from datetime import datetime
 import json
-with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'r') as f:
+with open(PROVIDERS_ROOT, 'r') as f:
     data = json.load(f)
 for channel in data['bouquets']:
     if channel["bouquet"]=="dstvback":
         channel['date']=datetime.today().strftime('%A %d %B %Y at %I:%M %p')
-with open('/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin/times.json', 'w') as f:
+with open(PROVIDERS_ROOT, 'w') as f:
     json.dump(data, f)
 
 if os.path.exists('/var/lib/dpkg/status'):

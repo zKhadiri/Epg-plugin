@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from time import sleep
 import os,io,re,sys,requests,json
-from Plugins.Extensions.EPGGrabber.core.paths import *
+from __init__ import *
 
 path = EPG_ROOT+'/jawwyen.xml'
 
