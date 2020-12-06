@@ -82,7 +82,6 @@
 	<channel id="OSN_Series">1:0:19:3EB:A:800:DCA0000:0:0:0:</channel>
 	<channel id="OSN_Comedy">1:0:19:119C:2D:800:DCA0000:0:0:0:</channel>
 	<channel id="OSN_Kidzone">1:0:19:6A6:11:800:DCA0000:0:0:0:</channel>
-	<channel id="OSN_POP_UP_Mega_Monsters">1:0:19:6A8:11:800:DCA0000:0:0:0:</channel>
 	<channel id="Comedy_Central_HD">1:0:19:3F1:A:800:DCA0000:0:0:0:</channel>
 	<channel id="Star_World_HD">1:0:19:6A9:11:800:DCA0000:0:0:0:</channel>
 	<channel id="CI">1:0:1:D4:2:800:DCA0000:0:0:0:</channel>
@@ -102,7 +101,7 @@
 	<channel id="E!_HD">1:0:19:131:3:800:DCA0000:0:0:0:</channel>
 	<channel id="Discovery_Channel_HD">1:0:19:1621:236:800:DCA0000:0:0:0:</channel>
 	<channel id="Nat_Geo_People_HD">1:0:19:3ED:A:800:DCA0000:0:0:0:</channel>
-	<channel id="OSN_News">1:0:19:6A5:11:800:DCA0000:0:0:0:</channel>
+	<channel id="OSN_News">1:0:19:12F:3:800:DCA0000:0:0:0:</channel>
 	<channel id="OSN_Mezze">1:0:19:1195:2D:800:DCA0000:0:0:0:</channel>
 	<channel id="Baby_TV">1:0:19:6A7:11:800:DCA0000:0:0:0:</channel>
 	<channel id="Nickelodeon_HD">1:0:19:161F:236:800:DCA0000:0:0:0:</channel>
