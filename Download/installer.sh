@@ -10,6 +10,7 @@ TEMPATH=/tmp
 PLUGINPATH=/usr/lib/enigma2/python/Plugins/Extensions/EPGGrabber
 
 # remove old version
+rm -rf /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin
 rm -rf /usr/lib/enigma2/python/Plugins/Extensions/EPGGrabber
 
 # check depends packges
