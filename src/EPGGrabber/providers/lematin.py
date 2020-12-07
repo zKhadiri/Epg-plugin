@@ -47,8 +47,8 @@ def lematin(channels):
                     with io.open(EPG_ROOT+'/lematin.xml',"a",encoding='UTF-8')as f:
                         f.write(ch)
                           
-        print(channel+' EPG ends at '+str(times[-1]))
-        sys.stdout.flush()
+            print(channel+' EPG ends at '+str(times[-1]))
+            sys.stdout.flush()
         
 def main():
     with open(PROVIDERS_ROOT, 'r') as f:
