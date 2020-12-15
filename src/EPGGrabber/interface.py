@@ -3,8 +3,8 @@
 
 # python3
 from __future__ import print_function
-from .core.compat import PY3
-from .core.paths import *
+from Plugins.Extensions.EPGGrabber.core.compat import PY3
+from Plugins.Extensions.EPGGrabber.core.paths import *
 
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
@@ -18,11 +18,11 @@ from Screens.MessageBox import MessageBox
 from Tools.Directories import fileExists
 from Plugins.Extensions.EPGGrabber.Console2 import Console2
 from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigYesNo, configfile, ConfigSelection
-import io,os,re,requests,gettext,json
 from ServiceReference import ServiceReference
 from Screens.ChoiceBox import ChoiceBox
-from enigma import gRGB,loadPNG,gPixmapPtr, RT_WRAP, ePoint, RT_HALIGN_LEFT, RT_VALIGN_CENTER, eListboxPythonMultiContent, gFont, getDesktop
+from enigma import gRGB, loadPNG, gPixmapPtr, RT_WRAP, ePoint, RT_HALIGN_LEFT, RT_VALIGN_CENTER, eListboxPythonMultiContent, gFont, getDesktop
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmap, MultiContentEntryPixmapAlphaTest
+import io, os, re, requests, gettext, json
 
 ### import class + screens from files inside plugin (Python3)
 from .skin import *
@@ -352,7 +352,6 @@ class EPGGrabber(Screen):
                     elif provName=='dstvback':
                         self.check_date(js['master'],provName)
                         self["status"].setText('Last commit : {}'.format(js['master']))
-                     
                     else:
                         self["status"].setText("")
     

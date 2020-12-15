@@ -1,18 +1,18 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# python3
 from __future__ import print_function
 
-from Plugins.Plugin import PluginDescriptor
-from .interface import EPGGrabber
-from Screens.MessageBox import MessageBox
-from Screens.Screen import Screen
-from enigma import eTimer
-from Tools.Directories import fileExists
 import requests, os, json
+from enigma import eTimer
+from enigma import eTimer
+from Plugins.Plugin import PluginDescriptor
+from Screens.MessageBox import MessageBox
+from Tools.Directories import fileExists
+from Screens.Screen import Screen
 from datetime import datetime
-from .core.paths import API_PATH
+from .interface import EPGGrabber
+from Plugins.Extensions.EPGGrabber.core.paths import API_PATH
 
 def connected_to_internet():	
     try:
