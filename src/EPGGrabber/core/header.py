@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from compat import PY3
+
+from Plugins.Extensions.EPGGrabber.core.compat import PY3
 import io
 
 def xml_header(path,channels):

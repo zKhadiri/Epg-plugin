@@ -1,11 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# python3
 from __future__ import print_function
 from __init__ import *
 
-import requests,re,io,os,sys,json
+import requests, re, io, os, sys, json
 from time import sleep,strftime
 from requests.adapters import HTTPAdapter
 

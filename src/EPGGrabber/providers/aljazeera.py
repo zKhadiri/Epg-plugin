@@ -1,12 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# python3
 from __future__ import print_function
 from __init__ import *
 
-import requests,re,io,sys,random
-from datetime import datetime,timedelta
+import requests, re, io, sys, random
+from datetime import datetime, timedelta
 from requests.adapters import HTTPAdapter
 from requests.exceptions import ConnectionError
 from Plugins.Extensions.EPGGrabber.core.proxies import proxy

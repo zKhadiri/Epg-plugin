@@ -5,10 +5,10 @@
 from __future__ import print_function
 from __init__ import *
 
-import requests,io,threading,sys,os
-from datetime import datetime,timedelta
+import requests, io, threading, sys, os
+from datetime import datetime, timedelta
 from requests.adapters import HTTPAdapter
-from time import sleep,strftime
+from time import sleep, strftime
 
 time_zone = tz()
 

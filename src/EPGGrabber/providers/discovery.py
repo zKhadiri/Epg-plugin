@@ -1,13 +1,13 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# python3
 from __future__ import print_function
 from __init__ import *
 
-import requests,re,sys,io
-from datetime import datetime,timedelta
+import requests, re, sys, io
+from datetime import datetime, timedelta
 from requests.adapters import HTTPAdapter
+
 if not PY3:
 	reload(sys)
 	sys.setdefaultencoding("utf-8")

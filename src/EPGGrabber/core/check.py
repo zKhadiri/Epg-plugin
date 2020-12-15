@@ -1,9 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# python3
 from __future__ import print_function
-from compat import PY3
+from Plugins.Extensions.EPGGrabber.core.compat import PY3
 
 import os,io,requests,sys
 if not os.path.exists('/etc/epgimport/ziko_config/custom.channels.xml'):

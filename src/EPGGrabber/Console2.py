@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# python3
 from __future__ import print_function
 
 from enigma import eConsoleAppContainer
@@ -12,7 +11,7 @@ from Components.Sources.StaticText import StaticText
 from Screens.MessageBox import MessageBox
 from enigma import getDesktop
 
-from .core.compat import PY3
+from Plugins.Extensions.EPGGrabber.core.compat import PY3
 
 def getDesktopSize():
     s = getDesktop(0).size()
@@ -65,6 +64,7 @@ class Console2(Screen):
 		"red": self.cancel,
 		"green": self.toggleHideShow,
 		"blue": self.restartenigma,
+		"exit": self.cancel,
             }, -1)
         self.cmdlist = isinstance(cmdlist, list) and cmdlist or [cmdlist]
         self.newtitle = title == 'Console' and _('Console') or title

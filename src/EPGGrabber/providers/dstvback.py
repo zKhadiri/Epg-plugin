@@ -1,12 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# python3
 from __future__ import print_function
 from __init__ import *
 
 from time import sleep
-import os,io,re,sys,requests
+import os, io, re, sys, requests
 
 path = '/etc/epgimport/ziko_epg/dstv.xml'
 
