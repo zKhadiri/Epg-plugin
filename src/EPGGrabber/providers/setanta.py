@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-import requests,re,io,json,sys
-from datetime import datetime,timedelta
+
+import requests, re, io, json, sys
+from datetime import datetime, timedelta
 from __init__ import *
 
 urls=['https://www.setantaeurasia.com/en/tv-schedule.html|SETANTA1','https://www.setantaeurasia.com/en/tv-schedule.html?channel=plus|SETANTA2']

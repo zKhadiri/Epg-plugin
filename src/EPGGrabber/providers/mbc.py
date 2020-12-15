@@ -1,10 +1,10 @@
 #!/usr/bin/env python2.7
 # -*- coding: utf-8 -*-
-import requests,json,io,os,re,sys
+
+import requests, json, io, os, re, sys
 from datetime import datetime
 from requests.adapters import HTTPAdapter
 from time import strftime
-
 from __init__ import *
 
 reload(sys)

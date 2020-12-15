@@ -1,15 +1,15 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# python3
 from __future__ import print_function
 from __init__ import *
 
-import requests,re,io,sys,os,ssl
+import requests, re, io, sys, os, ssl
 from datetime import datetime,timedelta
 from time import sleep,strftime
 from requests.adapters import HTTPAdapter
 import warnings
+
 warnings.filterwarnings('ignore', message='Unverified HTTPS request')
 
 headers={
