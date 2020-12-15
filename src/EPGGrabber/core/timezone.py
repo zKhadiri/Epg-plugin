@@ -1,7 +1,7 @@
-import requests,os,json
+import requests, os, json
 from time import strftime
 from datetime import datetime
-from paths import API_PATH
+from Plugins.Extensions.EPGGrabber.core.paths import API_PATH
 
 def get_tz():
     try:

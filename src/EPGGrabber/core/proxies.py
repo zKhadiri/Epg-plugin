@@ -1,4 +1,4 @@
-import requests,string,random,re,base64
+import requests, string, random, re, base64
 
 def proxy():
     res = {"result": 'a'+''.join(random.choice(string.digits+string.ascii_lowercase) for i in range(31))}
