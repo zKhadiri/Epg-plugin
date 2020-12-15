@@ -1,11 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# python3
 from __future__ import print_function
-from compat import PY3
-from paths import BOUQUETS_ROOT
-import requests,sys,io
+from Plugins.Extensions.EPGGrabber.core.compat import PY3
+from Plugins.Extensions.EPGGrabber.core.paths import BOUQUETS_ROOT
+import requests, sys, io
 
 print('Downloading custom.sources config')
 sys.stdout.flush()
