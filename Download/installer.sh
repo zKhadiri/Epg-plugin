@@ -7,11 +7,14 @@ description=What_is_NEW:\n'[Some Bug fixes.]'
 ##############################################################
 
 TEMPATH=/tmp
+
 PLUGINPATH=/usr/lib/enigma2/python/Plugins/Extensions/EPGGrabber
+OLDPLUGINPATH=/usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin
+ExtensionsPLUGINPATH=/usr/lib/enigma2/python/Plugins/Extensions
 
 # remove old version
-rm -rf /usr/lib/enigma2/python/Plugins/Extensions/Epg_Plugin
-rm -rf /usr/lib/enigma2/python/Plugins/Extensions/EPGGrabber
+rm -rf $OLDPLUGINPATH
+rm -rf $PLUGINPATH
 
 # check depends packges
 if [ -f /etc/apt/apt.conf ] ; then
@@ -90,10 +93,13 @@ cd /tmp
 set -e
 echo " Downloading And Insallling Epg_Plugin plugin ......"
 echo 
-wget -q "--no-check-certificate"  "https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/Epg_Plugin-"$version".tar.gz"
-tar -xzf Epg_Plugin-"$version".tar.gz -C /
+# wget -q "--no-check-certificate"  "https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/Epg_Plugin-"$version".tar.gz"
+# tar -xzf Epg_Plugin-"$version".tar.gz -C /
+wget -O - --no-check-certificate https://github.com/ziko-ZR1/Epg-plugin/archive/master.tar.gz | tar xz "Epg-plugin-master/src/EPGGrabber"
+mv Epg-plugin-master/src/EPGGrabber $ExtensionsPLUGINPATH
+rm -r Epg-plugin-master
+# rm -f Epg_Plugin-"$version".tar.gz
 set +e
-rm -f Epg_Plugin-"$version".tar.gz
 cd ..
 sync
 ############################
