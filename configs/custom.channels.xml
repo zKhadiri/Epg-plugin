@@ -66,6 +66,7 @@
 	<channel id="BS_NBA">1:0:19:283E:406:E0:1040000:0:0:0:</channel>
 	<channel id="SportsGlobalHD">1:0:19:283F:406:E0:1040000:0:0:0:</channel>
 	<channel id="News_ar">1:0:19:2840:406:E0:1040000:0:0:0:</channel>
+	<channel id="OSN_POP_UP_Disney's_Family_Squad">1:0:1:CC:2:800:DCA0000:0:0:0:</channel>
 	<channel id="OSN_Movies">1:0:19:1197:2D:800:DCA0000:0:0:0:</channel>
 	<channel id="OSN_Cinema">1:0:19:161E:236:800:DCA0000:0:0:0:</channel>
 	<channel id="OSN_Enigma">1:0:19:1198:2D:800:DCA0000:0:0:0:</channel>
