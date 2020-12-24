@@ -2,8 +2,8 @@
 ##setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=16.8
-description=What_is_NEW:\n'[Some Bug fixes.]'
+version=16.9
+description=What_is_NEW:\n'[New source : Rotana]'
 ##############################################################
 
 TEMPATH=/tmp

@@ -32,6 +32,11 @@
         "path": "/etc/epgimport/ziko_config/custom.channels.xml",
         "name": "MBC"
     }, {
+        "channels": ["Rotana Khalijiah","Rotana HD","LBC","Rotana Drama","Rotana Classic","Rotana cinema KSA","Rotana cinema masr"
+            ,"Rotana Amarica","Rotana aflam","Rotana Comedy","Rotana KIDS"],
+        "path": "/etc/epgimport/ziko_config/custom.channels.xml",
+        "name": "Rotana"
+    }, {
         "channels": ["aloula", "arryadia", "2m", "medi1"],
         "path": "/etc/epgimport/ziko_config/custom.channels.xml",
         "name": "LE Matin"
