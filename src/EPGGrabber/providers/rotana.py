@@ -26,14 +26,18 @@ def rotana(this_month,channel):
     end_dt = []
     titles = []
     descriptions = []
+    actors = []
+    genre = []
     for rows in my_list[1:]:
         start_dt.append(' '.join(rows[1:][2:4]))
         end_dt.append(' '.join((rows[1:][4:6])))
         titles.append(rows[1:][1])
         descriptions.append(rows[1:][7])
+        actors.append(rows[1:][8])
+        genre.append(rows[1:][12])
         
         
-    for title,des,start,end,ed in zip(titles,descriptions,start_dt,start_dt[1:]+[start_dt[0]],end_dt):
+    for title,des,start,end,ed,actor,g in zip(titles,descriptions,start_dt,start_dt[1:]+[start_dt[0]],end_dt,actors,genre):
         if start >= today:
             ch=''
             if start_dt[-1] == start and start_dt[0] == end :
@@ -44,11 +48,20 @@ def rotana(this_month,channel):
                 endtime= datetime.strptime(end,'%d/%m/%Y %H:%M:%S:%f').strftime('%Y%m%d%H%M%S')
                 
             ch+=2*' '+'<programme start="'+startime+' +0000" stop="'+endtime+' +0000" channel="'+channel.split('|')[1]+'">\n'
-            ch+=4*' '+'<title lang="ar">'+title+'</title>\n'
-            if des == '':
-                ch+=4*' '+'<desc lang="ar">يتعذر الحصول على معلومات هذا البرنامج</desc>\n  </programme>\r'
+            
+            if '-' in title:
+                ch+=4*' '+'<title lang="ar">'+title.split('-',1)[0].strip()+'</title>\n'
+                ch+=4*' '+'<desc lang="ar">'+title.split('-',1)[1].strip()+'</desc>\n  </programme>\r'
             else:
-                ch+=4*' '+'<desc lang="ar">'+des+'</desc>\n  </programme>\r'
+                ch+=4*' '+'<title lang="ar">'+title+'</title>\n'
+                if des == '' and actor !='':
+                    ch+=4*' '+'<desc lang="ar">'+actor+'</desc>\n  </programme>\r'
+                elif des != '' and actor =='':
+                    ch+=4*' '+'<desc lang="ar">'+des+'</desc>\n  </programme>\r'
+                elif des == '' and actor == '' and g != '' :
+                    ch+=4*' '+'<desc lang="en">'+g+'</desc>\n  </programme>\r'
+                else:
+                    ch+=4*' '+'<desc lang="ar">يتعذر الحصول على معلومات هذا البرنامج</desc>\n  </programme>\r'
                 
             with io.open(EPG_ROOT+'/rotana.xml',"a",encoding='UTF-8')as f:
                 if not PY3:
