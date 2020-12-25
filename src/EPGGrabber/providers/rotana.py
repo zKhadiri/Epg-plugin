@@ -51,7 +51,10 @@ def rotana(this_month,channel):
                 ch+=4*' '+'<desc lang="ar">'+des+'</desc>\n  </programme>\r'
                 
             with io.open(EPG_ROOT+'/rotana.xml',"a",encoding='UTF-8')as f:
-                f.write(ch)
+                if not PY3:
+                    f.write(ch.decode('utf-8'))
+                else:
+                    f.write(ch)
     
     print(channel.split('|')[1]+' EPG ends at '+ end_dt[-1])
     sys.stdout.flush()
