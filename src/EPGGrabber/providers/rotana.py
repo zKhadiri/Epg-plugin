@@ -9,8 +9,6 @@ if not PY3:
 
 today = (datetime.now()-timedelta(hours=4)).strftime('%d/%m/%Y %H:%M:%S')
 
-time_zone = tz()
-
 channels = ['Khalijiah-v2|Rotana Khalijiah','ROTANA-HD-2|Rotana HD','LBC-12|LBC','Drama-12|Rotana Drama',\
     'Classic-12|Rotana Classic','cinema-KSA-12|Rotana cinema KSA','Cinema-masr-12|Rotana cinema masr','Rotana-Amrica-12|Rotana Amarica'\
         ,'Aflam-|Rotana aflam','Comdey|Rotana Comedy','KIDs|Rotana KIDS']
@@ -45,7 +43,7 @@ def rotana(this_month,channel):
                 startime= datetime.strptime(start,'%d/%m/%Y %H:%M:%S:%f').strftime('%Y%m%d%H%M%S')
                 endtime= datetime.strptime(end,'%d/%m/%Y %H:%M:%S:%f').strftime('%Y%m%d%H%M%S')
                 
-            ch+=2*' '+'<programme start="'+startime+' '+time_zone+'" stop="'+endtime+' '+time_zone+'" channel="'+channel.split('|')[1]+'">\n'
+            ch+=2*' '+'<programme start="'+startime+' +0000" stop="'+endtime+' +0000" channel="'+channel.split('|')[1]+'">\n'
             ch+=4*' '+'<title lang="ar">'+title+'</title>\n'
             if des == '':
                 ch+=4*' '+'<desc lang="ar">يتعذر الحصول على معلومات هذا البرنامج</desc>\n  </programme>\r'

@@ -2,8 +2,8 @@
 ##setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=16.9
-description=What_is_NEW:\n'[New source : Rotana]'
+version=17.0
+description=What_is_NEW:\n'[Rotana Timezone Fix]'
 ##############################################################
 
 TEMPATH=/tmp
