@@ -37,6 +37,10 @@
         "path": "/etc/epgimport/ziko_config/custom.channels.xml",
         "name": "Rotana"
     }, {
+        "channels": ["Arryadia HD"],
+        "path": "/etc/epgimport/ziko_config/snrt.channels.xml",
+        "name": "Snrt"
+    }, {
         "channels": ["aloula", "arryadia", "2m", "medi1"],
         "path": "/etc/epgimport/ziko_config/custom.channels.xml",
         "name": "LE Matin"

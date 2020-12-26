@@ -67,3 +67,10 @@ if not os.path.exists('/etc/epgimport/ziko_config/discovery.channels.xml'):
     discovery_channels=requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/configs/discovery.channels.xml?raw=true')
     with io.open('/etc/epgimport/ziko_config/discovery.channels.xml','w',encoding="utf-8") as f:
         f.write(discovery_channels.text)
+
+if not os.path.exists('/etc/epgimport/ziko_config/snrt.channels.xml'):
+    print('Downloading Snrt.channels config')
+    sys.stdout.flush()
+    snrt_channels=requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/configs/snrt.channels.xml?raw=true')
+    with io.open('/etc/epgimport/ziko_config/snrt.channels.xml','w',encoding="utf-8") as f:
+        f.write(snrt_channels.text)
