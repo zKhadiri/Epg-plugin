@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <channels>
+	<!-- espn caribbean 15w -->
 	<channel id="Espn 901">1:0:1:385:1:0:D7A3141:0:0:0:</channel>
 	<channel id="Espn 902">1:0:1:386:1:0:D7A3141:0:0:0:</channel>
+	<!-- setanta eurasia 31E -->
 	<channel id="SETANTA1">1:0:19:1D56:2A:55:13B0000:0:0:0</channel>
 	<channel id="SETANTA2">1:0:19:1D60:2A:55:13B0000:0:0:0</channel>
+	<!-- jsc news ar -->
 	<channel id="aljazeera">1:0:19:1F5:EAC4:77E:DCA0000:0:0:0:</channel>
 	<channel id="aljazeera">1:0:1:2C4:1B58:13E:820000:0:0:0:</channel>
 	<channel id="aljazeera">1:0:19:2775:3F2:E0:1040000:0:0:0:</channel>
+	<!-- mbc -->
 	<channel id="noordubai">1:0:1:126D:2F:800:DCA0000:0:0:0</channel>
 	<channel id="noordubai">1:0:1:8A0:1FC:2BE:1040000:0:0:0</channel>
 	<channel id="MBC1">1:0:1:4:3B:800:DC00000:0:0:0:</channel>
@@ -31,6 +35,7 @@
 	<channel id="MBCEgypt2">1:0:1:3A:1BC0:2BE:1040000:0:0:0:</channel>
 	<channel id="Wanasah">1:0:1:B:1BC0:2BE:1040000:0:0:0:</channel>
 	<channel id="Wanasah">1:0:1:C:3C:800:DCA0000:0:0:0:</channel>
+	<!-- bein -->
 	<channel id="SportsGlobalHD">1:0:19:83A:C8:77E:DCA0000:0:0:0:</channel>
 	<channel id="News_ar">1:0:1:89A:12C:77E:DCA0000:0:0:0:</channel>
 	<channel id="HD1">1:0:19:7D1:64:77E:DCA0000:0:0:0</channel>
@@ -66,6 +71,7 @@
 	<channel id="BS_NBA">1:0:19:283E:406:E0:1040000:0:0:0:</channel>
 	<channel id="SportsGlobalHD">1:0:19:283F:406:E0:1040000:0:0:0:</channel>
 	<channel id="News_ar">1:0:19:2840:406:E0:1040000:0:0:0:</channel>
+	<!-- osn -->
 	<channel id="OSN_POP_UP_Disney's_Family_Squad">1:0:1:CC:2:800:DCA0000:0:0:0:</channel>
 	<channel id="OSN_Movies">1:0:19:1197:2D:800:DCA0000:0:0:0:</channel>
 	<channel id="OSN_Cinema">1:0:19:161E:236:800:DCA0000:0:0:0:</channel>
@@ -149,4 +155,35 @@
 	<channel id="Alfa_Fann">1:0:1:A93:1:2A:DC00000:0:0:0:</channel>
 	<channel id="Alfa_Music_Now">1:0:1:A94:1:2A:DC00000:0:0:0:</channel>
 	<channel id="Alfa_Al_Safwa">1:0:1:A8E:1:2A:DC00000:0:0:0:</channel>
+	<!-- rotana -->
+	<channel id="Rotana Khalijiah">1:0:1:6:2648:2BE:1040000:0:0:0:</channel>
+	<channel id="Rotana Khalijiah">1:0:19:130:51:2BE:1040000:0:0:0:</channel>
+	<channel id="Rotana Khalijiah">1:0:1:15E4:38:800:DCA0000:0:0:0:</channel>
+	<channel id="Rotana Khalijiah">1:0:1:15E4:0:0:20D2F16:0:0:0:</channel> 
+	<channel id="Rotana HD">1:0:1:14C9:E:20D:20D0000:0:0:0:</channel>
+	<channel id="LBC">1:0:1:3:2648:2BE:1040000:0:0:0:</channel>
+	<channel id="LBC">1:0:19:133:51:2BE:1040000:0:0:0:</channel>
+	<channel id="LBC">1:0:1:15EA:38:800:DCA0000:0:0:0:</channel>
+	<channel id="LBC">1:0:1:15EA:0:0:20D2F16:0:0:0:</channel>
+	<channel id="Rotana Drama">1:0:1:2:2648:2BE:1040000:0:0:0:</channel>
+	<channel id="Rotana Drama">1:0:19:131:51:2BE:1040000:0:0:0:</channel>
+	<channel id="Rotana Drama">1:0:1:15E6:38:800:DCA0000:0:0:0:</channel>
+	<channel id="Rotana Drama">1:0:1:15E6:0:0:20D2F16:0:0:0:</channel>
+	<channel id="Rotana Classic">1:0:1:9:2648:2BE:1040000:0:0:0:</channel>
+	<channel id="Rotana Classic">1:0:19:12F:51:2BE:1040000:0:0:0:</channel>
+	<channel id="Rotana Classic">1:0:1:15E5:38:800:DCA0000:0:0:0:</channel>
+	<channel id="Rotana Classic">1:0:1:15E5:0:0:20D2F16:0:0:0:</channel>
+	<channel id="Rotana Classic">1:0:16:779:12C:13E:820000:0:0:0:</channel>
+	<channel id="Rotana cinema KSA">1:0:1:8:2648:2BE:1040000:0:0:0:</channel>
+	<channel id="Rotana cinema KSA">1:0:19:12D:51:2BE:1040000:0:0:0:</channel>
+	<channel id="Rotana cinema KSA">1:0:1:15E9:38:800:DCA0000:0:0:0:</channel>
+	<channel id="Rotana cinema KSA">1:0:1:15E9:0:0:20D2F16:0:0:0:</channel>
+	<channel id="Rotana cinema KSA">1:0:16:770:12C:13E:820000:0:0:0:</channel>
+	<channel id="Rotana cinema masr">1:0:19:19E:15E9:2BE:1040000:0:0:0:</channel>
+	<channel id="Rotana cinema masr">1:0:1:15E7:38:800:DCA0000:0:0:0:</channel>
+	<channel id="Rotana cinema masr">1:0:1:15E7:0:0:20D2F16:0:0:0:</channel>
+	<channel id="Rotana aflam">1:0:1:14CA:E:20D:20D0000:0:0:0:</channel>
+	<channel id="Rotana Comedy">1:0:1:7:2648:2BE:1040000:0:0:0:</channel>
+	<channel id="Rotana Comedy">1:0:19:12E:51:2BE:1040000:0:0:0:</channel>
+	<channel id="Rotana KIDS">1:0:1:1A:16:20D:20D0000:0:0:0:</channel>
 </channels>
