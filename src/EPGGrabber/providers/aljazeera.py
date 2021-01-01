@@ -8,7 +8,7 @@ import requests, re, io, sys, random
 from datetime import datetime, timedelta
 from requests.adapters import HTTPAdapter
 from requests.exceptions import ConnectionError
-from Plugins.Extensions.EPGGrabber.core.proxies import proxy
+from core.proxies import proxy
 
 print('************Al jazeera arabic EPG **************')
 sys.stdout.flush() 

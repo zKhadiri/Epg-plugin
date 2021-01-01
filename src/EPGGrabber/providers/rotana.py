@@ -9,9 +9,9 @@ if not PY3:
 
 today = (datetime.now()-timedelta(hours=4)).strftime('%d/%m/%Y %H:%M:%S')
 
-channels = ['Khalijiah-v2|Rotana Khalijiah','ROTANA-HD-2|Rotana HD','LBC-12|LBC','Drama-12|Rotana Drama',\
-    'Classic-12|Rotana Classic','cinema-KSA-12|Rotana cinema KSA','Cinema-masr-12|Rotana cinema masr','Rotana-Amrica-12|Rotana Amarica'\
-        ,'Aflam-|Rotana aflam','Comdey|Rotana Comedy','KIDs|Rotana KIDS']
+channels = ['Rotana Khalijiah','Rotana HD','LBC','Rotana Drama',\
+    'Rotana Classic','Rotana cinema KSA','Rotana cinema masr','Rotana Amarica'\
+        ,'Rotana aflam','Rotana Comedy','Rotana KIDS']
 
 def rotana(this_month,channel):
     with requests.Session() as s:
@@ -85,12 +85,14 @@ def main():
     with open(PROVIDERS_ROOT, 'w') as f:
         json.dump(data, f)
     
-    xml_header(EPG_ROOT+'/rotana.xml',[ch.split('|')[1] for ch in channels])
+    xml_header(EPG_ROOT+'/rotana.xml',channels)
     
     url = requests.get('https://rotana.net/%D8%AC%D8%AF%D9%88%D9%84-%D8%A7%D9%84%D8%A8%D8%B1%D8%A7%D9%85%D8%AC/')
     date = re.findall(r'\/(\d{4}\W{2}\d{2})\W{2}',url.text)[0].replace('\/','/')
-    for channel in channels:
-        rotana(date,channel)
+    channel_code = re.findall(r'.jpg.*?\\/\d+\\/\d+\\/(.*?).csv\"',url.text)
+    
+    for channel,code in zip(channels,channel_code):
+        rotana(date,code+'|'+channel)
         
         
    
