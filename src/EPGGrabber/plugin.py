@@ -5,7 +5,6 @@ from __future__ import print_function
 
 import requests, os, json
 from enigma import eTimer
-from enigma import eTimer
 from Plugins.Plugin import PluginDescriptor
 from Screens.MessageBox import MessageBox
 from Tools.Directories import fileExists
