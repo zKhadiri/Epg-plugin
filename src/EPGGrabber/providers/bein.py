@@ -7,44 +7,27 @@ from __init__ import *
 import requests, re, io, os, sys, json
 from time import sleep, strftime
 from requests.adapters import HTTPAdapter
-
-headers={
-    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-    'Accept-Encoding': 'gzip, deflate',
-    'Accept-Language': 'en-US,en;q=0.9',
-    'Cache-Control': 'max-age=0',
-    'Connection': 'keep-alive',
-    'Host': 'epg.beinsports.com',
-    'Upgrade-Insecure-Requests': '1',
-    'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) snap Chromium/80.0.3987.149 Chrome/80.0.3987.149 Safari/537.36'
-}
+from datetime import datetime, timedelta
 
 urls=[]
 print('**************BEIN SPORTS EPG******************')
 sys.stdout.flush()
-for i in range(0,3):
-    import datetime
-    from datetime import timedelta
-    jour = datetime.date.today()
-    week = jour + timedelta(days=i)
-    urls.append('http://epg.beinsports.com/utctime_ar.php?cdate='+str(week))
-
 
 def bein():
-    for url in urls:
-        from datetime import datetime
+    for i in range(0,3):
+        week = (datetime.today() + timedelta(days=i)).strftime('%Y-%m-%d')
         with requests.Session() as s:
-            s.mount('http://', HTTPAdapter(max_retries=10))
-            link = s.get(url,headers=headers)
+            url = 'https://www.bein.com/ar/wp-admin/admin-ajax.php?action=epg_fetch&category=sports&serviceidentity=bein.net&mins=00&cdate={}&language=AR&postid=25344'.format(str(week))
+            link = s.get(url)
             time = re.findall(r'<p\sclass=time>(.*?)<\/p>',link.text)
             times = [t.replace('&nbsp;-&nbsp;','-').split('-') for t in time ]
-            channels = re.findall(r"data-img='mena_sports\/(.*?)\.svg",link.text)
             title = re.findall(r'<p\sclass=title>(.*?)<\/p>',link.text)
             formt = re.findall(r'<p\sclass=format>(.*?)<\/p>',link.text)
-            #format_=[4*' '+'<category lang="ar">'+f.replace('2014','2020')+'</category>'+'\n'+'  </programme>'+'\n' for f in formt]
+            channels = re.findall(r"https:\/\/assets\.bein\.com\/mena\/sites\/\d+\/\d+\/\d+\/(.*?)\.png\'\sdata",link.text)
+            
             desc=[]
-            title_chan=[]
             titles=[]
+            title_chan=[]
             prog=[]
             for tit in title:
                 title_chan.append(tit.replace('   ',' ').split('- ')[0])
@@ -55,10 +38,9 @@ def bein():
                     desc.append(4*' '+'<desc lang="ar">'+tit.replace('&','and')+'</desc>\n  </programme>\r')
 
             for title_,form_ in zip(title_chan,formt):
-                titles.append(4*' '+'<title lang="en">'+title_.replace('&','and')+' - '+form_.replace('2014','2020')+'</title>'+'\n')
+                titles.append(4*' '+'<title lang="en">'+title_.replace('&','and').strip()+' - '+form_.replace('2014','2021')+'</title>'+'\n')
             try:
                 for time_,chann_,chc,chch in zip(times,channels,channels,channels[1:]+[channels[0]]):
-                    from datetime import timedelta
                     date = re.search(r'\d{4}-\d{2}-\d{2}',url)
                     end ='05:59'
                     start='18:00'
@@ -66,16 +48,17 @@ def bein():
                         fix = (datetime.strptime(date.group(),'%Y-%m-%d')-timedelta(days=1)).strftime('%Y-%m-%d')
                         starttime = datetime.strptime(fix+' '+time_[0],'%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
                         endtime = datetime.strptime(date.group()+' ' + time_[1], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
-                        prog.append(2 * ' ' + '<programme start="' + starttime + ' +0000" stop="' + endtime + ' +0000" channel="'+chann_.replace('BS NBA','BS_NBA')+'">'+'\n')
+                        prog.append(2 * ' ' + '<programme start="' + starttime + ' +0000" stop="' + endtime + ' +0000" channel="'+chann_.replace('_Digital_Mono','').replace('_DIGITAL_Mono','')+'">'+'\n')
+
                     elif chc!=chch and time_[1]>='00:00':
                         fix = (datetime.strptime(date.group(),'%Y-%m-%d')+timedelta(days=1)).strftime('%Y-%m-%d')
                         starttime = datetime.strptime(date.group()+' '+time_[0],'%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
                         endtime = datetime.strptime(fix+' ' + time_[1], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
-                        prog.append(2 * ' ' + '<programme start="' + starttime + ' +0000" stop="' + endtime + ' +0000" channel="'+chann_.replace('BS NBA','BS_NBA')+'">'+'\n')
+                        prog.append(2 * ' ' + '<programme start="' + starttime + ' +0000" stop="' + endtime + ' +0000" channel="'+chann_.replace('_Digital_Mono','').replace('_DIGITAL_Mono','')+'">'+'\n')
                     else:
                         starttime = datetime.strptime(date.group()+' '+time_[0],'%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
                         endtime = datetime.strptime(date.group() + ' ' + time_[1], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
-                        prog.append(2 * ' ' + '<programme start="' + starttime + ' +0000" stop="' + endtime + ' +0000" channel="'+chann_.replace('BS NBA','BS_NBA')+'">'+'\n')
+                        prog.append(2 * ' ' + '<programme start="' + starttime + ' +0000" stop="' + endtime + ' +0000" channel="'+chann_.replace('_Digital_Mono','').replace('_DIGITAL_Mono','')+'">'+'\n')
             except:
                 break
             if len(title) !=0:
