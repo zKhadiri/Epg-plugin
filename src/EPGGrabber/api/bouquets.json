@@ -1,6 +1,8 @@
 {
     "bouquets": [{
-        "channels": ["SportsGlobalHD", "News_ar", "HD1", "HD2", "HD3", "HD4", "HD5", "HD6", "HD7", "HD8", "HD9", "HD10", "SportsHD11", "SportsHD12", "SportsHD13", "SportsHD14", "SportsHD15", "SportsHD16", "SportsHD17", "4K", "BS_NBA"],
+        "channels": ["NEWS","bein_SPORTS_FTA","beIN_SPORTS1_PREMIUM","beIN_SPORTS2_PREMIUM","beIN_SPORTS3_PREMIUM","beIN_SPORTS1","beIN_SPORTS2","beIN_SPORTS3","beIN_SPORTS4"
+            ,"beIN_SPORTS5","SPORTS_6-1","beIN_SPORTS7","beIN_SPORTS1_FRENCH","beIN_SPORTS2_FRENCH","beIN_SPORTS3_FRENCH","beIN_SPORTS1_ENGLISH"
+            ,"beIN_SPORTS2_ENGLISH","beIN_SPORTS3_ENGLISH","4k","NBA"],
         "path": "/etc/epgimport/ziko_config/custom.channels.xml",
         "name": "Bein sports"
     }, {
