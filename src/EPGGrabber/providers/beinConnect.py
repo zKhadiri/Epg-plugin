@@ -15,8 +15,7 @@ milli = (datetime.strptime('' + str(week) + ' 23:59:59', "%Y-%m-%d %H:%M:%S").st
 today = datetime.strptime(str(datetime.now().strftime('%Y-%m-%d'))+' 00:00:00',"%Y-%m-%d %H:%M:%S").strftime('%s')
 
 ch_code =['74-beIN Sports','75-beIN Sports News','65-beIN 1HD','66-beIN 2HD','67-beIN 3HD','68-beIN 4HD',
-          '69-beIN 5HD','70-beIN 6HD','71-beIN 7HD','72-beIN 8HD','73-beIN 9HD','58-beIN 10HD','59-beIN 11HD'
-          ,'60-beIN 12HD','61-beIN 13HD','62-beIN 14HD','63-beIN 15HD','64-beIN 16HD','80-beIN 17HD']
+          '69-beIN 5HD','70-beIN 6HD','71-beIN 7HD','72-beIN 1 PREM','73-beIN 2 PREM','58-beIN 3 PREM','103-XTRA 1','104-XTRA 2']
 
 head={
 	"user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
@@ -179,7 +178,3 @@ def main():
 	
 if __name__ == "__main__":
 	main()
-
-   
-
-
