@@ -10,7 +10,7 @@
         "path": "/etc/epgimport/ziko_config/bein.channels.xml",
         "name": "bein entertainment.net"
     }, {
-        "channels": ["beIN Sports", "beIN Sports News", "beIN 1HD", "beIN 2HD", "beIN 3HD", "beIN 4HD", "beIN 5HD", "beIN 6HD", "beIN 7HD", "beIN 8HD", "beIN 9HD", "beIN 10HD", "beIN 11HD", "beIN 12HD", "beIN 13HD", "beIN 14HD", "beIN 15HD", "beIN 16HD", "beIN 17HD"],
+        "channels": ["beIN Sports", "beIN Sports News", "beIN 1HD", "beIN 2HD", "beIN 3HD", "beIN 4HD", "beIN 5HD", "beIN 6HD", "beIN 7HD", "beIN 1 PREM", "beIN 2 PREM","beIN 3 PREM","XTRA 1","XTRA 2"],
         "path": "/etc/epgimport/ziko_config/bein.channels.xml",
         "name": "bein sport connect"
     }, {
