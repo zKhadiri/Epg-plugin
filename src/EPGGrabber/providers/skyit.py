@@ -6,7 +6,7 @@ import warnings
 
 warnings.filterwarnings('ignore', message='Unverified HTTPS request')
 
-from .__init__ import *
+from __init__ import *
 
 channels_code=['9077', '9074', '318', '9073', '9095', '9103', '9100', '9101', '9034', 
                '129', '9050', '9039', '10254', '10515', '472', '320', '7767', '8714', '931',
