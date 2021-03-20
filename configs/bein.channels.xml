@@ -1,4 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <channels>
 <!-- bein connect -->
+  <channel id="beIN Sports">1:0:19:83A:C8:77E:DC00000:0:0:0:</channel>
+  <channel id="beIN Sports News">1:0:19:89A:12C:77E:DC00000:0:0:0:</channel>
+  <channel id="beIN 1HD">1:0:19:7D3:64:77E:DC00000:0:0:0:</channel>
+  <channel id="beIN 1 PREM">1:0:19:7D1:64:77E:DC00000:0:0:0:</channel>
+  <channel id="beIN 2HD">1:0:19:836:C8:77E:DC00000:0:0:0:</channel>
+  <channel id="beIN 2 PREM">1:0:19:7D2:64:77E:DC00000:0:0:0:</channel>
+  <channel id="beIN 3HD">1:0:19:7D4:64:77E:DC00000:0:0:0:</channel>
+  <channel id="beIN 3 PREM">1:0:19:838:C8:77E:DC00000:0:0:0:</channel>
+  <channel id="beIN 4HD">1:0:19:835:C8:77E:DC00000:0:0:0:</channel>
+  <channel id="beIN 5HD">1:0:19:839:C8:77E:DC00000:0:0:0:</channel>
+  <channel id="beIN 6HD">1:0:19:837:C8:77E:DC00000:0:0:0:</channel>
+  <channel id="beIN 7HD">1:0:19:899:12C:77E:DC00000:0:0:0:</channel>
+  <channel id="XTRA 1">1:0:19:89D:12C:77E:DC00000:0:0:0:</channel>
+  <channel id="XTRA 2">1:0:19:89E:12C:77E:DC00000:0:0:0:</channel>
 </channels>
