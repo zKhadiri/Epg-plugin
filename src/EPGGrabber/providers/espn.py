@@ -1,40 +1,45 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-
 from __future__ import print_function
 from __init__ import *
 
-import requests, re, sys, io, json
-from datetime import datetime,timedelta
+import requests, io, sys, os , re , json
+from datetime import datetime, timedelta
+from requests.adapters import HTTPAdapter
+from time import sleep, strftime
 
+headers={
+    'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) snap Chromium/80.0.3987.149 Chrome/80.0.3987.149 Safari/537.36'
+}
 
-def espn(channel):
+def espn():
     for i in range(0,7):
-        days =  (datetime.today()+timedelta(days=i)).strftime('%Y%m%d')
-        
-        url = requests.get('http://www.guiaespn.com/dinamicas/grilladiaria/index.php?coca=695&fecha='+days+'&idMedio='+channel.split('-')[1]+'&formato=desktop')
+        week = (datetime.today() + timedelta(days=i)).strftime('%Y-%m-%d')
+        with requests.Session() as s:
+            s.mount('https://', HTTPAdapter(max_retries=10))
+            url = s.get('https://www.tvpassport.com/tv-listings/stations/espn/594/{}'.format(week),headers=headers,timeout=10)
 
-        titles = re.findall(r'<span class=\"main-title\">(.*?)<\/span>',url.content)
-        descriptions = re.findall(r'<div class=\"reviews-info\">(.*?)<\/div>',url.content)
+        date_start = re.findall(r'data-st=\"(.*?)\"',url.text)
+        duration = re.findall(r'data-duration=\"(.*?)\"',url.text)
+        title = re.findall(r'data-showName=\"(.*?)\"',url.text)
+        description = re.findall(r'data-description=\"(.*?)\"',url.text)
+        team1 = re.findall(r'data-team1=\"(.*?)\"',url.text)
+        team2 = re.findall(r'data-team2=\"(.*?)\"',url.text)
 
-        for time,end,title,des in zip(re.findall(r'<div class=\"item_hour\">(\d{2}:\d{2})',url.content),re.findall(r'duration\">.*\((\d+)',url.content),titles,descriptions):
-            start = datetime.strptime(days+' '+time,'%Y%m%d %H:%M').strftime('%Y%m%d%H%M%S')
-            end = datetime.strptime(days+' '+(datetime.strptime(time,"%H:%M")+timedelta(minutes=int(end))).strftime('%H:%M'),'%Y%m%d %H:%M').strftime('%Y%m%d%H%M%S')
-            epg=''
-            epg+=2 * ' ' + '<programme start="' + start + ' -0300" stop="' + end + ' -0300" channel="'+channel.split('-')[0]+'">\n'
-            if PY3:
-                epg+=4*' '+'<title lang="en">'+title.replace('&','and')+'</title>\n'
-                epg+=4*' '+'<desc lang="en">'+des.replace('&','and')+'</desc>\n  </programme>\r'
+        for dt,m,t,d,t1,t2 in zip(date_start,duration,title,description,team1,team2):
+            ch=''
+            start = datetime.strptime(dt,'%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
+            end = (datetime.strptime(start,'%Y%m%d%H%M%S') + timedelta(minutes=int(m))).strftime('%Y%m%d%H%M%S')
+            ch+=2 * ' ' + '<programme start="' + str(start) + ' +0000" stop="' + str(end) + ' +0000" channel="ESPN">\n'
+            if t1 != "" and t2 != "":
+                ch+=4*' '+'<title lang="en">'+t.replace('&','and')+' : '+t1+' vs '+t2+'</title>\n'
             else:
-                epg+=4*' '+'<title lang="en">'+title.decode('latin1').replace('&','and')+'</title>\n'
-                epg+=4*' '+'<desc lang="en">'+des.decode('latin1').replace('&','and')+'</desc>\n  </programme>\r'
-                
+                ch+=4*' '+'<title lang="en">'+t.replace('&','and')+'</title>\n'
+            ch+=4*' '+'<desc lang="en">'+d.replace('&','and')+'</desc>\n  </programme>\r'
             with io.open(EPG_ROOT+'/espn.xml',"a",encoding='UTF-8')as f:
-                f.write(epg)
-                
-    ends = datetime.strptime(end,'%Y%m%d%H%M%S').strftime('%Y-%m-%d %H:%M')
-    print(channel.split('-')[0]+' EPG ends at : '+ends)
-    sys.stdout.flush()
+                f.write(ch)
+        print(week)
+        sys.stdout.flush()
 
 def main():
     with open(PROVIDERS_ROOT, 'r') as f:
@@ -48,10 +53,9 @@ def main():
     print('**************Espn EPG******************')
     sys.stdout.flush()
     
-    xml_header(EPG_ROOT+'/espn.xml',['Espn 901','Espn 902'])
+    xml_header(EPG_ROOT+'/espn.xml',['ESPN'])
     
-    for channel in ['Espn 901-1418','Espn 902-1107']:
-        espn(channel)
+    espn()
     
     
     close_xml(EPG_ROOT+'/espn.xml')
