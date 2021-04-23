@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <channels>
 	<!-- espn caribbean 15w -->
-	<channel id="Espn 901">1:0:1:385:1:0:D7A3141:0:0:0:</channel>
-	<channel id="Espn 902">1:0:1:386:1:0:D7A3141:0:0:0:</channel>
+	<channel id="ESPN">1:0:0:1:1:1:D342D1D:0:0:0:</channel>
 	<!-- setanta eurasia 31E -->
 	<channel id="SETANTA1">1:0:19:1D56:2A:55:13B0000:0:0:0</channel>
 	<channel id="SETANTA2">1:0:19:1D60:2A:55:13B0000:0:0:0</channel>
