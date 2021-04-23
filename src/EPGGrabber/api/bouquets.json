@@ -75,7 +75,7 @@
         "path": "/etc/epgimport/ziko_config/custom.channels.xml",
         "name": "INDIAN SPORTS CHANNELS"
     }, {
-        "channels": ["aljazeera", "SETANTA1", "SETANTA2", "Espn 901", "Espn 902"],
+        "channels": ["aljazeera", "SETANTA1", "SETANTA2", "ESPN"],
         "path": "/etc/epgimport/ziko_config/custom.channels.xml",
         "name": "Others"
     }]
