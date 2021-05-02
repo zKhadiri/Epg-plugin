@@ -25,12 +25,12 @@ elif [ -f /etc/opkg/opkg.conf ] ; then
    OS='Opensource'
 fi
 ###############
-if [ -d /usr/lib/python3.8 ] ; then
-   echo "Python3"
+if python --version 2>&1 | grep -q '^Python 3\.'; then
+   echo "You have Python3 image"
    PYTHON='PY3'
    PYTHONPACK='python3-requests'
 else
-   echo "Python2"
+   echo "You have Python2 image"
    PYTHON='PY2'
    PYTHONPACK='python-requests'
 fi
