@@ -2,7 +2,7 @@
 ##setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=17.8
+version=17.9
 description=What_is_NEW:\n'[Add ESPN 1 usa tvguide]'
 ##############################################################
 
