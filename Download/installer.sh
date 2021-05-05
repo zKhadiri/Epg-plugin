@@ -3,7 +3,7 @@
 
 ######### Only These two lines to edit with new version ######
 version=17.9
-description=What_is_NEW:\n'[Add ESPN 1 usa tvguide]'
+description=What_is_NEW:\n'[Fix beIN connect epg]'
 ##############################################################
 
 TEMPATH=/tmp
