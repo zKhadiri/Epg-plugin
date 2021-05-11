@@ -26,7 +26,7 @@ LAMEDB = eEnv.resolve('${sysconfdir}/enigma2/lamedb')
 from .skin import *
 
 def parseColor(s):
-	return gRGB(int(s[1:], 0x10))
+        return gRGB(int(s[1:], 0x10))
 
 def getDesktopSize():
     s = getDesktop(0).size()
@@ -41,15 +41,15 @@ class AssignRef(Screen):
     def __init__(self, session, services, curservice=None, bouquetname=None):
         self.session = session
         if config.plugins.EpgPlugin.skin.value == 'smallscreen':
-        	if isHD():
-        		self.skin = SKIN_set_ref_Small_HD
-        	else:
-        		self.skin = SKIN_set_ref_Small_FHD
+                if isHD():
+                        self.skin = SKIN_set_ref_Small_HD
+                else:
+                        self.skin = SKIN_set_ref_Small_FHD
         else:
-        	if isHD():
-        		self.skin = SKIN_set_ref_Full_HD
-        	else:
-        		self.skin = SKIN_set_ref_Full_FHD
+                if isHD():
+                        self.skin = SKIN_set_ref_Full_HD
+                else:
+                        self.skin = SKIN_set_ref_Full_FHD
         self["status"] = Label()
         self["id"] = Label()
         self["label"] = Label()
@@ -91,15 +91,14 @@ class AssignRef(Screen):
 #####################################################
 
     def getJson(self):
-	try:
-        	with open(BOUQUETS_ROOT,'r')as f:
-            		self.data=json.load(f)
-            		for bouquet in self.data['bouquets']:
-                		self.bqList.append(bouquet['name'])
-        	self.changeBQ()
-	except:
-		except compat_URLError as e:
-			print('File json not found.')
+        try:
+                with open(BOUQUETS_ROOT,'r')as f:
+                        self.data=json.load(f)
+                        for bouquet in self.data['bouquets']:
+                                self.bqList.append(bouquet['name'])
+                self.changeBQ()
+        except compat_URLError as e:
+                        print('File json not found.')
     
     def last(self):
         self.bqIndex-=1
@@ -126,9 +125,9 @@ class AssignRef(Screen):
         for data in self.data['bouquets']:
             if data['name']==self.bqList[self.bqIndex]:
                 if PY3:
-                	channels = [s for s in data['channels']]
+                        channels = [s for s in data['channels']]
                 else:
-                	channels = [s.encode('ascii', 'ignore') for s in data['channels']]
+                        channels = [s.encode('ascii', 'ignore') for s in data['channels']]
                 self.path = data['path']
                 self['list'].setList([])    
                 self['list'].setList(channels)
@@ -190,9 +189,9 @@ class AssignRef(Screen):
                 dom = minidom.parseString(out)
                 f = open(self.path, 'w')
                 if PY3:
-                	dom_string = dom.toprettyxml()
+                        dom_string = dom.toprettyxml()
                 else:
-                	dom_string = dom.toprettyxml(encoding='UTF-8')
+                        dom_string = dom.toprettyxml(encoding='UTF-8')
                 dom_string = os.linesep.join([s for s in dom_string.splitlines() if s.strip()])
                 f.write(dom_string)
                 f.close()
@@ -245,30 +244,30 @@ class AssignRef(Screen):
     
 
 def freeMemory():
-	os.system("sync")
-	os.system("echo 3 > /proc/sys/vm/drop_caches")
+        os.system("sync")
+        os.system("echo 3 > /proc/sys/vm/drop_caches")
 
 def cleanup():
-	global Session
-	Session = None
-	global Servicelist
-	Servicelist = None
-	global epg_bouquet
-	epg_bouquet = None
-	freeMemory()
+        global Session
+        Session = None
+        global Servicelist
+        Servicelist = None
+        global epg_bouquet
+        epg_bouquet = None
+        freeMemory()
 
 def closed(ret=False):
-	cleanup()
+        cleanup()
 
 def getBouquetServices(bouquet):
-	services = []
-	Servicelist = eServiceCenter.getInstance().list(bouquet)
-	if Servicelist:
-		while True:
-			service = Servicelist.getNext()
-			if not service.valid():
-				break
-			if service.flags & (eServiceReference.isDirectory | eServiceReference.isMarker): 
-				continue
-			services.append(ServiceReference(service))
-	return services
+        services = []
+        Servicelist = eServiceCenter.getInstance().list(bouquet)
+        if Servicelist:
+                while True:
+                        service = Servicelist.getNext()
+                        if not service.valid():
+                                break
+                        if service.flags & (eServiceReference.isDirectory | eServiceReference.isMarker): 
+                                continue
+                        services.append(ServiceReference(service))
+        return services
