@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import print_function
-from Plugins.Extensions.EPGGrabber.core.compat import PY3
+from Plugins.Extensions.EPGGrabber.core.compat import PY3, compat_URLError
 from Plugins.Extensions.EPGGrabber.core.paths import BOUQUETS_ROOT
 
 from Screens.Screen import Screen
@@ -91,11 +91,15 @@ class AssignRef(Screen):
 #####################################################
 
     def getJson(self):
-        with open(BOUQUETS_ROOT,'r')as f:
-            self.data=json.load(f)
-            for bouquet in self.data['bouquets']:
-                self.bqList.append(bouquet['name'])
-        self.changeBQ()
+	try:
+        	with open(BOUQUETS_ROOT,'r')as f:
+            		self.data=json.load(f)
+            		for bouquet in self.data['bouquets']:
+                		self.bqList.append(bouquet['name'])
+        	self.changeBQ()
+	except:
+		except compat_URLError as e:
+			print('File json not found.')
     
     def last(self):
         self.bqIndex-=1
