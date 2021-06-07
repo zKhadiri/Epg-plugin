@@ -7,3 +7,4 @@ from core.compat import PY3
 from core.header import xml_header,close_xml
 from core.timezone import tz
 from core.paths import *
+from core.api_handler import *

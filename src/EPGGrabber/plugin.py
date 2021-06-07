@@ -69,11 +69,11 @@ class StartTimer:
                 
     def getStatus(self):
         allData=[]
-        branches = ['osn-ziko-ZR1','master-ziko-ZR1','jawwy-ziko-ZR1','FullArabicXML-Haxer','FullEnglishXML-Haxer']
+        branches = ['osn-ziko-ZR1','jawwy-ziko-ZR1','main-MOHAMED19OS']
         for branch in branches:
             try:
-                if branch.split('-')[1]=="Haxer":
-                    url = requests.get('https://api.github.com/repos/Haxer/EPG-XMLFiles/branches/'+branch.split('-')[0],timeout=5).json()
+                if branch.split('-')[1]=="MOHAMED19OS":
+                    url = requests.get('https://api.github.com/repos/MOHAMED19OS/XMLTV/branches/'+branch.split('-')[0],timeout=5).json()
                 else:
                     url = requests.get('https://api.github.com/repos/ziko-ZR1/xml/branches/'+branch.split('-')[0],timeout=5).json()
                 
