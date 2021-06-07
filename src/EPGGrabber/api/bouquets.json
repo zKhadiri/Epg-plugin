@@ -3,14 +3,14 @@
         "channels": ["NEWS","bein_SPORTS_FTA","beIN_SPORTS1_PREMIUM","beIN_SPORTS2_PREMIUM","beIN_SPORTS3_PREMIUM","beIN_SPORTS1","beIN_SPORTS2","beIN_SPORTS3","beIN_SPORTS4"
             ,"beIN_SPORTS5","SPORTS_6-1","beIN_SPORTS7","beIN_SPORTS1_FRENCH","beIN_SPORTS2_FRENCH","beIN_SPORTS3_FRENCH","beIN_SPORTS1_ENGLISH"
             ,"beIN_SPORTS2_ENGLISH","beIN_SPORTS3_ENGLISH","4k","NBA"],
-        "path": "/etc/epgimport/ziko_config/custom.channels.xml",
+        "path": "/etc/epgimport/ziko_config/bein.channels.xml",
         "name": "Bein sports"
     }, {
         "channels": ["AMC", "Aljazeera-Documentary", "AnimPlanet_onWhite", "BBC_earth", "Baby-TV", "Bara3em", "Bloomberg", "BoxOffice_HD1", "BoxOffice_HD2", "CBS-Reality", "CBeebies", "CNN-HD", "Cartoon-Network-Arabic", "Cartoon-Network-HD", "Cartoon-Network-Hindi", "D-Life", "DMAX", "DTX", "DW_B", "DramaHD1", "Euro-News", "FATAFEAT", "FOX-HD", "FX-HD-Black", "Fine-Living", "Fox-Action-Movies", "Fox-Family-Movies", "Gourmet", "HGTV", "HLN", "Jeem-HD", "JimJam", "MoviesHD1Premier", "MoviesHD2Action", "MoviesHD3Drama", "MoviesHD4Family", "Nat_Geo_wild", "Nat_geo_hd", "Nat_geo_people", "Outdoor-Channel", "SUNDANCE-TV", "SeriesHD2", "Star-Movies-HD", "StarWorldHD", "TCM-on-White", "Travel-Channel-HD", "Trt_worls_blk", "VHD", "beIN_SERIES_HD1", "beJUNIOR", "extreme-sports-channel", "food-network"],
         "path": "/etc/epgimport/ziko_config/bein.channels.xml",
         "name": "bein entertainment.net"
     }, {
-        "channels": ["beIN Sports", "beIN Sports News", "beIN 1HD", "beIN 2HD", "beIN 3HD", "beIN 4HD", "beIN 5HD", "beIN 6HD", "beIN 7HD", "beIN 1 PREM", "beIN 2 PREM","beIN 3 PREM","XTRA 1","XTRA 2","beIN SPORTS MAX 1",
+        "channels": ["beIN Sports", "beIN Sports News", "beIN 1HD", "beIN 2HD", "beIN 3HD", "beIN 4HD", "beIN 5HD", "beIN 6HD", "beIN 7HD", "beIN 1 PREM", "beIN 2 PREM","beIN 3 PREM","beIN SPORTS MAX 1",
                     "beIN SPORTS MAX 2","beIN SPORTS MAX 3","beIN SPORTS MAX 4","beIN SPORTS MAX 5","beIN SPORTS MAX 6"],
         "path": "/etc/epgimport/ziko_config/bein.channels.xml",
         "name": "bein sport connect"
@@ -19,7 +19,7 @@
         "path": "/etc/epgimport/ziko_config/bein.channels.xml",
         "name": "bein entertainment connect"
     }, {
-        "channels": ["ABS-CBN_Sports+Action", "AD_Sports_3_HD", "AD_Sports_4_HD", "ANC", "ARC", "Aksyon_TV", "Al_Hurra_HD", "Alfa_Al_Safwa", "Alfa_Al_Yawm_HD", "Alfa_Cinema_1", "Alfa_Cinema_2", "Alfa_Fann", "Alfa_Music_Now", "Alfa_Series_+2_HD", "Alfa_Series_HD", "Baby_TV", "Beity_TV", "Bloomberg", "CGTN", "CI", "CNBC_Europe", "CineMo", "Cinema_One_Global", "Comedy_Central_HD", "Discovery_Channel_HD", "Discovery_IDX_HD", "Discovery_Science_HD", "Disney_Channel_HD", "Disney_Junior_HD", "Disney_XD_HD", "E!_HD", "France_24_Arabic", "GMA_Life_TV", "GMA_News_TV", "GMA_Pinoy_TV", "H2_HD", "History_HD", "Lifestyle_Network", "MTV_Live_HD", "Majid_Kids_TV", "Myx", "NHK_World-Japan", "Nat_Geo_HD", "Nat_Geo_People_HD", "Nat_Geo_Wild_HD", "Net_25", "NickToons_HD", "Nick_Jr_HD", "Nickelodeon_HD","OSN_Pop_Up_Fantasy_World","OSN_Woman" ,"OSN_Action", "OSN_Series", "OSN_Cinema", "OSN_Comedy", "OSN_Enigma", "OSN_Kids", "OSN_Kidzone", "OSN_Living", "OSN_Mezze", "OSN_Mix", "OSN_Mov_First_+2h", "OSN_Movies", "OSN_Movies_Disney", "OSN_Movies_First", "OSN_News", "OSN_Series_First", "OSN_YH_Cinema", "OSN_Ya_Hala", "OSN_Ya_Hala_Al_Oula", "Rusiya_Al_Yawm", "Sky_News_Arabia", "Sky_News_HD", "Star_Movies_HD", "Star_World_HD", "TFC", "TLC_HD", "TeleRadyo", "VH1", "VIVA_TV", "YAS_Sports_HD", "Yalla_OSN_Support"],
+        "channels": ["OSN_Woman", "OSN_Movies_First", "OSN_Movies_First_+2", "OSN_Action", "OSN_Movies", "OSN_Popup", "OSN_Enigma", "OSN_Kids", "OSN_Movies_Disney", "Star_Movies_HD", "OSN_Ya_Hala_Al_Oula", "OSN_Ya_Hala", "OSN_Yahala_Cinema", "Series_Channel", "Al_Yawm", "Al_Safwa", "Fann", "Cinema_1", "Cinema_2", "Music_Now", "Hekayat", "CineMo", "Hekayat_2", "ART_Aflam_1", "ART_Aflam_2", "ART_Cinema", "OSN_Series_First", "OSN_Comedy", "Star_World_HD", "TLC_HD", "E!_Entertainment_HD", "OSN_Mezze", "OSN_Living", "MTV_Live_HD", "VH1", "Disney_HD", "Disney_Junior", "Nickelodeon_HD", "Nick_Jr", "OSN_Kid_Zone_TV", "NickToons_HD", "NHK_World_TV", "GMA_News_TV", "Nat_Geo_People_HD", "Baby_TV_Europe", "OSN_News", "Sky_News_HD", "CNBC", "Bloomberg","Discovery_HD","Discovery_Science_HD" ,"Discovery_ID", "Crime_And_Investigation_Network", "History_HD", "H2_HD", "Nat_Geo_HD", "Nat_Geo_Wild_HD", "Nat_Geo_People_HD", "TFC", "Cinema_One_Global", "OSN_Mix", "DZMM_Teleradyo", "Myx", "Aksyon_TV", "Cine_Mo", "GMA_Pinoy_TV", "GMA_Life_TV", "OSN_Series", "ANC"],
         "path": "/etc/epgimport/ziko_config/custom.channels.xml",
         "name": "OSN"
     }, {
