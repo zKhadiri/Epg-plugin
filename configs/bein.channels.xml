@@ -1,18 +1,80 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <channels>
-<!-- bein connect -->
-  <channel id="beIN Sports">1:0:19:83A:C8:77E:DC00000:0:0:0:</channel>
-  <channel id="beIN Sports News">1:0:19:89A:12C:77E:DC00000:0:0:0:</channel>
-  <channel id="beIN 1HD">1:0:19:7D3:64:77E:DC00000:0:0:0:</channel>
-  <channel id="beIN 1 PREM">1:0:19:7D1:64:77E:DC00000:0:0:0:</channel>
-  <channel id="beIN 2HD">1:0:19:836:C8:77E:DC00000:0:0:0:</channel>
-  <channel id="beIN 2 PREM">1:0:19:7D2:64:77E:DC00000:0:0:0:</channel>
-  <channel id="beIN 3HD">1:0:19:7D4:64:77E:DC00000:0:0:0:</channel>
-  <channel id="beIN 3 PREM">1:0:19:838:C8:77E:DC00000:0:0:0:</channel>
-  <channel id="beIN 4HD">1:0:19:835:C8:77E:DC00000:0:0:0:</channel>
-  <channel id="beIN 5HD">1:0:19:839:C8:77E:DC00000:0:0:0:</channel>
-  <channel id="beIN 6HD">1:0:19:837:C8:77E:DC00000:0:0:0:</channel>
-  <channel id="beIN 7HD">1:0:19:899:12C:77E:DC00000:0:0:0:</channel>
-  <channel id="XTRA 1">1:0:19:89D:12C:77E:DC00000:0:0:0:</channel>
-  <channel id="XTRA 2">1:0:19:89E:12C:77E:DC00000:0:0:0:</channel>
+	<!-- NilSat -->
+	<channel id="beIN 1 PREM">1:0:19:7D1:64:77E:DCA0000:0:0:0</channel>
+	<channel id="beIN 2 PREM">1:0:19:7D2:64:77E:DCA0000:0:0:0</channel>
+	<channel id="beIN 3 PREM">1:0:19:838:C8:77E:DCA0000:0:0:0</channel>
+	<channel id="beIN 1HD">1:0:19:7D3:64:77E:DCA0000:0:0:0</channel>
+	<channel id="beIN 2HD">1:0:19:836:C8:77E:DCA0000:0:0:0</channel>
+	<channel id="beIN 3HD">1:0:19:7D4:64:77E:DCA0000:0:0:0</channel>
+	<channel id="beIN 4HD">1:0:19:835:C8:77E:DCA0000:0:0:0</channel>
+	<channel id="beIN 5HD">1:0:19:839:C8:77E:DCA0000:0:0:0</channel>
+	<channel id="beIN 6HD">1:0:19:837:C8:77E:DCA0000:0:0:0</channel>
+	<channel id="beIN 7HD">1:0:19:899:12C:77E:DCA0000:0:0:0</channel>
+	<channel id="beIN Sports News">1:0:19:89A:12C:77E:DCA0000:0:0:0</channel>
+	<channel id="beIN Sports">1:0:19:83A:C8:77E:DCA0000:0:0:0</channel>
+	<channel id="XTRA 1">1:0:19:89D:12C:77E:DCA0000:0:0:0</channel>
+	<channel id="XTRA 2">1:0:19:89E:12C:77E:DCA0000:0:0:0</channel>
+	<channel id="beIN SPORTS MAX 1">1:0:19:89B:12C:77E:DCA0000:0:0:0</channel>
+	<channel id="beIN SPORTS MAX 2">1:0:19:7D6:64:77E:DCA0000:0:0:0</channel>
+	<channel id="beIN SPORTS MAX 3">1:0:19:7D5:64:77E:DCA0000:0:0:0</channel>
+	<channel id="beIN SPORTS MAX 4">1:0:19:89C:12C:77E:DCA0000:0:0:0</channel>
+	<channel id="beIN SPORTS MAX 5">1:0:19:89F:12C:77E:DCA0000:0:0:0</channel>
+	<channel id="beIN SPORTS MAX 6">1:0:19:8A0:12C:77E:DCA0000:0:0:0</channel>
+
+	<!-- Badr -->
+	<channel id="beIN 1 PREM">1:0:19:28A1:410:E0:1040000:0:0:0</channel>
+	<channel id="beIN 2 PREM">1:0:19:28A2:410:E0:1040000:0:0:0</channel>
+	<channel id="beIN 3 PREM">1:0:19:296C:424:E0:1040000:0:0:0</channel>
+	<channel id="beIN 1HD">1:0:19:28A3:410:E0:1040000:0:0:0</channel>
+	<channel id="beIN 2HD">1:0:19:296A:424:E0:1040000:0:0:0</channel>
+	<channel id="beIN 3HD">1:0:19:28A4:410:E0:1040000:0:0:0</channel>
+	<channel id="beIN 4HD">1:0:19:2969:424:E0:1040000:0:0:0</channel>
+	<channel id="beIN 5HD">1:0:19:2A31:438:E0:1040000:0:0:0</channel>
+	<channel id="beIN 6HD">1:0:19:296B:424:E0:1040000:0:0:0</channel>
+	<channel id="beIN 7HD">1:0:19:2A32:438:E0:1040000:0:0:0</channel>
+	<channel id="beIN Sports News">1:0:19:2840:406:E0:1040000:0:0:0</channel>
+	<channel id="beIN Sports">1:0:19:283F:406:E0:1040000:0:0:0</channel>
+	<channel id="4k">1:0:19:4E8C:7DA:E0:1040000:0:0:0</channel>
+	<channel id="NBA">1:0:19:283E:406:E0:1040000:0:0:0</channel>
+	<channel id="beIN_SPORTS1_ENGLISH">1:0:19:2A33:438:E0:1040000:0:0:0</channel>
+	<channel id="beIN_SPORTS2_ENGLISH">1:0:19:2A34:438:E0:1040000:0:0:0</channel>
+	<channel id="beIN_SPORTS3_ENGLISH">1:0:19:29CD:42E:E0:1040000:0:0:0</channel>
+	<channel id="beIN_SPORTS1_FRENCH">1:0:19:29CE:42E:E0:1040000:0:0:0</channel>
+	<channel id="beIN_SPORTS2_FRENCH">1:0:19:29CF:42E:E0:1040000:0:0:0</channel>
+	<channel id="beIN_SPORTS3_FRENCH">1:0:19:29D0:42E:E0:1040000:0:0:0</channel>
+	<channel id="beIN SPORTS MAX 1">1:0:19:2971:424:E0:1040000:0:0:0</channel>
+	<channel id="beIN SPORTS MAX 2">1:0:19:2A36:438:E0:1040000:0:0:0</channel>
+	<channel id="beIN SPORTS MAX 3">1:0:19:29D1:42E:E0:1040000:0:0:0</channel>
+	<channel id="beIN SPORTS MAX 4">1:0:19:2842:406:E0:1040000:0:0:0</channel>
+	<channel id="beIN SPORTS MAX 5">1:0:19:9CAE:FAA:E0:1040000:0:0:0</channel>
+	<channel id="beIN SPORTS MAX 6">1:0:19:9E3D:FD2:E0:1040000:0:0:0</channel>
+	<!-- Entertainment -->
+	<channel id="beIN Drama HD">1:0:19:4E88:7DA:E0:1040000:0:0:0</channel>
+	<channel id="beIN Gourmet HD">1:0:19:1F5:15EA:2BE:1040000:0:0:0</channel>
+	<channel id="Star-Movies-HD">1:0:19:9D0B:FB4:E0:1040000:0:0:0</channel>
+	<channel id="StarWorldHD">1:0:19:9D0C:FB4:E0:1040000:0:0:0</channel>
+	<channel id="beIN Movie 1">1:0:19:28A6:410:E0:1040000:0:0:0</channel>
+	<channel id="beIN Movie 2">1:0:19:29D2:42E:E0:1040000:0:0:0</channel>
+	<channel id="beIN Movie 3">1:0:19:2843:406:E0:1040000:0:0:0</channel>
+	<channel id="beIN Movie 4HD">1:0:19:2A35:438:E0:1040000:0:0:0</channel>
+	<channel id="Series 1HD">1:0:19:296E:424:E0:1040000:0:0:0</channel>
+	<channel id="beIN Series 2 HD">1:0:19:28A7:410:E0:1040000:0:0:0</channel>
+	<channel id="FOX-HD">1:0:19:9D0A:FB4:E0:1040000:0:0:0</channel>
+	<channel id="Fox-Action-Movies">1:0:19:9D0E:FB4:E0:1040000:0:0:0</channel>
+	<!-- Cultural-Nature -->
+	<channel id="Outdoor-Channel">1:0:19:9CAA:FAA:E0:1040000:0:0:0</channel>
+	<channel id="AMC">1:0:19:9CA8:FAA:E0:1040000:0:0:0</channel>
+	<channel id="BBC_earth">1:0:19:9CAD:FAA:E0:1040000:0:0:0</channel>
+	<channel id="Travel-Channel-HD">1:0:19:9CA9:FAA:E0:1040000:0:0:0</channel>
+	<channel id="Nat_geo_people">1:0:19:9E36:FD2:E0:1040000:0:0:0</channel>
+	<channel id="Nat_Geo_wild">1:0:19:9E37:FD2:E0:1040000:0:0:0</channel>
+	<channel id="Nat_geo_hd">1:0:19:9E35:FD2:E0:1040000:0:0:0</channel>
+	<!-- Children -->
+	<channel id="beJUNIOR">1:0:19:9D70:FBE:E0:1040000:0:0:0</channel>
+	<channel id="Bara3em">1:0:19:9D6E:FBE:E0:1040000:0:0:0</channel>
+	<!-- Food -->
+	<channel id="Gourmet">1:0:19:4E85:7DA:E0:1040000:0:0:0</channel>
+	<channel id="FATAFEAT">1:0:19:9D6F:FBE:E0:1040000:0:0:0</channel>
+	<channel id="food-network">1:0:19:9CAB:FAA:E0:1040000:0:0:0</channel>
 </channels>
