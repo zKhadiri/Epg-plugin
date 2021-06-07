@@ -2,8 +2,8 @@
 ##setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=18.2
-description=What_is_NEW:\n'[Update bein sport connect Remove XTRA 1/2]'
+version=18.3
+description=What_is_NEW:\n'[Merge and improve Bein sources into one file]'
 ##############################################################
 
 TEMPATH=/tmp
