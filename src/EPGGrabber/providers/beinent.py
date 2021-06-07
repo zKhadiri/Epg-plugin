@@ -16,7 +16,7 @@ for i in range(0,5):
     from datetime import timedelta
     jour = datetime.date.today()
     week = jour + timedelta(days=i)
-    urls.append('https://www.bein.com/en/wp-admin/admin-ajax.php?action=epg_fetch&offset=0&category=entertainment&serviceidentity=bein.net&mins=00&cdate='+str(week)+'&language=EN')
+    urls.append('https://www.bein.com/en/wp-admin/admin-ajax.php?action=epg_fetch&offset=%2B1&category=entertainment&serviceidentity=bein.net&mins=00&cdate='+str(week)+'&language=EN&postid=25356')
 
 desc=[]
 title_chan=[]
