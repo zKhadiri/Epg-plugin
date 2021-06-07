@@ -20,7 +20,7 @@ from datetime import datetime
 with open(PROVIDERS_ROOT, 'r') as f:
     data = json.load(f)
 for channel in data['bouquets']:
-    if channel["bouquet"]=="jawwy":
+    if channel["bouquet"]=="jawwyenOS":
         channel['date']=datetime.today().strftime('%A %d %B %Y at %I:%M %p')
 with open(PROVIDERS_ROOT, 'w') as f:
     json.dump(data, f)

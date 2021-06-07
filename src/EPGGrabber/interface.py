@@ -337,21 +337,13 @@ class EPGGrabber(Screen):
                         self.check_date(js['osn'],provName)
                         self["status"].setText('Last commit : {}'.format(js['osn']))
                         
-                    elif provName=='osnar':
-                        self.check_date(js['FullArabicXML'],provName)
-                        self["status"].setText('Last commit : {}'.format(js['FullArabicXML']))
-                        
-                    elif provName=='osnen':
-                        self.check_date(js['FullEnglishXML'],provName)
-                        self["status"].setText('Last commit : {}'.format(js['FullEnglishXML']))
-                        
                     elif provName=='jawwy' or provName=='jawwyen':
                         self.check_date(js['jawwy'],provName)
                         self["status"].setText('Last commit : {}'.format(js['jawwy']))
                         
-                    elif provName=='dstvback':
-                        self.check_date(js['master'],provName)
-                        self["status"].setText('Last commit : {}'.format(js['master']))
+                    elif provName=='jawwyenOS' or provName=='jawwyOS':
+                        self.check_date(js['main'],provName)
+                        self["status"].setText('Last commit : {}'.format(js['main']))
                     else:
                         self["status"].setText("")
     
