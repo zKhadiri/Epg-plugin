@@ -2,8 +2,8 @@
 ##setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=18.8
-description=What_is_NEW:\n'[Update List of ID channels]'
+version=18.9
+description=What_is_NEW:\n'[Update List of Some ID channels]'
 ##############################################################
 
 TEMPATH=/tmp
