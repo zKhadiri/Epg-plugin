@@ -329,17 +329,17 @@
         },
         {
             "channels": [
-                "KHALIJIA-3",
-                "KIDS-4",
-                "COMEDY-4",
-                "CINEMA-3",
-                "CLASSIC-4",
-                "DRAMA-4",
-                "LBC-4",            
-                "AFLAM-PLUS-4",
-                "AMERICA-3",
-                "CINEMA-EGY-3",                
-                "ROTANA-HD-3"
+                "KHALIJIA-July",
+                "KIDS-July",
+                "COMEDY-July",
+                "CINEMA-July",
+                "CLASSIC-July",
+                "DRAMA-July",
+                "LBC-July-1",            
+                "AFLAM-PLUS-July-1",
+                "AMERICA-July-1",
+                "CINEMA-EGY-July",                
+                "ROTANA-HD-July"
             ],
             "path": "/etc/epgimport/ziko_config/custom.channels.xml",
             "name": "Rotana"
