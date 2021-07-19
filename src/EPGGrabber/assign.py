@@ -55,7 +55,7 @@ class AssignRef(Screen):
         self["id"] = Label()
         self["label"] = Label()
         self["bouq"] = Label()
-        self['list']=MenuList([])
+        self['list'] = MenuList([])
         self["key_red"] = Button(_("last provider"))
         self["key_green"] = Button(_("next provider"))
         self.services = services
@@ -73,19 +73,19 @@ class AssignRef(Screen):
             "right":self.right,
             "left":self.left
         }, -1)
-        self.exist= False
+        self.exist = False
         self.ServicesList = []
-        self.idxList=[]
-        self.bqList=[]
+        self.idxList = []
+        self.bqList = []
         self.sidx = 0
         self.name = None
         self.refstr = None
         self.id = None
-        self.path=None
+        self.path = None
         self.idx = 0
         self.init() 
         self.getCurrentService()
-        self.bqIndex=0
+        self.bqIndex = 0
         self.getJson()       
         self["bouq"].setText("Current bouquet  : {}".format(self.bouquetname))
      
@@ -94,7 +94,7 @@ class AssignRef(Screen):
     def getJson(self):
         try:
                 with open(BOUQUETS_ROOT,'r')as f:
-                        self.data=json.load(f)
+                        self.data = json.load(f)
                         for bouquet in self.data['bouquets']:
                                 self.bqList.append(bouquet['name'])
                 self.changeBQ()
@@ -102,29 +102,29 @@ class AssignRef(Screen):
                         print('File json not found.')
     
     def last(self):
-        self.bqIndex-=1
+        self.bqIndex -= 1
         self.changeBQ()
         self['id'].setText("")
         
     def next(self):
-        self.bqIndex+=1
+        self.bqIndex += 1
         self.changeBQ()
         self['id'].setText("")
         
     def changeBQ(self):
-        if self.bqIndex>(len(self.bqList)-1):
-           self.bqIndex=0
-        if self.bqIndex<0:
-           self.bqIndex =len(self.bqList)-1
+        if self.bqIndex > (len(self.bqList) - 1):
+           self.bqIndex = 0
+        if self.bqIndex < 0:
+           self.bqIndex = len(self.bqList) - 1
            
-        bqTitle=self.bqList[self.bqIndex]
+        bqTitle = self.bqList[self.bqIndex]
         self["label"].setText('EPG Provider : {}'.format(bqTitle))
         self.listChannels()
      
       
     def listChannels(self):
         for data in self.data['bouquets']:
-            if data['name']==self.bqList[self.bqIndex]:
+            if data['name'] == self.bqList[self.bqIndex]:
                 if PY3:
                         channels = [s for s in data['channels']]
                 else:
@@ -133,8 +133,8 @@ class AssignRef(Screen):
                 self['list'].setList([])    
                 self['list'].setList(channels)
                 self['list'].show()
-                self.idxList=channels
-                self.lenidList=len(self.idxList)
+                self.idxList = channels
+                self.lenidList = len(self.idxList)
                 self.updateServiceID()
                         
     def listDOWN(self):
@@ -149,8 +149,8 @@ class AssignRef(Screen):
         self['id'].setText("")
         
     def updateServiceID(self):
-        index=self['list'].getSelectionIndex()
-        service=self.idxList[index]
+        index = self['list'].getSelectionIndex()
+        service = self.idxList[index]
         #self['id'].setText(service)
         self.id = service
         return
@@ -167,8 +167,8 @@ class AssignRef(Screen):
         if fileExists(self.path):
             self.exist = False
             
-            if len(self.refstr)>60:
-                new_id = '<channel id="{}">{}</channel>'.format(self.id,self.refstr.split('/')[0]+'//example.m3u8')
+            if len(self.refstr) > 60:
+                new_id = '<channel id="{}">{}</channel>'.format(self.id,self.refstr.split('/')[0] + '//example.m3u8')
             else:
                 new_id = '<channel id="{}">{}</channel>'.format(self.id,self.refstr)
             
@@ -199,7 +199,7 @@ class AssignRef(Screen):
                 self['id'].setText("{} added successfully to config".format(self.name))
                 self['id'].instance.setForegroundColor(parseColor("#008000"))
         else:
-            self.session.open(MessageBox,_(str(self.path)+" not found in path"), MessageBox.TYPE_INFO,timeout=10)
+            self.session.open(MessageBox,_(str(self.path) + " not found in path"), MessageBox.TYPE_INFO,timeout=10)
 
 
     def getCurrentService(self):

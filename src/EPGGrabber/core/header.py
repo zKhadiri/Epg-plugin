@@ -17,17 +17,17 @@ def xml_header(path,channels):
     for channel in channels:
         with io.open(path,"a",encoding='UTF-8')as f:
             if PY3:
-                f.write("\n"+'  <channel id="'+channel+'">'+"\n"+'    <display-name lang="en">'+channel+'</display-name>'+"\n"+'  </channel>\r')
+                f.write("\n" + '  <channel id="' + channel + '">' + "\n" + '    <display-name lang="en">' + channel + '</display-name>' + "\n" + '  </channel>\r')
             else:
-                f.write(("\n"+'  <channel id="'+channel+'">'+"\n"+'    <display-name lang="en">'+channel+'</display-name>'+"\n"+'  </channel>\r').decode('utf-8'))
+                f.write(("\n" + '  <channel id="' + channel + '">' + "\n" + '    <display-name lang="en">' + channel + '</display-name>' + "\n" + '  </channel>\r').decode('utf-8'))
                 
                 
 def close_xml(path):
     file = open(path,'a')
     if PY3:
-        file.write('\n'+'</tv>')
+        file.write('\n' + '</tv>')
     else:
-        file.write(('\n'+'</tv>').decode('utf-8'))
+        file.write(('\n' + '</tv>').decode('utf-8'))
         
     file.close()
     

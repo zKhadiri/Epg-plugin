@@ -9,13 +9,13 @@ import requests
 import json
 from __init__ import *
 
-path = EPG_ROOT+'/jawwyen.xml'
+path = EPG_ROOT + '/jawwyen.xml'
 
 print('**************Jawwy backup EPG******************')
 sys.stdout.flush()
 print("Downloading Jawwy English EPG guide\nPlease wait....")  
 sys.stdout.flush()
-url=requests.get('https://raw.githubusercontent.com/MOHAMED19OS/XMLTV/main/jawwyen.xml')
+url = requests.get('https://raw.githubusercontent.com/MOHAMED19OS/XMLTV/main/jawwyen.xml')
 with io.open(path,'w',encoding="utf-8") as f:
     f.write(url.text)
     
@@ -25,8 +25,8 @@ from datetime import datetime
 with open(PROVIDERS_ROOT, 'r') as f:
     data = json.load(f)
 for channel in data['bouquets']:
-    if channel["bouquet"]=="jawwyenOS":
-        channel['date']=datetime.today().strftime('%A %d %B %Y at %I:%M %p')
+    if channel["bouquet"] == "jawwyenOS":
+        channel['date'] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
 with open(PROVIDERS_ROOT, 'w') as f:
     json.dump(data, f)
     

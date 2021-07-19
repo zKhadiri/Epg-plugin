@@ -13,7 +13,7 @@ from datetime import datetime, timedelta
 from requests.adapters import HTTPAdapter
 from time import sleep, strftime
 
-headers={
+headers = {
     'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) snap Chromium/80.0.3987.149 Chrome/80.0.3987.149 Safari/537.36'
 }
 
@@ -32,16 +32,16 @@ def espn():
         team2 = re.findall(r'data-team2=\"(.*?)\"',url.text)
 
         for dt,m,t,d,t1,t2 in zip(date_start,duration,title,description,team1,team2):
-            ch=''
+            ch = ''
             start = datetime.strptime(dt,'%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
             end = (datetime.strptime(start,'%Y%m%d%H%M%S') + timedelta(minutes=int(m))).strftime('%Y%m%d%H%M%S')
-            ch+=2 * ' ' + '<programme start="' + str(start) + ' +0000" stop="' + str(end) + ' +0000" channel="ESPN">\n'
+            ch += 2 * ' ' + '<programme start="' + str(start) + ' +0000" stop="' + str(end) + ' +0000" channel="ESPN">\n'
             if t1 != "" and t2 != "":
-                ch+=4*' '+'<title lang="en">'+t.replace('&','and')+' : '+t1+' vs '+t2+'</title>\n'
+                ch += 4 * ' ' + '<title lang="en">' + t.replace('&','and') + ' : ' + t1 + ' vs ' + t2 + '</title>\n'
             else:
-                ch+=4*' '+'<title lang="en">'+t.replace('&','and')+'</title>\n'
-            ch+=4*' '+'<desc lang="en">'+d.replace('&','and')+'</desc>\n  </programme>\r'
-            with io.open(EPG_ROOT+'/espn.xml',"a",encoding='UTF-8')as f:
+                ch += 4 * ' ' + '<title lang="en">' + t.replace('&','and') + '</title>\n'
+            ch += 4 * ' ' + '<desc lang="en">' + d.replace('&','and') + '</desc>\n  </programme>\r'
+            with io.open(EPG_ROOT + '/espn.xml',"a",encoding='UTF-8')as f:
                 f.write(ch)
         print(week)
         sys.stdout.flush()
@@ -50,23 +50,23 @@ def main():
     with open(PROVIDERS_ROOT, 'r') as f:
         data = json.load(f)
     for bouquet in data['bouquets']:
-        if bouquet["bouquet"]=="espn":
-            bouquet['date']=datetime.today().strftime('%A %d %B %Y at %I:%M %p')
+        if bouquet["bouquet"] == "espn":
+            bouquet['date'] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
     with open(PROVIDERS_ROOT, 'w') as f:
         json.dump(data, f) 
     
     print('**************Espn EPG******************')
     sys.stdout.flush()
     
-    xml_header(EPG_ROOT+'/espn.xml',['ESPN'])
+    xml_header(EPG_ROOT + '/espn.xml',['ESPN'])
     
     espn()
     
     
-    close_xml(EPG_ROOT+'/espn.xml')
+    close_xml(EPG_ROOT + '/espn.xml')
     
     print("**************FINISHED******************")
     sys.stdout.flush()
     
-if __name__=='__main__':
+if __name__ == '__main__':
     main()

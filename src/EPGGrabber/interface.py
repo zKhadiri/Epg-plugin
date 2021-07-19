@@ -43,17 +43,17 @@ config.plugins.EpgPlugin = ConfigSubsection()
 config.plugins.EpgPlugin.update = ConfigYesNo(default=True)
 config.plugins.EpgPlugin.skin = ConfigSelection(default='smallscreen', choices=[('smallscreen', _('Small Screen')), ('fullscreen', _('Full Screen'))])
 
-REDC =  '\033[31m'                                                              
+REDC = '\033[31m'                                                              
 ENDC = '\033[m'                                                                 
                                                                                 
 def cprint(text):                                                               
-        print(REDC+text+ENDC)
+        print(REDC + text + ENDC)
 
 def logdata(label_name='', data=None):
     try:
-        data=str(data)
+        data = str(data)
         fp = open('/tmp/EPG_Plugin.log', 'a')
-        fp.write(str(label_name) + ': ' + data+"\n")
+        fp.write(str(label_name) + ': ' + data + "\n")
         fp.close()
     except:
         trace_error()    
@@ -70,7 +70,7 @@ def trace_error():
 
 def getversioninfo():
     currversion = '1.0'
-    version_file = BASE_DIR+'/version'
+    version_file = BASE_DIR + '/version'
     if os.path.exists(version_file):
         try:
             fp = open(version_file, 'r').readlines()
@@ -117,12 +117,12 @@ class EPGGrabber(Screen):
             else:
                 self.skin = SKIN_EPGGrabber_Full_FHD
         list = []
-        self.installList=[] ## New from mf to make choose list
+        self.installList = [] ## New from mf to make choose list
         
         for i in range(len(DataJs()['bouquets'])):
             list.append((DataJs()["bouquets"][i]["title"],i,DataJs()['bouquets'][i]["bouquet"]))
             
-        self.provList=list ## New from mf to make choose list
+        self.provList = list ## New from mf to make choose list
         Screen.__init__(self, session)
         self.skinName = ["EPGGrabber"]
         self["status"] = Label()
@@ -167,7 +167,7 @@ class EPGGrabber(Screen):
         cicolor = 13789470
         scolor = cbcolor
         res = []        
-        gList=[]
+        gList = []
         if isHD():
             self["config"].l.setItemHeight(37)
             self["config"].l.setFont(0, gFont('Regular', 22))
@@ -177,14 +177,14 @@ class EPGGrabber(Screen):
         for i in range(0, len(self.provList)):
             provider = self.provList[i][0]
             if isHD():
-                png=BASE_DIR+'/icons/epg.png'
+                png = BASE_DIR + '/icons/epg.png'
             else:
-                png=BASE_DIR+'/icons/epgfhd.png'
+                png = BASE_DIR + '/icons/epgfhd.png'
             if provider in self.installList:
                 if isHD():
-                    png = BASE_DIR+'/icons/ok.png'
+                    png = BASE_DIR + '/icons/ok.png'
                 else:
-                    png = BASE_DIR+'/icons/okfhd.png'
+                    png = BASE_DIR + '/icons/okfhd.png'
             res.append(MultiContentEntryText(pos=(0, 0), size=(0, 0), font=0, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='', color=scolor, color_sel=cccolor, border_width=3, border_color=806544))
             if isHD():
                 res.append(MultiContentEntryPixmapAlphaTest(pos=(5, 0), size=(35, 35), png=loadPNG(png)))
@@ -198,7 +198,7 @@ class EPGGrabber(Screen):
         self["config"].show()
 
     def showsetup(self):
-        choices=[]
+        choices = []
         self.list = []
         SkinStyle = config.plugins.EpgPlugin.skin.value
         EnablecheckUpdate = config.plugins.EpgPlugin.update.value
@@ -216,7 +216,7 @@ class EPGGrabber(Screen):
 
     def choicesback(self, select):
         if select:
-            if select[1]=='smallscreen':
+            if select[1] == 'smallscreen':
                 config.plugins.EpgPlugin.skin.value = "smallscreen"
                 config.plugins.EpgPlugin.skin.save()
                 configfile.save()
@@ -234,9 +234,9 @@ class EPGGrabber(Screen):
                 config.plugins.EpgPlugin.update.value = False
                 config.plugins.EpgPlugin.update.save()
                 configfile.save()
-            elif select[1]=='sref':
+            elif select[1] == 'sref':
                 from Plugins.Extensions.EPGGrabber import assign
-                servicelist=None
+                servicelist = None
                 global Servicelist
                 import Screens.InfoBar
                 Servicelist = servicelist or Screens.InfoBar.InfoBar.instance.servicelist
@@ -246,7 +246,7 @@ class EPGGrabber(Screen):
                     services = assign.getBouquetServices(epg_bouquet)
                     service = Servicelist.servicelist.getCurrent()
                     self.session.openWithCallback(assign.closed,assign.AssignRef, services, service, ServiceReference(epg_bouquet).getServiceName())
-            elif select[1]=="config":
+            elif select[1] == "config":
                 self.session.open(Console2,_("EPG Configs"), ["python /usr/lib/enigma2/python/Plugins/Extensions/EPGGrabber/core/configs.py"], closeOnSuccess=False)
 
     
@@ -274,14 +274,14 @@ class EPGGrabber(Screen):
         else:
             data = data.encode("utf-8")
         if data:
-            lines=data.split("\n")
+            lines = data.split("\n")
             for line in lines:
                 if line.startswith("version"):
                    self.new_version = line.split("=")[1]
                 if line.startswith("description"):
                    self.new_description = line.split("=")[1]
                    break
-        if float(Ver) == float(self.new_version) or float(Ver)>float(self.new_version):
+        if float(Ver) == float(self.new_version) or float(Ver) > float(self.new_version):
             logdata("Updates","No new version available")
         else:
             new_version = self.new_version
@@ -315,18 +315,18 @@ class EPGGrabber(Screen):
     
     def readJs(self):
         import json
-        if fileExists(API_PATH+'/epg_status.json'):
-            with open(API_PATH+'/epg_status.json','r')as f:
+        if fileExists(API_PATH + '/epg_status.json'):
+            with open(API_PATH + '/epg_status.json','r')as f:
                 try:
                     return json.loads(f.read())
                 except ValueError:
-                    os.remove(API_PATH+'/epg_status.json')
+                    os.remove(API_PATH + '/epg_status.json')
         else:
             return None
         
     def update(self):
-        index=self['config'].getSelectionIndex()
-        returnValue=self.provList[index][1]
+        index = self['config'].getSelectionIndex()
+        returnValue = self.provList[index][1]
         
         js = self.readJs()
         for i in range(len(self.provList)):
@@ -335,18 +335,18 @@ class EPGGrabber(Screen):
                     data = json.load(json_file)
                 provName = self.provList[i][2]
                 for channel in data['bouquets']:
-                    if channel["bouquet"]==provName:
+                    if channel["bouquet"] == provName:
                         self["glb"].setText("Last update : {}".format(channel["date"]))
                 if js != None:
-                    if provName=="osnplay":
+                    if provName == "osnplay":
                         self.check_date(js['osn'],provName)
                         self["status"].setText('Last commit : {}'.format(js['osn']))
                         
-                    elif provName=='jawwy' or provName=='jawwyen':
+                    elif provName == 'jawwy' or provName == 'jawwyen':
                         self.check_date(js['jawwy'],provName)
                         self["status"].setText('Last commit : {}'.format(js['jawwy']))
                         
-                    elif provName=='jawwyenOS' or provName=='jawwyOS':
+                    elif provName == 'jawwyenOS' or provName == 'jawwyOS':
                         self.check_date(js['main'],provName)
                         self["status"].setText('Last commit : {}'.format(js['main']))
                     else:
@@ -363,20 +363,20 @@ class EPGGrabber(Screen):
             
             
     def keyRed(self): ## New from mf to make choose list
-        if len(self.installList)>0:
+        if len(self.installList) > 0:
             ## Code to find connection internet or not
             self.install()
       
     def go(self): ## New from mf to make choose list
-        index=self['config'].getSelectionIndex()
-        provider=self.provList[index][0]
+        index = self['config'].getSelectionIndex()
+        provider = self.provList[index][0]
         if self.provList[index][2] not in self.expired:
             if provider in self.installList:
                 self.installList.remove(provider)
             else:   
                 self.installList.append(provider)
         self.iniMenu()
-        if len(self.installList)>0:
+        if len(self.installList) > 0:
             self["key_red"].show()
         else:
             self["key_red"].hide() 
@@ -385,13 +385,13 @@ class EPGGrabber(Screen):
     def install(self): ## New from mf to make choose list
         index = self['config'].getSelectionIndex()
         provider = self.provList[index][0]
-        cmdList=[]   
+        cmdList = []   
         for i in range(len(self.provList)):
             provider = self.provList[i][0]
             if not provider in self.installList:
                 continue
             provTag = self.provList[i][2]
-            cmd="python %s/%s.py" % (PROVIDERS_PATH,provTag)
+            cmd = "python %s/%s.py" % (PROVIDERS_PATH,provTag)
             cmdList.append(str(cmd))
             cmdList.append("python /usr/lib/enigma2/python/Plugins/Extensions/EPGGrabber/core/check.py")
         self.session.open(Console2,_("EPG install started"), cmdList, closeOnSuccess=False)

@@ -61,33 +61,33 @@ class StartTimer:
                 self.timer_conn = None		
 			
     def query(self):
-        if fileExists(API_PATH+'/epg_status.json'):
-            file_date = datetime.fromtimestamp(os.stat(API_PATH+'/epg_status.json').st_mtime).strftime('%Y-%m-%d')
+        if fileExists(API_PATH + '/epg_status.json'):
+            file_date = datetime.fromtimestamp(os.stat(API_PATH + '/epg_status.json').st_mtime).strftime('%Y-%m-%d')
             if file_date != self.today:
-                os.remove(API_PATH+'/epg_status.json')
+                os.remove(API_PATH + '/epg_status.json')
                 self.getStatus()
         else:
             self.getStatus()
                 
     def getStatus(self):
-        allData=[]
+        allData = []
         branches = ['osn-ziko-ZR1','jawwy-ziko-ZR1','main-MOHAMED19OS']
         for branch in branches:
             try:
-                if branch.split('-')[1]=="MOHAMED19OS":
-                    url = requests.get('https://api.github.com/repos/MOHAMED19OS/XMLTV/branches/'+branch.split('-')[0],timeout=5).json()
+                if branch.split('-')[1] == "MOHAMED19OS":
+                    url = requests.get('https://api.github.com/repos/MOHAMED19OS/XMLTV/branches/' + branch.split('-')[0],timeout=5).json()
                 else:
-                    url = requests.get('https://api.github.com/repos/ziko-ZR1/xml/branches/'+branch.split('-')[0],timeout=5).json()
+                    url = requests.get('https://api.github.com/repos/ziko-ZR1/xml/branches/' + branch.split('-')[0],timeout=5).json()
                 
                 try:
-                    result = url['commit']['commit']['message']+' '+url['commit']['commit']['committer']['date'].replace('T',' ').replace('Z','')
+                    result = url['commit']['commit']['message'] + ' ' + url['commit']['commit']['committer']['date'].replace('T',' ').replace('Z','')
                 except KeyError:
                     result = url['message'].split('. (')[0]
                      
             except:
                 result = "Unable to Fetch Data Error 404"
                 
-            allData.append(str(branch.split('-')[0]+' '+result))
+            allData.append(str(branch.split('-')[0] + ' ' + result))
         self.toJson(allData)
         
         
@@ -96,7 +96,7 @@ class StartTimer:
         for line in data: 
             prov, description = line.strip().split(None, 1)
             dict1[prov] = description.strip()
-        out_file = open(API_PATH+"/epg_status.json", "w") 
+        out_file = open(API_PATH + "/epg_status.json", "w") 
         json.dump(dict1, out_file, indent=4, sort_keys=False) 
         out_file.close()
 
@@ -107,7 +107,7 @@ def main(session, **kwargs):
         session.open(MessageBox,_("No internet connection available. Or github.com Down"), MessageBox.TYPE_INFO,timeout=10)
   
 def Plugins(**kwargs):
-    Descriptors=[]
+    Descriptors = []
     Descriptors.append(PluginDescriptor(name="EPG Grabber",description="EPG WEB Grabber",where=PluginDescriptor.WHERE_PLUGINMENU,icon="epg.png",fnc=main))
     Descriptors.append(PluginDescriptor(name="EPG Grabber",where=PluginDescriptor.WHERE_EXTENSIONSMENU,fnc=main))
     Descriptors.append(PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART,PluginDescriptor.WHERE_SESSIONSTART], fnc=autostart))
