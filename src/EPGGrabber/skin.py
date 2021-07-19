@@ -4,9 +4,11 @@ from Screens.Screen import Screen
 from Components.Pixmap import Pixmap
 import os
 
+
 def DreamOS():
     if os.path.exists('/var/lib/dpkg/status'):
         return DreamOS
+
 
 SKIN_EPGGrabber_Small_HD = """
 		<screen name="EPGGrabber" position="center,center" size="762,562" title="ZIKO EPG GRABBER" backgroundColor="#16000000" flags="wfNoBorder">

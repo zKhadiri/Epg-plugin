@@ -29,6 +29,7 @@ for i in range(0, 5):
 
 channels = []
 
+
 def dstv():
     for url in urls:
         with requests.Session() as s:
@@ -51,6 +52,7 @@ def dstv():
             sys.stdout.flush()
     update(channels)
     
+
 def update(chan):
     with open(BOUQUETS_ROOT, 'r') as f:
         data = json.load(f)
@@ -60,6 +62,7 @@ def update(chan):
     with open(BOUQUETS_ROOT, 'w') as f:
         json.dump(data, f)    
    
+
 def main():
     print('**************DSTV EPG******************')
     sys.stdout.flush()
@@ -85,7 +88,6 @@ def main():
     with open(PROVIDERS_ROOT, 'w') as f:
         json.dump(data, f)
     
-    
     if os.path.exists('/var/lib/dpkg/status'):
         print('Dream os image found\nSorting data please wait.....')
         sys.stdout.flush()
@@ -99,6 +101,7 @@ def main():
     
     print('**************FINISHED******************')
  
+
 if __name__ == '__main__':
     main()
 

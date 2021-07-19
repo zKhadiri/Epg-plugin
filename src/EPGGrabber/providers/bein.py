@@ -18,6 +18,7 @@ urls = []
 print('**************BEIN SPORTS EPG******************')
 sys.stdout.flush()
 
+
 def bein():
     for i in range(0, 3):
         week = (datetime.today() + timedelta(days=i)).strftime('%Y-%m-%d')
@@ -77,6 +78,7 @@ def bein():
                 print('No data found')
                 break
 
+
 def main():
     with open(API_PATH + '/bouquets.json', 'r') as f:
         jsData = json.load(f)
@@ -107,6 +109,7 @@ def main():
         new_els = sorted(els, key=lambda el: (el.tag, el.attrib['channel']))
         data[:] = new_els
         tree.write(EPG_ROOT + '/bein.xml', xml_declaration=True, encoding='utf-8')
+
 
 if __name__ == '__main__':
     main()

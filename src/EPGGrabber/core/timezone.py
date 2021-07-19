@@ -5,6 +5,7 @@ from time import strftime
 from datetime import datetime
 from .paths import API_PATH
 
+
 def get_tz():
     try:
         url_content = requests.get('http://worldtimeapi.org/api/ip').json()

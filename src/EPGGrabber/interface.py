@@ -46,8 +46,10 @@ config.plugins.EpgPlugin.skin = ConfigSelection(default='smallscreen', choices=[
 REDC = '\033[31m'                                                              
 ENDC = '\033[m'                                                                 
                                                                                 
+
 def cprint(text):                                                               
         print(REDC + text + ENDC)
+
 
 def logdata(label_name='', data=None):
     try:
@@ -59,6 +61,7 @@ def logdata(label_name='', data=None):
         trace_error()    
         pass
 
+
 def trace_error():
     import sys
     import traceback
@@ -67,6 +70,7 @@ def trace_error():
         traceback.print_exc(file=open('/tmp/EPG_PluginrError.log', 'a'))
     except:
         pass
+
 
 def getversioninfo():
     currversion = '1.0'
@@ -81,15 +85,19 @@ def getversioninfo():
             pass
     return (currversion)
 
+
 Ver = getversioninfo()
+
 
 def getDesktopSize():
     s = getDesktop(0).size()
     return (s.width(), s.height())
 
+
 def isHD():
     desktopSize = getDesktopSize()
     return desktopSize[0] == 1280
+
 
 def DataJs():
     file = open(PROVIDERS_ROOT, 'r')
@@ -249,7 +257,6 @@ class EPGGrabber(Screen):
             elif select[1] == "config":
                 self.session.open(Console2, _("EPG Configs"), ["python /usr/lib/enigma2/python/Plugins/Extensions/EPGGrabber/core/configs.py"], closeOnSuccess=False)
 
-    
     def check_dirs(self):
         import os
         if not os.path.isdir('/etc/epgimport/ziko_epg'):
@@ -360,7 +367,6 @@ class EPGGrabber(Screen):
                 self.expired.append(provName)
         except:
             pass
-            
             
     def keyRed(self): ## New from mf to make choose list
         if len(self.installList) > 0:

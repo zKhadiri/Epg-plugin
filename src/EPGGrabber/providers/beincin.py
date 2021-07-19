@@ -14,6 +14,7 @@ nb_channel = ['1322-BEINMOVIESPREMIERE', '1323-BEINMOVIESACTION', '1324-BEINMOVI
 
 time_zone = tz()
 
+
 class ElcinB(Elcinema, object):
     
     def __init__(self, channel):
@@ -32,6 +33,7 @@ class ElcinB(Elcinema, object):
         print(channel.split('-')[1] + ' epg ends at : ' + str(self.Endtime()[-1]))
         sys.stdout.flush()
         
+
 def main():
     channels = [nb.split('-')[1] for nb in nb_channel]
     
@@ -59,6 +61,7 @@ def main():
         with open(PROVIDERS_ROOT, 'w') as f:
             json.dump(data, f)
             
+
 if __name__ == '__main__':
     main()
     

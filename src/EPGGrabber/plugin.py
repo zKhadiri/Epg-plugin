@@ -15,6 +15,7 @@ from datetime import datetime
 from .interface import EPGGrabber
 from Plugins.Extensions.EPGGrabber.core.paths import API_PATH
 
+
 def connected_to_internet():	
     try:
         _ = requests.get('https://github.com', timeout=5)
@@ -22,8 +23,10 @@ def connected_to_internet():
     except:
         return False
     
+
 glb_session = None
 glb_startDelay = None
+
 
 def autostart(reason, **kwargs): 
     global glb_session
@@ -90,7 +93,6 @@ class StartTimer:
             allData.append(str(branch.split('-')[0] + ' ' + result))
         self.toJson(allData)
         
-        
     def toJson(self, data):
         dict1 = {} 
         for line in data: 
@@ -100,12 +102,14 @@ class StartTimer:
         json.dump(dict1, out_file, indent=4, sort_keys=False) 
         out_file.close()
 
+
 def main(session, **kwargs):
     if connected_to_internet():
         session.open(EPGGrabber)
     else:
         session.open(MessageBox, _("No internet connection available. Or github.com Down"), MessageBox.TYPE_INFO, timeout=10)
   
+
 def Plugins(**kwargs):
     Descriptors = []
     Descriptors.append(PluginDescriptor(name="EPG Grabber", description="EPG WEB Grabber", where=PluginDescriptor.WHERE_PLUGINMENU, icon="epg.png", fnc=main))

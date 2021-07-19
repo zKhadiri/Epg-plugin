@@ -68,6 +68,7 @@ def discovery():
             print(ch.split('|')[0] + ' epg ends at ' + last_date)
             sys.stdout.flush()
 
+
 def main():
     print('**************Discovery EPG******************')
     sys.stdout.flush()
@@ -91,6 +92,7 @@ def main():
     print('**************FINISHED******************')
     sys.stdout.flush()
            
+
 if __name__ == '__main__':
     
     main()

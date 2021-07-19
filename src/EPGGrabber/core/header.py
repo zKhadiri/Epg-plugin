@@ -4,6 +4,7 @@
 from .compat import PY3
 import io
 
+
 def xml_header(path, channels):
     file = open(path, 'w')
     if PY3:

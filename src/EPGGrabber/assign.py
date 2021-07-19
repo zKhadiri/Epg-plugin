@@ -26,16 +26,20 @@ LAMEDB = eEnv.resolve('${sysconfdir}/enigma2/lamedb')
 ### import class + screens from files inside plugin
 from .skin import *
 
+
 def parseColor(s):
         return gRGB(int(s[1:], 0x10))
+
 
 def getDesktopSize():
     s = getDesktop(0).size()
     return (s.width(), s.height())
 
+
 def isHD():
     desktopSize = getDesktopSize()
     return desktopSize[0] == 1280
+
 
 class AssignRef(Screen):
 
@@ -121,7 +125,6 @@ class AssignRef(Screen):
         self["label"].setText('EPG Provider : {}'.format(bqTitle))
         self.listChannels()
      
-      
     def listChannels(self):
         for data in self.data['bouquets']:
             if data['name'] == self.bqList[self.bqIndex]:
@@ -201,7 +204,6 @@ class AssignRef(Screen):
         else:
             self.session.open(MessageBox, _(str(self.path) + " not found in path"), MessageBox.TYPE_INFO, timeout=10)
 
-
     def getCurrentService(self):
         if self.curservice is not None:
             service = self.curservice
@@ -214,7 +216,6 @@ class AssignRef(Screen):
             self.setCurrentServiceIndex()
             self.displayServiceParams()
             
-    
     def displayServiceParams(self):
         self["status"].setText("Current channel : {}".format(self.name))
         #self["srf"].setText(self.refstr)
@@ -231,7 +232,6 @@ class AssignRef(Screen):
         self.changeService(-1)
         self['id'].setText("")
 
-        
     def changeService(self, num):
          if self.lenServicesList:
             self.sidx += num
@@ -248,6 +248,7 @@ def freeMemory():
         os.system("sync")
         os.system("echo 3 > /proc/sys/vm/drop_caches")
 
+
 def cleanup():
         global Session
         Session = None
@@ -257,8 +258,10 @@ def cleanup():
         epg_bouquet = None
         freeMemory()
 
+
 def closed(ret=False):
         cleanup()
+
 
 def getBouquetServices(bouquet):
         services = []

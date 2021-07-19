@@ -16,6 +16,7 @@ head = {
     "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
 }
 
+
 def lematin(channels):
     for channel in channels:
         with requests.Session() as s:
@@ -60,11 +61,13 @@ def lematin(channels):
                 print(channel + ' EPG ends at ' + str(times[-1]))
                 sys.stdout.flush()
 
+
 def cleanhtml(html):
     for elem in html:
         clean_text = re.sub(re.compile('<.*?>'), '', elem)
         yield clean_text
        
+
 def main():
     with open(PROVIDERS_ROOT, 'r') as f:
         data = json.load(f)

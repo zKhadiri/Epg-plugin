@@ -13,13 +13,16 @@ from enigma import getDesktop
 
 from Plugins.Extensions.EPGGrabber.core.compat import PY3
 
+
 def getDesktopSize():
     s = getDesktop(0).size()
     return (s.width(), s.height())
 
+
 def isHD():
     desktopSize = getDesktopSize()
     return desktopSize[0] == 1280
+
 
 class Console2(Screen):
     if isHD():

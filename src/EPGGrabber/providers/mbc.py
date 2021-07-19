@@ -49,8 +49,9 @@ sub = []
 channel = []
 
 
-
 now = datetime.datetime.now().strftime('%Y/%m/%d')
+
+
 def mbc():
     for url in urls:
         programme[:] = []
@@ -169,6 +170,7 @@ def main():
     print('**************FINISHED******************')
     sys.stdout.flush()
    
+
 if __name__ == "__main__":
     main()
     

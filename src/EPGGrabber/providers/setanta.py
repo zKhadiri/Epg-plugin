@@ -10,6 +10,7 @@ from __init__ import *
 
 urls = ['https://www.setantaeurasia.com/en/tv-schedule.html|SETANTA1', 'https://www.setantaeurasia.com/en/tv-schedule.html?channel=plus|SETANTA2']
 
+
 def setanta():
     times = []
     epg = []
@@ -56,6 +57,7 @@ def setanta():
         else:
             print('no data found for ' + link.split('|')[1].lower())
  
+
 def main():
     print('**************SETANTA Eurasia EPG******************')
     sys.stdout.flush() 
@@ -77,5 +79,6 @@ def main():
     print('**************FINISHED******************')
     sys.stdout.flush()
     
+
 if __name__ == '__main__':
     main()

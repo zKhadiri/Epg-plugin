@@ -32,6 +32,7 @@ head = {
     
 time_zone = tz()
 
+
 def b_connect():
 	print('**************BEIN SPORTS CONNECT EPG******************')
 	sys.stdout.flush()
@@ -163,6 +164,7 @@ def b_connect():
 			print(code.split('-')[1] + ' epg ends at ' + endtime)
 			sys.stdout.flush()
 
+
 def main():
 	channels = [ch.split('-')[1] for ch in ch_code]
 	xml_header(EPG_ROOT + '/beinConnect.xml', channels)
@@ -179,9 +181,9 @@ def main():
 			with open(PROVIDERS_ROOT, 'w') as f:
 				json.dump(data, f)
 	
-
 	print("**************FINISHED******************")
 	sys.stdout.flush()
 	
+
 if __name__ == "__main__":
 	main()

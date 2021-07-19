@@ -17,6 +17,7 @@ from core.proxies import proxy
 print('************Al jazeera arabic EPG **************')
 sys.stdout.flush() 
 
+
 def random_prox():
     p = random.choice(list(proxy()))
     return {'http': 'http://' + p, 'https': 'https://' + p}
@@ -55,6 +56,7 @@ def to_xml(data):
         print('No data found for aljazeera')
         sys.stdout.flush()
 
+
 def jscNews():
     with requests.Session() as s:
         s.mount('https://', HTTPAdapter(max_retries=3))
@@ -78,6 +80,7 @@ def jscNews():
                     tries -= 1
                     print('Error occured Retry!!', tries)
                     
+
 def main():
     xml_header(EPG_ROOT + '/aljazeera.xml', ['aljazeera'])
     
@@ -97,5 +100,6 @@ def main():
     print("**************FINISHED******************")
     sys.stdout.flush()
     
+
 if __name__ == "__main__":
     main()

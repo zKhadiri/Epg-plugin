@@ -38,12 +38,12 @@ nb_channel = ['1173-DubaiOne', '1223-Al_NaharDrama', '1169-Dubai_TV', '1137-Alha
             '1296-MTV', '1317-Oman', '1260-CBC_sofra', '1290-DMC', '1370-Khallik_Bilbait']
 
 
-    
 time_zone = tz()
 
 REDC = '\033[31m'                                                              
 ENDC = '\033[m'                                                                 
                                                                                 
+
 def cprint(text):                                                               
     print(REDC + text + ENDC)
 
@@ -100,7 +100,6 @@ class Elcinema:
             
         return self.prog_end
             
-    
     def GetDes(self):
         for f, l in zip(re.findall(r'<li>(.*?)<a\shref=\'#\'\sid=\'read-more\'>', self.data), re.findall(r"<span class='hide'>[^\n]+", self.data)):
             self.description.append(f + l.replace("<span class='hide'>", '').replace('</span></li>', ''))
@@ -142,6 +141,7 @@ class Elcinema:
         print(channel.split('-')[1] + ' epg ends at : ' + str(self.Endtime()[-1]))
         sys.stdout.flush()          
             
+
 def main():
     from datetime import datetime
     import json

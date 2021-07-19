@@ -26,8 +26,9 @@ channels_code.sort()
 today = (datetime.today() - timedelta(hours=3)).strftime('%Y-%m-%dT%H:00:00Z')
 
 
-
 channels = []
+
+
 def skyit():
     for code in channels_code:
         with requests.Session() as s:
@@ -51,6 +52,7 @@ def skyit():
     channels.sort()
     update(channels)
 
+
 def update(chan):
     with open(BOUQUETS_ROOT, 'r') as f:
         data = json.load(f)
@@ -59,6 +61,7 @@ def update(chan):
             channel['channels'] = sorted([ch for ch in list(dict.fromkeys(chan))])
     with open(BOUQUETS_ROOT, 'w') as f:
         json.dump(data, f)
+
 
 def main():
     print('**************SKY IT EPG******************')
@@ -84,6 +87,7 @@ def main():
         
     print('**************FINISHED******************')
     sys.stdout.flush()
+
 
 if __name__ == '__main__': 
     main()

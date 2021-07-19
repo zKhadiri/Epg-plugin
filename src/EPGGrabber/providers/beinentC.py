@@ -56,6 +56,7 @@ def beINent():
             print(code.split('-')[1] + ' epg ends at ' + endtime)
             sys.stdout.flush()
 
+
 def main():
     print('**************BEIN ENTERTAINMENT EPG******************')
     sys.stdout.flush()
@@ -77,6 +78,7 @@ def main():
  
     print("**************FINISHED******************")
     sys.stdout.flush()
+
 
 if __name__ == "__main__":
     main()

@@ -17,6 +17,7 @@ headers = {
     'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) snap Chromium/80.0.3987.149 Chrome/80.0.3987.149 Safari/537.36'
 }
 
+
 def espn():
     for i in range(0, 7):
         week = (datetime.today() + timedelta(days=i)).strftime('%Y-%m-%d')
@@ -46,6 +47,7 @@ def espn():
         print(week)
         sys.stdout.flush()
 
+
 def main():
     with open(PROVIDERS_ROOT, 'r') as f:
         data = json.load(f)
@@ -62,11 +64,11 @@ def main():
     
     espn()
     
-    
     close_xml(EPG_ROOT + '/espn.xml')
     
     print("**************FINISHED******************")
     sys.stdout.flush()
     
+
 if __name__ == '__main__':
     main()

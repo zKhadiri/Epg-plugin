@@ -27,6 +27,7 @@ for i in range(0, 7):
         urls.append('https://epgservices.sky.com/5.1.1/api/2.0/channel/json/' + code.split('-')[0] + '/' + str(int(days)) + '/86395/4|' + code.split('-')[1])
 urls.sort()
 
+
 def sky():
     for link in urls:
         try:
@@ -47,6 +48,7 @@ def sky():
             sys.stdout.flush()
         except:
             continue
+
 
 def main():
     print('**************UK SPORTS CHANNELS EPG******************')

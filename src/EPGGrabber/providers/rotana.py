@@ -13,6 +13,7 @@ if not PY3:
 
 today = (datetime.now() - timedelta(hours=4)).strftime('%d/%m/%Y %H:%M:%S')
 
+
 def rotana(this_month, channel):
     with requests.Session() as s:
         url = s.get('https://rotana.net/triAssets/uploads/{}/{}.csv'.format(this_month, channel))
@@ -68,6 +69,7 @@ def rotana(this_month, channel):
     
     print(channel + ' EPG ends at ' + end_dt[-1])
     sys.stdout.flush()
+
 
 def main():
     print('**************Rotana EPG******************')

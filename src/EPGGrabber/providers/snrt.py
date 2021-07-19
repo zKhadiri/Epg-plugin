@@ -9,6 +9,7 @@ from __init__ import *
 
 time_zone = tz()
 
+
 def arryadia():
     with requests.Session() as s:
         times = []
@@ -27,7 +28,6 @@ def arryadia():
                 titles.append(title)
                 descriptions.append(description)            
                 live.append(direct)
-        
         
         today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0) 
         last_hr = 0
@@ -65,6 +65,7 @@ def arryadia():
         print('Arryadia HD EPG ends at ' + str(start_dt[-1]))
         sys.stdout.flush()
         
+
 def main():
     print('**************Snrt EPG******************')
     sys.stdout.flush()

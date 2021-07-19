@@ -4,6 +4,7 @@ import random
 import re
 import base64
 
+
 def proxy():
     res = {"result": 'a' + ''.join(random.choice(string.digits + string.ascii_lowercase) for i in range(31))}
     _ = requests.post("http://free-proxy.cz/s.php", params=res)

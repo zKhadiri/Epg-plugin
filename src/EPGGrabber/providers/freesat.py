@@ -36,6 +36,7 @@ channels_code.sort()
 
 lock = threading.Semaphore(4)
 
+
 def freesat(code):
     try:
         for i in range(0, 8):
@@ -89,7 +90,6 @@ def main():
     for thread in thread_pool:
         thread.join()
       
-    
     close_xml(EPG_ROOT + '/freesat.xml')  
       
     if os.path.exists('/var/lib/dpkg/status'):
@@ -105,6 +105,7 @@ def main():
 
     print('**************FINISHED******************')
     sys.stdout.flush()
+
 
 if __name__ == '__main__':
     main()

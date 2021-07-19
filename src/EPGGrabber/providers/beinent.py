@@ -82,6 +82,7 @@ def beinen():
                 print('No data found')
                 break
 
+
 def update(chan):
     with open(BOUQUETS_ROOT, 'r') as f:
         data = json.load(f)
@@ -113,7 +114,6 @@ def main():
     with open(PROVIDERS_ROOT, 'w') as f:
         json.dump(data, f)
 
-
     if os.path.exists('/var/lib/dpkg/status'):
         print('Dream os image found\nSorting data please wait.....')
         sys.stdout.flush()
@@ -125,8 +125,8 @@ def main():
         data[:] = new_els
         tree.write(EPG_ROOT + '/beinent.xml', xml_declaration=True, encoding='utf-8')
 
-
     print("**************FINISHED******************")        
+
 
 if __name__ == '__main__':
     main()
