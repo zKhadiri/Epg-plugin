@@ -49,7 +49,7 @@ ENDC = '\033[m'
 def cprint(text):                                                               
         print(REDC+text+ENDC)
 
-def logdata(label_name = '', data = None):
+def logdata(label_name='', data=None):
     try:
         data=str(data)
         fp = open('/tmp/EPG_Plugin.log', 'a')
@@ -104,7 +104,7 @@ def DataJs():
 
 class EPGGrabber(Screen):
 
-    def __init__(self, session, args = 0):
+    def __init__(self, session, args=0):
         self.session = session
         if config.plugins.EpgPlugin.skin.value == 'smallscreen':
             if isHD():

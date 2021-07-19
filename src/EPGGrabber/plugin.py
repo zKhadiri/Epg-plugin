@@ -97,7 +97,7 @@ class StartTimer:
             prov, description = line.strip().split(None, 1)
             dict1[prov] = description.strip()
         out_file = open(API_PATH+"/epg_status.json", "w") 
-        json.dump(dict1, out_file, indent = 4, sort_keys = False) 
+        json.dump(dict1, out_file, indent=4, sort_keys=False) 
         out_file.close()
 
 def main(session, **kwargs):
@@ -108,7 +108,7 @@ def main(session, **kwargs):
   
 def Plugins(**kwargs):
     Descriptors=[]
-    Descriptors.append(PluginDescriptor(name="EPG Grabber",description="EPG WEB Grabber",where = PluginDescriptor.WHERE_PLUGINMENU,icon="epg.png",fnc=main))
-    Descriptors.append(PluginDescriptor(name="EPG Grabber",where = PluginDescriptor.WHERE_EXTENSIONSMENU,fnc=main))
-    Descriptors.append(PluginDescriptor(where = [PluginDescriptor.WHERE_AUTOSTART,PluginDescriptor.WHERE_SESSIONSTART], fnc=autostart))
+    Descriptors.append(PluginDescriptor(name="EPG Grabber",description="EPG WEB Grabber",where=PluginDescriptor.WHERE_PLUGINMENU,icon="epg.png",fnc=main))
+    Descriptors.append(PluginDescriptor(name="EPG Grabber",where=PluginDescriptor.WHERE_EXTENSIONSMENU,fnc=main))
+    Descriptors.append(PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART,PluginDescriptor.WHERE_SESSIONSTART], fnc=autostart))
     return Descriptors

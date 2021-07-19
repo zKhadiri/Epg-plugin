@@ -70,7 +70,7 @@ def jscNews():
             while tries >0:
                 
                 try:
-                    url = s.get('https://www.aljazeera.net/schedule',proxies = random_prox(),timeout=3)
+                    url = s.get('https://www.aljazeera.net/schedule',proxies=random_prox(),timeout=3)
                     if '<!doctype html>' in url.text:
                         to_xml(url.text)
                         break

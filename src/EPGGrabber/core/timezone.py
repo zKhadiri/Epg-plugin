@@ -10,12 +10,12 @@ def get_tz():
         url_content = requests.get('http://worldtimeapi.org/api/ip').json()
         js =  {'tz':url_content['utc_offset'].replace(':', '')}
         file = open(API_PATH+'/tz.json','w')
-        json.dump(js, file, indent = 4)
+        json.dump(js, file, indent=4)
         file.close()
     except:
         js = {'tz':strftime('%z')}
         file = open(API_PATH+'/tz.json','w')
-        json.dump(js, file, indent = 4)
+        json.dump(js, file, indent=4)
         file.close()
     
     
