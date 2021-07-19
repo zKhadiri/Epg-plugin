@@ -14,13 +14,13 @@ path = EPG_ROOT+'/osnplay.xml'
 
 print('**************OSN backup EPG******************')
 sys.stdout.flush()
-print ("Downloading OsnPlay epg guide\nPlease wait...." ) 
+print("Downloading OsnPlay epg guide\nPlease wait....") 
 sys.stdout.flush()
 url=requests.get('http://raw.githubusercontent.com/ziko-ZR1/XML/osn/osn.xml')
 with io.open(path,'w',encoding="utf-8") as f:
     f.write(url.text)
     
-print ("osnplay.xml donwloaded with succes")    
+print("osnplay.xml donwloaded with succes")    
 
 from datetime import datetime
 with open(PROVIDERS_ROOT, 'r') as f:

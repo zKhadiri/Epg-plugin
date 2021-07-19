@@ -37,7 +37,7 @@ def rotana(this_month,channel):
     for title,des,start,end,ed,actor,g in zip(titles,descriptions,start_dt,start_dt[1:]+[start_dt[0]],end_dt,actors,genre):
         if start >= today:
             ch=''
-            if start_dt[-1] == start and start_dt[0] == end :
+            if start_dt[-1] == start and start_dt[0] == end:
                 startime= datetime.strptime(start,'%d/%m/%Y %H:%M:%S:%f').strftime('%Y%m%d%H%M%S')
                 endtime= datetime.strptime(ed,'%d/%m/%Y %H:%M:%S:%f').strftime('%Y%m%d%H%M%S')
             else:
@@ -55,7 +55,7 @@ def rotana(this_month,channel):
                     ch+=4*' '+'<desc lang="ar">'+actor+'</desc>\n  </programme>\r'
                 elif des != '' and actor =='':
                     ch+=4*' '+'<desc lang="ar">'+des+'</desc>\n  </programme>\r'
-                elif des == '' and actor == '' and g != '' :
+                elif des == '' and actor == '' and g != '':
                     ch+=4*' '+'<desc lang="en">'+g+'</desc>\n  </programme>\r'
                 else:
                     ch+=4*' '+'<desc lang="ar">يتعذر الحصول على معلومات هذا البرنامج</desc>\n  </programme>\r'

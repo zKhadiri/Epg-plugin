@@ -53,7 +53,7 @@ def logdata(label_name='', data=None):
     try:
         data=str(data)
         fp = open('/tmp/EPG_Plugin.log', 'a')
-        fp.write( str(label_name) + ': ' + data+"\n")
+        fp.write(str(label_name) + ': ' + data+"\n")
         fp.close()
     except:
         trace_error()    
@@ -247,7 +247,7 @@ class EPGGrabber(Screen):
                     service = Servicelist.servicelist.getCurrent()
                     self.session.openWithCallback(assign.closed,assign.AssignRef, services, service, ServiceReference(epg_bouquet).getServiceName())
             elif select[1]=="config":
-                self.session.open(Console2,_("EPG Configs") , ["python /usr/lib/enigma2/python/Plugins/Extensions/EPGGrabber/core/configs.py"], closeOnSuccess=False)
+                self.session.open(Console2,_("EPG Configs"), ["python /usr/lib/enigma2/python/Plugins/Extensions/EPGGrabber/core/configs.py"], closeOnSuccess=False)
 
     
     def check_dirs(self):
@@ -283,7 +283,7 @@ class EPGGrabber(Screen):
                    break
         if float(Ver) == float(self.new_version) or float(Ver)>float(self.new_version):
             logdata("Updates","No new version available")
-        else :
+        else:
             new_version = self.new_version
             new_description = self.new_description
             self.session.openWithCallback(self.installupdate, MessageBox, _('New version %s is available.\n\n%s.\n\nDo you want to install it now.' % (self.new_version, self.new_description)), MessageBox.TYPE_YESNO)
@@ -394,4 +394,4 @@ class EPGGrabber(Screen):
             cmd="python %s/%s.py" % (PROVIDERS_PATH,provTag)
             cmdList.append(str(cmd))
             cmdList.append("python /usr/lib/enigma2/python/Plugins/Extensions/EPGGrabber/core/check.py")
-        self.session.open(Console2,_("EPG install started") , cmdList, closeOnSuccess=False)
+        self.session.open(Console2,_("EPG install started"), cmdList, closeOnSuccess=False)

@@ -33,9 +33,9 @@ nb_channel=['1173-DubaiOne', '1223-Al_NaharDrama', '1169-Dubai_TV', '1137-Alhaya
             '1299-Roya', '1138-Alhayat_Drama', '1310-Kuwait', '1304-Nessma', '1336-Maspero_Zaman', '1145-Mehwar',
             '1302-Fujairah', '1308-Watania1', '1204-iFILM_TV', '1306-Alrasheed', '1312-Al_Aoula_Morocco', '1321-almanar',
             '1338-Syria_TV', '1342-Lana_PlusTV', '1339-AlSaeedah', '1341-LBC', '1303-ATTESSIA', '1343-Musawa',
-            '1314-Jordan_TV', '1366-Thikrayat_Tv', '1353-2MTV', '1352-Saudiya_TV' ,'1349-IMN', '1334-Watania2',
+            '1314-Jordan_TV', '1366-Thikrayat_Tv', '1353-2MTV', '1352-Saudiya_TV','1349-IMN', '1334-Watania2',
             '1360-SalamTV', '1367-Utv', '1368-BahrainTV', '1355-Mix', '1350-SamaTV', '1369-Qurain',
-            '1296-MTV', '1317-Oman', '1260-CBC_sofra', '1290-DMC', '1370-Khallik_Bilbait' ]
+            '1296-MTV', '1317-Oman', '1260-CBC_sofra', '1290-DMC', '1370-Khallik_Bilbait']
 
 
     

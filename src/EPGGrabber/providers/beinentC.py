@@ -19,8 +19,7 @@ from time import strftime
 milli = (datetime.strptime('' + str(week) + ' 23:59:59', "%Y-%m-%d %H:%M:%S").strftime("%s"))+'.999'
 today = datetime.strptime(str(datetime.now().strftime('%Y-%m-%d'))+' 00:00:00',"%Y-%m-%d %H:%M:%S").strftime('%s')
 
-ch_code =['81-beIN Movie 1','82-beIN Movie 2','83-beIN Movie 3','90-beIN Movie 4HD','112-Series 1HD','175-beIN Series 2 HD'
-          ,'174-beIN Drama HD','170-beIN Gourmet HD','91-beJuniors','100-Jeem','99-Baraem']
+ch_code =['81-beIN Movie 1','82-beIN Movie 2','83-beIN Movie 3','90-beIN Movie 4HD','112-Series 1HD','175-beIN Series 2 HD','174-beIN Drama HD','170-beIN Gourmet HD','91-beJuniors','100-Jeem','99-Baraem']
 
 
 time_zone = tz()

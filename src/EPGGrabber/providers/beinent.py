@@ -42,7 +42,7 @@ def beinen():
             title = re.findall(r'<p\sclass=title>(.*?)<\/p>',link.text)
             time = re.findall(r'<p\sclass=time>(.*?)<\/p>',link.text)
             formt = re.findall(r'<p\sclass=format>(.*?)<\/p>',link.text)
-            times = [t.replace('&nbsp;-&nbsp;','-').split('-') for t in time ]
+            times = [t.replace('&nbsp;-&nbsp;','-').split('-') for t in time]
             channels = re.findall(r"<li\s+id='slider_.*_item\d+'.*img='.*/(.*).*.png",link.text)
             for tt_ in title:
                 titles.append(4*' '+'<title lang="en">'+tt_.replace('&','and')+'</title>'+'\n')

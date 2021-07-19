@@ -19,7 +19,7 @@ def connected_to_internet():
     try:
         _ = requests.get('https://github.com', timeout=5)
         return True
-    except :
+    except:
         return False
     
 glb_session = None
@@ -63,7 +63,7 @@ class StartTimer:
     def query(self):
         if fileExists(API_PATH+'/epg_status.json'):
             file_date = datetime.fromtimestamp(os.stat(API_PATH+'/epg_status.json').st_mtime).strftime('%Y-%m-%d')
-            if file_date != self.today :
+            if file_date != self.today:
                 os.remove(API_PATH+'/epg_status.json')
                 self.getStatus()
         else:

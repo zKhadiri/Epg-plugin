@@ -27,8 +27,7 @@ time_zone = tz()
 
 today = int(datetime.strptime('' + str(datetime.now().strftime('%Y-%m-%d')) + ' 00:00:00', "%Y-%m-%d %H:%M:%S").strftime("%s")) * 1000
 
-channels=['mbc1','mbc-drama','mbc-maser','mbc-maser2','mbc4','mbc2','mbc-action','mbc-bollywood'
-          ,'mbc-drama-plus','mbc-max','mbc-iraq','mbc5','Wanasa']
+channels=['mbc1','mbc-drama','mbc-maser','mbc-maser2','mbc4','mbc2','mbc-action','mbc-bollywood','mbc-drama-plus','mbc-max','mbc-iraq','mbc5','Wanasa']
 import datetime
 import time
 from datetime import timedelta
@@ -65,7 +64,7 @@ def mbc():
         data = json.loads(link.text)
         if data ==[]:
             nf = re.findall(r'channel=(.*?)&',str(url))
-            print( 'No data found for : '+''.join(nf))
+            print('No data found for : '+''.join(nf))
             sys.stdout.flush()
         else:
             for d in data:
@@ -96,7 +95,7 @@ def mbc():
                 with io.open(EPG_ROOT+'/mbc.xml',"a",encoding='UTF-8')as f:
                     f.write(prog+title+descri)
                     
-        print( nm+' epg donwloaded For : '+str(nb_days.days)+' Days')
+        print(nm+' epg donwloaded For : '+str(nb_days.days)+' Days')
         sys.stdout.flush()
                
 
@@ -120,7 +119,7 @@ def noor():
         last_hr = h
         times.append(today + timedelta(hours=h, minutes=m))
         
-    print ('Noor Dubai epg ends at {}'.format(times[-1]))
+    print('Noor Dubai epg ends at {}'.format(times[-1]))
     for elem,next_elem,tit,descri in zip(times, times[1:] + [times[0]],title,des):
         ch=''
         startime=datetime.strptime(str(elem),'%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')

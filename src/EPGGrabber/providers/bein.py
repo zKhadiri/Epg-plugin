@@ -25,7 +25,7 @@ def bein():
             url = 'https://www.bein.com/ar/wp-admin/admin-ajax.php?action=epg_fetch&category=sports&serviceidentity=bein.net&mins=00&cdate={}&language=AR&postid=25344'.format(str(week))
             link = s.get(url)
             time = re.findall(r'<p\sclass=time>(.*?)<\/p>',link.text)
-            times = [t.replace('&nbsp;-&nbsp;','-').split('-') for t in time ]
+            times = [t.replace('&nbsp;-&nbsp;','-').split('-') for t in time]
             title = re.findall(r'<p\sclass=title>(.*?)<\/p>',link.text)
             formt = re.findall(r'<p\sclass=format>(.*?)<\/p>',link.text)
             channels = re.findall(r"https:\/\/assets\.bein\.com\/mena\/sites\/\d+\/\d+\/\d+\/(.*?)\.png\'\sdata",link.text)

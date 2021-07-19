@@ -17,8 +17,7 @@ if not PY3:
 
 next_update = (datetime.today()+timedelta(days=30)).strftime('%Y-%m-%d 02:00:00')
 
-channels = ['Discovery Central Europe|DCENENG-UTC','Animal Planet Europe|APEUENG-UTC','Discovery Showcase HD|HDEUENG-UTC'
-            ,'Discovery Science Europe|SCEUENG-UTC','ID|IDXEENG-UTC','DTX|TUTUROM-UTC','Discovery World|CVEUENG-UTC',
+channels = ['Discovery Central Europe|DCENENG-UTC','Animal Planet Europe|APEUENG-UTC','Discovery Showcase HD|HDEUENG-UTC','Discovery Science Europe|SCEUENG-UTC','ID|IDXEENG-UTC','DTX|TUTUROM-UTC','Discovery World|CVEUENG-UTC',
             'Discovery Channel France|DFRAFRE-UTC','Discovery Science France|SCFRFRE-UTC',
             'Discovery Family France|DFFRFRE-UTC','Investigation Discovery France|IDFRFRE-UTC']
 

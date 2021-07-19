@@ -51,7 +51,7 @@ def arryadia():
                 else:
                     ch+=4*' '+'<title lang="ar/en">'+t+'</title>\n'
                 
-                if d != "" :
+                if d != "":
                     ch+=4*' '+'<desc lang="en/ar">'+d+'</desc>\n  </programme>\r'
                 else:
                     ch+=4*' '+'<desc lang="ar/en">Arryadia HD</desc>\n  </programme>\r'
