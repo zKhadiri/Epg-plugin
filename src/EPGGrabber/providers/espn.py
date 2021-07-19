@@ -18,30 +18,30 @@ headers = {
 }
 
 def espn():
-    for i in range(0,7):
+    for i in range(0, 7):
         week = (datetime.today() + timedelta(days=i)).strftime('%Y-%m-%d')
         with requests.Session() as s:
             s.mount('https://', HTTPAdapter(max_retries=10))
-            url = s.get('https://www.tvpassport.com/tv-listings/stations/espn/594/{}'.format(week),headers=headers,timeout=10)
+            url = s.get('https://www.tvpassport.com/tv-listings/stations/espn/594/{}'.format(week), headers=headers, timeout=10)
 
-        date_start = re.findall(r'data-st=\"(.*?)\"',url.text)
-        duration = re.findall(r'data-duration=\"(.*?)\"',url.text)
-        title = re.findall(r'data-showName=\"(.*?)\"',url.text)
-        description = re.findall(r'data-description=\"(.*?)\"',url.text)
-        team1 = re.findall(r'data-team1=\"(.*?)\"',url.text)
-        team2 = re.findall(r'data-team2=\"(.*?)\"',url.text)
+        date_start = re.findall(r'data-st=\"(.*?)\"', url.text)
+        duration = re.findall(r'data-duration=\"(.*?)\"', url.text)
+        title = re.findall(r'data-showName=\"(.*?)\"', url.text)
+        description = re.findall(r'data-description=\"(.*?)\"', url.text)
+        team1 = re.findall(r'data-team1=\"(.*?)\"', url.text)
+        team2 = re.findall(r'data-team2=\"(.*?)\"', url.text)
 
-        for dt,m,t,d,t1,t2 in zip(date_start,duration,title,description,team1,team2):
+        for dt, m, t, d, t1, t2 in zip(date_start, duration, title, description, team1, team2):
             ch = ''
-            start = datetime.strptime(dt,'%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
-            end = (datetime.strptime(start,'%Y%m%d%H%M%S') + timedelta(minutes=int(m))).strftime('%Y%m%d%H%M%S')
+            start = datetime.strptime(dt, '%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
+            end = (datetime.strptime(start, '%Y%m%d%H%M%S') + timedelta(minutes=int(m))).strftime('%Y%m%d%H%M%S')
             ch += 2 * ' ' + '<programme start="' + str(start) + ' +0000" stop="' + str(end) + ' +0000" channel="ESPN">\n'
             if t1 != "" and t2 != "":
-                ch += 4 * ' ' + '<title lang="en">' + t.replace('&','and') + ' : ' + t1 + ' vs ' + t2 + '</title>\n'
+                ch += 4 * ' ' + '<title lang="en">' + t.replace('&', 'and') + ' : ' + t1 + ' vs ' + t2 + '</title>\n'
             else:
-                ch += 4 * ' ' + '<title lang="en">' + t.replace('&','and') + '</title>\n'
-            ch += 4 * ' ' + '<desc lang="en">' + d.replace('&','and') + '</desc>\n  </programme>\r'
-            with io.open(EPG_ROOT + '/espn.xml',"a",encoding='UTF-8')as f:
+                ch += 4 * ' ' + '<title lang="en">' + t.replace('&', 'and') + '</title>\n'
+            ch += 4 * ' ' + '<desc lang="en">' + d.replace('&', 'and') + '</desc>\n  </programme>\r'
+            with io.open(EPG_ROOT + '/espn.xml', "a", encoding='UTF-8')as f:
                 f.write(ch)
         print(week)
         sys.stdout.flush()
@@ -58,7 +58,7 @@ def main():
     print('**************Espn EPG******************')
     sys.stdout.flush()
     
-    xml_header(EPG_ROOT + '/espn.xml',['ESPN'])
+    xml_header(EPG_ROOT + '/espn.xml', ['ESPN'])
     
     espn()
     

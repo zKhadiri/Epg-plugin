@@ -10,13 +10,13 @@ import io
 import os
 import sys
 import json
-from time import sleep,strftime
+from time import sleep, strftime
 from requests.adapters import HTTPAdapter
 
 print('**************BEIN ENTERTAINMENT EPG******************')
 sys.stdout.flush()
 urls = []
-for i in range(0,5):
+for i in range(0, 5):
     import datetime
     from datetime import timedelta
     jour = datetime.date.today()
@@ -31,7 +31,7 @@ prog = []
 
 def beinen():
     for url in urls:
-        from datetime import datetime,timedelta
+        from datetime import datetime, timedelta
         desc[:] = []
         title_chan[:] = []
         titles[:] = []
@@ -39,45 +39,45 @@ def beinen():
         with requests.Session() as s:
             s.mount('https://', HTTPAdapter(max_retries=10))
             link = s.get(url)
-            title = re.findall(r'<p\sclass=title>(.*?)<\/p>',link.text)
-            time = re.findall(r'<p\sclass=time>(.*?)<\/p>',link.text)
-            formt = re.findall(r'<p\sclass=format>(.*?)<\/p>',link.text)
-            times = [t.replace('&nbsp;-&nbsp;','-').split('-') for t in time]
-            channels = re.findall(r"<li\s+id='slider_.*_item\d+'.*img='.*/(.*).*.png",link.text)
+            title = re.findall(r'<p\sclass=title>(.*?)<\/p>', link.text)
+            time = re.findall(r'<p\sclass=time>(.*?)<\/p>', link.text)
+            formt = re.findall(r'<p\sclass=format>(.*?)<\/p>', link.text)
+            times = [t.replace('&nbsp;-&nbsp;', '-').split('-') for t in time]
+            channels = re.findall(r"<li\s+id='slider_.*_item\d+'.*img='.*/(.*).*.png", link.text)
             for tt_ in title:
-                titles.append(4 * ' ' + '<title lang="en">' + tt_.replace('&','and') + '</title>' + '\n')
+                titles.append(4 * ' ' + '<title lang="en">' + tt_.replace('&', 'and') + '</title>' + '\n')
                 #desc.append(4*' '+'<category lang="en">No data found</category>'+'\n')
             format_ = [4 * ' ' + '<desc lang="en">' + f + '</desc>' + "\n" + '  </programme>' + '\n' for f in formt]
             try:
-                for time_,chann_,chc,chch in zip(times,channels,channels,channels[1:] + [channels[0]]):
+                for time_, chann_, chc, chch in zip(times, channels, channels, channels[1:] + [channels[0]]):
                     end = '05:59'
                     start = '18:00'
-                    date = re.search(r'\d{4}-\d{2}-\d{2}',url)
-                    channel_b = chann_.replace('-logo-2018-1','').replace('-Yellow-1','').replace('-1','').replace('-2','')
+                    date = re.search(r'\d{4}-\d{2}-\d{2}', url)
+                    channel_b = chann_.replace('-logo-2018-1', '').replace('-Yellow-1', '').replace('-1', '').replace('-2', '')
                     if time_[0] >= start and time_[1] <= end and chc == chch:
-                        fix = (datetime.strptime(date.group(),'%Y-%m-%d') - timedelta(days=1)).strftime('%Y-%m-%d')
-                        starttime = datetime.strptime(fix + ' ' + time_[0],'%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
+                        fix = (datetime.strptime(date.group(), '%Y-%m-%d') - timedelta(days=1)).strftime('%Y-%m-%d')
+                        starttime = datetime.strptime(fix + ' ' + time_[0], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
                         endtime = datetime.strptime(date.group() + ' ' + time_[1], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
                         prog.append(2 * ' ' + '<programme start="' + starttime + ' +0000" stop="' + endtime + ' +0000" channel="' + channel_b + '">' + '\n')
                     elif chc != chch and time_[1] >= '00:00':
-                        fix = (datetime.strptime(date.group(),'%Y-%m-%d') + timedelta(days=1)).strftime('%Y-%m-%d')
-                        starttime = datetime.strptime(date.group() + ' ' + time_[0],'%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
+                        fix = (datetime.strptime(date.group(), '%Y-%m-%d') + timedelta(days=1)).strftime('%Y-%m-%d')
+                        starttime = datetime.strptime(date.group() + ' ' + time_[0], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
                         endtime = datetime.strptime(fix + ' ' + time_[1], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
                         prog.append(2 * ' ' + '<programme start="' + starttime + ' +0000" stop="' + endtime + ' +0000" channel="' + channel_b + '">' + '\n')
                     else:
-                        starttime = datetime.strptime(date.group() + ' ' + time_[0],'%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
+                        starttime = datetime.strptime(date.group() + ' ' + time_[0], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
                         endtime = datetime.strptime(date.group() + ' ' + time_[1], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
                         prog.append(2 * ' ' + '<programme start="' + starttime + ' +0000" stop="' + endtime + ' +0000" channel="' + channel_b + '">' + '\n')
             except:
                 break     
             if len(title) != 0:
-                for ttt,f,p in zip(titles,format_,prog):
-                    with io.open(EPG_ROOT + '/beinent.xml',"a",encoding='UTF-8')as fil:
+                for ttt, f, p in zip(titles, format_, prog):
+                    with io.open(EPG_ROOT + '/beinent.xml', "a", encoding='UTF-8')as fil:
                         fil.write(p + ttt + f)
-                dat = re.search(r'\d{4}-\d{2}-\d{2}',url)
+                dat = re.search(r'\d{4}-\d{2}-\d{2}', url)
                 print('Date' + ' : ' + dat.group())
                 sys.stdout.flush()
-                update([channel.replace('-logo-2018-1','').replace('-Yellow-1','').replace('-1','').replace('-2','') for channel in channels])
+                update([channel.replace('-logo-2018-1', '').replace('-Yellow-1', '').replace('-1', '').replace('-2', '') for channel in channels])
             else:
                 print('No data found')
                 break
@@ -97,7 +97,7 @@ def main():
         jsData = json.load(f)
     for channel in jsData['bouquets']:
         if channel["name"] == "bein entertainment.net":
-            xml_header(EPG_ROOT + '/beinent.xml',channel['channels'])
+            xml_header(EPG_ROOT + '/beinent.xml', channel['channels'])
 
     beinen()
     

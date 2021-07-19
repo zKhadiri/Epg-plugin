@@ -56,7 +56,7 @@ class Console2(Screen):
         self['text'] = ScrollLabel('')
         self['key_red'] = StaticText(_('Cancel'))
         self['key_green'] = StaticText(_('Hide'))
-        self["actions"] = ActionMap(["WizardActions", "DirectionActions",'ColorActions'],
+        self["actions"] = ActionMap(["WizardActions", "DirectionActions", 'ColorActions'],
             {
 		"ok": self.cancel,
 		"up": self["text"].pageUp,

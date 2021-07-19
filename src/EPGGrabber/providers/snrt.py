@@ -4,7 +4,7 @@ import sys
 import re
 import io
 import json
-from datetime import datetime,timedelta
+from datetime import datetime, timedelta
 from __init__ import *
 
 time_zone = tz()
@@ -15,14 +15,14 @@ def arryadia():
         titles = []
         descriptions = []
         live = []
-        for i in range(0,2):
+        for i in range(0, 2):
             next_day = (datetime.today() + timedelta(days=i)).strftime('%Y/%m/%d')
             url = s.get('http://arryadia.snrt.ma/ar/grilles-des-programmes-ar/eventsbyday/' + next_day)
             
-            for hour,title,description,direct in zip(re.findall(r'<div class=\"eventlineitem-time\">(.*?)</div>',url.text),
-                re.findall(r'<span class=\"emissiontitle\">(.*?)</span>',url.text),
-                re.findall(r'<span class=\"emissiontitle\">.*?</span><br\s+/>\s+(.*?)</div>',url.text),
-                re.findall(r'<span class=\"direct\">(.*?)</span>',url.text)):
+            for hour, title, description, direct in zip(re.findall(r'<div class=\"eventlineitem-time\">(.*?)</div>', url.text),
+                re.findall(r'<span class=\"emissiontitle\">(.*?)</span>', url.text),
+                re.findall(r'<span class=\"emissiontitle\">.*?</span><br\s+/>\s+(.*?)</div>', url.text),
+                re.findall(r'<span class=\"direct\">(.*?)</span>', url.text)):
                 times.append(hour)
                 titles.append(title)
                 descriptions.append(description)            
@@ -39,11 +39,11 @@ def arryadia():
             last_hr = h
             start_dt.append(today + timedelta(hours=h, minutes=m))
         
-        for start,end,t,d,lv in zip(start_dt,start_dt[1:] + [start_dt[0]],titles,descriptions,live):
+        for start, end, t, d, lv in zip(start_dt, start_dt[1:] + [start_dt[0]], titles, descriptions, live):
             if start != start_dt[-1] and end != start_dt[0]:
                 ch = ''
-                startime = datetime.strptime(str(start),'%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
-                endtime = datetime.strptime(str(end),'%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
+                startime = datetime.strptime(str(start), '%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
+                endtime = datetime.strptime(str(end), '%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
                 ch += 2 * ' ' + '<programme start="' + startime + ' ' + time_zone + '" stop="' + endtime + ' ' + time_zone + '" channel="Arryadia HD">\n'
                 if lv != "":
                     
@@ -56,7 +56,7 @@ def arryadia():
                 else:
                     ch += 4 * ' ' + '<desc lang="ar/en">Arryadia HD</desc>\n  </programme>\r'
                     
-                with io.open(EPG_ROOT + '/snrt.xml',"a",encoding='UTF-8')as f:
+                with io.open(EPG_ROOT + '/snrt.xml', "a", encoding='UTF-8')as f:
                     if not PY3:
                         f.write(ch.decode('utf-8'))
                     else:
@@ -77,7 +77,7 @@ def main():
     with open(PROVIDERS_ROOT, 'w') as f:
         json.dump(data, f)
     
-    xml_header(EPG_ROOT + '/snrt.xml',["Arryadia HD"])
+    xml_header(EPG_ROOT + '/snrt.xml', ["Arryadia HD"])
     
     arryadia()
         

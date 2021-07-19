@@ -10,24 +10,24 @@ import requests
 import sys
 from datetime import datetime, timedelta
 
-nb_channel = ['1322-BEINMOVIESPREMIERE','1323-BEINMOVIESACTION','1324-BEINMOVIESDRAMA','1325-BEINMOVIESFAMILY','1326-BeInBoxOffice','1327-BeInSeriesHD1','1328-BeInSeriesHD2','1309-beINDrama','1330-FOXACTIONMOVIES','1331-FOXFAMILYMOVIESHD']
+nb_channel = ['1322-BEINMOVIESPREMIERE', '1323-BEINMOVIESACTION', '1324-BEINMOVIESDRAMA', '1325-BEINMOVIESFAMILY', '1326-BeInBoxOffice', '1327-BeInSeriesHD1', '1328-BeInSeriesHD2', '1309-beINDrama', '1330-FOXACTIONMOVIES', '1331-FOXFAMILYMOVIESHD']
 
 time_zone = tz()
 
-class ElcinB(Elcinema,object):
+class ElcinB(Elcinema, object):
     
-    def __init__(self,channel):
+    def __init__(self, channel):
         super(ElcinB, self).__init__(channel)
     
-    def Toxml(self,channel):
-        for elem,next_elem,title,des in zip(self.Starttime(),self.Endtime(),self.Gettitle(),self.GetDes()):
+    def Toxml(self, channel):
+        for elem, next_elem, title, des in zip(self.Starttime(), self.Endtime(), self.Gettitle(), self.GetDes()):
             ch = ''
-            startime = datetime.strptime(str(elem),'%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
-            endtime = datetime.strptime(str(next_elem),'%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
+            startime = datetime.strptime(str(elem), '%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
+            endtime = datetime.strptime(str(next_elem), '%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
             ch += 2 * ' ' + '<programme start="' + startime + ' ' + time_zone + '" stop="' + endtime + ' ' + time_zone + '" channel="' + channel.split('-')[1] + '">\n'
-            ch += 4 * ' ' + '<title lang="ar">' + title.replace('&#39;',"'").replace('&quot;','"').replace('&amp;','and') + '</title>\n'
-            ch += 4 * ' ' + '<desc lang="ar">' + des.replace('&#39;',"'").replace('&quot;','"').replace('&amp;','and').replace('(','').replace(')','').strip() + '</desc>\n  </programme>\r'
-            with io.open(EPG_ROOT + "/beinentCin.xml","a",encoding='UTF-8')as f:
+            ch += 4 * ' ' + '<title lang="ar">' + title.replace('&#39;', "'").replace('&quot;', '"').replace('&amp;', 'and') + '</title>\n'
+            ch += 4 * ' ' + '<desc lang="ar">' + des.replace('&#39;', "'").replace('&quot;', '"').replace('&amp;', 'and').replace('(', '').replace(')', '').strip() + '</desc>\n  </programme>\r'
+            with io.open(EPG_ROOT + "/beinentCin.xml", "a", encoding='UTF-8')as f:
                 f.write(ch)
         print(channel.split('-')[1] + ' epg ends at : ' + str(self.Endtime()[-1]))
         sys.stdout.flush()
@@ -35,7 +35,7 @@ class ElcinB(Elcinema,object):
 def main():
     channels = [nb.split('-')[1] for nb in nb_channel]
     
-    xml_header(EPG_ROOT + '/beinentCin.xml',channels)
+    xml_header(EPG_ROOT + '/beinentCin.xml', channels)
             
     print('**************ELCINEMA BEIN ENTERTAINMENT EPG******************')
     sys.stdout.flush()         

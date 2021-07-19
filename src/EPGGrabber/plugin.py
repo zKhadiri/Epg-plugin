@@ -71,16 +71,16 @@ class StartTimer:
                 
     def getStatus(self):
         allData = []
-        branches = ['osn-ziko-ZR1','jawwy-ziko-ZR1','main-MOHAMED19OS']
+        branches = ['osn-ziko-ZR1', 'jawwy-ziko-ZR1', 'main-MOHAMED19OS']
         for branch in branches:
             try:
                 if branch.split('-')[1] == "MOHAMED19OS":
-                    url = requests.get('https://api.github.com/repos/MOHAMED19OS/XMLTV/branches/' + branch.split('-')[0],timeout=5).json()
+                    url = requests.get('https://api.github.com/repos/MOHAMED19OS/XMLTV/branches/' + branch.split('-')[0], timeout=5).json()
                 else:
-                    url = requests.get('https://api.github.com/repos/ziko-ZR1/xml/branches/' + branch.split('-')[0],timeout=5).json()
+                    url = requests.get('https://api.github.com/repos/ziko-ZR1/xml/branches/' + branch.split('-')[0], timeout=5).json()
                 
                 try:
-                    result = url['commit']['commit']['message'] + ' ' + url['commit']['commit']['committer']['date'].replace('T',' ').replace('Z','')
+                    result = url['commit']['commit']['message'] + ' ' + url['commit']['commit']['committer']['date'].replace('T', ' ').replace('Z', '')
                 except KeyError:
                     result = url['message'].split('. (')[0]
                      
@@ -91,7 +91,7 @@ class StartTimer:
         self.toJson(allData)
         
         
-    def toJson(self,data):
+    def toJson(self, data):
         dict1 = {} 
         for line in data: 
             prov, description = line.strip().split(None, 1)
@@ -104,11 +104,11 @@ def main(session, **kwargs):
     if connected_to_internet():
         session.open(EPGGrabber)
     else:
-        session.open(MessageBox,_("No internet connection available. Or github.com Down"), MessageBox.TYPE_INFO,timeout=10)
+        session.open(MessageBox, _("No internet connection available. Or github.com Down"), MessageBox.TYPE_INFO, timeout=10)
   
 def Plugins(**kwargs):
     Descriptors = []
-    Descriptors.append(PluginDescriptor(name="EPG Grabber",description="EPG WEB Grabber",where=PluginDescriptor.WHERE_PLUGINMENU,icon="epg.png",fnc=main))
-    Descriptors.append(PluginDescriptor(name="EPG Grabber",where=PluginDescriptor.WHERE_EXTENSIONSMENU,fnc=main))
-    Descriptors.append(PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART,PluginDescriptor.WHERE_SESSIONSTART], fnc=autostart))
+    Descriptors.append(PluginDescriptor(name="EPG Grabber", description="EPG WEB Grabber", where=PluginDescriptor.WHERE_PLUGINMENU, icon="epg.png", fnc=main))
+    Descriptors.append(PluginDescriptor(name="EPG Grabber", where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=main))
+    Descriptors.append(PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=autostart))
     return Descriptors

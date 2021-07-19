@@ -16,11 +16,11 @@ import datetime
 week = datetime.date.today() + timedelta(days=7)
 from datetime import datetime
 milli = (datetime.strptime('' + str(week) + ' 23:59:59', "%Y-%m-%d %H:%M:%S").strftime("%s")) + '.999'
-today = datetime.strptime(str(datetime.now().strftime('%Y-%m-%d')) + ' 00:00:00',"%Y-%m-%d %H:%M:%S").strftime('%s')
+today = datetime.strptime(str(datetime.now().strftime('%Y-%m-%d')) + ' 00:00:00', "%Y-%m-%d %H:%M:%S").strftime('%s')
 
-ch_code = ['74-beIN Sports','75-beIN Sports News','67-beIN 1HD','70-beIN 2HD','68-beIN 3HD','69-beIN 4HD',
-          '73-beIN 5HD','71-beIN 6HD','58-beIN 7HD','65-beIN 1 PREM','66-beIN 2 PREM','72-beIN 3 PREM',
-	  '59-beIN 1HD english','60-beIN 2HD english','61-beIN 3HD english','62-beIN SPORTS 1 FR','63-beIN SPORTS 2 FR','64-beIN SPORTS 3 FR']
+ch_code = ['74-beIN Sports', '75-beIN Sports News', '67-beIN 1HD', '70-beIN 2HD', '68-beIN 3HD', '69-beIN 4HD',
+          '73-beIN 5HD', '71-beIN 6HD', '58-beIN 7HD', '65-beIN 1 PREM', '66-beIN 2 PREM', '72-beIN 3 PREM',
+	  '59-beIN 1HD english', '60-beIN 2HD english', '61-beIN 3HD english', '62-beIN SPORTS 1 FR', '63-beIN SPORTS 2 FR', '64-beIN SPORTS 3 FR']
 	  #,'64-beIN SPORTS 3 FR','101-beIN SPORTS MAX 1','102-beIN SPORTS MAX 2',
           #'216-beIN SPORTS MAX 3','217-beIN SPORTS MAX 4','213-beIN SPORTS MAX 5','218-beIN SPORTS MAX 6'
 
@@ -40,7 +40,7 @@ def b_connect():
 			"languageId": "ara",
 			"filter": '{"$and":[{"id_channel":{"$in":[' + code.split('-')[0] + ']}},{"endutc":{"$ge":' + today + '}},{"startutc":{"$le":' + milli + '}}]}'
 		}
-		url = requests.get('https://proxies-beinmena.portail.alphanetworks.be/cms/epg/filtered',headers=head,params=query).json()
+		url = requests.get('https://proxies-beinmena.portail.alphanetworks.be/cms/epg/filtered', headers=head, params=query).json()
 		if url['status'] == False:
 			print('Invalid API Key')
 			break
@@ -48,7 +48,7 @@ def b_connect():
 			for data in url['result']['epg']['chan_' + code.split('-')[0]]:
 				start = datetime.fromtimestamp(int(data['startutc'])).strftime('%Y%m%d%H%M%S') 
 				end = datetime.fromtimestamp(int(data['endutc'])).strftime('%Y%m%d%H%M%S')
-				title = data['title'].replace('   ',' ').split('- ')[0]
+				title = data['title'].replace('   ', ' ').split('- ')[0]
 				if PY3:
 					if 'Qatar Stars League' in data['title']:
 							extra = 'دوري نجوم قطر'
@@ -143,29 +143,29 @@ def b_connect():
 							extra = 'دوري أبطال أفريقيا'.decode('utf-8')
 					else:
 							extra = 'الرياضة العام'.decode('utf-8')
-				spl = re.search(r'-\s(.*)',title)
+				spl = re.search(r'-\s(.*)', title)
 				ch = ''
 				ch += 2 * ' ' + '<programme start="' + start + ' ' + time_zone + '" stop="' + end + ' ' + time_zone + '" channel="' + code.split('-')[1] + '">\n'
 				if spl != None:
-					ch += 4 * ' ' + '<title lang="en">' + spl.group().replace('&','and') + ' - ' + extra + '</title>\n'
+					ch += 4 * ' ' + '<title lang="en">' + spl.group().replace('&', 'and') + ' - ' + extra + '</title>\n'
 				else:
-					ch += 4 * ' ' + '<title lang="en">' + title.replace('&','and').strip() + ' - ' + extra + '</title>\n'
+					ch += 4 * ' ' + '<title lang="en">' + title.replace('&', 'and').strip() + ' - ' + extra + '</title>\n'
 				if data['synopsis'].strip() == u'' and ' -' in data['title']:
-					ch += 4 * ' ' + '<desc lang="en">' + data['title'].split(' -')[1].strip().replace('&','and') + '</desc>\n  </programme>\r'
+					ch += 4 * ' ' + '<desc lang="en">' + data['title'].split(' -')[1].strip().replace('&', 'and') + '</desc>\n  </programme>\r'
 				elif data['synopsis'].strip() == u'':
-					ch += 4 * ' ' + '<desc lang="en">' + title.replace('&','and') + '</desc>\n  </programme>\r'
+					ch += 4 * ' ' + '<desc lang="en">' + title.replace('&', 'and') + '</desc>\n  </programme>\r'
 				else:
-					ch += 4 * ' ' + '<desc lang="en">' + data['synopsis'].strip().replace('&','and') + '</desc>\n  </programme>\r'
-				endtime = datetime.strptime(start,'%Y%m%d%H%M%S').strftime('%Y-%m-%d %H:%M')
+					ch += 4 * ' ' + '<desc lang="en">' + data['synopsis'].strip().replace('&', 'and') + '</desc>\n  </programme>\r'
+				endtime = datetime.strptime(start, '%Y%m%d%H%M%S').strftime('%Y-%m-%d %H:%M')
 				
-				with io.open(EPG_ROOT + '/beinConnect.xml','a',encoding="utf-8") as f:
+				with io.open(EPG_ROOT + '/beinConnect.xml', 'a', encoding="utf-8") as f:
 					f.write(ch)
 			print(code.split('-')[1] + ' epg ends at ' + endtime)
 			sys.stdout.flush()
 
 def main():
 	channels = [ch.split('-')[1] for ch in ch_code]
-	xml_header(EPG_ROOT + '/beinConnect.xml',channels)
+	xml_header(EPG_ROOT + '/beinConnect.xml', channels)
 
 	b_connect()
 

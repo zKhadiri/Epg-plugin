@@ -62,16 +62,16 @@ class AssignRef(Screen):
         self.curservice = curservice
         self.bouquetname = bouquetname
         Screen.__init__(self, session)
-        self["myActionMap"] = ActionMap(["EpgColorActions","EpgWizardActions",'PiPSetupActions','SrefColorActions'],
+        self["myActionMap"] = ActionMap(["EpgColorActions", "EpgWizardActions", 'PiPSetupActions', 'SrefColorActions'],
         {   
             "back": self.exit,
-            "up":self.listUP,
+            "up": self.listUP,
             "last": self.last,
             "next": self.next,
-            "down":self.listDOWN,
-            "ok":self.ok,
-            "right":self.right,
-            "left":self.left
+            "down": self.listDOWN,
+            "ok": self.ok,
+            "right": self.right,
+            "left": self.left
         }, -1)
         self.exist = False
         self.ServicesList = []
@@ -93,7 +93,7 @@ class AssignRef(Screen):
 
     def getJson(self):
         try:
-                with open(BOUQUETS_ROOT,'r')as f:
+                with open(BOUQUETS_ROOT, 'r')as f:
                         self.data = json.load(f)
                         for bouquet in self.data['bouquets']:
                                 self.bqList.append(bouquet['name'])
@@ -168,9 +168,9 @@ class AssignRef(Screen):
             self.exist = False
             
             if len(self.refstr) > 60:
-                new_id = '<channel id="{}">{}</channel>'.format(self.id,self.refstr.split('/')[0] + '//example.m3u8')
+                new_id = '<channel id="{}">{}</channel>'.format(self.id, self.refstr.split('/')[0] + '//example.m3u8')
             else:
-                new_id = '<channel id="{}">{}</channel>'.format(self.id,self.refstr)
+                new_id = '<channel id="{}">{}</channel>'.format(self.id, self.refstr)
             
             f = open(self.path, 'r')
             data = f.read()
@@ -199,7 +199,7 @@ class AssignRef(Screen):
                 self['id'].setText("{} added successfully to config".format(self.name))
                 self['id'].instance.setForegroundColor(parseColor("#008000"))
         else:
-            self.session.open(MessageBox,_(str(self.path) + " not found in path"), MessageBox.TYPE_INFO,timeout=10)
+            self.session.open(MessageBox, _(str(self.path) + " not found in path"), MessageBox.TYPE_INFO, timeout=10)
 
 
     def getCurrentService(self):
@@ -220,8 +220,8 @@ class AssignRef(Screen):
         #self["srf"].setText(self.refstr)
 
     def setCurrentServiceIndex(self):
-        if self.ServicesList.count((self.name,self.refstr)):
-                self.sidx = self.ServicesList.index((self.name,self.refstr))
+        if self.ServicesList.count((self.name, self.refstr)):
+                self.sidx = self.ServicesList.index((self.name, self.refstr))
     
     def right(self):
         self.changeService(1)

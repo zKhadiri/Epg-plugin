@@ -16,7 +16,7 @@ sys.stdout.flush()
 print("Downloading Jawwy English EPG guide\nPlease wait....")  
 sys.stdout.flush()
 url = requests.get('https://raw.githubusercontent.com/MOHAMED19OS/XMLTV/main/jawwyen.xml')
-with io.open(path,'w',encoding="utf-8") as f:
+with io.open(path, 'w', encoding="utf-8") as f:
     f.write(url.text)
     
 print("jawwyen.xml donwloaded with success")

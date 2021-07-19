@@ -2,7 +2,7 @@ import json
 from datetime import datetime
 from .paths import *
 
-def update_channels(provider,channels):
+def update_channels(provider, channels):
     with open(BOUQUETS_ROOT, 'r') as f:
         data = json.load(f)
     for channel in data['bouquets']:

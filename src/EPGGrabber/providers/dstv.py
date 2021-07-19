@@ -19,7 +19,7 @@ headers = {
     'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) snap Chromium/80.0.3987.100 Chrome/80.0.3987.100 Safari/537.36'
 }
 
-for i in range(0,5):
+for i in range(0, 5):
     import datetime
     from datetime import timedelta
     jour = datetime.date.today()
@@ -33,20 +33,20 @@ def dstv():
     for url in urls:
         with requests.Session() as s:
             s.mount('https://', HTTPAdapter(max_retries=100))
-            link = s.get(url,headers=headers)
+            link = s.get(url, headers=headers)
             data = json.loads(link.text)
             for d in data['Channels']:
                 for prog in d['Programmes']:
                     ch = ''
-                    startime = datetime.datetime.strptime(prog['StartTime'].replace('T',' ').replace('Z',''),'%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
-                    endtime = datetime.datetime.strptime(prog['EndTime'].replace('T',' ').replace('Z',''),'%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
-                    ch += 2 * ' ' + '<programme start="' + startime + ' +0200" stop="' + endtime + ' +0200" channel="' + d['Name'].replace(' ','').replace('&','and') + '">\n'
-                    ch += 4 * ' ' + '<title lang="en">' + prog['Title'].replace('&','and') + '</title>\n'
+                    startime = datetime.datetime.strptime(prog['StartTime'].replace('T', ' ').replace('Z', ''), '%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
+                    endtime = datetime.datetime.strptime(prog['EndTime'].replace('T', ' ').replace('Z', ''), '%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
+                    ch += 2 * ' ' + '<programme start="' + startime + ' +0200" stop="' + endtime + ' +0200" channel="' + d['Name'].replace(' ', '').replace('&', 'and') + '">\n'
+                    ch += 4 * ' ' + '<title lang="en">' + prog['Title'].replace('&', 'and') + '</title>\n'
                     ch += 4 * ' ' + '<desc lang="en">No description Found for this programme</desc>\n  </programme>\r'
-                    with io.open(EPG_ROOT + '/dstv.xml',"a",encoding='UTF-8')as f:
+                    with io.open(EPG_ROOT + '/dstv.xml', "a", encoding='UTF-8')as f:
                         f.write(ch)
-                channels.append(d['Name'].replace(' ','').replace('&','and'))
-            dat = re.search(r'\d{4}-\d{2}-\d{2}',url)
+                channels.append(d['Name'].replace(' ', '').replace('&', 'and'))
+            dat = re.search(r'\d{4}-\d{2}-\d{2}', url)
             print('Date' + ' : ' + dat.group())    
             sys.stdout.flush()
     update(channels)
@@ -69,7 +69,7 @@ def main():
         
     for channel in jsData['bouquets']:
         if channel["name"] == "DSTV":  
-            xml_header(EPG_ROOT + '/dstv.xml',channel['channels'])
+            xml_header(EPG_ROOT + '/dstv.xml', channel['channels'])
 
     dstv()
     

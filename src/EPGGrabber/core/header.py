@@ -4,8 +4,8 @@
 from .compat import PY3
 import io
 
-def xml_header(path,channels):
-    file = open(path,'w')
+def xml_header(path, channels):
+    file = open(path, 'w')
     if PY3:
         file.write('<?xml version="1.0" encoding="UTF-8"?>\n')
         file.write('<tv generator-info-name="By ZR1">')
@@ -15,7 +15,7 @@ def xml_header(path,channels):
     file.close()
     
     for channel in channels:
-        with io.open(path,"a",encoding='UTF-8')as f:
+        with io.open(path, "a", encoding='UTF-8')as f:
             if PY3:
                 f.write("\n" + '  <channel id="' + channel + '">' + "\n" + '    <display-name lang="en">' + channel + '</display-name>' + "\n" + '  </channel>\r')
             else:
@@ -23,7 +23,7 @@ def xml_header(path,channels):
                 
                 
 def close_xml(path):
-    file = open(path,'a')
+    file = open(path, 'a')
     if PY3:
         file.write('\n' + '</tv>')
     else:

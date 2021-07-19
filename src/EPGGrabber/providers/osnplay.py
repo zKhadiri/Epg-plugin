@@ -17,7 +17,7 @@ sys.stdout.flush()
 print("Downloading OsnPlay epg guide\nPlease wait....") 
 sys.stdout.flush()
 url = requests.get('http://raw.githubusercontent.com/ziko-ZR1/XML/osn/osn.xml')
-with io.open(path,'w',encoding="utf-8") as f:
+with io.open(path, 'w', encoding="utf-8") as f:
     f.write(url.text)
     
 print("osnplay.xml donwloaded with succes")    

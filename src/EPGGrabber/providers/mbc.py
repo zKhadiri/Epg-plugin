@@ -27,7 +27,7 @@ time_zone = tz()
 
 today = int(datetime.strptime('' + str(datetime.now().strftime('%Y-%m-%d')) + ' 00:00:00', "%Y-%m-%d %H:%M:%S").strftime("%s")) * 1000
 
-channels = ['mbc1','mbc-drama','mbc-maser','mbc-maser2','mbc4','mbc2','mbc-action','mbc-bollywood','mbc-drama-plus','mbc-max','mbc-iraq','mbc5','Wanasa']
+channels = ['mbc1', 'mbc-drama', 'mbc-maser', 'mbc-maser2', 'mbc4', 'mbc2', 'mbc-action', 'mbc-bollywood', 'mbc-drama-plus', 'mbc-max', 'mbc-iraq', 'mbc5', 'Wanasa']
 import datetime
 import time
 from datetime import timedelta
@@ -37,8 +37,8 @@ for c in channels:
     urls.append('https://www.mbc.net/.rest/api/channel/grids?channel=' + c + '&from=' + str(today) + '&to=' + str(milli) + '')
     
 
-ch = ['MBC1','MBCDrama','MBCEgypt','MBCEgypt2','MBC4','MBC2','MBCAction','MBCBollywood',
-    'MBC+Drama','MBCMovieMax','MBCIraq','MBCCinq','Wanasah','QATAR.TV','noordubai']
+ch = ['MBC1', 'MBCDrama', 'MBCEgypt', 'MBCEgypt2', 'MBC4', 'MBC2', 'MBCAction', 'MBCBollywood',
+    'MBC+Drama', 'MBCMovieMax', 'MBCIraq', 'MBCCinq', 'Wanasah', 'QATAR.TV', 'noordubai']
 
 programme = []
 times = []
@@ -63,7 +63,7 @@ def mbc():
         link = requests.get(url)
         data = json.loads(link.text)
         if data == []:
-            nf = re.findall(r'channel=(.*?)&',str(url))
+            nf = re.findall(r'channel=(.*?)&', str(url))
             print('No data found for : ' + ''.join(nf))
             sys.stdout.flush()
         else:
@@ -71,28 +71,28 @@ def mbc():
                 times.append(d['startTime'])
                 end.append(d['endTime'])
                 channel.append(d['channelLabel'])
-                titles.append('     <title lang="ar">' + d['showPageTitle'].replace('&','-') + '</title>\n')
+                titles.append('     <title lang="ar">' + d['showPageTitle'].replace('&', '-') + '</title>\n')
                 if d['showPageGenreInArabic'] == None or d['showPageAboutInArabic'] == None:
                     des.append('     <desc lang="ar">No description for this programme</desc>\n  </programme>\r')
                     #sub.append('     <sub-title lang="ar">No data</sub-title>\n  </programme>\r')
                 else:
-                    des.append('     <desc lang="ar">' + d['showPageAboutInArabic'].replace('&','-') + '</desc>\n  </programme>\r')
+                    des.append('     <desc lang="ar">' + d['showPageAboutInArabic'].replace('&', '-') + '</desc>\n  </programme>\r')
                     #sub.append('     <sub-title lang="ar">'+d['showPageGenreInArabic'].replace('&','-')+'</sub-title>\n  </programme>\r')
             from datetime import datetime
-            for elem, next_elem,en,nm in zip(times, times[1:] + [times[0]],end,channel):
+            for elem, next_elem, en, nm in zip(times, times[1:] + [times[0]], end, channel):
                 if times[-1] == elem and times[0] == next_elem:
                     prog_start = datetime.fromtimestamp(int(elem) // 1000).strftime('%Y%m%d%H%M%S')
                     prog_end = datetime.fromtimestamp(int(en) // 1000).strftime('%Y%m%d%H%M%S')
                     date_end = datetime.fromtimestamp(int(en) // 1000).strftime('%Y/%m/%d')
-                    day = datetime.strptime(date_end,'%Y/%m/%d')
-                    date_now = datetime.strptime(now,'%Y/%m/%d')
+                    day = datetime.strptime(date_end, '%Y/%m/%d')
+                    date_now = datetime.strptime(now, '%Y/%m/%d')
                     nb_days = day - date_now 
                 else:
                     prog_start = datetime.fromtimestamp(int(elem) // 1000).strftime('%Y%m%d%H%M%S')
                     prog_end = datetime.fromtimestamp(int(next_elem) // 1000).strftime('%Y%m%d%H%M%S')
-                programme.append(2 * ' ' + '<programme start="' + prog_start + ' ' + time_zone + '" stop="' + prog_end + ' ' + time_zone + '" channel="' + nm.replace(' ','').replace('-','') + '">\n')
-            for prog,title,descri in zip(programme,titles,des):
-                with io.open(EPG_ROOT + '/mbc.xml',"a",encoding='UTF-8')as f:
+                programme.append(2 * ' ' + '<programme start="' + prog_start + ' ' + time_zone + '" stop="' + prog_end + ' ' + time_zone + '" channel="' + nm.replace(' ', '').replace('-', '') + '">\n')
+            for prog, title, descri in zip(programme, titles, des):
+                with io.open(EPG_ROOT + '/mbc.xml', "a", encoding='UTF-8')as f:
                     f.write(prog + title + descri)
                     
         print(nm + ' epg donwloaded For : ' + str(nb_days.days) + ' Days')
@@ -105,10 +105,10 @@ def noor():
     from datetime import datetime
     with requests.Session() as s:
         s.mount('http://', HTTPAdapter(max_retries=50))
-        url = s.get('http://www.noordubai.com/content/noordubai/ar-ae/schedule/2.html',headers=headers)
-        time = re.findall(r'GMT:\s+(\d{2}:\d{2})',url.text)
-        des = re.findall(r"class=\"post-title mt-0 mb-5\"><a href='#'>(.*?)</a></h5>\s+<h6><i",url.text)
-        title = re.findall(r"<h4 class=\"post-title mt-0 mb-5\"><a href='#'>(.*?)</a>",url.text)
+        url = s.get('http://www.noordubai.com/content/noordubai/ar-ae/schedule/2.html', headers=headers)
+        time = re.findall(r'GMT:\s+(\d{2}:\d{2})', url.text)
+        des = re.findall(r"class=\"post-title mt-0 mb-5\"><a href='#'>(.*?)</a></h5>\s+<h6><i", url.text)
+        title = re.findall(r"<h4 class=\"post-title mt-0 mb-5\"><a href='#'>(.*?)</a>", url.text)
 
     today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0) 
     last_hr = 0
@@ -120,10 +120,10 @@ def noor():
         times.append(today + timedelta(hours=h, minutes=m))
         
     print('Noor Dubai epg ends at {}'.format(times[-1]))
-    for elem,next_elem,tit,descri in zip(times, times[1:] + [times[0]],title,des):
+    for elem, next_elem, tit, descri in zip(times, times[1:] + [times[0]], title, des):
         ch = ''
-        startime = datetime.strptime(str(elem),'%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
-        endtime = datetime.strptime(str(next_elem),'%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
+        startime = datetime.strptime(str(elem), '%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
+        endtime = datetime.strptime(str(next_elem), '%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
         ch += 2 * ' ' + '<programme start="' + startime + ' ' + time_zone + '" stop="' + endtime + ' ' + time_zone + '" channel="noordubai">\n'
         ch += 4 * ' ' + '<title lang="ar">' + tit + '</title>\n'
         if descri == '':
@@ -139,7 +139,7 @@ def noor():
     data.pop(-1)
 
     for epg in data:
-        with io.open(EPG_ROOT + '/mbc.xml', "a",encoding="utf-8") as f:
+        with io.open(EPG_ROOT + '/mbc.xml', "a", encoding="utf-8") as f:
             if not PY3:
                 f.write((epg).decode('utf-8'))
             else:
@@ -150,7 +150,7 @@ def main():
     print('**************MBC EPG******************')
     sys.stdout.flush()
     
-    xml_header(EPG_ROOT + '/mbc.xml',ch)
+    xml_header(EPG_ROOT + '/mbc.xml', ch)
     
     mbc()
     noor()
