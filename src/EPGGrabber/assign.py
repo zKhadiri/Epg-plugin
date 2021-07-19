@@ -18,7 +18,8 @@ from Screens.MessageBox import MessageBox
 from xml.etree import ElementTree as ET
 from xml.dom import minidom
 from Components.config import config
-import os, json
+import os
+import json
 
 LAMEDB = eEnv.resolve('${sysconfdir}/enigma2/lamedb')
 

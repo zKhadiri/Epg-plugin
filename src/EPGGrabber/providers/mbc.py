@@ -1,7 +1,12 @@
 #!/usr/bin/env python2.7
 # -*- coding: utf-8 -*-
 
-import requests, json, io, os, re, sys
+import requests
+import json
+import io
+import os
+import re
+import sys
 from datetime import datetime
 from requests.adapters import HTTPAdapter
 from time import strftime
@@ -24,7 +29,8 @@ today = int(datetime.strptime('' + str(datetime.now().strftime('%Y-%m-%d')) + ' 
 
 channels=['mbc1','mbc-drama','mbc-maser','mbc-maser2','mbc4','mbc2','mbc-action','mbc-bollywood'
           ,'mbc-drama-plus','mbc-max','mbc-iraq','mbc5','Wanasa']
-import datetime, time
+import datetime
+import time
 from datetime import timedelta
 week = datetime.date.today() + timedelta(days=7)
 milli = int(datetime.datetime.strptime('' + str(week) + ' 00:00:00', "%Y-%m-%d %H:%M:%S").strftime("%s")) * 1000

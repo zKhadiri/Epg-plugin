@@ -5,7 +5,9 @@ from __future__ import print_function
 from __init__ import *
 
 from elcin import Elcinema
-import io, requests, sys
+import io
+import requests
+import sys
 from datetime import datetime, timedelta
 
 nb_channel=['1322-BEINMOVIESPREMIERE','1323-BEINMOVIESACTION','1324-BEINMOVIESDRAMA','1325-BEINMOVIESFAMILY','1326-BeInBoxOffice','1327-BeInSeriesHD1'

@@ -4,7 +4,10 @@
 from __future__ import print_function
 from Plugins.Extensions.EPGGrabber.core.compat import PY3
 
-import os,io,requests,sys
+import os
+import io
+import requests
+import sys
 if not os.path.exists('/etc/epgimport/ziko_config/custom.channels.xml'):
     print('Downloading custom.channels config')
     sys.stdout.flush()

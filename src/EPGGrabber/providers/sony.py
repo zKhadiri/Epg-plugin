@@ -1,4 +1,7 @@
-import requests, re, io, sys
+import requests
+import re
+import io
+import sys
 from datetime import datetime,timedelta
 from requests.adapters import HTTPAdapter
 from __init__ import *

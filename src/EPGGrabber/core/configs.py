@@ -4,7 +4,9 @@
 from __future__ import print_function
 from Plugins.Extensions.EPGGrabber.core.compat import PY3
 from Plugins.Extensions.EPGGrabber.core.paths import BOUQUETS_ROOT
-import requests, sys, io
+import requests
+import sys
+import io
 
 print('Downloading custom.sources config')
 sys.stdout.flush()

@@ -4,7 +4,11 @@
 from __future__ import print_function
 from __init__ import *
 
-import requests, re, io, sys, random
+import requests
+import re
+import io
+import sys
+import random
 from datetime import datetime, timedelta
 from requests.adapters import HTTPAdapter
 from requests.exceptions import ConnectionError

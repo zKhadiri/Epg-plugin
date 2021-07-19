@@ -22,7 +22,12 @@ from ServiceReference import ServiceReference
 from Screens.ChoiceBox import ChoiceBox
 from enigma import gRGB, loadPNG, gPixmapPtr, RT_WRAP, ePoint, RT_HALIGN_LEFT, RT_VALIGN_CENTER, eListboxPythonMultiContent, gFont, getDesktop
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmap, MultiContentEntryPixmapAlphaTest
-import io, os, re, requests, gettext, json
+import io
+import os
+import re
+import requests
+import gettext
+import json
 
 ### import class + screens from files inside plugin (Python3)
 from .skin import *

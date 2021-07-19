@@ -4,7 +4,12 @@
 from __future__ import print_function
 from __init__ import *
 
-import requests, json, io, re, os, sys
+import requests
+import json
+import io
+import re
+import os
+import sys
 from datetime import datetime
 from requests.adapters import HTTPAdapter
 

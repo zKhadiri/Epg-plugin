@@ -1,4 +1,6 @@
-import requests, os, json
+import requests
+import os
+import json
 from time import strftime
 from datetime import datetime
 from .paths import API_PATH

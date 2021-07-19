@@ -1,4 +1,9 @@
-import requests, re, io, sys, json, ssl
+import requests
+import re
+import io
+import sys
+import json
+import ssl
 from datetime import datetime, timedelta
 from requests.adapters import HTTPAdapter
 from time import strftime

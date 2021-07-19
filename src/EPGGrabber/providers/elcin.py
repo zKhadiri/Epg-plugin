@@ -4,7 +4,12 @@
 from __future__ import print_function
 from __init__ import *
 
-import requests, re, io, sys, os, ssl
+import requests
+import re
+import io
+import sys
+import os
+import ssl
 from datetime import datetime,timedelta
 from time import sleep,strftime
 from requests.adapters import HTTPAdapter
