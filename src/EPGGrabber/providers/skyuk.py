@@ -56,18 +56,18 @@ def main():
 
     channels = [ch.split('-')[1] for ch in uk_sports]
     xml_header(EPG_ROOT + '/skyuk.xml', channels)
-    sky()   
+    sky()
     close_xml(EPG_ROOT + '/skyuk.xml')
-    
+
     with open(PROVIDERS_ROOT, 'r') as f:
         data = json.load(f)
-        
+
     for channel in data['bouquets']:
         if channel["bouquet"] == "skyuk":
             channel['date'] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
     with open(PROVIDERS_ROOT, 'w') as f:
         json.dump(data, f)
-        
+
     print('**************FINISHED******************')
     sys.stdout.flush()
 

@@ -67,7 +67,7 @@ class AssignRef(Screen):
         self.bouquetname = bouquetname
         Screen.__init__(self, session)
         self["myActionMap"] = ActionMap(["EpgColorActions", "EpgWizardActions", 'PiPSetupActions', 'SrefColorActions'],
-        {   
+        {
             "back": self.exit,
             "up": self.listUP,
             "last": self.last,
@@ -87,12 +87,12 @@ class AssignRef(Screen):
         self.id = None
         self.path = None
         self.idx = 0
-        self.init() 
+        self.init()
         self.getCurrentService()
         self.bqIndex = 0
-        self.getJson()       
+        self.getJson()
         self["bouq"].setText("Current bouquet  : {}".format(self.bouquetname))
-     
+
 #####################################################
 
     def getJson(self):
@@ -104,27 +104,27 @@ class AssignRef(Screen):
                 self.changeBQ()
         except compat_URLError as e:
                         print('File json not found.')
-    
+
     def last(self):
         self.bqIndex -= 1
         self.changeBQ()
         self['id'].setText("")
-        
+
     def next(self):
         self.bqIndex += 1
         self.changeBQ()
         self['id'].setText("")
-        
+
     def changeBQ(self):
         if self.bqIndex > (len(self.bqList) - 1):
            self.bqIndex = 0
         if self.bqIndex < 0:
            self.bqIndex = len(self.bqList) - 1
-           
+
         bqTitle = self.bqList[self.bqIndex]
         self["label"].setText('EPG Provider : {}'.format(bqTitle))
         self.listChannels()
-     
+
     def listChannels(self):
         for data in self.data['bouquets']:
             if data['name'] == self.bqList[self.bqIndex]:
@@ -133,13 +133,13 @@ class AssignRef(Screen):
                 else:
                         channels = [s.encode('ascii', 'ignore') for s in data['channels']]
                 self.path = data['path']
-                self['list'].setList([])    
+                self['list'].setList([])
                 self['list'].setList(channels)
                 self['list'].show()
                 self.idxList = channels
                 self.lenidList = len(self.idxList)
                 self.updateServiceID()
-                        
+
     def listDOWN(self):
         self['list'].down()
         self.updateServiceID()
@@ -150,41 +150,41 @@ class AssignRef(Screen):
         self['list'].up()
         self.updateServiceID()
         self['id'].setText("")
-        
+
     def updateServiceID(self):
         index = self['list'].getSelectionIndex()
         service = self.idxList[index]
         #self['id'].setText(service)
         self.id = service
         return
-#########################################        
-    
+#########################################
+
     def init(self):
         for service in self.services:
             self.ServicesList.append((service.getServiceName(), str(service)))
         self.lenServicesList = len(self.ServicesList)
         if not self.bouquetname:
             self.ServicesList.sort()
-    
+
     def ok(self):
         if fileExists(self.path):
             self.exist = False
-            
+
             if len(self.refstr) > 60:
                 new_id = '<channel id="{}">{}</channel>'.format(self.id, self.refstr.split('/')[0] + '//example.m3u8')
             else:
                 new_id = '<channel id="{}">{}</channel>'.format(self.id, self.refstr)
-            
+
             f = open(self.path, 'r')
             data = f.read()
             f.close()
-            
+
             for line in data.split('\n'):
                 if new_id == line.strip():
                     self['id'].setText("{} already exist in config".format(self.name))
                     self['id'].instance.setForegroundColor(parseColor("#00ff2525"))
                     self.exist = True
-                  
+
             if not self.exist:
                 doc = ET.parse(self.path)
                 root = doc.getroot()
@@ -215,7 +215,7 @@ class AssignRef(Screen):
             self.refstr = ':'.join(service.toString().split(':')[:11])
             self.setCurrentServiceIndex()
             self.displayServiceParams()
-            
+
     def displayServiceParams(self):
         self["status"].setText("Current channel : {}".format(self.name))
         #self["srf"].setText(self.refstr)
@@ -223,7 +223,7 @@ class AssignRef(Screen):
     def setCurrentServiceIndex(self):
         if self.ServicesList.count((self.name, self.refstr)):
                 self.sidx = self.ServicesList.index((self.name, self.refstr))
-    
+
     def right(self):
         self.changeService(1)
         self['id'].setText("")
@@ -239,10 +239,10 @@ class AssignRef(Screen):
             self.name = self.ServicesList[self.sidx][0]
             self.refstr = self.ServicesList[self.sidx][1]
             self.displayServiceParams()
-           
+
     def exit(self):
         self.close(None)
-    
+
 
 def freeMemory():
         os.system("sync")
@@ -271,7 +271,7 @@ def getBouquetServices(bouquet):
                         service = Servicelist.getNext()
                         if not service.valid():
                                 break
-                        if service.flags & (eServiceReference.isDirectory | eServiceReference.isMarker): 
+                        if service.flags & (eServiceReference.isDirectory | eServiceReference.isMarker):
                                 continue
                         services.append(ServiceReference(service))
         return services

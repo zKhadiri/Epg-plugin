@@ -18,8 +18,8 @@ def get_tz():
         file = open(API_PATH + '/tz.json', 'w')
         json.dump(js, file, indent=4)
         file.close()
-    
-    
+
+
 def tz():
     if os.path.exists(API_PATH + '/tz.json'):
         this_month = datetime.today().strftime('%Y-%m')
@@ -41,4 +41,3 @@ def tz():
         timezone = file.read()
         file.close()
         return json.loads(timezone)['tz']
-    

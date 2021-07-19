@@ -48,10 +48,10 @@ def dstv():
                         f.write(ch)
                 channels.append(d['Name'].replace(' ', '').replace('&', 'and'))
             dat = re.search(r'\d{4}-\d{2}-\d{2}', url)
-            print('Date' + ' : ' + dat.group())    
+            print('Date' + ' : ' + dat.group())
             sys.stdout.flush()
     update(channels)
-    
+
 
 def update(chan):
     with open(BOUQUETS_ROOT, 'r') as f:
@@ -60,8 +60,8 @@ def update(chan):
         if channel["name"] == "DSTV":
             channel['channels'] = sorted([ch for ch in list(dict.fromkeys(chan))])
     with open(BOUQUETS_ROOT, 'w') as f:
-        json.dump(data, f)    
-   
+        json.dump(data, f)
+
 
 def main():
     print('**************DSTV EPG******************')
@@ -69,15 +69,15 @@ def main():
 
     with open(BOUQUETS_ROOT, 'r') as f:
         jsData = json.load(f)
-        
+
     for channel in jsData['bouquets']:
-        if channel["name"] == "DSTV":  
+        if channel["name"] == "DSTV":
             xml_header(EPG_ROOT + '/dstv.xml', channel['channels'])
 
     dstv()
-    
+
     close_xml(EPG_ROOT + '/dstv.xml')
-    
+
     from datetime import datetime
 
     with open(PROVIDERS_ROOT, 'r') as f:
@@ -87,7 +87,7 @@ def main():
             bouquet['date'] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
     with open(PROVIDERS_ROOT, 'w') as f:
         json.dump(data, f)
-    
+
     if os.path.exists('/var/lib/dpkg/status'):
         print('Dream os image found\nSorting data please wait.....')
         sys.stdout.flush()
@@ -98,13 +98,9 @@ def main():
         new_els = sorted(els, key=lambda el: (el.tag, el.attrib['channel']))
         data[:] = new_els
         tree.write(EPG_ROOT + '/dstv.xml', xml_declaration=True, encoding='utf-8')
-    
+
     print('**************FINISHED******************')
- 
+
 
 if __name__ == '__main__':
     main()
-
-
-    
-

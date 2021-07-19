@@ -17,7 +17,7 @@ sys.stdout.flush()
 url = requests.get('http://raw.githubusercontent.com/Haxer/EPG-XMLFiles/FullArabicXML/osn.xml')
 with io.open(path, 'w', encoding="utf-8") as f:
     f.write(url.text)
-    
+
 print "osnplay.xml donwloaded with succes"
 
 from datetime import datetime

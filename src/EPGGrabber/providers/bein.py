@@ -30,7 +30,7 @@ def bein():
             title = re.findall(r'<p\sclass=title>(.*?)<\/p>', link.text)
             formt = re.findall(r'<p\sclass=format>(.*?)<\/p>', link.text)
             channels = re.findall(r"https:\/\/assets\.bein\.com\/mena\/sites\/\d+\/\d+\/\d+\/(.*?)\.png\'\sdata", link.text)
-            
+
             desc = []
             titles = []
             title_chan = []
@@ -85,9 +85,9 @@ def main():
         for channel in jsData['bouquets']:
             if channel["name"] == "Bein sports":
                 xml_header(EPG_ROOT + '/bein.xml', channel['channels'])
-    
+
     bein()
-    
+
     from datetime import datetime
     with open(PROVIDERS_ROOT, 'r') as f:
         data = json.load(f)
@@ -113,5 +113,5 @@ def main():
 
 if __name__ == '__main__':
     main()
-    
+
 print("**************FINISHED******************")

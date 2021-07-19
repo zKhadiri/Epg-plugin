@@ -55,20 +55,20 @@ def main():
         if bouquet["bouquet"] == "espn":
             bouquet['date'] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
     with open(PROVIDERS_ROOT, 'w') as f:
-        json.dump(data, f) 
-    
+        json.dump(data, f)
+
     print('**************Espn EPG******************')
     sys.stdout.flush()
-    
+
     xml_header(EPG_ROOT + '/espn.xml', ['ESPN'])
-    
+
     espn()
-    
+
     close_xml(EPG_ROOT + '/espn.xml')
-    
+
     print("**************FINISHED******************")
     sys.stdout.flush()
-    
+
 
 if __name__ == '__main__':
     main()

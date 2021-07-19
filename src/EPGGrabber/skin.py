@@ -99,11 +99,11 @@ SKIN_EPGGrabber_Full_FHD = """
 			<widget name="glb" foregroundColor="#00ffffff" backgroundColor="#16000000" position="963,769" size="948,92" font="Regular;32" zPosition="1" halign="center" valign="center"/>
 			<widget name="status" foregroundColor="#000080ff" backgroundColor="#16000000" position="963,840" size="948,92" font="Regular;32" zPosition="2" halign="center" valign="center"/>
 		</screen>"""
-		
+
 SKIN_set_ref_Small_HD = """
 		<screen position="center,center" size="1000,400" title="GET SERVICE" backgroundColor="#16000000" flags="wfNoBorder">
 			<widget name="bouq" position="200,10" size="990,50" font="Regular;40" foregroundColor="#00ffa500" backgroundColor="#16000000" transparent="1"/>
-			<widget name="status" foregroundColor="#00ffffff" backgroundColor="#16000000"  position="10,130" size="700,25" font="Regular;23"/>             
+			<widget name="status" foregroundColor="#00ffffff" backgroundColor="#16000000"  position="10,130" size="700,25" font="Regular;23"/>
 			<widget name="label" foregroundColor="#00ffffff" backgroundColor="#16000000"  position="10,100" size="700,25" font="Regular;23" />
 			<widget name="list" foregroundColor="#00ffffff" backgroundColor="#16000000" zPosition="2" position="650,80" size="320,300" scrollbarMode="showOnDemand" transparent="1" />
 			<widget name="id" foregroundColor="#008000" backgroundColor="#16000000"  position="30,200" size="700,25" font="Regular;22" />
@@ -116,7 +116,7 @@ SKIN_set_ref_Small_HD = """
 SKIN_set_ref_Small_FHD = """
 		<screen position="center,center" size="1200,500" title="GET SERVICE" backgroundColor="#16000000" flags="wfNoBorder">
 			<widget name="bouq" position="200,10" size="990,50" font="Regular;40" foregroundColor="#00ffa500" backgroundColor="#16000000" transparent="1"/>
-			<widget name="status" foregroundColor="#00ffffff" backgroundColor="#16000000"  position="10,145" size="700,30" font="Regular;30"/>             
+			<widget name="status" foregroundColor="#00ffffff" backgroundColor="#16000000"  position="10,145" size="700,30" font="Regular;30"/>
 			<widget name="label" foregroundColor="#00ffffff" backgroundColor="#16000000"  position="10,100" size="700,30" font="Regular;30" />
 			<widget name="list" foregroundColor="#00ffffff" backgroundColor="#16000000" zPosition="2" position="750,80" size="450,400" transparent="1" />
 			<widget name="id" foregroundColor="#008000" backgroundColor="#16000000"  position="35,250" size="700,35" font="Regular;30" />

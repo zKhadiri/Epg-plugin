@@ -14,7 +14,7 @@ if not os.path.exists('/etc/epgimport/ziko_config/custom.channels.xml'):
     custom_channels = requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/configs/custom.channels.xml?raw=true')
     with io.open('/etc/epgimport/ziko_config/custom.channels.xml', 'w', encoding="utf-8") as f:
         f.write(custom_channels.text)
-        
+
 if not os.path.exists('/etc/epgimport/custom.sources.xml'):
     print('Downloading custom sources config')
     sys.stdout.flush()
@@ -49,21 +49,21 @@ if not os.path.exists('/etc/epgimport/ziko_config/freesat.channels.xml'):
     free_channels = requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/configs/freesat.channels.xml?raw=true')
     with io.open('/etc/epgimport/ziko_config/freesat.channels.xml', 'w', encoding="utf-8") as f:
         f.write(free_channels.text)
-        
+
 if not os.path.exists('/etc/epgimport/ziko_config/skyit.channels.xml'):
     print('Downloading skyit channels config')
     sys.stdout.flush()
     sky_it = requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/configs/skyit.channels.xml?raw=true')
     with io.open('/etc/epgimport/ziko_config/skyit.channels.xml', 'w', encoding="utf-8") as f:
         f.write(sky_it.text)
-        
+
 if not os.path.exists('/etc/epgimport/ziko_config/bein.channels.xml'):
     print('Downloading bein.channels config')
     sys.stdout.flush()
     bein_channels = requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/configs/bein.channels.xml?raw=true')
     with io.open('/etc/epgimport/ziko_config/bein.channels.xml', 'w', encoding="utf-8") as f:
         f.write(bein_channels.text)
-        
+
 if not os.path.exists('/etc/epgimport/ziko_config/discovery.channels.xml'):
     print('Downloading discovery.channels config')
     sys.stdout.flush()

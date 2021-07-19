@@ -21,7 +21,7 @@ channels = ['Discovery Central Europe|DCENENG-UTC', 'Animal Planet Europe|APEUEN
             'Discovery Channel France|DFRAFRE-UTC', 'Discovery Science France|SCFRFRE-UTC',
             'Discovery Family France|DFFRFRE-UTC', 'Investigation Discovery France|IDFRFRE-UTC']
 
-     
+
 french = ['DFRAFRE-UTC', 'SCFRFRE-UTC', 'DFFRFRE-UTC', 'IDFRFRE-UTC']
 
 
@@ -64,7 +64,7 @@ def discovery():
                         epg += 4 * ' ' + '<desc lang="en">' + py + ' (S' + se + ' Ep ' + ep + ') : ' + des.replace('&amp;', 'and').strip() + '</desc>\n  </programme>\r'
                     with io.open(EPG_ROOT + '/discovery.xml', "a", encoding='UTF-8')as f:
                         f.write(epg)
-                    
+
             print(ch.split('|')[0] + ' epg ends at ' + last_date)
             sys.stdout.flush()
 
@@ -72,14 +72,14 @@ def discovery():
 def main():
     print('**************Discovery EPG******************')
     sys.stdout.flush()
-    
+
     ch = [c.split('|')[0] for c in channels]
     xml_header(EPG_ROOT + '/discovery.xml', ch)
-    
+
     discovery()
-    
+
     close_xml(EPG_ROOT + '/discovery.xml')
-    
+
     import json
     with open(PROVIDERS_ROOT, 'r') as f:
         data = json.load(f)
@@ -88,12 +88,11 @@ def main():
             bouquet['date'] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
     with open(PROVIDERS_ROOT, 'w') as f:
         json.dump(data, f)
-        
+
     print('**************FINISHED******************')
     sys.stdout.flush()
-           
+
 
 if __name__ == '__main__':
-    
+
     main()
-    

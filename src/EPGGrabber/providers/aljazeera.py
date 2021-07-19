@@ -15,7 +15,7 @@ from requests.exceptions import ConnectionError
 from core.proxies import proxy
 
 print('************Al jazeera arabic EPG **************')
-sys.stdout.flush() 
+sys.stdout.flush()
 
 
 def random_prox():
@@ -23,7 +23,7 @@ def random_prox():
     return {'http': 'http://' + p, 'https': 'https://' + p}
 
 
-def to_xml(data):             
+def to_xml(data):
     times = re.findall(r'<div class="schedule__row__timeslot">(.*?)</div>', data)
     title = re.findall(r'<div class="schedule__row__showname">(.*?)</div>', data)
     des = re.findall(r'<div class="schedule__row__description">(.*?)</div>', data)
@@ -46,12 +46,12 @@ def to_xml(data):
             else:
                 ch += 4 * ' ' + '<title lang="ar">' + tit.replace('&#39;', "'").replace('&quot;', '"').replace('&amp;', 'و'.decode('utf-8')).replace('<div class="schedule__row__nowshowing">', '') + '</title>\n'
                 ch += 4 * ' ' + '<desc lang="ar">' + de.replace('&#39;', "'").replace('&quot;', '"').replace('&amp;', 'و'.decode('utf-8')).strip() + '</desc>\n  </programme>\r'
-            
+
             with io.open(EPG_ROOT + "/aljazeera.xml", "a", encoding="utf-8") as f:
                 f.write(ch)
-                
+
         print('aljazeera epg download finished')
-        sys.stdout.flush()   
+        sys.stdout.flush()
     else:
         print('No data found for aljazeera')
         sys.stdout.flush()
@@ -64,13 +64,13 @@ def jscNews():
             url = s.get('https://www.aljazeera.net/schedule', timeout=5)
             to_xml(url.text)
         except ConnectionError:
-        
+
             print("Ip blocked , using proxy....\nPlease wait this might take a while.")
             sys.stdout.flush()
-            
+
             tries = 10
             while tries > 0:
-                
+
                 try:
                     url = s.get('https://www.aljazeera.net/schedule', proxies=random_prox(), timeout=3)
                     if '<!doctype html>' in url.text:
@@ -79,15 +79,15 @@ def jscNews():
                 except Exception:
                     tries -= 1
                     print('Error occured Retry!!', tries)
-                    
+
 
 def main():
     xml_header(EPG_ROOT + '/aljazeera.xml', ['aljazeera'])
-    
+
     jscNews()
-    
+
     close_xml(EPG_ROOT + '/aljazeera.xml')
-        
+
     import json
     with open(PROVIDERS_ROOT, 'r') as f:
         data = json.load(f)
@@ -99,7 +99,7 @@ def main():
 
     print("**************FINISHED******************")
     sys.stdout.flush()
-    
+
 
 if __name__ == "__main__":
     main()

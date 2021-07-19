@@ -16,10 +16,10 @@ time_zone = tz()
 
 
 class ElcinB(Elcinema, object):
-    
+
     def __init__(self, channel):
         super(ElcinB, self).__init__(channel)
-    
+
     def Toxml(self, channel):
         for elem, next_elem, title, des in zip(self.Starttime(), self.Endtime(), self.Gettitle(), self.GetDes()):
             ch = ''
@@ -32,15 +32,15 @@ class ElcinB(Elcinema, object):
                 f.write(ch)
         print(channel.split('-')[1] + ' epg ends at : ' + str(self.Endtime()[-1]))
         sys.stdout.flush()
-        
+
 
 def main():
     channels = [nb.split('-')[1] for nb in nb_channel]
-    
+
     xml_header(EPG_ROOT + '/beinentCin.xml', channels)
-            
+
     print('**************ELCINEMA BEIN ENTERTAINMENT EPG******************')
-    sys.stdout.flush()         
+    sys.stdout.flush()
     import time
     Hour = time.strftime("%H:%M")
     start = '00:00'
@@ -60,11 +60,11 @@ def main():
                 channel['date'] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
         with open(PROVIDERS_ROOT, 'w') as f:
             json.dump(data, f)
-            
+
 
 if __name__ == '__main__':
     main()
-    
+
     close_xml(EPG_ROOT + '/beinentCin.xml')
 
     print('**************FINISHED******************')

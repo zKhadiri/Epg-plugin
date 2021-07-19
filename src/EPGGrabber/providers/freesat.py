@@ -75,11 +75,11 @@ def main():
             channel['date'] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
     with open(PROVIDERS_ROOT, 'w') as f:
         json.dump(data, f)
-    
+
     channels = [ch.split('-')[1] for ch in channels_code]
-    
-    xml_header(EPG_ROOT + '/freesat.xml', channels)  
-      
+
+    xml_header(EPG_ROOT + '/freesat.xml', channels)
+
     thread_pool = []
     for url in channels_code:
         thread = threading.Thread(target=freesat, args=(url,))
@@ -89,9 +89,9 @@ def main():
         lock.acquire()
     for thread in thread_pool:
         thread.join()
-      
-    close_xml(EPG_ROOT + '/freesat.xml')  
-      
+
+    close_xml(EPG_ROOT + '/freesat.xml')
+
     if os.path.exists('/var/lib/dpkg/status'):
         print('Dream os image found\nSorting data please wait.....')
         sys.stdout.flush()
@@ -109,4 +109,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-

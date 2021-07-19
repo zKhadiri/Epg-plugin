@@ -13,9 +13,9 @@ warnings.filterwarnings('ignore', message='Unverified HTTPS request')
 
 from __init__ import *
 
-channels_code = ['9077', '9074', '318', '9073', '9095', '9103', '9100', '9101', '9034', 
+channels_code = ['9077', '9074', '318', '9073', '9095', '9103', '9100', '9101', '9034',
                '129', '9050', '9039', '10254', '10515', '472', '320', '7767', '8714', '931',
-                '467', '10135', '461', '9113', '9115', '460', '8128', '9042', '9047', '7427', 
+                '467', '10135', '461', '9113', '9115', '460', '8128', '9042', '9047', '7427',
                 '9044', '641', '929', '7507', '8453', '588', '364', '6624', '10458', '10469', '10464',
                 '10454', '6601', '6621', '6602', '5007', '6622', '5023', '6608', '6623', '362', '895', '445',
                 '446', '10918', '9099', '8753', '9096', '8434', '10774', '9057', '9060', '9055', '10518',
@@ -66,17 +66,17 @@ def update(chan):
 def main():
     print('**************SKY IT EPG******************')
     sys.stdout.flush()
-    
+
     with open(BOUQUETS_ROOT, 'r') as f:
         jsData = json.load(f)
     for channel in jsData['bouquets']:
-        if channel["name"] == "SKY IT":    
+        if channel["name"] == "SKY IT":
             xml_header(EPG_ROOT + '/skyit.xml', channel['channels'])
-    
+
     skyit()
 
     close_xml(EPG_ROOT + '/skyit.xml')
-        
+
     with open(PROVIDERS_ROOT, 'r') as f:
         data = json.load(f)
     for channel in data['bouquets']:
@@ -84,11 +84,10 @@ def main():
             channel['date'] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
     with open(PROVIDERS_ROOT, 'w') as f:
         json.dump(data, f)
-        
+
     print('**************FINISHED******************')
     sys.stdout.flush()
 
 
-if __name__ == '__main__': 
+if __name__ == '__main__':
     main()
-    

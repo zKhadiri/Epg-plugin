@@ -69,7 +69,7 @@ def beinen():
                         endtime = datetime.strptime(date.group() + ' ' + time_[1], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
                         prog.append(2 * ' ' + '<programme start="' + starttime + ' +0000" stop="' + endtime + ' +0000" channel="' + channel_b + '">' + '\n')
             except:
-                break     
+                break
             if len(title) != 0:
                 for ttt, f, p in zip(titles, format_, prog):
                     with io.open(EPG_ROOT + '/beinent.xml', "a", encoding='UTF-8')as fil:
@@ -91,7 +91,7 @@ def update(chan):
             channel['channels'] = sorted([ch for ch in list(dict.fromkeys(chan))])
     with open(BOUQUETS_ROOT, 'w') as f:
         json.dump(data, f)
-           
+
 
 def main():
     with open(BOUQUETS_ROOT, 'r') as f:
@@ -101,9 +101,9 @@ def main():
             xml_header(EPG_ROOT + '/beinent.xml', channel['channels'])
 
     beinen()
-    
+
     close_xml(EPG_ROOT + '/beinent.xml')
-    
+
     from datetime import datetime
 
     with open(PROVIDERS_ROOT, 'r') as f:
@@ -125,7 +125,7 @@ def main():
         data[:] = new_els
         tree.write(EPG_ROOT + '/beinent.xml', xml_declaration=True, encoding='utf-8')
 
-    print("**************FINISHED******************")        
+    print("**************FINISHED******************")
 
 
 if __name__ == '__main__':

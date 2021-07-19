@@ -34,7 +34,7 @@ def rotana(this_month, channel):
         descriptions.append(rows[1:][7])
         actors.append(rows[1:][8])
         genre.append(rows[1:][12])
-        
+
     for title, des, start, end, ed, actor, g in zip(titles, descriptions, start_dt, start_dt[1:] + [start_dt[0]], end_dt, actors, genre):
         if start >= today:
             ch = ''
@@ -44,9 +44,9 @@ def rotana(this_month, channel):
             else:
                 startime = datetime.strptime(start, '%d/%m/%Y %H:%M:%S:%f').strftime('%Y%m%d%H%M%S')
                 endtime = datetime.strptime(end, '%d/%m/%Y %H:%M:%S:%f').strftime('%Y%m%d%H%M%S')
-                
+
             ch += 2 * ' ' + '<programme start="' + startime + ' +0000" stop="' + endtime + ' +0000" channel="' + channel + '">\n'
-            
+
             if '-' in title:
                 ch += 4 * ' ' + '<title lang="ar">' + title.split('-', 1)[0].strip() + '</title>\n'
                 ch += 4 * ' ' + '<desc lang="ar">' + title.split('-', 1)[1].strip() + '</desc>\n  </programme>\r'
@@ -60,13 +60,13 @@ def rotana(this_month, channel):
                     ch += 4 * ' ' + '<desc lang="en">' + g + '</desc>\n  </programme>\r'
                 else:
                     ch += 4 * ' ' + '<desc lang="ar">يتعذر الحصول على معلومات هذا البرنامج</desc>\n  </programme>\r'
-                
+
             with io.open(EPG_ROOT + '/rotana.xml', "a", encoding='UTF-8')as f:
                 if not PY3:
                     f.write(ch.decode('utf-8'))
                 else:
                     f.write(ch)
-    
+
     print(channel + ' EPG ends at ' + end_dt[-1])
     sys.stdout.flush()
 
@@ -88,7 +88,7 @@ def main():
     update_channels("Rotana", channel_code)
     print('**************FINISHED******************')
     sys.stdout.flush()
-    
-    
+
+
 if __name__ == "__main__":
     main()

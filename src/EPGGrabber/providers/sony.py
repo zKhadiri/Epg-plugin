@@ -8,7 +8,7 @@ from __init__ import *
 
 channels = ['sony-six/84', 'sony-ten-1/85', 'sony-ten-2/92', 'star-sports1/88', 'star-sports-select-1/86', 'star-sports-select-hd-2/214', 'star-sports2/87', 'wow-hd/207']
 
-        
+
 def sony():
     for code in channels:
         with requests.Session() as s:
@@ -23,7 +23,7 @@ def sony():
             for time in times:
                 end.append(time.split('to')[1].strip())
                 start.append(time.split('to')[0].strip())
-                
+
             time_start = []
             time_end = []
             now = datetime.strptime(start_date, '%Y-%m-%d')
@@ -47,7 +47,7 @@ def sony():
                     if time_start[-1] == elem and time_start[0] == next_elem:
                         startime = datetime.strptime(str(elem), '%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
                         endtime = datetime.strptime(str(en), '%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
-                        
+
                     else:
                         startime = datetime.strptime(str(elem), '%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
                         endtime = datetime.strptime(str(next_elem), '%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
@@ -69,11 +69,11 @@ def main():
 
     channel = [ch.split('/')[0] for ch in channels]
     xml_header(EPG_ROOT + '/sony.xml', channel)
-    
-    sony()       
-    
+
+    sony()
+
     close_xml(EPG_ROOT + '/sony.xml')
-    
+
     import json
     with open(PROVIDERS_ROOT, 'r') as f:
         data = json.load(f)
@@ -82,11 +82,10 @@ def main():
             bouquet['date'] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
     with open(PROVIDERS_ROOT, 'w') as f:
         json.dump(data, f)
-        
+
     print('**************FINISHED******************')
     sys.stdout.flush()
-    
+
 
 if __name__ == '__main__':
     main()
-

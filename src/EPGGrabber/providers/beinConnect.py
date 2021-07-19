@@ -29,14 +29,14 @@ head = {
 	"x-an-webservice-identitykey": "t1Th55UviStev8p2urOv4fOtraDaBr1f"
 }
 
-    
+
 time_zone = tz()
 
 
 def b_connect():
 	print('**************BEIN SPORTS CONNECT EPG******************')
 	sys.stdout.flush()
-	for code in ch_code: 
+	for code in ch_code:
 		query = {
 			"languageId": "ara",
 			"filter": '{"$and":[{"id_channel":{"$in":[' + code.split('-')[0] + ']}},{"endutc":{"$ge":' + today + '}},{"startutc":{"$le":' + milli + '}}]}'
@@ -47,7 +47,7 @@ def b_connect():
 			break
 		else:
 			for data in url['result']['epg']['chan_' + code.split('-')[0]]:
-				start = datetime.fromtimestamp(int(data['startutc'])).strftime('%Y%m%d%H%M%S') 
+				start = datetime.fromtimestamp(int(data['startutc'])).strftime('%Y%m%d%H%M%S')
 				end = datetime.fromtimestamp(int(data['endutc'])).strftime('%Y%m%d%H%M%S')
 				title = data['title'].replace('   ', ' ').split('- ')[0]
 				if PY3:
@@ -158,7 +158,7 @@ def b_connect():
 				else:
 					ch += 4 * ' ' + '<desc lang="en">' + data['synopsis'].strip().replace('&', 'and') + '</desc>\n  </programme>\r'
 				endtime = datetime.strptime(start, '%Y%m%d%H%M%S').strftime('%Y-%m-%d %H:%M')
-				
+
 				with io.open(EPG_ROOT + '/beinConnect.xml', 'a', encoding="utf-8") as f:
 					f.write(ch)
 			print(code.split('-')[1] + ' epg ends at ' + endtime)
@@ -180,10 +180,10 @@ def main():
 			bouquet['date'] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
 			with open(PROVIDERS_ROOT, 'w') as f:
 				json.dump(data, f)
-	
+
 	print("**************FINISHED******************")
 	sys.stdout.flush()
-	
+
 
 if __name__ == "__main__":
 	main()

@@ -35,7 +35,7 @@ week = datetime.date.today() + timedelta(days=7)
 milli = int(datetime.datetime.strptime('' + str(week) + ' 00:00:00', "%Y-%m-%d %H:%M:%S").strftime("%s")) * 1000
 for c in channels:
     urls.append('https://www.mbc.net/.rest/api/channel/grids?channel=' + c + '&from=' + str(today) + '&to=' + str(milli) + '')
-    
+
 
 ch = ['MBC1', 'MBCDrama', 'MBCEgypt', 'MBCEgypt2', 'MBC4', 'MBC2', 'MBCAction', 'MBCBollywood',
     'MBC+Drama', 'MBCMovieMax', 'MBCIraq', 'MBCCinq', 'Wanasah', 'QATAR.TV', 'noordubai']
@@ -87,7 +87,7 @@ def mbc():
                     date_end = datetime.fromtimestamp(int(en) // 1000).strftime('%Y/%m/%d')
                     day = datetime.strptime(date_end, '%Y/%m/%d')
                     date_now = datetime.strptime(now, '%Y/%m/%d')
-                    nb_days = day - date_now 
+                    nb_days = day - date_now
                 else:
                     prog_start = datetime.fromtimestamp(int(elem) // 1000).strftime('%Y%m%d%H%M%S')
                     prog_end = datetime.fromtimestamp(int(next_elem) // 1000).strftime('%Y%m%d%H%M%S')
@@ -95,10 +95,10 @@ def mbc():
             for prog, title, descri in zip(programme, titles, des):
                 with io.open(EPG_ROOT + '/mbc.xml', "a", encoding='UTF-8')as f:
                     f.write(prog + title + descri)
-                    
+
         print(nm + ' epg donwloaded For : ' + str(nb_days.days) + ' Days')
         sys.stdout.flush()
-               
+
 
 def noor():
     times = []
@@ -111,7 +111,7 @@ def noor():
         des = re.findall(r"class=\"post-title mt-0 mb-5\"><a href='#'>(.*?)</a></h5>\s+<h6><i", url.text)
         title = re.findall(r"<h4 class=\"post-title mt-0 mb-5\"><a href='#'>(.*?)</a>", url.text)
 
-    today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0) 
+    today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
     last_hr = 0
     for d in time:
         h, m = map(int, d.split(":"))
@@ -119,7 +119,7 @@ def noor():
             today += + timedelta(days=1)
         last_hr = h
         times.append(today + timedelta(hours=h, minutes=m))
-        
+
     print('Noor Dubai epg ends at {}'.format(times[-1]))
     for elem, next_elem, tit, descri in zip(times, times[1:] + [times[0]], title, des):
         ch = ''
@@ -136,7 +136,7 @@ def noor():
         else:
             ch += 4 * ' ' + '<desc lang="ar">' + descri.strip() + '</desc>\n  </programme>\r'
         data.append(ch)
-        
+
     data.pop(-1)
 
     for epg in data:
@@ -145,17 +145,17 @@ def noor():
                 f.write((epg).decode('utf-8'))
             else:
                 f.write(epg)
-                
-        
+
+
 def main():
     print('**************MBC EPG******************')
     sys.stdout.flush()
-    
+
     xml_header(EPG_ROOT + '/mbc.xml', ch)
-    
+
     mbc()
     noor()
-    
+
     from datetime import datetime
     with open(PROVIDERS_ROOT, 'r') as f:
         data = json.load(f)
@@ -164,17 +164,12 @@ def main():
             channel['date'] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
     with open(PROVIDERS_ROOT, 'w') as f:
         json.dump(data, f)
-        
+
     close_xml(EPG_ROOT + '/mbc.xml')
-    
+
     print('**************FINISHED******************')
     sys.stdout.flush()
-   
+
 
 if __name__ == "__main__":
     main()
-    
-       
-
-
-

@@ -43,11 +43,11 @@ config.plugins.EpgPlugin = ConfigSubsection()
 config.plugins.EpgPlugin.update = ConfigYesNo(default=True)
 config.plugins.EpgPlugin.skin = ConfigSelection(default='smallscreen', choices=[('smallscreen', _('Small Screen')), ('fullscreen', _('Full Screen'))])
 
-REDC = '\033[31m'                                                              
-ENDC = '\033[m'                                                                 
-                                                                                
+REDC = '\033[31m'
+ENDC = '\033[m'
 
-def cprint(text):                                                               
+
+def cprint(text):
         print(REDC + text + ENDC)
 
 
@@ -58,7 +58,7 @@ def logdata(label_name='', data=None):
         fp.write(str(label_name) + ': ' + data + "\n")
         fp.close()
     except:
-        trace_error()    
+        trace_error()
         pass
 
 
@@ -126,10 +126,10 @@ class EPGGrabber(Screen):
                 self.skin = SKIN_EPGGrabber_Full_FHD
         list = []
         self.installList = [] ## New from mf to make choose list
-        
+
         for i in range(len(DataJs()['bouquets'])):
             list.append((DataJs()["bouquets"][i]["title"], i, DataJs()['bouquets'][i]["bouquet"]))
-            
+
         self.provList = list ## New from mf to make choose list
         Screen.__init__(self, session)
         self.skinName = ["EPGGrabber"]
@@ -153,7 +153,7 @@ class EPGGrabber(Screen):
             "cancel": self.close,
         }, -1)
         self.onShown.append(self.onWindowShow)
-      
+
     def onWindowShow(self):
         self.onShown.remove(self.onWindowShow)
         self.new_version = Ver
@@ -162,7 +162,7 @@ class EPGGrabber(Screen):
         self.setTitle("EPG GRABBER BY ZIKO V %s" % Ver)
         self["key_red"].hide() ## New from mf to make choose list
         self.iniMenu() ## New from mf to make choose list
-        
+
     def iniMenu(self): ## New from mf to make choose list
         cacolor = 16776960
         cbcolor = 16753920
@@ -174,7 +174,7 @@ class EPGGrabber(Screen):
         chcolor = 13047173
         cicolor = 13789470
         scolor = cbcolor
-        res = []        
+        res = []
         gList = []
         if isHD():
             self["config"].l.setItemHeight(37)
@@ -263,7 +263,7 @@ class EPGGrabber(Screen):
             os.makedirs('/etc/epgimport/ziko_epg')
         if not os.path.isdir('/etc/epgimport/ziko_config'):
             os.makedirs('/etc/epgimport/ziko_config')
-    
+
     def checkupdates(self):
         try:
             from twisted.web.client import getPage, error
@@ -307,11 +307,11 @@ class EPGGrabber(Screen):
     def up(self):
         self["config"].up()
         self.update()
-       
+
     def down(self):
         self["config"].down()
         self.update()
-    
+
     def keyGreen(self):
         if epgimport:
             self["key_green"].show()
@@ -319,7 +319,7 @@ class EPGGrabber(Screen):
         else:
             self["key_green"].hide()
             self.session.open(MessageBox, _("Epgimport is not installed"), MessageBox.TYPE_INFO, timeout=10)
-    
+
     def readJs(self):
         import json
         if fileExists(API_PATH + '/epg_status.json'):
@@ -330,11 +330,11 @@ class EPGGrabber(Screen):
                     os.remove(API_PATH + '/epg_status.json')
         else:
             return None
-        
+
     def update(self):
         index = self['config'].getSelectionIndex()
         returnValue = self.provList[index][1]
-        
+
         js = self.readJs()
         for i in range(len(self.provList)):
             if returnValue == i:
@@ -348,17 +348,17 @@ class EPGGrabber(Screen):
                     if provName == "osnplay":
                         self.check_date(js['osn'], provName)
                         self["status"].setText('Last commit : {}'.format(js['osn']))
-                        
+
                     elif provName == 'jawwy' or provName == 'jawwyen':
                         self.check_date(js['jawwy'], provName)
                         self["status"].setText('Last commit : {}'.format(js['jawwy']))
-                        
+
                     elif provName == 'jawwyenOS' or provName == 'jawwyOS':
                         self.check_date(js['main'], provName)
                         self["status"].setText('Last commit : {}'.format(js['main']))
                     else:
                         self["status"].setText("")
-    
+
     def check_date(self, data, provName):
         from datetime import datetime, timedelta
         try:
@@ -367,31 +367,31 @@ class EPGGrabber(Screen):
                 self.expired.append(provName)
         except:
             pass
-            
+
     def keyRed(self): ## New from mf to make choose list
         if len(self.installList) > 0:
             ## Code to find connection internet or not
             self.install()
-      
+
     def go(self): ## New from mf to make choose list
         index = self['config'].getSelectionIndex()
         provider = self.provList[index][0]
         if self.provList[index][2] not in self.expired:
             if provider in self.installList:
                 self.installList.remove(provider)
-            else:   
+            else:
                 self.installList.append(provider)
         self.iniMenu()
         if len(self.installList) > 0:
             self["key_red"].show()
         else:
-            self["key_red"].hide() 
+            self["key_red"].hide()
         #self.session.openWithCallback(self.install, MessageBox, _('Do you want to Download now?!'), MessageBox.TYPE_YESNO)
 
     def install(self): ## New from mf to make choose list
         index = self['config'].getSelectionIndex()
         provider = self.provList[index][0]
-        cmdList = []   
+        cmdList = []
         for i in range(len(self.provList)):
             provider = self.provList[i][0]
             if not provider in self.installList:
