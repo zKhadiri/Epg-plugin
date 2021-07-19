@@ -58,7 +58,8 @@ def freesat(code):
         print(code.split('-')[1]+' epg ends at : '+(datetime.strptime(end,'%Y%m%d%H%M%S').strftime('%Y-%m-%d %H:%M')))
         sys.stdout.flush()
         lock.release()
-    except:pass
+    except:
+        pass
 
 
 def main():

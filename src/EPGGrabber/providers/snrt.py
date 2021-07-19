@@ -19,9 +19,9 @@ def arryadia():
             next_day = (datetime.today()+timedelta(days=i)).strftime('%Y/%m/%d')
             url = s.get('http://arryadia.snrt.ma/ar/grilles-des-programmes-ar/eventsbyday/'+next_day)
             
-            for hour,title,description,direct in zip(re.findall(r'<div class=\"eventlineitem-time\">(.*?)</div>',url.text),\
-                re.findall(r'<span class=\"emissiontitle\">(.*?)</span>',url.text),\
-                re.findall(r'<span class=\"emissiontitle\">.*?</span><br\s+/>\s+(.*?)</div>',url.text),\
+            for hour,title,description,direct in zip(re.findall(r'<div class=\"eventlineitem-time\">(.*?)</div>',url.text),
+                re.findall(r'<span class=\"emissiontitle\">(.*?)</span>',url.text),
+                re.findall(r'<span class=\"emissiontitle\">.*?</span><br\s+/>\s+(.*?)</div>',url.text),
                 re.findall(r'<span class=\"direct\">(.*?)</span>',url.text)):
                 times.append(hour)
                 titles.append(title)

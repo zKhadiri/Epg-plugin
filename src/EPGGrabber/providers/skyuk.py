@@ -45,7 +45,8 @@ def sky():
                         f.write(epg)
             print(link.split('|')[1]+' epg date : '+(datetime.strptime(end,'%Y%m%d%H%M%S').strftime('%Y-%m-%d %H:%M')))
             sys.stdout.flush()
-        except:continue
+        except:
+            continue
 
 def main():
     print('**************UK SPORTS CHANNELS EPG******************')
