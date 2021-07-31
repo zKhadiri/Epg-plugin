@@ -96,7 +96,7 @@ def mbc():
                 with io.open(EPG_ROOT + '/mbc.xml', "a", encoding='UTF-8')as f:
                     f.write(prog + title + descri)
 
-        print(nm + ' epg donwloaded For : ' + str(nb_days.days) + ' Days')
+            print(nm + ' epg donwloaded For : ' + str(nb_days.days) + ' Days')
         sys.stdout.flush()
 
 
