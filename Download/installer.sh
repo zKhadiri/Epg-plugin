@@ -2,8 +2,8 @@
 ##setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=19.1
-description=What_is_NEW:\n'[Update bouquets ROTANA and Disale Bein max (Bein Max not work any more)]'
+version=19.2
+description=What_is_NEW:\n'[Fix rotana error list index out of range]'
 ##############################################################
 
 TEMPATH=/tmp
