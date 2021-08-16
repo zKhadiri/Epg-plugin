@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <channels>
-	<channel id="Arryadia HD">1:0:1:D:2:1:D80000:0:0:0:</channel>
-	<channel id="Arryadia HD">1:0:1:1E:320:2BE:1040000:0:0:0:</channel>
-	<channel id="Arryadia HD">1:0:1:1F:320:2BE:1040000:0:0:0:</channel>
-	<channel id="Arryadia HD">1:0:1:A:2E18:B0:820000:0:0:0:</channel>
+	<!-- NilSat -->
+	<channel id="Arryadia HD">1:0:1:82:9D6C:77E:DCA0000:0:0:0</channel>
+
+	<!-- HotBird -->
+	<channel id="Arryadia HD">1:0:1:A:2E18:B0:820000:0:0:0</channel>
+
+	<!-- EutelSat -->
+	<channel id="Arryadia HD">1:0:1:D:2:1:D70000:0:0:0</channel>
+	
+	<!-- Badr -->
+	<channel id="Arryadia HD">1:0:1:1F:320:2BE:1040000:0:0:0</channel>
 </channels>
