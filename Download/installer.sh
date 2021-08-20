@@ -3,7 +3,7 @@
 
 ######### Only These two lines to edit with new version ######
 version=19.4
-description=What_is_NEW:\n'[Fix Mbc epg]'
+description=What_is_NEW:\n'New sources : Canal+Afrique/elcinema english'
 ##############################################################
 
 TEMPATH=/tmp
