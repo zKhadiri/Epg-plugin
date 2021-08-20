@@ -50,18 +50,7 @@ def dstv():
             dat = re.search(r'\d{4}-\d{2}-\d{2}', url)
             print('Date' + ' : ' + dat.group())
             sys.stdout.flush()
-    update(channels)
-
-
-def update(chan):
-    with open(BOUQUETS_ROOT, 'r') as f:
-        data = json.load(f)
-    for channel in data['bouquets']:
-        if channel["name"] == "DSTV":
-            channel['channels'] = sorted([ch for ch in list(dict.fromkeys(chan))])
-    with open(BOUQUETS_ROOT, 'w') as f:
-        json.dump(data, f)
-
+    update_channels("DSTV", channels)
 
 def main():
     print('**************DSTV EPG******************')

@@ -51,15 +51,8 @@ def main():
     else:
         for nb in nb_channel:
             ElcinB(nb)
-        from datetime import datetime
-        import json
-        with open(PROVIDERS_ROOT, 'r') as f:
-            data = json.load(f)
-        for channel in data['bouquets']:
-            if channel["bouquet"] == "beincin":
-                channel['date'] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
-        with open(PROVIDERS_ROOT, 'w') as f:
-            json.dump(data, f)
+        provider = __file__.rpartition('/')[-1].replace('.py', '')
+        update_status(provider)
 
 
 if __name__ == '__main__':

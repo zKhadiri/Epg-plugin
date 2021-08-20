@@ -68,13 +68,8 @@ def main():
 
     close_xml(EPG_ROOT + '/beinentC.xml')
 
-    with open(PROVIDERS_ROOT, 'r') as f:
-        data = json.load(f)
-    for bouquet in data['bouquets']:
-        if bouquet["bouquet"] == "beinentC":
-            bouquet['date'] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
-    with open(PROVIDERS_ROOT, 'w') as f:
-        json.dump(data, f)
+    provider = __file__.rpartition('/')[-1].replace('.py', '')
+    update_status(provider)
 
     print("**************FINISHED******************")
     sys.stdout.flush()

@@ -1,4 +1,3 @@
-#!/usr/bin/env python2.7
 # -*- coding: utf-8 -*-
 
 import requests
@@ -156,14 +155,8 @@ def main():
     mbc()
     noor()
 
-    from datetime import datetime
-    with open(PROVIDERS_ROOT, 'r') as f:
-        data = json.load(f)
-    for channel in data['bouquets']:
-        if channel["bouquet"] == "mbc":
-            channel['date'] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
-    with open(PROVIDERS_ROOT, 'w') as f:
-        json.dump(data, f)
+    provider = __file__.rpartition('/')[-1].replace('.py', '')
+    update_status(provider)
 
     close_xml(EPG_ROOT + '/mbc.xml')
 

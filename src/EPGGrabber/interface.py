@@ -37,7 +37,6 @@ try:
     epgimport = True
 except:
     epgimport = False
-    pass
 
 config.plugins.EpgPlugin = ConfigSubsection()
 config.plugins.EpgPlugin.update = ConfigYesNo(default=True)
@@ -346,12 +345,8 @@ class EPGGrabber(Screen):
                         self["glb"].setText("Last update : {}".format(channel["date"]))
                 if js != None:
                     if provName == "osnplay":
-                        self.check_date(js['osn'], provName)
-                        self["status"].setText('Last commit : {}'.format(js['osn']))
-
-                    elif provName == 'jawwy' or provName == 'jawwyen':
-                        self.check_date(js['jawwy'], provName)
-                        self["status"].setText('Last commit : {}'.format(js['jawwy']))
+                        self.check_date(js['main'], provName)
+                        self["status"].setText('Last commit : {}'.format(js['main']))
 
                     elif provName == 'jawwyenOS' or provName == 'jawwyOS':
                         self.check_date(js['main'], provName)

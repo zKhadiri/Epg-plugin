@@ -74,14 +74,10 @@ class StartTimer:
 
     def getStatus(self):
         allData = []
-        branches = ['osn-ziko-ZR1', 'jawwy-ziko-ZR1', 'main-MOHAMED19OS']
+        branches = ['main-MOHAMED19OS']
         for branch in branches:
             try:
-                if branch.split('-')[1] == "MOHAMED19OS":
-                    url = requests.get('https://api.github.com/repos/MOHAMED19OS/XMLTV/branches/' + branch.split('-')[0], timeout=5).json()
-                else:
-                    url = requests.get('https://api.github.com/repos/ziko-ZR1/xml/branches/' + branch.split('-')[0], timeout=5).json()
-
+                url = requests.get('https://api.github.com/repos/MOHAMED19OS/XMLTV/branches/' + branch.split('-')[0], timeout=5).json()
                 try:
                     result = url['commit']['commit']['message'] + ' ' + url['commit']['commit']['committer']['date'].replace('T', ' ').replace('Z', '')
                 except KeyError:

@@ -29,7 +29,7 @@
         <url>/etc/epgimport/ziko_epg/jawwyen.xml</url>
     </source>
     <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/elcinema.channels.xml">
-        <description>elcinema</description>
+        <description>elcinema/elcinema english</description>
         <url>/etc/epgimport/ziko_epg/elcinema.xml</url>
     </source>
     <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/custom.channels.xml">
@@ -59,6 +59,10 @@
     <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/discovery.channels.xml">
         <description>discovery 0.8w and 4.8E</description>
         <url>/etc/epgimport/ziko_epg/discovery.xml</url>
+    </source>
+    <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/caf.channels.xml">
+        <description>Canal+AF</description>
+        <url>/etc/epgimport/ziko_epg/caf.xml</url>
     </source>
     <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/custom.channels.xml">
         <description>espn</description>

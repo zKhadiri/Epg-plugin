@@ -49,28 +49,14 @@ def skyit():
             channels.append(channel_name)
             sys.stdout.flush()
     channels.sort()
-    update(channels)
-
-
-def update(chan):
-    with open(BOUQUETS_ROOT, 'r') as f:
-        data = json.load(f)
-    for channel in data['bouquets']:
-        if channel["name"] == "SKY IT":
-            channel['channels'] = sorted([ch for ch in list(dict.fromkeys(chan))])
-    with open(BOUQUETS_ROOT, 'w') as f:
-        json.dump(data, f)
-
+    update_channels("SKY IT",channels)
 
 def main():
     print('**************SKY IT EPG******************')
     sys.stdout.flush()
-
-    with open(BOUQUETS_ROOT, 'r') as f:
-        jsData = json.load(f)
-    for channel in jsData['bouquets']:
-        if channel["name"] == "SKY IT":
-            xml_header(EPG_ROOT + '/skyit.xml', channel['channels'])
+            
+    channels = get_channels("SKY IT")
+    xml_header(EPG_ROOT + '/skyit.xml', channels)
 
     skyit()
 
