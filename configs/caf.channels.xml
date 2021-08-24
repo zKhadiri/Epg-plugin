@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <channels>
-    <!-- CANAL+AF -->
+	<channel id="CANAL+ SPORT 5 HD">1:0:1:A:F337:B53C:0:0:0:0</channel>
+	<channel id="CANAL+ OUEST HD">1:0:1:B:F337:B53C:0:0:0:0</channel>
+	<channel id="CANAL+ CENTRE HD">1:0:1:C:F337:B53C:0:0:0:0</channel>
+	<channel id="CANAL+ ACTION C HD">1:0:1:D:F337:B53C:0:0:0:0</channel>
+	<channel id="CANAL+ ACTION O HD">1:0:1:E:F337:B53C:0:0:0:0</channel>
+	<channel id="CANAL+ CINEMA CENTRE HD">1:0:1:F:F337:B53C:0:0:0:0</channel>
+	<channel id="CANAL+ CINEMA OUEST HD">1:0:1:10:F337:B53C:0:0:0:0</channel>
+	<channel id="CANAL+ FAMILY CENTRE HD">1:0:1:11:F337:B53C:0:0:0:0</channel>
+	<channel id="CANAL+ FAMILY OUEST HD">1:0:1:12:F337:B53C:0:0:0:0</channel>
+	<channel id="CANAL+ ELLES CENTRE HD">1:0:1:13:F337:B53C:0:0:0:0</channel>
+	<channel id="CANAL+ ELLES OUEST HD">1:0:1:14:F337:B53C:0:0:0:0</channel>
+	<channel id="CANAL+ COMEDIE C HD">1:0:1:15:F337:B53C:0:0:0:0</channel>
+	<channel id="CANAL+ COMEDIE O HD">1:0:1:16:F337:B53C:0:0:0:0</channel>
+	<channel id="CANAL+ SPORT 1 T HD">1:0:1:2:F337:B53C:0:0:0:0</channel>
+	<channel id="CANAL+ SPORT 2 HD">1:0:1:4:F337:B53C:0:0:0:0</channel>
+	<channel id="CANAL+ SPORT 3 HD">1:0:1:6:F337:B53C:0:0:0:0</channel>
 </channels>

@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <channels>
-    <channel id="BBC ONE HD">1:0:19:4484:1000:1:CFDACE7:0:0:0:</channel>
-    <channel id="BBC ONE SD">1:0:1:1044:1000:1:CFDACE7:0:0:0:</channel>
-    <channel id="BBC ONE SD">1:0:1:107C:1000:1:CFDACE7:0:0:0:</channel>
-    <channel id="BBC ONE SD">1:0:1:107D:1000:1:CFDACE7:0:0:0:</channel>
-    <channel id="BBC ONE SD">1:0:1:107E:1000:1:CFDACE7:0:0:0:</channel>
-    <channel id="BBC PALIAMENT">1:0:1:1280:1000:1:CFDACE7:0:0:0:</channel>
-    <channel id="BBC TWO">1:0:1:10BF:1000:1:CFDACE7:0:0:0:</channel>
-    <channel id="BBC FOUR SD">1:0:1:11C0:1000:1:CFDACE7:0:0:0:</channel>
-    <channel id="BBC ALBA">1:0:1:12FC:1000:1:CFDACE7:0:0:0:</channel>
-    <channel id="Channel 4 HD">1:0:19:4500:1000:1:CFDACE7:0:0:0:</channel>
-    <channel id="BBC Scotland HD">1:0:19:433C:1000:1:CFDACE7:0:0:0:</channel>
-    <channel id="BBC TWO HD">1:0:19:4440:1000:1:CFDACE7:0:0:0:</channel>
-    <channel id="Channel 5 HD">1:0:19:4540:1000:1:CFDACE7:0:0:0:</channel>
-    <channel id="BBC FOUR HD">1:0:19:4680:1000:1:CFDACE7:0:0:0:</channel>
-    <channel id="CBBC HD">1:0:19:46C0:1000:1:CFDACE7:0:0:0:</channel>
-    <channel id="BBC NEWS HD">1:0:1:1100:1000:1:CFDACE7:0:0:0:</channel>
-    <channel id="CBBC HD">1:0:1:1200:1000:1:CFDACE7:0:0:0:</channel>
-    <channel id="CBEEBIES">1:0:1:1240:1000:1:CFDACE7:0:0:0:</channel>
-    <channel id="ITV HD">1:0:19:44C8:1000:1:CFDACE7:0:0:0:</channel>
+      	<!-- HD -->
+    <channel id="BBC ONE HD">1:0:19:4484:1000:1:CFDACE7:0:0:0</channel>
+    <channel id="BBC TWO HD">1:0:19:4440:1000:1:CFDACE7:0:0:0</channel>
+    <channel id="Channel 4 HD">1:0:19:4500:1000:1:CFDACE7:0:0:0</channel>
+    <channel id="BBC FOUR HD">1:0:19:4680:1000:1:CFDACE7:0:0:0</channel>
+    <channel id="CBBC HD">1:0:19:46C0:1000:1:CFDACE7:0:0:0</channel>
+    <channel id="Channel 5 HD">1:0:19:4540:1000:1:CFDACE7:0:0:0</channel>
+    <channel id="BBC NEWS HD">1:0:1:1100:1000:1:CFDACE7:0:0:0</channel>
+    <channel id="CBBC HD">1:0:1:1200:1000:1:CFDACE7:0:0:0</channel>
+    <channel id="ITV HD">1:0:19:44C8:1000:1:CFDACE7:0:0:0</channel>
+    <channel id="BBC Scotland HD">1:0:19:433C:1000:1:CFDACE7:0:0:0</channel>
+    	<!-- SD -->
+    <channel id="BBC ONE SD">1:0:1:1044:1000:1:CFDACE7:0:0:0</channel>
+    <channel id="BBC PALIAMENT">1:0:1:1280:1000:1:CFDACE7:0:0:0</channel>
+    <channel id="BBC TWO">1:0:1:10BF:1000:1:CFDACE7:0:0:0</channel>
+    <channel id="BBC FOUR SD">1:0:1:11C0:1000:1:CFDACE7:0:0:0</channel>
+    <channel id="BBC ALBA">1:0:1:12FC:1000:1:CFDACE7:0:0:0</channel>
+    <channel id="CBEEBIES">1:0:1:1240:1000:1:CFDACE7:0:0:0</channel>
+
 </channels>
