@@ -64,6 +64,9 @@
 
 	<!-- NilSat -->
 	<!-- osn -->
+	<channel id="OSN_Family">1:0:19:1622:236:800:DCA2DCF:0:0:0</channel>
+	<channel id="Pop_Up">1:0:1:CC:2:800:DCA2E69:0:0:0</channel>
+	<channel id="MTV_00s">1:0:1:DE:2:800:DCA2E69:0:0:0</channel>
 	<channel id="OSN_Woman">1:0:1:D0:2:800:DCA0000:0:0:0</channel>
 	<channel id="OSN_Movies_First">1:0:19:12D:3:800:DCA0000:0:0:0</channel>
 	<channel id="OSN_Mov_First_+2h">1:0:19:1625:236:800:DCA0000:0:0:0</channel>
@@ -103,7 +106,6 @@
 	<channel id="OSN_News">1:0:19:12F:3:800:DCA0000:0:0:0</channel>
 	<channel id="Sky_News_HD">1:0:19:7DC:14:800:DCA0000:0:0:0</channel>
 	<channel id="CNBC_Europe">1:0:1:CF:2:800:DCA0000:0:0:0</channel>
-	<channel id="VH1">1:0:1:DE:2:800:DCA0000:0:0:0</channel>
 	<channel id="Bloomberg">1:0:1:C9:2:800:DCA0000:0:0:0</channel>
 	<channel id="Discovery_Channel_HD">1:0:19:1621:236:800:DCA0000:0:0:0</channel>
 	<channel id="Discovery_Science_HD">1:0:19:3F1:A:800:DCA0000:0:0:0</channel>
@@ -113,17 +115,16 @@
 	<channel id="H2_HD">1:0:19:1623:236:800:DCA0000:0:0:0</channel>
 	<channel id="Nat_Geo_HD">1:0:19:3EE:A:800:DCA0000:0:0:0</channel>
 	<channel id="Nat_Geo_Wild_HD">1:0:19:3EC:A:800:DCA0000:0:0:0</channel>
-	<channel id="Nat_Geo_People_HD">1:0:19:3ED:A:800:DCA0000:0:0:0</channel>
 	<channel id="TFC_HD">1:0:1:D9:2:800:DCA0000:0:0:0</channel>
 	<channel id="Cinema_One_Global">1:0:1:D8:2:800:DCA0000:0:0:0</channel>
 	<channel id="Teleradyo">1:0:1:D7:2:800:DCA0000:0:0:0</channel>
 	<channel id="Myx">1:0:1:D1:2:800:DCA0000:0:0:0</channel>
-	<channel id="Aksyon_TV">1:0:1:DC:2:800:DCA0000:0:0:0</channel>
+	<channel id="Kapatid_TV5">1:0:1:DC:2:800:DCA2E69:0:0:0</channel>
 	<channel id="CineMo">1:0:1:DF:2:800:DCA0000:0:0:0</channel>
 	<channel id="GMA_Pinoy_TV">1:0:1:CA:2:800:DCA0000:0:0:0</channel>
 	<channel id="GMA_Life_TV">1:0:1:D3:2:800:DCA0000:0:0:0</channel>
 	<channel id="OSN_Series">1:0:19:3EB:A:800:DCA0000:0:0:0</channel>
-	<channel id="ANC">1:0:1:E0:2:800:DCA0000:0:0:0</channel>
+	<channel id="ANC">1:0:1:E0:2:800:DCA2E69:0:0:0</channel>
 	<channel id="OSN_Mix">1:0:19:1199:2D:800:DCA0000:0:0:0</channel>
 	<channel id="NHK_World-Japan">1:0:1:517:D:800:DCA0000:0:0:0</channel>
 	<channel id="Al_Hurra_HD">1:0:1:1B9:10:6E:DCA0000:0:0:0</channel>
@@ -136,7 +137,7 @@
 	<channel id="AD_Sports_4_HD">1:0:1:12E:13EF:13E:822DE3:0:0:0</channel>
 
 	<!-- Badr -->
-	<channel id="Al_Hurra_HD">1:0:1:24F:1F6:2BE:1040000:0:0:0</channel>	
+	<channel id="Al_Hurra_HD">1:0:1:24F:1F6:2BE:1040000:0:0:0</channel>
 
 	<!-- rotana -->
 	<!-- NilSat -->
