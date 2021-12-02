@@ -42,14 +42,12 @@ def rotana(this_month, channel):
             	try:
                 	startime = datetime.strptime(start, '%d/%m/%Y %H:%M:%S:%f').strftime('%Y%m%d%H%M%S')
                 	endtime = datetime.strptime(end, '%d/%m/%Y %H:%M:%S:%f').strftime('%Y%m%d%H%M%S')
-                	print("endtime", endtime)
                 except:
                 	pass
             else:
             	try:
                 	startime = datetime.strptime(start, '%d/%m/%Y %H:%M:%S:%f').strftime('%Y%m%d%H%M%S')
                 	endtime = datetime.strptime(end, '%d/%m/%Y %H:%M:%S:%f').strftime('%Y%m%d%H%M%S')
-                	print("endtime2", endtime)
                 except:
                 	pass
 
