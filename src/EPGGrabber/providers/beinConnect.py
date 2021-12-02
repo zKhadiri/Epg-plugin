@@ -4,13 +4,16 @@
 from __future__ import print_function
 from __init__ import *
 
-import requests
 import re
 import sys
 import io
 import json
 from datetime import timedelta
 from time import strftime
+
+import requests
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 import datetime
 week = datetime.date.today() + timedelta(days=7)
@@ -41,7 +44,7 @@ def b_connect():
 			"languageId": "ara",
 			"filter": '{"$and":[{"id_channel":{"$in":[' + code.split('-')[0] + ']}},{"endutc":{"$ge":' + today + '}},{"startutc":{"$le":' + milli + '}}]}'
 		}
-		url = requests.get('https://proxies-beinmena.portail.alphanetworks.be/cms/epg/filtered', headers=head, params=query).json()
+		url = requests.get('https://proxies-beinmena.portail.alphanetworks.be/cms/epg/filtered', headers=head, params=query, verify=False).json()
 		if url['status'] == False:
 			print('Invalid API Key')
 			break
