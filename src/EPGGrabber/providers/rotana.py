@@ -39,17 +39,17 @@ def rotana(this_month, channel):
         if start >= today:
             ch = ''
             if start_dt[-1] == start and start_dt[0] == end:
-            	try:
-                	startime = datetime.strptime(start, '%d/%m/%Y %H:%M:%S:%f').strftime('%Y%m%d%H%M%S')
-                	endtime = datetime.strptime(end, '%d/%m/%Y %H:%M:%S:%f').strftime('%Y%m%d%H%M%S')
+                try:
+                        startime = datetime.strptime(start, '%d/%m/%Y %H:%M:%S:%f').strftime('%Y%m%d%H%M%S')
+                        endtime = datetime.strptime(end, '%d/%m/%Y %H:%M:%S:%f').strftime('%Y%m%d%H%M%S')
                 except:
-                	pass
+                        pass
             else:
-            	try:
-                	startime = datetime.strptime(start, '%d/%m/%Y %H:%M:%S:%f').strftime('%Y%m%d%H%M%S')
-                	endtime = datetime.strptime(end, '%d/%m/%Y %H:%M:%S:%f').strftime('%Y%m%d%H%M%S')
+                try:
+                        startime = datetime.strptime(start, '%d/%m/%Y %H:%M:%S:%f').strftime('%Y%m%d%H%M%S')
+                        endtime = datetime.strptime(end, '%d/%m/%Y %H:%M:%S:%f').strftime('%Y%m%d%H%M%S')
                 except:
-                	pass
+                        pass
 
             ch += 2 * ' ' + '<programme start="' + startime + ' +0000" stop="' + endtime + ' +0000" channel="' + channel + '">\n'
 
