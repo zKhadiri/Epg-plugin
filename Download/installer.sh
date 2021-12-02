@@ -2,8 +2,8 @@
 ##setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=19.7
-description=What_is_NEW:\n'Try to fix (certificate verify failed) on some images'
+version=19.8
+description=What_is_NEW:\n'Try to fix rotana'
 ##############################################################
 
 TEMPATH=/tmp
