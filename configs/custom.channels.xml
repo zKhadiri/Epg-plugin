@@ -141,28 +141,28 @@
 
 	<!-- rotana -->
 	<!-- NilSat -->
-	<channel id="LBC-5">1:0:1:15EA:38:800:DCA0000:0:0:0</channel> <!-- LBC -->
-	<channel id="DRAMA-5">1:0:1:15E6:38:800:DCA0000:0:0:0</channel> <!-- Rotana Drama -->
-	<channel id="CLASSIC-5">1:0:1:15E5:38:800:DCA0000:0:0:0</channel> <!-- Rotana Classic -->
-	<channel id="CINEMA-4">1:0:1:15E9:38:800:DCA0000:0:0:0</channel> <!-- Rotana cinema KSA -->
-	<channel id="CINEMA-EGY-4">1:0:1:15E7:38:800:DCA0000:0:0:0</channel> <!-- Rotana cinema masr -->
+	<channel id="LBC-11">1:0:1:83C:15:800:DCA2FC2:0:0:0</channel> <!-- LBC -->
+	<channel id="DRAMA-10">1:0:1:839:15:800:DCA2FC2:0:0:0</channel> <!-- Rotana Drama -->
+	<channel id="CLASSIC-9">1:0:1:838:15:800:DCA2FC2:0:0:0</channel> <!-- Rotana Classic -->
+	<channel id="CINEMA-8">1:0:1:83B:15:800:DCA2FC2:0:0:0</channel> <!-- Rotana cinema KSA -->
+	<channel id="CINEMA-EGY-8">1:0:19:83E:15:800:DCA2FC2:0:0:0</channel> <!-- Rotana cinema masr -->
 
 	<!-- HotBird -->
-	<channel id="CINEMA-EGY-4">1:0:16:4212:2F44:13E:822AB2:0:0:0</channel> <!-- Rotana cinema masr -->
+	<channel id="CINEMA-EGY-8">1:0:16:4212:2F44:13E:822AB2:0:0:0</channel> <!-- Rotana cinema masr -->
 
- <!-- Badr -->
-	<channel id="CINEMA-4">1:0:19:12D:51:2BE:1040000:0:0:0</channel> <!-- Rotana cinema KSA -->
-	<channel id="CINEMA-EGY-4">1:0:19:19E:15E9:2BE:1040000:0:0:0</channel> <!-- Rotana cinema masr -->
-	<channel id="DRAMA-5">1:0:19:131:51:2BE:1040000:0:0:0</channel> <!-- Rotana Drama -->
-	<channel id="CLASSIC-5">1:0:19:12F:51:2BE:1040000:0:0:0</channel> <!-- Rotana Classic -->
-	<channel id="COMEDY-6">1:0:19:12E:51:2BE:1040000:0:0:0</channel> <!-- Rotana Comedy -->
+	<!-- Badr -->
+	<channel id="CINEMA-8">1:0:19:12D:51:2BE:1040000:0:0:0</channel> <!-- Rotana cinema KSA -->
+	<channel id="CINEMA-EGY-8">1:0:19:19E:15E9:2BE:1040000:0:0:0</channel> <!-- Rotana cinema masr -->
+	<channel id="DRAMA-10">1:0:19:131:51:2BE:1040000:0:0:0</channel> <!-- Rotana Drama -->
+	<channel id="CLASSIC-9">1:0:19:12F:51:2BE:1040000:0:0:0</channel> <!-- Rotana Classic -->
+	<channel id="COMEDY-10">1:0:19:12E:51:2BE:1040000:0:0:0</channel> <!-- Rotana Comedy -->
 
 	<!-- Al Yah 1 -->
-	<channel id="ROTANA-HD-4">1:0:1:14C9:E:20D:20D0000:0:0:0</channel> <!-- Rotana HD -->
-	<channel id="AFLAM-PLUS-5">1:0:1:14CA:E:20D:20D0000:0:0:0</channel> <!-- Rotana aflam -->
-	<channel id="KIDS-5">1:0:1:1A:16:20D:20D0000:0:0:0</channel> <!-- Rotana KIDS -->
-	<channel id="CINEMA-4">1:0:1:15E9:0:0:20D2F16:0:0:0</channel> <!-- Rotana cinema KSA -->
-	<channel id="COMEDY-6">1:0:1:15E7:0:0:20D2F16:0:0:0</channel> <!-- Rotana Comedy -->
-	<channel id="LBC-5">1:0:1:15EA:0:0:20D2F16:0:0:0</channel> <!-- LBC -->
+	<channel id="ROTANA-HD-8">1:0:1:14C9:E:20D:20D0000:0:0:0</channel> <!-- Rotana HD -->
+	<channel id="AFLAM-PLUS-8">1:0:1:14CA:E:20D:20D0000:0:0:0</channel> <!-- Rotana aflam -->
+	<channel id="KIDS-9">1:0:1:1A:16:20D:20D0000:0:0:0</channel> <!-- Rotana KIDS -->
+	<channel id="CINEMA-8">1:0:1:15E9:0:0:20D2F16:0:0:0</channel> <!-- Rotana cinema KSA -->
+	<channel id="COMEDY-10">1:0:1:15E7:0:0:20D2F16:0:0:0</channel> <!-- Rotana Comedy -->
+	<channel id="LBC-11">1:0:1:15EA:0:0:20D2F16:0:0:0</channel> <!-- LBC -->
 
 </channels>
