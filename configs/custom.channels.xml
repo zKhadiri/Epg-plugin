@@ -129,8 +129,8 @@
 	<channel id="NHK_World-Japan">1:0:1:517:D:800:DCA0000:0:0:0</channel>
 	<channel id="Al_Hurra_HD">1:0:1:1B9:10:6E:DCA0000:0:0:0</channel>
 	<channel id="YAS_Sports_HD">1:0:1:7:32:64:DCA2C93:0:0:0</channel>
-	<channel id="AD_Sports_3_HD">1:0:1:12D:C9:800:DCA0000:0:0:0</channel>
-	<channel id="AD_Sports_4_HD">1:0:1:12E:C9:800:DCA0000:0:0:0</channel>
+	<channel id="AD_Sports_3_HD">1:0:19:178D:18:6E:DCA0000:0:0:0</channel>
+	<channel id="AD_Sports_4_HD">1:0:19:178E:18:6E:DCA0000:0:0:0</channel>
 
 	<!-- HotBird -->
 	<channel id="AD_Sports_3_HD">1:0:1:12D:13EF:13E:822DE3:0:0:0</channel>
