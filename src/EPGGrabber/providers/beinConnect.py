@@ -22,10 +22,11 @@ milli = (datetime.strptime('' + str(week) + ' 23:59:59', "%Y-%m-%d %H:%M:%S").st
 today = datetime.strptime(str(datetime.now().strftime('%Y-%m-%d')) + ' 00:00:00', "%Y-%m-%d %H:%M:%S").strftime('%s')
 
 ch_code = ['74-beIN Sports', '75-beIN Sports News', '67-beIN 1HD', '70-beIN 2HD', '68-beIN 3HD', '69-beIN 4HD',
-          '73-beIN 5HD', '71-beIN 6HD', '58-beIN 7HD', '65-beIN 1 PREM', '66-beIN 2 PREM', '72-beIN 3 PREM',
-	  '59-beIN 1HD english', '60-beIN 2HD english', '61-beIN 3HD english', '62-beIN SPORTS 1 FR', '63-beIN SPORTS 2 FR', '64-beIN SPORTS 3 FR']
-	  #,'64-beIN SPORTS 3 FR','101-beIN SPORTS MAX 1','102-beIN SPORTS MAX 2',
-          #'216-beIN SPORTS MAX 3','217-beIN SPORTS MAX 4','213-beIN SPORTS MAX 5','218-beIN SPORTS MAX 6'
+           '73-beIN 5HD', '71-beIN 6HD', '58-beIN 7HD', '65-beIN 1 PREM', '66-beIN 2 PREM', '72-beIN 3 PREM',
+           '103-beIN SPORTS XTRA 1', '104-beIN SPORTS XTRA 2', '59-beIN 1HD english', '60-beIN 2HD english',
+           '61-beIN 3HD english', '62-beIN SPORTS 1 FR', '63-beIN SPORTS 2 FR', '64-beIN SPORTS 3 FR',
+           '101-beIN SPORTS MAX 1', '102-beIN SPORTS MAX 2']
+#'216-beIN SPORTS MAX 3','217-beIN SPORTS MAX 4','213-beIN SPORTS MAX 5','218-beIN SPORTS MAX 6'
 
 head = {
 	"user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
