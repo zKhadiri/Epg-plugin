@@ -20,6 +20,8 @@
 	<channel id="beIN_SPORTS_MAX4">1:0:19:89C:12C:77E:DC00000:0:0:0</channel>
 	<channel id="NEW_beIN-SPORTS-MAX-05">1:0:19:89F:12C:77E:DC00000:0:0:0</channel>
 	<channel id="NEW_beIN-SPORTS-MAX-06">1:0:19:8A0:12C:77E:DC00000:0:0:0</channel>
+	<channel id="beIN_SPORTS_XTRA1">1:0:19:89D:12C:77E:DC00000:0:0:0</channel>
+	<channel id="beIN_SPORTS_XTRA2">1:0:19:89E:12C:77E:DC00000:0:0:0</channel>
 
 	<!-- Bein connect -->
 	<channel id="beIN 1 PREM">1:0:19:7D1:64:77E:DC00000:0:0:0</channel>
@@ -69,6 +71,8 @@
 	<channel id="beIN_SPORTS1_ENGLISH">1:0:19:2A33:438:E0:1040000:0:0:0</channel>
 	<channel id="beIN_SPORTS2_ENGLISH">1:0:19:2A34:438:E0:1040000:0:0:0</channel>
 	<channel id="beIN_SPORTS3_ENGLISH">1:0:19:29CD:42E:E0:1040000:0:0:0</channel>
+	<channel id="beIN_SPORTS_XTRA1">1:0:19:4FB7:7F8:E0:1040000:0:0:0</channel>
+	<channel id="beIN_SPORTS_XTRA2">1:0:19:4FB8:7F8:E0:1040000:0:0:0</channel>
 
 	<!-- bein Entertainment.net -->
 	<channel id="food-network">1:0:19:9CAB:FAA:E0:1040000:0:0:0</channel>
@@ -137,6 +141,8 @@
 	<channel id="beIN SPORTS MAX 4">1:0:19:2842:406:E0:1040000:0:0:0</channel>
 	<channel id="beIN SPORTS MAX 5">1:0:19:9CAE:FAA:E0:1040000:0:0:0</channel>
 	<channel id="beIN SPORTS MAX 6">1:0:19:9E3D:FD2:E0:1040000:0:0:0</channel>
+	<channel id="XTRA 1">1:0:19:4FB7:7F8:E0:1040000:0:0:0</channel>
+	<channel id="XTRA 2">1:0:19:4FB8:7F8:E0:1040000:0:0:0</channel>
 
 	<!-- Entertainment -->
 	<channel id="beIN Drama HD">1:0:19:4E88:7DA:E0:1040000:0:0:0</channel>
