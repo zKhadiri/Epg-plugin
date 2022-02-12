@@ -2,8 +2,8 @@
 ##setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=20.4
-description=What_is_NEW:\n'-Add Id For bein Xtra 1 & 2 (by MOHAMED19OS)\n-Add bein Xtra In bein .net (by MOHAMED19OS)\n-Add bein Max 1 & 2 And Add bein Xtra 1 & 2  in beinConnect (by MOHAMED19OS)'
+version=20.5
+description=What_is_NEW:\n'-Update bein channel Id (by MOHAMED19OS)\n-Fix url beIN net ar (by MOHAMED19OS)\n-Disable bein max For now (by MOHAMED19OS)\n-fix url bein entertainment (by MOHAMED19OS)'
 ##############################################################
 
 TEMPATH=/tmp
