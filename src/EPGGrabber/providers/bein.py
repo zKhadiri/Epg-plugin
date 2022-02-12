@@ -23,7 +23,7 @@ def bein():
     for i in range(0, 3):
         week = (datetime.today() + timedelta(days=i)).strftime('%Y-%m-%d')
         with requests.Session() as s:
-            url = 'https://www.bein.com/ar/wp-admin/admin-ajax.php?action=epg_fetch&category=sports&serviceidentity=bein.net&mins=00&cdate={}&language=AR&postid=25344'.format(str(week))
+            url = 'https://www.bein.com/ar/epg-ajax-template/?action=epg_fetch&offset=%2B2&category=sports&serviceidentity=bein.net&mins=00&cdate={}&language=AR&postid=25344&loadindex='.format(str(week)) + str(i)
             link = s.get(url)
             time = re.findall(r'<p\sclass=time>(.*?)<\/p>', link.text)
             times = [t.replace('&nbsp;-&nbsp;', '-').split('-') for t in time]
