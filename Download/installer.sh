@@ -2,8 +2,8 @@
 ##setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=20.6
-description=What_is_NEW:\n'-Update bein channel Id (by MOHAMED19OS)\n-Fix url beIN net ar (by MOHAMED19OS)\n-Disable bein max For now (by MOHAMED19OS)\n-fix url bein entertainment (by MOHAMED19OS)\n-Update elcinema.channels (by MOHAMED19OS)\n-Update elcinema Arab (by MOHAMED19OS)'
+version=20.7
+description=What_is_NEW:\n'-Update bouquets For Last Change (by MOHAMED19OS)\n-Update Id For last Change ROtana (by MOHAMED19OS)'
 ##############################################################
 
 TEMPATH=/tmp
