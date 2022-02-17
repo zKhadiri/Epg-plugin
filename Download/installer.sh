@@ -2,8 +2,8 @@
 ##setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=20.7
-description=What_is_NEW:\n'-Update bouquets For Last Change (by MOHAMED19OS)\n-Update Id For last Change ROtana (by MOHAMED19OS)'
+version=20.8
+description=What_is_NEW:\n'-Bein.net (sports channels) fixed\n-Add bbc three sd/hd in freesat source\nSky it source fixed'
 ##############################################################
 
 TEMPATH=/tmp

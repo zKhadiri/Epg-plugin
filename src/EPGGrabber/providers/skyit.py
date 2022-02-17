@@ -45,9 +45,11 @@ def skyit():
                 epg += 4 * ' ' + '<desc lang="it">' + data['eventSynopsis'].replace('&', 'and') + '</desc>\n  </programme>\r'
                 with io.open(EPG_ROOT + '/skyit.xml', "a", encoding='UTF-8')as f:
                     f.write(epg)
-            print(channel_name + ' ends at ' + data['endtime'].replace('T', ' ').replace('Z', ''))
-            channels.append(channel_name)
-            sys.stdout.flush()
+            try:
+                print(channel_name + ' ends at ' + data['endtime'].replace('T', ' ').replace('Z', ''))
+                sys.stdout.flush()
+                channels.append(channel_name)
+            except:pass
     channels.sort()
     update_channels("SKY IT",channels)
 
@@ -61,14 +63,8 @@ def main():
     skyit()
 
     close_xml(EPG_ROOT + '/skyit.xml')
-
-    with open(PROVIDERS_ROOT, 'r') as f:
-        data = json.load(f)
-    for channel in data['bouquets']:
-        if channel["bouquet"] == "skyit":
-            channel['date'] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
-    with open(PROVIDERS_ROOT, 'w') as f:
-        json.dump(data, f)
+    provider = __file__.rpartition('/')[-1].replace('.py', '')
+    update_status(provider)
 
     print('**************FINISHED******************')
     sys.stdout.flush()
