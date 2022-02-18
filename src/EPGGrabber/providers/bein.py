@@ -31,7 +31,7 @@ def bein():
                 title = re.findall(r'<p\sclass=title>(.*?)<\/p>', data)
                 formt = re.findall(r'<p\sclass=format>(.*?)<\/p>', data)
                 channels = re.findall(r"data-img.*?sites\/\d+\/\d+\/\d+\/(.*?)\.png", data)
-                live_events = re.findall(r"live='(\d)'",data)
+                live_events = re.findall(r"li\s+live='(\d)'",data)
                 channels_found += channels
 
                 desc = []
