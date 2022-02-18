@@ -62,11 +62,11 @@ def b_connect():
 							extra = 'حصيلة الدوريات'
 					elif 'English Premier League' in data['title']:
 							extra = 'الدوري الإنجليزي الممتاز'
-					elif 'Spanish La Liga' in data['title']:
+					elif 'Spanish La Liga' in data['title'] or 'La Liga World' in data['title'] or 'La Liga Show' in data['title']:
 							extra = 'الدوري الإسباني لكرة القدم'
 					elif 'Italian Serie A' in data['title']:
 							extra = 'الدوري الإيطالي لكرة القدم'
-					elif 'French Ligue 1' in data['title']:
+					elif 'French Ligue 1' in data['title'] or 'Ligue 1 Weekly Preview' in data['title']:
 							extra = 'الدوري الفرنسي'
 					elif 'Copa Libertadores' in data['title']:
 							extra = 'كأس ليبرتادوريس'
@@ -78,13 +78,13 @@ def b_connect():
 							extra = 'كرة قدم'
 					elif 'NBA' in data['title']:
 							extra = 'الدوري الأميركي لكرة السلة'
-					elif 'WTA' in data['title']:
+					elif 'WTA' in data['title'] or 'Tennis' in data['synopsis']:
 							extra = 'تنس'
 					elif 'Mini Match' in data['title']:
 							extra = 'مباريات قصيرة'
 					elif 'Major League Baseball' in data['title']:
 							extra = 'كرة القاعدة'
-					elif 'UEFA Champions League' in data['title']:
+					elif 'UEFA Champions League' in data['title'] or 'UEFA Highlights' in data['title']:
 							extra = 'دوري أبطال أوروبا لكرة القدم'
 					elif 'UEFA Europa League' in data['title']:
 							extra = 'الدوري الأوروبي'
@@ -94,9 +94,9 @@ def b_connect():
 							extra = 'الأخبار الرياضية'
 					elif 'Handball' in data['title']:
 							extra = 'كرة اليد'
-					elif 'EPL World' in data['title']:
+					elif 'EPL World' in data['title'] or 'EPL Matchpack' in data['title']:
 							extra = 'عالم الدوري الانجليزي الممتاز'
-					elif 'CAF Champions League' in data['title']:
+					elif 'CAF Champions League' in data['title'] or "CAF Champion's League" in data['title']:
 							extra = 'دوري أبطال أفريقيا'
 					else:
 							extra = 'الرياضة العام'
@@ -109,11 +109,11 @@ def b_connect():
 							extra = 'حصيلة الدوريات'.decode('utf-8')
 					elif 'English Premier League' in data['title']:
 							extra = 'الدوري الإنجليزي الممتاز'.decode('utf-8')
-					elif 'Spanish La Liga' in data['title']:
+					elif 'Spanish La Liga' in data['title'] or 'La Liga World' in data['title'] or 'La Liga Show' in data['title']:
 							extra = 'الدوري الإسباني لكرة القدم'.decode('utf-8')
 					elif 'Italian Serie A' in data['title']:
 							extra = 'الدوري الإيطالي لكرة القدم'.decode('utf-8')
-					elif 'French Ligue 1' in data['title']:
+					elif 'French Ligue 1' in data['title'] or 'Ligue 1 Weekly Preview' in data['title']:
 							extra = 'الدوري الفرنسي'.decode('utf-8')
 					elif 'Copa Libertadores' in data['title']:
 							extra = 'كأس ليبرتادوريس'.decode('utf-8')
@@ -125,13 +125,13 @@ def b_connect():
 							extra = 'كرة قدم'.decode('utf-8')
 					elif 'NBA' in data['title']:
 							extra = 'الدوري الأميركي لكرة السلة'.decode('utf-8')
-					elif 'WTA' in data['title']:
+					elif 'WTA' in data['title'] or 'Tennis' in data['synopsis']:
 							extra = 'تنس'.decode('utf-8')
 					elif 'Mini Match' in data['title']:
 							extra = 'مباريات قصيرة'.decode('utf-8')
 					elif 'Major League Baseball' in data['title']:
 							extra = 'كرة القاعدة'.decode('utf-8')
-					elif 'UEFA Champions League' in data['title']:
+					elif 'UEFA Champions League' in data['title'] or 'UEFA Highlights' in data['title']:
 							extra = 'دوري أبطال أوروبا لكرة القدم'.decode('utf-8')
 					elif 'UEFA Europa League' in data['title']:
 							extra = 'الدوري الأوروبي'.decode('utf-8')
@@ -141,9 +141,9 @@ def b_connect():
 							extra = 'الأخبار الرياضية'.decode('utf-8')
 					elif 'Handball' in data['title']:
 							extra = 'كرة اليد'.decode('utf-8')
-					elif 'EPL World' in data['title']:
+					elif 'EPL World' in data['title'] or 'EPL Matchpack' in data['title']:
 							extra = 'عالم الدوري الانجليزي الممتاز'.decode('utf-8')
-					elif 'CAF Champions League' in data['title']:
+					elif 'CAF Champions League' in data['title'] or "CAF Champion's League" in data['title']:
 							extra = 'دوري أبطال أفريقيا'.decode('utf-8')
 					else:
 							extra = 'الرياضة العام'.decode('utf-8')
