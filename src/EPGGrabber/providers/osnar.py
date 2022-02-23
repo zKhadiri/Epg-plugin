@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import print_function
 from time import sleep
 import os
 import io
@@ -18,7 +19,7 @@ url = requests.get('http://raw.githubusercontent.com/Haxer/EPG-XMLFiles/FullArab
 with io.open(path, 'w', encoding="utf-8") as f:
     f.write(url.text)
 
-print "osnplay.xml donwloaded with succes"
+print("osnplay.xml donwloaded with succes")
 
 from datetime import datetime
 with open(PROVIDERS_ROOT, 'r') as f:
