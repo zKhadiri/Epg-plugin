@@ -4,7 +4,7 @@
 from __future__ import print_function
 from __init__ import *
 
-from elcin import Elcinema , nb_channel , headers , cprint
+from elcin import Elcinema, nb_channel, headers, cprint
 import ssl
 import requests
 import sys

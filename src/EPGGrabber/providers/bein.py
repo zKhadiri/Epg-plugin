@@ -24,7 +24,7 @@ def bein():
         week = (datetime.today() + timedelta(days=i)).strftime('%Y-%m-%d')
         with requests.Session() as s:
             for idx in range(0,4):
-                url = 'https://www.bein.com/ar/epg-ajax-template/?action=epg_fetch&category=sports&serviceidentity=bein.net&offset=00&mins=00&cdate={}&language=AR&postid=25344&loadindex={}'.format(week , idx)
+                url = 'https://www.bein.com/ar/epg-ajax-template/?action=epg_fetch&category=sports&serviceidentity=bein.net&offset=00&mins=00&cdate={}&language=AR&postid=25344&loadindex={}'.format(week, idx)
                 data = s.get(url).text
                 time = re.findall(r'<p\sclass=time>(.*?)<\/p>', data)
                 times = [t.replace('&nbsp;-&nbsp;', '-').split('-') for t in time]
