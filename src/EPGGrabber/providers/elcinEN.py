@@ -25,9 +25,9 @@ class ElcinEn(Elcinema, object):
             ssl._create_default_https_context = ssl._create_unverified_context
             s.mount('https://', HTTPAdapter(max_retries=100))
             url = s.get('https://elcinema.com/en/tvguide/' + ch.split('-')[0] + '/', headers=headers, verify=False)
-            
+
             self.data = url.text
-            
+
     def Gettitle(self):
         self.title = re.findall(r'<a\shref=\"\/en/work\/\d+\/\">(.*?)<\/a><\/li', self.data)
         mt = re.findall(r'<a\shref=\"\/en/work\/\d+\/\">(.*?)<\/a><\/li|columns small-7 large-11\">\s+<ul class=\"unstyled no-margin\">\s+<li>(.*?)<\/li>', self.data)
@@ -86,12 +86,10 @@ def main():
         provider = __file__.rpartition('/')[-1].replace('.py', '')
         update_status(provider)
         close_xml(EPG_ROOT + '/elcinema.xml')
-        
+
     print('**************FINISHED******************')
     sys.stdout.flush()
 
 
 if __name__ == '__main__':
     main()
-
-

@@ -58,7 +58,7 @@ def skyit():
 def main():
     print('**************SKY IT EPG******************')
     sys.stdout.flush()
-            
+
     channels = get_channels("SKY IT")
     xml_header(EPG_ROOT + '/skyit.xml', channels)
 

@@ -33,7 +33,7 @@ def cplus():
         if ch_name and endtime:
             print(ch_name.replace('.', '') + ' EPG ends at : ' + str(datetime.fromtimestamp(endtime).strftime('%Y-%m-%d %H:%M')))
             sys.stdout.flush()
-        
+
 
 def main():
     print('**************Canal+AF EPG******************')
