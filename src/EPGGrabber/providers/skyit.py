@@ -49,7 +49,8 @@ def skyit():
                 print(channel_name + ' ends at ' + data['endtime'].replace('T', ' ').replace('Z', ''))
                 sys.stdout.flush()
                 channels.append(channel_name)
-            except:pass
+            except:
+                pass
     channels.sort()
     update_channels("SKY IT",channels)
 

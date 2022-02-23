@@ -29,7 +29,8 @@ def cplus():
                         ch += 4 * ' ' + '<desc lang="fr">' + subtitle.replace('&', 'and') + '</desc>\n  </programme>\r'
                         with io.open(EPG_ROOT + '/caf.xml', "a", encoding='UTF-8')as f:
                             f.write(ch)
-            except KeyError:pass
+            except KeyError:
+                pass
         if ch_name and endtime:
             print(ch_name.replace('.','')+' EPG ends at : '+str(datetime.fromtimestamp(endtime).strftime('%Y-%m-%d %H:%M')))
             sys.stdout.flush()
