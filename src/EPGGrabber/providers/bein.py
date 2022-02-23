@@ -51,7 +51,7 @@ def bein():
                         live = "Live: " if is_live == "1" else ""
                         epg = ''
                         epg += 2 * ' ' + '<programme start="' + starttime + ' +0300" stop="' + endtime + ' +0300" channel="' + ch.replace('_Digital_Mono', '').replace('_DIGITAL_Mono', '').replace('-1','') + '">' + '\n'
-                        epg += 4 * ' ' + '<title lang="en">'+ live + title_.replace('&', 'and').strip() + ' - ' + form_.replace('2014', '2021') + '</title>' + '\n'
+                        epg += 4 * ' ' + '<title lang="en">' + live + title_.replace('&', 'and').strip() + ' - ' + form_.replace('2014', '2021') + '</title>' + '\n'
                         epg += 4 * ' ' + '<desc lang="ar">' + des.replace('- ', '').replace('&', 'and') + '</desc>\n  </programme>\r'
                         with io.open(EPG_ROOT + '/bein.xml', "a", encoding='UTF-8')as f:
                             f.write(epg)
@@ -59,7 +59,7 @@ def bein():
                     break
                 if len(title) != 0:
                     dat = re.search(r'\d{4}-\d{2}-\d{2}', url)
-                    print('Date' + ' : ' + dat.group()+' & Index : '+str(idx))
+                    print('Date' + ' : ' + dat.group() + ' & Index : ' + str(idx))
                     sys.stdout.flush()
                 else:
                     print('No data found')
