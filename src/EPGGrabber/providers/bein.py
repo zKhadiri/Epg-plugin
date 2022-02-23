@@ -17,6 +17,7 @@ from datetime import datetime, timedelta
 print('**************BEIN SPORTS EPG******************')
 sys.stdout.flush()
 
+
 def bein():
 
     channels_found = []
@@ -67,6 +68,7 @@ def bein():
     if len(channels_found) > 0:
         channels_found = sorted([ch.replace('_Digital_Mono', '').replace('_DIGITAL_Mono', '').replace('-1', '') for ch in list(dict.fromkeys(channels_found))])
         update_channels("Bein sports", channels_found)
+
 
 def main():
 

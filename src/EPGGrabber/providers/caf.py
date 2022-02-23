@@ -8,6 +8,7 @@ time_zone = tz()
 
 ch_code = ['80018', '80402', '80645', '80016', '80646', '80403', '80050', '80625', '80124', '80149', '80393', '80394', '80129', '80302', '80626', '80125', '80628', '80144', '80555', '80041', '80042', '60022', '60014', '60020', '60115', '60243', '60347', '60629', '60630']
 
+
 def cplus():
     for code in ch_code:
         for i in range(0, 8):
@@ -33,6 +34,7 @@ def cplus():
             print(ch_name.replace('.', '') + ' EPG ends at : ' + str(datetime.fromtimestamp(endtime).strftime('%Y-%m-%d %H:%M')))
             sys.stdout.flush()
         
+
 def main():
     print('**************Canal+AF EPG******************')
     sys.stdout.flush()

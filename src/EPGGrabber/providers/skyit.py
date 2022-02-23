@@ -54,6 +54,7 @@ def skyit():
     channels.sort()
     update_channels("SKY IT", channels)
 
+
 def main():
     print('**************SKY IT EPG******************')
     sys.stdout.flush()

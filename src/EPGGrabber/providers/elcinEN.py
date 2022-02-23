@@ -65,7 +65,6 @@ class ElcinEn(Elcinema, object):
 def main():
     channels = [nb.split('-')[1] for nb in nb_channel]
 
-
     print('**************ELCINEMA ENGLISH EPG******************')
     sys.stdout.flush()
     import time
@@ -90,6 +89,7 @@ def main():
         
     print('**************FINISHED******************')
     sys.stdout.flush()
+
 
 if __name__ == '__main__':
     main()
