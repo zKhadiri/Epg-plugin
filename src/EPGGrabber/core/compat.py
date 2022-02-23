@@ -100,7 +100,7 @@ if version_info >= (2, 7, 9):
 		import ssl
 		sslContext = ssl._create_unverified_context()
 	except Exception as e:
-		print(('Error in set ssl context', e))
+		print('Error in set ssl context', e)
 
 
 def compat_ssl_urlopen(url):
