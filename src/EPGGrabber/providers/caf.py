@@ -1,9 +1,9 @@
-from __future__ import print_function
+
 import io
 import requests
 import sys
 from datetime import datetime
-from __init__ import *
+from .__init__ import *
 
 time_zone = tz()
 

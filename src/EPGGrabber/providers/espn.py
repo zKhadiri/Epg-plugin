@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from __future__ import print_function
-from __init__ import *
+
+from .__init__ import *
 
 import requests
 import io

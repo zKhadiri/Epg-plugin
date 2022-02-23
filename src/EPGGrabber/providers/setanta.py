@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import print_function
+
 import requests
 import re
 import io
 import json
 import sys
 from datetime import datetime, timedelta
-from __init__ import *
+from .__init__ import *
 
 urls = ['https://www.setantaeurasia.com/en/tv-schedule.html|SETANTA1', 'https://www.setantaeurasia.com/en/tv-schedule.html?channel=plus|SETANTA2']
 
@@ -31,7 +31,7 @@ def setanta():
                 today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
             last_hr = 0
             for d in time:
-                h, m = map(int, d.split(":"))
+                h, m = list(map(int, d.split(":")))
                 if last_hr > h:
                     today += + timedelta(days=1)
                 last_hr = h

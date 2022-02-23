@@ -1,4 +1,4 @@
-from __future__ import print_function
+
 import requests
 import io
 import re
@@ -7,7 +7,7 @@ import json
 from datetime import datetime, timedelta
 from requests.adapters import HTTPAdapter
 from time import strftime
-from __init__ import *
+from .__init__ import *
 
 
 time_zone = tz()

@@ -1,11 +1,11 @@
-from __future__ import print_function
+
 import requests
 import re
 import io
 import sys
 from datetime import datetime, timedelta
 from requests.adapters import HTTPAdapter
-from __init__ import *
+from .__init__ import *
 
 channels = ['sony-six/84', 'sony-ten-1/85', 'sony-ten-2/92', 'star-sports1/88', 'star-sports-select-1/86', 'star-sports-select-hd-2/214', 'star-sports2/87', 'wow-hd/207']
 
@@ -31,14 +31,14 @@ def sony():
             today = now.replace(hour=0, minute=0, second=0, microsecond=0)
             last_hr = 0
             for d in start:
-                h, m = map(int, d.split(":"))
+                h, m = list(map(int, d.split(":")))
                 if last_hr > h:
                     today += + timedelta(days=1)
                 last_hr = h
                 time_start.append(today + timedelta(hours=h, minutes=m))
 
             for s in end:
-                h, m = map(int, s.split(":"))
+                h, m = list(map(int, s.split(":")))
                 if last_hr > h:
                     today += + timedelta(days=1)
                 last_hr = h

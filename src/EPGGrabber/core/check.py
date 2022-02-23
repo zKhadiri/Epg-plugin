@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from __future__ import print_function
+
 from Plugins.Extensions.EPGGrabber.core.compat import PY3
 
 import os

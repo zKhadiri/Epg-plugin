@@ -1,8 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from __future__ import print_function
-from __init__ import *
+
+from .__init__ import *
 
 import requests
 import re
@@ -10,9 +10,10 @@ import sys
 import io
 from datetime import datetime, timedelta
 from requests.adapters import HTTPAdapter
+import importlib
 
 if not PY3:
-	reload(sys)
+	importlib.reload(sys)
 	sys.setdefaultencoding("utf-8")
 
 next_update = (datetime.today() + timedelta(days=30)).strftime('%Y-%m-%d 02:00:00')

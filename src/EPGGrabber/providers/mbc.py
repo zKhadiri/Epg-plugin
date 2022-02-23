@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import print_function
+
 import requests
 import json
 import io
@@ -10,10 +10,11 @@ import sys
 from datetime import datetime
 from requests.adapters import HTTPAdapter
 from time import strftime
-from __init__ import *
+from .__init__ import *
+import importlib
 
 if not PY3:
-    reload(sys)
+    importlib.reload(sys)
     sys.setdefaultencoding('utf-8')
 
 urls = []
@@ -114,7 +115,7 @@ def noor():
     today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
     last_hr = 0
     for d in time:
-        h, m = map(int, d.split(":"))
+        h, m = list(map(int, d.split(":")))
         if last_hr > h:
             today += + timedelta(days=1)
         last_hr = h

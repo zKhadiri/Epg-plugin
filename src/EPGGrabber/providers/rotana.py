@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
-from __future__ import print_function
+
 import csv
 import requests
 import sys
 import re
 import io
 from datetime import datetime, timedelta
-from __init__ import *
+from .__init__ import *
+import importlib
 
 if not PY3:
-    reload(sys)
+    importlib.reload(sys)
     sys.setdefaultencoding('utf-8')
 
 today = (datetime.now() - timedelta(hours=4)).strftime('%d/%m/%Y %H:%M:%S')

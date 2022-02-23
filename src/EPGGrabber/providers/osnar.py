@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import print_function
+
 from time import sleep
 import os
 import io
@@ -8,7 +8,7 @@ import re
 import sys
 import requests
 import json
-from __init__ import *
+from .__init__ import *
 
 path = EPG_ROOT + '/osnplay.xml'
 

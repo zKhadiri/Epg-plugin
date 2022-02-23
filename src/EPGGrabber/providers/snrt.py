@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-from __future__ import print_function
+
 import requests
 import sys
 import re
 import io
 import json
 from datetime import datetime, timedelta
-from __init__ import *
+from .__init__ import *
 
 time_zone = tz()
 
@@ -34,7 +34,7 @@ def arryadia():
         last_hr = 0
         start_dt = []
         for d in times:
-            h, m = map(int, d.split(":"))
+            h, m = list(map(int, d.split(":")))
             if last_hr > h:
                 today += + timedelta(days=1)
             last_hr = h

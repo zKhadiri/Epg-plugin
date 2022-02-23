@@ -1,4 +1,4 @@
-from __future__ import print_function
+
 # Source code from (https://github.com/Taapat/enigma2-plugin-youtube/blob/master/src/compat.py)
 from sys import version_info
 
@@ -6,28 +6,28 @@ PY3 = version_info[0] == 3
 
 if version_info[0] == 2:
 	# Python 2
-	compat_str = unicode
+	compat_str = str
 
 	from re import compile
 	from urllib import _hextochr
 
-	from urllib import urlencode as compat_urlencode
-	from urllib import quote as compat_quote
-	from urllib2 import urlopen as compat_urlopen
-	from urllib2 import Request as compat_Request
-	from urllib2 import HTTPError as compat_HTTPError
-	from urllib2 import URLError as compat_URLError
-	from urlparse import urljoin as compat_urljoin
-	from urlparse import urlparse as compat_urlparse
-	from urlparse import urlunparse as compat_urlunparse
-	from httplib import HTTPException as compat_HTTPException
+	from urllib.parse import urlencode as compat_urlencode
+	from urllib.parse import quote as compat_quote
+	from urllib.request import urlopen as compat_urlopen
+	from urllib.request import Request as compat_Request
+	from urllib.error import HTTPError as compat_HTTPError
+	from urllib.error import URLError as compat_URLError
+	from urllib.parse import urljoin as compat_urljoin
+	from urllib.parse import urlparse as compat_urlparse
+	from urllib.parse import urlunparse as compat_urlunparse
+	from http.client import HTTPException as compat_HTTPException
 
 	def _unquote_to_bytes(string):
 		if not string:
 			# Is it a string-like object?
 			string.split
 			return b''
-		if isinstance(string, unicode):
+		if isinstance(string, str):
 			string = string.encode('utf-8')
 		bits = string.split(b'%')
 		if len(bits) == 1:
@@ -61,8 +61,8 @@ if version_info[0] == 2:
 				continue
 			nv = name_value.split('=', 1)
 			if len(nv) == 2 and len(nv[1]):
-				name = unicode(_unquote(nv[0].replace('+', ' ')))
-				value = unicode(_unquote(nv[1].replace('+', ' ')))
+				name = str(_unquote(nv[0].replace('+', ' ')))
+				value = str(_unquote(nv[1].replace('+', ' ')))
 				r.append((name, value))
 		return r
 

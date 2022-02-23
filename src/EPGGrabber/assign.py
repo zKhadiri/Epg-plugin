@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from __future__ import print_function
+
 from Plugins.Extensions.EPGGrabber.core.compat import PY3, compat_URLError
 from Plugins.Extensions.EPGGrabber.core.paths import BOUQUETS_ROOT
 
@@ -71,7 +71,7 @@ class AssignRef(Screen):
             "back": self.exit,
             "up": self.listUP,
             "last": self.last,
-            "next": self.next,
+            "next": self.__next__,
             "down": self.listDOWN,
             "ok": self.ok,
             "right": self.right,
@@ -110,7 +110,7 @@ class AssignRef(Screen):
         self.changeBQ()
         self['id'].setText("")
 
-    def next(self):
+    def __next__(self):
         self.bqIndex += 1
         self.changeBQ()
         self['id'].setText("")

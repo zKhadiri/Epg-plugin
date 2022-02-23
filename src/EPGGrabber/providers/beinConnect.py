@@ -1,8 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from __future__ import print_function
-from __init__ import *
+
+from .__init__ import *
 
 import re
 import sys
@@ -154,9 +154,9 @@ def b_connect():
 					ch += 4 * ' ' + '<title lang="en">' + spl.group().replace('&', 'and') + ' - ' + extra + '</title>\n'
 				else:
 					ch += 4 * ' ' + '<title lang="en">' + title.replace('&', 'and').strip() + ' - ' + extra + '</title>\n'
-				if data['synopsis'].strip() == u'' and ' -' in data['title']:
+				if data['synopsis'].strip() == '' and ' -' in data['title']:
 					ch += 4 * ' ' + '<desc lang="en">' + data['title'].split(' -')[1].strip().replace('&', 'and') + '</desc>\n  </programme>\r'
-				elif data['synopsis'].strip() == u'':
+				elif data['synopsis'].strip() == '':
 					ch += 4 * ' ' + '<desc lang="en">' + title.replace('&', 'and') + '</desc>\n  </programme>\r'
 				else:
 					ch += 4 * ' ' + '<desc lang="en">' + data['synopsis'].strip().replace('&', 'and') + '</desc>\n  </programme>\r'

@@ -1,10 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from __future__ import print_function
-from __init__ import *
 
-from elcin import Elcinema
+from .__init__ import *
+
+from .elcin import Elcinema
 import io
 import requests
 import sys

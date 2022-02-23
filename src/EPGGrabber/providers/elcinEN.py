@@ -1,10 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from __future__ import print_function
-from __init__ import *
 
-from elcin import Elcinema, nb_channel, headers, cprint
+from .__init__ import *
+
+from .elcin import Elcinema, nb_channel, headers, cprint
 import ssl
 import requests
 import sys
@@ -53,7 +53,7 @@ class ElcinEn(Elcinema, object):
         today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
         last_hr = 0
         for d in hours:
-            h, m = map(int, d.split(":"))
+            h, m = list(map(int, d.split(":")))
             if last_hr > h:
                 today += + timedelta(days=1)
             last_hr = h
