@@ -23,7 +23,7 @@ def bein():
     for i in range(0, 3):
         week = (datetime.today() + timedelta(days=i)).strftime('%Y-%m-%d')
         with requests.Session() as s:
-            for idx in range(0,4):
+            for idx in range(0, 4):
                 url = 'https://www.bein.com/ar/epg-ajax-template/?action=epg_fetch&category=sports&serviceidentity=bein.net&offset=00&mins=00&cdate={}&language=AR&postid=25344&loadindex={}'.format(week, idx)
                 data = s.get(url).text
                 time = re.findall(r'<p\sclass=time>(.*?)<\/p>', data)
@@ -31,7 +31,7 @@ def bein():
                 title = re.findall(r'<p\sclass=title>(.*?)<\/p>', data)
                 formt = re.findall(r'<p\sclass=format>(.*?)<\/p>', data)
                 channels = re.findall(r"data-img.*?sites\/\d+\/\d+\/\d+\/(.*?)\.png", data)
-                live_events = re.findall(r"li\s+live='(\d)'",data)
+                live_events = re.findall(r"li\s+live='(\d)'", data)
                 channels_found += channels
 
                 desc = []
@@ -50,7 +50,7 @@ def bein():
                         endtime = datetime.strptime(date.group() + ' ' + time_[1], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
                         live = "Live: " if is_live == "1" else ""
                         epg = ''
-                        epg += 2 * ' ' + '<programme start="' + starttime + ' +0300" stop="' + endtime + ' +0300" channel="' + ch.replace('_Digital_Mono', '').replace('_DIGITAL_Mono', '').replace('-1','') + '">' + '\n'
+                        epg += 2 * ' ' + '<programme start="' + starttime + ' +0300" stop="' + endtime + ' +0300" channel="' + ch.replace('_Digital_Mono', '').replace('_DIGITAL_Mono', '').replace('-1', '') + '">' + '\n'
                         epg += 4 * ' ' + '<title lang="en">' + live + title_.replace('&', 'and').strip() + ' - ' + form_.replace('2014', '2021') + '</title>' + '\n'
                         epg += 4 * ' ' + '<desc lang="ar">' + des.replace('- ', '').replace('&', 'and') + '</desc>\n  </programme>\r'
                         with io.open(EPG_ROOT + '/bein.xml', "a", encoding='UTF-8')as f:
@@ -65,8 +65,8 @@ def bein():
                     print('No data found')
                     break
     if len(channels_found) > 0:
-        channels_found = sorted([ch.replace('_Digital_Mono', '').replace('_DIGITAL_Mono', '').replace('-1','') for ch in list(dict.fromkeys(channels_found))])
-        update_channels("Bein sports",channels_found)
+        channels_found = sorted([ch.replace('_Digital_Mono', '').replace('_DIGITAL_Mono', '').replace('-1', '') for ch in list(dict.fromkeys(channels_found))])
+        update_channels("Bein sports", channels_found)
 
 def main():
 

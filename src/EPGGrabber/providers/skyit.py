@@ -52,7 +52,7 @@ def skyit():
             except:
                 pass
     channels.sort()
-    update_channels("SKY IT",channels)
+    update_channels("SKY IT", channels)
 
 def main():
     print('**************SKY IT EPG******************')
