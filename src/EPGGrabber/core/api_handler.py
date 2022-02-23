@@ -10,7 +10,7 @@ def update_channels(provider, channels):
         if channel["name"] == provider:
             channel['channels'] = sorted([ch for ch in list(dict.fromkeys(channels))])
     with open(BOUQUETS_ROOT, 'w') as f:
-        json.dump(data, f,indent = 4)
+        json.dump(data, f, indent=4)
 
 
 def get_channels(provider):
@@ -28,4 +28,4 @@ def update_status(provider):
         if channel["bouquet"] == provider:
             channel['date'] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
     with open(PROVIDERS_ROOT, 'w') as f:
-        json.dump(data, f,indent = 4)
+        json.dump(data, f, indent=4)

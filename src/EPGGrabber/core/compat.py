@@ -1,3 +1,4 @@
+from __future__ import print_function
 # Source code from (https://github.com/Taapat/enigma2-plugin-youtube/blob/master/src/compat.py)
 from sys import version_info
 

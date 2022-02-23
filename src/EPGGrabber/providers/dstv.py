@@ -52,6 +52,7 @@ def dstv():
             sys.stdout.flush()
     update_channels("DSTV", channels)
 
+
 def main():
     print('**************DSTV EPG******************')
     sys.stdout.flush()

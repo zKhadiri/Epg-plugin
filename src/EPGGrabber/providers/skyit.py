@@ -1,3 +1,4 @@
+from __future__ import print_function
 import requests
 import re
 import io
@@ -49,14 +50,16 @@ def skyit():
                 print(channel_name + ' ends at ' + data['endtime'].replace('T', ' ').replace('Z', ''))
                 sys.stdout.flush()
                 channels.append(channel_name)
-            except:pass
+            except:
+                pass
     channels.sort()
-    update_channels("SKY IT",channels)
+    update_channels("SKY IT", channels)
+
 
 def main():
     print('**************SKY IT EPG******************')
     sys.stdout.flush()
-            
+
     channels = get_channels("SKY IT")
     xml_header(EPG_ROOT + '/skyit.xml', channels)
 
