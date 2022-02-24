@@ -2,7 +2,10 @@
 # -*- coding: utf-8 -*-
 
 
-from .__init__ import *
+try:
+	from .__init__ import *
+except:
+	from __init__ import *
 
 from .elcin import Elcinema, nb_channel, headers, cprint
 import ssl

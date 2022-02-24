@@ -3,7 +3,10 @@
 
 # python3
 
-from .__init__ import *
+try:
+	from .__init__ import *
+except:
+	from __init__ import *
 
 import requests
 import io

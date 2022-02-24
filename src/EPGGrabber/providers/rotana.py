@@ -6,11 +6,14 @@ import sys
 import re
 import io
 from datetime import datetime, timedelta
-from .__init__ import *
+try:
+	from .__init__ import *
+except:
+	from __init__ import *
 import importlib
 
 if not PY3:
-    importlib.reload(sys)
+    reload(sys)
     sys.setdefaultencoding('utf-8')
 
 today = (datetime.now() - timedelta(hours=4)).strftime('%d/%m/%Y %H:%M:%S')

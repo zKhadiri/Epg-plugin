@@ -6,7 +6,10 @@ import re
 import io
 import json
 from datetime import datetime, timedelta
-from .__init__ import *
+try:
+	from .__init__ import *
+except:
+	from __init__ import *
 
 time_zone = tz()
 

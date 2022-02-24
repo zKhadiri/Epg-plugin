@@ -10,11 +10,15 @@ import sys
 from datetime import datetime
 from requests.adapters import HTTPAdapter
 from time import strftime
-from .__init__ import *
+try:
+	from .__init__ import *
+except:
+	from __init__ import *
+
 import importlib
 
 if not PY3:
-    importlib.reload(sys)
+    reload(sys)
     sys.setdefaultencoding('utf-8')
 
 urls = []

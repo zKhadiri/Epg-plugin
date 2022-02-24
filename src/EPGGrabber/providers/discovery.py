@@ -2,7 +2,10 @@
 # -*- coding: utf-8 -*-
 
 
-from .__init__ import *
+try:
+	from .__init__ import *
+except:
+	from __init__ import *
 
 import requests
 import re
@@ -13,7 +16,7 @@ from requests.adapters import HTTPAdapter
 import importlib
 
 if not PY3:
-	importlib.reload(sys)
+	reload(sys)
 	sys.setdefaultencoding("utf-8")
 
 next_update = (datetime.today() + timedelta(days=30)).strftime('%Y-%m-%d 02:00:00')

@@ -1,9 +1,15 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+try:
+	from .__init__ import *
+except:
+	from __init__ import *
 
 import io
 import requests
 import sys
 from datetime import datetime
-from .__init__ import *
 
 time_zone = tz()
 

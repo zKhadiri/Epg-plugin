@@ -8,7 +8,10 @@ import re
 import sys
 from datetime import datetime, timedelta
 from time import strftime
-from .__init__ import *
+try:
+	from .__init__ import *
+except:
+	from __init__ import *
 
 time_zone = tz()
 

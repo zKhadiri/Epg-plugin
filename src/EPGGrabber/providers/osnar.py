@@ -8,7 +8,10 @@ import re
 import sys
 import requests
 import json
-from .__init__ import *
+try:
+	from .__init__ import *
+except:
+	from __init__ import *
 
 path = EPG_ROOT + '/osnplay.xml'
 

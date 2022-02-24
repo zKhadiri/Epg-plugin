@@ -7,7 +7,10 @@ import json
 from datetime import datetime, timedelta
 from requests.adapters import HTTPAdapter
 from time import strftime
-from .__init__ import *
+try:
+	from .__init__ import *
+except:
+	from __init__ import *
 
 
 time_zone = tz()

@@ -7,7 +7,10 @@ import io
 import json
 import sys
 from datetime import datetime, timedelta
-from .__init__ import *
+try:
+	from .__init__ import *
+except:
+	from __init__ import *
 
 urls = ['https://www.setantaeurasia.com/en/tv-schedule.html|SETANTA1', 'https://www.setantaeurasia.com/en/tv-schedule.html?channel=plus|SETANTA2']
 
