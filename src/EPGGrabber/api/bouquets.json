@@ -293,7 +293,8 @@
         "MBC_Iraq",
         "MBC_Drama",
         "MBC_Drama+",
-        "Mix_Bel_Araby"
+        "Mix_Bel_Araby",
+        "Mix_ONE"
       ],
       "path": "/etc/epgimport/ziko_config/elcinema.channels.xml",
       "name": "ELCINEMA"
