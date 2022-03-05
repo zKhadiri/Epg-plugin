@@ -3,9 +3,9 @@
 
 
 try:
-	from .__init__ import *
-except:
 	from __init__ import *
+except:
+	from .__init__ import *
 
 from .elcin import Elcinema
 import io
