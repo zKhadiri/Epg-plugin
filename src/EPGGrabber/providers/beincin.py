@@ -7,7 +7,7 @@ try:
 except:
 	from .__init__ import *
 
-from .elcin import Elcinema
+from elcin import Elcinema
 import io
 import requests
 import sys
