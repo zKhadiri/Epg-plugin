@@ -3,11 +3,11 @@
 
 
 try:
-	from .__init__ import *
-except:
 	from __init__ import *
+except:
+	from .__init__ import *
 
-from .elcin import Elcinema, nb_channel, headers, cprint
+from elcin import Elcinema, nb_channel, headers, cprint
 import ssl
 import requests
 import sys
