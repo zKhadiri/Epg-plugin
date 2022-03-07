@@ -72,19 +72,23 @@ class StartTimer:
 
     def getStatus(self):
         allData = []
-        branches = ['main-MOHAMED19OS']
-        for branch in branches:
+        links = ["https://api.github.com/repos/MOHAMED19OS/XMLTV/branches/main|OS","http://tunisia01.selfip.com/EPG/satTv/update|sattv"]
+        for link in links:
             try:
-                url = requests.get('https://api.github.com/repos/MOHAMED19OS/XMLTV/branches/' + branch.split('-')[0], timeout=5).json()
-                try:
-                    result = url['commit']['commit']['message'] + ' ' + url['commit']['commit']['committer']['date'].replace('T', ' ').replace('Z', '')
-                except KeyError:
-                    result = url['message'].split('. (')[0]
+                if link.split('|')[1] == "OS":
+                    url = requests.get(link.split('|')[0], timeout=5).json()
+                    try:
+                        result = url['commit']['commit']['message'] + ' ' + url['commit']['commit']['committer']['date'].replace('T', ' ').replace('Z', '')
+                    except KeyError:
+                        result = url['message'].split('. (')[0]
+                else:
+                    url = requests.get(link.split('|')[0], timeout=5)
+                    result = url.text
 
             except:
                 result = "Unable to Fetch Data Error 404"
 
-            allData.append(str(branch.split('-')[0] + ' ' + result))
+            allData.append(link.split('|')[1]+' ' + result)
         self.toJson(allData)
 
     def toJson(self, data):

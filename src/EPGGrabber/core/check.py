@@ -77,3 +77,10 @@ if not os.path.exists('/etc/epgimport/ziko_config/snrt.channels.xml'):
     snrt_channels = requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/configs/snrt.channels.xml?raw=true')
     with io.open('/etc/epgimport/ziko_config/snrt.channels.xml', 'w', encoding="utf-8") as f:
         f.write(snrt_channels.text)
+
+if not os.path.exists('/etc/epgimport/ziko_config/satTv.channels.xml'):
+    print('Downloading satTv.channels config')
+    sys.stdout.flush()
+    satTv_channels = requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/configs/satTv.channels.xml?raw=true')
+    with io.open('/etc/epgimport/ziko_config/satTv.channels.xml', 'w', encoding="utf-8") as f:
+        f.write(satTv_channels.text)

@@ -49,6 +49,16 @@
             "bouquet": "rotana", 
             "date": "You didn't download from this source yet", 
             "title": "Rotana"
+        },
+        {
+            "bouquet": "satTv",
+            "date": "You didn't download from this source yet",
+            "title": "SAT Tv"
+        },
+        {
+            "bouquet": "satTvB",
+            "date": "You didn't download from this source yet",
+            "title": "SAT Tv Backup"
         }, 
         {
             "bouquet": "snrt", 
@@ -94,11 +104,11 @@
             "bouquet": "dstv", 
             "date": "You didn't download from this source yet", 
             "title": "DSTV.ZA"
-        }, 
+        },
         {
-            "bouquet": "setanta", 
-            "date": "You didn't download from this source yet", 
-            "title": "SETANTA Eurasia"
+            "bouquet": "lovenature",
+            "date": "You didn't download from this source yet",
+            "title": "Love Nature"
         }, 
         {
             "bouquet": "aljazeera", 

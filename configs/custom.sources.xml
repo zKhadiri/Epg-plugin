@@ -44,6 +44,10 @@
         <description>Rotana</description>
         <url>/etc/epgimport/ziko_epg/rotana.xml</url>
     </source>
+    <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/satTv.channels.xml">
+        <description>SAT Tv</description>
+        <url>/etc/epgimport/ziko_epg/satTv.xml</url>
+    </source>
     <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/snrt.channels.xml">
         <description>Snrt</description>
         <url>/etc/epgimport/ziko_epg/snrt.xml</url>
@@ -77,8 +81,8 @@
         <url>/etc/epgimport/ziko_epg/skyuk.xml</url>
     </source>
     <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/custom.channels.xml">
-        <description>SETANTA eurasia</description>
-        <url>/etc/epgimport/ziko_epg/setanta.xml</url>
+        <description>Love Nature</description>
+        <url>/etc/epgimport/ziko_epg/lovenature.xml</url>
     </source>
     <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/custom.channels.xml">
         <description>INDIAN SPORTS CHANNELS</description>

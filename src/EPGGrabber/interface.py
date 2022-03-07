@@ -345,12 +345,15 @@ class EPGGrabber(Screen):
                         self["glb"].setText("Last update : {}".format(channel["date"]))
                 if js != None:
                     if provName == "osnplay":
-                        self.check_date(js['main'], provName)
-                        self["status"].setText('Last commit : {}'.format(js['main']))
+                        self.check_date(js['OS'], provName)
+                        self["status"].setText('Last commit : {}'.format(js['OS']))
 
                     elif provName == 'jawwyenOS' or provName == 'jawwyOS':
-                        self.check_date(js['main'], provName)
-                        self["status"].setText('Last commit : {}'.format(js['main']))
+                        self.check_date(js['OS'], provName)
+                        self["status"].setText('Last commit : {}'.format(js['OS']))
+                    elif provName == "satTvB":
+                        self.check_date(js['sattv'], provName)
+                        self["status"].setText('Last commit : {}'.format(js['sattv']))
                     else:
                         self["status"].setText("")
 
