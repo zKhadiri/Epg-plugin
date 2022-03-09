@@ -41,6 +41,10 @@ if time_zone != "+0000":
         else:
             print("file is empty")
 
+if os.path.exists('/var/lib/dpkg/status'):
+    print('Dream os image found\nSorting data please wait.....')
+    sortXML('satTv.xml')
+
 print("satTv.xml donwloaded with success")
 
 provider = __file__.rpartition('/')[-1].replace('.py', '')

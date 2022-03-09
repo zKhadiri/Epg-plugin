@@ -76,14 +76,22 @@ def appSat():
 def main():
     print('**************SatTv EPG******************')
     sys.stdout.flush()
-
+ 
     xml_header(EPG_ROOT + '/satTv.xml', list(CHANNELS.values()))
 
-    appSat()
+    try:
+        appSat()
+    except Exception as e:
+        print(e)
+        sys.stdout.flush()
 
     close_xml(EPG_ROOT + '/satTv.xml')
+
     provider = __file__.rpartition('/')[-1].replace('.py', '')
     update_status(provider)
+    if os.path.exists('/var/lib/dpkg/status'):
+        print('Dream os image found\nSorting data please wait.....')
+        sortXML('satTv.xml')
 
     print("**************FINISHED******************")
     sys.stdout.flush()
