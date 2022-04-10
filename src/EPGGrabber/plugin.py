@@ -72,7 +72,7 @@ class StartTimer:
 
     def getStatus(self):
         allData = []
-        links = ["https://api.github.com/repos/MOHAMED19OS/XMLTV/branches/main|OS","http://tunisia01.selfip.com/EPG/satTv/update|sattv"]
+        links = ["https://api.github.com/repos/MOHAMED19OS/XMLTV/branches/main|OS","http://ipkinstall.ath.cx/EPG/satTv/update|sattv"]
         for link in links:
             try:
                 if link.split('|')[1] == "OS":
