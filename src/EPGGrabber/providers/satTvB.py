@@ -18,7 +18,7 @@ sys.stdout.flush()
 print("Downloading SAT Tv guide\nPlease wait....")
 sys.stdout.flush()
 
-os.system("wget http://tunisia01.selfip.com/EPG/satTv/satTv.xml -O "+path)
+os.system("wget http://ipkinstall.ath.cx/EPG/satTv/satTv.xml -O "+path)
 
 if time_zone != "+0000":
     print("changing to your timezone please wait....")
