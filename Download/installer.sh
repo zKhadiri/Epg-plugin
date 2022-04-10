@@ -2,8 +2,8 @@
 ##setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=21.2
-description=What_is_NEW:\n'-New Sources: Sat.tv/Sat.tv Backup'
+version=21.3
+description=What_is_NEW:\n'-Update Sat.Tv backup url'
 ##############################################################
 
 TEMPATH=/tmp
