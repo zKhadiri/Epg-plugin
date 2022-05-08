@@ -27,7 +27,8 @@ today = datetime.strptime(str(datetime.now().strftime('%Y-%m-%d')) + ' 00:00:00'
 ch_code = ['74-beIN Sports', '75-beIN Sports News', '67-beIN 1HD', '70-beIN 2HD', '68-beIN 3HD', '69-beIN 4HD',
            '73-beIN 5HD', '71-beIN 6HD', '58-beIN 7HD', '65-beIN 1 PREM', '66-beIN 2 PREM', '72-beIN 3 PREM',
            '103-beIN SPORTS XTRA 1', '104-beIN SPORTS XTRA 2', '59-beIN 1HD english', '60-beIN 2HD english',
-           '61-beIN 3HD english', '62-beIN SPORTS 1 FR', '63-beIN SPORTS 2 FR', '64-beIN SPORTS 3 FR']
+           '61-beIN 3HD english', '62-beIN SPORTS 1 FR', '63-beIN SPORTS 2 FR', '64-beIN SPORTS 3 FR',
+	   '228-beIN SPORTS AFC', '229-beIN SPORTS 1 AFC', '230-beIN SPORTS 2 AFC', '231-beIN SPORTS 3 AFC']
 # '101-beIN SPORTS MAX 1', '102-beIN SPORTS MAX 2', '216-beIN SPORTS MAX 3','217-beIN SPORTS MAX 4','213-beIN SPORTS MAX 5','218-beIN SPORTS MAX 6'
 
 head = {
