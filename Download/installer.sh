@@ -2,8 +2,8 @@
 ##setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=21.4
-description=What_is_NEW:\n'-Add beIN SPORTS, AFC and Al Kass'
+version=21.5
+description=What_is_NEW:\n'-Update Channel ID For OSN'
 ##############################################################
 
 TEMPATH=/tmp
