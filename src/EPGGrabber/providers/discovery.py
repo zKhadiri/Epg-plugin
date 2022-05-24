@@ -21,9 +21,9 @@ if not PY3:
 
 next_update = (datetime.today() + timedelta(days=30)).strftime('%Y-%m-%d 02:00:00')
 
-channels = ['Discovery Central Europe|DCENENG-UTC', 'Animal Planet Europe|APEUENG-UTC', 'Discovery Showcase HD|HDEUENG-UTC', 'Discovery Science Europe|SCEUENG-UTC', 'ID|IDXEENG-UTC', 'DTX|TUTUROM-UTC', 'Discovery World|CVEUENG-UTC',
-            'Discovery Channel France|DFRAFRE-UTC', 'Discovery Science France|SCFRFRE-UTC',
-            'Discovery Family France|DFFRFRE-UTC', 'Investigation Discovery France|IDFRFRE-UTC']
+channels = ["Discovery Channel Denmark|DDENENG-UTC", "Discovery Channel Norway|DNORENG-UTC", "Discovery Channel Sweden|DSWEENG-UTC", "Discovery Central Europe|DCENENG-UTC", "Animal Planet Europe|APEUENG-UTC", "Discovery Science Europe|SCEUENG-UTC", "Investigation Discovery France|IDFRFRE-UTC"
+            "HGTV Pan Regional|HGEUENG-UTC", "ID Pan Regional|IDXEENG-UTC", "Discovery World|CVEUENG-UTC", "Discovery Channel France|DFRAFRE-UTC", "Discovery Science France|SCFRFRE-UTC", "Discovery Family France|DFFRFRE-UTC", "Travel Channel EMEA|TCEUENG-UTC", "TLC Denmark|TLDEENG-UTC", "TLC Norway|TLCNENG-UTC",
+            "TLC Pan Regional|TLPRENG-UTC", "TLC Sweden|TLSWENG-UTC", "DTX EMEA|TUTUENG-UTC"]
 
 
 french = ['DFRAFRE-UTC', 'SCFRFRE-UTC', 'DFFRFRE-UTC', 'IDFRFRE-UTC']
