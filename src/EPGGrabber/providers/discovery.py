@@ -21,7 +21,7 @@ if not PY3:
 
 next_update = (datetime.today() + timedelta(days=30)).strftime('%Y-%m-%d 02:00:00')
 
-channels = ["Discovery Channel Denmark|DDENENG-UTC", "Discovery Channel Norway|DNORENG-UTC", "Discovery Channel Sweden|DSWEENG-UTC", "Discovery Central Europe|DCENENG-UTC", "Animal Planet Europe|APEUENG-UTC", "Discovery Science Europe|SCEUENG-UTC", "Investigation Discovery France|IDFRFRE-UTC"
+channels = ["Discovery Channel Denmark|DDENENG-UTC", "Discovery Channel Norway|DNORENG-UTC", "Discovery Channel Sweden|DSWEENG-UTC", "Discovery Central Europe|DCENENG-UTC", "Animal Planet Europe|APEUENG-UTC", "Discovery Science Europe|SCEUENG-UTC", "Investigation Discovery France|IDFRFRE-UTC",
             "HGTV Pan Regional|HGEUENG-UTC", "ID Pan Regional|IDXEENG-UTC", "Discovery World|CVEUENG-UTC", "Discovery Channel France|DFRAFRE-UTC", "Discovery Science France|SCFRFRE-UTC", "Discovery Family France|DFFRFRE-UTC", "Travel Channel EMEA|TCEUENG-UTC", "TLC Denmark|TLDEENG-UTC", "TLC Norway|TLCNENG-UTC",
             "TLC Pan Regional|TLPRENG-UTC", "TLC Sweden|TLSWENG-UTC", "DTX EMEA|TUTUENG-UTC"]
 
@@ -57,11 +57,11 @@ def discovery():
                     elif ch.split('|')[1] in french:
                         epg += 2 * ' ' + '<programme start="' + prog_start + ' +0000" stop="' + prog_end + ' +0000" channel="' + ch.split('|')[0] + '">\n'
                         if PY3:
-                        	epg += 4 * ' ' + '<title lang="en">' + title.replace('&amp;', 'and') + '</title>\n'
-                        	epg += 4 * ' ' + '<desc lang="en">' + py + ' (S' + se + ' Ep ' + ep + ') : ' + des.replace('&amp;', 'and').strip() + '</desc>\n  </programme>\r'
+                            epg += 4 * ' ' + '<title lang="en">' + title.replace('&amp;', 'and') + '</title>\n'
+                            epg += 4 * ' ' + '<desc lang="en">' + py + ' (S' + se + ' Ep ' + ep + ') : ' + des.replace('&amp;', 'and').strip() + '</desc>\n  </programme>\r'
                         else:
-                        	epg += 4 * ' ' + '<title lang="en">' + title.encode('latin-1').replace('&amp;', 'and') + '</title>\n'
-                        	epg += 4 * ' ' + '<desc lang="en">' + py + ' (S' + se + ' Ep ' + ep + ') : ' + des.encode('latin-1').replace('&amp;', 'and').strip() + '</desc>\n  </programme>\r'
+                            epg += 4 * ' ' + '<title lang="en">' + title.encode('latin-1').replace('&amp;', 'and') + '</title>\n'
+                            epg += 4 * ' ' + '<desc lang="en">' + py + ' (S' + se + ' Ep ' + ep + ') : ' + des.encode('latin-1').replace('&amp;', 'and').strip() + '</desc>\n  </programme>\r'
                     else:
                         epg += 2 * ' ' + '<programme start="' + prog_start + ' +0000" stop="' + prog_end + ' +0000" channel="' + ch.split('|')[0] + '">\n'
                         epg += 4 * ' ' + '<title lang="en">' + title.replace('&amp;', 'and') + '</title>\n'
