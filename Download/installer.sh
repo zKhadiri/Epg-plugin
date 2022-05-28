@@ -2,8 +2,8 @@
 ##setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=21.6
-description=What_is_NEW:\n'-Update Channel list for Discovery'
+version=21.7
+description=What_is_NEW:\n'-some Fix and Update For Script and id channels by (MOHAMED19OS)'
 ##############################################################
 
 TEMPATH=/tmp
