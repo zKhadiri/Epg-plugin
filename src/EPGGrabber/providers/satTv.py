@@ -4,7 +4,7 @@ from datetime import datetime, date, timedelta
 from requests.adapters import HTTPAdapter
 from __init__ import *
 
-time_zone = tz()
+time_zone = '+0200'
 
 CHANNELS = {
     5: 'AD Sports 1', 7: 'Al Arabiya', 8: 'Al Jazeera', 9: 'Al Jazeera English', 11: 'Arryadia', 12: 'Assadissa', 13: 'BBC Arabic', 15: 'BBC World News', 17: 'CNBC Europe',
@@ -76,7 +76,7 @@ def appSat():
 def main():
     print('**************SatTv EPG******************')
     sys.stdout.flush()
- 
+
     xml_header(EPG_ROOT + '/satTv.xml', list(CHANNELS.values()))
 
     try:

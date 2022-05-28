@@ -9,7 +9,7 @@ import requests
 import json
 from __init__ import *
 
-time_zone = tz()
+time_zone = '+0200'
 
 path = EPG_ROOT + '/satTv.xml'
 
