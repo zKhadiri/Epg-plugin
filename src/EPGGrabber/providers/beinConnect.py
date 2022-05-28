@@ -12,7 +12,6 @@ import sys
 import io
 import json
 from datetime import timedelta
-from time import strftime
 
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
@@ -24,12 +23,7 @@ from datetime import datetime
 milli = (datetime.strptime('' + str(week) + ' 23:59:59', "%Y-%m-%d %H:%M:%S").strftime("%s")) + '.999'
 today = datetime.strptime(str(datetime.now().strftime('%Y-%m-%d')) + ' 00:00:00', "%Y-%m-%d %H:%M:%S").strftime('%s')
 
-ch_code = ['74-beIN Sports', '75-beIN Sports News', '67-beIN 1HD', '70-beIN 2HD', '68-beIN 3HD', '69-beIN 4HD',
-           '73-beIN 5HD', '71-beIN 6HD', '58-beIN 7HD', '65-beIN 1 PREM', '66-beIN 2 PREM', '72-beIN 3 PREM',
-           '103-beIN SPORTS XTRA 1', '104-beIN SPORTS XTRA 2', '59-beIN 1HD english', '60-beIN 2HD english',
-           '61-beIN 3HD english', '62-beIN SPORTS 1 FR', '63-beIN SPORTS 2 FR', '64-beIN SPORTS 3 FR',
-	   '228-beIN SPORTS AFC', '229-beIN SPORTS 1 AFC', '230-beIN SPORTS 2 AFC', '231-beIN SPORTS 3 AFC']
-# '101-beIN SPORTS MAX 1', '102-beIN SPORTS MAX 2', '216-beIN SPORTS MAX 3','217-beIN SPORTS MAX 4','213-beIN SPORTS MAX 5','218-beIN SPORTS MAX 6'
+bein_ch = []
 
 head = {
 	"user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
@@ -40,10 +34,26 @@ head = {
 time_zone = tz()
 
 
+
+def channel():
+    with requests.session() as s:
+        url = s.get('http://proxies.bein-mena-production.eu-west-2.tuc.red/proxy/listChannels', headers=head).json()
+        data = url['result']['channels']
+    for c in range(len(data)):
+        for i in data[c].get('tags'):
+            if i == 'channeltype:sports':
+                extra = i.replace('channeltype:sports','sports')
+            elif i == 'channeltype:entertainment':
+                extra =i.replace('channeltype:entertainment','entertainment')
+        if extra == 'sports':
+            bein_ch.append("{}-{}".format(data[c]['idChannel'],data[c]['name']))
+        else:
+            pass
+
 def b_connect():
 	print('**************BEIN SPORTS CONNECT EPG******************')
 	sys.stdout.flush()
-	for code in ch_code:
+	for code in bein_ch:
 		query = {
 			"languageId": "ara",
 			"filter": '{"$and":[{"id_channel":{"$in":[' + code.split('-')[0] + ']}},{"endutc":{"$ge":' + today + '}},{"startutc":{"$le":' + milli + '}}]}'
@@ -171,9 +181,20 @@ def b_connect():
 			print(code.split('-')[1] + ' epg ends at ' + endtime)
 			sys.stdout.flush()
 
+def update(chan):
+    with open(BOUQUETS_ROOT, 'r') as f:
+        data = json.load(f)
+    for channel in data['bouquets']:
+        if channel["name"] == "bein sport connect":
+            channel['channels'] = sorted([ch for ch in chan])
+    with open(BOUQUETS_ROOT, 'w') as f:
+        json.dump(data, f)
+
+
 
 def main():
-	channels = [ch.split('-')[1] for ch in ch_code]
+	channels = [ch.split('-')[1] for ch in bein_ch]
+
 	xml_header(EPG_ROOT + '/beinConnect.xml', channels)
 
 	b_connect()
@@ -187,10 +208,11 @@ def main():
 			bouquet['date'] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
 			with open(PROVIDERS_ROOT, 'w') as f:
 				json.dump(data, f)
-
+	update(channels)
 	print("**************FINISHED******************")
 	sys.stdout.flush()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
+	channel()
 	main()
