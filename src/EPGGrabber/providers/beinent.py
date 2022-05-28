@@ -57,7 +57,7 @@ def bein():
                         epg += 2 * ' ' + '<programme start="' + starttime + ' +0300" stop="' + endtime + ' +0300" channel="' + ch.replace('_Digital_Mono', '').replace('_DIGITAL_Mono', '').replace('-1', '') + '">' + '\n'
                         epg += 4 * ' ' + '<title lang="en">' + live + title_.replace('&', 'and').strip() + ' - ' + form_.replace('2014', '2021') + '</title>' + '\n'
                         epg += 4 * ' ' + '<desc lang="ar">' + des.replace('- ', '').replace('&', 'and') + '</desc>\n  </programme>\r'
-                        with io.open(EPG_ROOT + '/bein.xml', "a", encoding='UTF-8')as f:
+                        with io.open(EPG_ROOT + '/beinent.xml', "a", encoding='UTF-8')as f:
                             f.write(epg)
                 except:
                     break
@@ -77,23 +77,23 @@ def main():
 
     provider = __file__.rpartition('/')[-1].replace('.py', '')
     channels = get_channels("bein entertainment.net")
-    xml_header(EPG_ROOT + '/bein.xml', channels)
+    xml_header(EPG_ROOT + '/beinent.xml', channels)
 
     bein()
 
-    close_xml(EPG_ROOT + '/bein.xml')
+    close_xml(EPG_ROOT + '/beinent.xml')
     update_status(provider)
 
     if os.path.exists('/var/lib/dpkg/status'):
         print('Dream os image found\nSorting data please wait.....')
         sys.stdout.flush()
         import xml.etree.ElementTree as ET
-        tree = ET.parse(EPG_ROOT + '/bein.xml')
+        tree = ET.parse(EPG_ROOT + '/beinent.xml')
         data = tree.getroot()
         els = data.findall("*[@channel]")
         new_els = sorted(els, key=lambda el: (el.tag, el.attrib['channel']))
         data[:] = new_els
-        tree.write(EPG_ROOT + '/bein.xml', xml_declaration=True, encoding='utf-8')
+        tree.write(EPG_ROOT + '/beinent.xml', xml_declaration=True, encoding='utf-8')
 
 
 if __name__ == '__main__':
