@@ -54,7 +54,7 @@ def bein():
                         endtime = datetime.strptime(date.group() + ' ' + time_[1], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
                         live = "Live: " if is_live == "1" else ""
                         epg = ''
-                        epg += 2 * ' ' + '<programme start="' + starttime + ' +0300" stop="' + endtime + ' +0300" channel="' + ch.replace('_Digital_Mono', '').replace('_DIGITAL_Mono', '').replace('-1', '') + '">' + '\n'
+                        epg += 2 * ' ' + '<programme start="' + starttime + ' +0300" stop="' + endtime + ' +0300" channel="' + ch.replace("_Digital_Mono", "").replace("_DIGITAL_Mono", "").replace("-Yellow-1", "").replace("-logo-2018","").replace("UPDATEz-NGW_Full_Logo_20182","Nat_wd").replace("-1", "") + '">' + '\n'
                         epg += 4 * ' ' + '<title lang="en">' + live + title_.replace('&', 'and').strip() + ' - ' + form_.replace('2014', '2021') + '</title>' + '\n'
                         epg += 4 * ' ' + '<desc lang="ar">' + des.replace('- ', '').replace('&', 'and') + '</desc>\n  </programme>\r'
                         with io.open(EPG_ROOT + '/beinent.xml', "a", encoding='UTF-8')as f:
