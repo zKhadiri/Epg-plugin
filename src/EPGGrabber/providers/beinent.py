@@ -15,107 +15,74 @@ import sys
 import json
 from time import sleep, strftime
 from requests.adapters import HTTPAdapter
+from datetime import datetime, timedelta
 
 print('**************BEIN ENTERTAINMENT EPG******************')
 sys.stdout.flush()
-urls = []
-for i in range(0, 5):
-    import datetime
-    from datetime import timedelta
-    jour = datetime.date.today()
-    week = jour + timedelta(days=i)
-    urls.append('https://www.bein.com/en/epg-ajax-template/?action=epg_fetch&offset=%2B2&category=entertainment&serviceidentity=bein.net&mins=00&cdate={}&language=EN&postid=25356&loadindex='.format(str(week)) + str(i))
-
-desc = []
-title_chan = []
-titles = []
-prog = []
 
 
-def beinen():
-    for url in urls:
-        from datetime import datetime, timedelta
-        desc[:] = []
-        title_chan[:] = []
-        titles[:] = []
-        prog[:] = []
+def bein():
+
+    channels_found = []
+    for i in range(0, 3):
+        week = (datetime.today() + timedelta(days=i)).strftime('%Y-%m-%d')
         with requests.Session() as s:
-            s.mount('https://', HTTPAdapter(max_retries=10))
-            link = s.get(url)
-            title = re.findall(r'<p\sclass=title>(.*?)<\/p>', link.text)
-            time = re.findall(r'<p\sclass=time>(.*?)<\/p>', link.text)
-            formt = re.findall(r'<p\sclass=format>(.*?)<\/p>', link.text)
-            times = [t.replace('&nbsp;-&nbsp;', '-').split('-') for t in time]
-            channels = re.findall(r"<li\s+id='slider_.*_item\d+'.*img='.*/(.*).*.png", link.text)
-            for tt_ in title:
-                titles.append(4 * ' ' + '<title lang="en">' + tt_.replace('&', 'and') + '</title>' + '\n')
-                #desc.append(4*' '+'<category lang="en">No data found</category>'+'\n')
-            format_ = [4 * ' ' + '<desc lang="en">' + f + '</desc>' + "\n" + '  </programme>' + '\n' for f in formt]
-            try:
-                for time_, chann_, chc, chch in zip(times, channels, channels, channels[1:] + [channels[0]]):
-                    end = '05:59'
-                    start = '18:00'
-                    date = re.search(r'\d{4}-\d{2}-\d{2}', url)
-                    channel_b = chann_.replace('-logo-2018-1', '').replace('-Yellow-1', '').replace('-1', '').replace('-2', '')
-                    if time_[0] >= start and time_[1] <= end and chc == chch:
-                        fix = (datetime.strptime(date.group(), '%Y-%m-%d') - timedelta(days=1)).strftime('%Y-%m-%d')
-                        starttime = datetime.strptime(fix + ' ' + time_[0], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
-                        endtime = datetime.strptime(date.group() + ' ' + time_[1], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
-                        prog.append(2 * ' ' + '<programme start="' + starttime + ' +0000" stop="' + endtime + ' +0000" channel="' + channel_b + '">' + '\n')
-                    elif chc != chch and time_[1] >= '00:00':
-                        fix = (datetime.strptime(date.group(), '%Y-%m-%d') + timedelta(days=1)).strftime('%Y-%m-%d')
-                        starttime = datetime.strptime(date.group() + ' ' + time_[0], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
-                        endtime = datetime.strptime(fix + ' ' + time_[1], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
-                        prog.append(2 * ' ' + '<programme start="' + starttime + ' +0000" stop="' + endtime + ' +0000" channel="' + channel_b + '">' + '\n')
+            for idx in range(0, 4):
+                url = 'https://www.bein.com/ar/epg-ajax-template/?action=epg_fetch&category=entertainment&serviceidentity=bein.net&offset=00&mins=00&cdate={}&language=AR&postid=25344&loadindex={}'.format(week, idx)
+                data = s.get(url).text
+                time = re.findall(r'<p\sclass=time>(.*?)<\/p>', data)
+                times = [t.replace('&nbsp;-&nbsp;', '-').split('-') for t in time]
+                title = re.findall(r'<p\sclass=title>(.*?)<\/p>', data)
+                formt = re.findall(r'<p\sclass=format>(.*?)<\/p>', data)
+                channels = re.findall(r"data-img.*?sites\/\d+\/\d+\/\d+\/(.*?)\.png", data)
+                live_events = re.findall(r"li\s+live='(\d)'", data)
+                channels_found += channels
+
+                desc = []
+                title_chan = []
+                for tit in title:
+                    title_chan.append(tit.replace('   ', ' ').split('- ')[0])
+                    spl = re.search(r'-\s(.*)', tit)
+                    if spl != None:
+                        desc.append(spl.group().replace('- ', '').replace('&', 'and'))
                     else:
+                        desc.append(tit.replace('&', 'and'))
+                try:
+                    for title_, form_, time_, ch, des, is_live in zip(title_chan, formt, times, channels, desc, live_events):
+                        date = re.search(r'\d{4}-\d{2}-\d{2}', url)
                         starttime = datetime.strptime(date.group() + ' ' + time_[0], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
                         endtime = datetime.strptime(date.group() + ' ' + time_[1], '%Y-%m-%d %H:%M').strftime('%Y%m%d%H%M%S')
-                        prog.append(2 * ' ' + '<programme start="' + starttime + ' +0000" stop="' + endtime + ' +0000" channel="' + channel_b + '">' + '\n')
-            except:
-                break
-            if len(title) != 0:
-                for ttt, f, p in zip(titles, format_, prog):
-                    with io.open(EPG_ROOT + '/beinent.xml', "a", encoding='UTF-8')as fil:
-                        fil.write(p + ttt + f)
-                dat = re.search(r'\d{4}-\d{2}-\d{2}', url)
-                print('Date' + ' : ' + dat.group())
-                sys.stdout.flush()
-                update([channel.replace('-logo-2018-1', '').replace('-Yellow-1', '').replace('-1', '').replace('-2', '') for channel in channels])
-            else:
-                print('No data found')
-                break
-
-
-def update(chan):
-    with open(BOUQUETS_ROOT, 'r') as f:
-        data = json.load(f)
-    for channel in data['bouquets']:
-        if channel["name"] == "bein entertainment.net":
-            channel['channels'] = sorted([ch for ch in list(dict.fromkeys(chan))])
-    with open(BOUQUETS_ROOT, 'w') as f:
-        json.dump(data, f)
+                        live = "Live: " if is_live == "1" else ""
+                        epg = ''
+                        epg += 2 * ' ' + '<programme start="' + starttime + ' +0300" stop="' + endtime + ' +0300" channel="' + ch.replace("_Digital_Mono", "").replace("_DIGITAL_Mono", "").replace("-Yellow-1", "").replace("-logo-2018","").replace("UPDATEz-NGW_Full_Logo_20182","Nat_wd").replace("-1", "") + '">' + '\n'
+                        epg += 4 * ' ' + '<title lang="en">' + live + title_.replace('&', 'and').strip() + ' - ' + form_.replace('2014', '2021') + '</title>' + '\n'
+                        epg += 4 * ' ' + '<desc lang="ar">' + des.replace('- ', '').replace('&', 'and') + '</desc>\n  </programme>\r'
+                        with io.open(EPG_ROOT + '/beinent.xml', "a", encoding='UTF-8')as f:
+                            f.write(epg)
+                except:
+                    break
+                if len(title) != 0:
+                    dat = re.search(r'\d{4}-\d{2}-\d{2}', url)
+                    print('Date' + ' : ' + dat.group() + ' & Index : ' + str(idx))
+                    sys.stdout.flush()
+                else:
+                    print('No data found')
+                    break
+    if len(channels_found) > 0:
+        channels_found = sorted([ch.replace("_Digital_Mono", "").replace("_DIGITAL_Mono", "").replace("-Yellow-1", "").replace("-logo-2018","").replace("UPDATEz-NGW_Full_Logo_20182","Nat_wd").replace("-1", "") for ch in list(dict.fromkeys(channels_found))])
+        update_channels("bein entertainment.net", channels_found)
 
 
 def main():
-    with open(BOUQUETS_ROOT, 'r') as f:
-        jsData = json.load(f)
-    for channel in jsData['bouquets']:
-        if channel["name"] == "bein entertainment.net":
-            xml_header(EPG_ROOT + '/beinent.xml', channel['channels'])
 
-    beinen()
+    provider = __file__.rpartition('/')[-1].replace('.py', '')
+    channels = get_channels("bein entertainment.net")
+    xml_header(EPG_ROOT + '/beinent.xml', channels)
+
+    bein()
 
     close_xml(EPG_ROOT + '/beinent.xml')
-
-    from datetime import datetime
-
-    with open(PROVIDERS_ROOT, 'r') as f:
-        data = json.load(f)
-    for bouquet in data['bouquets']:
-        if bouquet["bouquet"] == "beinent":
-            bouquet['date'] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
-    with open(PROVIDERS_ROOT, 'w') as f:
-        json.dump(data, f)
+    update_status(provider)
 
     if os.path.exists('/var/lib/dpkg/status'):
         print('Dream os image found\nSorting data please wait.....')
@@ -128,8 +95,8 @@ def main():
         data[:] = new_els
         tree.write(EPG_ROOT + '/beinent.xml', xml_declaration=True, encoding='utf-8')
 
-    print("**************FINISHED******************")
-
 
 if __name__ == '__main__':
     main()
+
+print("**************FINISHED******************")

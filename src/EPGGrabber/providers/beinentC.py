@@ -25,7 +25,7 @@ from time import strftime
 milli = (datetime.strptime('' + str(week) + ' 23:59:59', "%Y-%m-%d %H:%M:%S").strftime("%s")) + '.999'
 today = datetime.strptime(str(datetime.now().strftime('%Y-%m-%d')) + ' 00:00:00', "%Y-%m-%d %H:%M:%S").strftime('%s')
 
-ch_code = ['81-beIN Movie 1', '82-beIN Movie 2', '83-beIN Movie 3', '90-beIN Movie 4HD', '112-Series 1HD', '175-beIN Series 2 HD', '174-beIN Drama HD', '170-beIN Gourmet HD', '91-beJuniors', '100-Jeem', '99-Baraem']
+bein_ch = []
 
 
 time_zone = tz()
@@ -36,9 +36,23 @@ head = {
 	"x-an-webservice-identitykey": "t1Th55UviStev8p2urOv4fOtraDaBr1f"
 }
 
+def channel():
+    with requests.session() as s:
+        url = s.get('http://proxies.bein-mena-production.eu-west-2.tuc.red/proxy/listChannels', headers=head).json()
+        data = url['result']['channels']
+    for c in range(len(data)):
+        for i in data[c].get('tags'):
+            if i == 'channeltype:sports':
+                extra = i.replace('channeltype:sports','sports')
+            elif i == 'channeltype:entertainment':
+                extra =i.replace('channeltype:entertainment','entertainment')
+        if extra == 'entertainment':
+            bein_ch.append("{}-{}".format(data[c]['idChannel'],data[c]['name']))
+        else:
+            pass
 
 def beINent():
-    for code in ch_code:
+    for code in bein_ch:
         query = {
             "languageId": "ara",
             "filter": '{"$and":[{"id_channel":{"$in":[' + code.split('-')[0] + ']}},{"endutc":{"$ge":' + today + '}},{"startutc":{"$le":' + milli + '}}]}'
@@ -62,18 +76,27 @@ def beINent():
             print(code.split('-')[1] + ' epg ends at ' + endtime)
             sys.stdout.flush()
 
+def update(chan):
+    with open(BOUQUETS_ROOT, 'r') as f:
+        data = json.load(f)
+    for channel in data['bouquets']:
+        if channel["name"] == "bein entertainment connect":
+            channel['channels'] = sorted([ch for ch in chan])
+    with open(BOUQUETS_ROOT, 'w') as f:
+        json.dump(data, f)
+
 
 def main():
     print('**************BEIN ENTERTAINMENT EPG******************')
     sys.stdout.flush()
 
-    channels = [ch.split('-')[1] for ch in ch_code]
+    channels = [ch.split('-')[1] for ch in bein_ch]
     xml_header(EPG_ROOT + '/beinentC.xml', channels)
 
     beINent()
 
     close_xml(EPG_ROOT + '/beinentC.xml')
-
+    update(channels)
     provider = __file__.rpartition('/')[-1].replace('.py', '')
     update_status(provider)
 
@@ -82,4 +105,5 @@ def main():
 
 
 if __name__ == "__main__":
+    channel()
     main()
