@@ -57,7 +57,7 @@ def beINent():
             "languageId": "ara",
             "filter": '{"$and":[{"id_channel":{"$in":[' + code.split('-')[0] + ']}},{"endutc":{"$ge":' + today + '}},{"startutc":{"$le":' + milli + '}}]}'
         }
-        url = requests.get('https://proxies-beinmena.portail.alphanetworks.be/cms/epg/filtered', headers=head, params=query, verify=False).json()
+        url = requests.get('https://proxies.bein-mena-production.eu-west-2.tuc.red/cms/epg/filtered', headers=head, params=query, verify=False).json()
         if url['status'] == False:
             print('Invalid API Key')
             break
