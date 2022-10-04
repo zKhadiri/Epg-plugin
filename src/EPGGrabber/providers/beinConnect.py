@@ -37,7 +37,7 @@ time_zone = tz()
 
 def channel():
     with requests.session() as s:
-        url = s.get('http://proxies.bein-mena-production.eu-west-2.tuc.red/proxy/listChannels', headers=head).json()
+        url = s.post('http://proxies.bein-mena-production.eu-west-2.tuc.red/proxy/listChannels', headers=head).json()
         data = url['result']['channels']
     for c in range(len(data)):
         for i in data[c].get('tags'):
