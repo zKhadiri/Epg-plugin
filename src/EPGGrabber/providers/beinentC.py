@@ -38,7 +38,7 @@ head = {
 
 def channel():
     with requests.session() as s:
-        url = s.get('http://proxies.bein-mena-production.eu-west-2.tuc.red/proxy/listChannels', headers=head).json()
+        url = s.post('http://proxies.bein-mena-production.eu-west-2.tuc.red/proxy/listChannels', headers=head, params={"languageId":"ara"}).json()
         data = url['result']['channels']
     for c in range(len(data)):
         for i in data[c].get('tags'):
@@ -62,19 +62,21 @@ def beINent():
             print('Invalid API Key')
             break
         else:
-            for data in url['result']['epg']['chan_' + code.split('-')[0]]:
-                start = datetime.fromtimestamp(int(data['startutc'])).strftime('%Y%m%d%H%M%S')
-                end = datetime.fromtimestamp(int(data['endutc'])).strftime('%Y%m%d%H%M%S')
-                ch = ''
-                ch += 2 * ' ' + '<programme start="' + start + ' ' + time_zone + '" stop="' + end + ' ' + time_zone + '" channel="' + code.split('-')[1] + '">\n'
-                ch += 4 * ' ' + '<title lang="en">' + data['title'].replace('&', 'and').strip() + '</title>\n'
-                ch += 4 * ' ' + '<desc lang="en">' + data['synopsis'].strip().replace('&', 'and') + '</desc>\n  </programme>\r'
-                with io.open('/etc/epgimport/ziko_epg/beinentC.xml', 'a', encoding="utf-8") as f:
-                    f.write(ch)
+            ch_code = 'chan_' + code.split('-')[0]
+            if ch_code in url['result']['epg']:
+                for data in url['result']['epg']['chan_' + code.split('-')[0]]:
+                    start = datetime.fromtimestamp(int(data['startutc'])).strftime('%Y%m%d%H%M%S')
+                    end = datetime.fromtimestamp(int(data['endutc'])).strftime('%Y%m%d%H%M%S')
+                    ch = ''
+                    ch += 2 * ' ' + '<programme start="' + start + ' ' + time_zone + '" stop="' + end + ' ' + time_zone + '" channel="' + code.split('-')[1] + '">\n'
+                    ch += 4 * ' ' + '<title lang="en">' + data['title'].replace('&', 'and').strip() + '</title>\n'
+                    ch += 4 * ' ' + '<desc lang="en">' + data['synopsis'].strip().replace('&', 'and') + '</desc>\n  </programme>\r'
+                    with io.open('/etc/epgimport/ziko_epg/beinentC.xml', 'a', encoding="utf-8") as f:
+                        f.write(ch)
 
-            endtime = datetime.strptime(start, '%Y%m%d%H%M%S').strftime('%Y-%m-%d %H:%M')
-            print(code.split('-')[1] + ' epg ends at ' + endtime)
-            sys.stdout.flush()
+                endtime = datetime.strptime(start, '%Y%m%d%H%M%S').strftime('%Y-%m-%d %H:%M')
+                print(code.split('-')[1] + ' epg ends at ' + endtime)
+                sys.stdout.flush()
 
 def update(chan):
     with open(BOUQUETS_ROOT, 'r') as f:
