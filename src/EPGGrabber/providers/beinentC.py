@@ -70,7 +70,10 @@ def beINent():
                     ch = ''
                     ch += 2 * ' ' + '<programme start="' + start + ' ' + time_zone + '" stop="' + end + ' ' + time_zone + '" channel="' + code.split('-')[1] + '">\n'
                     ch += 4 * ' ' + '<title lang="en">' + data['title'].replace('&', 'and').strip() + '</title>\n'
-                    ch += 4 * ' ' + '<desc lang="en">' + data['synopsis'].strip().replace('&', 'and') + '</desc>\n  </programme>\r'
+                    try:
+                    	ch += 4 * ' ' + '<desc lang="en">' + data['synopsis'].strip().replace('&', 'and') + '</desc>\n  </programme>\r'
+                    except:
+                    	pass
                     with io.open('/etc/epgimport/ziko_epg/beinentC.xml', 'a', encoding="utf-8") as f:
                         f.write(ch)
 
