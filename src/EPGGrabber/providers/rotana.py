@@ -18,6 +18,8 @@ if not PY3:
 
 today = (datetime.now() - timedelta(hours=4)).strftime('%d/%m/%Y %H:%M:%S')
 
+## This headers to bypass cloudflare
+headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:77.0) Gecko/20100101 Firefox/77.0'}
 
 def rotana(this_month, channel):
     with requests.Session() as s:
@@ -89,7 +91,7 @@ def main():
     channels = get_channels("Rotana")
     update_status(provider)
     xml_header(EPG_ROOT + '/rotana.xml', channels)
-    url = requests.get('https://rotana.net/%D8%AC%D8%AF%D9%88%D9%84-%D8%A7%D9%84%D8%A8%D8%B1%D8%A7%D9%85%D8%AC/')
+    url = requests.get('https://rotana.net/%D8%AC%D8%AF%D9%88%D9%84-%D8%A7%D9%84%D8%A8%D8%B1%D8%A7%D9%85%D8%AC/', headers=headers)
     date = re.findall(r'csv\":\"https:\\\/\\\/rotana.net\\\/triAssets\\\/uploads\\\/(\d{4}\W{2}\d{2})\W{2}', url.text)[0].replace('\/', '/')
     channel_code = re.findall(r'/\d+\\/\d+\\/(.*?).csv\"', url.text)
     channel_code = [ch for ch in channel_code if not '.png' in ch]
