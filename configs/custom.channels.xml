@@ -145,11 +145,10 @@
 	<channel id="CINEMA-EGY-9">1:0:16:4212:2F44:13E:822AB2:0:0:0</channel> <!-- Rotana cinema masr -->
 
 	<!-- Badr -->
-	<channel id="CINEMA-8">1:0:19:12D:51:2BE:1040000:0:0:0</channel> <!-- Rotana cinema KSA -->
-	<channel id="CINEMA-EGY-9">1:0:19:19E:15E9:2BE:1040000:0:0:0</channel> <!-- Rotana cinema masr -->
-	<channel id="DRAMA-11">1:0:19:131:51:2BE:1040000:0:0:0</channel> <!-- Rotana Drama -->
-	<channel id="CLASSIC-10">1:0:19:12F:51:2BE:1040000:0:0:0</channel> <!-- Rotana Classic -->
-	<channel id="COMEDY-11">1:0:19:12E:51:2BE:1040000:0:0:0</channel> <!-- Rotana Comedy -->
+	<channel id="CINEMA-8">1:0:1:83B:15:2BE:1040000:0:0:0</channel> <!-- Rotana cinema KSA -->
+    	<channel id="DRAMA-11">1:0:1:839:15:2BE:1040000:0:0:0</channel> <!-- Rotana Drama -->
+    	<channel id="CLASSIC-10">1:0:1:838:15:2BE:1040000:0:0:0</channel> <!-- Rotana Classic -->
+    	<channel id="COMEDY-11">1:0:19:12E:51:2BE:1040000:0:0:0</channel> <!-- Rotana Comedy -->
 
 	<!-- Al Yah 1 -->
 	<channel id="ROTANA-HD-9">1:0:1:14C9:E:20D:20D0000:0:0:0</channel> <!-- Rotana HD -->
