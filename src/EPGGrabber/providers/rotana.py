@@ -7,9 +7,9 @@ import re
 import io
 from datetime import datetime, timedelta
 try:
-	from .__init__ import *
+        from .__init__ import *
 except:
-	from __init__ import *
+        from __init__ import *
 import importlib
 
 if not PY3:
@@ -88,20 +88,20 @@ def main():
     print('**************Rotana EPG******************')
     sys.stdout.flush()
     try:
-    	provider = __file__.rpartition('/')[-1].replace('.py', '')
-    	channels = get_channels("Rotana")
-    	update_status(provider)
-    	xml_header(EPG_ROOT + '/rotana.xml', channels)
-    	url = requests.get('https://rotana.net/%D8%AC%D8%AF%D9%88%D9%84-%D8%A7%D9%84%D8%A8%D8%B1%D8%A7%D9%85%D8%AC/', headers=headers)
-    	date = re.findall(r'csv\":\"https:\\\/\\\/rotana.net\\\/triAssets\\\/uploads\\\/(\d{4}\W{2}\d{2})\W{2}', url.text)[0].replace('\/', '/')
-    	channel_code = re.findall(r'/\d+\\/\d+\\/(.*?).csv\"', url.text)
-    	channel_code = [ch for ch in channel_code if not '.png' in ch]
-    	for code in channel_code:
-        	rotana(date, code)
-    	close_xml(EPG_ROOT + '/rotana.xml')
-	update_channels("Rotana", channel_code)
+        provider = __file__.rpartition('/')[-1].replace('.py', '')
+        channels = get_channels("Rotana")
+        update_status(provider)
+        xml_header(EPG_ROOT + '/rotana.xml', channels)
+        url = requests.get('https://rotana.net/%D8%AC%D8%AF%D9%88%D9%84-%D8%A7%D9%84%D8%A8%D8%B1%D8%A7%D9%85%D8%AC/', headers=headers)
+        date = re.findall(r'csv\":\"https:\\\/\\\/rotana.net\\\/triAssets\\\/uploads\\\/(\d{4}\W{2}\d{2})\W{2}', url.text)[0].replace('\/', '/')
+        channel_code = re.findall(r'/\d+\\/\d+\\/(.*?).csv\"', url.text)
+        channel_code = [ch for ch in channel_code if not '.png' in ch]
+        for code in channel_code:
+                rotana(date, code)
+        close_xml(EPG_ROOT + '/rotana.xml')
+        update_channels("Rotana", channel_code)
     except:
-    	pass
+        pass
     print('**************FINISHED******************')
     sys.stdout.flush()
 
