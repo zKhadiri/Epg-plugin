@@ -91,20 +91,17 @@ class Elcinema:
         return self.prog_start
 
     def Endtime(self):
-        try:
-                minutes = []
-                for end in re.findall(r'\"subheader\">\[(\d+)', self.data):
-                        minutes.append(int(end))
-                start = datetime.strptime(datetime.strptime(str(self.Starttime(
-                )[0]), '%Y-%m-%d %H:%M:%S').strftime('%Y %m %d %H:%M'), '%Y %m %d %H:%M')
-                for m in minutes:
-                        x = start + timedelta(minutes=m)
-                        start += timedelta(minutes=m)
-                        self.prog_end.append(x)
+        minutes = []
+        for end in re.findall(r'\"subheader\">\[(\d+)', self.data):
+        	minutes.append(int(end))
+        start = datetime.strptime(datetime.strptime(str(self.Starttime(
+        )[0]), '%Y-%m-%d %H:%M:%S').strftime('%Y %m %d %H:%M'), '%Y %m %d %H:%M')
+        for m in minutes:
+        	x = start + timedelta(minutes=m)
+        	start += timedelta(minutes=m)
+        	self.prog_end.append(x)
 
-                return self.prog_end
-        except:
-                pass
+        return self.prog_end
 
     def GetDes(self):
         for f, l in zip(re.findall(r'<li>(.*?)<a\shref=\'#\'\sid=\'read-more\'>', self.data), re.findall(r"<span class='hide'>[^\n]+", self.data)):
