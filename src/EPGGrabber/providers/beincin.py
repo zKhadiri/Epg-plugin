@@ -24,17 +24,20 @@ class ElcinB(Elcinema, object):
         super(ElcinB, self).__init__(channel)
 
     def Toxml(self, channel):
-        for elem, next_elem, title, des in zip(self.Starttime(), self.Endtime(), self.Gettitle(), self.GetDes()):
-            ch = ''
-            startime = datetime.strptime(str(elem), '%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
-            endtime = datetime.strptime(str(next_elem), '%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
-            ch += 2 * ' ' + '<programme start="' + startime + ' ' + time_zone + '" stop="' + endtime + ' ' + time_zone + '" channel="' + channel.split('-')[1] + '">\n'
-            ch += 4 * ' ' + '<title lang="ar">' + title.replace('&#39;', "'").replace('&quot;', '"').replace('&amp;', 'and') + '</title>\n'
-            ch += 4 * ' ' + '<desc lang="ar">' + des.replace('&#39;', "'").replace('&quot;', '"').replace('&amp;', 'and').replace('(', '').replace(')', '').strip() + '</desc>\n  </programme>\r'
-            with io.open(EPG_ROOT + "/beinentCin.xml", "a", encoding='UTF-8')as f:
-                f.write(ch)
-        print(channel.split('-')[1] + ' epg ends at : ' + str(self.Endtime()[-1]))
-        sys.stdout.flush()
+        try:
+        	for elem, next_elem, title, des in zip(self.Starttime(), self.Endtime(), self.Gettitle(), self.GetDes()):
+            		ch = ''
+            		startime = datetime.strptime(str(elem), '%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
+            		endtime = datetime.strptime(str(next_elem), '%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
+            		ch += 2 * ' ' + '<programme start="' + startime + ' ' + time_zone + '" stop="' + endtime + ' ' + time_zone + '" channel="' + channel.split('-')[1] + '">\n'
+            		ch += 4 * ' ' + '<title lang="ar">' + title.replace('&#39;', "'").replace('&quot;', '"').replace('&amp;', 'and') + '</title>\n'
+            		ch += 4 * ' ' + '<desc lang="ar">' + des.replace('&#39;', "'").replace('&quot;', '"').replace('&amp;', 'and').replace('(', '').replace(')', '').strip() + '</desc>\n  </programme>\r'
+            		with io.open(EPG_ROOT + "/beinentCin.xml", "a", encoding='UTF-8')as f:
+                		f.write(ch)
+        	print(channel.split('-')[1] + ' epg ends at : ' + str(self.Endtime()[-1]))
+        	sys.stdout.flush()
+        except:
+        	pass
 
 
 def main():
