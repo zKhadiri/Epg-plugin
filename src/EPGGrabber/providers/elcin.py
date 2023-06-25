@@ -34,7 +34,11 @@ nb_channel = ['1173-DubaiOne', '1223-Al_NaharDrama', '1169-Dubai_TV', '1137-Alha
               '1299-Roya', '1310-Kuwait', '1304-Nessma', '1336-Maspero_Zaman', '1308-Watania1', '1204-iFILM_TV', '1306-Alrasheed', '1341-LBC',
               '1338-Syria_TV', '1339-AlSaeedah', '1366-Thikrayat_Tv', '1353-2MTV', '1352-Saudiya_TV', '1367-Utv', '1355-Mix', '1350-SamaTV', '1369-Qurain',
               '1296-MTV', '1260-CBC_sofra', '1290-DMC', '1129-MBC4', '1132-MBC_MAX', '1259-MBC_Bollywood', '1130-MBC_Action', '1239-MBC_Egypt', '1340-MBC_Iraq',
-              '1127-MBC', '1241-MBC3', '1278-MBC_MASR2', '1194-MBC_Drama', '1354-MBC5', '1128-MBC2', '1131-MBC_Drama+', '1371-Mix_Bel_Araby', '1373-Mix_ONE']
+              '1127-MBC', '1241-MBC3', '1278-MBC_MASR2', '1194-MBC_Drama', '1354-MBC5', '1128-MBC2', '1131-MBC_Drama+', '1371-Mix_Bel_Araby', '1373-Mix_ONE', 
+              '1101-Aloula_Egy_Ch','1101-Egyptian_TV','1137-Alhayat_TV','1147-Rotana_Drama','1148-Rotana_Cinema_Masr','1159-Nile_Life','1217-Rotana_Classic',
+              '1266-AD_Nat_Geo_HD', '1289-Rotana_Cinema_KSA', '1313-Ltv','1330-Fox_Movies_Action','1358-Rotana_Comedy','1365-Rotana+_HD_Channel',
+              '1370-Kuwait_Drama','1375-ETC_TV ','1385-Dijlah_TV','1388-Al_Shams', '1149-Rotana_Khalijieah_HD', '1120-AFlam_1', '1121-AFlam_2', '1195-ART Cinema', 
+              '1122-ART_Hekayat_1', '1182-ART_Hekayat_2',]
 
 
 time_zone = tz()
