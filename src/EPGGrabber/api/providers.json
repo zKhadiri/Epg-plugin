@@ -1,53 +1,58 @@
 {
     "bouquets": [
         {
-            "date": "You didn't download from this source yet", 
-            "bouquet": "bein", 
+            "date": "You didn't download from this source yet",
+            "bouquet": "bein",
             "title": "Bein Sports.net"
-        }, 
+        },
         {
-            "bouquet": "beinent", 
-            "date": "You didn't download from this source yet", 
+            "bouquet": "beinent",
+            "date": "You didn't download from this source yet",
             "title": "Bein entertainment.net"
-        }, 
+        },
         {
-            "bouquet": "beinConnect", 
-            "date": "You didn't download from this source yet", 
+            "bouquet": "beinConnect",
+            "date": "You didn't download from this source yet",
             "title": "Bein Sports connect"
-        }, 
+        },
         {
-            "bouquet": "beinentC", 
-            "date": "You didn't download from this source yet", 
+            "bouquet": "beinentC",
+            "date": "You didn't download from this source yet",
             "title": "Bein entertainment connect"
-        }, 
+        },
         {
-            "bouquet": "osnplay", 
-            "date": "You didn't download from this source yet", 
+            "bouquet": "bebawy6",
+            "date": "You didn't download from this source yet",
+            "title": "Nilesat Arabic EPG by (bebawy6)"
+        },
+        {
+            "bouquet": "osnplay",
+            "date": "You didn't download from this source yet",
             "title": "OSN english title arabic description Backup (MOHAMED19OS)"
-        }, 
+        },
         {
-            "bouquet": "elcin", 
-            "date": "You didn't download from this source yet", 
+            "bouquet": "elcin",
+            "date": "You didn't download from this source yet",
             "title": "ELCINEMA Website"
-        }, 
+        },
         {
-            "bouquet": "elcinEN", 
-            "date": "You didn't download from this source yet", 
+            "bouquet": "elcinEN",
+            "date": "You didn't download from this source yet",
             "title": "ELCINEMA ENGLISH EPG"
-        }, 
+        },
         {
-            "bouquet": "beincin", 
-            "date": "You didn't download from this source yet", 
+            "bouquet": "beincin",
+            "date": "You didn't download from this source yet",
             "title": "ELCINEMA Bein entertainment"
-        }, 
+        },
         {
-            "bouquet": "mbc", 
-            "date": "You didn't download from this source yet", 
+            "bouquet": "mbc",
+            "date": "You didn't download from this source yet",
             "title": "MBC.NET/NOOR DUBAI"
-        }, 
+        },
         {
-            "bouquet": "rotana", 
-            "date": "You didn't download from this source yet", 
+            "bouquet": "rotana",
+            "date": "You didn't download from this source yet",
             "title": "Rotana"
         },
         {
@@ -59,75 +64,75 @@
             "bouquet": "satTvB",
             "date": "You didn't download from this source yet",
             "title": "SAT Tv Backup"
-        }, 
+        },
         {
-            "bouquet": "snrt", 
-            "date": "You didn't download from this source yet", 
+            "bouquet": "snrt",
+            "date": "You didn't download from this source yet",
             "title": "Snrt"
-        }, 
+        },
         {
-            "bouquet": "lematin", 
-            "date": "You didn't download from this source yet", 
+            "bouquet": "lematin",
+            "date": "You didn't download from this source yet",
             "title": "LE Matin.ma"
-        }, 
+        },
         {
-            "bouquet": "jawwyOS", 
-            "date": "You didn't download from this source yet", 
+            "bouquet": "jawwyOS",
+            "date": "You didn't download from this source yet",
             "title": "Jawwy EPG english title arabic description Backup (MOHAMED19OS)"
-        }, 
+        },
         {
-            "bouquet": "jawwyenOS", 
-            "date": "You didn't download from this source yet", 
+            "bouquet": "jawwyenOS",
+            "date": "You didn't download from this source yet",
             "title": "Jawwy English EPG  Backup (MOHAMED19OS)"
-        }, 
+        },
         {
-            "bouquet": "caf", 
-            "date": "You didn't download from this source yet", 
+            "bouquet": "caf",
+            "date": "You didn't download from this source yet",
             "title": "Canal+AF"
-        }, 
+        },
         {
-            "bouquet": "espn", 
-            "date": "You didn't download from this source yet", 
+            "bouquet": "espn",
+            "date": "You didn't download from this source yet",
             "title": "ESPN 1 USA"
-        }, 
+        },
         {
-            "bouquet": "freesat", 
-            "date": "You didn't download from this source yet", 
+            "bouquet": "freesat",
+            "date": "You didn't download from this source yet",
             "title": "FREESAT UK"
-        }, 
+        },
         {
-            "bouquet": "skyuk", 
-            "date": "You didn't download from this source yet", 
+            "bouquet": "skyuk",
+            "date": "You didn't download from this source yet",
             "title": "UK SPORTS channels"
-        }, 
+        },
         {
-            "bouquet": "dstv", 
-            "date": "You didn't download from this source yet", 
+            "bouquet": "dstv",
+            "date": "You didn't download from this source yet",
             "title": "DSTV.ZA"
         },
         {
             "bouquet": "lovenature",
             "date": "You didn't download from this source yet",
             "title": "Love Nature"
-        }, 
+        },
         {
-            "bouquet": "aljazeera", 
-            "date": "You didn't download from this source yet", 
+            "bouquet": "aljazeera",
+            "date": "You didn't download from this source yet",
             "title": "Aljazeera.net Arabic"
-        }, 
+        },
         {
-            "bouquet": "sony", 
-            "date": "You didn't download from this source yet", 
+            "bouquet": "sony",
+            "date": "You didn't download from this source yet",
             "title": "INDIAN SPORTS CHANNELS"
-        }, 
+        },
         {
-            "bouquet": "skyit", 
-            "date": "You didn't download from this source yet", 
+            "bouquet": "skyit",
+            "date": "You didn't download from this source yet",
             "title": "SKY IT"
-        }, 
+        },
         {
-            "bouquet": "discovery", 
-            "date": "You didn't download from this source yet", 
+            "bouquet": "discovery",
+            "date": "You didn't download from this source yet",
             "title": "Discovery 0.8W & 4.8E"
         }
     ]

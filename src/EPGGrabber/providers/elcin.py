@@ -34,10 +34,10 @@ nb_channel = ['1173-DubaiOne', '1223-Al_NaharDrama', '1169-Dubai_TV', '1137-Alha
               '1299-Roya', '1310-Kuwait', '1304-Nessma', '1336-Maspero_Zaman', '1308-Watania1', '1204-iFILM_TV', '1306-Alrasheed', '1341-LBC',
               '1338-Syria_TV', '1339-AlSaeedah', '1366-Thikrayat_Tv', '1353-2MTV', '1352-Saudiya_TV', '1367-Utv', '1355-Mix', '1350-SamaTV', '1369-Qurain',
               '1296-MTV', '1260-CBC_sofra', '1290-DMC', '1129-MBC4', '1132-MBC_MAX', '1259-MBC_Bollywood', '1130-MBC_Action', '1239-MBC_Egypt', '1340-MBC_Iraq',
-              '1127-MBC', '1241-MBC3', '1278-MBC_MASR2', '1194-MBC_Drama', '1354-MBC5', '1128-MBC2', '1131-MBC_Drama+', '1371-Mix_Bel_Araby', '1373-Mix_ONE', 
+              '1127-MBC', '1241-MBC3', '1278-MBC_MASR2', '1194-MBC_Drama', '1354-MBC5', '1128-MBC2', '1131-MBC_Drama+', '1371-Mix_Bel_Araby', '1373-Mix_ONE',
               '1101-Aloula_Egy_Ch','1101-Egyptian_TV','1137-Alhayat_TV','1147-Rotana_Drama','1148-Rotana_Cinema_Masr','1159-Nile_Life','1217-Rotana_Classic',
               '1266-AD_Nat_Geo_HD', '1289-Rotana_Cinema_KSA', '1313-Ltv','1330-Fox_Movies_Action','1358-Rotana_Comedy','1365-Rotana+_HD_Channel',
-              '1370-Kuwait_Drama','1375-ETC_TV ','1385-Dijlah_TV','1388-Al_Shams', '1149-Rotana_Khalijieah_HD', '1120-AFlam_1', '1121-AFlam_2', '1195-ART Cinema', 
+              '1370-Kuwait_Drama','1375-ETC_TV ','1385-Dijlah_TV','1388-Al_Shams', '1149-Rotana_Khalijieah_HD', '1120-AFlam_1', '1121-AFlam_2', '1195-ART Cinema',
               '1122-ART_Hekayat_1', '1182-ART_Hekayat_2',]
 
 
@@ -46,6 +46,26 @@ time_zone = tz()
 REDC = '\033[31m'
 ENDC = '\033[m'
 
+
+if os.path.exists('/var/lib/dpkg/status'):
+    if subprocess.call(["apt", "list", "enigma2-plugin-extensions-eventdatamanger"]) == 0:
+        print("eventdatamanger found")
+        poster_dir = '/data/event_image/content/'
+    else:
+        print("eventdatamanger not found")
+        poster_dir = '/tmp/poster/'
+
+# Check if the '/tmp/poster' or '/media/hdd/xtraEvent/poster' directory exists
+else:
+    if subprocess.call(["opkg", "list-installed", "enigma2-plugin-extensions-xtraevent"]) == 0:
+        print("xtraevent found")
+        poster_dir = '/media/hdd/xtraEvent/backdrop/'
+    else:
+        print("xtraevent not found")
+        poster_dir = '/tmp/poster/'
+
+if not os.path.exists(poster_dir):
+    os.makedirs(poster_dir)
 
 def cprint(text):
     print(REDC + text + ENDC)
@@ -160,47 +180,104 @@ class Elcinema:
               ' epg ends at : ' + str(self.Endtime()[-1]))
         sys.stdout.flush()
 
+    def GetPosters(self, ch):
+            #for ch in nb_channel:
+                #data = requests.get('https://elcinema.com/tvguide/{}'.format(ch.split('-')[0]), headers=headers, verify=False).text
+                titles = re.findall(r'<a\s+href=\"\/(work\/\d+\/)\">(.*?)<\/a><\/li', self.data)
+                for elem in titles:
+                    title = elem[1]
+                    work = elem[0][:-1].replace('/', "\/")
+                    poster_link = re.search(
+                        r'<a\s+href=\"\/' + work + '\/\\"><img.*src="(https.*)"\s+\/><\/a>', self.data)
+                    if poster_link is not None:
+                        link = poster_link.group(1).strip().replace('" src="', "").replace("150x200", "315x420")
+                        ext = link.split(".")[-1]
+                        encoded_path = path.encode('utf-8')  # Encode path using UTF-8
+                        if not os.path.exists(encoded_path):
+                            try:
+                                os.makedirs(encoded_path)
+                            except:
+                                continue
+                        if poster_dir == "/data/event_image/content/":
+                            tilex = title.replace('\xc2\x86', '').replace('\xc2\x87', '')
+                            tile = tilex.replace('\xc2\x86', '').replace('\xc2\x87', '').replace('[0-9]\xd8\xa7\xd9\x84\xd8\xad\xd9\x84\xd9\x82\xd8\xa9:', '')
+                            img = poster_dir + tile.replace('/', ' ') + "." + '_p.jpg'
+                            imgx = img.lower().replace(' ', '')
+                            img_path = imgx.encode('utf-8')  # Encode path using UTF-8
+                            if os.path.exists(img_path):
+                                pass
+                            else:
+                                img_data = requests.get(link).content
+                                with open(img_path, 'wb') as handler:
+                                    handler.write(img_data)
+                        else:
+                            tilex = title.replace('\xc2\x86', '').replace('\xc2\x87', '')
+                            tile = re.sub("([\(\[]).*?([\)\]])|(: odc.\d+)|(\d+: odc.\d+)|(\d+ odc.\d+)|(:)|( -(.*?).*)|(,)|!", "", tilex).rstrip().lower().replace('/', '')
+                            img = poster_dir + tile.replace('/', ' ') + "." + '.jpg'
+                            imgx = img.lower().replace(' ', '')
+                            img_path = imgx.encode('utf-8')  # Encode path using UTF-8
+                            if os.path.exists(img_path):
+                                pass
+                            else:
+                                img_data = requests.get(link).content
+                                with open(img_path, 'wb') as handler:
+                                    handler.write(img_data)
+
+
+
 
 def main():
-    from datetime import datetime
-    import json
-    with open(PROVIDERS_ROOT, 'r') as f:
-        data = json.load(f)
-    for channel in data['bouquets']:
-        if channel["bouquet"] == "elcin":
-            channel['date'] = datetime.today().strftime(
-                '%A %d %B %Y at %I:%M %p')
-    with open(PROVIDERS_ROOT, 'w') as f:
-        json.dump(data, f)
 
-    print('**************ELCINEMA EPG******************')
-    sys.stdout.flush()
+from datetime import datetime
+import json
+with open(PROVIDERS_ROOT, 'r') as f:
+    data = json.load(f)
+for channel in data['bouquets']:
+    if channel["bouquet"] == "elcin":
+        channel['date'] = datetime.today().strftime(
+            '%A %d %B %Y at %I:%M %p')
+with open(PROVIDERS_ROOT, 'w') as f:
+    json.dump(data, f)
 
-    channels = [ch.split('-')[1] for ch in nb_channel]
-    xml_header(EPG_ROOT + "/elcinema.xml", channels)
+print('**************ELCINEMA Posters and EPG******************')
+sys.stdout.flush()
 
-    import time
-    Hour = time.strftime("%H:%M")
-    start = '00:00'
-    end = '02:00'
-    if Hour >= start and Hour < end:
-        print('Please come back at 2am to download the epg')
+channels = [ch.split('-')[1] for ch in nb_channel]
+xml_header(EPG_ROOT + "/elcinema.xml", channels)
+for nb in nb_channel:
+    try:
+        elcinema = Elcinema(nb)  # Create an instance of the Elcinema class
+        elcinema.GetPosters(nb)
+        cprint2("Posters Downloaded For " + nb.split('-')[1] + " Events")
+    except IndexError:
+        cprint('No Posters found or missing data for : ' +
+               nb.split('-')[1])
         sys.stdout.flush()
-    else:
-        for nb in nb_channel:
-            try:
-                Elcinema(nb)
-            except IndexError:
-                cprint('No epg found or missing data for : ' +
-                       nb.split('-')[1])
-                sys.stdout.flush()
-                continue
+        continue
+
+
+import time
+Hour = time.strftime("%H:%M")
+start = '00:00'
+end = '02:00'
+if Hour >= start and Hour < end:
+    print('Please come back at 2am to download the epg')
+    sys.stdout.flush()
+else:
+    for nb in nb_channel:
+        try:
+            Elcinema(nb)
+        except IndexError:
+            cprint('No epg found or missing data for : ' +
+                   nb.split('-')[1])
+            sys.stdout.flush()
+            continue
 
 
 if __name__ == '__main__':
-    main()
 
-    close_xml(EPG_ROOT + "/elcinema.xml")
+main()
+close_xml(EPG_ROOT + "/elcinema.xml")
 
-    print('**************FINISHED******************')
-    sys.stdout.flush()
+print('**************FINISHED******************')
+sys.stdout.flush()
