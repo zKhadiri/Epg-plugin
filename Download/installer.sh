@@ -4,6 +4,9 @@
 ######### Only These two lines to edit with new version ######
 version=22.7.1
 description=What_is_NEW:\n'-fix elcin'
+=======
+version=22.6
+description=What_is_NEW:\n'-Update elcin'\n'-Added bebawy source'
 ##############################################################
 
 TEMPATH=/tmp
