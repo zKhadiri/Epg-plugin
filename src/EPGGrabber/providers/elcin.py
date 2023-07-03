@@ -17,6 +17,7 @@ from datetime import datetime, timedelta
 from time import sleep, strftime
 from requests.adapters import HTTPAdapter
 import warnings
+import subprocess
 
 warnings.filterwarnings('ignore', message='Unverified HTTPS request')
 
@@ -228,7 +229,40 @@ class Elcinema:
 
 
 def main():
+    from datetime import datetime
+    import json
+    with open(PROVIDERS_ROOT, 'r') as f:
+        data = json.load(f)
+    for channel in data['bouquets']:
+        if channel["bouquet"] == "elcin":
+            channel['date'] = datetime.today().strftime(
+                '%A %d %B %Y at %I:%M %p')
+    with open(PROVIDERS_ROOT, 'w') as f:
+        json.dump(data, f)
 
+    print('**************ELCINEMA Posters and EPG******************')
+    sys.stdout.flush()
+
+    channels = [ch.split('-')[1] for ch in nb_channel]
+    xml_header(EPG_ROOT + "/elcinema.xml", channels)
+    for nb in nb_channel:
+        try:
+            elcinema = Elcinema(nb)  # Create an instance of the Elcinema class
+            elcinema.GetPosters(nb)
+            cprint2("Posters Downloaded For " + nb.split('-')[1] + " Events")
+        except IndexError:
+            cprint('No Posters found or missing data for : ' +
+                   nb.split('-')[1])
+            sys.stdout.flush()
+            continue
+
+
+    import time
+    Hour = time.strftime("%H:%M")
+    start = '00:00'
+    end = '02:00'
+    if Hour >= start and Hour < end:
+        print('Please come back at 2am to download the epg')
         from datetime import datetime
         import json
         with open(PROVIDERS_ROOT, 'r') as f:
@@ -257,27 +291,11 @@ def main():
                 continue
 
 
-        import time
-        Hour = time.strftime("%H:%M")
-        start = '00:00'
-        end = '02:00'
-        if Hour >= start and Hour < end:
-            print('Please come back at 2am to download the epg')
-            sys.stdout.flush()
-        else:
-            for nb in nb_channel:
-                try:
-                    Elcinema(nb)
-                except IndexError:
-                    cprint('No epg found or missing data for : ' +
-                           nb.split('-')[1])
-                    sys.stdout.flush()
-                    continue
-
-
 if __name__ == '__main__':
-        main()
-        close_xml(EPG_ROOT + "/elcinema.xml")
+    main()
+    close_xml(EPG_ROOT + "/elcinema.xml")
+
+
 
 print('**************FINISHED******************')
 sys.stdout.flush()

@@ -2,6 +2,9 @@
 ##setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
+version=22.7.1
+description=What_is_NEW:\n'-fix elcin'
+=======
 version=22.6
 description=What_is_NEW:\n'-Update elcin'\n'-Added bebawy source'
 ##############################################################
@@ -50,13 +53,13 @@ else
      if grep -q $PYTHONPACK $STATUS; then
           echo ""
      else
-          if [ $OS = "DreamOS" ]; then 
+          if [ $OS = "DreamOS" ]; then
                   echo " Downloading $PYTHONPACK ......"
                   apt-get install python-requests -y
-          elif [ $PYTHON = "PY2" ]; then 
+          elif [ $PYTHON = "PY2" ]; then
                   echo " Downloading $PYTHONPACK ......"
                   opkg install python-requests
-          elif [ $PYTHON = "PY3" ]; then 
+          elif [ $PYTHON = "PY3" ]; then
                   echo " Downloading $PYTHONPACK ......"
                   opkg install python3-requests
           fi
@@ -92,7 +95,7 @@ echo ""
 cd /tmp
 set -e
 echo " Downloading And Insallling Epg_Plugin plugin ......"
-echo 
+echo
 # wget -q "--no-check-certificate"  "https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/Epg_Plugin-"$version".tar.gz"
 # tar -xzf Epg_Plugin-"$version".tar.gz -C /
 wget -O - --no-check-certificate https://github.com/ziko-ZR1/Epg-plugin/archive/master.tar.gz | tar xz "Epg-plugin-master/src/EPGGrabber"

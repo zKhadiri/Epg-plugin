@@ -22,6 +22,13 @@ if not os.path.exists('/etc/epgimport/custom.sources.xml'):
     with io.open('/etc/epgimport/custom.sources.xml', 'w', encoding="utf-8") as f:
         f.write(custom_source.text)
 
+if not os.path.exists('/etc/epgimport/ziko_config/bebawy6.channels.xml'):
+    print('Downloading bebawy6 channels config')
+    sys.stdout.flush()
+    bebawy6_channels = requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/configs/bebawy6.channels.xml?raw=true')
+    with io.open('/etc/epgimport/ziko_config/bebawy6.channels.xml', 'w', encoding="utf-8") as f:
+        f.write(bebawy6_channels.text)
+
 if not os.path.exists('/etc/epgimport/ziko_config/elcinema.channels.xml'):
     print('Downloading elcinema channels config')
     sys.stdout.flush()
