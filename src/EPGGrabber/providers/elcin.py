@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 
 try:
-        from .__init__ import *
+    from .__init__ import *
 except:
-        from __init__ import *
+    from __init__ import *
 
 import requests
 import re
@@ -12,12 +12,10 @@ import io
 import sys
 import os
 import ssl
-import subprocess
 from datetime import datetime, timedelta
 from time import sleep, strftime
 from requests.adapters import HTTPAdapter
 import warnings
-import subprocess
 
 warnings.filterwarnings('ignore', message='Unverified HTTPS request')
 
@@ -27,21 +25,16 @@ headers = {
     'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.75 Safari/537.36'
 }
 
-nb_channel = ['1173-DubaiOne', '1223-Al_NaharDrama', '1169-Dubai_TV', '1137-Alhayat_TV', '1199-CBC_Drama', '1176-Cima', '1227-Sada_ElBalad_Drama',
-              '1198-CBC', '1177-Sama_Dubai', '1193-Al_NaharTV', '1246-LDC', '1135-Emirates', '1159-Nile_Life', '1158-Nile_Comedy',
-              '1174-Al_Kahera_Wal_NasTV', '1216-Al_JadeedTV', '1226-Sada_El_Balad', '1168-LBCI', '1252-Al_Kahera_Wal_NasTV2', '1264-Al_Dafrah', '1372-Beurtv',
-              '1203-ONE', '1101-Aloula', '1134-ONDrama', '1283-Dubai_Zaman', '1188-Sharjah_TV', '1315-EchoroukTV', '1300-Syria_Drama', '1370-Khallik_Bilbait',
-              '1279-Sada_El_Balad2', '1313-Lana', '1269-AlSharqiya', '1242-Network_Arabic', '1280-TeNTV', '1298-Amman', '1343-Musawa', '1145-Mehwar',
-              '1156-Nile_Drama', '1292-DMC_DRAMA', '1136-AbuDhabi_TV', '1297-SBC', '1301-Alsumaria', '1312-Al_Aoula_Morocco', '1321-almanar', '1334-Watania2',
-              '1299-Roya', '1310-Kuwait', '1304-Nessma', '1336-Maspero_Zaman', '1308-Watania1', '1204-iFILM_TV', '1306-Alrasheed', '1341-LBC',
-              '1338-Syria_TV', '1339-AlSaeedah', '1366-Thikrayat_Tv', '1353-2MTV', '1352-Saudiya_TV', '1367-Utv', '1355-Mix', '1350-SamaTV', '1369-Qurain',
-              '1296-MTV', '1260-CBC_sofra', '1290-DMC', '1129-MBC4', '1132-MBC_MAX', '1259-MBC_Bollywood', '1130-MBC_Action', '1239-MBC_Egypt', '1340-MBC_Iraq',
-              '1127-MBC', '1241-MBC3', '1278-MBC_MASR2', '1194-MBC_Drama', '1354-MBC5', '1128-MBC2', '1131-MBC_Drama+', '1371-Mix_Bel_Araby', '1373-Mix_ONE',
-              '1101-Aloula_Egy_Ch','1101-Egyptian_TV','1137-Alhayat_TV','1147-Rotana_Drama','1148-Rotana_Cinema_Masr','1159-Nile_Life','1217-Rotana_Classic',
-              '1266-AD_Nat_Geo_HD', '1289-Rotana_Cinema_KSA', '1313-Ltv','1330-Fox_Movies_Action','1358-Rotana_Comedy','1365-Rotana+_HD_Channel',
-              '1370-Kuwait_Drama','1375-ETC_TV ','1385-Dijlah_TV','1388-Al_Shams', '1149-Rotana_Khalijieah_HD', '1120-AFlam_1', '1121-AFlam_2', '1195-ART Cinema',
-              '1122-ART_Hekayat_1', '1182-ART_Hekayat_2',]
-
+nb_channel = ['1353-2MTV','1136-AbuDhabi_TV','1120-AFlam_1','1121-AFlam_2','1264-Al_Dafrah','1216-Al_JadeedTV','1174-Al_Kahera_Wal_NasTV','1252-Al_Kahera_Wal_NasTV2',
+'1223-Al_NaharDrama','1193-Al_NaharTV','1388-Al_Shams','1137-Alhayat_TV','1321-almanar','1101-Aloula_Egy_Ch','1306-Alrasheed','1339-AlSaeedah','1269-AlSharqiya','1301-Alsumaria',
+'1298-Amman','1195-ART_Cinema','1122-ART_Hekayat_1','1182-ART_Hekayat_2','1372-Beurtv','1198-CBC','1199-CBC_Drama','1260-CBC_sofra','1176-Cima','1385-Dijlah_TV','1290-DMC',
+'1292-DMC_DRAMA','1169-Dubai_TV','1283-Dubai_Zaman','1173-DubaiOne','1315-EchoroukTV','1101-Egyptian_TV','1135-Emirates','1375-ETC_TV','1330-Fox_Movies_Action','1204-iFILM_TV',
+'1370-Khallik_Bilbait','1310-Kuwait','1370-Kuwait_Drama','1313-Lana','1341-LBC','1168-LBCI','1246-LDC','1313-Ltv','1336-Maspero_Zaman','1127-MBC','1130-MBC_Action',
+'1259-MBC_Bollywood','1194-MBC_Drama','1131-MBC_Drama+','1239-MBC_Egypt','1340-MBC_Iraq','1278-MBC_MASR2','1132-MBC_MAX','1128-MBC2','1241-MBC3','1129-MBC4','1354-MBC5','1145-Mehwar',
+'1355-Mix','1371-Mix_Bel_Araby','1373-Mix_ONE','1296-MTV','1266-AD_Nat_Geo_HD','1304-Nessma','1242-Network_Arabic','1158-Nile_Comedy','1156-Nile_Drama','1159-Nile_Life',
+'1134-ONDrama','1203-ONE','1369-Qurain','1289-Rotana_Cinema','1289-Rotana_Cinema_KSA','1148-Rotana_Cinema_Masr','1148-Rotana_Cinema_EGY','1217-Rotana_Classic','1358-Rotana_Comedy',
+'1147-Rotana_Drama','1149-Rotana_Khalijieah_HD','1365-Rotana+_HD_Channel','1299-Roya','1226-Sada_El_Balad','1279-Sada_El_Balad2','1227-Sada_ElBalad_Drama','1177-Sama_Dubai','1350-SamaTV',
+'1352-Saudiya_TV','1297-SBC','1188-Sharjah_TV','1300-Syria_Drama','1338-Syria_TV','1280-TeNTV','1366-Thikrayat_Tv','1367-Utv','1308-Watania1','1334-Watania2',]
 
 time_zone = tz()
 
@@ -49,32 +42,10 @@ REDC = '\033[31m'
 ENDC = '\033[m'
 
 
-if os.path.exists('/var/lib/dpkg/status'):
-    if subprocess.call(["apt", "list", "enigma2-plugin-extensions-eventdatamanger"]) == 0:
-        print("eventdatamanger found")
-        poster_dir = '/data/event_image/content/'
-    else:
-        print("eventdatamanger not found")
-        poster_dir = '/tmp/poster/'
-
-# Check if the '/tmp/poster' or '/media/hdd/xtraEvent/poster' directory exists
-else:
-    if subprocess.call(["opkg", "list-installed", "enigma2-plugin-extensions-xtraevent"]) == 0:
-        print("xtraevent found")
-        poster_dir = '/media/hdd/xtraEvent/backdrop/'
-    else:
-        print("xtraevent not found")
-        poster_dir = '/tmp/poster/'
-
-if not os.path.exists(poster_dir):
-    os.makedirs(poster_dir)
-
 def cprint(text):
     print(REDC + text + ENDC)
 
-
 class Elcinema:
-
     def __init__(self, channel):
         self.getData(channel)
         self.prog_start = []
@@ -98,7 +69,7 @@ class Elcinema:
             if PY3:
                 if 'مساءً' in time or 'صباحًا' in time:
                     start = datetime.strptime(time.replace(
-                        '</li>', '').replace('مساءً', 'PM').replace('صباحًا', 'AM'), '%I:%M %p')
+                        '</li>', '').replace('مساءً', 'PM').replace('صباحًا', 'AM'),'%I:%M %p')
                     hours.append(start.strftime('%H:%M'))
             else:
                 if 'مساءً'.decode('utf-8') in time or 'صباحًا'.decode('utf-8') in time:
@@ -182,51 +153,6 @@ class Elcinema:
               ' epg ends at : ' + str(self.Endtime()[-1]))
         sys.stdout.flush()
 
-    def GetPosters(self, ch):
-            #for ch in nb_channel:
-                #data = requests.get('https://elcinema.com/tvguide/{}'.format(ch.split('-')[0]), headers=headers, verify=False).text
-                titles = re.findall(r'<a\s+href=\"\/(work\/\d+\/)\">(.*?)<\/a><\/li', self.data)
-                for elem in titles:
-                    title = elem[1]
-                    work = elem[0][:-1].replace('/', "\/")
-                    poster_link = re.search(
-                        r'<a\s+href=\"\/' + work + '\/\\"><img.*src="(https.*)"\s+\/><\/a>', self.data)
-                    if poster_link is not None:
-                        link = poster_link.group(1).strip().replace('" src="', "").replace("150x200", "315x420")
-                        ext = link.split(".")[-1]
-                        encoded_path = path.encode('utf-8')  # Encode path using UTF-8
-                        if not os.path.exists(encoded_path):
-                            try:
-                                os.makedirs(encoded_path)
-                            except:
-                                continue
-                        if poster_dir == "/data/event_image/content/":
-                            tilex = title.replace('\xc2\x86', '').replace('\xc2\x87', '')
-                            tile = tilex.replace('\xc2\x86', '').replace('\xc2\x87', '').replace('[0-9]\xd8\xa7\xd9\x84\xd8\xad\xd9\x84\xd9\x82\xd8\xa9:', '')
-                            img = poster_dir + tile.replace('/', ' ') + "." + '_p.jpg'
-                            imgx = img.lower().replace(' ', '')
-                            img_path = imgx.encode('utf-8')  # Encode path using UTF-8
-                            if os.path.exists(img_path):
-                                pass
-                            else:
-                                img_data = requests.get(link).content
-                                with open(img_path, 'wb') as handler:
-                                    handler.write(img_data)
-                        else:
-                            tilex = title.replace('\xc2\x86', '').replace('\xc2\x87', '')
-                            tile = re.sub("([\(\[]).*?([\)\]])|(: odc.\d+)|(\d+: odc.\d+)|(\d+ odc.\d+)|(:)|( -(.*?).*)|(,)|!", "", tilex).rstrip().lower().replace('/', '')
-                            img = poster_dir + tile.replace('/', ' ') + "." + '.jpg'
-                            imgx = img.lower().replace(' ', '')
-                            img_path = imgx.encode('utf-8')  # Encode path using UTF-8
-                            if os.path.exists(img_path):
-                                pass
-                            else:
-                                img_data = requests.get(link).content
-                                with open(img_path, 'wb') as handler:
-                                    handler.write(img_data)
-
-
-
 
 def main():
     from datetime import datetime
@@ -235,58 +161,29 @@ def main():
         data = json.load(f)
     for channel in data['bouquets']:
         if channel["bouquet"] == "elcin":
-            channel['date'] = datetime.today().strftime(
-                '%A %d %B %Y at %I:%M %p')
+            channel['date'] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
     with open(PROVIDERS_ROOT, 'w') as f:
         json.dump(data, f)
 
-    print('**************ELCINEMA Posters and EPG******************')
+    print('**************ELCINEMA EPG******************')
     sys.stdout.flush()
 
     channels = [ch.split('-')[1] for ch in nb_channel]
     xml_header(EPG_ROOT + "/elcinema.xml", channels)
-    for nb in nb_channel:
-        try:
-            elcinema = Elcinema(nb)  # Create an instance of the Elcinema class
-            elcinema.GetPosters(nb)
-            cprint2("Posters Downloaded For " + nb.split('-')[1] + " Events")
-        except IndexError:
-            cprint('No Posters found or missing data for : ' +
-                   nb.split('-')[1])
-            sys.stdout.flush()
-            continue
-
 
     import time
     Hour = time.strftime("%H:%M")
     start = '00:00'
     end = '02:00'
-    if Hour >= start and Hour < end:
-        print('Please come back at 2am to download the epg')
-        from datetime import datetime
-        import json
-        with open(PROVIDERS_ROOT, 'r') as f:
-            data = json.load(f)
-        for channel in data['bouquets']:
-            if channel["bouquet"] == "elcin":
-                channel['date'] = datetime.today().strftime(
-                    '%A %d %B %Y at %I:%M %p')
-        with open(PROVIDERS_ROOT, 'w') as f:
-            json.dump(data, f)
-        
-        print('**************ELCINEMA Posters and EPG******************')
+    if start <= Hour < end:
+        print('Please come back at 2am to download the EPG')
         sys.stdout.flush()
-        
-        channels = [ch.split('-')[1] for ch in nb_channel]
-        xml_header(EPG_ROOT + "/elcinema.xml", channels)
+    else:
         for nb in nb_channel:
             try:
-                elcinema = Elcinema(nb)  # Create an instance of the Elcinema class
-                elcinema.GetPosters(nb)
-                cprint2("Posters Downloaded For " + nb.split('-')[1] + " Events")
+                Elcinema(nb)
             except IndexError:
-                cprint('No Posters found or missing data for : ' +
-                       nb.split('-')[1])
+                cprint('No epg found or missing data for: ' +nb.split('-')[1])
                 sys.stdout.flush()
                 continue
 
@@ -294,8 +191,6 @@ def main():
 if __name__ == '__main__':
     main()
     close_xml(EPG_ROOT + "/elcinema.xml")
-
-
 
 print('**************FINISHED******************')
 sys.stdout.flush()
