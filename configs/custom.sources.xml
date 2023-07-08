@@ -20,6 +20,14 @@
         <description>Nilesat by (Bebawy6)</description>
         <url>/etc/epgimport/ziko_epg/Bebawy6.xml</url>
     </source>
+    <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/elcinmaiet5.channels.xml">
+        <description>Elcinma Alt# by iet5</description>
+        <url>/etc/epgimport/ziko_epg/arabia.xml</url>
+    </source>
+    <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/sportiet5.channels.xml">
+        <description>Sport (Bein - Al-Kass) by iet5</description>
+        <url>/etc/epgimport/ziko_epg/arabiapremiumar.xml</url>
+    </source>
     <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/custom.channels.xml">
         <description>Osnplay</description>
         <url>/etc/epgimport/ziko_epg/osnplay.xml</url>
