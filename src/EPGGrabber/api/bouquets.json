@@ -464,7 +464,7 @@
                 "ZeeAflam",
                 "ZeeAlwan"
 			], 
-            "path": "/etc/epgimport/elcinmaiet5.xml", 
+            "path": "/etc/epgimport/elcinmaiet5.channels.xml", 
             "name": "elcinmaiet5"
         }, 
         {
