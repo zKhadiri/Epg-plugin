@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sourcecat sourcecatname="ZIKO EPG">
+    <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/beinnew.channels.xml">
+        <description>BeIN Sports New (ISAH2)</description>
+        <url>/etc/epgimport/ziko_epg/beinnew.xml</url>
+    </source>
+	    <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/mbcnew.channels.xml">
+        <description>MBC New (ISAH2)</description>
+        <url>/etc/epgimport/ziko_epg/mbcnew.xml</url>
+    </source>
+	    <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/sattvnew.channels.xml">
+        <description>SatTV NEW (ISAH2)</description>
+        <url>/etc/epgimport/ziko_epg/sattvnew.xml</url>
+    </source>
+	    <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/art.channels.xml">
+        <description>ART Online (ISAH2)</description>
+        <url>/etc/epgimport/ziko_epg/art.xml</url>
+    </source>
+	    <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/osnnew.channels.xml">
+        <description>OSN New (ISAH2)</description>
+        <url>/etc/epgimport/ziko_epg/osnnew.xml</url>
+    </source>
     <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/bein.channels.xml">
         <description>bein sport.net</description>
         <url>/etc/epgimport/ziko_epg/bein.xml</url>
@@ -15,10 +35,6 @@
     <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/bein.channels.xml">
         <description>bein entertainment connect</description>
         <url>/etc/epgimport/ziko_epg/beinentC.xml</url>
-    </source>
-    <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/bebawy6.channels.xml">
-        <description>Nilesat by (Bebawy6)</description>
-        <url>/etc/epgimport/ziko_epg/Bebawy6.xml</url>
     </source>
     <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/elcinmaiet5.channels.xml">
         <description>Elcinma Alt# by iet5</description>
