@@ -3,7 +3,7 @@
 
 ######### Only These two lines to edit with new version ######
 version=23.2
-description=What_is_NEW:\n'-Some fix for El Cinma'
+description=What_is_NEW:\n'-Some fixes'
 ##############################################################
 
 TEMPATH=/tmp
