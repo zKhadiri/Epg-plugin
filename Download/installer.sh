@@ -3,7 +3,7 @@
 
 ######### Only These two lines to edit with new version ######
 version=23.4
-description=What_is_NEW:\n'-Some fixes and update'
+description=What_is_NEW:\n'-Some fixes and update Bein Sports by Saiedf'
 ##############################################################
 
 TEMPATH=/tmp
