@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<channels>
+	<channel id="Abu Dhabi Channel.ua">1:0:1:1:32:64:DCA0000:0:0:0:</channel>
+	<channel id="Abu Dhabi Sports Channel 1.ua">1:0:1:5:32:64:DCA0000:0:0:0:</channel>
+	<channel id="Abu Dhabi Sports Channel 2.ua">1:0:1:6:32:64:DCA0000:0:0:0:</channel>
+	<channel id="National Geographic HD Channel.ua">1:0:1:8:32:64:DCA0000:0:0:0:</channel>
+	<channel id="YAS Sports Channel.ua">1:0:1:7:32:64:DCA0000:0:0:0:</channel>
+</channels>
