@@ -16,37 +16,49 @@
         <description>bein entertainment connect</description>
         <url>/etc/epgimport/ziko_epg/beinentC.xml</url>
     </source>
+    <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/bebawy6.channels.xml">
+        <description>Nilesat by (Bebawy6)</description>
+        <url>/etc/epgimport/ziko_epg/Bebawy6.xml</url>
+    </source>
+	 <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/beinsportiet5.channels.xml">
+        <description>Bein_Sport_iet5 by (iet5 )</description>
+        <url>/etc/epgimport/ziko_epg/qatarpremium.xml</url>
+    </source>
+    <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/sportiet5.channels.xml">
+        <description>Sport_iet5 by ( iet5 )</description>
+        <url>/etc/epgimport/ziko_epg/arabiapremiumar.xml</url>
+   </source>
+	<source type="gen_xmltv" channels="/etc/epgimport/ziko_config/qatareniet5.channels.xml">
+        <description>Qataren_iet5 by (iet5 )</description>
+        <url>/etc/epgimport/ziko_epg/qatar3.xml</url>
+    </source>
 	<source type="gen_xmltv" channels="/etc/epgimport/ziko_config/egypt2iet5.channels.xml">
         <description>Egypt2_iet5 by (iet5 )</description>
         <url>/etc/epgimport/ziko_epg/egypt2.xml</url>
     </source>
-	<source type="gen_xmltv" channels="/etc/epgimport/ziko_config/nilesatiet5.channels.xml">
-        <description>Nilesat_iet5 by (iet5 )</description>
+	<source type="gen_xmltv" channels="/etc/epgimport/ziko_config/arabiapriet5.channels.xml">
+        <description>Arabiapr_iet5 by (iet5 )</description>
         <url>/etc/epgimport/ziko_epg/palestine1.xml</url>
-    </source>
-    <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/sportiet5.channels.xml">
-        <description>sportar_iet5 by (iet5 )</description>
-        <url>/etc/epgimport/ziko_epg/qatar2.xml</url>
-    </source>
-	<source type="gen_xmltv" channels="/etc/epgimport/ziko_config/sporteniet5.channels.xml">
-        <description>Sporten_iet5 by (iet5 )</description>
-        <url>/etc/epgimport/ziko_epg/qatar3.xml</url>
-    </source>
-	<source type="gen_xmltv" channels="/etc/epgimport/ziko_config/qatarpriet5.channels.xml">
-        <description>QatarPR_iet5 by (iet5 )</description>
-        <url>/etc/epgimport/ziko_epg/qatarpremium.xml</url>
     </source>
 	<source type="gen_xmltv" channels="/etc/epgimport/ziko_config/uae1iet5.channels.xml">
         <description>UAE1_iet5 by (iet5 )</description>
         <url>/etc/epgimport/ziko_epg/uaepremium1.xml</url>
     </source>
-	<source type="gen_xmltv" channels="/etc/epgimport/ziko_config/uaeariet5.channels.xml">
+    <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/uaeariet5.channels.xml">
         <description>UAE_AR_iet5 by (iet5 )</description>
         <url>/etc/epgimport/ziko_epg/uaepremium2.xml</url>
-    </source>
-	<source type="gen_xmltv" channels="/etc/epgimport/ziko_config/uaeeniet5.channels.xml">
+   </source>
+   <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/uaeeniet5.channels.xml">
         <description>UAE_EN_iet5 by (iet5 )</description>
         <url>/etc/epgimport/ziko_epg/uaepremium3.xml</url>
+    </source>
+    <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/nilesatiet5.channels.xml">
+        <description>Nilesat_iet5 by (iet5 )</description>
+        <url>/etc/epgimport/ziko_epg/arabiapremium2.xml</url>
+    </source>
+    <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/elcinmaiet5.channels.xml">
+        <description>Elcinma Alt# by ( iet5 )</description>
+        <url>/etc/epgimport/ziko_epg/arabia.xml</url>
     </source>
     <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/custom.channels.xml">
         <description>Osnplay</description>
