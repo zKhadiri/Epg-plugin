@@ -70,12 +70,12 @@ def adjust_times():
 
     def adjust_start_time(match):
         original_time = datetime.strptime(match.group(1), '%Y%m%d%H%M%S')
-        adjusted_time = original_time + timedelta(hours=3)
+        adjusted_time = original_time + timedelta(hours=3)  # Changed to +3 hours
         return 'start="{} +0300"'.format(adjusted_time.strftime('%Y%m%d%H%M%S'))
 
     def adjust_stop_time(match):
         original_time = datetime.strptime(match.group(1), '%Y%m%d%H%M%S')
-        adjusted_time = original_time + timedelta(hours=3)
+        adjusted_time = original_time + timedelta(hours=3)  # Changed to +3 hours
         return 'stop="{} +0300"'.format(adjusted_time.strftime('%Y%m%d%H%M%S'))
 
     # Adjust the start and stop times

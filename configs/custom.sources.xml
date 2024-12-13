@@ -124,4 +124,19 @@
         <description>DSTV</description>
         <url>/etc/epgimport/ziko_epg/dstv.xml</url>
     </source>
+	    <mappings>
+        <channel name="osn.channels.xml.xz" nocheck="1">
+            <url>http://raw.githubusercontent.com/MOHAMED19OS/DZ_EPG/main/osn.channels.xml.xz</url>
+        </channel>
+    </mappings>
+    <sourcecat sourcecatname="Dream EPG">
+        <source type="gen_xmltv" channels="osn.channels.xml.xz" nocheck="1">
+            <description>OSN Channels English (xz)</description>
+            <url>http://raw.githubusercontent.com/MOHAMED19OS/DZ_EPG/main/osnen.xml.xz</url>
+        </source>
+        <source type="gen_xmltv" channels="osn.channels.xml.xz" nocheck="1">
+            <description>OSN Channels Arabic (xz)</description>
+            <url>http://raw.githubusercontent.com/MOHAMED19OS/DZ_EPG/main/osnara.xml.xz</url>
+        </source>
+    </sourcecat>	
 </sourcecat>
