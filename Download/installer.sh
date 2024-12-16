@@ -42,8 +42,11 @@ fi
 if grep -q 'enigma2-plugin-extensions-epgimport' $STATUS; then
     epgimport='Installed'
 fi
+if grep -q 'enigma2-plugin-extensions-epgimport-dreamos' $STATUS; then
+    epgimportdreamos='Installed'
+fi
 ################
-if [ $requests = "Installed" -a $epgimport = "Installed" ]; then
+if [ $requests = "Installed" -a $epgimport = "Installed" -o $epgimportdreamos = "Installed" ]; then
      echo ""
 else
 
@@ -67,9 +70,10 @@ else
           if [ $OS = "DreamOS" ]; then
                    echo " Downloading/Insallling epgimport ......"
                    sleep 3
-                   wget -q "--no-check-certificate" "https://github.com/ziko-ZR1/Epg-plugin/blob/master/Download/enigma2-plugin-extensions-epgimport_2.0-r219_all.deb?raw=true" -O "/tmp/enigma2-plugin-extensions-epgimport_2.0-r219_all.deb";
+                   wget -q "--no-check-certificate" "https://github.com/ziko-ZR1/Epg-plugin/blob/master/Download/enigma2-plugin-extensions-epgimport-dreamos_2.5_all.deb?raw=true" -O "/tmp/enigma2-plugin-extensions-epgimport-dreamos_2.5_all.deb";
                    dpkg -i /tmp/*.deb;
                    apt-get install -f -y;
+		   apt-get install python-compression, python-backports-lzma, python-shell, python-sqlite3 -f -y;
           else
                    echo " Downloading/Insallling epgimport ......"
                    opkg install enigma2-plugin-extensions-epgimport
