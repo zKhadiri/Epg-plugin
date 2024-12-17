@@ -70,7 +70,7 @@ else
           if [ $OS = "DreamOS" ]; then
                    echo " Downloading/Insallling epgimport ......"
                    sleep 3
-                   wget -q "--no-check-certificate" "https://github.com/ziko-ZR1/Epg-plugin/blob/master/Download/enigma2-plugin-extensions-epgimport-dreamos_2.5_all.deb?raw=true" -O "/tmp/enigma2-plugin-extensions-epgimport-dreamos_2.5_all.deb";
+                   wget -q "--no-check-certificate" "https://github.com/ziko-ZR1/Epg-plugin/blob/master/Download/enigma2-plugin-extensions-epgimport-dreamos_2.6_all.deb?raw=true" -O "/tmp/enigma2-plugin-extensions-epgimport-dreamos_2.6_all.deb";
                    dpkg -i /tmp/*.deb;
                    apt-get install -f -y;
 		   apt-get install python-compression, python-backports-lzma, python-shell, python-sqlite3 -f -y;
