@@ -29,33 +29,26 @@ if not os.path.exists('/etc/epgimport/ziko_config/egypt2iet5.channels.xml'):
     with io.open('/etc/epgimport/ziko_config/egypt2iet5.channels.xml', 'w', encoding="utf-8") as f:
         f.write(egypt2iet5_channels.text) 
 
-if not os.path.exists('/etc/epgimport/ziko_config/arabiapriet5.channels.xml'):
-    print('Downloading arabiapriet5 channels config')
-    sys.stdout.flush()
-    arabiapriet5_channels = requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/configs/arabiapriet5.channels.xml?raw=true')
-    with io.open('/etc/epgimport/ziko_config/arabiapriet5.channels.xml', 'w', encoding="utf-8") as f:
-        f.write(arabiapriet5_channels.text) 
-
-if not os.path.exists('/etc/epgimport/ziko_config/qatareniet5.channels.xml'):
-    print('Downloading qatareniet5 channels config')
-    sys.stdout.flush()
-    arabiapreniet5_channels = requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/configs/qatareniet5.channels.xml?raw=true')
-    with io.open('/etc/epgimport/ziko_config/qatareniet5.channels.xml', 'w', encoding="utf-8") as f:
-        f.write(qatareniet5_channels.text)
-
-if not os.path.exists('/etc/epgimport/ziko_config/qatarpriet5.channels.xml'):
-    print('Downloading qatarpriet5 channels config')
-    sys.stdout.flush()
-    qatarpriet5_channels = requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/configs/qatarpriet5.channels.xml?raw=true')
-    with io.open('/etc/epgimport/ziko_config/qatarpriet5.channels.xml', 'w', encoding="utf-8") as f:
-        f.write(qatarpriet5_channels.text)
-
 if not os.path.exists('/etc/epgimport/ziko_config/uae1iet5.channels.xml'):
     print('Downloading uae1iet5 channels config')
     sys.stdout.flush()
     uae1iet5_channels = requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/configs/uae1iet5.channels.xml?raw=true')
     with io.open('/etc/epgimport/ziko_config/uae1iet5.channels.xml', 'w', encoding="utf-8") as f:
         f.write(uae1iet5_channels.text)
+
+if not os.path.exists('/etc/epgimport/ziko_config/polandiet5.channels.xml'):
+    print('Downloading polandiet5 channels config')
+    sys.stdout.flush()
+    polandiet5_channels = requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/configs/polandiet5.channels.xml?raw=true')
+    with io.open('/etc/epgimport/ziko_config/polandiet5.channels.xml', 'w', encoding="utf-8") as f:
+        f.write(polandiet5_channels.text)
+
+if not os.path.exists('/etc/epgimport/ziko_config/polandpremiumiet5.channels.xml'):
+    print('Downloading polandpremiumiet5 channels config')
+    sys.stdout.flush()
+    polandpremiumiet5_channels = requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/configs/polandpremiumiet5.channels.xml?raw=true')
+    with io.open('/etc/epgimport/ziko_config/polandpremiumiet5.channels.xml', 'w', encoding="utf-8") as f:
+        f.write(polandpremiumiet5_channels.text)
 
 if not os.path.exists('/etc/epgimport/ziko_config/elcinema.channels.xml'):
     print('Downloading elcinema channels config')
@@ -71,12 +64,26 @@ if not os.path.exists('/etc/epgimport/ziko_config/bein.channels.xml'):
     with io.open('/etc/epgimport/ziko_config/bein.channels.xml', 'w', encoding="utf-8") as f:
         f.write(bein_channels.text)
 
-if not os.path.exists('/etc/epgimport/ziko_config/sportiet5.channels.xml'):
-    print('Downloading sportiet5 channels config')
+if not os.path.exists('/etc/epgimport/ziko_config/qatarariet5.channels.xml'):
+    print('Downloading qatarariet5 channels config')
     sys.stdout.flush()
-    sportiet5_channels = requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/configs/sportiet5.channels.xml?raw=true')
-    with io.open('/etc/epgimport/ziko_config/sportiet5.channels.xml', 'w', encoding="utf-8") as f:
-        f.write(sportiet5_channels.text)
+    qatareniet5_channels = requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/configs/qatarariet5.channels.xml?raw=true')
+    with io.open('/etc/epgimport/ziko_config/qatareniet5.channels.xml', 'w', encoding="utf-8") as f:
+        f.write(qatarariet5_channels.text)
+
+if not os.path.exists('/etc/epgimport/ziko_config/qatareniet5.channels.xml'):
+    print('Downloading qatareniet5 channels config')
+    sys.stdout.flush()
+    qatareniet5_channels = requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/configs/qatareniet5.channels.xml?raw=true')
+    with io.open('/etc/epgimport/ziko_config/qatareniet5.channels.xml', 'w', encoding="utf-8") as f:
+        f.write(qatareniet5_channels.text)
+
+if not os.path.exists('/etc/epgimport/ziko_config/qatarpriet5.channels.xml'):
+    print('Downloading qatarpriet5 channels config')
+    sys.stdout.flush()
+    qatarpriet5_channels = requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/configs/qatarpriet5.channels.xml?raw=true')
+    with io.open('/etc/epgimport/ziko_config/qatarpriet5.channels.xml', 'w', encoding="utf-8") as f:
+        f.write(qatarpriet5_channels.text)
 
 if not os.path.exists('/etc/epgimport/ziko_config/uaeariet5.channels.xml'):
     print('Downloading uaeariet5 channels config')
@@ -92,9 +99,44 @@ if not os.path.exists('/etc/epgimport/ziko_config/uaeeniet5.channels.xml'):
     with io.open('/etc/epgimport/ziko_config/uaeeniet5.channels.xml', 'w', encoding="utf-8") as f:
         f.write(uaeeniet5_channels.text)
 
-if not os.path.exists('/etc/epgimport/ziko_config/beinsportiet5.channels.xml'):
-    print('Downloading beinsportiet5 channels config')
+if not os.path.exists('/etc/epgimport/ziko_config/dstv.channels.xml'):
+    print('Downloading dstv channels config')
     sys.stdout.flush()
-    beinsportiet5_channels = requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/configs/beinsportiet5.channels.xml?raw=true')
-    with io.open('/etc/epgimport/ziko_config/beinsportiet5.channels.xml', 'w', encoding="utf-8") as f:
-        f.write(beinsportiet5_channels.text)
+    dstv_channels = requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/configs/dstv.channels.xml?raw=true')
+    with io.open('/etc/epgimport/ziko_config/dstv.channels.xml', 'w', encoding="utf-8") as f:
+        f.write(dstv_channels.text)
+
+if not os.path.exists('/etc/epgimport/ziko_config/freesat.channels.xml'):
+    print('Downloading freesat channels config')
+    sys.stdout.flush()
+    free_channels = requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/configs/freesat.channels.xml?raw=true')
+    with io.open('/etc/epgimport/ziko_config/freesat.channels.xml', 'w', encoding="utf-8") as f:
+        f.write(free_channels.text)
+
+if not os.path.exists('/etc/epgimport/ziko_config/skyit.channels.xml'):
+    print('Downloading skyit channels config')
+    sys.stdout.flush()
+    sky_it = requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/configs/skyit.channels.xml?raw=true')
+    with io.open('/etc/epgimport/ziko_config/skyit.channels.xml', 'w', encoding="utf-8") as f:
+        f.write(sky_it.text)
+
+if not os.path.exists('/etc/epgimport/ziko_config/discovery.channels.xml'):
+    print('Downloading discovery.channels config')
+    sys.stdout.flush()
+    discovery_channels = requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/configs/discovery.channels.xml?raw=true')
+    with io.open('/etc/epgimport/ziko_config/discovery.channels.xml', 'w', encoding="utf-8") as f:
+        f.write(discovery_channels.text)
+
+if not os.path.exists('/etc/epgimport/ziko_config/snrt.channels.xml'):
+    print('Downloading Snrt.channels config')
+    sys.stdout.flush()
+    snrt_channels = requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/configs/snrt.channels.xml?raw=true')
+    with io.open('/etc/epgimport/ziko_config/snrt.channels.xml', 'w', encoding="utf-8") as f:
+        f.write(snrt_channels.text)
+
+if not os.path.exists('/etc/epgimport/ziko_config/satTv.channels.xml'):
+    print('Downloading satTv.channels config')
+    sys.stdout.flush()
+    satTv_channels = requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/configs/satTv.channels.xml?raw=true')
+    with io.open('/etc/epgimport/ziko_config/satTv.channels.xml', 'w', encoding="utf-8") as f:
+        f.write(satTv_channels.text)
