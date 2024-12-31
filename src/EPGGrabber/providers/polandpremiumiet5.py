@@ -22,22 +22,22 @@ except ImportError:
     from __init__ import EPG_ROOT, PROVIDERS_ROOT
 
 # Paths
-input_path = os.path.join(EPG_ROOT, 'qatarpremium.xml')
+input_path = os.path.join(EPG_ROOT, 'polandpremium.xml')
 output_path = os.path.join(EPG_ROOT, 'out.xml')
 
 def main():
-    print("*****************Qatar_premium_iet5 EPG******************")
+    print("*****************Polandpremium_iet5 EPG******************")
     sys.stdout.flush()
-    print("Downloading Qatar_premium_iet5 EPG guide\nPlease wait....")
+    print("Downloading Polandpremium_iet5 EPG guide\nPlease wait....")
     sys.stdout.flush()
     try:
         # Download the XML file
-        response = requests.get('https://www.open-epg.com/files/qatarpremium.xml', verify=False)
+        response = requests.get('https://www.open-epg.com/files/polandpremium.xml', verify=False)
         if response.status_code == 200:
             with io.open(input_path, 'w', encoding="utf-8") as f:
                 f.write(response.text)
             print("##########################################")
-            print("Qatarpremium.xml Downloaded Successfully")
+            print("polandpremium.xml Downloaded Successfully")
             print("##########################################")
 
             # Adjust times in the XML
@@ -53,9 +53,9 @@ def main():
             print('**************FINISHED******************')
             sys.stdout.flush()
         else:
-            print("Failed to download /qatarpremium.xml. Status code: {}".format(response.status_code))
+            print("Failed to download /polandpremium.xml. Status code: {}".format(response.status_code))
     except requests.exceptions.RequestException as e:
-        print("Failed to download /qatarpremium.xml: {}".format(e))
+        print("Failed to download /polandpremium.xml: {}".format(e))
 
 def adjust_times():
     with io.open(input_path, 'r', encoding="utf-8") as f:
@@ -89,10 +89,10 @@ def remove_duplicates():
 def rename_file():
     os.remove(input_path)
     os.rename(output_path, input_path)
-    print("Qatarpremium.xml file is created - successfully done")
+    print("polandpremium.xml file successfully created")
     print("############################################################")
     print("The time is set to +0200 ,and if your time is different,")
-    print("you can modify the Qatarpriet5.py file at the following path:")
+    print("you can modify the Polandpremiumiet5.py file at the following path:")
     print("/usr/lib/enigma2/python/Plugins/Extensions/EPGGrabber/providers/")
     print("############################################################")
 
@@ -100,7 +100,7 @@ def update_providers():
     with open(PROVIDERS_ROOT, 'r') as f:
         data = json.load(f)
         for channel in data['bouquets']:
-            if channel["bouquet"] == "Qatarpriet5":
+            if channel["bouquet"] == "Polandpremiumiet5":
                 channel['date'] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
     with open(PROVIDERS_ROOT, 'w') as f:
         json.dump(data, f, indent=4)

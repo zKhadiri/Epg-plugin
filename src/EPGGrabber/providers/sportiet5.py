@@ -33,7 +33,7 @@ def main():
 
     try:
         # Download the XML file
-        response = requests.get('https://www.bevy.be/bevyfiles/arabiapremiumar.xml', verify=False)
+        response = requests.get('https://www.open-epg.com/files/arabiapremiumar.xml', verify=False)
         if response.status_code == 200:
             with io.open(path, 'w', encoding="utf-8") as f:
                 f.write(response.text)
