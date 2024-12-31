@@ -26,13 +26,13 @@ input_path = os.path.join(EPG_ROOT, 'palestine1.xml')
 output_path = os.path.join(EPG_ROOT, 'out.xml')
 
 def main():
-    print("*****************Nilesat_iet5 EPG******************")
+    print("*****************Arabiapr_iet5 EPG******************")
     sys.stdout.flush()
-    print("Downloading Nilesat_iet5 EPG guide\nPlease wait....")
+    print("Downloading Arabiapr_iet5 EPG guide\nPlease wait....")
     sys.stdout.flush()
     try:
         # Download the XML file
-        response = requests.get('https://www.bevy.be/bevyfiles/palestine1.xml', verify=False)
+        response = requests.get('https://www.open-epg.com/files/palestine1.xml', verify=False)
         if response.status_code == 200:
             with io.open(input_path, 'w', encoding="utf-8") as f:
                 f.write(response.text)
@@ -89,10 +89,10 @@ def remove_duplicates():
 def rename_file():
     os.remove(input_path)
     os.rename(output_path, input_path)
-    print("uaepremium2.xml file successfully created")
+    print("Palestine1.xml file successfully created")
     print("############################################################")
     print("The time is set to +0200 ,and if your time is different,")
-    print("you can modify the nilesatiet5.py file at the following path:")
+    print("you can modify the Arabiapriet5.py file at the following path:")
     print("/usr/lib/enigma2/python/Plugins/Extensions/EPGGrabber/providers/")
     print("############################################################")
 
@@ -100,7 +100,7 @@ def update_providers():
     with open(PROVIDERS_ROOT, 'r') as f:
         data = json.load(f)
         for channel in data['bouquets']:
-            if channel["bouquet"] == "nilesatiet5":
+            if channel["bouquet"] == "Arabiapriet5":
                 channel['date'] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
     with open(PROVIDERS_ROOT, 'w') as f:
         json.dump(data, f, indent=4)
