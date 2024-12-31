@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" ?>
 <channels>
 	<channel id="Al-Kass-8-1.qa">1:0:19:4FC0:7F8:E0:1040000:0:0:0:</channel>
 	<channel id="leg SPORTS FTA DIGITAL.qa">1:0:19:283F:406:E0:1040000:0:0:0:</channel>
@@ -60,4 +60,8 @@
 	<channel id="2023 Alkass 7.ar">1:0:1:71:1029:E0:1040000:0:0:0:</channel>
 	<channel id="2023 Alkass 4.ar">1:0:1:5:22B:2BE:1040000:0:0:0:</channel>
 	<channel id="2023 Alkass 8.ar">1:0:1:72:1029:E0:1040000:0:0:0:</channel>
+	<channel id="Abu Dhabi Channel.ua">1:0:1:1:32:64:DCA0000:0:0:0:</channel>
+	<channel id="National Geographic HD Channel.ua">1:0:1:8:32:64:DCA0000:0:0:0:</channel>
+	<channel id="Abu Dhabi Sports Channel 1.ua">1:0:1:5:32:64:DCA0000:0:0:0:</channel>
+	<channel id="Abu Dhabi Sports Channel 2.ua">1:0:1:6:32:64:DCA0000:0:0:0:</channel>
 </channels>
