@@ -67,7 +67,7 @@ if not os.path.exists('/etc/epgimport/ziko_config/bein.channels.xml'):
 if not os.path.exists('/etc/epgimport/ziko_config/qatarariet5.channels.xml'):
     print('Downloading qatarariet5 channels config')
     sys.stdout.flush()
-    qatareniet5_channels = requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/configs/qatarariet5.channels.xml?raw=true')
+    qatarariet5_channels = requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/configs/qatarariet5.channels.xml?raw=true')
     with io.open('/etc/epgimport/ziko_config/qatareniet5.channels.xml', 'w', encoding="utf-8") as f:
         f.write(qatarariet5_channels.text)
 
