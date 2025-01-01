@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sourcecat sourcecatname="ZIKO EPG">
     <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/bein.channels.xml">
-        <description>bein sport.net</description>
+        <description>Bein Sport.net</description>
         <url>/etc/epgimport/ziko_epg/bein.xml</url>
     </source>
     <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/bein.channels.xml">
-        <description>bein entertainment.net</description>
+        <description>Bein Entertainment.net</description>
         <url>/etc/epgimport/ziko_epg/beinent.xml</url>
     </source>
     <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/bein.channels.xml">
-        <description>bein sport connect</description>
+        <description>Bein Sport Connect</description>
         <url>/etc/epgimport/ziko_epg/beinConnect.xml</url>
     </source>
     <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/bein.channels.xml">
-        <description>bein entertainment connect</description>
+        <description>Bein Entertainment Connect</description>
         <url>/etc/epgimport/ziko_epg/beinentC.xml</url>
     </source>
 	<source type="gen_xmltv" channels="/etc/epgimport/ziko_config/qatarariet5.channels.xml">
-        <description>Qatarar_iet5 by (iet5 )</description>
-        <url>/etc/epgimport/ziko_epg/qatar2.xml</url>
+       <description>Qatarar_iet5 by (iet5)</description>
+       <url>/etc/epgimport/ziko_epg/qatar2.xml</url>
     </source>
 	<source type="gen_xmltv" channels="/etc/epgimport/ziko_config/qatareniet5.channels.xml">
-        <description>Qataren_iet5 by (iet5 )</description>
+        <description>Qataren_iet5 by (iet5)</description>
         <url>/etc/epgimport/ziko_epg/qatar3.xml</url>
     </source>
 	<source type="gen_xmltv" channels="/etc/epgimport/ziko_config/qatarpriet5.channels.xml">
-        <description>Qatar_pri_iet5 by (iet5 )</description>
+        <description>QatarPR_iet5 by (iet5)</description>
         <url>/etc/epgimport/ziko_epg/qatarpremium.xml</url>
     </source>
 	<source type="gen_xmltv" channels="/etc/epgimport/ziko_config/egypt2iet5.channels.xml">
-        <description>Egypt2_iet5 by (iet5 )</description>
+        <description>Egypt2_iet5 by (iet5)</description>
         <url>/etc/epgimport/ziko_epg/egypt2.xml</url>
     </source>
 	<source type="gen_xmltv" channels="/etc/epgimport/ziko_config/arabiapriet5.channels.xml">
@@ -37,17 +37,17 @@
         <url>/etc/epgimport/ziko_epg/palestine1.xml</url>
     </source>
 	<source type="gen_xmltv" channels="/etc/epgimport/ziko_config/uae1iet5.channels.xml">
-        <description>UAE1_iet5 by (iet5 )</description>
+        <description>UAE1_iet5 by (iet5)</description>
         <url>/etc/epgimport/ziko_epg/uaepremium1.xml</url>
     </source>
     <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/uaeariet5.channels.xml">
-        <description>UAE_AR_iet5 by (iet5 )</description>
+        <description>UAE_AR_iet5 by (iet5)</description>
         <url>/etc/epgimport/ziko_epg/uaepremium2.xml</url>
    </source>
    <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/uaeeniet5.channels.xml">
-        <description>UAE_EN_iet5 by (iet5 )</description>
+        <description>UAE_EN_iet5 by (iet5)</description>
         <url>/etc/epgimport/ziko_epg/uaepremium3.xml</url>
-    </source>
+   </source>
    <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/polandiet5.channels.xml">
         <description>POLAND_iet5 by (iet5 )</description>
         <url>/etc/epgimport/ziko_epg/poland.xml</url>
@@ -61,7 +61,7 @@
         <url>/etc/epgimport/ziko_epg/osnplay.xml</url>
     </source>
     <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/elcinema.channels.xml">
-        <description>elcinema/elcinema english</description>
+        <description>Elcinema/Elcinema English</description>
         <url>/etc/epgimport/ziko_epg/elcinema.xml</url>
     </source>
     <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/custom.channels.xml">
@@ -69,7 +69,7 @@
         <url>/etc/epgimport/ziko_epg/aljazeera.xml</url>
     </source>
     <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/custom.channels.xml">
-        <description>mbc</description>
+        <description>MBC</description>
         <url>/etc/epgimport/ziko_epg/mbc.xml</url>
     </source>
     <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/custom.channels.xml">
@@ -77,7 +77,7 @@
         <url>/etc/epgimport/ziko_epg/rotana.xml</url>
     </source>
     <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/satTv.channels.xml">
-        <description>SAT Tv</description>
+        <description>SAT TV</description>
         <url>/etc/epgimport/ziko_epg/satTv.xml</url>
     </source>
     <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/snrt.channels.xml">
@@ -89,11 +89,11 @@
         <url>/etc/epgimport/ziko_epg/lematin.xml</url>
     </source>
     <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/elcinema.channels.xml">
-        <description>Bein entertainment cinema</description>
+        <description>Bein Entertainment Cinema</description>
         <url>/etc/epgimport/ziko_epg/beinentCin.xml</url>
     </source>
     <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/discovery.channels.xml">
-        <description>discovery 0.8w and 4.8E</description>
+        <description>Discovery 0.8W and 4.8E</description>
         <url>/etc/epgimport/ziko_epg/discovery.xml</url>
     </source>
     <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/caf.channels.xml">
@@ -101,7 +101,7 @@
         <url>/etc/epgimport/ziko_epg/caf.xml</url>
     </source>
     <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/custom.channels.xml">
-        <description>espn</description>
+        <description>Espn</description>
         <url>/etc/epgimport/ziko_epg/espn.xml</url>
     </source>
     <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/freesat.channels.xml">
@@ -109,7 +109,7 @@
         <url>/etc/epgimport/ziko_epg/freesat.xml</url>
     </source>
     <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/custom.channels.xml">
-        <description>UK SPORTS CHANNELS</description>
+        <description>UK Sports Channels</description>
         <url>/etc/epgimport/ziko_epg/skyuk.xml</url>
     </source>
     <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/custom.channels.xml">
@@ -117,7 +117,7 @@
         <url>/etc/epgimport/ziko_epg/lovenature.xml</url>
     </source>
     <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/custom.channels.xml">
-        <description>INDIAN SPORTS CHANNELS</description>
+        <description>Indian Sports Channels</description>
         <url>/etc/epgimport/ziko_epg/sony.xml</url>
     </source>
     <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/skyit.channels.xml">
@@ -128,7 +128,7 @@
         <description>DSTV</description>
         <url>/etc/epgimport/ziko_epg/dstv.xml</url>
     </source>
-	    <mappings>
+	<mappings>
         <channel name="osn.channels.xml.xz" nocheck="1">
             <url>http://raw.githubusercontent.com/MOHAMED19OS/DZ_EPG/main/osn.channels.xml.xz</url>
         </channel>
