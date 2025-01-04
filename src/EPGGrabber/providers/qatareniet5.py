@@ -25,6 +25,12 @@ except ImportError:
 input_path = os.path.join(EPG_ROOT, 'qatar3.xml')
 output_path = os.path.join(EPG_ROOT, 'out.xml')
 
+# List of changes to apply
+List_Chang = [
+    # Example: ('old_text', 'new_text'),
+    # Add your specific changes here
+]
+
 def main():
     print("*****************Qatar_iet5_EN EPG******************")
     sys.stdout.flush()
@@ -40,6 +46,8 @@ def main():
             print("qatar3.xml Downloaded Successfully")
             print("##########################################")
 
+            # Apply the transformations
+            apply_changes()
             # Adjust times in the XML
             adjust_times()
             # Remove duplicate lines
@@ -56,6 +64,13 @@ def main():
             print("Failed to download /qatar3.xml. Status code: {}".format(response.status_code))
     except requests.exceptions.RequestException as e:
         print("Failed to download /qatar3.xml: {}".format(e))
+
+def apply_changes():
+    for old_text, new_text in List_Chang:
+        for line in fileinput.input(input_path, inplace=True):
+            if old_text in line:
+                line = line.replace(old_text, new_text)
+            sys.stdout.write(line)
 
 def adjust_times():
     with io.open(input_path, 'r', encoding="utf-8") as f:
@@ -89,10 +104,10 @@ def remove_duplicates():
 def rename_file():
     os.remove(input_path)
     os.rename(output_path, input_path)
-    print("qatar3.xml file is created - successfully done")
+    print("qatar3.xml file successfully created")
     print("############################################################")
     print("The time is set to +0200 ,and if your time is different,")
-    print("you can modify the Qatareniet5.py file at the following path:")
+    print("you can modify the qatareniet5.py file at the following path:")
     print("/usr/lib/enigma2/python/Plugins/Extensions/EPGGrabber/providers/")
     print("############################################################")
 
@@ -100,7 +115,7 @@ def update_providers():
     with open(PROVIDERS_ROOT, 'r') as f:
         data = json.load(f)
         for channel in data['bouquets']:
-            if channel["bouquet"] == "Qatareniet5":
+            if channel["bouquet"] == "qatareniet5":
                 channel['date'] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
     with open(PROVIDERS_ROOT, 'w') as f:
         json.dump(data, f, indent=4)
