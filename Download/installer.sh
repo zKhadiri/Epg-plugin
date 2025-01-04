@@ -2,8 +2,8 @@
 ##setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=24.0
-description=What_is_NEW:\n'-Fix some minor errors by Saiedf'
+version=24.1
+description=What_is_NEW:\n'-Fixes to make Script Provider work with Dreambox'
 ##############################################################
 
 TEMPATH=/tmp
