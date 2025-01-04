@@ -391,4 +391,17 @@
 	<channel id="ON_E">1:0:19:CA:2:800:DCA0000:0:0:0:</channel>
 	<channel id="TeN_TV">1:0:1:259:6:800:DCA0000:0:0:0:</channel>
 	<channel id="Nat_Geo_AD_HD">1:0:1:8:32:64:DCA0000:0:0:0:</channel>
+	<channel id="Al_Aoula_Morocco">1:0:1:1:320:2BE:1040000:0:0:0:</channel>
+	<channel id="Aloula_Egy_Ch">1:0:19:1F6:5:800:DCA0000:0:0:0:</channel>
+	<channel id="Alrasheed">1:0:19:4:9C7C:77E:DCA0000:0:0:0:</channel>
+	<channel id="Alsumaria">1:0:19:5:9C7C:77E:DCA0000:0:0:0:</channel>
+	<channel id="Al_NaharTV">1:0:19:C88:20:800:DCA0000:0:0:0:</channel>
+	<channel id="Egyptian_TV">1:0:19:451:B:800:DCA0000:0:0:0:</channel>
+	<channel id="ElMehwarChannel">1:0:1:457:B:800:DCA0000:0:0:0:</channel>
+	<channel id="Maspero_Zaman">1:0:1:267:6:800:DCA0000:0:0:0:</channel>
+	<channel id="Mix">1:0:1:8:1BC0:2BE:1040000:0:0:0:</channel>
+	<channel id="Nessma">1:0:1:E:1137:21AC:1040000:0:0:0:</channel>
+	<channel id="ONE">1:0:19:16:1:2BE:1040000:0:0:0:</channel>
+	<channel id="Syria_TV">1:0:1:B0B:1C:800:DCA0000:0:0:0:</channel>
+	<channel id="Star_Movies">1:0:19:9D0B:FB4:E0:1040000:0:0:0:</channel>
 </channels>

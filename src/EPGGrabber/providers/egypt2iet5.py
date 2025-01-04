@@ -25,6 +25,11 @@ except ImportError:
 input_path = os.path.join(EPG_ROOT, 'egypt2.xml')
 output_path = os.path.join(EPG_ROOT, 'out.xml')
 
+# List of changes to apply
+List_Chang = [
+    # Example: ('old_text', 'new_text'),
+    # Add your specific changes here
+]
 def main():
     print("*****************EGYPT2_iet5_EN EPG******************")
     sys.stdout.flush()
@@ -40,6 +45,8 @@ def main():
             print("egypt2.xml Downloaded Successfully")
             print("##########################################")
 
+            # Apply the transformations
+            apply_changes()
             # Adjust times in the XML
             adjust_times()
             # Remove duplicate lines
@@ -56,6 +63,13 @@ def main():
             print("Failed to download /egypt2.xml. Status code: {}".format(response.status_code))
     except requests.exceptions.RequestException as e:
         print("Failed to download /egypt2.xml: {}".format(e))
+
+def apply_changes():
+    for old_text, new_text in List_Chang:
+        for line in fileinput.input(input_path, inplace=True):
+            if old_text in line:
+                line = line.replace(old_text, new_text)
+            sys.stdout.write(line)
 
 def adjust_times():
     with io.open(input_path, 'r', encoding="utf-8") as f:
