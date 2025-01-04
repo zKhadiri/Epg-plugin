@@ -1,92 +1,77 @@
+
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
-import requests, json, sys, io
-from datetime import datetime, date , timedelta
-from __init__ import *
 
-dst = requests.get('https://tvlistings.gracenote.com/gapzap_webapi/api/Providers/GetDstOffsetForPostalByCountry/M4S1A4/CAN/en').json()
+try:
+	from .__init__ import *
+except:
+	from __init__ import *
 
-yesterday = date.today() - timedelta(days=1)
-timestamp = datetime.strptime(str(yesterday) + ' 06:00:00', "%Y-%m-%d %H:%M:%S").strftime("%s")
+import requests
+import io
+import sys
+import os
+import re
+import json
+from datetime import datetime, timedelta
+from requests.adapters import HTTPAdapter
+from time import sleep, strftime
 
-payload = {
-    "timespan": "336",
-    "timestamp": timestamp,
-    "prgsvcid": "52745",
-    "headendId": "0005580",
-    "countryCode": "CAN",
-    "postalCode": "M4S1A4",
-    "device": "X",
-    "userId": "-",
-    "aid": "lovenature",
-    "DSTUTCOffset": "-240",
-    "STDUTCOffset": "-300",
-    "DSTStart": dst["DSTStart"],
-    "DSTEnd": dst["DSTEnd"],
-    "languagecode": "en"
+headers = {
+    'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) snap Chromium/80.0.3987.149 Chrome/80.0.3987.149 Safari/537.36'
 }
 
-synopsis_all = {}
 
+def love_nature():
+    for i in range(0, 14):
+        week = (datetime.today() + timedelta(days=i)).strftime('%Y-%m-%d')
+        with requests.Session() as s:
+            s.mount('https://', HTTPAdapter(max_retries=10))
+            url = s.get('https://www.tvpassport.com/tv-listings/stations/love-nature/3907/{}'.format(week), headers=headers, timeout=10)
+        date_start = re.findall(r'data-st=\"(.*?)\"', url.text)
+        duration = re.findall(r'data-duration=\"(.*?)\"', url.text)
+        title = re.findall(r'data-showName=\"(.*?)\"', url.text)
+        description = re.findall(r'data-description=\"(.*?)\"', url.text)
+        team1 = re.findall(r'data-team1=\"(.*?)\"', url.text)
+        team2 = re.findall(r'data-team2=\"(.*?)\"', url.text)
 
-def getSynopsis(id, title):
-    synopsis_payload = payload
-    synopsis_payload['programSeriesID'] = id
-    synopsis_payload['season'] = -1
-    synopsis_payload['pageSize'] = 100
-    synopsis_payload['pageNo'] = 1
-    synopsis_payload['headendId'] = "0005580"
-    try:
-        if title in synopsis_all:
-            return synopsis_all[title]
-        else:
-            data = requests.post('https://tvlistings.gracenote.com/api/program/episodeGuide',json=synopsis_payload).json()
-            synopsis_all[title] = data['episodeGuideTab']['season']['episodes'][0]['synopsis']
-            return data['episodeGuideTab']['season']['episodes'][0]['synopsis']
-    except KeyError:
-        return None
+        for dt, m, t, d, t1, t2 in zip(date_start, duration, title, description, team1, team2):
+            ch = ''
+            start = datetime.strptime(dt, '%Y-%m-%d %H:%M:%S').strftime('%Y%m%d%H%M%S')
+            end = (datetime.strptime(start, '%Y%m%d%H%M%S') + timedelta(minutes=int(m))).strftime('%Y%m%d%H%M%S')
+            ch += 2 * ' ' + '<programme start="' + str(start) + ' +0000" stop="' + str(end) + ' +0000" channel="Love Nature 4K">\n'
+            if t1 != "" and t2 != "":
+                ch += 4 * ' ' + '<title lang="en">' + t.replace('&', 'and') + ' : ' + t1 + ' vs ' + t2 + '</title>\n'
+            else:
+                ch += 4 * ' ' + '<title lang="en">' + t.replace('&', 'and') + '</title>\n'
+            ch += 4 * ' ' + '<desc lang="en">' + d.replace('&', 'and') + '</desc>\n  </programme>\r'
+            with io.open(EPG_ROOT + '/lovenature.xml', "a", encoding='UTF-8')as f:
+                f.write(ch)
+        print(week)
+        sys.stdout.flush()
 
-def guide():
-    data = requests.post("https://tvlistings.gracenote.com/api/sslgrid",json=payload).json()
-    for key in data.keys():
-        if datetime.strptime(key,"%Y-%m-%d").date() >= date.today():
-            for prog in data[key]:
-                prog_start = datetime.fromtimestamp(prog['startTime']).strftime('%Y%m%d%H%M%S')
-                prog_end = datetime.fromtimestamp(prog['endTime']).strftime('%Y%m%d%H%M%S')
-                epg = ''
-                epg += 2 * ' ' + '<programme start="' + prog_start + ' -0800" stop="' + prog_end + ' -0800" channel="lovenature">\n'
-                if prog['program']['episodeTitle'] != None:
-                    epg += 4 * ' ' + '<title lang="en">' + prog['program']['title'].replace('&', 'and') + ' "'+prog['program']['episodeTitle'].replace('&', 'and')+'"'+'</title>\n'
-                else:
-                    epg += 4 * ' ' + '<title lang="en">' + prog['program']['title'].replace('&', 'and') + '</title>\n'
-                if prog['program']['shortDesc'] == None:
-                    _synopsis = getSynopsis(prog['program']['seriesId'], prog['program']['title'])
-                    if _synopsis != None:
-                        epg += 4 * ' ' + '<desc lang="en">' + _synopsis.replace('&', 'and') + '</desc>\n  </programme>\r'
-                    else:
-                        epg += 4 * ' ' + '<desc lang="en">Love Nature</desc>\n  </programme>\r'
-                else:
-                    epg += 4 * ' ' + '<desc lang="en">' + prog['program']['shortDesc'].replace('&', 'and') + '</desc>\n  </programme>\r'
-                with io.open(EPG_ROOT + '/lovenature.xml', "a", encoding='UTF-8')as f:
-                    f.write(epg)
-    print('Love Nature EPG ends at : ' + key)
-    sys.stdout.flush()
 
 def main():
-    print('**************Love Nature EPG******************')
+    with open(PROVIDERS_ROOT, 'r') as f:
+        data = json.load(f)
+    for bouquet in data['bouquets']:
+        if bouquet["bouquet"] == "Love Nature 4K":
+            bouquet['date'] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
+    with open(PROVIDERS_ROOT, 'w') as f:
+        json.dump(data, f)
+
+    print('**************Love Nature 4K EPG******************')
     sys.stdout.flush()
 
-    xml_header(EPG_ROOT + '/lovenature.xml', ["lovenature"])
+    xml_header(EPG_ROOT + '/lovenature.xml', ['Love Nature 4K'])
 
-    guide()
+    love_nature()
 
     close_xml(EPG_ROOT + '/lovenature.xml')
-    provider = __file__.rpartition('/')[-1].replace('.py', '')
-    update_status(provider)
 
     print("**************FINISHED******************")
     sys.stdout.flush()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
-
