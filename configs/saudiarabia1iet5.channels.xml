@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<channels>
+	<channel id="Rotana Cinema Masr.sa">1:0:19:83E:15:800:DCA0000:0:0:0:</channel>
+	<channel id="Rotana Cinema HD.sa">1:0:1:83B:15:800:DCA0000:0:0:0:</channel>
+	<channel id="Rotana Cinema HD.sa">1:0:19:5141:820:E0:1040000:0:0:0:</channel>
+	<channel id="Rotana Classic HD.sa">1:0:1:838:15:800:DCA0000:0:0:0:</channel>
+	<channel id="Rotana Classic HD.sa">1:0:19:5143:820:E0:1040000:0:0:0:</channel>
+	<channel id="Rotana Comedy.sa">1:0:19:5142:820:E0:1040000:0:0:0:</channel>
+	<channel id="Rotana Drama HD.sa">1:0:1:839:15:800:DCA0000:0:0:0:</channel>
+	<channel id="Rotana Drama HD.sa">1:0:19:5145:820:E0:1040000:0:0:0:</channel>
+	<channel id="Rotana Khalijia HD.sa">1:0:19:5144:820:E0:1040000:0:0:0:</channel>
+	<channel id="Rotana Khalijia HD.sa">1:0:1:837:15:800:DCA0000:0:0:0:</channel>
+</channels>
