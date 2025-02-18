@@ -22,7 +22,7 @@ except ImportError:
     from __init__ import EPG_ROOT, PROVIDERS_ROOT
 
 # Paths
-input_path = os.path.join(EPG_ROOT, 'uae1.xml')
+input_path = os.path.join(EPG_ROOT, 'uae2.xml')
 output_path = os.path.join(EPG_ROOT, 'out.xml')
 
 # List of changes to apply
@@ -31,18 +31,18 @@ List_Chang = [
     # Add your specific changes here
 ]
 def main():
-    print("*****************UAE1_iet5 EPG******************")
+    print("*****************UAE2_iet5_EPG******************")
     sys.stdout.flush()
-    print("Downloading UAE1_iet5 EPG guide\nPlease wait....")
+    print("Downloading UAE2_iet5 EPG guide\nPlease wait....")
     sys.stdout.flush()
     try:
         # Download the XML file
-        response = requests.get('https://www.open-epg.com/files/uae1.xml', verify=False)
+        response = requests.get('https://www.open-epg.com/files/uae2.xml', verify=False)
         if response.status_code == 200:
             with io.open(input_path, 'w', encoding="utf-8") as f:
                 f.write(response.text)
             print("##########################################")
-            print("UAE1.xml Downloaded Successfully")
+            print("UAE2.xml Downloaded Successfully")
             print("##########################################")
 
             # Apply the transformations
@@ -57,13 +57,12 @@ def main():
             update_providers()
             # Remove specific lines
             remove_specific_lines()
-
             print('**************FINISHED******************')
             sys.stdout.flush()
         else:
-            print("Failed to download /uae1.xml. Status code: {}".format(response.status_code))
+            print("Failed to download /uae2.xml. Status code: {}".format(response.status_code))
     except requests.exceptions.RequestException as e:
-        print("Failed to download /uae1.xml: {}".format(e))
+        print("Failed to download /uae2.xml: {}".format(e))
 
 def apply_changes():
     for old_text, new_text in List_Chang:
@@ -104,10 +103,10 @@ def remove_duplicates():
 def rename_file():
     os.remove(input_path)
     os.rename(output_path, input_path)
-    print("UAE1.xml file successfully created")
+    print("uae2.xml file successfully created")
     print("############################################################")
     print("The time is set to +0200 ,and if your time is different,")
-    print("you can modify the uae1iet5.py file at the following path:")
+    print("you can modify the uae2iet5.py file at the following path:")
     print("/usr/lib/enigma2/python/Plugins/Extensions/EPGGrabber/providers/")
     print("############################################################")
 
@@ -115,7 +114,7 @@ def update_providers():
     with open(PROVIDERS_ROOT, 'r') as f:
         data = json.load(f)
         for channel in data['bouquets']:
-            if channel["bouquet"] == "uae1iet5":
+            if channel["bouquet"] == "uae2iet5":
                 channel['date'] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
     with open(PROVIDERS_ROOT, 'w') as f:
         json.dump(data, f, indent=4)
