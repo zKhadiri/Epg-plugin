@@ -126,6 +126,13 @@ if not os.path.exists('/etc/epgimport/ziko_config/qatar4iet5.channels.xml'):
     with io.open('/etc/epgimport/ziko_config/qatar4iet5.channels.xml', 'w', encoding="utf-8") as f:
         f.write(qatar4iet5_channels.text)
 
+if not os.path.exists('/etc/epgimport/ziko_config/qatar5iet5.channels.xml'):
+    print('Downloading qatar5iet5 channels config')
+    sys.stdout.flush()
+    qatar5iet5_channels = requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/configs/qatar5iet5.channels.xml?raw=true')
+    with io.open('/etc/epgimport/ziko_config/qatar5iet5.channels.xml', 'w', encoding="utf-8") as f:
+        f.write(qatar5iet5_channels.text)
+        
 if not os.path.exists('/etc/epgimport/ziko_config/poland1iet5.channels.xml'):
     print('Downloading poland1iet5 channels config')
     sys.stdout.flush()
@@ -146,6 +153,20 @@ if not os.path.exists('/etc/epgimport/ziko_config/dstv.channels.xml'):
     dstv_channels = requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/configs/dstv.channels.xml?raw=true')
     with io.open('/etc/epgimport/ziko_config/dstv.channels.xml', 'w', encoding="utf-8") as f:
         f.write(dstv_channels.text)
+
+if not os.path.exists('/etc/epgimport/ziko_config/rotana.channels.xml'):
+    print('Downloading rotana channels config')
+    sys.stdout.flush()
+    free_channels = requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/configs/rotana.channels.xml?raw=true')
+    with io.open('/etc/epgimport/ziko_config/rotana.channels.xml', 'w', encoding="utf-8") as f:
+        f.write(free_channels.text)
+
+if not os.path.exists('/etc/epgimport/ziko_config/aljazeera.channels.xml'):
+    print('Downloading aljazeera channels config')
+    sys.stdout.flush()
+    aljazeera_channels = requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/configs/aljazeera.channels.xml?raw=true')
+    with io.open('/etc/epgimport/ziko_config/aljazeera.channels.xml', 'w', encoding="utf-8") as f:
+        f.write(aljazeera_channels.text) 
 
 if not os.path.exists('/etc/epgimport/ziko_config/freesat.channels.xml'):
     print('Downloading freesat channels config')

@@ -11,6 +11,7 @@ from datetime import datetime, timedelta
 import warnings
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 import fileinput
+from time import sleep  # Import the sleep function
 
 # Ignore insecure request warnings
 warnings.filterwarnings('ignore', category=InsecureRequestWarning)
@@ -32,20 +33,36 @@ List_Chang = [
 ]
 
 def main():
-    print("*****************Qatar3_iet5 EPG******************")
-    sys.stdout.flush()
+    # Added code snippet
+    print("**************Qatar3_iet5_EPG****************")
+    sys.stdout.flush()  # Flush after the initial print
+    sleep(1)  # Add a 1-second delay
+    print("=============================================")
+
     print("Downloading Qatar3_iet5 EPG guide\nPlease wait....")
     sys.stdout.flush()
     try:
         # Download the XML file
         response = requests.get('https://www.open-epg.com/files/qatar3.xml', verify=False)
         if response.status_code == 200:
+            # Convert content to unicode using utf-8 encoding
+            data_unicode = response.content.decode('utf-8')  # use content and decode to utf-8
             with io.open(input_path, 'w', encoding="utf-8") as f:
-                f.write(response.text)
-            print("##########################################")
-            print("qatar3.xml Downloaded Successfully")
-            print("##########################################")
+                f.write(data_unicode)  # write the unicode data
+                print("============================================")
 
+            # Fetch the number of channels (replace this with your actual logic)
+            with io.open(input_path, 'r', encoding="utf-8") as f:
+                xml_data = f.read()
+
+            # Count the number of channels
+            channel_count = xml_data.count('<channel id="')  # Example: Count channels in XML
+
+            print("There are {0} channels available for EPG data.".format(channel_count))
+            print("============================================")
+            print("Qatar3.xml Downloaded Successfully")
+            sys.stdout.flush()  # Flush after printing the channel count
+            sleep(1)  # Add a 1-second delay
             # Apply the transformations
             apply_changes()
             # Adjust times in the XML
@@ -58,12 +75,14 @@ def main():
             update_providers()
             # Remove specific lines
             remove_specific_lines()
-            print('**************FINISHED******************')
+            print('*****************FINISHED*******************')
             sys.stdout.flush()
         else:
-            print("Failed to download /qatar3.xml. Status code: {}".format(response.status_code))
-    except requests.exceptions.RequestException as e:
-        print("Failed to download /qatar3.xml: {}".format(e))
+            print("Failed to download /Qatar3.xml. Status code: {}".format(response.status_code))
+            sys.exit(1)  # Exit if download fails
+    except requests.exceptions.RequestException as e:  # Corrected exception syntax
+        print("Failed to download /Qatar3.xml: {}".format(e))
+        sys.exit(1)  # Exit if an exception occurs during download
 
 def apply_changes():
     for old_text, new_text in List_Chang:
@@ -104,12 +123,9 @@ def remove_duplicates():
 def rename_file():
     os.remove(input_path)
     os.rename(output_path, input_path)
-    print("qatar3.xml file successfully created")
-    print("############################################################")
-    print("The time is set to +0200 ,and if your time is different,")
-    print("you can modify the qatar3iet5.py file at the following path:")
-    print("/usr/lib/enigma2/python/Plugins/Extensions/EPGGrabber/providers/")
-    print("############################################################")
+    print("============================================")
+    print("The time is set to +0200")
+    print("============================================")
 
 def update_providers():
     with open(PROVIDERS_ROOT, 'r') as f:
@@ -141,3 +157,4 @@ def change(list_changes):
 
 if __name__ == "__main__":
     main()
+    sys.stdout.flush()
