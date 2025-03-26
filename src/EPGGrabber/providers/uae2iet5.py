@@ -6,12 +6,22 @@ import io
 import re
 import sys
 import json
+import json
+import time
 import requests
 from datetime import datetime, timedelta
 import warnings
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 import fileinput
 from time import sleep  # Import the sleep function
+
+# Timezone initialization
+# Calculate timezone offset using receiver's local time (Python 2.7 compatible)
+is_dst = time.localtime().tm_isdst > 0
+utc_offset_seconds = - (time.altzone if is_dst else time.timezone)
+offset_hours = utc_offset_seconds // 3600
+offset_minutes = (abs(utc_offset_seconds) % 3600) // 60
+time_zone = "{0:+03d}{1:02d}".format(offset_hours, offset_minutes)
 
 # Ignore insecure request warnings
 warnings.filterwarnings('ignore', category=InsecureRequestWarning)
@@ -20,7 +30,8 @@ warnings.filterwarnings('ignore', category=InsecureRequestWarning)
 try:
     from __init__ import EPG_ROOT, PROVIDERS_ROOT
 except ImportError:
-    from __init__ import EPG_ROOT, PROVIDERS_ROOT
+    EPG_ROOT = "./"  # Default if __init__ is not available
+    PROVIDERS_ROOT = "./providers.json"  # Default if __init__ is not available
 
 # Paths
 input_path = os.path.join(EPG_ROOT, 'uae2.xml')
@@ -34,12 +45,12 @@ List_Chang = [
 
 def main():
     # Added code snippet
-    print("**************UAE2_iet5_EPG****************")
+    print("***************UAE2_iet5_EPG*****************")
     sys.stdout.flush()  # Flush after the initial print
     sleep(1)  # Add a 1-second delay
     print("=============================================")
 
-    print("Downloading UAE2_iet5 EPG guide\nPlease wait....")
+    print("Downloading UAE2_iet5 EPG guide...\nPlease wait...")
     sys.stdout.flush()
     try:
         # Download the XML file
@@ -95,19 +106,25 @@ def adjust_times():
     with io.open(input_path, 'r', encoding="utf-8") as f:
         xml_data = f.read()
 
-    def adjust_start_time(match):
+    def adjust_time(match, time_type):
         original_time = datetime.strptime(match.group(1), '%Y%m%d%H%M%S')
-        adjusted_time = original_time + timedelta(hours=2)  # Changed to +2 hours
-        return 'start="{} +0200"'.format(adjusted_time.strftime('%Y%m%d%H%M%S'))
+        sign = 1 if time_zone[0] == '+' else -1
+        hours = int(time_zone[1:3])
+        minutes = int(time_zone[3:5])
+        delta = timedelta(hours=sign*hours, minutes=sign*minutes)
+        adjusted_time = original_time + delta
+        return '{0}="{1} {2}"'.format(time_type, adjusted_time.strftime('%Y%m%d%H%M%S'), time_zone)
 
-    def adjust_stop_time(match):
-        original_time = datetime.strptime(match.group(1), '%Y%m%d%H%M%S')
-        adjusted_time = original_time + timedelta(hours=2)  # Changed to +2 hours
-        return 'stop="{} +0200"'.format(adjusted_time.strftime('%Y%m%d%H%M%S'))
-
-    # Adjust the start and stop times
-    xml_data = re.sub(r'start="(\d{14}) \+0000"', adjust_start_time, xml_data)
-    xml_data = re.sub(r'stop="(\d{14}) \+0000"', adjust_stop_time, xml_data)
+    xml_data = re.sub(
+        r'start="(\d{14}) \+0000"',
+        lambda m: adjust_time(m, 'start'),
+        xml_data
+    )
+    xml_data = re.sub(
+        r'stop="(\d{14}) \+0000"',
+        lambda m: adjust_time(m, 'stop'),
+        xml_data
+    )
 
     with io.open(input_path, 'w', encoding="utf-8") as f:
         f.write(xml_data)
@@ -124,7 +141,7 @@ def rename_file():
     os.remove(input_path)
     os.rename(output_path, input_path)
     print("============================================")
-    print("The time is set to +0200")
+    print("Time_zone is set to {}".format(time_zone))
     print("============================================")
 
 def update_providers():
