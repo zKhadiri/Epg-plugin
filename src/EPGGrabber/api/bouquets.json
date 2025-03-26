@@ -1343,6 +1343,21 @@
         },
         {
             "channels": [
+               "Alkass Online.qa",
+               "Alkass One.qa",
+               "Alkass Two.qa",
+               "Alkass Three.qa",
+               "Alkass Four.qa",
+               "Alkass Five.qa",
+               "Alkass Six.qa",
+               "Alkass Seven.qa",
+               "Alkass Eight.qa"
+            ],
+            "path": "/etc/epgimport/ziko_config/qatar6iet5.channels.xml",
+            "name": "Qatar6_Alkass_iet5"
+        },
+        {
+            "channels": [
                 "13 Ulica HD.pl",
                 "13 Ulica.pl",
                 "13.tv.pl",

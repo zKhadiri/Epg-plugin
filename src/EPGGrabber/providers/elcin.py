@@ -19,6 +19,9 @@ import warnings
 
 warnings.filterwarnings('ignore', message='Unverified HTTPS request')
 
+# Define the output directory
+output_dir = "/etc/epgimport/ziko_epg"
+
 headers = {
     'Host': 'elcinema.com',
     "Connection": "keep-alive",
@@ -35,13 +38,13 @@ nb_channel = [
     '1323-beIN_Movies_Action_HD2', '1324-beIN_Movies_Drama_HD3', '1325-beIN_Movies_Family_HD4', 
     '1327-beIN_Series_HD1','1328-beIN_Series_HD2', '1198-CBC', '1199-CBC_Drama', '1260-CBC_sofra', '1176-Cima',
     '1385-Dijlah_TV', '1272-Discovery', '1290-DMC',
-    '1292-DMC_DRAMA', '1169-Dubai_TV', '1283-Dubai_Zaman', '1173-DubaiOne',
+    '1292-DMC_DRAMA', '1169-Dubai_TV', '1173-DubaiOne',
     '1315-Echorouk_TV', '1119-Egyption_TV', '1135-Emirates', '1375-ETC_TV',
     '1374-HadarMout_TV', '1204-iFILM_TV', '1349-Iraqia_TV', '1314-Jordan_TV',
     '1310-Kuwait', '1341-LBC', '1168-LBCI', '1246-LDC',
     '1313-Ltv', '1336-Maspero_Zaman', '1127-MBC', '1130-MBC_Action', '1259-MBC_Bollywood',
-    '1194-MBC_Drama', '1131-MBC_Drama+', '1239-MBC_Egypt', '1340-MBC_Iraq', '1278-MBC_MASR2',
-    '1132-MBC_MAX', '1128-MBC2', '1241-MBC3', '1129-MBC4', '1354-MBC5',
+    '1194-MBC_Drama', '1131-MBC_Drama+', '1239-MBC_MASR', '1278-MBC_MASR2', '1399-MBC_MASR_DRAMA_HD',
+    '1340-MBC_Iraq', '1132-MBC_MAX', '1128-MBC2', '1241-MBC3', '1129-MBC4', '1354-MBC5',
     '1145-Mehwar', '1355-Mix', '1371-Mix_Bel_Araby', '1373-Mix_ONE', '1296-MTV-Lebanon',
     '1266-Nat_Geo_AD_HD', '1275-National_Geographic_Ch', '1304-Nessma', '1158-Nile_Comedy',
     '1156-Nile_Drama', '1159-Nile_Life', '1317-Oman', '1134-ON_Drama', '1203-ON_E',
@@ -57,6 +60,14 @@ nb_channel = [
     '1188-Sharjah_TV', '1338-Syria_TV', '1280-TeN_TV', '1366-Thikrayat_Tv',
     '1367-Utv', '1308-Watania1', '1334-Watania2', '1383-WTV', '1261-Zee_Alwan',
 ]
+
+print("*****************ELCINEMA EPG********************")
+sys.stdout.flush()
+# Print the number of channels available for EPG data
+print("=================================================")
+print("There are {} channels available for EPG data.".format(len(nb_channel)))
+print("=================================================")
+
 time_zone = tz()
 
 REDC = '\033[31m'
@@ -72,8 +83,8 @@ class Elcinema:
         self.prog_start = []
         self.prog_end = []
         self.description = []
-        self.now = datetime.today().strftime('%Y %m %d')
         self.titles = []
+        self.now = datetime.today().strftime('%Y %m %d')
         self.Toxml(channel)
 
     def getData(self, ch):
@@ -111,13 +122,13 @@ class Elcinema:
     def Endtime(self):
         minutes = []
         for end in re.findall(r'\"subheader\">\[(\d+)', self.data):
-        	minutes.append(int(end))
+            minutes.append(int(end))
         start = datetime.strptime(datetime.strptime(str(self.Starttime(
         )[0]), '%Y-%m-%d %H:%M:%S').strftime('%Y %m %d %H:%M'), '%Y %m %d %H:%M')
         for m in minutes:
-        	x = start + timedelta(minutes=m)
-        	start += timedelta(minutes=m)
-        	self.prog_end.append(x)
+            x = start + timedelta(minutes=m)
+            start += timedelta(minutes=m)
+            self.prog_end.append(x)
 
         return self.prog_end
 
@@ -153,6 +164,10 @@ class Elcinema:
         return self.titles
 
     def Toxml(self, channel):
+
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir)  # Create the directory if it doesn't exist
+
         for elem, next_elem, title, des in zip(self.Starttime(), self.Endtime(), self.Gettitle(), self.GetDes()):
             ch = ''
             startime = datetime.strptime(
@@ -167,13 +182,12 @@ class Elcinema:
                     '&quot;', '"').replace('&amp;', 'and') + '</title>\n'
             ch += 4 * ' ' + '<desc lang="ar">' + des.replace('&#39;', "'").replace('&quot;', '"').replace(
                 '&amp;', 'and').replace('(', '').replace(')', '').strip() + '</desc>\n  </programme>\r'
-            with io.open(EPG_ROOT + "/elcinema.xml", "a", encoding='UTF-8')as f:
+            with io.open(os.path.join(output_dir, "elcinema.xml"), "a", encoding='UTF-8') as f:
                 f.write(ch)
 
         print(channel.split('-')[1] +
               ' epg ends at : ' + str(self.Endtime()[-1]))
         sys.stdout.flush()
-
 
 def main():
     from datetime import datetime
@@ -190,7 +204,7 @@ def main():
     sys.stdout.flush()
 
     channels = [ch.split('-')[1] for ch in nb_channel]
-    xml_header(EPG_ROOT + "/elcinema.xml", channels)
+    xml_header(os.path.join(output_dir, "elcinema.xml"), channels)
 
     import time
     Hour = time.strftime("%H:%M")
@@ -204,14 +218,14 @@ def main():
             try:
                 Elcinema(nb)
             except IndexError:
-                cprint('No epg found or missing data for: ' +nb.split('-')[1])
+                cprint('No epg found or missing data for: ' + nb.split('-')[1])
                 sys.stdout.flush()
                 continue
 
 
 if __name__ == '__main__':
     main()
-    close_xml(EPG_ROOT + "/elcinema.xml")
+    close_xml(os.path.join(output_dir, "elcinema.xml"))
 
 print('**************FINISHED******************')
 sys.stdout.flush()

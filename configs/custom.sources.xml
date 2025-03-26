@@ -40,6 +40,10 @@
         <description>Qatar5_iet5 by (iet5)</description>
         <url>/etc/epgimport/ziko_epg/qatar5.xml</url>
     </source>
+	<source type="gen_xmltv" channels="/etc/epgimport/ziko_config/qatar6iet5.channels.xml">
+        <description>Qatar6_iet5 by (iet5)</description>
+        <url>/etc/epgimport/ziko_epg/qatar6.xml</url>
+    </source>
    <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/saudiarabia1iet5.channels.xml">
         <description>Saudiarabia1_iet5 by (iet5 )</description>
         <url>/etc/epgimport/ziko_epg/saudiarabia1.xml</url>		

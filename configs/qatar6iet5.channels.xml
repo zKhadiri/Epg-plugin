@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<channels>
+	<channel id="Alkass One.qa">1:0:1:3:22B:2BE:1040000:0:0:0:</channel>
+	<channel id="Alkass One.qa">1:0:1:9C5:19:800:DCA0000:0:0:0:</channel>
+	<channel id="Alkass Four.qa">1:0:1:5:2:2:104AA12:0:0:0:</channel>
+	<channel id="Alkass One.qa">1:0:1:3:2:2:104AA12:0:0:0:</channel>
+	<channel id="Alkass Three.qa">1:0:19:4FB6:7F8:E0:1040000:0:0:0:</channel>
+	<channel id="Alkass Two.qa">1:0:1:4:2:2:104AA12:0:0:0:</channel>
+	<channel id="Alkass Two.qa">1:0:19:4FB5:7F8:E0:1040000:0:0:0:</channel>
+	<channel id="Alkass Two.qa">1:0:1:9C6:19:800:DCA0000:0:0:0:</channel>
+	<channel id="Alkass Two.qa">1:0:1:4:22B:2BE:1040000:0:0:0:</channel>
+	<channel id="Alkass Three.qa">1:0:1:9C7:19:800:DCA0000:0:0:0:</channel>
+	<channel id="Alkass Three.qa">1:0:1:1:22B:2BE:1040000:0:0:0:</channel>
+	<channel id="Alkass Four.qa">1:0:1:9CB:19:800:DCA0000:0:0:0:</channel>
+	<channel id="Alkass Five.qa">1:0:1:6F:1029:E0:1040000:0:0:0:</channel>
+	<channel id="Alkass Six.qa">1:0:1:70:1029:E0:1040000:0:0:0:</channel>
+	<channel id="Alkass Seven.qa">1:0:1:71:1029:E0:1040000:0:0:0:</channel>
+	<channel id="Alkass Four.qa">1:0:1:5:22B:2BE:1040000:0:0:0:</channel>
+	<channel id="Alkass Eight.qa">1:0:1:72:1029:E0:1040000:0:0:0:</channel>
+</channels>

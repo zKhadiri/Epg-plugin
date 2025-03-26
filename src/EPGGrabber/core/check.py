@@ -132,7 +132,14 @@ if not os.path.exists('/etc/epgimport/ziko_config/qatar5iet5.channels.xml'):
     qatar5iet5_channels = requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/configs/qatar5iet5.channels.xml?raw=true')
     with io.open('/etc/epgimport/ziko_config/qatar5iet5.channels.xml', 'w', encoding="utf-8") as f:
         f.write(qatar5iet5_channels.text)
-        
+
+if not os.path.exists('/etc/epgimport/ziko_config/qatar6iet5.channels.xml'):
+    print('Downloading qatar6iet5 channels config')
+    sys.stdout.flush()
+    qatar6iet5_channels = requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/configs/qatar6iet5.channels.xml?raw=true')
+    with io.open('/etc/epgimport/ziko_config/qatar6iet5.channels.xml', 'w', encoding="utf-8") as f:
+        f.write(qatar6iet5_channels.text)
+      
 if not os.path.exists('/etc/epgimport/ziko_config/poland1iet5.channels.xml'):
     print('Downloading poland1iet5 channels config')
     sys.stdout.flush()
