@@ -20,26 +20,25 @@ headers = {
     "Connection": "keep-alive",
     'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.75 Safari/537.36'
 }
-
 # Function to fetch available channels from Elcinema
 def fetch_channels():
     url = "https://elcinema.com/en/tvguide/"
     try:
         response = requests.get(url, headers=headers, verify=False)
         response.raise_for_status()
-        channels = re.findall(r'<a title="(.*?)" href="/en/tvguide/(\d+)/">', response.text)
-        unique_channels = set(["{}-{}".format(channel_id, channel_name) for channel_name, channel_id in channels])
-        return sorted(unique_channels)
+        channels = set(re.findall(r'<a title="(.*?)" href="/en/tvguide/(\d+)/">', response.text))
+        # Fixed sorting using lower() for Python 2.7 compatibility
+        sorted_channels = sorted(["{}-{}".format(channel_id, channel_name) for channel_name, channel_id in channels], 
+                               key=lambda x: x.split("-", 1)[1].lower())
+        return sorted_channels
     except requests.RequestException as e:
         print("Error fetching channels:", e)
         return []
-
 # Fetch channels and exit if no channels are found
 nb_channel = fetch_channels()
 if not nb_channel:
-    print("No channels available. Exiting.")
+    print("No channels found, cannot proceed.")
     sys.exit(1)
-
 # Define timezone (assuming tz() is defined elsewhere)
 time_zone = tz()
 
@@ -113,7 +112,7 @@ def main():
     else:
         for nb in nb_channel:
             try:
-                Elcinema(nb)
+                ElcinEn(nb)
             except IndexError:
                 cprint('No EPG found or missing data for: ' + nb.split('-')[1])
                 sys.stdout.flush()
@@ -125,6 +124,5 @@ def main():
 # Entry point for the script
 if __name__ == '__main__':
     main()
-
     print('**************FINISHED******************')
-    sys.stdout.flush()    
+    sys.stdout.flush()
