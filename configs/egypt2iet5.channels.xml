@@ -84,4 +84,7 @@
 	<channel id="ON Drama.eg">1:0:1:D0:2:800:DCA0000:0:0:0:</channel>
 	<channel id="Sada El Balad.eg">1:0:1:45A:B:800:DCA0000:0:0:0:</channel>
 	<channel id="Sada El Balad 2.eg">1:0:1:45B:B:800:DCA0000:0:0:0:</channel>
+	<channel id="MBC Egypt.eg">1:0:1:14:3B:800:DCA0000:0:0:0:</channel>
+	<channel id="MBC Drama +.eg">1:0:19:67:D28C:77E:DCA0000:0:0:0:</channel>
+	<channel id="MBC MASR 2.eg">1:0:19:66:D28C:77E:DCA0000:0:0:0:</channel>
 </channels>
