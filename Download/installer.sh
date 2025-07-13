@@ -2,8 +2,8 @@
 ##setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=24.5
-description=What_is_NEW:\n'- Import Time Zone from Receiver Time - By iet5'
+version=24.6
+description=What_is_NEW:\n'- Some update By iet5'
 ##############################################################
 
 TEMPATH=/tmp
