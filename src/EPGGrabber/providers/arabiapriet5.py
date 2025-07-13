@@ -6,12 +6,22 @@ import io
 import re
 import sys
 import json
+import json
+import time
 import requests
 from datetime import datetime, timedelta
 import warnings
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 import fileinput
+from time import sleep  # Import the sleep function
 
+# Timezone initialization
+# Calculate timezone offset using receiver's local time (Python 2.7 compatible)
+is_dst = time.localtime().tm_isdst > 0
+utc_offset_seconds = - (time.altzone if is_dst else time.timezone)
+offset_hours = utc_offset_seconds // 3600
+offset_minutes = (abs(utc_offset_seconds) % 3600) // 60
+time_zone = "{0:+03d}{1:02d}".format(offset_hours, offset_minutes)
 # Ignore insecure request warnings
 warnings.filterwarnings('ignore', category=InsecureRequestWarning)
 
@@ -19,7 +29,8 @@ warnings.filterwarnings('ignore', category=InsecureRequestWarning)
 try:
     from __init__ import EPG_ROOT, PROVIDERS_ROOT
 except ImportError:
-    from __init__ import EPG_ROOT, PROVIDERS_ROOT
+    EPG_ROOT = "./"  # Default if __init__ is not available
+    PROVIDERS_ROOT = "./providers.json"  # Default if __init__ is not available
 
 # Paths
 input_path = os.path.join(EPG_ROOT, 'palestine1.xml')
@@ -30,21 +41,38 @@ List_Chang = [
     # Example: ('old_text', 'new_text'),
     # Add your specific changes here
 ]
+
 def main():
-    print("*****************Arabiapr_iet5 EPG******************")
-    sys.stdout.flush()
-    print("Downloading Arabiapr_iet5 EPG guide\nPlease wait....")
+    # Added code snippet
+    print("**************Arabiapr_iet5 EPG****************")
+    sys.stdout.flush()  # Flush after the initial print
+    sleep(1)  # Add a 1-second delay
+    print("=============================================")
+
+    print("Downloading Arabiapr_iet5 EPG guide...\nPlease wait...")
     sys.stdout.flush()
     try:
         # Download the XML file
         response = requests.get('https://www.open-epg.com/files/palestine1.xml', verify=False)
         if response.status_code == 200:
+            # Convert content to unicode using utf-8 encoding
+            data_unicode = response.content.decode('utf-8')  # use content and decode to utf-8
             with io.open(input_path, 'w', encoding="utf-8") as f:
-                f.write(response.text)
-            print("##########################################")
-            print("palestine1.xml Downloaded Successfully")
-            print("##########################################")
+                f.write(data_unicode)  # write the unicode data
+                print("============================================")
 
+            # Fetch the number of channels (replace this with your actual logic)
+            with io.open(input_path, 'r', encoding="utf-8") as f:
+                xml_data = f.read()
+
+            # Count the number of channels
+            channel_count = xml_data.count('<channel id="')  # Example: Count channels in XML
+
+            print("There are {0} channels available for EPG data.".format(channel_count))
+            print("============================================")
+            print("palestine1.xml Downloaded Successfully")
+            sys.stdout.flush()  # Flush after printing the channel count
+            sleep(1)  # Add a 1-second delay
             # Apply the transformations
             apply_changes()
             # Adjust times in the XML
@@ -57,12 +85,14 @@ def main():
             update_providers()
             # Remove specific lines
             remove_specific_lines()
-            print('**************FINISHED******************')
+            print('*****************FINISHED*******************')
             sys.stdout.flush()
         else:
             print("Failed to download /palestine1.xml. Status code: {}".format(response.status_code))
-    except requests.exceptions.RequestException as e:
+            sys.exit(1)  # Exit if download fails
+    except requests.exceptions.RequestException as e:  # Corrected exception syntax
         print("Failed to download /palestine1.xml: {}".format(e))
+        sys.exit(1)  # Exit if an exception occurs during download
 
 def apply_changes():
     for old_text, new_text in List_Chang:
@@ -75,19 +105,25 @@ def adjust_times():
     with io.open(input_path, 'r', encoding="utf-8") as f:
         xml_data = f.read()
 
-    def adjust_start_time(match):
+    def adjust_time(match, time_type):
         original_time = datetime.strptime(match.group(1), '%Y%m%d%H%M%S')
-        adjusted_time = original_time + timedelta(hours=2)  # Changed to +2 hours
-        return 'start="{} +0200"'.format(adjusted_time.strftime('%Y%m%d%H%M%S'))
+        sign = 1 if time_zone[0] == '+' else -1
+        hours = int(time_zone[1:3])
+        minutes = int(time_zone[3:5])
+        delta = timedelta(hours=sign*hours, minutes=sign*minutes)
+        adjusted_time = original_time + delta
+        return '{0}="{1} {2}"'.format(time_type, adjusted_time.strftime('%Y%m%d%H%M%S'), time_zone)
 
-    def adjust_stop_time(match):
-        original_time = datetime.strptime(match.group(1), '%Y%m%d%H%M%S')
-        adjusted_time = original_time + timedelta(hours=2)  # Changed to +2 hours
-        return 'stop="{} +0200"'.format(adjusted_time.strftime('%Y%m%d%H%M%S'))
-
-    # Adjust the start and stop times
-    xml_data = re.sub(r'start="(\d{14}) \+0000"', adjust_start_time, xml_data)
-    xml_data = re.sub(r'stop="(\d{14}) \+0000"', adjust_stop_time, xml_data)
+    xml_data = re.sub(
+        r'start="(\d{14}) \+0000"',
+        lambda m: adjust_time(m, 'start'),
+        xml_data
+    )
+    xml_data = re.sub(
+        r'stop="(\d{14}) \+0000"',
+        lambda m: adjust_time(m, 'stop'),
+        xml_data
+    )
 
     with io.open(input_path, 'w', encoding="utf-8") as f:
         f.write(xml_data)
@@ -103,12 +139,9 @@ def remove_duplicates():
 def rename_file():
     os.remove(input_path)
     os.rename(output_path, input_path)
-    print("Palestine1.xml file successfully created")
-    print("############################################################")
-    print("The time is set to +0200 ,and if your time is different,")
-    print("you can modify the Arabiapriet5.py file at the following path:")
-    print("/usr/lib/enigma2/python/Plugins/Extensions/EPGGrabber/providers/")
-    print("############################################################")
+    print("============================================")
+    print("Time_zone is set to {}".format(time_zone))
+    print("============================================")
 
 def update_providers():
     with open(PROVIDERS_ROOT, 'r') as f:
@@ -140,3 +173,4 @@ def change(list_changes):
 
 if __name__ == "__main__":
     main()
+    sys.stdout.flush()
