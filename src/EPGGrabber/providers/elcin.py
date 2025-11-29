@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+# modified by iet5
 from __future__ import print_function
 try:
     from .__init__ import *
@@ -28,7 +29,7 @@ headers = {
     "Connection": "keep-alive",
     'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.75 Safari/537.36'
 }
-
+# Function to fetch available channels from Elcinema
 def fetch_channels():
     url = "https://elcinema.com/en/tvguide/"
     try:
@@ -42,6 +43,7 @@ def fetch_channels():
     except requests.RequestException as e:
         print("Error fetching channels:", e)
         return []
+# Fetch channels and exit if no channels are found
 nb_channel = fetch_channels()
 if not nb_channel:
     print("No channels found, cannot proceed.")
@@ -60,7 +62,6 @@ time_zone = get_local_offset()
 REDC = '\033[31m'
 ENDC = '\033[m'
 
-
 def cprint(text):
     print(REDC + text + ENDC)
 
@@ -74,6 +75,7 @@ class Elcinema:
         self.now = datetime.today().strftime('%Y %m %d')
         self.Toxml(channel)
 
+    # Fetch data for a specific channel
     def getData(self, ch):
         with requests.Session() as s:
             ssl._create_default_https_context = ssl._create_unverified_context
@@ -175,6 +177,7 @@ class Elcinema:
               ' epg ends at : ' + str(self.Endtime()[-1]))
         sys.stdout.flush()
 
+# Main function to generate EPG data
 def main():
     from datetime import datetime
     import json
@@ -207,7 +210,7 @@ def main():
             cprint('No epg found or missing data for: ' + nb.split('-')[1])
             sys.stdout.flush()
             continue
-
+# Entry point for the script
 if __name__ == '__main__':
     main()
     close_xml(os.path.join(output_dir, "elcinema.xml"))
