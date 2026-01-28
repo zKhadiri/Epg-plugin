@@ -2842,19 +2842,12 @@
             "name": "SAT Tv"
         },
         {
-            "channels": [
-                "Arryadia HD"
-            ],
+            "channels": ["Arryadia HD"],
             "path": "/etc/epgimport/ziko_config/snrt.channels.xml",
             "name": "Snrt"
         },
         {
-            "channels": [
-                "aloula",
-                "arryadia",
-                "2m",
-                "medi1"
-            ],
+            "channels": ["aloula", "arryadia", "2m", "medi1"],
             "path": "/etc/epgimport/ziko_config/custom.channels.xml",
             "name": "LE Matin"
         },
@@ -3230,20 +3223,12 @@
             "name": "INDIAN SPORTS CHANNELS"
         },
         {
-            "channels": [
-                "aljazeera",
-                "aljazeera_doc",
-                "Love Nature 4K",
-                "ESPN"
-            ],
+            "channels": ["aljazeera", "aljazeera_doc", "Love Nature 4K", "ESPN"],
             "path": "/etc/epgimport/ziko_config/custom.channels.xml",
             "name": "Others"
         },
         {
-            "channels": [
-                "aljazeera",
-                "aljazeera_doc"
-            ],
+            "channels": ["aljazeera", "aljazeera_doc"],
             "path": "/etc/epgimport/ziko_config/aljazeera.channels.xml",
             "name": "aljazeera"
         },
