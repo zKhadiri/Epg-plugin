@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+import warnings
+warnings.simplefilter("ignore")
+
 import requests, sys, io
 from datetime import datetime, date, timedelta
 from requests.adapters import HTTPAdapter

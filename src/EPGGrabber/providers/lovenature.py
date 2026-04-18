@@ -1,3 +1,6 @@
+import warnings
+warnings.simplefilter("ignore")
+
 
 #!/usr/bin/python
 # -*- coding: utf-8 -*-

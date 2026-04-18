@@ -42,7 +42,6 @@ SESSION = requests.Session()
 SESSION.mount('https://', HTTPAdapter(max_retries=MAX_RETRIES))
 ssl._create_default_https_context = ssl._create_unverified_context
 # -----------------------------------------------------
-
 # --------- REGEX (compiled once for speed + accuracy) ---------
 RE_CHANNELS = re.compile(r'<a title="(.*?)" href="/en/tvguide/(\d+)/">')
 RE_DUR = re.compile(r'\"subheader\">\[(\d+)')
@@ -123,6 +122,7 @@ class ElcinEn(object):
         if self._start_done:
             return self.prog_start
         self._start_done = True
+
         hours = []
         times = RE_TIME.findall(self.data)
 
@@ -249,7 +249,7 @@ class ElcinEn(object):
         sys.stdout.flush()
 
 # Main function to generate EPG data
-def main():
+def update_provider_date():
     # Keep original PROVIDERS_ROOT update logic (as plugin expects)
     try:
         from datetime import datetime
@@ -257,13 +257,14 @@ def main():
         with open(PROVIDERS_ROOT, 'r') as f:
             data = json.load(f)
         for channel in data.get('bouquets', []):
-            if channel.get("bouquet") == "elcin":
+            if channel.get("bouquet") == "elcinEN":
                 channel['date'] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
         with open(PROVIDERS_ROOT, 'w') as f:
             json.dump(data, f)
     except Exception:
         pass
 
+def main():
     print('**************ELCINEMA ENGLISH EPG******************')
     sys.stdout.flush()
 
@@ -291,6 +292,8 @@ def main():
 
         if SLEEP_BETWEEN_CHANNELS:
             sleep(SLEEP_BETWEEN_CHANNELS)
+
+    update_provider_date()
 
 # Entry point for the script
 if __name__ == '__main__':

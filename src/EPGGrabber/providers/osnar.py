@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+import warnings
+warnings.simplefilter("ignore")
+
 
 
 from time import sleep

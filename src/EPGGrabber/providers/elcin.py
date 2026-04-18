@@ -26,11 +26,11 @@ REQUEST_TIMEOUT = 20          # prevent long hangs
 MAX_RETRIES = 5               # avoid excessive retries
 SLEEP_BETWEEN_CHANNELS = 0.2  # set 0.0 if you want no delay
 # ----------------------------------------------------------
-
 # Define the output directory
 output_dir = "/etc/epgimport/ziko_epg"
 xml_file = os.path.join(output_dir, "elcinema.xml")
 
+# Define headers for HTTP requests
 headers = {
     'Host': 'elcinema.com',
     "Connection": "keep-alive",
@@ -42,7 +42,6 @@ SESSION = requests.Session()
 SESSION.mount('https://', HTTPAdapter(max_retries=MAX_RETRIES))
 ssl._create_default_https_context = ssl._create_unverified_context
 # -----------------------------------------------------
-
 # Function to fetch available channels from Elcinema
 def fetch_channels():
     url = "https://elcinema.com/en/tvguide/"
@@ -97,16 +96,16 @@ class Elcinema(object):
         self.prog_end = []
         self.description = []
         self.titles = []
-
         self.getData(channel)
         self.Toxml(channel)
 
-    # Fetch data for a specific channel (reuses shared SESSION)
+    # Fetch data for a specific channel
     def getData(self, ch):
         url = 'https://elcinema.com/tvguide/' + ch.split('-')[0] + '/'
         resp = SESSION.get(url, headers=headers, verify=False, timeout=REQUEST_TIMEOUT)
         self.data = getattr(resp, "text", "") or ""
 
+    # Extract program start times from the fetched data
     def Starttime(self):
         if self._start_done:
             return self.prog_start
@@ -146,7 +145,6 @@ class Elcinema(object):
         self._end_done = True
 
         minutes = [int(x) for x in re.findall(r'\"subheader\">\[(\d+)', self.data)]
-
         starts = self.Starttime()
         if not starts:
             raise IndexError("No start times")
@@ -178,6 +176,7 @@ class Elcinema(object):
 
         return self.description
 
+    # Extract program titles from the fetched data
     def Gettitle(self):
         if self._title_done:
             return self.titles
@@ -226,6 +225,7 @@ class Elcinema(object):
 
             chxml = ''
             chxml += 2 * ' ' + '<programme start="' + startime + ' ' + time_zone + '" stop="' + endtime + ' ' + time_zone + '" channel="' + '-'.join(channel.split('-')[1:]) + '">\n'
+            # IMPORTANT: AR language tags
             chxml += 4 * ' ' + '<title lang="ar">' + title.replace('&#39;', "'").replace('&quot;', '"').replace('&amp;', 'and') + '</title>\n'
             chxml += 4 * ' ' + '<desc lang="ar">' + des.replace('&#39;', "'").replace('&quot;', '"').replace('&amp;', 'and').replace('(', '').replace(')', '').strip() + '</desc>\n  </programme>\r'
 
@@ -236,7 +236,8 @@ class Elcinema(object):
         print('-'.join(channel.split('-')[1:]) + ' epg ends at : ' + str(ends[-1]))
         sys.stdout.flush()
 
-def main():
+# Main function to generate EPG data
+def update_provider_date():
     # Keep original PROVIDERS_ROOT update logic (as plugin expects)
     try:
         from datetime import datetime
@@ -251,6 +252,7 @@ def main():
     except Exception:
         pass
 
+def main():
     print('**************ELCINEMA EPG******************')
     sys.stdout.flush()
 
@@ -261,6 +263,7 @@ def main():
     print("=================================================")
     print("There are {} channels available for EPG data.".format(len(nb_channel)))
     print("=================================================")
+
     channels = [ch.split('-', 1)[1] for ch in nb_channel]
     xml_header(xml_file, channels)
 
@@ -278,6 +281,9 @@ def main():
         if SLEEP_BETWEEN_CHANNELS:
             sleep(SLEEP_BETWEEN_CHANNELS)
 
+    update_provider_date()
+
+# Entry point for the script
 if __name__ == '__main__':
     main()
     close_xml(xml_file)

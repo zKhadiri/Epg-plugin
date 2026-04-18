@@ -1,5 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+import warnings
+warnings.simplefilter("ignore")
+
 
 try:
 	from .__init__ import *

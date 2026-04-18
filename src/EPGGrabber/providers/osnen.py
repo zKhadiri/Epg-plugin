@@ -1,5 +1,8 @@
 #!/usr/bin/env python2.7
 # -*- coding: utf-8 -*-
+import warnings
+warnings.simplefilter("ignore")
+
 
 
 from time import sleep
