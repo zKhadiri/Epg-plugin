@@ -2,8 +2,8 @@
 ##setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=24.8
-description=What_is_NEW:\n'- Fixing the slow download problem of the Arabic and English cinema epg script by iet5'
+version=24.9
+description=What_is_NEW:\n'- Fix for OPEnAtv 8.0 by iet5'
 ##############################################################
 
 TEMPATH=/tmp
