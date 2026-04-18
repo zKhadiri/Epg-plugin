@@ -85,9 +85,19 @@ class Console2(Screen):
     def updateTitle(self):
         self.setTitle(self.newtitle)
 
+
+    def _prepareCmd(self, cmd):
+        if not cmd:
+            return cmd
+        cmd = cmd.strip()
+        if cmd.startswith('python ') or cmd.startswith('python3 '):
+            return 'PYTHONWARNINGS=ignore %s 2>/dev/null' % cmd
+        return cmd
+
     def startRun(self):
         if self.showStartStopText:
             self['text'].setText(_('Execution progress:') + '\n\n')
+        self.cmdlist[self.run] = self._prepareCmd(self.cmdlist[self.run])
         print('[Console] executing in run', self.run, ' the command:', self.cmdlist[self.run])
         if self.container.execute(self.cmdlist[self.run]):
             self.runFinished(-1)
@@ -98,6 +108,7 @@ class Console2(Screen):
             self.show()
         self.run += 1
         if self.run != len(self.cmdlist):
+            self.cmdlist[self.run] = self._prepareCmd(self.cmdlist[self.run])
             if self.container.execute(self.cmdlist[self.run]):
                 self.runFinished(-1)
         else:
