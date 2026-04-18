@@ -1,14 +1,28 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+# This script created by iet5
+#
+from __future__ import print_function, unicode_literals
+import warnings
+warnings.simplefilter("ignore")
 
 import os
 import io
 import re
 import sys
 import json
-import json
 import time
-import requests
+import warnings
+
+# Python 2/3 compatibility for requests
+try:
+    import requests
+    from requests.packages.urllib3.exceptions import InsecureRequestWarning
+except ImportError:
+    # For Python 2.7 without requests, but keep original structure
+    import requests
+    from requests.packages.urllib3.exceptions import InsecureRequestWarning
+
 from datetime import datetime, timedelta
 import warnings
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
@@ -43,21 +57,35 @@ List_Chang = [
     # Add your specific changes here
 ]
 
+# Add the missing response_text function
+def response_text(response):
+    """
+    Extract text from response object - compatible with Python 2 and 3
+    """
+    if hasattr(response, 'text'):
+        return response.text
+    elif hasattr(response, 'content'):
+        try:
+            return response.content.decode('utf-8')
+        except:
+            return str(response.content)
+    else:
+        return str(response)
+
 def main():
     # Added code snippet
     print("***************UAE4_iet5_EPG*****************")
     sys.stdout.flush()  # Flush after the initial print
     sleep(1)  # Add a 1-second delay
     print("=============================================")
-
     print("Downloading UAE4_iet5 EPG guide...\nPlease wait...")
     sys.stdout.flush()
     try:
         # Download the XML file
-        response = requests.get('https://www.open-epg.com/files/uae4.xml', verify=False)
+        response = requests.get('https://www.open-epg.com/files/uae4.xml', verify=False, timeout=30)
         if response.status_code == 200:
             # Convert content to unicode using utf-8 encoding
-            data_unicode = response.content.decode('utf-8')  # use content and decode to utf-8
+            data_unicode = response_text(response)  # use content and decode to utf-8
             with io.open(input_path, 'w', encoding="utf-8") as f:
                 f.write(data_unicode)  # write the unicode data
                 print("============================================")

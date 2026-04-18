@@ -1,3 +1,9 @@
+import os
+os.environ["PYTHONWARNINGS"] = "ignore"
+
+import warnings
+warnings.simplefilter("ignore")
+
 import sys
 import os
 

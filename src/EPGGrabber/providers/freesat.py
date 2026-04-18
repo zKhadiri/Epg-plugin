@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import warnings
+warnings.simplefilter("ignore")
+
 
 from __future__ import print_function, unicode_literals
 # python3
@@ -102,15 +105,6 @@ def main():
     print('**************FREESAT EPG******************')
     sys.stdout.flush()
 
-    import json
-    with open(PROVIDERS_ROOT, 'r') as f:
-        data = json.load(f)
-    for channel in data['bouquets']:
-        if channel["bouquet"] == "freesat":
-            channel['date'] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
-    with open(PROVIDERS_ROOT, 'w') as f:
-        json.dump(data, f)
-
     channels = [ch.split('-')[1] for ch in channels_code]
 
     xml_header(EPG_ROOT + '/freesat.xml', channels)
@@ -124,6 +118,16 @@ def main():
         lock.acquire()
     for thread in thread_pool:
         thread.join()
+
+
+    import json
+    with open(PROVIDERS_ROOT, 'r') as f:
+        data = json.load(f)
+    for channel in data['bouquets']:
+        if channel["bouquet"] == "freesat":
+            channel['date'] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
+    with open(PROVIDERS_ROOT, 'w') as f:
+        json.dump(data, f)
 
     close_xml(EPG_ROOT + '/freesat.xml')
 

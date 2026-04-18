@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import warnings
+warnings.simplefilter("ignore")
+
 
 import os
 import io

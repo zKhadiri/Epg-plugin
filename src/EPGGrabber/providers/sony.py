@@ -1,3 +1,6 @@
+import warnings
+warnings.simplefilter("ignore")
+
 
 import requests
 import re

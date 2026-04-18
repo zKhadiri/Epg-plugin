@@ -48,7 +48,7 @@ except ImportError:
     PROVIDERS_ROOT = "./providers.json"  # Default if __init__ is not available
 
 # Paths
-input_path = os.path.join(EPG_ROOT, 'saudiarabia2.xml')
+input_path = os.path.join(EPG_ROOT, 'uae1.xml')
 output_path = os.path.join(EPG_ROOT, 'out.xml')
 
 # List of changes to apply
@@ -74,16 +74,15 @@ def response_text(response):
 
 def main():
     # Added code snippet
-    print("***********Saudiarabia2_iet5_EPG*************")
+    print("***************UAE1_iet5_EPG*****************")
     sys.stdout.flush()  # Flush after the initial print
     sleep(1)  # Add a 1-second delay
     print("=============================================")
-
-    print("Downloading Saudiarabia2_iet5 EPG guide...\nPlease wait...")
+    print("Downloading UAE1_iet5 EPG guide...\nPlease wait...")
     sys.stdout.flush()
     try:
         # Download the XML file
-        response = requests.get('https://www.open-epg.com/files/saudiarabia2.xml', verify=False, timeout=30)
+        response = requests.get('https://www.open-epg.com/files/uae1.xml', verify=False, timeout=30)
         if response.status_code == 200:
             # Convert content to unicode using utf-8 encoding
             data_unicode = response_text(response)  # use content and decode to utf-8
@@ -100,7 +99,7 @@ def main():
 
             print("There are {0} channels available for EPG data.".format(channel_count))
             print("============================================")
-            print("Saudiarabia2.xml Downloaded Successfully")
+            print("UAE1.xml Downloaded Successfully")
             sys.stdout.flush()  # Flush after printing the channel count
             sleep(1)  # Add a 1-second delay
             # Apply the transformations
@@ -118,10 +117,10 @@ def main():
             print('*****************FINISHED*******************')
             sys.stdout.flush()
         else:
-            print("Failed to download /Saudiarabia2.xml. Status code: {}".format(response.status_code))
+            print("Failed to download /uae1.xml. Status code: {}".format(response.status_code))
             sys.exit(1)  # Exit if download fails
     except requests.exceptions.RequestException as e:  # Corrected exception syntax
-        print("Failed to download /Saudiarabia2.xml: {}".format(e))
+        print("Failed to download /uae1.xml: {}".format(e))
         sys.exit(1)  # Exit if an exception occurs during download
 
 def apply_changes():
@@ -177,7 +176,7 @@ def update_providers():
     with open(PROVIDERS_ROOT, 'r') as f:
         data = json.load(f)
         for channel in data['bouquets']:
-            if channel["bouquet"] == "saudiarabia2iet5":
+            if channel["bouquet"] == "uae1iet5":
                 channel['date'] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
     with open(PROVIDERS_ROOT, 'w') as f:
         json.dump(data, f, indent=4)

@@ -2,13 +2,27 @@
 # -*- coding: utf-8 -*-
 # This script created by iet5
 #
+from __future__ import print_function, unicode_literals
+import warnings
+warnings.simplefilter("ignore")
+
 import os
 import io
 import re
 import sys
 import json
 import time
-import requests
+import warnings
+
+# Python 2/3 compatibility for requests
+try:
+    import requests
+    from requests.packages.urllib3.exceptions import InsecureRequestWarning
+except ImportError:
+    # For Python 2.7 without requests, but keep original structure
+    import requests
+    from requests.packages.urllib3.exceptions import InsecureRequestWarning
+
 from datetime import datetime, timedelta
 import warnings
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
@@ -42,6 +56,21 @@ List_Chang = [
     # Example: ('old_text', 'new_text'),
     # Add your specific changes here
 ]
+
+# Add the missing response_text function
+def response_text(response):
+    """
+    Extract text from response object - compatible with Python 2 and 3
+    """
+    if hasattr(response, 'text'):
+        return response.text
+    elif hasattr(response, 'content'):
+        try:
+            return response.content.decode('utf-8')
+        except:
+            return str(response.content)
+    else:
+        return str(response)
 
 def main():
     # Added code snippet
@@ -174,4 +203,4 @@ def change(list_changes):
 
 if __name__ == "__main__":
     main()
-    sys.stdout.flush()
+    sys.stdout.flush()    
