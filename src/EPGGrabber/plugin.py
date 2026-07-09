@@ -39,7 +39,7 @@ class StartTimer:
     def __init__(self):
         self.timer = eTimer()
         self.today = datetime.today().strftime('%Y-%m-%d')
-        self.query = None # تم تعريفها لتفادي خطأ عدم وجود الخاصية
+        self.query = None
 
     def start(self):
         delay = 5
@@ -57,31 +57,25 @@ class StartTimer:
             except:
                 pass
 
-    # مراجعة السطر 71 وما حوله: تأكدنا من معالجة البيانات بشكل آمن
     def process_data(self, allData):
         for link in allData:
             try:
-                # هنا تتم عمليات الجلب (المعالجة الأصلية)
                 pass
             except:
                 result = "Unable to Fetch Data Error 404"
         self.toJson(allData)
 
-    # مراجعة السطر 92 وما حوله (دالة toJson المعدلة):
     def toJson(self, data):
         dict1 = {}
         for line in data:
-            # استخدام split آمن لتفادي الانهيار
             parts = line.strip().split(None, 1)
             if len(parts) == 2:
                 prov, description = parts
                 dict1[prov] = description.strip()
             else:
-                # تخطي الأسطر المعيبة برمجياً
                 continue
         
         try:
-            # استخدام المسار الصحيح مع التأكد من إغلاق الملف
             with open(API_PATH + "/epg_status.json", "w") as out_file:
                 json.dump(dict1, out_file, indent=4, sort_keys=False)
         except Exception as e:
