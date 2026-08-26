@@ -19,10 +19,6 @@
             <description>Bein Entertainment Connect</description>
             <url>/etc/epgimport/ziko_epg/beinentC.xml</url>
         </source>
-        <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/custom.channels.xml">
-            <description>Osnplay</description>
-            <url>/etc/epgimport/ziko_epg/osnplay.xml</url>
-        </source>
         <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/satTv.channels.xml">
             <description>SAT TV</description>
             <url>/etc/epgimport/ziko_epg/satTv.xml</url>
@@ -131,17 +127,21 @@
             <description>UAE6_iet5 by (iet5)</description>
             <url>/etc/epgimport/ziko_epg/uae6.xml</url>
         </source>
-        <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/poland1iet5.channels.xml">
-            <description>POLAND1_iet5 by (iet5)</description>
-            <url>/etc/epgimport/ziko_epg/poland1.xml</url>
-        </source>
-        <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/poland2iet5.channels.xml">
-            <description>POLAND2_iet5 by (iet5)</description>
-            <url>/etc/epgimport/ziko_epg/poland2.xml</url>
-        </source>
         <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/elcinema.channels.xml">
             <description>Elcinema/Elcinema English</description>
             <url>/etc/epgimport/ziko_epg/elcinema.xml</url>
+        </source>
+        <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/rotana.channels.xml">
+            <description>Rotana</description>
+            <url>/etc/epgimport/ziko_epg/rotana.xml</url>
+        </source>
+        <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/osnar.channels.xml">
+            <description>OSN-AR </description>
+            <url>/etc/epgimport/ziko_epg/osnar.xml</url>
+        </source>
+        <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/osnen.channels.xml">
+            <description>OSN-EN </description>
+            <url>/etc/epgimport/ziko_epg/osnen.xml</url>
         </source>
         <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/aljazeera.channels.xml">
             <description>Aljazeera.net</description>
@@ -151,22 +151,30 @@
             <description>MBC</description>
             <url>/etc/epgimport/ziko_epg/mbc.xml</url>
         </source>
-        <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/rotana.channels.xml">
-            <description>Rotana</description>
-            <url>/etc/epgimport/ziko_epg/rotana.xml</url>
+        <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/poland1iet5.channels.xml">
+            <description>POLAND1_iet5 by (iet5)</description>
+            <url>/etc/epgimport/ziko_epg/poland1.xml</url>
+        </source>
+        <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/poland2iet5.channels.xml">
+            <description>POLAND2_iet5 by (iet5)</description>
+            <url>/etc/epgimport/ziko_epg/poland2.xml</url>
         </source>
     </sourcecat>
 
     <!-- ================= DREAM EPG ================= -->
     <sourcecat sourcecatname="Dream EPG">
-        <source type="gen_xmltv" channels="osn.channels.xml.xz" nocheck="1">
+        <source type="gen_xmltv"
+                channels="http://raw.githubusercontent.com/MOHAMED19OS/DZ_EPG/main/osn.channels.xml.xz"
+                nocheck="1">
             <description>OSN Channels English (xz)</description>
             <url>http://raw.githubusercontent.com/MOHAMED19OS/DZ_EPG/main/osnen.xml.xz</url>
         </source>
-        <source type="gen_xmltv" channels="osn.channels.xml.xz" nocheck="1">
+
+        <source type="gen_xmltv"
+                channels="http://raw.githubusercontent.com/MOHAMED19OS/DZ_EPG/main/osn.channels.xml.xz"
+                nocheck="1">
             <description>OSN Channels Arabic (xz)</description>
             <url>http://raw.githubusercontent.com/MOHAMED19OS/DZ_EPG/main/osnara.xml.xz</url>
         </source>
     </sourcecat>
-
 </sources>

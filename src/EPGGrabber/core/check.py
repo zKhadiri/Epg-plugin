@@ -202,3 +202,21 @@ if not os.path.exists('/etc/epgimport/ziko_config/satTv.channels.xml'):
     satTv_channels = requests.get('https://github.com/ziko-ZR1/Epg-plugin/blob/master/configs/satTv.channels.xml?raw=true')
     with io.open('/etc/epgimport/ziko_config/satTv.channels.xml', 'w', encoding="utf-8") as f:
         f.write(satTv_channels.text)
+ 
+if not os.path.exists('/etc/epgimport/ziko_config/osnar.channels.xml'):
+    print('Downloading osnar.channels config')
+    sys.stdout.flush()
+    osnar_channels = requests.get(
+        'https://github.com/ziko-ZR1/Epg-plugin/blob/master/configs/osnar.channels.xml?raw=true'
+    )
+    with io.open('/etc/epgimport/ziko_config/osnar.channels.xml', 'w', encoding="utf-8") as f:
+        f.write(osnar_channels.text)
+
+if not os.path.exists('/etc/epgimport/ziko_config/osnen.channels.xml'):
+    print('Downloading osnen.channels config')
+    sys.stdout.flush()
+    osnen_channels = requests.get(
+        'https://github.com/ziko-ZR1/Epg-plugin/blob/master/configs/osnen.channels.xml?raw=true'
+    )
+    with io.open('/etc/epgimport/ziko_config/osnen.channels.xml', 'w', encoding="utf-8") as f:
+        f.write(osnen_channels.text)
