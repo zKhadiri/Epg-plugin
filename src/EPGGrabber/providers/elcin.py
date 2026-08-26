@@ -149,15 +149,18 @@ class Elcinema(object):
         if not starts:
             raise IndexError("No start times")
 
-        start = datetime.strptime(
-            datetime.strptime(str(starts[0]), '%Y-%m-%d %H:%M:%S').strftime('%Y %m %d %H:%M'),
-            '%Y %m %d %H:%M'
-        )
-
-        for m in minutes:
-            x = start + timedelta(minutes=m)
-            start += timedelta(minutes=m)
-            self.prog_end.append(x)
+        # Each duration belongs to the programme at the same index.  Do not
+        # accumulate durations from the first programme: gaps or missing
+        # durations would make later stop times precede their start times.
+        for index, start in enumerate(starts):
+            duration = minutes[index] if index < len(minutes) else 0
+            if duration <= 0 and index + 1 < len(starts):
+                next_start = starts[index + 1]
+                if next_start > start:
+                    duration = int((next_start - start).total_seconds() // 60)
+            if duration <= 0:
+                duration = 30
+            self.prog_end.append(start + timedelta(minutes=duration))
 
         return self.prog_end
 
