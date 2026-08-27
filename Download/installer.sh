@@ -2,8 +2,8 @@
 ##setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=25.1
-description=What_is_NEW:\n'- OSN ARABIC & OSN ENGLISH  has been added by iet5'
+version=25.2
+description=What_is_NEW:\n'- Add MBC & Shahid Epg by iet5'
 ##############################################################
 
 TEMPATH=/tmp
