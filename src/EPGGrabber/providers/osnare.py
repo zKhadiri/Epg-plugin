@@ -33,14 +33,14 @@ except NameError:
 
 
 # =========================================================
-# OSN English EPG grabber - By iet5
+# OSN Arabic EPG grabber - By iet5
 # =========================================================
 BASE_URL = 'https://www.osn.com'
 API_BASE = BASE_URL + '/api/TVScheduleWebService.asmx'
-TV_GUIDE_URL = BASE_URL + '/en-eg/watch/tv-schedule'
+TV_GUIDE_URL = BASE_URL + '/ar-eg/watch/tv-schedule'
 
 COUNTRY_CODE = 'AE'
-CULTURE = 'en-AE'
+CULTURE = 'ar-AE'
 DAYS_TO_GRAB = 7
 REQUEST_TIMEOUT = 15
 MAX_RETRIES = 2
@@ -50,9 +50,9 @@ SLEEP_BETWEEN_CHANNELS = 0.02
 DETAILS_CACHE = {}
 
 try:
-    xml_file = os.path.join(EPG_ROOT, 'osnen.xml')
+    xml_file = os.path.join(EPG_ROOT, 'osnara.xml')
 except Exception:
-    xml_file = '/etc/epgimport/ziko_epg/osnen.xml'
+    xml_file = '/etc/epgimport/ziko_epg/osnara.xml'
 
 HEADERS = {
     'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 '
@@ -60,7 +60,7 @@ HEADERS = {
     'Accept': 'application/json, text/javascript, */*; q=0.01',
     'Referer': TV_GUIDE_URL,
     'X-Requested-With': 'XMLHttpRequest',
-    'Accept-Language': 'en-EG,en;q=1.0',
+    'Accept-Language': 'ar-EG,ar;q=0.9,en;q=0.7',
     'Connection': 'keep-alive',
 }
 
@@ -415,7 +415,7 @@ def stop_from_duration(start, details):
     if start is None or not isinstance(details, dict):
         return None
 
-    duration = clean_text(first_value(details, ['DurationTime', 'durationTime', 'DurationTimeAr']))
+    duration = clean_text(first_value(details, ['DurationTimeAr', 'DurationTime', 'durationTime']))
     if '-' not in duration:
         return None
 
@@ -439,7 +439,7 @@ def programme_from_item(item):
         'End', 'end'
     ]))
 
-    title = clean_text(first_value(item, ['Title', 'title', 'EpisodeEn', 'EnglishTitle', 'TitleEn', 'TitleEN']))
+    title = clean_text(first_value(item, ['Arab_Title', 'ArabicTitle', 'TitleAr', 'TitleAR', 'Title', 'title']))
     epg_id = clean_text(first_value(item, [
         'EPGUNIQID', 'EpgUniqId', 'EPGUniqueID', 'ProgramId', 'programId'
     ]))
@@ -449,11 +449,11 @@ def programme_from_item(item):
         stop = stop_from_duration(start, details)
 
     if details:
-        title = clean_text(first_value(details, ['Title', 'EpisodeEn', 'EnglishTitle', 'TitleEn', 'TitleEN'], title)) or title
+        title = clean_text(first_value(details, ['Arab_Title', 'ArabicTitle', 'TitleAr', 'TitleAR', 'EpisodeAr', 'Title'], title)) or title
 
-    desc = clean_text(first_value(details, ['Synopsis', 'Description', 'EnglishSynopsis', 'SynopsisEn', 'SynopsisEN']))
+    desc = clean_text(first_value(details, ['Arab_Synopsis', 'ArabicSynopsis', 'SynopsisAr', 'SynopsisAR', 'Synopsis', 'Description']))
     if not desc:
-        desc = clean_text(first_value(item, ['Synopsis', 'Description', 'EnglishSynopsis', 'SynopsisEn', 'SynopsisEN']))
+        desc = clean_text(first_value(item, ['Arab_Synopsis', 'ArabicSynopsis', 'SynopsisAr', 'SynopsisAR', 'Synopsis', 'Description']))
 
     rating = clean_text(first_value(details, [
         'ParentalRating', 'Parental_Rating', 'Rating', 'rating',
@@ -502,7 +502,7 @@ def write_xml(channels, programmes_by_channel):
             name = xml_escape(channel['name'])
             icon = xml_escape(channel.get('icon', ''))
             f.write(u'  <channel id="%s">\n' % name)
-            f.write(u'    <display-name lang="en">%s</display-name>\n' % name)
+            f.write(u'    <display-name lang="ar">%s</display-name>\n' % name)
             if icon:
                 f.write(u'    <icon src="%s"></icon>\n' % icon)
             f.write(u'  </channel>\n')
@@ -529,9 +529,9 @@ def write_xml(channels, programmes_by_channel):
                     (name, start.strftime('%Y%m%d%H%M%S'), TIME_ZONE,
                      stop.strftime('%Y%m%d%H%M%S'), TIME_ZONE)
                 )
-                f.write(u'    <title lang="en">%s</title>\n' %
+                f.write(u'    <title lang="ar">%s</title>\n' %
                         xml_escape(item.get('title', '')))
-                f.write(u'    <desc lang="en">%s</desc>\n' %
+                f.write(u'    <desc lang="ar">%s</desc>\n' %
                         xml_escape(item.get('desc', '')))
 
                 rating = xml_escape(item.get('rating', ''))
@@ -549,7 +549,7 @@ def update_provider_date():
             data = json.load(f)
 
         for item in data.get('bouquets', []):
-            if item.get('bouquet') == 'osnen':
+            if item.get('bouquet') == 'osnar':
                 item['date'] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
 
         with open(PROVIDERS_ROOT, 'w') as f:
@@ -559,9 +559,9 @@ def update_provider_date():
 
 
 def print_header():
-    print('***************** OSN_English_EPG_By_iet5 *******************')
+    print('***************** OSN_Arabic_EPG_By_iet5 *******************')
     print('=============================================================')
-    print('Downloading OSN English EPG guide...')
+    print('Downloading OSN Arabic EPG guide...')
     print('Please wait...')
     print('=============================================================')
 

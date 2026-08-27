@@ -147,8 +147,8 @@
             <description>Aljazeera.net</description>
             <url>/etc/epgimport/ziko_epg/aljazeera.xml</url>
         </source>
-        <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/custom.channels.xml">
-            <description>MBC</description>
+        <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/mbc.channels.xml">
+            <description>MBC_Shahid_EPG_BY_iet5</description>
             <url>/etc/epgimport/ziko_epg/mbc.xml</url>
         </source>
         <source type="gen_xmltv" channels="/etc/epgimport/ziko_config/poland1iet5.channels.xml">
