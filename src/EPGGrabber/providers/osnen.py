@@ -277,7 +277,8 @@ def fetch_channels():
             items = as_list(data)
             if not items and isinstance(data, dict):
                 items = [v for v in data.values() if isinstance(v, dict)]
-        except Exception:
+        except Exception as error:
+            cprint('OSN channel request error: %s' % error)
             break
 
         if not items:
