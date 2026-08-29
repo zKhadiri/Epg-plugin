@@ -77,6 +77,20 @@ EPG_URLS = [
     "https://api2.shahid.net/proxy/v2/shahid-epg-api/"
 ]
 
+# Shahid sometimes returns short filler entries between real programmes.  They
+# are not useful EPG events and should never be shown as programme titles.
+UNAVAILABLE_TITLES = set([
+    "\u062c\u062f\u0648\u0644 \u0627\u0644\u0628\u0631\u0627\u0645\u062c \u063a\u064a\u0631 \u0645\u062a\u0627\u062d",
+    "program schedule unavailable",
+    "schedule unavailable",
+    "no epg data"
+])
+
+# Short filler periods are normally breaks between two real programmes.  Fold
+# them into the preceding programme so Enigma2 does not display an empty gap.
+MAX_FILLER_MINUTES = 30
+selected_api_url = None
+
 # name, Shahid ids, common bouquet names
 MBC_CHANNELS = [
     # MBC
@@ -228,15 +242,81 @@ def get_programs(data, channel_id):
     return []
 
 
+def is_unavailable_program(program):
+    title = (program.get('title') or '').strip().lower()
+    title = " ".join(title.split())
+    return title in UNAVAILABLE_TITLES
+
+
+def has_real_programs(programs):
+    return any(not is_unavailable_program(program) for program in programs)
+
+
+def filler_minutes(program):
+    try:
+        start, unused_start_zone = parse_date(program.get('from'))
+        stop, unused_stop_zone = parse_date(program.get('to'))
+        start_dt = datetime.strptime(start, '%Y%m%d%H%M%S')
+        stop_dt = datetime.strptime(stop, '%Y%m%d%H%M%S')
+        return max(0, (stop_dt - start_dt).total_seconds() / 60.0)
+    except:
+        return MAX_FILLER_MINUTES + 1
+
+
+def clean_programs(programs):
+    """Remove Shahid filler events and absorb only short, contiguous gaps."""
+    cleaned = []
+    pending = None
+
+    for original in programs:
+        program = dict(original)
+
+        if is_unavailable_program(program):
+            if pending is None:
+                pending = program
+            else:
+                pending['to'] = program.get('to') or pending.get('to')
+            continue
+
+        if pending is not None:
+            duration = filler_minutes(pending)
+            is_short = duration <= MAX_FILLER_MINUTES
+
+            if (cleaned and is_short and
+                    cleaned[-1].get('to') == pending.get('from') and
+                    pending.get('to') == program.get('from')):
+                cleaned[-1]['to'] = pending.get('to')
+            elif (not cleaned and is_short and
+                  pending.get('to') == program.get('from')):
+                program['from'] = pending.get('from')
+
+            pending = None
+
+        cleaned.append(program)
+
+    if pending is not None and cleaned:
+        if (filler_minutes(pending) <= MAX_FILLER_MINUTES and
+                cleaned[-1].get('to') == pending.get('from')):
+            cleaned[-1]['to'] = pending.get('to')
+
+    return cleaned
+
+
 def find_epg_api():
+    global selected_api_url
+
+    if selected_api_url:
+        return selected_api_url
+
     test_id = "387238"
 
     for api_url in EPG_URLS:
         data, status = get_epg_data(api_url, test_id, 2)
         programs = get_programs(data, test_id)
 
-        if status == 200 and programs:
-            return api_url
+        if status == 200 and has_real_programs(programs):
+            selected_api_url = api_url
+            return selected_api_url
 
     return None
 
@@ -265,7 +345,7 @@ def fetch_channels():
             data, status = get_epg_data(api_url, channel_id, 2)
             programs = get_programs(data, channel_id)
 
-            if status == 200 and programs:
+            if status == 200 and has_real_programs(programs):
                 working_id = channel_id
                 break
 
@@ -377,7 +457,7 @@ def mbc_epg(code):
             print("Failed to fetch data for {} (ID: {}). Status code: {}".format(channel_name, channel_id, status))
             return
 
-        programs = get_programs(data, channel_id)
+        programs = clean_programs(get_programs(data, channel_id))
 
         if not programs:
             print("No EPG data found for: {}".format(channel_name))
@@ -396,6 +476,9 @@ def mbc_epg(code):
                 end, end_zone = parse_date(end_time)
             except Exception as e:
                 print("Error parsing date for {}: {}".format(channel_name, e))
+                continue
+
+            if end <= start:
                 continue
 
             ch = '  <programme start="{} {}" stop="{} {}" channel="{}">\n'.format(
@@ -489,7 +572,7 @@ def create_sources_file():
             f.write('<?xml version="1.0" encoding="UTF-8"?>\n')
             f.write('<sources>\n')
             f.write('  <sourcecat sourcecatname="MBC">\n')
-            f.write('    <source type="gen_xmltv" nocheck="1" channels=CHANNELS_FILE>\n')
+            f.write('    <source type="gen_xmltv" nocheck="1" channels="{}">\n'.format(CHANNELS_FILE))
             f.write('      <description>MBC EPG</description>\n')
             f.write('      <url>{}</url>\n'.format(EPG_FILE))
             f.write('    </source>\n')
