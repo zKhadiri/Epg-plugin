@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sources>
+  <sourcecat sourcecatname="MBC">
+    <source type="gen_xmltv" nocheck="1" channels="/etc/epgimport/ziko_config/mbc.channels.xml">
+      <description>MBC EPG</description>
+      <url>/etc/epgimport/ziko_epg/mbc.xml</url>
+    </source>
+  </sourcecat>
+</sources>

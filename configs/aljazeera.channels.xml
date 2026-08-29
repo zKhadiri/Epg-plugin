@@ -1,5 +1,13 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <channels>
-	<channel id="aljazeera_doc">1:0:19:1F8:EAC4:77E:DCA0000:0:0:0:</channel>
-	<channel id="aljazeera">1:0:19:1F5:EAC4:77E:DC00000:0:0:0:</channel>
+    <!-- Al Jazeera Arabic -->
+    <channel id="aljazeera">1:0:19:1F5:EAC4:77E:DCA0000:0:0:0:</channel>
+    <channel id="aljazeera">1:0:19:2775:3F2:E0:1040000:0:0:0:</channel>
+    <channel id="aljazeera">1:0:1:2905:41A:E0:1040000:0:0:0:</channel>
+
+    <!-- Al Jazeera Documentary -->
+    <channel id="aljazeera_doc">1:0:19:1F8:EAC4:77E:DCA0000:0:0:0:</channel>
+    <channel id="aljazeera_doc">1:0:19:2778:3F2:E0:1040000:0:0:0:</channel>
+    <channel id="aljazeera_doc">1:0:1:2908:41A:E0:1040000:0:0:0:</channel>
+
 </channels>

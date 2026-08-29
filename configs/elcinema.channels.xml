@@ -760,10 +760,8 @@
   <channel id="OSN TV Movies Action">1:0:19:12E:3:800:DCA2EDB:0:0:0:</channel>
   <channel id="OSN TV Movies Action">1:0:25:12E:3:800:DCA0000:0:0:0::OSNtv Movies Action</channel>
   <channel id="OSN TV Movies Comedy">1:0:19:1625:236:800:DCA0000:0:0:0:</channel>
-  <channel id="OSN TV Movies Comedy">1:0:19:119C:2D:800:DCA2F28:0:0:0:</channel>
   <channel id="OSN TV Movies Comedy">1:0:19:1625:236:800:DCA2DCF:0:0:0:</channel>
   <channel id="OSN TV Movies Comedy">1:0:25:1625:236:800:DCA0000:0:0:0::OSNtv Movies Comedy</channel>
-  <channel id="OSN TV Movies Comedy">1:0:25:119C:2D:800:DCA0000:0:0:0::OSNtv Comedy</channel>
   <channel id="OSN TV Movies Family">1:0:19:1622:236:800:DCA0000:0:0:0:</channel>
   <channel id="OSN TV Movies Family">1:0:19:1622:236:800:DCA2DCF:0:0:0:</channel>
   <channel id="OSN TV Movies Family">1:0:25:1622:236:800:DCA0000:0:0:0::OSNtv Movies Family</channel>
