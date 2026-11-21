@@ -3,8 +3,6 @@
 # This script created by iet5
 #
 from __future__ import print_function, unicode_literals
-import warnings
-warnings.simplefilter("ignore")
 
 import os
 import io
@@ -13,21 +11,11 @@ import sys
 import json
 import time
 import warnings
-
-# Python 2/3 compatibility for requests
-try:
-    import requests
-    from requests.packages.urllib3.exceptions import InsecureRequestWarning
-except ImportError:
-    # For Python 2.7 without requests, but keep original structure
-    import requests
-    from requests.packages.urllib3.exceptions import InsecureRequestWarning
-
-from datetime import datetime, timedelta
-import warnings
-from requests.packages.urllib3.exceptions import InsecureRequestWarning
+import requests
 import fileinput
-from time import sleep  # Import the sleep function
+from datetime import datetime, timedelta
+from time import sleep
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
 # Timezone initialization
 # Calculate timezone offset using receiver's local time (Python 2.7 compatible)
@@ -48,7 +36,7 @@ except ImportError:
     PROVIDERS_ROOT = "./providers.json"  # Default if __init__ is not available
 
 # Paths
-input_path = os.path.join(EPG_ROOT, 'Poland.xml')
+input_path = os.path.join(EPG_ROOT, 'poland.xml')
 output_path = os.path.join(EPG_ROOT, 'out.xml')
 
 # List of changes to apply
@@ -57,39 +45,36 @@ List_Chang = [
     # Add your specific changes here
 ]
 
-# Add the missing response_text function
-def response_text(response):
-    """
-    Extract text from response object - compatible with Python 2 and 3
-    """
-    if hasattr(response, 'text'):
-        return response.text
-    elif hasattr(response, 'content'):
-        try:
-            return response.content.decode('utf-8')
-        except:
-            return str(response.content)
-    else:
-        return str(response)
-
 def main():
     # Added code snippet
-    print("*****************Poland_iet5 EPG******************")
+    print("***************Poland_iet5_EPG*****************")
     sys.stdout.flush()  # Flush after the initial print
     sleep(1)  # Add a 1-second delay
     print("=============================================")
-
     print("Downloading Poland_iet5 EPG guide...\nPlease wait...")
     sys.stdout.flush()
     try:
+        download_start = time.time()
         # Download the XML file
-        response = requests.get('https://www.open-epg.com/files/poland.xml', verify=False, timeout=30)
+        # Stream the response to avoid buffering the entire EPG in RAM.
+        response = requests.get(
+            'https://www.open-epg.com/files/poland.xml',
+            verify=False,
+            timeout=(8, 30),
+            stream=True,
+            headers={'Accept-Encoding': 'gzip, deflate'}
+        )
         if response.status_code == 200:
-            # Convert content to unicode using utf-8 encoding
-            data_unicode = response_text(response)  # use content and decode to utf-8
-            with io.open(input_path, 'w', encoding="utf-8") as f:
-                f.write(data_unicode)  # write the unicode data
+            # Decode incrementally (also handles a UTF-8 BOM).
+            import codecs
+            decoder = codecs.getincrementaldecoder('utf-8-sig')()
+            with io.open(input_path, 'w', encoding='utf-8') as f:
+                for chunk in response.iter_content(chunk_size=256 * 1024):
+                    if chunk:
+                        f.write(decoder.decode(chunk))
+                f.write(decoder.decode(b'', final=True))
                 print("============================================")
+            response.close()
 
             # Fetch the number of channels (replace this with your actual logic)
             with io.open(input_path, 'r', encoding="utf-8") as f:
@@ -100,7 +85,10 @@ def main():
 
             print("There are {0} channels available for EPG data.".format(channel_count))
             print("============================================")
-            print("Poland2.xml Downloaded Successfully")
+            file_size_mb = os.path.getsize(input_path) / (1024.0 * 1024.0)
+            elapsed = time.time() - download_start
+            print("poland.xml Downloaded Successfully ({:.2f} MB)".format(file_size_mb))
+            print("Download Time : {:.2f} seconds".format(elapsed))
             sys.stdout.flush()  # Flush after printing the channel count
             sleep(1)  # Add a 1-second delay
             # Apply the transformations
@@ -115,13 +103,13 @@ def main():
             update_providers()
             # Remove specific lines
             remove_specific_lines()
-            print('**************FINISHED******************')
+            print('*****************FINISHED*******************')
             sys.stdout.flush()
         else:
             print("Failed to download /poland.xml. Status code: {}".format(response.status_code))
             sys.exit(1)  # Exit if download fails
     except requests.exceptions.RequestException as e:  # Corrected exception syntax
-        print("Failed to download /poland2.xml: {}".format(e))
+        print("Failed to download /poland.xml: {}".format(e))
         sys.exit(1)  # Exit if an exception occurs during download
 
 def apply_changes():
@@ -159,12 +147,15 @@ def adjust_times():
         f.write(xml_data)
 
 def remove_duplicates():
-    lines_seen = set()
-    with open(output_path, 'w') as output_file:
-        for line in open(input_path, 'r'):
-            if line not in lines_seen:
-                output_file.write(line)
-                lines_seen.add(line)
+    # Preserve XML structure: repeated lines can be valid XMLTV elements.
+    # Keep output_path for the existing rename_file() workflow.
+    with open(input_path, 'rb') as source:
+        with open(output_path, 'wb') as destination:
+            while True:
+                chunk = source.read(256 * 1024)
+                if not chunk:
+                    break
+                destination.write(chunk)
 
 def rename_file():
     os.remove(input_path)
@@ -181,14 +172,18 @@ def update_providers():
                 channel['date'] = datetime.today().strftime('%A %d %B %Y at %I:%M %p')
     with open(PROVIDERS_ROOT, 'w') as f:
         json.dump(data, f, indent=4)
+
 # Remove lines containing specified data and empty lines
 def remove_specific_lines():
-    with open(input_path, 'r') as f:
-        lines = f.readlines()
-    with open(input_path, 'w') as f:
-        for line in lines:
-            if '<icon src="https://' not in line and '<url>https://' not in line and '<category' not in line and line.strip():
-                f.write(line)
+    # Remove only the unwanted XML elements, not the entire line.
+    with io.open(input_path, 'r', encoding='utf-8') as f:
+        xml_data = f.read()
+    xml_data = re.sub(r'<icon\b[^>]*/>', '', xml_data)
+    xml_data = re.sub(r'<url\b[^>]*>.*?</url\s*>', '', xml_data, flags=re.DOTALL)
+    xml_data = re.sub(r'<category\b[^>]*>.*?</category\s*>', '', xml_data, flags=re.DOTALL)
+    xml_data = re.sub(r'(?m)^[ \t]*\r?\n', '', xml_data)
+    with io.open(input_path, 'w', encoding='utf-8') as f:
+        f.write(xml_data)
 
 def change_data_list(old_text, new_text, file_path):
     for line in fileinput.input(file_path, inplace=True):
