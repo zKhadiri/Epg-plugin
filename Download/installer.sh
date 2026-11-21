@@ -2,8 +2,8 @@
 ##setup command=wget -q "--no-check-certificate" https://raw.githubusercontent.com/ziko-ZR1/Epg-plugin/master/Download/installer.sh -O - | /bin/sh
 
 ######### Only These two lines to edit with new version ######
-version=25.5
-description=What_is_NEW:\n'- fix some config files by Saiedf'
+version=25.6
+description=What_is_NEW:\n'- Updates based on changes to the source by iet5'
 ##############################################################
 
 TEMPATH=/tmp
