@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='utf-8'?>
+<channels>
+  <!--References from local configs and receiver lamedb. See review/review_report.json for unresolved IDs.-->
+  <channel id="DW.ps">1:0:19:1644:42C:1:C00000:0:0:0:</channel>
+  <channel id="DW.ps">1:0:1:332D:1388:13E:820000:0:0:0:</channel>
+  <channel id="Ps.ps">1:0:1:1F7:9E34:77E:DC00000:0:0:0:</channel>
+  <channel id="Ps.ps">1:0:1:1F7:9E34:77E:DCA0000:0:0:0:</channel>
+  <channel id="Ps.ps">1:0:1:2BE:14B4:13E:820000:0:0:0:</channel>
+  <channel id="Ps10.ps">1:0:19:516:D:800:DC00000:0:0:0:</channel>
+  <channel id="Ps10.ps">1:0:19:516:D:800:DCA0000:0:0:0:</channel>
+  <channel id="Ps10.ps">1:0:1:6AA:3138:13E:820000:0:0:0:</channel>
+  <channel id="Ps11.ps">1:0:1:1FF:9E34:77E:DC00000:0:0:0:</channel>
+  <channel id="Ps11.ps">1:0:1:1FF:9E34:77E:DCA0000:0:0:0:</channel>
+  <channel id="Ps11.ps">1:0:1:2C7:14B4:13E:820000:0:0:0:</channel>
+  <channel id="Ps13.ps">1:0:1:1326:33F4:13E:820000:0:0:0:</channel>
+  <channel id="Ps15.ps">1:0:19:1C8A:332C:13E:820000:0:0:0:</channel>
+  <channel id="Ps15.ps">1:0:19:1F7:EAC4:77E:DC00000:0:0:0:</channel>
+  <channel id="Ps15.ps">1:0:19:1F8:EAC4:77E:DCA0000:0:0:0:</channel>
+  <channel id="Ps15.ps">1:0:19:2777:3F2:E0:1040000:0:0:0:</channel>
+  <channel id="Ps15.ps">1:0:1:193:4EE8:77E:DC00000:0:0:0:</channel>
+  <channel id="Ps15.ps">1:0:1:193:4EE8:77E:DCA0000:0:0:0:</channel>
+  <channel id="Ps15.ps">1:0:1:2907:41A:E0:1040000:0:0:0:</channel>
+  <channel id="Ps17.ps">1:0:1:1325:33F4:13E:820000:0:0:0:</channel>
+  <channel id="Ps17.ps">1:0:1:E:9C68:77E:DC00000:0:0:0:</channel>
+  <channel id="Ps17.ps">1:0:1:E:9C68:77E:DCA0000:0:0:0:</channel>
+  <channel id="Ps20.ps">1:0:1:2BD:14B4:13E:820000:0:0:0:</channel>
+  <channel id="Ps21.ps">1:0:1:2C9:1B58:13E:820000:0:0:0:</channel>
+  <channel id="Ps24.ps">1:0:19:DAD:1F40:13E:820000:0:0:0:</channel>
+  <channel id="Ps25.ps">1:0:19:9D72:FBE:E0:1040000:0:0:0:</channel>
+  <channel id="Ps3.ps">1:0:1:34:1FD:2BE:1040000:0:0:0:</channel>
+  <channel id="Ps4.ps">1:0:1:133:1FE:2BE:1040000:0:0:0:</channel>
+  <channel id="Ps5.ps">1:0:19:215:384:13E:820000:0:0:0:</channel>
+  <channel id="Ps5.ps">1:0:1:5A0:FFDC:1:DC0318F:0:0:0:</channel>
+  <channel id="Ps5.ps">1:0:1:5A0:FFDC:1:DCA318F:0:0:0:</channel>
+  <channel id="Ps6.ps">1:0:19:19DB:42:800:DC00000:0:0:0:</channel>
+  <channel id="Ps6.ps">1:0:19:19DB:42:800:DCA0000:0:0:0:</channel>
+  <channel id="Ps6.ps">1:0:1:3332:1388:13E:820000:0:0:0:</channel>
+  <channel id="Ps8.ps">1:0:1:1FB:9E34:77E:DC00000:0:0:0:</channel>
+  <channel id="Ps8.ps">1:0:1:1FB:9E34:77E:DCA0000:0:0:0:</channel>
+  <channel id="Ps8.ps">1:0:1:2C8:14B4:13E:820000:0:0:0:</channel>
+  <channel id="Ps9.ps">1:0:19:187E:190:5000:DC00000:0:0:0:</channel>
+  <channel id="Ps9.ps">1:0:19:187E:190:5000:DCA0000:0:0:0:</channel>
+  <channel id="Ps9.ps">1:0:1:134:1FE:2BE:1040000:0:0:0:</channel>
+  <channel id="Ps9.ps">1:0:1:1B06:3FE:1:C00000:0:0:0:</channel>
+  <channel id="Ps9.ps">1:0:1:323:3BC4:13E:820000:0:0:0:</channel>
+</channels>

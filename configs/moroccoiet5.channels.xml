@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='utf-8'?>
+<channels>
+  <!--References from local configs and receiver lamedb. See review/review_report.json for unresolved IDs.-->
+  <channel id="AlAoulaAr.ma">1:0:19:3:424:E0:1040000:0:0:0:</channel>
+  <channel id="AlAoulaAr.ma">1:0:1:3:2E18:B0:820000:0:0:0:</channel>
+  <channel id="AlAoulaAr.ma">1:0:1:5:2E18:B0:820000:0:0:0:</channel>
+  <channel id="AlAoulaAr.ma">1:0:1:C8A:20:800:DC00000:0:0:0:</channel>
+  <channel id="AlAoulaAr.ma">1:0:1:C8A:20:800:DCA0000:0:0:0:</channel>
+  <channel id="AlmaghribiaAr.ma">1:0:19:1:2E18:B0:820000:0:0:0:</channel>
+  <channel id="AlmaghribiaAr.ma">1:0:19:1:424:E0:1040000:0:0:0:</channel>
+  <channel id="TamazightAr.ma">1:0:19:F1:2E18:B0:820000:0:0:0:</channel>
+  <channel id="TamazightAr.ma">1:0:19:F1:424:E0:1040000:0:0:0:</channel>
+</channels>
